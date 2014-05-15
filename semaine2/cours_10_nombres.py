@@ -17,7 +17,7 @@ i
 i=20; i
 
 ########## flottants
-3.14
+f=3.14
 
 # voir le type d'un nombre
 type(i)
@@ -85,8 +85,8 @@ pow(2,32)
 # ou logique (bitwise OR)  -> 1111 -> 15
 12 | 7
 
-# une astuce : '_' represente le dernier resultat (en mode interactif)
-_ * 2
+# une astuce : '_' represente le dernier resultat (en mode interactif seulement)
+# _ * 2
 
 ########## le module 'math'
 # on verra plus tard les importations, mais pour l'instant:
