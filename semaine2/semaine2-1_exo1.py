@@ -73,7 +73,7 @@ print 2 ** 32   # puissances
 print abs(-5.3) # valeur absolue
 
 ## On peut convertir des types de bases entre eux (avec risque
-## de perte d'information)
+## de perte de précision ou d'information, troncation).
 
 print int(4.32)
 print long(5.3)
