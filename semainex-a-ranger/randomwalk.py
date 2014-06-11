@@ -1,42 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import random
-
 from argparse import ArgumentParser
-
-# our random walk does not have equal probabilities for going up or down
-# this function takes in argument an integer, and returns a tuple
-# (left, right) 
-# this is ready for use with random.randint, meaning we will issue
-# randint (left,right) and go left or right 
-# whether the result is neg. or pos. respectively
-
-# we want to make sure we remain in a constrained range
-# so border is the positive threshold that we should not exceed
-
-def left_right (n, border):
-    # handle the case where n >=0
-    a=abs(n)
-    # if we reach the limit, bounce back
-    if a >= border: 
-        result = (1,2) # always positive
-    # otherwise
-    # we need the range to move twice as slowly as the index, so 
-    # we multiply by 2
-    # 0 : -b .. +b
-    # 1 : -b-1 .. b-1
-    # 2 : -b-2 .. b-2
-    # ..
-    # b-1: -2b-1 .. 1
-    else:
-        result = ( -border-a , border-a)
-        
-    # now handle the case where n < 0
-    if (n<0):
-        (l,r)=result
-        result=(-r,-l)
-
-    return result
 
 class RandomWalk:
     def __init__ (self, length, border):
@@ -61,17 +26,29 @@ class RandomWalk:
             move=random.randint(-1,1)
         self.current += move
         return result
+
+import matplotlib.pyplot as plt
+
+def draw_walks (length, border, runs):
+    print 'runs',runs
+    for i in xrange(runs):
+        random_walk = RandomWalk (length, border)
+        data = [ y for (x,y) in random_walk ] 
+        plt.plot ( data )
+        plt.axis ( [ 0,length,-border,border] )
+    plt.ylabel ( "%s random walk(s) %s x %s" % (runs, length, border))
+    plt.show ()
         
 def main ():
     parser = ArgumentParser (description="generate a randomwalk of length <length> and with absolute value constrained by <border>")
     parser.add_argument ("length", type=int)
     parser.add_argument ("border", type=int)
+    parser.add_argument ("runs", type=int, default=1, nargs='?')
     args=parser.parse_args ()
 
     random.seed()
-    for r in RandomWalk (args.length, args.border):
-        print r
-    # xxx to display ...
+
+    draw_walks ( args.length, args.border, args.runs )
 
 if __name__ == '__main__':
     main()
