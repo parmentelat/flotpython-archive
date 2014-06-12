@@ -12,18 +12,18 @@ class RandomWalk:
     def __iter__(self):
         return self
     def next(self):
+        # are we done ?
         if self.counter==self.length:
             raise StopIteration
-        # return current position and compute next
-        result=(self.counter, self.current)
+        # remember current position and compute next
+        result=self.current
         self.counter += 1
         # compute sign of next move
-        if self.current==self.border:
-            move=-1
-        elif self.current== -self.border:
-            move=1
-        else:
-            move=random.randint(-1,1)
+        (bottom,top) = (-1,1)
+        # if at the border.. 
+        if self.current==self.border:           move=random.randint(-1,0)
+        elif self.current== -self.border:       move=random.randint(0,1)
+        else:                                   move=random.randint(-1,1)
         self.current += move
         return result
 
@@ -33,7 +33,7 @@ def draw_walks (length, border, runs):
     print 'runs',runs
     for i in xrange(runs):
         random_walk = RandomWalk (length, border)
-        data = [ y for (x,y) in random_walk ] 
+        data = [ y for y in random_walk ] 
         plt.plot ( data )
         plt.axis ( [ 0,length,-border,border] )
     plt.ylabel ( "%s random walk(s) %s x %s" % (runs, length, border))
