@@ -23,10 +23,24 @@ class Permutations:
             except:
                 raise StopIteration
         # inserting <n> in the middle of a <n-1> permutation 
-        result = self.subsequence[0:self.counter] + [ self.n ] + self.subsequence [ self.counter:self.n-1]
+        # this first naive version would first issue [n n-1 .. 1]
+        #result = self.subsequence[0:self.counter] + [ self.n ] + self.subsequence [ self.counter:self.n-1]
+        cutter=self.n-1-self.counter
+        result = self.subsequence[0:cutter] + [ self.n ] + self.subsequence [ cutter:self.n-1]
         # move the next insertion one step right, or rewind
         self.counter = (self.counter+1)%self.n
         return result
+
+
+# show the <max> first permutations - or all of them if max is None or False
+def show_first_permutations  (n,max):
+    counter=0
+    for s in Permutations (n):
+        print s
+        counter+=1
+        if max and counter>=max:
+            print '....'
+            break
 
 from argparse import ArgumentParser
 
@@ -35,13 +49,7 @@ def main ():
     parser.add_argument("-f","--first",dest='max',default=None,type=int,help="list only the <N> first permutations")
     parser.add_argument("n",type=int)
     args=parser.parse_args()
-    counter=0
-    for s in Permutations (args.n):
-        print s
-        counter+=1
-        if args.max and counter>=args.max:
-            print '....'
-            break
+    show_first_permutations (args.n, args.max)
 
 if __name__ == '__main__':
     main()
