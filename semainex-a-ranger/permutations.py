@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import math
+
 class Permutations:
     def __init__ (self, n):
         self.n=n
@@ -31,11 +33,16 @@ class Permutations:
         self.counter = (self.counter+1)%self.n
         return result
 
+    def __len__ (self):
+        return math.factorial(self.n)
+
 
 # show the <max> first permutations - or all of them if max is None or False
-def show_first_permutations  (n,max):
+def show_first_permutations  (n,max=None):
+    iterator = Permutations (n)
+    print "Il y a ",len(iterator),"permutations d'ordre",n
     counter=0
-    for s in Permutations (n):
+    for s in iterator:
         print s
         counter+=1
         if max and counter>=max:
@@ -53,7 +60,3 @@ def main ():
 
 if __name__ == '__main__':
     main()
-
-
-        
-        
