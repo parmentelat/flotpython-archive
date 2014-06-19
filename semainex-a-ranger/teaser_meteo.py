@@ -13,7 +13,7 @@ import zlib
 import json
 
 daily14_url = "http://78.46.48.103/sample/daily_14.json.gz"
-daily14_cache = "daily14.json.cache"
+daily14_cache = "daily_14.json.cache"
 
 upper_left_lat_lon = ( 50, -5)
 lower_right_lat_lon = (42, 8)
