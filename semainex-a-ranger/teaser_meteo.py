@@ -1,8 +1,11 @@
 #!/usr/bin/env python
+# -*- coding: cp1252 -*-
 
 import sys
 import types
 import time
+# izip plutot que zip
+import itertools
 # une librairie pour les noms de fichier
 import os.path
 # une librairie pour decharger des donnees au dessus de http
@@ -56,19 +59,19 @@ def hash_by_path (entries, path):
 def fetch_compressed_data (url,cache):
     if os.path.isfile(cache):
         # il faudrait verifier la date de ce cache..
-        print '%s: on utilise le cache %s'%(url,cache)
+        print "%s: on utilise le cache %s"%(url,cache)
         with open(cache) as f: 
             return f.read()
-    print 'Telechargement de %s ...'%url,
+    print "Téléchargement de %s ..."%url,
     sys.stdout.flush()
     network_file=urllib2.urlopen(url)
     compressed_json=network_file.read()
-    print ' OK - %s octets'%len(compressed_json)
+    print " OK - %s octets"%len(compressed_json)
     # http://stackoverflow.com/questions/3122145/zlib-error-error-3-while-decompressing-incorrect-header-check
     uncompressed_json=zlib.decompress(compressed_json, zlib.MAX_WBITS | 16)
-    print "decompression terminee"
+    print "décompression terminée"
     with open(cache,'w') as f:
-        print '%s: on sauve dans le cache %s'%(url,cache)
+        print "%s: on sauve dans le cache %s"%(url,cache)
         f.write(uncompressed_json)
     return uncompressed_json
 
@@ -83,31 +86,31 @@ def in_area ( lat_lon_rec, upper_left_lat_lon, lower_right_lat_lon):
 # enchainer le tout
 def main ():
     raw_daily14 = fetch_compressed_data (daily14_url, daily14_cache)
-    print 'Parsing json ...', 
+    print "Parsing json ...", 
     sys.stdout.flush()
     # nous avons a ce stade une entree json par ligne
     all_entries = [ json.loads(line) for line in raw_daily14.split("\n") if line ]
-    print 'OK, nous avons %s entrees'%len(all_entries)
+    print "OK, nous avons %s entrées de ville"%len(all_entries)
     
     # on filtre les entrees qui correspondent a notre aire d'interet
     entries_in_area = [ entry for entry in all_entries 
                         if in_area ( xpath (entry, ('city','coord')), 
                                      upper_left_lat_lon, lower_right_lat_lon) ]
-    print 'nous avons %s entrees dans la zone'%len(entries_in_area)
+    print "nous avons %s entrées dans la zone"%len(entries_in_area)
 
     # xxx on pourrait filtrer sur un autre critere comme un RE pour le nom de la ville...
     # a voir
 
     # creer une table de hash sur le nom de la ville
     hash_by_city_name = hash_by_path (entries_in_area, ('city','name'))
-    print 'nous avons %s noms de villes differents'%len(hash_by_city_name)
+    print "nous avons %s noms de villes differents"%len(hash_by_city_name)
 
     # grouper les entrees par l'initiale du nom, afficher une ville par entree
     hash_by_first_letter = hash_by_path (entries_in_area, ('city', 'name', 0))
     for letter in [ str(chr(ord('A')+i)) for i in xrange(26) ]:
         try: 
             entry=hash_by_first_letter[letter][0]
-            print letter,':',entry['city']['name'],'...'
+            print letter,":",entry['city']['name'],"..."
         except: 
             # pas de ville commencant par cette lettre
             pass
@@ -117,33 +120,29 @@ def main ():
     for (name,l) in duplicates:
         print "DUP: ",name
 
-#    # afficher une entree echantillon
-#    # chaque entree a un champ 'city' qui decrit le point de mesures
-#    # et un champs 'data' qui contient une liste de cellules
-#    # et chaque cellule correspond a un ensemble de mesures a cet instant et a cet endroit
-#    import pprint
-#    pp=pprint.PrettyPrinter()
-#    entry=entries_in_area[0]
-#    print 10*'=',"sample data for",xpath(entry,('city','name'))
-#    print 4*'=',"entry['city']"
-#    pp.pprint(entry['city'])
-#    print 4*'=',"entry['data'][0]"
-#    pp.pprint(entry['data'][0])
-#    print 4*'=',"entry"
-#    pp.pprint(entry)
-
-    # visualisation 
+    # génération d'un fichier csv et visualisation
     # pour faire simple on va visualiser la pression observee dans la zone le premier jour
     # en admettant que tous les tableaux de 'data' sont synchrones
     fig = plt.figure()
     ax = fig.gca(projection='3d')
     X = [ xpath (entry, ('city','coord','lon')) for entry in entries_in_area ]
     Y = [ xpath (entry, ('city','coord','lat')) for entry in entries_in_area ]
-    for day in 0,: # seulement le premier jour
-        date = time.strftime(date_format,time.localtime(entries_in_area[0]['data'][day]['dt']))
-        print 'echantillon du ',date
+    for day in xrange(14): # seulement le premier jour
+        # traduire la date pour un humain
+        dates = [ time.strftime(date_format,time.localtime(entry['data'][day]['dt'])) for entry in entries_in_area ]
         P = [ xpath (entry, ('data',day,'pressure')) for entry in entries_in_area ]
-        ax.plot_trisurf(X,Y,P, cmap=cm.jet, linewidth=0.2, label="Pression le %s"%date)
+        # generer un fichier csv avec toutes ces donnees pour la derniere valeur de 'day'
+        filename = "daily_14_day_%s.csv"%day
+        with open(filename,'w') as csv:
+            csv.write("longitude;latitude;pression;date;\n")
+            for (x,y,p,date) in itertools.izip(X,Y,P,dates):
+                csv.write("%s;%s;%s;%s;\n"%(x,y,p,date))
+        print "Données générées dans %s"%filename
+
+        if day==0:
+            date = dates[0]
+            print "Affichage de l'échantillon du ",date
+            ax.plot_trisurf(X,Y,P, cmap=cm.jet, linewidth=0.2, label="Pression le %s"%date)
     plt.show()
 
 if __name__ == '__main__': main()
