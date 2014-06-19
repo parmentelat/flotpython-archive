@@ -12,13 +12,19 @@ import zlib
 # une librairie pour decortiquer le format json
 import json
 
+# pour la visualisation
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
+import matplotlib.pyplot as plt
+import numpy as np
+
 daily14_url = "http://78.46.48.103/sample/daily_14.json.gz"
 daily14_cache = "daily_14.json.cache"
 
 upper_left_lat_lon = ( 50, -5)
 lower_right_lat_lon = (42, 8)
 
-date_format="%Y-%m-%d"
+date_format="%Y-%m-%d:%H-%M"
 
 # chercher par exemple entry['city']['id'] a partir d'un chemin genre ('city','id')
 # i.e. xpath ( {'city':{'id':12,'name':'Montreal'}}, ['city','id']) => 12
@@ -60,6 +66,7 @@ def fetch_compressed_data (url,cache):
     print ' OK - %s octets'%len(compressed_json)
     # http://stackoverflow.com/questions/3122145/zlib-error-error-3-while-decompressing-incorrect-header-check
     uncompressed_json=zlib.decompress(compressed_json, zlib.MAX_WBITS | 16)
+    print "decompression terminee"
     with open(cache,'w') as f:
         print '%s: on sauve dans le cache %s'%(url,cache)
         f.write(uncompressed_json)
@@ -72,16 +79,6 @@ def in_area ( lat_lon_rec, upper_left_lat_lon, lower_right_lat_lon):
     lon=lat_lon_rec['lon']
     lat=lat_lon_rec['lat']
     return lon>=left and lon<=right and lat>=lower and lat <= upper
-
-from mpl_toolkits.mplot3d import Axes3D
-from matplotlib import cm
-import matplotlib.pyplot as plt
-import numpy as np
-def show_3d (x,y,z,label):
-    fig = plt.figure()
-    ax = fig.gca(projection='3d')
-    ax.plot_trisurf(x, y, z, cmap=cm.jet, linewidth=0.2, label=label)
-    plt.show()
 
 # enchainer le tout
 def main ():
@@ -105,39 +102,48 @@ def main ():
     hash_by_city_name = hash_by_path (entries_in_area, ('city','name'))
     print 'nous avons %s noms de villes differents'%len(hash_by_city_name)
 
-    # afficher une liste alphabetique des noms de ville
-    city_names = hash_by_city_name.keys()
-    city_names.sort()
-    print city_names
-    
+    # grouper les entrees par l'initiale du nom, afficher une ville par entree
+    hash_by_first_letter = hash_by_path (entries_in_area, ('city', 'name', 0))
+    for letter in [ str(chr(ord('A')+i)) for i in xrange(26) ]:
+        try: 
+            entry=hash_by_first_letter[letter][0]
+            print letter,':',entry['city']['name'],'...'
+        except: 
+            # pas de ville commencant par cette lettre
+            pass
+
     # montrer les villes qui font l'objet de plusieurs entrees
     duplicates = [ (name,l) for (name,l) in hash_by_city_name.iteritems() if len(l) >=2 ]
     for (name,l) in duplicates:
         print "DUP: ",name
 
-    # afficher une entree echantillon
-    # chaque entree a un champ 'city' qui decrit le point de mesures
-    # et un champs 'data' qui contient une liste de cellules
-    # et chaque cellule correspond a un ensemble de mesures a cet instant et a cet endroit
-    import pprint
-    pp=pprint.PrettyPrinter()
-    entry=entries_in_area[0]
-    print 10*'=',"sample data for",xpath(entry,('city','name'))
-    print 4*'=',"entry['city']"
-    pp.pprint(entry['city'])
-    print 4*'=',"entry['data'][0]"
-    pp.pprint(entry['data'][0])
-    
-    # l'heure de la mesure cell['dt'] est exprime en secondes a partir du 01/01/1970 
-    # ajouter un champ 'date' qui soit lisible par un humain
-    for entry in entries_in_area:
-        for cell in entry['data']:
-            cell['date']=time.strftime(date_format,time.gmtime(cell['dt']))
+#    # afficher une entree echantillon
+#    # chaque entree a un champ 'city' qui decrit le point de mesures
+#    # et un champs 'data' qui contient une liste de cellules
+#    # et chaque cellule correspond a un ensemble de mesures a cet instant et a cet endroit
+#    import pprint
+#    pp=pprint.PrettyPrinter()
+#    entry=entries_in_area[0]
+#    print 10*'=',"sample data for",xpath(entry,('city','name'))
+#    print 4*'=',"entry['city']"
+#    pp.pprint(entry['city'])
+#    print 4*'=',"entry['data'][0]"
+#    pp.pprint(entry['data'][0])
+#    print 4*'=',"entry"
+#    pp.pprint(entry)
 
+    # visualisation 
+    # pour faire simple on va visualiser la pression observee dans la zone le premier jour
+    # en admettant que tous les tableaux de 'data' sont synchrones
+    fig = plt.figure()
+    ax = fig.gca(projection='3d')
     X = [ xpath (entry, ('city','coord','lon')) for entry in entries_in_area ]
     Y = [ xpath (entry, ('city','coord','lat')) for entry in entries_in_area ]
-    Z_pres_0 = [ xpath (entry, ('data',0,'pressure')) for entry in entries_in_area ]
-    
-    show_3d (X,Y,Z_pres_0,"Pression")
+    for day in 0,: # seulement le premier jour
+        date = time.strftime(date_format,time.localtime(entries_in_area[0]['data'][day]['dt']))
+        print 'echantillon du ',date
+        P = [ xpath (entry, ('data',day,'pressure')) for entry in entries_in_area ]
+        ax.plot_trisurf(X,Y,P, cmap=cm.jet, linewidth=0.2, label="Pression le %s"%date)
+    plt.show()
 
 if __name__ == '__main__': main()
