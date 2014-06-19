@@ -86,7 +86,7 @@ def in_area ( lat_lon_rec, upper_left_lat_lon, lower_right_lat_lon):
 # enchainer le tout
 def main ():
     raw_daily14 = fetch_compressed_data (daily14_url, daily14_cache)
-    print "Parsing json ...", 
+    print "Décodage json ...", 
     sys.stdout.flush()
     # nous avons a ce stade une entree json par ligne
     all_entries = [ json.loads(line) for line in raw_daily14.split("\n") if line ]
@@ -122,26 +122,29 @@ def main ():
 
     # génération d'un fichier csv et visualisation
     # pour faire simple on va visualiser la pression observee dans la zone le premier jour
-    # en admettant que tous les tableaux de 'data' sont synchrones
+    # xxx on admet que tous les tableaux de 'data' sont synchrones
     fig = plt.figure()
     ax = fig.gca(projection='3d')
     X = [ xpath (entry, ('city','coord','lon')) for entry in entries_in_area ]
     Y = [ xpath (entry, ('city','coord','lat')) for entry in entries_in_area ]
-    for day in xrange(14): # seulement le premier jour
+    names = [ xpath (entry, ('city','name')) for entry in entries_in_area ]
+    for day in xrange(14): 
         # traduire la date pour un humain
         dates = [ time.strftime(date_format,time.localtime(entry['data'][day]['dt'])) for entry in entries_in_area ]
         P = [ xpath (entry, ('data',day,'pressure')) for entry in entries_in_area ]
+        T = [ xpath (entry, ('data',day,'temp','day')) for entry in entries_in_area ]
         # generer un fichier csv avec toutes ces donnees pour la derniere valeur de 'day'
         filename = "daily_14_day_%s.csv"%day
         with open(filename,'w') as csv:
-            csv.write("longitude;latitude;pression;date;\n")
-            for (x,y,p,date) in itertools.izip(X,Y,P,dates):
-                csv.write("%s;%s;%s;%s;\n"%(x,y,p,date))
+            csv.write("nom;longitude;latitude;date;temperature;pression;\n")
+            for (name,x,y,date,temp,p) in itertools.izip(names,X,Y,dates,T,P):
+                csv.write("%s;%s;%s;%s;%s;%s;\n"%(name,x,y,date,temp,p))
         print "Données générées dans %s"%filename
 
+        # on visualise la pression -- seulement pour le premier jour
         if day==0:
             date = dates[0]
-            print "Affichage de l'échantillon du ",date
+            print "Visualisation de la pression observée le ",date
             ax.plot_trisurf(X,Y,P, cmap=cm.jet, linewidth=0.2, label="Pression le %s"%date)
     plt.show()
 
