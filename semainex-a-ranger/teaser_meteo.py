@@ -28,6 +28,7 @@ def xpath (entry, path):
         result=result[key]
     return result
 
+#################### peut-etre pas utile
 # calculer un hash de toutes les entrees par une cle obtenue a partir d'un chemin
 # e.g. 
 # entries = [ {'city':{'name':'Grenoble'},'data':data1}, {'city':{'name':'Toulouse'},'data':data2} ]
@@ -42,6 +43,7 @@ def hash_by_path (entries, path):
         if key not in result: result[key]=[]
         result[key].append(entry)
     return result
+#################### peut-etre pas utile
 
 # aller chercher les donnees a une url et les decompresser 
 # ou les prendre dans le cache s'il exite
@@ -71,17 +73,27 @@ def in_area ( lat_lon_rec, upper_left_lat_lon, lower_right_lat_lon):
     lat=lat_lon_rec['lat']
     return lon>=left and lon<=right and lat>=lower and lat <= upper
 
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
+import matplotlib.pyplot as plt
+import numpy as np
+def show_3d (x,y,z,label):
+    fig = plt.figure()
+    ax = fig.gca(projection='3d')
+    ax.plot_trisurf(x, y, z, cmap=cm.jet, linewidth=0.2, label=label)
+    plt.show()
+
 # enchainer le tout
 def main ():
     raw_daily14 = fetch_compressed_data (daily14_url, daily14_cache)
     print 'Parsing json ...', 
     sys.stdout.flush()
     # nous avons a ce stade une entree json par ligne
-    entries = [ json.loads(line) for line in raw_daily14.split("\n") if line ]
-    print 'OK, nous avons %s entrees'%len(entries)
+    all_entries = [ json.loads(line) for line in raw_daily14.split("\n") if line ]
+    print 'OK, nous avons %s entrees'%len(all_entries)
     
     # on filtre les entrees qui correspondent a notre aire d'interet
-    entries_in_area = [ entry for entry in entries 
+    entries_in_area = [ entry for entry in all_entries 
                         if in_area ( xpath (entry, ('city','coord')), 
                                      upper_left_lat_lon, lower_right_lat_lon) ]
     print 'nous avons %s entrees dans la zone'%len(entries_in_area)
@@ -109,10 +121,12 @@ def main ():
     # et chaque cellule correspond a un ensemble de mesures a cet instant et a cet endroit
     import pprint
     pp=pprint.PrettyPrinter()
-    for i in 0,:
-        entry=entries_in_area[i]
-        print 10*'=',"sample data for",xpath(entry,('city','name'))
-        pp.pprint(entry['data'][0])
+    entry=entries_in_area[0]
+    print 10*'=',"sample data for",xpath(entry,('city','name'))
+    print 4*'=',"entry['city']"
+    pp.pprint(entry['city'])
+    print 4*'=',"entry['data'][0]"
+    pp.pprint(entry['data'][0])
     
     # l'heure de la mesure cell['dt'] est exprime en secondes a partir du 01/01/1970 
     # ajouter un champ 'date' qui soit lisible par un humain
@@ -120,6 +134,10 @@ def main ():
         for cell in entry['data']:
             cell['date']=time.strftime(date_format,time.gmtime(cell['dt']))
 
+    X = [ xpath (entry, ('city','coord','lon')) for entry in entries_in_area ]
+    Y = [ xpath (entry, ('city','coord','lat')) for entry in entries_in_area ]
+    Z_pres_0 = [ xpath (entry, ('data',0,'pressure')) for entry in entries_in_area ]
     
+    show_3d (X,Y,Z_pres_0,"Pression")
 
 if __name__ == '__main__': main()
