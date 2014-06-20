@@ -86,6 +86,7 @@ def in_area ( lat_lon_rec, upper_left_lat_lon, lower_right_lat_lon):
 # enchainer le tout
 def main ():
     raw_daily14 = fetch_compressed_data (daily14_url, daily14_cache)
+
     print "Décodage json ...", 
     sys.stdout.flush()
     # nous avons a ce stade une entree json par ligne
@@ -98,12 +99,20 @@ def main ():
                                      upper_left_lat_lon, lower_right_lat_lon) ]
     print "nous avons %s entrées dans la zone"%len(entries_in_area)
 
-    # xxx on pourrait filtrer sur un autre critere comme un RE pour le nom de la ville...
-    # a voir
+    # ajouter la date sous un format lisible par un humain
+    for entry in all_entries:
+        for cell in entry['data']:
+            cell['date']= time.strftime(date_format,time.localtime(cell['dt'])) 
 
     # creer une table de hash sur le nom de la ville
     hash_by_city_name = hash_by_path (entries_in_area, ('city','name'))
-    print "nous avons %s noms de villes differents"%len(hash_by_city_name)
+    print "nous avons %s noms de villes différents"%len(hash_by_city_name)
+
+    # on cherche l'entrée correspondant à Paris
+    if 'Paris' in hash_by_city_name:
+        entry=hash_by_city_name['Paris'][0]
+        print "Il y a %s entrees pour Paris"%len(entry['data'])
+        for cell in entry['data']: print cell['date'],'pression=',cell['pressure']
 
     # grouper les entrees par l'initiale du nom, afficher une ville par entree
     hash_by_first_letter = hash_by_path (entries_in_area, ('city', 'name', 0))
@@ -120,6 +129,16 @@ def main ():
     for (name,l) in duplicates:
         print "DUP: ",name
 
+    # visualiser l'ensemble des positions lon/lat
+    LON_s = [ entry['city']['coord']['lon'] for entry in all_entries ]
+    LAT_s = [ entry['city']['coord']['lat'] for entry in all_entries ]
+    # mettre un couleur particuliere pour ceux qu'on a retenus
+    for entry in entries_in_area: entry['selected']=True
+    colors = [ 'r' if  'selected' in entry else 'b' for entry in all_entries ]
+    sizes = [ 30 if 'selected' in entry else 1 for entry in all_entries ]
+    plt.scatter(LON_s, LAT_s, c=colors, s=sizes)
+
+
     # génération d'un fichier csv et visualisation
     # pour faire simple on va visualiser la pression observee dans la zone le premier jour
     # xxx on admet que tous les tableaux de 'data' sont synchrones
@@ -129,8 +148,7 @@ def main ():
     Y = [ xpath (entry, ('city','coord','lat')) for entry in entries_in_area ]
     names = [ xpath (entry, ('city','name')) for entry in entries_in_area ]
     for day in xrange(14): 
-        # traduire la date pour un humain
-        dates = [ time.strftime(date_format,time.localtime(entry['data'][day]['dt'])) for entry in entries_in_area ]
+        dates = [ entry['data'][day]['date'] for entry in entries_in_area ]
         P = [ xpath (entry, ('data',day,'pressure')) for entry in entries_in_area ]
         T = [ xpath (entry, ('data',day,'temp','day')) for entry in entries_in_area ]
         # generer un fichier csv avec toutes ces donnees pour la derniere valeur de 'day'
