@@ -19,6 +19,7 @@ ax.set_xlim([-0.5, 2.5])
 ax.set_ylim([0, 110])
 
 ax.bar([i-0.125 for i in range(3)], [5, 3, 100], 0.25)
+ax.tick_params(size=0)
 ax.set_xticks([0, 1, 2])
 ax.set_xticklabels(["900 HOURS\nOF CLASS", 
                     "400 HOURS\nOF HOMEWORK", 
