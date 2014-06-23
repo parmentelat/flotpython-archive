@@ -12,7 +12,7 @@ plt.xkcd()
 
 fig = plt.figure()
 #fig.set_bbox()
-fig.text(0.03,0.82,"freely adapted after\nhttp://xkcd.com/519/",fontsize=12)
+fig.text(0.03,0.85,"freely adapted\nafter\nhttp://xkcd.com/519/",fontsize=12)
 ax = fig.add_subplot(1, 1, 1)
 ax.spines['right'].set_color('none')
 ax.spines['top'].set_color('none')
