@@ -11,6 +11,8 @@ import numpy as np
 plt.xkcd()
 
 fig = plt.figure()
+#fig.set_bbox()
+fig.text(0.03,0.82,"freely adapted after\nhttp://xkcd.com/519/",fontsize=12)
 ax = fig.add_subplot(1, 1, 1)
 ax.spines['right'].set_color('none')
 ax.spines['top'].set_color('none')
@@ -29,7 +31,7 @@ ax.set_ylabel("USEFULNESS\nTO CAREER\nSUCCESS",
               rotation='horizontal',
               labelpad=50)
 
-plt.title("11th-GRADE ACTIVITIES:\nafter http://xkcd.com/519/",
+plt.title("Python: des fondements\naux applications",
           fontsize=25)
 
 fig.subplots_adjust(left=0.2,top=0.8,bottom=0.12)
