@@ -1,0 +1,3 @@
+Exos à faire en compléments du cours
+* opérations bitwise
+* module decimal
