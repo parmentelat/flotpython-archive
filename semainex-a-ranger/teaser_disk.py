@@ -41,7 +41,7 @@ def pass1 (path):
         cumulated_size += local_size
         cumulated_size_by_dir [ root ] = cumulated_size
         
-#        print "%-8s %s"%(repr(cumulated_size),root)
+        print "%-8s %s"%(repr(cumulated_size),root)
 
 # xxx will use argparse of course ultimately
 import sys
