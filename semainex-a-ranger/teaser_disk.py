@@ -11,15 +11,37 @@ pass2: an interactive tool for navigating the tree
 import os, os.path
 from operator import add
 
-# ongoing work..
-def pass1 (path):
-    for root, dirs, files in os.walk (path):
-        filepaths = [ os.path.join(root,file) for file in files ]
-        size_for_files = reduce (add, [ os.path.getsize(filepath) 
-                                        for filepath in filepaths 
-                                        if os.path.exists(filepath) ], 0 )
-        print "directory %s holds %s bytes in files"%(root,size_for_files)
+# 2**10 = 1024 = 1 kilo
+POWER2_SYMBOLS = [ ( 40, 'T'), ( 30, 'G'), ( 20, 'M'), ( 10, 'k'), (0, 'b') ]
+# compute 2**p
+UNIT_SYMBOLS = [ ( 2**p, s) for (p, s) in POWER2_SYMBOLS ]
 
+def repr (bytes):
+    for ( unit, symbol ) in UNIT_SYMBOLS:
+        if bytes >= unit:
+            return "%s%s"%(bytes/unit,symbol)
+    return "???"
+
+def pass1 (path):
+    # first deal with files, stores local total in a has
+    local_size_by_dir = {}
+    cumulated_size_by_dir = {}
+    for root, dirs, files in os.walk (path, topdown=False):
+        filepaths = [ os.path.join(root,file) for file in files ]
+        local_size = reduce (add, [ os.path.getsize(filepath) 
+                                    for filepath in filepaths 
+                                    if os.path.exists(filepath) ], 0 )
+        # count the directory itself
+        local_size += os.path.getsize (root)
+        local_size_by_dir [ root ] = local_size
+        def subdir_size (subdir):
+            path=os.path.join(root,subdir)
+            return cumulated_size_by_dir.get(path,0) 
+        cumulated_size = reduce (add, [ subdir_size (subdir) for subdir in dirs ], 0)
+        cumulated_size += local_size
+        cumulated_size_by_dir [ root ] = cumulated_size
+        
+#        print "%-8s %s"%(repr(cumulated_size),root)
 
 # xxx will use argparse of course ultimately
 import sys
