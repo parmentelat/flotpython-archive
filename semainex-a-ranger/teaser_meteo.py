@@ -132,12 +132,11 @@ def main ():
     # visualiser l'ensemble des positions lon/lat
     LON_s = [ entry['city']['coord']['lon'] for entry in all_entries ]
     LAT_s = [ entry['city']['coord']['lat'] for entry in all_entries ]
-    # mettre un couleur particuliere pour ceux qu'on a retenus
+    # mettre une taille et une couleur particuliere pour ceux qu'on a retenus
     for entry in entries_in_area: entry['selected']=True
     colors = [ 'r' if  'selected' in entry else 'b' for entry in all_entries ]
     sizes = [ 30 if 'selected' in entry else 1 for entry in all_entries ]
     plt.scatter(LON_s, LAT_s, c=colors, s=sizes)
-
 
     # génération d'un fichier csv et visualisation
     # pour faire simple on va visualiser la pression observee dans la zone le premier jour
