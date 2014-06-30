@@ -16,6 +16,7 @@ POWER2_SYMBOLS = [ ( 40, 'T'), ( 30, 'G'), ( 20, 'M'), ( 10, 'k'), (0, 'b') ]
 # compute 2**p
 UNIT_SYMBOLS = [ ( 2**p, s) for (p, s) in POWER2_SYMBOLS ]
 
+# how to display a raw byte count nicely like 2G or 4M or 6k
 def repr (bytes):
     for ( unit, symbol ) in UNIT_SYMBOLS:
         if bytes >= unit:
@@ -24,27 +25,39 @@ def repr (bytes):
 
 ###
 def pass1 (path):
-    # first deal with files, stores local total in a has
     cumulated_size_by_dir = {}
     for root, dirs, files in os.walk (path, topdown=False):
+        # first deal with files
         filepaths = [ os.path.join(root,file) for file in files ]
         local_size = reduce (add, [ os.path.getsize(filepath) 
                                     for filepath in filepaths 
                                     if os.path.exists(filepath) ], 0 )
         # count the directory itself
         local_size += os.path.getsize (root)
+        # because we do the traversal bottom up, we already have the size for our immediate sons
+        # in cumulated_size_by_dir; however the disk is alive during this time so it might be
+        # that a new son is showing up that we do not know about
         def subdir_size (subdir):
             path=os.path.join(root,subdir)
+            # in which case we return 0 and not some exception
             return cumulated_size_by_dir.get(path,0) 
+        # total on the immediate sons
         cumulated_size = reduce (add, [ subdir_size (subdir) for subdir in dirs ], 0)
+        # add the local weight (files + this_dir)
         cumulated_size += local_size
+        # store in dictionary for dealing with the upper directory
         cumulated_size_by_dir [ root ] = cumulated_size
+        # store result in <dir>/.du for second/interactive pass
         with open(os.path.join(root,".du"),'w') as store:
             store.write("%s\n"%cumulated_size)
 #        print "%-8s %s"%(repr(cumulated_size),root)
     return cumulated_size_by_dir
 
 ###
+# we have a global cache object, that is a dict { dirname -> size }
+# at the beginning it is empty, and we fill it as we go
+# if the size is not known from the cache we look in <dir>/.du
+# if it's still not known we return 0
 def get_size (path, cache):
     if cache.has_key(path): 
         return cache[path]
@@ -55,6 +68,8 @@ def get_size (path, cache):
         except: 
             return 0
 
+# during pass2, when inspecting a directory we show the immediate subdirs (with numbers for selection) 
+# they are sorted so that the bigger one comes last (and can thus be selected using 'l')
 def show_path (path,cache):
     print "Total size %s for path %s"%(repr(get_size(path,cache)),path)
     subdirs=[ (d,os.path.join(path,d)) for d in os.listdir(path) if os.path.isdir(os.path.join(path,d)) ]
@@ -67,19 +82,24 @@ def show_path (path,cache):
     for name,path,size in sized_subdirs:
         print "%s %s %s"%(counter,name,repr(size))
         counter +=1
+    # the interactive mainloop for selecting the next dir
     while True:
-        string=raw_input("Enter number (or l(ast) or u(p)) ")
-#        import pdb
-#        pdb.set_trace()
+        string=raw_input("Enter number (or l(ast) or u(p)) or (q)uit ")
+        # englobe in try/except as the input might not be an int or make no sense
         try: return sized_subdirs[int(string)-1][1]
         except: pass
+        # again try/except for if subdirs is empty
         try: 
             if string.strip() in ['l']: return sized_subdirs[-1][1]
         except: pass
-        print 'path',path,'res',os.path.dirname(path)
+        # how to step up 
         if string.strip() in ['..','0','u']:
             return os.path.dirname(path)
-        
+        # xxx would make sense to accept strings as well here...
+        if string.strip() in ['q','Q']:
+            exit(0)
+
+# well, that's it mostly        
 def pass2 (path, cache):
     while True:
         path=show_path (path, cache)
