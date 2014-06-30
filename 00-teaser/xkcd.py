@@ -18,7 +18,7 @@ fig.subplots_adjust(left=0.25,bottom=0.22,top=0.65)
 fig.text(0.01,0.01,"adaptation libre de http://xkcd.com/519/",
          fontsize=14,ha='left',va='bottom')
 
-fig.text(0.5,0.82,"Python:\ndes fondements\naux applications",
+fig.text(0.5,0.82,"Python:\ndes fondements\na l'utilisation du langage",
          fontsize=45, ha='center',va='center')
 
 #plt.title("Python\ndes fondements\naux applications",fontsize=45)
