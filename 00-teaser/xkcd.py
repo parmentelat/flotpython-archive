@@ -13,10 +13,10 @@ plt.xkcd()
 my_dpi=80
 fig = plt.figure(dpi=my_dpi,figsize=(9,6))
 
-fig.subplots_adjust(left=0.30,top=0.65,bottom=0.15)
+fig.subplots_adjust(left=0.25,bottom=0.22,top=0.65)
 
-fig.text(0.02,0.02,"adaptation libre de http://xkcd.com/519/",
-         fontsize=12,ha='left')
+fig.text(0.01,0.01,"adaptation libre de http://xkcd.com/519/",
+         fontsize=14,ha='left',va='bottom')
 
 fig.text(0.5,0.82,"Python:\ndes fondements\naux applications",
          fontsize=45, ha='center',va='center')
@@ -34,21 +34,27 @@ ax.bar([i-0.125 for i in range(3)], [5, 3, 100], 0.25)
 ax.xaxis.set_ticks_position('bottom')
 ax.tick_params(size=0)
 ax.set_xticks([0, 1, 2])
-ax.set_xticklabels(["900 HEURES\nDE COURS", 
-                    "400 HEURES\nDE DM", 
+ax.set_xticklabels(["900\nHEURES\nDE COURS", 
+                    "400\nHEURES\nDE DM", 
                     "UN MOOC\nA JOUER\nAVEC PYTHON"])
+for tick in ax.xaxis.get_major_ticks():
+    tick.label.set_fontsize(26) 
 plt.yticks([])
-ax.set_ylabel("apport pour\nune carriere\nreussie",
+ax.set_ylabel("apport\npour une\ncarriere\nreussie",
               rotation='horizontal',
-              labelpad=100,
-              fontsize=20)
+              labelpad=80,
+              fontsize=26)
 
 
 fig.savefig('xkcd.png')
 
 ## the pictures I can see on FUN are 220 x 147
-#(tx,ty)=(220,147)
-#fig.set_size_inches (tx/my_dpi,ty/my_dpi)
-#fig.savefig('xkcd-small.png')
+# the wet finger technique...
+# this does produce a 220x147 output but the fonts are not resized accordingly...
+# so do this under preview & adjust size...
+#h=1.47
+#fig.set_size_inches (h*1.5,h)
+#fig.savefig('xkcd-220x147.png')
+fig.savefig('xkcd-220x147.png')
 
 plt.show()
