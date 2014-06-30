@@ -69,8 +69,8 @@ def show_path (path,cache):
         counter +=1
     while True:
         string=raw_input("Enter number (or l(ast) or u(p)) ")
-        import pdb
-        pdb.set_trace()
+#        import pdb
+#        pdb.set_trace()
         try: return sized_subdirs[int(string)-1][1]
         except: pass
         try: 
