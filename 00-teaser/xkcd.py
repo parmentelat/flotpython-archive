@@ -40,7 +40,7 @@ ax.set_xticklabels(["900\nHEURES\nDE COURS",
 for tick in ax.xaxis.get_major_ticks():
     tick.label.set_fontsize(26) 
 plt.yticks([])
-ax.set_ylabel("apport\npour une\ncarriere\nreussie",
+ax.set_ylabel("utilite\npour une\ncarriere\nreussie",
               rotation='horizontal',
               labelpad=80,
               va='center',
