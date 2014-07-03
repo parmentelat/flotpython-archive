@@ -23,12 +23,13 @@ import numpy as np
 
 date_format="%Y-%m-%d:%H-%M"
 
+KELVIN=273.15
+
 # chercher par exemple entry['city']['id'] a partir d'un chemin genre ('city','id')
 # i.e. xpath ( {'city':{'id':12,'name':'Montreal'}}, ['city','id']) => 12
 def xpath (entry, path):
     result=entry
-    for key in path:
-        result=result[key]
+    for key in path: result=result[key]
     return result
 
 # on a des megas...
@@ -37,21 +38,8 @@ def megas(bytes):
     megas=float(int(megas*10))/10
     return "%s Mo"%megas
 
-#################### peut-etre pas utile
-# aller chercher les donnees a une url et les decompresser 
-# ou les prendre dans le cache s'il exite
-def fetch_compressed_data (url,cache):
-    print "Téléchargement de %s ..."%url,
-    sys.stdout.flush()
-    network_file=urllib2.urlopen(url)
-    compressed_json=network_file.read()
-    print " OK - %s "%megas(len(compressed_json))
-    uncompressed_json=zlib.decompress(compressed_json, zlib.MAX_WBITS | 16)
-    print "décompression terminée avec %s"%megas(len(uncompressed_json))
-    return uncompressed_json
-
 # like in css we do: top right bottom left
-france = ( 50, 8, 42, -5)
+#france = ( 50, 8, 42, -5)
 europe = ( 60, 26, 34, -12)
 
 # determiner si une position est dans un rectangle donne
@@ -61,67 +49,61 @@ def in_area ( lat_lon_rec, css_4uple):
     lat=lat_lon_rec['lat']
     return lon>=left and lon<=right and lat>=bottom and lat<=top
 
-def main ():
-    
-    print 40*'='
-    url = "http://78.46.48.103/sample/daily_14.json.gz"
+print 40*'='
+url = "http://78.46.48.103/sample/daily_14.json.gz"
 
-    print "Téléchargement de %s ..."%url
-    network_file=urllib2.urlopen(url)
-    compressed_json=network_file.read()
-    print "OK - %s téléchargés"%megas(len(compressed_json))
-    uncompressed_json=zlib.decompress(compressed_json, zlib.MAX_WBITS | 16)
-    print "décompression terminée avec %s"%megas(len(uncompressed_json))
+print "Téléchargement de %s ..."%url
+network_file=urllib2.urlopen(url)
+compressed_json=network_file.read()
+print "OK - %s téléchargés"%megas(len(compressed_json))
+uncompressed_json=zlib.decompress(compressed_json, zlib.MAX_WBITS | 16)
+print "décompression terminée avec %s"%megas(len(uncompressed_json))
 
-    print "Décodage json ...", 
-    sys.stdout.flush()
-    # nous avons a ce stade une entree json par ligne
-    all_entries = [ json.loads(line) for line in uncompressed_json.split("\n") if line ]
-    print "OK"
-    print "nous avons %s entrées de ville"%len(all_entries)
+print "Décodage json ..."
+all_cities = [ json.loads(line) for line in uncompressed_json.split("\n") if line ]
+print 40*'='
 
-    print 40*'='
-    print("téléchargement terminé..")
-    print 40*'='
+# nous avons a ce stade une entree json par ligne
 
-    # on filtre les entrees qui correspondent a notre aire d'interet
-    entries_in_europe = [ entry for entry in all_entries 
-                        if in_area ( xpath (entry, ('city','coord')), europe ) ]
-    print "nous avons %s villes dans la zone 'europe'"%len(entries_in_europe)
+print "Sur un total de %s villes"%len(all_cities)
 
-    entries_in_france = [ entry for entry in all_entries 
-                        if in_area ( xpath (entry, ('city','coord')), france ) ]
-    print "nous avons %s villes dans la zone 'france'"%len(entries_in_france)
+# on filtre les entrees qui correspondent a notre aire d'interet
+europe_cities = [ entry for entry in all_cities 
+                    if in_area ( xpath (entry, ('city','coord')), europe ) ]
+print "nous avons %s villes dans la zone 'europe'"%len(europe_cities)
 
-    # visualiser l'ensemble des positions lon/lat
-    print "Les points de relèvement en France par rapport à l'Europe"
-    LON_s = [ entry['city']['coord']['lon'] for entry in entries_in_europe ]
-    LAT_s = [ entry['city']['coord']['lat'] for entry in entries_in_europe ]
-    # mettre une taille et une couleur particuliere pour ceux qu'on a retenus
-    for entry in entries_in_france: entry['selected']=True
-    # les entrées dans la zone d'intérêt en rouge
-    colors = [ 'r' if  'selected' in entry else 'b' for entry in entries_in_europe ]
-    # et un peu plus grosses
-    sizes = [ 30 if 'selected' in entry else 1 for entry in entries_in_europe ]
-    plt.scatter(LON_s, LAT_s, c=colors, s=sizes)
+#entries_in_france = [ entry for entry in all_cities 
+#                    if in_area ( xpath (entry, ('city','coord')), france ) ]
+#print "nous avons %s villes dans la zone 'france'"%len(entries_in_france)
 
-    print 40*'='
-    plt.show()
+# visualiser l'ensemble des positions lon/lat
+print "Les points de relèvement en Europe"
+LON_s = [ entry['city']['coord']['lon'] for entry in all_cities ]
+LAT_s = [ entry['city']['coord']['lat'] for entry in all_cities ]
+# mettre une taille et une couleur particuliere pour ceux qu'on a retenus
+for entry in europe_cities: entry['selected']=True
+# les entrées dans la zone d'intérêt en rouge
+colors = [ 'r' if  'selected' in entry else 'b' for entry in all_cities ]
+# et un peu plus grosses
+sizes = [ 30 if 'selected' in entry else 1 for entry in all_cities ]
+plt.scatter(LON_s, LAT_s, c=colors, s=sizes)
 
-    # pour faire simple on va visualiser la pression observee dans la zone le premier jour
-    day=0
-    dt=xpath(entries_in_france[0],('data',day,'dt'))
-    date=time.strftime(date_format,time.localtime(dt))
-    print "Visualisation de la pression observée le ",date
-    fig = plt.figure()
-    ax = fig.gca(projection='3d')
-    X = [ xpath (entry, ('city','coord','lon')) for entry in entries_in_france ]
-    Y = [ xpath (entry, ('city','coord','lat')) for entry in entries_in_france ]
-    P = [ xpath (entry, ('data',day,'pressure')) for entry in entries_in_france ]
-    ax.plot_trisurf(X,Y,P, cmap=cm.jet, linewidth=0.2, label="Pression le %s"%date)
-    ax.set_title ("Pression en France relevee le %s"%date)
+print 40*'='
+plt.show()
 
-    print 40*'='
-    plt.show()
+# pour faire simple on va visualiser la pression observee dans la zone le premier jour
+day=0
+dt=xpath(europe_cities[0],('data',day,'dt'))
+date=time.strftime(date_format,time.localtime(dt))
+print "Visualisation de la pression observée le ",date
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+X = [ xpath (entry, ('city','coord','lon')) for entry in europe_cities ]
+Y = [ xpath (entry, ('city','coord','lat')) for entry in europe_cities ]
+T_celsius = [ xpath (entry, ('data',day,'temp','day')) - KELVIN for entry in europe_cities ]
+ax.plot_trisurf(X,Y,T_celsius, cmap=cm.jet, linewidth=0.2, label="Température le %s"%date)
+ax.set_title ("Pression en Europe relevee le %s"%date)
 
-if __name__ == '__main__': main()
+print 40*'='
+plt.show()
+
