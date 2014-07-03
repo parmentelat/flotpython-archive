@@ -6,7 +6,7 @@ import matplotlib
 matplotlib.use('TkAgg')
 
 from matplotlib import pyplot as plt
-import numpy as np
+#import numpy as np
 
 plt.xkcd()
 
