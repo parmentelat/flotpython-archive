@@ -17,7 +17,7 @@ x,y= 324, 201
 fact=3
 fig = plt.figure(dpi=dpi,figsize=(fact*float(x)/dpi,fact*float(y)/dpi))
 
-fig.subplots_adjust(left=0.04,right=0.78,bottom=0.18,top=0.7)
+fig.subplots_adjust(left=0.02,right=0.78,bottom=0.18,top=0.7)
 
 fig.text(0.86,0.39,"impact\nsur\ncarriere",ha='center', fontsize=36)
 
@@ -32,16 +32,16 @@ ax.spines['top'].set_color('none')
 
 ax.set_xlim([-0.5, 2.5])
 ax.set_ylim([0, 110])
-ax.bar([i-0.125 for i in range(3)], [8, 4, 100], 0.25)
+ax.bar([i-0.125 for i in range(3)], [4, 12, 100], 0.25)
 
 ax.xaxis.set_ticks_position('bottom')
 ax.tick_params(size=0)
 ax.set_xticks([0, 1, 2])
-ax.set_xticklabels(["900 h\nDE COURS", 
-                    "400 h\nDE TD", 
-                    "UN MOOC\nSUR PYTHON"])
+ax.set_xticklabels(["900 h\nde cours", 
+                    "un livre\nsur python", 
+                    "jouer avec\npython"])
 for tick in ax.xaxis.get_major_ticks():
-    tick.label.set_fontsize(32) 
+    tick.label.set_fontsize(28) 
 plt.yticks([])
 #ax.set_ylabel("impact\nsur\ncarriere", rotation='horizontal',
 #              labelpad=80, va='center', fontsize=26)
