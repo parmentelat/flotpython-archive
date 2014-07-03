@@ -8,9 +8,7 @@ def display ( tuples_list ):
     image = np.zeros(size*size)
     for tuple in tuples_list:
         x,y=tuple
-        x-=1
-        y-=1
-        image [ size*x + y ] = 1.
+        image [ size*(x-1) + (y-1) ] = 1.
     # Reshape things into a 9x9 grid.
     image = image.reshape((size,size))
     row_labels = range(size)
