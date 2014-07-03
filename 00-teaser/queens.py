@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 from queens_chessboard import display
 
 BOARD_SIZE = 8
@@ -8,7 +7,6 @@ def under_attack(col, queens):
     left = right = col
     for r, c in reversed(queens):
         left, right = left - 1, right + 1
-
         if c in (left, col, right):
             return True
     return False
@@ -16,9 +14,7 @@ def under_attack(col, queens):
 def solve(n):
     if n == 0:
         return [[]]
-
     smaller_solutions = solve(n - 1)
-
     return [solution+[(n,i+1)]
             for i in xrange(BOARD_SIZE)
             for solution in smaller_solutions
@@ -26,6 +22,7 @@ def solve(n):
 
 answers = solve(BOARD_SIZE)
 for i,answer in zip(range(len(answers)),answers):
+    print 'solution',i+1
     display (answer)
-    print i
-    if i>=3: exit(0)
+    if i>=3: 
+        print '...'; exit(0)
