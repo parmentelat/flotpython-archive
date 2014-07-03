@@ -41,7 +41,8 @@ for i,a,x,y,angle,size in zip (range(n),aphorisms,X,Y,angles,font_sizes):
 #    fig.text (x,y,"%s:%s"%(i,a),rotation=angle,fontsize=size,ha='center',va='center')
 
 
-my_selection=[1,2,18,19]
+aphorisms = [ a.strip('.') for a in aphorisms if len(a)<=40 and 'Although' not in a ]
+n=len(aphorisms)
 
 layout = [
     (0.5,0.9,0,1.,'k','center','center'),
@@ -61,14 +62,14 @@ def draw (layout):
 
 Y_bottom=0.08
 X_bottom=0.01
-X_top=0.75
+X_top=0.63
 delta=float(X_top-X_bottom)/(n-1)
 X_current=X_bottom
-ANGLE=60
+ANGLE=45
 
-layout2 = [ (X_bottom+i*delta,Y_bottom, ANGLE, .8, 'k','left','bottom')
+layout2 = [ (X_bottom+i*delta,Y_bottom, ANGLE, .8, 'b','left','bottom')
            for i,a in zip(range(n),aphorisms) ]
-layout2[0]= (0.5,0.9,0,1.,'k','center','center')
+layout2[0]= (0.5,0.9,0,1.4,'k','center','center')
 
 
 draw (layout2)  
