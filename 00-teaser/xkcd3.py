@@ -30,25 +30,30 @@ def draw (layout,strings):
         fig.text (x,y,text,rotation=angle,fontsize=fontsize,color=color,ha=ha,va=va)
 
 FONT_SMALL,FONT_LARGE=14,32
-X_left=0.04
-X_right=0.8
+X_left=0.05
+X_right=0.84
 Y_bottom=0.05
 
 ANGLE=45
 
 # on ne prend que les plus courts; on enleve celui qui tombe a plat
 title=original_aphorisms[0]
+title=["The zen of\nPython","by tim peters"]
 aphorisms = [ a.strip('.') for a in original_aphorisms[1:] if len(a)<=40 and 'Although' not in a ]
+aphorisms.append ('......')
 n=len(aphorisms)
 
 delta=float(X_right-X_left)/(n-1)
-layout_title = [ (0.5,0.9,0,FONT_LARGE,'k','center','center'), ]
-layout_items = [ (X_left+i*delta,Y_bottom, ANGLE, FONT_SMALL, 'b','left','bottom')
+layout_title = [ (.11,0.68,0,FONT_LARGE,'k','center','center'), 
+                 (.11,.5,0,10,'k','center','center'),
+]
+layout_aphos = [ (X_left+i*delta,Y_bottom, ANGLE, FONT_SMALL, 'b','left','bottom')
                  for i,a in zip(range(n),aphorisms) ]
-layout = layout_title + layout_items
+layout = layout_aphos + layout_title
+items = aphorisms + title
 # Le titre vient en premier
 
-draw (layout,[title]+aphorisms)  
+draw (layout,items)
 
 fig.savefig('xkcd3.png')
 
