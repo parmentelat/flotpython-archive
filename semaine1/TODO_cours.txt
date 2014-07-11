@@ -1,3 +1,10 @@
-installer Python 2.x
-pourquoi Python 2.x et pas 3.x
-fonctionnement machine virtuelle
+-installer Python 2.x
+-pourquoi Python 2.x et pas 3.x
+-fonctionnement machine virtuelle
+-expliquer que beaucoup d'approfondissement seront vu en exercice (exemple du marteau :
+si je vous apprends comment utiliser un marteau, vous saurez utiliser n'importe quel
+marteau, il vous faudra peut-être un peu d'entrainement, mais vous n'aurez pas à 
+surmonter de grosses difficultés) 
+-expliquer l'histoire des monthy python (et les mots spam egg beans)
+-introduire la notion de terminal interactive et d'éditeur de texte (on utilise l'un ou l'autre suivant le besoin)
+
