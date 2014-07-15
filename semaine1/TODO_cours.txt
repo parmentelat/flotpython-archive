@@ -6,5 +6,5 @@ si je vous apprends comment utiliser un marteau, vous saurez utiliser n'importe 
 marteau, il vous faudra peut-être un peu d'entrainement, mais vous n'aurez pas à 
 surmonter de grosses difficultés) 
 -expliquer l'histoire des monthy python (et les mots spam egg beans)
--introduire la notion de terminal interactive et d'éditeur de texte (on utilise l'un ou l'autre suivant le besoin)
+-introduire la notion de terminal interactif et d'éditeur de texte (on utilise l'un ou l'autre suivant le besoin)
 

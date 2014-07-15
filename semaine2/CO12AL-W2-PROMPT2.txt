@@ -1,0 +1,69 @@
+## FORMAT DU FICHIER
+## Tout de qui commence avec un ## est un commentaire
+##
+## le texte entre double crochets ouvrants et fermants
+## est à afficher en surimpression pendant que je parle et à 
+## synchroniser avec le texte entre crochet 
+
+## En Python, tout est un objet (30s)
+
+En python tout est un objet, ce qui simplifie et réduit
+considérablement le temps de développement de programmes.  On accède à
+tous les objets par leur référence en mémoire, mais on ne manipule
+jamais directement ces références. On utilise à la place l'affectation
+à une variable, c'est-à-dire que l'on utilise le signe égal pour
+affecter un objet à une variable, par exemple [a=1] signifie que l'on
+affecte l'objet entier 1 à la variable a. Regardons maintenant plus en
+détail cette notion de variable...
+
+[[
+a = 1
+]]
+
+## Notion de variables (50s)
+
+Une variable est un nom que l'on donne à un objet pour le retrouver en
+mémoire.
+
+Il y a trois règles importantes pour le nom d'une variable en Python.
+Une variable peut être composée [de tirets bas] et d'une suite
+quelconque de caractères alphanumériques, c'est-à-dire les [lettres de
+l'alphabet en minuscule], [en majuscule] et les [chiffres de 0 à 9].  Une
+variable commence soit par une [lettre soit pas un tiret bas], mais
+[jamais par un chiffre].  Les majuscules et minuscules sont prises en
+compte, donc [Ma_variable] est différent de [ma_variable].
+
+Il est recommandé d'utiliser des noms explicites de variable, de tout
+écrire en minuscule, et de séparer les mots par des tirets bas. Par
+exemple, [moyenne_age_francais] est un bon nom de variable, meilleur de
+[moy_age_f] et bien meilleur que simplement [x]
+
+[[
+_
+abcdefghijklmnopqrstuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+0123456789
+
+ma_variable (vert)
+_ma_variable (vert)
+1variable (barrer en rouge)
+
+Ma_variable est différent de ma_variable
+
+Utiliser 
+moyenne_age_francais 
+plutôt que 
+moy_age_f 
+ou pire 
+x
+]]
+
+
+## Typage dynamique (20s)
+
+Maintenant que nous avons vu les notions d'objets et de variables,
+parlons du typage dynamique.  Python utilise le typage dynamique
+c'est-à-dire que le type des variables n'est pas spécifié lors de
+l'écriture du programme, mais automatiquement à l'exécution. En fait,
+les variables n'ont pas de type, ce sont les objets qu'elles
+référencent qui ont un type. Prenons un exemple.

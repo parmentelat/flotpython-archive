@@ -1,42 +1,54 @@
-# -*- coding: cp1252 -*-
+# -*- coding: latin_1 -*-
 
-## Comment manipule-t-on des objets en Python ?
-## On utilise l'affectation (typage dymamique).
-## On dit que l'on affecte un nom à un objet ou que
-## le nom référence l'objet. Parler du typage dynamique.
+## On va voir dans cette vidéo les 5 types numériques en Python, les types entier
+## int et long, le type décimal float, le type complex pour les nombres complexes
+## et le type bool pour le booleens. 
 
-a = 1 + 2
-b = a + 2
+## le type entier
+## pour entrer un entier, on n'a rien d'autre à faire que d'écrire
+## cet entier
+1
+
+## on peut également l'affecter à une variable
+i = 1
 
 ## Comment affiche-t-on un objet en Python ?
 ## On utilise print (on peut séparer les variables
 ## par des virgules).
 
-print a
-print a, b
+print i
 
-## Qu'est-ce que la représentation interne d'un objet ?
-## Souvent équivallent à print (mais pas toujours).
+## lorsque l'on est dans le terminal interactif, on peut aussi directement
+## taper le nom de la variable suivi d'un retour chariot.
+
+i
+
+## On voit ainsi la représentation interne de l'objet ?
+## c'est souvent équivallent à print (mais pas toujours).
 ## La représentation internet peut donner des informations
 ## supplémentaires.
-
-a  #il faut taper "a" (sans les guillemets) dans l'interpréteur
-   #pour voir la représentation interne
 
 ## Comment on connait le type d'un objet en Python ?
 ## On utilise la fonction built-in type()
 
-type(a)
+type(i)
 
-## Les types numériques
-
-## Les entiers
+## en python on a deux type entiers, les int et les long
 i = 10
 l = 23480284028402840289482184018 # précision illimitée
 print l * l     # précision illimitée sur les long
 
-type(i + l)     # conversion automatique en long si on a besoin de plus de
-                # précision qu'un int
+## pourquoi avons nous deux types entier en Python ?
+## le type int est plus compact que le type long, par conséquent
+## pour les petits entier, Python va utiliser le type int pour reduire
+## la consommation mémoire, et le type long s'il y a vraiement besoin de
+## grands entiers.
+
+## heureusement, Python fait automatiquement la conversion
+## de int vers long s'il y a besoin. Donc en pratique vous n'avez
+## jamais à vour préocupé du type d'entier que vous utilisez
+
+type(i + l)     
 
 ## Les décimaux. On sépare la partie entière et décimale par un .
 f = 4.3
