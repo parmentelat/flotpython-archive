@@ -1,5 +1,0 @@
-documentation sur les types numériques
-https://docs.python.org/2.7/library/stdtypes.html#numeric-types-int-float-long-complex
-
-documentation sur les limitations des float
-https://docs.python.org/2.7/tutorial/floatingpoint.html
