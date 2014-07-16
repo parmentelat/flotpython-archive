@@ -8,6 +8,10 @@ CO12AL-W2-PROMPT3.txt
 CO12AL-W2-EXO1.py
 CO12AL-W2-PROMPT4.txt
 
+## Exercices Vidéo 1
+opérations bitwise
+limitation de la précision des floats et module decimal 
+
 
 ## Vidéo 2
 CO12AL-W2-PROMPT5.txt

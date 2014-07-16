@@ -7,4 +7,4 @@ marteau, il vous faudra peut-être un peu d'entrainement, mais vous n'aurez pas à
 surmonter de grosses difficultés) 
 -expliquer l'histoire des monthy python (et les mots spam egg beans)
 -introduire la notion de terminal interactif et d'éditeur de texte (on utilise l'un ou l'autre suivant le besoin)
-
+-définir le retour chariot

@@ -7,13 +7,12 @@
 
 ## Résumé de la vidéo (25s)
 
-Bonjour, nous allons voir dans cette vidéo les 5 types numériques qui
+Bonjour, nous allons voir dans cette vidéo les 4 types numériques qui
 existent en Python : les [int] qui représentent des entiers, les [long]
 qui représentent des entiers de précision illimité, les [float] qui
-représentent des nombre décimaux, les [complex] qui représentent des
-nombres complexes et les [bool] qui représentent des booléens,
-c'est-à-dire des nombres qui prennent soit la valeur 1 soit la valeur
-0. Ouvrons un terminal interactif pour jouer avec ces types
+représentent des nombre décimaux, et les [complex] qui représentent des
+nombres complexes. 
+Ouvrons un terminal interactif pour jouer avec ces types
 numériques...
  
 

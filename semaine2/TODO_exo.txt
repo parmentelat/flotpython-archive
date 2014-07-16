@@ -1,9 +1,3 @@
-Vidéo 1
-* opérations bitwise
-* module decimal
-
-
-
 
 sorted()
 list.sort() avec key=...
