@@ -10,6 +10,4 @@
 Dans cette vidéo, nous avons introduit la notion d'objet avec les
 variables et le typage dynamique, et nous avons présenté l'instruction
 print qui permet d'afficher la valeur d'un objet sur le terminal. Dans
-la prochaine vidéo, nous introduirons les types de base, et les
-techniques de factorisation de code que sont les boucles, les
-fonctions et les modules
+la prochaine vidéo, nous introduirons les types numériques en Python.

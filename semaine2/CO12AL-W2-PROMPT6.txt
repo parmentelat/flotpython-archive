@@ -1,0 +1,13 @@
+## FORMAT DU FICHIER
+## Tout de qui commence avec un ## est un commentaire
+##
+## le texte entre double crochets ouvrants et fermants
+## est à afficher en surimpression pendant que je parle et à 
+## synchroniser avec le texte entre crochet 
+
+## Résumé de la vidéo (25s)
+
+Nous avons vu dans cette vidéo les 4 types numériques qui
+existent en Python : les int, les long, les float et les complexe. 
+On a vu que le type long est un type puissant permettant de travailler
+avec des entiers de taille illimité. On va maintenant voir d

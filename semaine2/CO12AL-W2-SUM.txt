@@ -8,13 +8,70 @@ CO12AL-W2-PROMPT3.txt
 CO12AL-W2-EXO1.py
 CO12AL-W2-PROMPT4.txt
 
+## Quizz Vidéo 1
+
 ## Exercices Vidéo 1
+
+###################################################################
+
+## Vidéo 2
+
+CO12AL-W2-PROMPT5.txt
+CO12AL-W2-EXO2.py
+CO12AL-W2-PROMPT6.txt
+
+## Quizz Vidéo 2
+
+## Exercices Vidéo 2
+
 opérations bitwise
 limitation de la précision des floats et module decimal 
 
 
-## Vidéo 2
-CO12AL-W2-PROMPT5.txt
-CO12AL-W2-EXO2.py
+###################################################################
 
+## Vidéo 3
 
+## Quizz Vidéo 3
+
+## Exercices Vidéo 3
+
+###################################################################
+
+## Vidéo 4
+
+## Quizz Vidéo 4
+
+## Exercices Vidéo 4
+
+###################################################################
+
+## Vidéo 5
+
+## Quizz Vidéo 5
+
+## Exercices Vidéo 5
+
+###################################################################
+
+## Vidéo 6
+
+## Quizz Vidéo 6
+
+## Exercices Vidéo 6
+
+###################################################################
+
+## Vidéo 7
+
+## Quizz Vidéo 7
+
+## Exercices Vidéo 7
+
+###################################################################
+
+## Vidéo 8
+
+## Quizz Vidéo 8
+
+## Exercices Vidéo 8

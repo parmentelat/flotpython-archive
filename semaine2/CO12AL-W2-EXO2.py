@@ -60,6 +60,14 @@ print i + l + f
 
 print i + l + f + c
 
+## On peut convertir des types de bases entre eux (avec risque
+## de perte de précision ou d'information, troncation).
+
+print int(4.32)
+print long(5.3)
+print float(9879729572895792375948)
+print complex(10)
+
 ## opérations de base
 
 print 5 + 3
@@ -73,13 +81,7 @@ print 5.2//3.1  # force la division sur des entiers (5.0/3.0)
 print 2 ** 32   # puissances
 print abs(-5.3) # valeur absolue
 
-## On peut convertir des types de bases entre eux (avec risque
-## de perte de précision ou d'information, troncation).
 
-print int(4.32)
-print long(5.3)
-print float(9879729572895792375948)
-print complex(10)
 
 
 
