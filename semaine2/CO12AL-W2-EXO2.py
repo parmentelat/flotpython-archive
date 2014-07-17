@@ -81,6 +81,20 @@ print 5.2//3.1  # force la division sur des entiers (5.0/3.0)
 print 2 ** 32   # puissances
 print abs(-5.3) # valeur absolue
 
+## pour finir, j'aimerai introduire un dernier type qui n'est pas
+## a proprement parlé un type numérique, mais qui est implémenté comme
+## tel, c'est le type booléen. Ce type est utilisé pour le résultat
+## de tous les tests en Python et ne contient que deux valeurs True et False
+## On verra bientôt cette notion de test en Python, mais regardons un test
+## simple pour illustrer les booléens
+
+1 < 2
+1 > 2
+
+## noter la premiere lettre qui est une majuscule
+
+## nous reviendrons très bientôt sur l'utilisation des Booléens
+
 
 
 

@@ -1,4 +1,4 @@
-## Vidéo 1
+## Vidéo 1 (objets, variables, typage dynamique)
 
 CO12AL-W2-PROMPT1.txt
 CO12AL-W2-SLIDE1.pptx
@@ -14,7 +14,7 @@ CO12AL-W2-PROMPT4.txt
 
 ###################################################################
 
-## Vidéo 2
+## Vidéo 2 (types numériques : int, long, float, complex, bool)
 
 CO12AL-W2-PROMPT5.txt
 CO12AL-W2-EXO2.py
@@ -30,11 +30,18 @@ limitation de la précision des floats et module decimal
 
 ###################################################################
 
-## Vidéo 3
+## Vidéo 3 (séquences)
+
+CO12AL-W2-PROMPT7.txt
+CO12AL-W2-EXO3.py
 
 ## Quizz Vidéo 3
 
 ## Exercices Vidéo 3
+
+bytearray
+buffer
+unicode
 
 ###################################################################
 
