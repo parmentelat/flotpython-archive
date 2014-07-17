@@ -1,0 +1,21 @@
+## FORMAT DU FICHIER
+## Tout ce qui commence avec un ## est un commentaire
+##
+## le texte entre double crochets ouvrants et fermants
+## est à afficher en surimpression pendant que je parle et à 
+## synchroniser avec le texte entre crochet 
+
+## Résumé de la vidéo (20s)
+
+Dans cette vidéo, nous allons aborber un ensemble de types de base en Python
+qui sont au coeur du langage, ce sont les types séquence. Les principaux 
+types séquence sont les [listes], les [tuples] et les [string] qui sont des chaines de caractères. 
+
+[[
+list
+tuple
+str
+]]
+
+
+
