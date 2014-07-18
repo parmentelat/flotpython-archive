@@ -32,24 +32,30 @@ limitation de la précision des floats et module decimal
 
 ## Vidéo 3 (séquences)
 
-CO12AL-W2-PROMPT7.txt
-CO12AL-W2-EXO3.py
+CO12AL-W2-PROMPT7.txt  (20s)
+CO12AL-W2-EXO3.py      (5 m)
+CO12AL-W2-SLIDE3.pptx  (
 
 ## Quizz Vidéo 3
 
 ## Exercices Vidéo 3
 
-bytearray
-buffer
-unicode
+slicing
+opérations génériques sur les séquences en prenant une str comme exemple
 
 ###################################################################
 
-## Vidéo 4
+## Vidéo 4 (les listes et les tuples)
+
+CO12AL-W2-PROMPT8.txt
+CO12AL-W2-EXO4.py
+
 
 ## Quizz Vidéo 4
 
 ## Exercices Vidéo 4
+
+buffer
 
 ###################################################################
 
@@ -58,6 +64,9 @@ unicode
 ## Quizz Vidéo 5
 
 ## Exercices Vidéo 5
+
+bytearray
+unicode
 
 ###################################################################
 

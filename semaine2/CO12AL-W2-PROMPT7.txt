@@ -7,9 +7,11 @@
 
 ## Résumé de la vidéo (20s)
 
-Dans cette vidéo, nous allons aborber un ensemble de types de base en Python
+Nous allons aborber un ensemble de types de base en Python
 qui sont au coeur du langage, ce sont les types séquence. Les principaux 
-types séquence sont les [listes], les [tuples] et les [string] qui sont des chaines de caractères. 
+types séquence sont les [listes], les [tuples] et les [string]. 
+Tous les types séquence ont de charactéristiques
+commune que nous allons présenter dans cette vidéo.
 
 [[
 list

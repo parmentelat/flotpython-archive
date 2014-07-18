@@ -1,0 +1,32 @@
+## FORMAT DU FICHIER
+## Tout ce qui commence avec un ## est un commentaire
+##
+## le texte entre double crochets ouvrants et fermants
+## est à afficher en surimpression pendant que je parle et à 
+## synchroniser avec le texte entre crochet 
+
+## Résumé de la vidéo (1 minute)
+
+Dans cette vidéo nous allons presenter deux types
+de séquence : les listes et les tuples.
+
+Les listes et les tuples permettent de regrouper
+sous forme d'une séquence des objets hétérogènes de n'importe
+quel type. Ce sont des structures extrements souples et puissantes.
+
+Il existe une différence fondamentale entre les listes et les tuples.
+Les listes sont muables, c'est-à-dire que l'on peut les modifier en 
+place. On dit qu'une modification est en place lorsque l'on modifie directement
+l'objet en mémoire sans en faire une copie temporaire. L'intérêt d'une 
+modification en place est qu'elle est économe en mémoire puisqu'elle ne
+demande pas de copie temporaire. 
+
+Les tuples sont immutables, c'est à dire que les modification en place
+sont interdites, on ne peut donc pas modifier un tuple déjà créé. 
+
+Nous discuterons l'intérêt des objets immutables lorsque nous parlerons des
+dictionnaires et des références partagées dans les vidéos qui suivent 
+cette semaine. 
+
+Ouvrons un terminal interactif et commençons a jouer avec les listes. 
+
