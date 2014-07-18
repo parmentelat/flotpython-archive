@@ -1,4 +1,0 @@
-
-sorted()
-list.sort() avec key=...
-

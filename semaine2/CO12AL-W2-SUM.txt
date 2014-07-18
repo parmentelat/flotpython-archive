@@ -34,7 +34,7 @@ limitation de la précision des floats et module decimal
 
 CO12AL-W2-PROMPT7.txt  (20s)
 CO12AL-W2-EXO3.py      (5 m)
-CO12AL-W2-SLIDE3.pptx  (
+CO12AL-W2-SLIDE3.pptx  ()
 
 ## Quizz Vidéo 3
 
@@ -55,6 +55,8 @@ CO12AL-W2-EXO4.py
 
 ## Exercices Vidéo 4
 
+sort (avec les paramètres reverse et key)
+sorted()
 buffer
 
 ###################################################################
