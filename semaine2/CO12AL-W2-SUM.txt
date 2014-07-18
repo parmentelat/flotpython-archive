@@ -45,10 +45,10 @@ opérations génériques sur les séquences en prenant une str comme exemple
 
 ###################################################################
 
-## Vidéo 4 (les listes et les tuples)
+## Vidéo 4 (les listes)
 
-CO12AL-W2-PROMPT8.txt
-CO12AL-W2-EXO4.py
+CO12AL-W2-PROMPT8.txt (1 minute)
+CO12AL-W2-EXO4.py (8 minutes)
 
 
 ## Quizz Vidéo 4
@@ -61,22 +61,27 @@ buffer
 
 ###################################################################
 
-## Vidéo 5
+## Vidéo 5 (les tuples)
+
+CO12AL-W2-PROMPT9.txt (1 minute)
+CO12AL-W2-EXO5.py
 
 ## Quizz Vidéo 5
 
 ## Exercices Vidéo 5
 
-bytearray
-unicode
+
 
 ###################################################################
 
-## Vidéo 6
+## Vidéo 6 (les string)
 
 ## Quizz Vidéo 6
 
 ## Exercices Vidéo 6
+
+bytearray
+unicode
 
 ###################################################################
 
