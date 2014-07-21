@@ -1,12 +1,12 @@
 ## Vidéo 1 (objets, variables, typage dynamique)
 
-CO12AL-W2-PROMPT1.txt
-CO12AL-W2-SLIDE1.pptx
-CO12AL-W2-PROMPT2.txt
-CO12AL-W2-SLIDE2.pptx
-CO12AL-W2-PROMPT3.txt
-CO12AL-W2-EXO1.py
-CO12AL-W2-PROMPT4.txt
+CO12AL-W2-PROMPT01.txt
+CO12AL-W2-SLIDE01.pptx
+CO12AL-W2-PROMPT02.txt
+CO12AL-W2-SLIDE02.pptx
+CO12AL-W2-PROMPT03.txt
+CO12AL-W2-EXO01.py
+CO12AL-W2-PROMPT04.txt
 
 ## Quizz Vidéo 1
 
@@ -16,9 +16,9 @@ CO12AL-W2-PROMPT4.txt
 
 ## Vidéo 2 (types numériques : int, long, float, complex, bool)
 
-CO12AL-W2-PROMPT5.txt
-CO12AL-W2-EXO2.py
-CO12AL-W2-PROMPT6.txt
+CO12AL-W2-PROMPT05.txt
+CO12AL-W2-EXO02.py
+CO12AL-W2-PROMPT06.txt
 
 ## Quizz Vidéo 2
 
@@ -32,9 +32,9 @@ limitation de la précision des floats et module decimal
 
 ## Vidéo 3 (séquences)
 
-CO12AL-W2-PROMPT7.txt  (20s)
-CO12AL-W2-EXO3.py      (5 m)
-CO12AL-W2-SLIDE3.pptx  ()
+CO12AL-W2-PROMPT07.txt  (20s)
+CO12AL-W2-EXO03.py      (5 m)
+CO12AL-W2-SLIDE03.pptx  ()
 
 ## Quizz Vidéo 3
 
@@ -47,8 +47,8 @@ opérations génériques sur les séquences en prenant une str comme exemple
 
 ## Vidéo 4 (les listes)
 
-CO12AL-W2-PROMPT8.txt (1 minute)
-CO12AL-W2-EXO4.py (8 minutes)
+CO12AL-W2-PROMPT08.txt (1 minute)
+CO12AL-W2-EXO04.py (8 minutes)
 
 
 ## Quizz Vidéo 4
@@ -63,8 +63,8 @@ buffer
 
 ## Vidéo 5 (les tuples)
 
-CO12AL-W2-PROMPT9.txt (1 minute)
-CO12AL-W2-EXO5.py
+CO12AL-W2-PROMPT09.txt (1 minute)
+CO12AL-W2-EXO05.py
 
 ## Quizz Vidéo 5
 
