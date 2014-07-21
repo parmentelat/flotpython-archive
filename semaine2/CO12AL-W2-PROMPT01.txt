@@ -11,8 +11,8 @@ Cette semaine nous allons aborder deux sujets importants.  Le premier
 sujet est sur les notions d'objets, de variables et de typage
 dynamique qui représentent une des clefs de la compréhension de
 Python. Le deuxième sujet est sur la présentation des types de base en
-Python qui sont des objets puissants, polyvalents, mais très souple et
-facile à utiliser.
+Python qui sont des objets puissants, polyvalents, mais très souples et
+faciles à utiliser.
 
 ## Résumé de la vidéo (20s)
 
@@ -26,7 +26,7 @@ typage dynamique en Python.
 Commençons par la notion d'objet. En informatique, un [objet] est un
 morceau de programme qui peut [stocker de l'information] et qui a un
 ensemble de mécanismes, que l'on appelle [méthodes], qui permettent
-d'effectuer des taches. Le [type] de l'objet va définir les [informations
+d'effectuer des tâches. Le [type] de l'objet va définir les [informations
 et les méthodes qui existent par défaut] à la création de
 l'objet. Regardons maintenant un exemple de création d'objet...
 

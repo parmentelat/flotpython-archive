@@ -35,7 +35,7 @@ compte, donc [Ma_variable] est différent de [ma_variable].
 
 Il est recommandé d'utiliser des noms explicites de variable, de tout
 écrire en minuscule, et de séparer les mots par des tirets bas. Par
-exemple, [moyenne_age_francais] est un bon nom de variable, meilleur de
+exemple, [moyenne_age_francais] est un bon nom de variable, meilleur que
 [moy_age_f] et bien meilleur que simplement [x]
 
 [[
