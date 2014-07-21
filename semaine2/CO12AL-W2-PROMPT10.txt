@@ -5,32 +5,43 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
-## Résumé de la vidéo ()
+## Résumé de la vidéo ( 1 minutes 40 secondes)
 
 Nous avons déjà vu des notions très importante en Python : 
 les notions d'objet, de variable et de 
 typage dynamique, les types numériques, et les types séquences 
 avec les listes et les tuples. Cependant, vous devez vous demander
 comment faire de vrais programmes avec ces notions ? Pour faire
-de vrais programmes vous aurez besoin de connaitre au minimum
-les notions d'expression conditionnelles et de test, de boucles, de fonctions
-et de modules. Nous verrons ces notions en détail dans les semaines
-qui viennent, cependant, notre but et de vous amener a jouer avec
-Python le plus tôt possible. Pour cette raison, je vais introduire
-ces quelques notions clefs à l'écriture de vrais programmes, notions
-que nous approfondirons dans les semaines suivantes. 
+de vrais programmes vous aurez besoin de connaitre des notions que nous
+verrons en détail dans les semaines qui viennent comme les notions 
+d'expression conditionnelles, de boucles, de fonctions
+et de modules. Comme notre but et de vous amener a jouer avec
+Python le plus tôt possible, je vais introduire dans les prochaines vidéos
+ces quelques notions clefs à l'écriture de vrais programmes. 
 
 ## expressions conditionelles et instruction if else
 
-Commençons avec les expressions conditionnelles et l'instruction if else. Une 
+Dans cette vidéo, nous allons parler des expressions conditionnelles et de l'instruction 
+if else. Une 
 expression conditionnelle est une expression qui a pour résultat un booléen
 c'est-à-dire True ou False. C'est toujours le résultat d'un test. Les expressions
 conditionelles les plus courantes sont [a > b], [a >= b], [a < b], [a <= b], [a == b], 
-et [a != b]. Et on peut également rajouter le test d'appartenance des séquences
+et [a != b]. Et on peut également ajouter le test d'appartenance des séquences
 [a in s] et [a not in s]. 
 
+[[
+a > b
+a >= b
+a < b
+a <= b
+a == b
+a != b
+a in s
+a not in s
+]]
+
 Les expressions conditionnelles sont principalement utilisées
-dans une expression if else. L'instruction if va permettre d'executer un bloc d'instruction
+dans une expression if else. L'instruction if else va permettre d'executer un bloc d'instruction
 si l'expression est vraie est un autre bloc si l'expression est fausse. 
 
 Regardons a cas pratique : supposons que l'on veuille écrire un programme 

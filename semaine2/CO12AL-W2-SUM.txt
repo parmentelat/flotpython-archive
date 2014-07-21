@@ -74,22 +74,56 @@ CO12AL-W2-EXO5.py
 
 ###################################################################
 
-## Vidéo 6 (les string)
+## Vidéo 6 (101 if else)
+
+CO12AL-W2-PROMPT10.txt (1 minutes 40 secondes)
+CO12AL-W2-SLIDE4.pptx ( 4 minutes)
 
 ## Quizz Vidéo 6
 
 ## Exercices Vidéo 6
+
+
+
+###################################################################
+
+## Vidéo 7 (101 for, def, module)
+
+
+## Quizz Vidéo 7
+
+## Exercices Vidéo 7
+
+
+
+###################################################################
+
+## Vidéo 8
+
+## Quizz Vidéo 8
+
+## Exercices Vidéo 8
 
 bytearray
 unicode
 
 ###################################################################
 
-## Vidéo 7
+## Vidéo 8
 
-## Quizz Vidéo 7
+## Quizz Vidéo 8
 
-## Exercices Vidéo 7
+## Exercices Vidéo 8
+
+
+###################################################################
+
+## Vidéo 8
+
+## Quizz Vidéo 8
+
+## Exercices Vidéo 8
+
 
 ###################################################################
 
