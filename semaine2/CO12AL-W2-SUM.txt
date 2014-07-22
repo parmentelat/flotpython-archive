@@ -35,13 +35,15 @@ limitation de la précision des floats et module decimal
 CO12AL-W2-PROMPT07.txt  (20s)
 CO12AL-W2-EXO03.py      (5 m)
 CO12AL-W2-SLIDE03.pptx  ()
+# XXX Thierry : manque le baratin de conclusion habituel
 
 ## Quizz Vidéo 3
 
 ## Exercices Vidéo 3
 
-slicing
+slicing - indices négatifs
 opérations génériques sur les séquences en prenant une str comme exemple
+davantages de conversions : chr - ord
 
 ###################################################################
 

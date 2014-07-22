@@ -17,5 +17,5 @@ Pour finir, maintenant que l'on sait utiliser les variables et
 affecter une référence d'objet à une variable, je vais vous présenter
 l'instruction print. Cette instruction sert à afficher sur le terminal
 la valeur d'un objet. Passons sur un terminal interactif pour voir
-comment utiliser cette intruction...
+comment utiliser cette instruction...
 
