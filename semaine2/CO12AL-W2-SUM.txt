@@ -23,8 +23,8 @@ CO12AL-W2-PROMPT06.txt
 ## Quizz Vidéo 2
 
 ## Exercices Vidéo 2
-
-opérations bitwise
+# opérations bitwise 
+CO12AL-W2-NB01.ipynb
 limitation de la précision des floats et module decimal 
 
 

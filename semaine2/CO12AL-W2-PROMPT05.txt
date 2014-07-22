@@ -9,7 +9,7 @@
 
 Bonjour, nous allons voir dans cette vidéo les 4 types numériques qui
 existent en Python : les [int] qui représentent des entiers, les [long]
-qui représentent des entiers de précision illimité, les [float] qui
+qui représentent des entiers de précision illimitée, les [float] qui
 représentent des nombre décimaux, et les [complex] qui représentent des
 nombres complexes. 
 Ouvrons un terminal interactif pour jouer avec ces types

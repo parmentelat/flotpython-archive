@@ -1,8 +1,12 @@
-# -*- coding: latin_1 -*-
+# -*- coding: iso-8859-15 -*-
+# XXX initialement latin_1, qui n'est semble-t-il pas reconnu sur mon mac
+# dis-moi si cette balise-ci te pose probleme
+# XXX dans tous les cas il faut privilegier iso-latin-15 
+# à iso-latin-1 qui n'a pas le symbole euro
 
 ## Je vous rappelle que Python utilise le typage dynamique, c'est-à-dire
-## que l'on ne donne jamais le type d'un objet à l'écriture du programme,
-## ce type est déterminé à l'execution. Ça simplifie beaucoup l'écriture
+## que l'on ne donne pas le type d'un objet à l'écriture du programme,
+## ce type est déterminé à l'ex'ecution. Ça simplifie beaucoup l'écriture
 ## des programmes.
 
 ## le type entier
@@ -10,7 +14,7 @@
 ## cet entier
 1
 
-## on peut également l'affecter à une variable
+## comme on l'a vu dans la vidéo 1, on peut également l'affecter à une variable
 i = 1
 
 ## Comment on connait le type d'un objet en Python ?
@@ -24,22 +28,27 @@ i = 10 ## codé sur 32 bits sur une machine 32 bits
 l = 23480284028402840289482184018 # précision illimitée
 print l * l     # précision illimitée sur les long
 
-## pourquoi avons nous deux types entier en Python ?
+## Pourquoi avons nous deux types 'entier' en Python ?
 ## le type int est plus compact que le type long, par conséquent
-## pour les petits entier, Python va utiliser le type int pour reduire
-## la consommation mémoire, et le type long s'il y a vraiement besoin de
+## pour les petits entiers, Python va utiliser le type int pour réduire
+## la consommation mémoire, et le type long s'il y a vraiment besoin de
 ## grands entiers.
 
-## heureusement, Python fait automatiquement la conversion
+## Heureusement, Python fait automatiquement la conversion
 ## de int vers long s'il y a besoin. Donc en pratique vous n'avez
-## jamais à vour préocupé du type d'entier que vous utilisez
+## pas à vous préocupper du type d'entier que vous utilisez
 
 type(i + l)     
 
-## Les décimaux. On sépare la partie entière et décimale par un .
+## Les décimaux, qu'on appelle aussi 'flottants'. 
+# On sépare la partie entière et décimale par un .
 f = 4.3
 
-## les float sont en général équivallent aux double en C,
+### XXX Thierry
+# le texte suivant a mon avis n'apporte rien ici; on en dit trop ou pas assez..
+# par contre on ne dit rien sur les complexes qui arrivent juste apres..
+### XXX
+## les float sont en général équivalents aux 'double' en C,
 ## c'est à dire que ce sont des nombres codés sur 53 bits
 ## avec un maximum de 15 à 17 chiffres significatifs
 
@@ -47,7 +56,8 @@ c = 1 + 3j
 
 print c.real, c.imag
 
-
+## On peut 'mélanger' les types numériques dans une expression, 
+## par exemple en ajoutant un entier et un flottant
 ## Par contre on peut perdre en précision.
 ## Un int et un long donne toujours un long
 ## Un type entier (int, long) et un float donne toujours un float
@@ -60,7 +70,7 @@ print i + l + f
 
 print i + l + f + c
 
-## On peut convertir des types de bases entre eux (avec risque
+## On peut convertir des types de bases entre eux (avec risque là aussi
 ## de perte de précision ou d'information, troncation).
 
 print int(4.32)
@@ -81,11 +91,11 @@ print 5.2//3.1  # force la division sur des entiers (5.0/3.0)
 print 2 ** 32   # puissances
 print abs(-5.3) # valeur absolue
 
-## pour finir, j'aimerai introduire un dernier type qui n'est pas
-## a proprement parlé un type numérique, mais qui est implémenté comme
+## pour finir, j'aimerais introduire un dernier type qui n'est pas
+## à proprement parler un type numérique, mais qui est implémenté comme
 ## tel, c'est le type booléen. Ce type est utilisé pour le résultat
 ## de tous les tests en Python et ne contient que deux valeurs True et False
-## On verra bientôt cette notion de test en Python, mais regardons un test
+## On verra bientôt cette notion de test en Python, mais regardons un exemple
 ## simple pour illustrer les booléens
 
 1 < 2
@@ -94,8 +104,3 @@ print abs(-5.3) # valeur absolue
 ## noter la premiere lettre qui est une majuscule
 
 ## nous reviendrons très bientôt sur l'utilisation des Booléens
-
-
-
-
-
