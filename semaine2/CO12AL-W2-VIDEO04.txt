@@ -21,6 +21,10 @@ place. On dit qu'une modification est en place lorsque l'on modifie directement
 l'objet en mémoire sans en faire une copie temporaire. L'intérêt d'une 
 modification en place est qu'elle est économe en mémoire puisqu'elle ne
 demande pas de copie temporaire.
-I
+
 Ouvrons un terminal interactif et commençons a jouer avec les listes. 
+
+#################### INCLUDE CO12AL-W2-VIDEO04-EXO01.py (8 minutes) 
+
+### XXX missing : conclusion (on a fait ceci, on fera cela...)
 

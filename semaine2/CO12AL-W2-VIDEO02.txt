@@ -7,6 +7,27 @@
 
 ## Résumé de la vidéo (25s)
 
+Bonjour, nous allons voir dans cette vidéo les 4 types numériques qui
+existent en Python : les [int] qui représentent des entiers, les [long]
+qui représentent des entiers de précision illimitée, les [float] qui
+représentent des nombre décimaux, et les [complex] qui représentent des
+nombres complexes. 
+Ouvrons un terminal interactif pour jouer avec ces types
+numériques...
+ 
+
+[[
+int
+long
+float
+complex
+bool
+]]
+
+#################### INCLUDE CO12AL-W2-VIDEO2-EXO01.py
+
+## Résumé de la vidéo (25s)
+
 Nous avons vu dans cette vidéo les 4 types numériques qui
 existent en Python : les int, les long, les float et les complexe. 
 On a vu que le type long est un type puissant permettant de travailler
