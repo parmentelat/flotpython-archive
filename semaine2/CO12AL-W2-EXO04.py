@@ -1,4 +1,4 @@
-# -*- coding: latin_1 -*-
+# -*- coding: iso-8859-15 -*-
 
 ## une liste est une séquence, donc toutes les fonctions et opérations
 ## que l'on a vues pour les séquences s'appliques aux listes : en particulier

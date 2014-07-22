@@ -1,0 +1,13 @@
+## FORMAT DU FICHIER
+## Tout ce qui commence avec un ## est un commentaire
+##
+## le texte entre double crochets ouvrants et fermants
+## est à afficher en surimpression pendant que je parle et à 
+## synchroniser avec le texte entre crochet 
+
+## Boucle for ()
+
+Un principe fondateur de la programmation est la réutilisation du code. 
+Ce principe est que pour une tache donnée, on écrit qu'une seule fois
+le code faisant cette tache. Ensuite on réutilise ce code dans le programme
+sans le dupliquer 

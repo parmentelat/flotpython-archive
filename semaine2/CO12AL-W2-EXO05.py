@@ -1,4 +1,4 @@
-# -*- coding: latin_1 -*-
+# -*- coding: iso-8859-15 -*-
 
 ## Pour définir un tuple on utilise des paranthèses
 

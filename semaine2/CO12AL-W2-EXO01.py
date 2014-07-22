@@ -1,4 +1,4 @@
-# -*- coding: latin_1 -*-
+# -*- coding: iso-8859-15 -*-
 
 ## l'instruction print d'afficher simplement la valeur d'un objet sur le terminal
 ## on dit également que l'on affiche une valeur sur la sortie standard

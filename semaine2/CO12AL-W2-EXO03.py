@@ -1,4 +1,4 @@
-# -*- coding: latin_1 -*-
+# -*- coding: iso-8859-15 -*-
 
 ## une séquence est un ensemble finie d'éléments ordonnés qui sont
 ## indexés par des entiers commençant à 0
