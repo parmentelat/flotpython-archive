@@ -7,7 +7,9 @@
 
 ## Boucle for ()
 
-Un principe fondateur de la programmation est la réutilisation du code. 
-Ce principe est que pour une tache donnée, on écrit qu'une seule fois
-le code faisant cette tache. Ensuite on réutilise ce code dans le programme
-sans le dupliquer 
+Un principe fondateur de la programmation est la factorisation du code, 
+c'est-à-dire que l'on reduit le code écrit pour en faciliter la maintenance.
+On va voir dans cette vidéo trois techniques de factorisation de code, les
+boucles for, les fonctions et les modules. 
+
+ouvrons un terminal et commençons à jouer avec les boucles for...
