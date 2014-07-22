@@ -77,7 +77,7 @@ CO12AL-W2-EXO05.py
 ## Vidéo 6 (101 if else)
 
 CO12AL-W2-PROMPT10.txt (1 minutes 40 secondes)
-CO12AL-W2-SLIDE4.pptx ( 4 minutes)
+CO12AL-W2-SLIDE04.pptx ( 4 minutes)
 
 ## Quizz Vidéo 6
 
@@ -88,7 +88,7 @@ CO12AL-W2-SLIDE4.pptx ( 4 minutes)
 ###################################################################
 
 ## Vidéo 7 (101 for, def, module)
-
+CO12AL-W2-PROMPT11.txt 
 
 ## Quizz Vidéo 7
 
