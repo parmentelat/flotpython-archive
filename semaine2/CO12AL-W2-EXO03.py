@@ -1,6 +1,6 @@
-# -*- coding: latin_1 -*-
+# -*- coding: iso-8859-15 -*-
 
-## une séquence est un ensemble finie d'éléments ordonnés qui sont
+## une séquence est un ensemble fini d'éléments ordonnés qui sont
 ## indexés par des entiers commençant à 0
 
 ## Pour illustrer le fonctionnement des séquences commençons par
@@ -29,6 +29,11 @@ print s + ' and spam'
 
 print s[3]
 
+### XXX Thierry
+# il me semble que tu ne parles nulle part des indices négatifs comme s[-1]
+# ça pourrait aller dans le slicing mais la diapo est déjà chargée...
+# je vais prévoir un exo là dessus
+
 ## le nombre d'éléments
 
 print len(s)
@@ -46,7 +51,7 @@ print s.index('g')
 
 print s.count('g')
 
-## n shallow copy de s concaténés, on reviendra sur la notion de shallow copie
+## n shallow copy de s concaténés, on reviendra sur la notion de shallow copy
 ## cette semaine.
 
 print s*3
@@ -59,6 +64,8 @@ print '-'*30
 ## d'origine. C'est une opération très puissante qu'il est
 ## important de bien maitriser. Regardons comment le slicing
 ## fonctionne
+
+
 
 
 

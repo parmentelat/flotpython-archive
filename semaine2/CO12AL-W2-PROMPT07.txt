@@ -18,6 +18,3 @@ list
 tuple
 str
 ]]
-
-
-
