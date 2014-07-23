@@ -33,6 +33,8 @@ CO12AL-W2-VIDEO03.txt
 slicing - indices négatifs
 opérations génériques sur les séquences en prenant une str comme exemple
 XXX Thierry : le cours a déjà utilisé les strings, pourquoi ne pas prendre les listes justement
+XXX Arnaud : je présente les listes dans la vidéo suivante, presenter en avance de phase risque d'ajouter
+XXX          de la confusion pour les débutants. 
 davantages de conversions : chr - ord
 
 ###################################################################

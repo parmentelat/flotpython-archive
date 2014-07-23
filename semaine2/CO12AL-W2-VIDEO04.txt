@@ -24,7 +24,7 @@ demande pas de copie temporaire.
 
 Ouvrons un terminal interactif et commençons a jouer avec les listes. 
 
-#################### INCLUDE CO12AL-W2-VIDEO04-EXO01.py (8 minutes) 
+>>>>>>>>>> INCLUDE CO12AL-W2-VIDEO04-EXO01.py (8 minutes) <<<<<<<<<<
 
 ### XXX missing : conclusion (on a fait ceci, on fera cela...)
 

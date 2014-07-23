@@ -19,8 +19,8 @@ tuple
 str
 ]]
 
-#################### INCLUDE CO12AL-W2-VIDEO03-EXO01.py (5m)
+>>>>>>>>>> INCLUDE CO12AL-W2-VIDEO03-EXO01.py (5m) <<<<<<<<<<
 
-#################### INCLUDE CO12AL-W2-VIDEO03-SLIDE01.pptx ()
+>>>>>>>>>> INCLUDE CO12AL-W2-VIDEO03-SLIDE01.pptx () <<<<<<<<<<
 
 ### XXX missing : conclusion (on a fait ceci, on fera cela...)

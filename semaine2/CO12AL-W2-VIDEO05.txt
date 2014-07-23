@@ -23,4 +23,4 @@ cette semaine.
 
 Ouvrons un terminal interactif pour jouer avec les tuples.
 
-#################### INCLUDE CO12AL-W2-VIDEO05-EXO01.py
+>>>>>>>>>> INCLUDE CO12AL-W2-VIDEO05-EXO01.py  <<<<<<<<<<

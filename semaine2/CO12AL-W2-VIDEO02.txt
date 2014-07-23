@@ -24,7 +24,7 @@ complex
 bool
 ]]
 
-#################### INCLUDE CO12AL-W2-VIDEO2-EXO01.py
+>>>>>>>>>> INCLUDE CO12AL-W2-VIDEO2-EXO01.py <<<<<<<<<<
 
 ## Résumé de la vidéo (25s)
 

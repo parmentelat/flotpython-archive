@@ -51,7 +51,16 @@ def f(L):
 
 ## une fonction commence avec l'instruction def, on donne ensuite un nom
 ## à la fonction (f ici). puis en met entre paranthèses l'argument de la
-## fonction (L dans notre cas). 
+## fonction (L dans notre cas) et on finit une fois encore par un :
+## qui signal un nouveau bloc d'instruction qui doit être indenté de 4
+## caractère vers la droite par rapport au premier caractere du la
+## permière ligne de la fonction, donc le d du def.
+## Le principe d'une fonction est que le bloc d'instruction dans la fonction
+## (c'est-à-dire indenté de 4 caractères vers la droite) est exécuté
+## à chaque appel de la fonction avec l'argument passé au moment de la
+## fonction. C'est très facile d'appeler une fonction et de lui passer un
+## argument, il suffit de taper le nom de la fonction suivi de l'argument
+## entre parenthèses.
 
 f(L1)
 f(L2)

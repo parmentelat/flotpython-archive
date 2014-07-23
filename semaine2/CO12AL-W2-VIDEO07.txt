@@ -13,3 +13,5 @@ On va voir dans cette vidéo trois techniques de factorisation de code, les
 boucles for, les fonctions et les modules. 
 
 ouvrons un terminal et commençons à jouer avec les boucles for...
+
+>>>>>>>>>>  CO12AL-W2-VIDEO07-EXO01.py  <<<<<<<<<<
