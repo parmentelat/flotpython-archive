@@ -13,3 +13,11 @@ surmonter de grosses difficultés)
 -introduire les trois grands concepts majeurs de Python (typage dynamique et références partagées, itérateurs,
 et espage de nommage) dire dans quelle semaine ces concepts seront abordés. Expliquer succintement leur
 intérêt. 
+-discuter du zen de python
+-discuter de l'intêret de l'indentation comme base de la syntaxe (montrer
+une fonction avec accolades et ; et une fonction Python standard)
+
+TODO sur les autres semaines
+-parler de la taille des type de base avec sys.getsizeof() et expliquer
+qu'avec les références partagés Python n'est pas trop mauvais
+au niveau de l'utilisation mémoire. 

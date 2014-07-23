@@ -89,7 +89,9 @@ CO12AL-W2-VIDEO07.txt
 
 ###################################################################
 
-## Vidéo 8 (table de hash)
+## Vidéo 8 (str)
+
+CO12AL-W2-VIDEO08.txt 
 
 ## Quizz Vidéo 8
 
