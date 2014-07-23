@@ -9,9 +9,15 @@
 
 Un principe fondateur de la programmation est la factorisation du code, 
 c'est-à-dire que l'on reduit le code écrit pour en faciliter la maintenance.
-On va voir dans cette vidéo trois techniques de factorisation de code, les
-boucles for, les fonctions et les modules. 
+On va voir dans cette vidéo deux techniques de factorisation de code, les
+boucles for et les fonctions. 
 
 ouvrons un terminal et commençons à jouer avec les boucles for...
 
 >>>>>>>>>>  CO12AL-W2-VIDEO07-EXO01.py  <<<<<<<<<<
+
+On a vu dans cette vidéo deux notions nécessaire à l'écriture de vrais
+programmes, les boucles for et les fonctions. Cependant, 
+il ne s'agit que d'une survol rapide destiné à vous permettre de jouer
+avec Python dès maintenant, nous verrons toutes les subtilités des 
+ces notions dans les semaines suivantes. 

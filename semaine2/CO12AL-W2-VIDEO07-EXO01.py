@@ -2,16 +2,16 @@
 
 ## prenons un problème simple, je veux afficher la liste des entiers
 ## de 1 à 10 et de leur carré.
-print 'x =', 1, ', x**2 =', 1**2
-print 'x =', 2, ', x**2 =', 2**2
-print 'x =', 3, ', x**2 =', 3**2
+print 1, 1**2
+print 2, 2**2
+print 3, 3**2
 
 ## on se rend vite compte que l'on fait 10 fois la même tache avec
 ## une petite variation, la valeur de x. Les boucles for existe justement
 ## pour factoriser ce type de taches. Regardons comme on écrit une boucle for
 
 for x in range(1,11):
-    print 'x =', x, ', x**2 =', x**2
+    print x, x**2
 print "on est sorti de la boucle"
 ## La boucle for utilise (comment souvent en Python), une notation
 ## simple et intuitive. On commence une boucle for par l'instruction
@@ -34,11 +34,11 @@ print "on est sorti de la boucle"
 
 L1 = [1, 4, 6, 7, 10, 11, 30, 50]
 for x in L1:
-    print 'x =', x, ', x**2 =', x**2
+    print x, x**2
 
 L2 = [3.4, 11, 22, 150.435, 18]
 for x in L2:
-    print 'x =', x, ', x**2 =', x**2
+    print x, x**2
 
 ## on voit que grace à la boucle for, je peux factoriser mon code, mais
 ## que malgré tout je répète deux fois exactement la même boucle for.
@@ -47,14 +47,15 @@ for x in L2:
 
 def f(L):
     for x in L:
-        print 'x =', x, ', x**2 =', x**2
+        print x, x**2
 
 ## une fonction commence avec l'instruction def, on donne ensuite un nom
 ## à la fonction (f ici). puis en met entre paranthèses l'argument de la
 ## fonction (L dans notre cas) et on finit une fois encore par un :
 ## qui signal un nouveau bloc d'instruction qui doit être indenté de 4
 ## caractère vers la droite par rapport au premier caractere du la
-## permière ligne de la fonction, donc le d du def.
+## permière ligne de la fonction, donc le d du def. On appelle de bloc
+## d'instructions le corps de la fonction. 
 ## Le principe d'une fonction est que le bloc d'instruction dans la fonction
 ## (c'est-à-dire indenté de 4 caractères vers la droite) est exécuté
 ## à chaque appel de la fonction avec l'argument passé au moment de la
@@ -64,3 +65,6 @@ def f(L):
 
 f(L1)
 f(L2)
+
+## 6 minutes ##
+

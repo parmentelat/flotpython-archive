@@ -41,7 +41,7 @@ davantages de conversions : chr - ord
 
 ## Vidéo 4 (les listes)
 
-CO12AL-W2-VIDEO04.txt (1 minute)
+CO12AL-W2-VIDEO04.txt (9 minutes)
 
 ## Quizz Vidéo 4
 
@@ -55,7 +55,7 @@ buffer
 
 ## Vidéo 5 (les tuples)
 
-CO12AL-W2-VIDEO05 (1 minute)
+CO12AL-W2-VIDEO05 ()
 
 ## Quizz Vidéo 5
 
@@ -67,7 +67,7 @@ CO12AL-W2-VIDEO05 (1 minute)
 
 ## Vidéo 6 (101 if else)
 
-CO12AL-W2-VIDEO06.txt (1 minutes 40 secondes)
+CO12AL-W2-VIDEO06.txt (5 minutes 40 secondes)
 
 ## Quizz Vidéo 6
 
@@ -77,7 +77,8 @@ CO12AL-W2-VIDEO06.txt (1 minutes 40 secondes)
 
 ###################################################################
 
-## Vidéo 7 (101 for, def, module)
+## Vidéo 7 (101 boucle for et fonctions)
+
 CO12AL-W2-VIDEO07.txt 
 
 ## Quizz Vidéo 7
@@ -88,7 +89,7 @@ CO12AL-W2-VIDEO07.txt
 
 ###################################################################
 
-## Vidéo 8
+## Vidéo 8 (table de hash)
 
 ## Quizz Vidéo 8
 
