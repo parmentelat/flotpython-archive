@@ -1,6 +1,8 @@
 ## Vidéo 1 (objets, variables, typage dynamique)
 
 CO12AL-W2-VIDEO01.txt
+# un notebook qui introduit la fonction built-in type
+CO12AL-W2-VIDEO01-NB01.ipynb
 
 ## Quizz Vidéo 1
 
