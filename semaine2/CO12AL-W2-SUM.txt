@@ -19,8 +19,9 @@ CO12AL-W2-VIDEO02.txt
 
 ## Exercices Vidéo 2
 
-# opérations bitwise : et ou negation shifts
+# opérations bitwise : et/ou/ou exclusifs décalages
 CO12AL-W2-VIDEO02-NB01.ipynb
+# xxx à faire
 limitation de la précision des floats et module decimal 
 
 
@@ -35,11 +36,8 @@ CO12AL-W2-VIDEO03.txt
 ## Exercices Vidéo 3
 
 slicing - indices négatifs
+
 opérations génériques sur les séquences en prenant une str comme exemple
-XXX Thierry : le cours a déjà utilisé les strings, pourquoi ne pas prendre les listes justement
-XXX Arnaud : je présente les listes dans la vidéo suivante, presenter en avance de phase risque d'ajouter
-XXX          de la confusion pour les débutants. 
-davantages de conversions : chr - ord
 
 ###################################################################
 
@@ -104,9 +102,17 @@ CO12AL-W2-VIDEO08.txt
 
 *bytearray
 *unicode
-*encore du slicing et de exos du style s[:2] + 'x' + s[3:] et s[:3] + 'x' + s[3:]
-*Parler du l'opérateur % pour le formatage des chaîne (on ne doit plus l'utiliser, mais on le trouve encore dans du vieux code) et notamment des notations pour les décimaux %e, %f, %g et les variantes
+*Parler du l'opérateur % pour le formatage des chaînes (on ne doit plus l'utiliser, mais on le trouve encore dans du vieux code) et notamment des notations pour les décimaux %e, %f, %g et les variantes
 *parler de rjust(), ljust(), center() et format()
+
+# xxx Thierry : je serais favorable a introduire aussi quelques outils
+# de base sur les strings, comme strip, split, index
+# xxx a ce propos, as-tu prevu d'aborder les expressions regulieres
+# quelque part ? d'après moi ça irait tout droit dans les sujets avancés
+
+* davantages de conversions : chr - ord  (quoique ce serait peut-être mieux + tard, genre sujets avancés aussi)
+
+*encore du slicing et de exos du style s[:2] + 'x' + s[3:] et s[:3] +'x' + s[3:] -- xxx Thierry : je trouve que ça fait déjà beaucoup avec le slicing; il y a tellement de choses à dire sur les strings...
 
 ###################################################################
 

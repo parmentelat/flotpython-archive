@@ -20,7 +20,7 @@ Par contre, contrairement au dictionnaire, on ne peut pas stocker
 de valeur associée à une clef. 
 
 Les [sets] sont des objets mutables et il existe un type [frozenset]
-qui a les même caractéristiques qu'un set, mais qui est immuable. 
+qui a les mêmes caractéristiques qu'un set, mais qui est immuable. 
 
 Ouvrons un terminal interactif pour jouer avec les set. 
 
@@ -32,7 +32,7 @@ frozenset immuable
 >>>>>>>>>> CO12AL-W2-VIDEO11-EXO01.py <<<<<<<<<<
 
 nous avons fini la présentation des principaux type de base en Python.
-On a vu que ces types étaient riches et très puissants. Il constitue
+On a vu que ces types étaient riches et très puissants. Ils constituent
 un socle solide à l'écriture rapide de programmes. Je vous encourage
-à jouer avec pour bien les maitriser et ainsi aborder dans les meilleurs
+à jouer avec pour bien les maitriser et ainsi aborder dans les meilleures
 conditions les prochaines vidéos. 
