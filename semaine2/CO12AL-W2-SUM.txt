@@ -64,7 +64,7 @@ CO12AL-W2-VIDEO05 ()
 ## Quizz Vidéo 5
 
 ## Exercices Vidéo 5
-
+comment accéder à l'entier 3 dans L=['abc', [(1,2), ([3], 4)], 5]
 
 
 ###################################################################
@@ -112,6 +112,8 @@ CO12AL-W2-VIDEO08.txt
 
 ## Vidéo 9 (tables de hash)
 
+CO12AL-W2-VIDEO09.txt 
+
 ## Quizz Vidéo 9
 
 ## Exercices Vidéo 9
@@ -119,17 +121,43 @@ CO12AL-W2-VIDEO08.txt
 
 ###################################################################
 
-## Vidéo 8
+## Vidéo 10 (dict)
 
-## Quizz Vidéo 8
+CO12AL-W2-VIDEO10.txt 
 
-## Exercices Vidéo 8
+## Quizz Vidéo 10
+
+## Exercices Vidéo 10
+*voir la construction D=dict(clef1=obj1, clef2=obj2)
+*voir d.get('marc', '?') et son usage par rapport à d['marc']
+*voir une exemple de dict dans un dict et de l'accès à ses éléments D={'alice': 35, 'enfant':{'bob' : 9, 'charlie' : 6}}
+
+###################################################################
+
+## Vidéo 11 (set, frozenset)
+
+## Quizz Vidéo 11
+
+## Exercices Vidéo 11
+*autre fonctions sur les sets non vue dans la vidéo (e.g., <=, <, discard, pop, clear)
+*test de performance sur le test d'appartenance entre list et set
+pour expliquer qu'il faut toujours utiliser des sets
+>>> timeit.timeit(setup= "x = range(2)", stmt = '"c" in x', number = 6000000)
+1.042163089558322
+>>> timeit.timeit(setup= "x = set(range(2))", stmt = '"c" in x', number = 6000000)
+0.32964897792466274
+
+>>> timeit.timeit(setup= "x = range(2)", stmt = '0 in x', number = 6000000)
+0.3086782596151636
+>>> timeit.timeit(setup= "x = set(range(2))", stmt = '0 in x', number = 6000000)
+0.3819173343944584
+
 
 
 ###################################################################
 
-## Vidéo 8
+## Vidéo 12 (références partagés)
 
-## Quizz Vidéo 8
+## Quizz Vidéo 12
 
-## Exercices Vidéo 8
+## Exercices Vidéo 12
