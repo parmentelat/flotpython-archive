@@ -6,6 +6,7 @@ si je vous apprends comment utiliser un marteau, vous saurez utiliser n'importe 
 marteau, il vous faudra peut-être un peu d'entrainement, mais vous n'aurez pas à 
 surmonter de grosses difficultés) 
 -expliquer l'histoire des monthy python (et les mots spam egg beans)
+https://www.youtube.com/watch?v=anwy2MPT5RE
 -introduire la notion de terminal interactif et d'éditeur de texte (on utilise l'un ou l'autre suivant le besoin)
 -définir le retour chariot
 -discuter des exception et de SyntaxError en particulier (expliquer que Pyhton montre l'endroit de la première erreur)

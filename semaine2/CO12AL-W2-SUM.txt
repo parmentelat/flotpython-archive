@@ -1,12 +1,13 @@
 ## Vidéo 1 (objets, variables, typage dynamique)
 
 CO12AL-W2-VIDEO01.txt
-# un notebook qui introduit la fonction built-in type
-CO12AL-W2-VIDEO01-NB01.ipynb
 
 ## Quizz Vidéo 1
 
 ## Exercices Vidéo 1
+
+# un notebook qui introduit la fonction built-in type
+CO12AL-W2-VIDEO01-NB01.ipynb
 
 ###################################################################
 
@@ -17,6 +18,7 @@ CO12AL-W2-VIDEO02.txt
 ## Quizz Vidéo 2
 
 ## Exercices Vidéo 2
+
 # opérations bitwise : et ou negation shifts
 CO12AL-W2-VIDEO02-NB01.ipynb
 limitation de la précision des floats et module decimal 
@@ -74,7 +76,8 @@ CO12AL-W2-VIDEO06.txt (5 minutes 40 secondes)
 ## Quizz Vidéo 6
 
 ## Exercices Vidéo 6
-
+-expliquer <> et dire qu'il est obsolète mais qu'on le trouve dans du
+code ancien
 
 
 ###################################################################
@@ -99,16 +102,19 @@ CO12AL-W2-VIDEO08.txt
 
 ## Exercices Vidéo 8
 
-bytearray
-unicode
+*bytearray
+*unicode
+*encore du slicing et de exos du style s[:2] + 'x' + s[3:] et s[:3] + 'x' + s[3:]
+*Parler du l'opérateur % pour le formatage des chaîne (on ne doit plus l'utiliser, mais on le trouve encore dans du vieux code) et notamment des notations pour les décimaux %e, %f, %g et les variantes
+*parler de rjust(), ljust(), center() et format()
 
 ###################################################################
 
-## Vidéo 8
+## Vidéo 9 (tables de hash)
 
-## Quizz Vidéo 8
+## Quizz Vidéo 9
 
-## Exercices Vidéo 8
+## Exercices Vidéo 9
 
 
 ###################################################################
