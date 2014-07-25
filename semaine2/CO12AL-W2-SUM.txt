@@ -136,6 +136,8 @@ CO12AL-W2-VIDEO10.txt
 
 ## Vidéo 11 (set, frozenset)
 
+CO12AL-W2-VIDEO11.txt 
+
 ## Quizz Vidéo 11
 
 ## Exercices Vidéo 11
@@ -158,6 +160,19 @@ pour expliquer qu'il faut toujours utiliser des sets
 
 ## Vidéo 12 (références partagés)
 
+CO12AL-W2-VIDEO12.txt 
+
 ## Quizz Vidéo 12
 
 ## Exercices Vidéo 12
+
+*montrer le problème suivant L=[[1]]*5 et demander une solution pour le pas avoir de ref. partagées
+*construire des exemples montrant des problèmes de ref partagées sur des mutables, e.g., 
+a = [ 1, [2, 3], 4]
+b = a[:]                  #shallow copy
+a[0] = 'x'        #ok
+a[1][1] = 'y'     #ref partagée
+
+*voir copy.copy() pour faire les shallows copies et copy.deepcopy() pour les deep copy
+* voir sys.getrefcount(1) et expliquer le résultats
+* exo pour voir jusqu'à quelle taille de chaîne de caractères (et quelle taille d'entier) Python arrête de faire des références partagées pour optimiser la mémoire. 
