@@ -185,3 +185,4 @@ a[1][1] = 'y'     #ref partagée
 *voir copy.copy() pour faire les shallows copies et copy.deepcopy() pour les deep copy
 * voir sys.getrefcount(1) et expliquer le résultats
 * exo pour voir jusqu'à quelle taille de chaîne de caractères (et quelle taille d'entier) Python arrête de faire des références partagées pour optimiser la mémoire. 
+* introduire http://pythontutor.com
