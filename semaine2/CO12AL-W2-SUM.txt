@@ -21,8 +21,7 @@ CO12AL-W2-VIDEO02.txt
 
 # opérations bitwise : et/ou/ou exclusifs décalages
 CO12AL-W2-VIDEO02-NB01.ipynb
-# xxx à faire
-limitation de la précision des floats et module decimal 
+CO12AL-W2-VIDEO02-NB02 : limitation de la précision des floats  
 
 
 ###################################################################
