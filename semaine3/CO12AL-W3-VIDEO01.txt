@@ -6,13 +6,18 @@
 ## synchroniser avec le texte entre crochet 
 
 
-## Sujet de la semaine (18s)
+## Sujet de la semaine ()
+
+Cette semaine, nous verrons en détails les instructions if else et for, 
+nous introduirons la notion d'itérateur, notion clef en Python pour parcourir
+de manière intuitive et efficace des objets, et nous finirons par les fonctions. 
 
 
 
-## Résumé de la vidéo (20s)
+## Résumé de la vidéo ()
 
 
+>>>>>>>>>> CO12AL-W3-VIDEO01-SLIDE01.pptx <<<<<<<<<<
 
 
 >>>>>>>>>> INCLUDE CO12AL-W3-VIDEO01-EXO01.py <<<<<<<<<<
