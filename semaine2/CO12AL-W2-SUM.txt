@@ -6,8 +6,10 @@ CO12AL-W2-VIDEO01.txt
 
 ## Exercices Vidéo 1
 
-# un notebook qui introduit la fonction built-in type
-CO12AL-W2-VIDEO01-NB01.ipynb
+CO12AL-W2-VIDEO01-NB01 : la fonction 'type' 
+# xxx sans doute trop tot / trop complique
+# au depart je voulais juste illustrer le slide
+# le fait que ce sont sont les valeurs qui sont typees et pas les variables
 
 ###################################################################
 
@@ -19,10 +21,8 @@ CO12AL-W2-VIDEO02.txt
 
 ## Exercices Vidéo 2
 
-# opérations bitwise : et/ou/ou exclusifs décalages
-CO12AL-W2-VIDEO02-NB01.ipynb
+CO12AL-W2-VIDEO02-NB01 : opérations bitwise : et/ou/ou exclusifs décalages
 CO12AL-W2-VIDEO02-NB02 : limitation de la précision des floats  
-
 
 ###################################################################
 

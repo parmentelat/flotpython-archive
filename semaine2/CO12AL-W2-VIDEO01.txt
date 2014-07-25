@@ -8,7 +8,7 @@
 
 ## Sujet de la semaine (18s)
 
-Cette semaine nous allons aborder deux sujets importants.  Le premier
+Cette semaine nous allons aborder deux sujets importants. Le premier
 sujet est sur les notions d'objets, de variables et de typage
 dynamique qui représentent une des clefs de la compréhension de
 Python. Le deuxième sujet est sur la présentation des types de base en
