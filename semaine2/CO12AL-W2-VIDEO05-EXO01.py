@@ -31,13 +31,13 @@ print 3 in t
 ## on peut facilement convertir un tuple en list et une liste en tuple
 ## en utilisant les fonction built-in list() et tuple()
 
-l = list(t)
+a = list(t)
 
-print l
+print a
 
-l.append(11)
-print l
+a.append(11)
+print a
 
-t = tuple(l)
+t = tuple(a)
 
 print t

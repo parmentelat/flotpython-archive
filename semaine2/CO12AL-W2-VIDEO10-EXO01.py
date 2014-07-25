@@ -13,8 +13,8 @@ d = {'marc':35, 'alice':30, 'eric':38}
 ## ce cas on peut automatiquement créer un dictionnaire
 ## à partir d'une liste de tuple clef,valeur
 
-l = [('marc', 35), ('alice', 30), ('eric', 38)]
-d = dict(l)
+a = [('marc', 35), ('alice', 30), ('eric', 38)]
+d = dict(a)
 
 ## je rappelle qu'il n'y a pas d'ordre dans un dictionnaire
 ## donc le dictionnaire n'affiche pas nécéssairement

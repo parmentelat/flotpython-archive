@@ -2,8 +2,8 @@
 
 ## Nous avons vu la notion de shallow copie pour les séquences
 
-l = range(10)
-l2 = l[:]
+a = range(10)
+a2 = a[:]
 
 ## mais on peut également faire une shallow copy pour un dictionnaire
 ## ou un set
@@ -19,14 +19,14 @@ s2 = s.copy()
 print s, s2
 
 ## pour finir, j'aimerai aborder un problème d'optimisation de CPython
-l = [1, 2]
-m = l
-print l == m
-print l is m
+a = [1, 2]
+b = a
+print a == b
+print a is b
 
-m = [1, 2]
-print l == m
-print l is m
+b = [1, 2]
+print a == b
+print a is b
 
 a = 18
 b = 18

@@ -89,14 +89,14 @@ print s
 ## regardons un example
 
 s = 'marc 35 175'
-l = s.split()
-print l
-l[-1] = l[-1] + 'cm'
-print l
-s = ' '.join(l)
+a = s.split()
+print a
+a[-1] = a[-1] + 'cm'
+print a
+s = ' '.join(a)
 print s
-s = ', '.join(l)
+s = ', '.join(a)
 print s
-l = s.split(', ')
-print l
+a = s.split(', ')
+print a
 

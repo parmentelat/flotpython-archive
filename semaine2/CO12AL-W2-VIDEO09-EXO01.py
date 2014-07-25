@@ -11,9 +11,9 @@
 ## Mais comment de comporte une séquence avec
 ## le test d'appartenance...
 
-def f(l):
+def f(a):
     for i in range(5):
-        print 'x' in l
+        print 'x' in a
 
 f(range(10))
 f(range(50000000))
@@ -37,8 +37,8 @@ f(range(50000000))
 ## indice, par exemple des chaînes des caractères pour faire
 ## un annuaire, ça n'est pas possible avec les séquences.
 
-l = []
-#l['diane'] = '0118252627'
+a = []
+#a['diane'] = '0118252627'
 
 ## il existe une structure de données qui permet un accès
 ## une modification, un effacement et un test d'appartenance
