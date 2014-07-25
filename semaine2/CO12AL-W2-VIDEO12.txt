@@ -11,7 +11,7 @@ de cette notion est la source de beaucoup de difficultés chez les débutants en
 Python. Nous allons donc prendre notre temps dans cette vidéo pour comprendre
 cette notion. 
 
->>>>>>>>>> CO12AL-W2-VIDEO11-SLIDE01.py <<<<<<<<<<
+>>>>>>>>>> CO12AL-W2-VIDEO11-SLIDE01.pptx <<<<<<<<<<
 
 Pour finir, nous allons aborder quelques derniers point à connaître sur les références 
 partagées. Pour cela, ouvrons un terminal interactif...
