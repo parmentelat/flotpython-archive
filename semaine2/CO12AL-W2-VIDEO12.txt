@@ -1,0 +1,19 @@
+## FORMAT DU FICHIER
+## Tout ce qui commence avec un ## est un commentaire
+##
+## le texte entre double crochets ouvrants et fermants
+## est à afficher en surimpression pendant que je parle et à 
+## synchroniser avec le texte entre crochet 
+
+Nous allons voir dans cette vidéo une des notions les plus importantes et
+les plus subtiles en Python : les références partagées. La mauvaise compréhension
+de cette notion est la source de beaucoup de difficultés chez les débutants en
+Python. Nous allons donc prendre notre temps dans cette vidéo pour comprendre
+cette notion. 
+
+>>>>>>>>>> CO12AL-W2-VIDEO11-SLIDE01.py <<<<<<<<<<
+
+Pour finir, nous allons aborder quelques derniers point à connaître sur les références 
+partagées. Pour cela, ouvrons un terminal interactif...
+
+>>>>>>>>>> CO12AL-W2-VIDEO11-EXO01.py <<<<<<<<<<

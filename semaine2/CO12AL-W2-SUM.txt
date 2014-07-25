@@ -106,8 +106,12 @@ CO12AL-W2-VIDEO08.txt
 
 # xxx Thierry : je serais favorable a introduire aussi quelques outils
 # de base sur les strings, comme strip, split, index
+# xxx Arnaud : je parle de split dans le cours, mais bien sur, ma liste est juste
+# une proposition (non exhaustive), strip et index sont très important aussi. 
 # xxx a ce propos, as-tu prevu d'aborder les expressions regulieres
 # quelque part ? d'après moi ça irait tout droit dans les sujets avancés
+# oui, dans les sujets avancés en dernière semaine ça serait bien. je fais un répertoire
+# semaine 7 avec un TODO pour ne pas oublier. 
 
 * davantages de conversions : chr - ord  (quoique ce serait peut-être mieux + tard, genre sujets avancés aussi)
 
