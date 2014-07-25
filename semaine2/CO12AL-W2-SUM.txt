@@ -6,7 +6,9 @@ CO12AL-W2-VIDEO01.txt
 
 ## Exercices Vidéo 1
 
-CO12AL-W2-VIDEO01-NB01 : la fonction 'type' 
+CO12AL-W2-VIDEO01-NB01 : noms de variables
+
+CO12AL-W2-VIDEO01-NB02 : la fonction 'type' 
 # xxx sans doute trop tot / trop complique
 # au depart je voulais juste illustrer le slide
 # le fait que ce sont sont les valeurs qui sont typees et pas les variables
@@ -167,7 +169,7 @@ pour expliquer qu'il faut toujours utiliser des sets
 
 ###################################################################
 
-## Vidéo 12 (références partagés)
+## Vidéo 12 (références partagées)
 
 CO12AL-W2-VIDEO12.txt 
 
