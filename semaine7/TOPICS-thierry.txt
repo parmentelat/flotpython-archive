@@ -1,0 +1,11 @@
+. expressions regulieres
+. argparse
+. decorateurs
+. methodes statiques - methodes de classe
+. framework de tests
+
+-- intrduire rapidement (essentiellement mentionner et montrer des exemples)
+. django
+. matplotlib
+. numpy
+. sage
