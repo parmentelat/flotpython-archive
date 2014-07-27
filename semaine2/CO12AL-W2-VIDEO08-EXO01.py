@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-15 -*-
 
-## il existe deux manières totalement équivallentes de créer
+## il existe deux manières totalement équivalentes de créer
 ## une chaîne de caractères. Soit on met la chaîne que l'on
 ## veut créer entre apostrophes ou entre guillemets
 
@@ -11,9 +11,9 @@ print s1, s2
 
 print s1 == s2
 
-## l'intérêt d'avoir deux notations est que si dans la
-## chaîne on veut avoir un guillement ou une apostrophe
-## en peut l'écrire en utilisant l'autre notation pour
+## l'intérêt d'avoir deux notations est que, si dans la
+## chaîne on veut avoir un guillement ou une apostrophe,
+## on peut l'écrire en utilisant l'autre notation pour
 ## ne pas avoit d'ambiguïté
 
 s1 = "l'herbe"
@@ -35,9 +35,9 @@ print '\' \" \\ \n spam'
 nom = 'c:\temp\test\f.py'
 print nom
 
-## on a deux solutions à ce problèmes, soit on double
+## on a deux solutions à ce problèmes; soit on double
 ## tous les backslash, mais c'est fastidieux et sujet
-## à erreur, soit on utilise une raw string, c'est-à-dire
+## à erreur, soit on utilise une "raw string", c'est-à-dire
 ## une chaîne de caractères qui n'interprête plus aucun
 ## backslash comme caractère spécial.
 
@@ -47,6 +47,13 @@ print nom
 nom = r'c:\temp\test\f.py'
 print nom
 
+# XXX : Thierry: je propose de supprimer ceci;
+# (ou alors à la limite de le mettre APRÈS les triples apostrophes)
+# on a déjà dit qu'on pouvait mettre un backslash 
+# devant un caractère spécial, là le caractère spécial
+# c'est le retour à la ligne, donc bref ça n'apporte rien 
+# et ça risque juste de créer de la confusion puisque, 
+# essentiellement, il ne faut pas le faire... XXX
 ## un dernière utilisation du backslash est lorsque l'on
 ## veut écrire une chaine de caractères sur plusieurs lignes
 
@@ -68,10 +75,10 @@ Usage : fft(n)
 s
 print s
 
-## comme les chaînes de caractères sont immuable, on ne peut
+## comme les chaînes de caractères sont immuables, on ne peut
 ## pas les modifier en place, par contre, il existe de
 ## nombreuses fonctions qui retournent une nouvelle chaîne
-## modifiée. Regardons quelques unes des ces fonctions.
+## modifiée. Regardons quelques-unes des ces fonctions.
 
 s = "le spam, c'est bon"
 s = s.upper()
@@ -83,20 +90,20 @@ print s
 
 ## il y a ensuite deux fonctions très importantes qui
 ## permettent de passer d'une chaîne de caractère à une liste
-## et vice versa. Je rappelle que la liste et le type central
-## en Python, il est donc naturel pour travailler
+## et vice versa. Je rappelle que la liste est le type central
+## en Python, XXX Thierry ah bon ? pourtant ca s'appelle pas lisp XXX, 
+## il est donc naturel pour travailler
 ## sur une chaîne de caractère de la transformer en liste
 ## regardons un example
 
-s = 'marc 35 175'
-a = s.split()
-print a
-a[-1] = a[-1] + 'cm'
-print a
-s = ' '.join(a)
-print s
-s = ', '.join(a)
-print s
-a = s.split(', ')
-print a
+string = 'marc 35 175'
+liste = string.split()
+print liste
+liste[1] += 'ans'  
+liste[-1] += 'cm'  
+print liste
+string = '; '.join(liste)
+print string
+liste = string.split('; ')
+print liste
 
