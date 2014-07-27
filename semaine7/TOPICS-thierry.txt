@@ -1,3 +1,4 @@
+. debugger
 . expressions regulieres
 . argparse
 . decorateurs
