@@ -25,14 +25,9 @@ print 'g' not in s # noter que c'est presque du langage naturel
 
 print s + ' and spam'
 
-## l'accès direct à un élément par son indice
+## l'accès direct à un élément par un indice négatif
 
-print s[3]
-
-### XXX Thierry
-# il me semble que tu ne parles nulle part des indices négatifs comme s[-1]
-# ça pourrait aller dans le slicing mais la diapo est déjà chargée...
-# je vais prévoir un exo là dessus
+print s[-3]
 
 ## le nombre d'éléments
 
