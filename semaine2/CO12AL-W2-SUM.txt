@@ -1,3 +1,10 @@
+# XXX j'utilise pour l'instant des noms plus simples qui  
+# me permettent mieux de m'y retrouver, je renommerai le tout plus tard  
+
+# ceci est  sans doute plutot pour la semaine 1
+notebooks.ipynb : expliquer le fonctionnement des notebooks
+notebook-vs-interpreter.ipynb : illustrer un bout de programme executé sous interpréteur, par python et sous notebook
+
 ## Vidéo 1 (objets, variables, typage dynamique)
 
 CO12AL-W2-VIDEO01.txt
@@ -23,10 +30,6 @@ CO12AL-W2-VIDEO02.txt
 
 ## Exercices Vidéo 2
 
-# XXX j'utilise pour l'instant des noms plus simples qui
-# me permettent mieux de m'y retrouver, je renommerai le tout plus tard
-
-notebooks.py : expliquer le fonctionnement des notebooks - sans doute meme utile en semaine 1
 calculette.ipynb : utiliser python comme une calculette - introduit aussi les conversions
 
 CO12AL-W2-VIDEO02-NB01 : opérations bitwise : et/ou/ou exclusifs décalages
