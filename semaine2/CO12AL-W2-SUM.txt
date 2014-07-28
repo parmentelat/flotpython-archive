@@ -35,6 +35,8 @@ calculette.ipynb : utiliser python comme une calculette - introduit aussi les co
 CO12AL-W2-VIDEO02-NB01 : opérations bitwise : et/ou/ou exclusifs décalages
 CO12AL-W2-VIDEO02-NB02 : limitation de la précision des floats  
 
+flottants-min.ipynb : exercice pour trouver la valeur approximative du + petit flottant
+
 ###################################################################
 
 ## Vidéo 3 (séquences)
