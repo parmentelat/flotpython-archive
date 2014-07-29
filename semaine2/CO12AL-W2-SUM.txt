@@ -33,6 +33,7 @@ precision-flottants.ipynb : limitation de la précision des floats
 entiers-bitwise.ipynb : opérations bitwise : et/ou/ou exclusifs décalages 
 
 ## Quizz Vidéo 2 
+types-numeriques.quiz
 
 ## Exercices Vidéo 2 
 exo-flottants-min.ipynb : exercice pour trouver la valeur approximative du + petit flottant 
