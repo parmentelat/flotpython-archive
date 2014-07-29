@@ -49,6 +49,8 @@ CO12AL-W2-VIDEO03.txt
 
 exo-slicing.ipynb: un peu de slicing, et des indices négatifs
 
+generic-slicing.quiz
+
 opérations génériques sur les séquences en prenant une str comme exemple
 
 ###################################################################
