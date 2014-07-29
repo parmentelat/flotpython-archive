@@ -9,16 +9,16 @@ notebook-vs-interpreter.ipynb : illustrer un bout de programme executé sous inte
 
 CO12AL-W2-VIDEO01.txt
 
-## Quizz Vidéo 1
+## Compléments Vidéo 1
+
+noms-variables.ipynb : noms de variables
+# xxx sans doute trop tot / trop complique - il faut sans doute ne garder que le debut
+# au depart je voulais juste illustrer le fait que ce sont sont les valeurs qui sont typees et pas les variables
+ fonction-type.ipynb : la fonction 'type' 
+
+## Quizz Vidéo 1 
 
 ## Exercices Vidéo 1
-
-CO12AL-W2-VIDEO01-NB01 : noms de variables
-
-CO12AL-W2-VIDEO01-NB02 : la fonction 'type' 
-# xxx sans doute trop tot / trop complique
-# au depart je voulais juste illustrer le slide
-# le fait que ce sont sont les valeurs qui sont typees et pas les variables
 
 ###################################################################
 
@@ -26,16 +26,16 @@ CO12AL-W2-VIDEO01-NB02 : la fonction 'type'
 
 CO12AL-W2-VIDEO02.txt
 
-## Quizz Vidéo 2
-
-## Exercices Vidéo 2
+## Compléments Vidéo 2
 
 calculette.ipynb : utiliser python comme une calculette - introduit aussi les conversions
+precision-flottants.ipynb : limitation de la précision des floats  
+entiers-bitwise.ipynb : opérations bitwise : et/ou/ou exclusifs décalages 
 
-CO12AL-W2-VIDEO02-NB01 : opérations bitwise : et/ou/ou exclusifs décalages
-CO12AL-W2-VIDEO02-NB02 : limitation de la précision des floats  
+## Quizz Vidéo 2 
 
-exo-flottants-min.ipynb : exercice pour trouver la valeur approximative du + petit flottant
+## Exercices Vidéo 2 
+exo-flottants-min.ipynb : exercice pour trouver la valeur approximative du + petit flottant 
 
 ###################################################################
 
@@ -43,15 +43,17 @@ exo-flottants-min.ipynb : exercice pour trouver la valeur approximative du + pet
 
 CO12AL-W2-VIDEO03.txt
 
-## Quizz Vidéo 3
+## Compléments Vidéo 3 
 
-## Exercices Vidéo 3
+XXX : on ne parle pas du tout semble-t-il des slices genre chaine [ debut : fin : pas ]
+il faut sans doute l'introduire dans ce notebook ? ou bien est-ce traité + tard ?
 
-exo-slicing.ipynb: un peu de slicing, et des indices négatifs
+## Quizz Vidéo 3 
 
-generic-slicing.quiz
+generic-slicing.quiz : opérations génériques sur les séquences en prenant une str comme exemple 
 
-opérations génériques sur les séquences en prenant une str comme exemple
+## Exercices Vidéo 3 
+exo-slicing.ipynb: un peu de slicing, et des indices négatifs 
 
 ###################################################################
 
@@ -59,13 +61,15 @@ opérations génériques sur les séquences en prenant une str comme exemple
 
 CO12AL-W2-VIDEO04.txt (9 minutes)
 
-## Quizz Vidéo 4
-
-## Exercices Vidéo 4
+## Compléments Vidéo 4 
 
 sort (avec les paramètres reverse et key)
 sorted()
 buffer
+
+## Quizz Vidéo 4 
+
+## Exercices Vidéo 4 
 
 ###################################################################
 
@@ -73,11 +77,12 @@ buffer
 
 CO12AL-W2-VIDEO05 ()
 
-## Quizz Vidéo 5
-
-## Exercices Vidéo 5
+## Compléments Vidéo 5  
 comment accéder à l'entier 3 dans L=['abc', [(1,2), ([3], 4)], 5]
 
+## Quizz Vidéo 5 
+
+## Exercices Vidéo 5 
 
 ###################################################################
 
@@ -85,12 +90,13 @@ comment accéder à l'entier 3 dans L=['abc', [(1,2), ([3], 4)], 5]
 
 CO12AL-W2-VIDEO06.txt (5 minutes 40 secondes)
 
+## Compléments Vidéo 6
+-expliquer <> et dire qu'il est obsolète mais qu'on le trouve dans du 
+code ancien 
+
 ## Quizz Vidéo 6
 
 ## Exercices Vidéo 6
--expliquer <> et dire qu'il est obsolète mais qu'on le trouve dans du
-code ancien
-
 
 ###################################################################
 
@@ -98,11 +104,11 @@ code ancien
 
 CO12AL-W2-VIDEO07.txt 
 
+## Compléments Vidéo 7 
+
 ## Quizz Vidéo 7
 
-## Exercices Vidéo 7
-
-
+## Exercices Vidéo 7 
 
 ###################################################################
 
@@ -110,33 +116,30 @@ CO12AL-W2-VIDEO07.txt
 
 CO12AL-W2-VIDEO08.txt 
 
-## Quizz Vidéo 8
-
-## Exercices Vidéo 8
-
+## Compléments Vidéo 8 
 *bytearray
 *unicode
 *Parler du l'opérateur % pour le formatage des chaînes (on ne doit plus l'utiliser, mais on le trouve encore dans du vieux code) et notamment des notations pour les décimaux %e, %f, %g et les variantes
 *parler de rjust(), ljust(), center() et format()
 
-# xxx Thierry : je serais favorable a introduire aussi quelques outils
-# de base sur les strings, comme strip, split, index
-# xxx Arnaud : je parle de split dans le cours, mais bien sur, ma liste est juste
+# xxx Thierry : je serais favorable a introduire aussi quelques outils 
+# de base sur les strings, comme strip, split, index 
+# xxx Arnaud : je parle de split dans le cours, mais bien sur, ma liste est juste 
 # une proposition (non exhaustive), strip et index sont très important aussi. 
-# xxx a ce propos, as-tu prevu d'aborder les expressions regulieres
-# quelque part ? d'après moi ça irait tout droit dans les sujets avancés
-# oui, dans les sujets avancés en dernière semaine ça serait bien. je fais un répertoire
-# semaine 7 avec un TODO pour ne pas oublier. 
+* davantages de conversions : chr - ord  (quoique ce serait peut-être mieux + tard, genre sujets avancés aussi) 
 
-* davantages de conversions : chr - ord  (quoique ce serait peut-être mieux + tard, genre sujets avancés aussi)
 
-*encore du slicing et de exos du style s[:2] + 'x' + s[3:] et s[:3] +'x' + s[3:] -- xxx Thierry : je trouve que ça fait déjà beaucoup avec le slicing; il y a tellement de choses à dire sur les strings...
+## Quizz Vidéo 8
+
+## Exercices Vidéo 8
 
 ###################################################################
 
 ## Vidéo 9 (tables de hash)
 
 CO12AL-W2-VIDEO09.txt 
+
+## Compléments Vidéo 9 
 
 ## Quizz Vidéo 9
 
@@ -149,12 +152,14 @@ CO12AL-W2-VIDEO09.txt
 
 CO12AL-W2-VIDEO10.txt 
 
+## Compléments Vidéo 10
+*voir la construction D=dict(clef1=obj1, clef2=obj2) 
+*voir d.get('marc', '?') et son usage par rapport à d['marc']
+*voir un exemple de dict dans un dict et de l'accès à ses éléments D={'alice': 35, 'enfant':{'bob' : 9, 'charlie' : 6}}
+
 ## Quizz Vidéo 10
 
 ## Exercices Vidéo 10
-*voir la construction D=dict(clef1=obj1, clef2=obj2)
-*voir d.get('marc', '?') et son usage par rapport à d['marc']
-*voir une exemple de dict dans un dict et de l'accès à ses éléments D={'alice': 35, 'enfant':{'bob' : 9, 'charlie' : 6}}
 
 ###################################################################
 
@@ -162,9 +167,7 @@ CO12AL-W2-VIDEO10.txt
 
 CO12AL-W2-VIDEO11.txt 
 
-## Quizz Vidéo 11
-
-## Exercices Vidéo 11
+## Compléments Vidéo 11
 *autre fonctions sur les sets non vue dans la vidéo (e.g., <=, <, discard, pop, clear)
 *test de performance sur le test d'appartenance entre list et set
 pour expliquer qu'il faut toujours utiliser des sets
@@ -178,7 +181,9 @@ pour expliquer qu'il faut toujours utiliser des sets
 >>> timeit.timeit(setup= "x = set(range(2))", stmt = '0 in x', number = 6000000)
 0.3819173343944584
 
+## Quizz Vidéo 11
 
+## Exercices Vidéo 11
 
 ###################################################################
 
@@ -186,18 +191,22 @@ pour expliquer qu'il faut toujours utiliser des sets
 
 CO12AL-W2-VIDEO12.txt 
 
-## Quizz Vidéo 12
-
-## Exercices Vidéo 12
-
-*montrer le problème suivant L=[[1]]*5 et demander une solution pour le pas avoir de ref. partagées
-*construire des exemples montrant des problèmes de ref partagées sur des mutables, e.g., 
+## Compléments Vidéo 12
+* introduire http://pythontutor.com 
+[[construire des exemples montrant des problèmes de ref partagées sur des mutables, e.g., 
 a = [ 1, [2, 3], 4]
 b = a[:]                  #shallow copy
 a[0] = 'x'        #ok
 a[1][1] = 'y'     #ref partagée
+]]
 
-*voir copy.copy() pour faire les shallows copies et copy.deepcopy() pour les deep copy
-* voir sys.getrefcount(1) et expliquer le résultats
+* voir copy.copy() pour faire les shallows copies et copy.deepcopy() pour les deep copy 
+* voir sys.getrefcount(1) et expliquer le résultat -- sans doute moyen de refourguer le morceau de fonction-type.ipynb sur les entiers comme singletons
+
+## Quizz Vidéo 12
+
+## Exercices Vidéo 12
+
+*montrer le problème suivant L=[[1]]*5 et demander une solution pour ne pas avoir de ref. partagées
+
 * exo pour voir jusqu'à quelle taille de chaîne de caractères (et quelle taille d'entier) Python arrête de faire des références partagées pour optimiser la mémoire. 
-* introduire http://pythontutor.com
