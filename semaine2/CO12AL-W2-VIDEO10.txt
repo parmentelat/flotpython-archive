@@ -13,7 +13,7 @@ est une table de hash qui prend comme clef n'importe immuable
 et comme valeur n'importe quel objet. Il n'y a pas de notion 
 d'ordre dans un dictionnaire, on peut donc le voir comme une 
 collection non ordonnées de couples clef, valeur. Le dictionnaire
-est par contre un type muable, c'est-à-dire qu'on peut le modifier 
+est par contre un type mutable, c'est-à-dire qu'on peut le modifier 
 en place. 
 
 Les dictionnaires sont des objets très puissants qui permettent 

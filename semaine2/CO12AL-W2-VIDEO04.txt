@@ -16,7 +16,7 @@ sont stockées. Donc la taille d'une liste n'augmente pas avec la taille
 des objets qu'elle référence, mais seulement avec le nombre d'objet
 quelle référence. 
 
-Les listes sont muables, c'est-à-dire que l'on peut les modifier en 
+Les listes sont mutables, c'est-à-dire que l'on peut les modifier en 
 place. On dit qu'une modification est en place lorsque l'on modifie directement
 l'objet en mémoire sans en faire une copie temporaire. L'intérêt d'une 
 modification en place est qu'elle est économe en mémoire puisqu'elle ne
