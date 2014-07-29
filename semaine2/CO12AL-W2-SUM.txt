@@ -193,6 +193,8 @@ pour expliquer qu'il faut toujours utiliser des sets
 CO12AL-W2-VIDEO12.txt 
 
 ## Compléments Vidéo 12
+references-circulaires.ipynb : une liste infinie; un exemple + utile de reference circulaire
+
 * introduire http://pythontutor.com 
 [[construire des exemples montrant des problèmes de ref partagées sur des mutables, e.g., 
 a = [ 1, [2, 3], 4]
