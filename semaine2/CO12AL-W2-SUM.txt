@@ -14,7 +14,7 @@ CO12AL-W2-VIDEO01.txt
 noms-variables.ipynb : noms de variables
 # xxx sans doute trop tot / trop complique - il faut sans doute ne garder que le debut
 # au depart je voulais juste illustrer le fait que ce sont sont les valeurs qui sont typees et pas les variables
- fonction-type.ipynb : la fonction 'type' 
+fonction-type.ipynb : la fonction 'type' 
 
 ## Quizz Vidéo 1 
 
@@ -53,7 +53,7 @@ slicing-step.ipynb : détaille les slicings avec pas ( a:b:c )
 generic-slicing.quiz : opérations génériques sur les séquences en prenant une str comme exemple 
 
 ## Exercices Vidéo 3 
-exo-slicing.ipynb: un peu de slicing, et des indices négatifs 
+exo-slicing.ipynb: un peu de slicing, et des indices négatifs, utilisation de la longueur
 
 ###################################################################
 
@@ -63,9 +63,9 @@ CO12AL-W2-VIDEO04.txt (9 minutes)
 
 ## Compléments Vidéo 4 
 
-sort (avec les paramètres reverse et key)
-sorted()
-buffer
+XXX thierry: voir si on conserve la fin à cet endroit ou si on bouge ça + tard dans le cours  
+listes-sort.ipynb : sort avec les paramètres reverse et key, et sorted
+#buffer : XXX thierry je connais pas du tout, et je n'ai pas de reseau pour l'instant
 
 ## Quizz Vidéo 4 
 
