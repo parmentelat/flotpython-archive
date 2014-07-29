@@ -46,8 +46,7 @@ CO12AL-W2-VIDEO03.txt
 
 ## Compléments Vidéo 3 
 
-XXX : on ne parle pas du tout semble-t-il des slices genre chaine [ debut : fin : pas ]
-il faut sans doute l'introduire dans ce notebook ? ou bien est-ce traité + tard ?
+slicing-step.ipynb : détaille les slicings avec pas ( a:b:c )
 
 ## Quizz Vidéo 3 
 
