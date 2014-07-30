@@ -29,6 +29,7 @@ CO12AL-W2-VIDEO02.txt
 ## Compléments Vidéo 2
 
 calculette.ipynb : utiliser python comme une calculette - introduit aussi les conversions
+# xxx TODO : affectations à la += ; est-ce prevu ailleurs ?
 precision-flottants.ipynb : limitation de la précision des floats  
 entiers-bitwise.ipynb : opérations bitwise : et/ou/ou exclusifs décalages 
 
@@ -46,14 +47,15 @@ CO12AL-W2-VIDEO03.txt
 
 ## Compléments Vidéo 3 
 
-slicing-step.ipynb : détaille les slicings avec pas ( a:b:c )
+# deprecated-slicing-step.ipynb : était un notebook sur les slicing avec pas (a:b:c)
+# en fait cela etait couvert dans les slides mais je n'avais vu que la page 1
 
 ## Quizz Vidéo 3 
 
 generic-slicing.quiz : opérations génériques sur les séquences en prenant une str comme exemple 
 
 ## Exercices Vidéo 3 
-exo-slicing.ipynb: un peu de slicing, et des indices négatifs, utilisation de la longueur
+exo-slicing.ipynb: un peu de slicing, et des indices négatifs, le slicing avec pas, utilisation de la longueur
 
 ###################################################################
 
@@ -63,7 +65,8 @@ CO12AL-W2-VIDEO04.txt (9 minutes)
 
 ## Compléments Vidéo 4 
 
-XXX thierry: voir si on conserve la fin à cet endroit ou si on bouge ça + tard dans le cours  
+XXX thierry: voir si on conserve la fin (qui passe une fonction en
+# parametre...) à cet endroit ou si on bouge ça + tard dans le cours  
 listes-sort.ipynb : sort avec les paramètres reverse et key, et sorted
 #buffer : XXX thierry je connais pas du tout, et je n'ai pas de reseau pour l'instant
 
@@ -78,9 +81,14 @@ listes-sort.ipynb : sort avec les paramètres reverse et key, et sorted
 CO12AL-W2-VIDEO05 ()
 
 ## Compléments Vidéo 5  
-comment accéder à l'entier 3 dans L=['abc', [(1,2), ([3], 4)], 5]
+
+# discussion sur la virgule finale qui est optionnelle (sauf quand un seul élément) - pratique pour maintenir les fichiers sources, on peut toujours ajouter/supprimer une ligne entière
+# comment accéder à l'entier 3 dans L=['abc', [(1,2), ([3], 4)], 5]
+# affectation par tuple a,b = 1,2
+# construire un tuple : la fonction tuple ()
 
 ## Quizz Vidéo 5 
+a-t-on le droit de modifier un tuple ?
 
 ## Exercices Vidéo 5 
 
