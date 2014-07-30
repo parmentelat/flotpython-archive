@@ -12,9 +12,10 @@ CO12AL-W2-VIDEO01.txt
 ## Compléments Vidéo 1
 
 noms-variables.ipynb : noms de variables
-# xxx sans doute trop tot / trop complique - il faut sans doute ne garder que le debut
-# au depart je voulais juste illustrer le fait que ce sont sont les valeurs qui sont typees et pas les variables
-fonction-type.ipynb : la fonction 'type' 
+
+# deprecated-fonction-type.ipynb : la fonction type() id() operateur is, 
+# les entiers implementes comme des singletons, type(type(x)==type(type(y))
+# c'est bcp trop tot, je garde en reserve pour + tard
 
 ## Quizz Vidéo 1 
 
