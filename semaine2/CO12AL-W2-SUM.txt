@@ -32,6 +32,7 @@ calculette.ipynb : utiliser python comme une calculette - introduit aussi les co
 # xxx TODO : affectations à la += ; est-ce prevu ailleurs ?
 precision-flottants.ipynb : limitation de la précision des floats  
 entiers-bitwise.ipynb : opérations bitwise : et/ou/ou exclusifs décalages 
+affectations-operations : illustrer += et les autres variantes, mentionner les autres types
 
 ## Quizz Vidéo 2 
 types-numeriques.quiz
