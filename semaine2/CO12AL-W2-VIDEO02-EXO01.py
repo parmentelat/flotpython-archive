@@ -1,8 +1,4 @@
 # -*- coding: iso-8859-15 -*-
-# XXX initialement latin_1, qui n'est semble-t-il pas reconnu sur mon mac
-# dis-moi si cette balise-ci te pose probleme
-# XXX dans tous les cas il faut privilegier iso-latin-15 
-# à iso-latin-1 qui n'a pas le symbole euro
 
 ## Je vous rappelle que Python utilise le typage dynamique, c'est-à-dire
 ## que l'on ne donne pas le type d'un objet à l'écriture du programme,
