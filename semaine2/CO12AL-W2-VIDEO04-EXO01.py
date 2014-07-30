@@ -93,7 +93,7 @@ print a
 a.extend([11, 12])
 print a
 
-## insert l'objet juste avant la position, mais n'efface et ne remplace rien
+## insère l'objet juste avant la position, mais n'efface et ne remplace rien
 a.insert(2, 'egg')
 print a
 

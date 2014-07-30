@@ -71,6 +71,7 @@ listes-sort.ipynb : sort avec les paramètres reverse et key, et sorted
 #buffer : XXX thierry je connais pas du tout, et je n'ai pas de reseau pour l'instant
 
 ## Quizz Vidéo 4 
+listes.quiz : pop append extend del sort sorted (XXX j'utilise aussi += a un moment)
 
 ## Exercices Vidéo 4 
 
