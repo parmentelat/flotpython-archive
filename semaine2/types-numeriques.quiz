@@ -33,6 +33,7 @@ Par contre ici 2 ** 200 est beaucoup trop gros pour être représenté par un entie
 Que retourne la formule
 
 (2 ** 200) >> 196 == 2 ** 4
+
 (x) True
 ( ) False
 
@@ -51,5 +52,5 @@ Comment entrer la valeur du complexe 3 + 2i
 
 [explanation]
 Les anglais utilisent 'j' plutôt que notre 'i'
-Les deux dernières formes font référence à une variable 'i' ou 'j'
+Les deux dernières formes font référence à une variable "normale" qui s'appellerait 'i' ou 'j'
 [explanation]
