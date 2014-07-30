@@ -30,7 +30,6 @@ CO12AL-W2-VIDEO02.txt
 ## Compléments Vidéo 2
 
 calculette.ipynb : utiliser python comme une calculette - introduit aussi les conversions
-# xxx TODO : affectations à la += ; est-ce prevu ailleurs ?
 precision-flottants.ipynb : limitation de la précision des floats  
 entiers-bitwise.ipynb : opérations bitwise : et/ou/ou exclusifs décalages 
 affectations-operations : illustrer += et les autres variantes, mentionner les autres types
@@ -73,7 +72,7 @@ listes-sort.ipynb : sort avec les paramètres reverse et key, et sorted
 #buffer : XXX thierry je connais pas du tout, et je n'ai pas de reseau pour l'instant
 
 ## Quizz Vidéo 4 
-listes.quiz : pop append extend del sort sorted (XXX j'utilise aussi += a un moment)
+listes.quiz : pop append extend del sort sorted (j'utilise aussi += a un moment)
 
 ## Exercices Vidéo 4 
 
@@ -90,13 +89,11 @@ tuple-commas : les différentes syntaxes (avec ou sans parenthèses, avec ou sans 
 			  la fonction tuple pour convertir une liste 
 			  digression sur les noms de fonctions prédéfinies
 
-# discussion sur la virgule finale qui est optionnelle (sauf quand un seul élément) - pratique pour maintenir les fichiers sources, on peut toujours ajouter/supprimer une ligne entière
-# comment accéder à l'entier 3 dans L=['abc', [(1,2), ([3], 4)], 5]
-# affectation par tuple a,b = 1,2 -- application: inverser deux elements dans une liste
-# construire un tuple : la fonction tuple ()
+affectations-filtrage : a,b = tuple - je parle aussi de l'exemple 3 dans ['abc', [(1,2), ([3], 4)], 5]
 
 ## Quizz Vidéo 5 
 a-t-on le droit de modifier un tuple ?
+les affectations par filtrage, e.g.inverser deux elements dans une liste 
 
 ## Exercices Vidéo 5 
 
