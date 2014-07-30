@@ -78,6 +78,9 @@ print range(10)
 print range(1, 10)
 
 print range(1, 10, 2)
+# suggestion Thierry : souligner l'analogie avec les slices
+range(100)[4:10:2] == range(4,10,2)
+range(100)[18:12:-2] == range(18,12,-2)
 
 ## Regardons maintenant les 7 fonctions qui permettent de modifier
 ## les listes en place.
