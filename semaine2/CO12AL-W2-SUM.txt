@@ -83,9 +83,14 @@ CO12AL-W2-VIDEO05 ()
 
 ## Compléments Vidéo 5  
 
+tuple-commas : les différentes syntaxes (avec ou sans parenthèses, avec ou sans virgule terminale)
+	                  le cas des tuples à un élément
+			  la fonction tuple pour convertir une liste 
+			  digression sur les noms de fonctions prédéfinies
+
 # discussion sur la virgule finale qui est optionnelle (sauf quand un seul élément) - pratique pour maintenir les fichiers sources, on peut toujours ajouter/supprimer une ligne entière
 # comment accéder à l'entier 3 dans L=['abc', [(1,2), ([3], 4)], 5]
-# affectation par tuple a,b = 1,2
+# affectation par tuple a,b = 1,2 -- application: inverser deux elements dans une liste
 # construire un tuple : la fonction tuple ()
 
 ## Quizz Vidéo 5 
