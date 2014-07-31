@@ -109,6 +109,8 @@ indentations.ipynb : imbrications, espaces vs tabulations, utilisez des indentat
 elif.ipynb : if elif else - évaluation paresseuse
 
 ## Quizz Vidéo 6
+# J'arrive un peu à la limite qu quiz car je ne sais pas si je peux mettre des réponses
+# sur plusieurs lignes dans les questions a choix multiples
 
 ## Exercices Vidéo 6
 
@@ -119,6 +121,7 @@ elif.ipynb : if elif else - évaluation paresseuse
 CO12AL-W2-VIDEO07.txt 
 
 ## Compléments Vidéo 7 
+for-multi.ipynb: affectation a,b dans un for, la fonction zip
 
 ## Quizz Vidéo 7
 
