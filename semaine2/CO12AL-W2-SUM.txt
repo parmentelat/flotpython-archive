@@ -13,10 +13,6 @@ CO12AL-W2-VIDEO01.txt
 
 noms-variables.ipynb : noms de variables
 
-# deprecated-fonction-type.ipynb : la fonction type() id() operateur is, 
-# les entiers implementes comme des singletons, type(type(x)==type(type(y))
-# c'est bcp trop tot, je garde en reserve pour + tard
-
 ## Quizz Vidéo 1 
 
 ## Exercices Vidéo 1
@@ -215,6 +211,8 @@ CO12AL-W2-VIDEO12.txt
 
 ## Compléments Vidéo 12
 references-circulaires.ipynb : une liste infinie; un exemple + utile de reference circulaire
+is-id.ipynb : function id(), operateur is,  les entiers implementes comme des singletons
+
 
 * introduire http://pythontutor.com 
 [[construire des exemples montrant des problèmes de ref partagées sur des mutables, e.g., 
