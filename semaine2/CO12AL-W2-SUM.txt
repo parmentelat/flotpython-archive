@@ -123,7 +123,7 @@ for-multi.ipynb: affectation a,b dans un for, la fonction zip
 ## Quizz Vidéo 7
 
 ## Exercices Vidéo 7 
-TODO fonction-return.ipynb il nous faut return pour les exercices please
+function-return.ipynb : il nous faut 'return' pour les exercices please
 exo-if.ipynb : une petite fonction qui calcule si deux entiers sont divisibles ou pas
 TODO exo-for.ipynb
 TODO exo-def.ipynb
