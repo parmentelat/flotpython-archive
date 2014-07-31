@@ -22,11 +22,13 @@ ces quelques notions clefs à l'écriture de vrais programmes.
 ## expressions conditionelles et instruction if else
 
 Dans cette vidéo, nous allons parler des expressions conditionnelles et de l'instruction 
-if else. Une 
-expression conditionnelle est une expression qui a pour résultat un booléen
+if else. Une expression conditionnelle est une expression qui a pour résultat un booléen
 c'est-à-dire True ou False. C'est toujours le résultat d'un test. Les expressions
-conditionelles les plus courantes sont [a > b], [a >= b], [a < b], [a <= b], [a == b], 
-et [a != b]. Et on peut également ajouter le test d'appartenance des séquences
+conditionnelles les plus courantes sont les comparaisons 
+[a > b], [a >= b], [a < b], [a <= b],
+et les tests d'égalité [a == b], et [a != b] que nous avons déjà
+rencontrés.
+Et on peut également ajouter le test d'appartenance des séquences
 [a in s] et [a not in s]. 
 
 [[
@@ -44,7 +46,7 @@ Les expressions conditionnelles sont principalement utilisées
 dans une expression if else. L'instruction if else va permettre d'executer un bloc d'instruction
 si l'expression est vraie est un autre bloc si l'expression est fausse. 
 
-Regardons a cas pratique : supposons que l'on veuille écrire un programme 
-qui affiche reçu si la note d'un examen est supérieur à 10 et recalé sinon. 
+Regardons un cas pratique : supposons que l'on veuille écrire un programme 
+qui affiche reçu si la note d'un examen est supérieure à 10, et recalé sinon. 
 
 >>>>>>>>>> INCLUDE CO12AL-W2-VIDEO06-SLIDE01.pptx ( 4 minutes) <<<<<<<<<<
