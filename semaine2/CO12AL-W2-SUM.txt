@@ -106,7 +106,7 @@ CO12AL-W2-VIDEO06.txt (5 minutes 40 secondes)
 # XXX Thierry: je ne comprends pas ce commentaire 
 # expliquer <> et dire qu'il est obsolète mais qu'on le trouve dans du code ancien 
 indentations.ipynb : imbrications, espaces vs tabulations, utilisez des indentations de 4 espaces
-# todo elif.ipynb
+elif.ipynb : if elif else - évaluation paresseuse
 
 ## Quizz Vidéo 6
 
