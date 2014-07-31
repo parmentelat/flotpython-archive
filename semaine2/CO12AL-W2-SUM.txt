@@ -109,10 +109,11 @@ indentations.ipynb : imbrications, espaces vs tabulations, utilisez des indentat
 elif.ipynb : if elif else - évaluation paresseuse
 
 ## Quizz Vidéo 6
-# J'arrive un peu à la limite qu quiz car je ne sais pas si je peux mettre des réponses
+# J'arrive un peu à la limite du quiz car je ne sais pas si je peux mettre des réponses
 # sur plusieurs lignes dans les questions a choix multiples
 
 ## Exercices Vidéo 6
+# je postpone à après la vidéo 7 car on aura les fonctions 
 
 ###################################################################
 
@@ -126,6 +127,10 @@ for-multi.ipynb: affectation a,b dans un for, la fonction zip
 ## Quizz Vidéo 7
 
 ## Exercices Vidéo 7 
+TODO fonction-return.ipynb il nous faut return pour les exercices please
+exo-if.ipynb : une petite fonction qui calcule si deux entiers sont divisibles ou pas
+TODO exo-for.ipynb
+TODO exo-def.ipynb
 
 ###################################################################
 
