@@ -15,13 +15,13 @@ def solve(n):
     if n == 0:
         return [[]]
     smaller_solutions = solve(n - 1)
-    return [solution+[(n,i+1)]
-            for i in xrange(BOARD_SIZE)
-            for solution in smaller_solutions
-            if not under_attack(i+1, solution) ]
+    return [ solution + [(n,i+1)]
+             for i in xrange(BOARD_SIZE)
+             for solution in smaller_solutions
+             if not under_attack (i+1, solution) ]
 
 answers = solve(BOARD_SIZE)
-for i,answer in zip(range(len(answers)),answers):
+for i,answer in zip (range(len(answers)), answers):
     print 'solution',i+1
     display (answer)
     if i>=3: 
