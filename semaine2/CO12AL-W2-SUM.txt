@@ -129,22 +129,22 @@ OK exo-for.ipynb : trier toutes les listes dans une liste; idem avec une directi
 CO12AL-W2-VIDEO08.txt 
 
 ## Compléments Vidéo 8 
-OK string-formatting.ipynb
+OK string-formatting.ipynb : format et % - je laisse tomber rjust/ljust/center pour le moment
+OK string-tools.ipynb : # help(str)  #split join  #replace strip #index find rfind count startswith endswith upper lower swapcase capitalize title  renvoie sur la doc
+
 # XXX : Thierry : je dois postponer ceci car je n'ai pas de reseau et
 # j'ai besoin de reviser tout ceci...
 *bytearray
 *unicode
-*Parler du l'opérateur % pour le formatage des chaînes (on ne doit plus l'utiliser, mais on le trouve encore dans du vieux code) et notamment des notations pour les décimaux %e, %f, %g et les variantes
-*parler de rjust(), ljust(), center() et format()
 
-# TODO : module-string.ipynb : un truc qui introduit aussi strip,
-# index, upper/lower, et qui pointe vers la doc pour le reste
 
 ## Quizz Vidéo 8
-TODO le quiz se prete bien surement aux basiques des strings
+TODO strings.quiz - le quiz se prete bien surement aux basiques des strings
+le string n'est pas mutable
+les methodes sur les strings
+le formattage
 
 ## Exercices Vidéo 8
-TODO exo-strings.ipynb
 
 ###################################################################
 
@@ -168,7 +168,7 @@ CO12AL-W2-VIDEO10.txt
 ## Compléments Vidéo 10
 *voir la construction D=dict(clef1=obj1, clef2=obj2) 
 *voir d.get('marc', '?') et son usage par rapport à d['marc']
-*voir un exemple de dict dans un dict et de l'accès à ses éléments D={'alice': 35, 'enfant':{'bob' : 9, 'charlie' : 6}}
+*voir un exemple de dict dans un dict et de l'accès à ses éléments D={'alice': 35, 'enfants':{'bob' : 9, 'charlie' : 6}}
 
 ## Quizz Vidéo 10
 
