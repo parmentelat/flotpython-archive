@@ -7,7 +7,7 @@ CO12AL-W2-VIDEO01.txt
 
 ## Compléments Vidéo 1
 
-noms-variables.ipynb : noms de variables
+OK noms-variables.ipynb : noms de variables
 
 ## Quizz Vidéo 1 
 
@@ -21,16 +21,16 @@ CO12AL-W2-VIDEO02.txt
 
 ## Compléments Vidéo 2
 
-calculette.ipynb : utiliser python comme une calculette - introduit aussi les conversions
-precision-flottants.ipynb : limitation de la précision des floats  
-entiers-bitwise.ipynb : opérations bitwise : et/ou/ou exclusifs décalages 
-affectations-operations.ipynb : illustrer += et les autres variantes, mentionner les autres types
+OK calculette.ipynb : utiliser python comme une calculette - introduit aussi les conversions
+OK precision-flottants.ipynb : limitation de la précision des floats  
+OK entiers-bitwise.ipynb : opérations bitwise : et/ou/ou exclusifs décalages 
+OK affectations-operations.ipynb : illustrer += et les autres variantes, mentionner les autres types
 
 ## Quizz Vidéo 2 
-types-numeriques.quiz
+OK types-numeriques.quiz
 
 ## Exercices Vidéo 2 
-exo-flottants-min.ipynb : exercice pour trouver la valeur approximative du + petit flottant 
+OK exo-flottants-min.ipynb : exercice pour trouver la valeur approximative du + petit flottant 
 
 ###################################################################
 
@@ -45,10 +45,10 @@ CO12AL-W2-VIDEO03.txt
 
 ## Quizz Vidéo 3 
 
-generic-slicing.quiz : opérations génériques sur les séquences en prenant une str comme exemple 
+OK generic-slicing.quiz : opérations génériques sur les séquences en prenant une str comme exemple 
 
 ## Exercices Vidéo 3 
-exo-slicing.ipynb: un peu de slicing, et des indices négatifs, le slicing avec pas, utilisation de la longueur
+OK exo-slicing.ipynb: un peu de slicing, et des indices négatifs, le slicing avec pas, utilisation de la longueur
 
 ###################################################################
 
@@ -60,11 +60,11 @@ CO12AL-W2-VIDEO04.txt (9 minutes)
 
 XXX thierry: voir si on conserve la fin (qui passe une fonction en
 # parametre...) à cet endroit ou si on bouge ça + tard dans le cours  
-listes-sort.ipynb : sort avec les paramètres reverse et key, et sorted
+OK listes-sort.ipynb : sort avec les paramètres reverse et key, et sorted
 #buffer : XXX thierry je connais pas du tout, et je n'ai pas de reseau pour l'instant
 
 ## Quizz Vidéo 4 
-listes.quiz : pop append extend del sort sorted (j'utilise aussi += a un moment)
+OK listes.quiz : pop append extend del sort sorted (j'utilise aussi += a un moment)
 
 ## Exercices Vidéo 4 
 
@@ -76,15 +76,14 @@ CO12AL-W2-VIDEO05 ()
 
 ## Compléments Vidéo 5  
 
-tuple-commas : les différentes syntaxes (avec ou sans parenthèses, avec ou sans virgule terminale)
-	                  le cas des tuples à un élément
-			  la fonction tuple pour convertir une liste 
-			  digression sur les noms de fonctions prédéfinies
+OK tuple-commas : les différentes syntaxes (avec ou sans parenthèses, avec ou sans virgule terminale
+                               le cas des tuples à un élément; la fonction tuple pour convertir une liste 
+			       digression sur les noms de fonctions prédéfinies
 
-affectations-filtrage : a,b = tuple - je parle aussi de retrouver 3 dans ['abc', [(1,2), ([3], 4)], 5]
+OK affectations-filtrage : a,b = tuple - je parle aussi de retrouver 3 dans ['abc', [(1,2), ([3], 4)], 5]
 
 ## Quizz Vidéo 5 
-tuples.quiz
+OK tuples.quiz
 
 ## Exercices Vidéo 5 
 
@@ -97,15 +96,15 @@ CO12AL-W2-VIDEO06.txt (5 minutes 40 secondes)
 ## Compléments Vidéo 6
 # XXX Thierry: je ne comprends pas ce commentaire 
 # expliquer <> et dire qu'il est obsolète mais qu'on le trouve dans du code ancien 
-indentations.ipynb : imbrications, espaces vs tabulations, utilisez des indentations de 4 espaces
-elif.ipynb : if elif else - évaluation paresseuse
+OK indentations.ipynb : imbrications, espaces vs tabulations, utilisez des indentations de 4 espaces
+OK elif.ipynb : if elif else - évaluation paresseuse
 
 ## Quizz Vidéo 6
 # J'arrive un peu à la limite du quiz car je ne sais pas si je peux mettre des réponses
 # sur plusieurs lignes dans les questions a choix multiples
 
 ## Exercices Vidéo 6
-# je postpone à après la vidéo 7 car on aura les fonctions 
+# je postpone à après la vidéo 7 car on aura les fonctions; bref pas d'exo après cette semaine-là
 
 ###################################################################
 
@@ -114,14 +113,14 @@ elif.ipynb : if elif else - évaluation paresseuse
 CO12AL-W2-VIDEO07.txt 
 
 ## Compléments Vidéo 7 
-for-multi.ipynb: affectation a,b dans un for, la fonction zip
+OK for-multi.ipynb: affectation a,b dans un for, la fonction zip
 
 ## Quizz Vidéo 7
 
 ## Exercices Vidéo 7 
-function-return.ipynb : il nous faut 'return' pour les exercices please
-exo-if.ipynb : une petite fonction qui calcule si deux entiers sont divisibles ou pas
-exo-for.ipynb : trier toutes les listes dans une liste; idem avec une direction
+OK function-return.ipynb : il nous faut 'return' pour les exercices please
+OK exo-if.ipynb : une petite fonction qui calcule si deux entiers sont divisibles ou pas
+OK exo-for.ipynb : trier toutes les listes dans une liste; idem avec une direction
 
 ###################################################################
 
@@ -130,7 +129,7 @@ exo-for.ipynb : trier toutes les listes dans une liste; idem avec une direction
 CO12AL-W2-VIDEO08.txt 
 
 ## Compléments Vidéo 8 
-string-formatting.ipynb
+OK string-formatting.ipynb
 # XXX : Thierry : je dois postponer ceci car je n'ai pas de reseau et
 # j'ai besoin de reviser tout ceci...
 *bytearray
@@ -206,8 +205,8 @@ pour expliquer qu'il faut toujours utiliser des sets
 CO12AL-W2-VIDEO12.txt 
 
 ## Compléments Vidéo 12
-references-circulaires.ipynb : une liste infinie; un exemple + utile de reference circulaire
-is-id.ipynb : function id(), operateur is,  les entiers implementes comme des singletons
+OK references-circulaires.ipynb : une liste infinie; un exemple + utile de reference circulaire
+OK is-id.ipynb : function id(), operateur is,  les entiers implementes comme des singletons
 
 
 * introduire http://pythontutor.com 
