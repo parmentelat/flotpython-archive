@@ -1,4 +1,5 @@
-chaine = "abcdefghijklmnopqrstuvwxyz"
+import string
+chaine = string.lowercase
 
 print 'question 1', chaine [-5:-2]
 
