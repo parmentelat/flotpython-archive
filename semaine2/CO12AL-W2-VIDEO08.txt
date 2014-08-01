@@ -24,6 +24,7 @@ x in s
 x not in s
 s + t
 s[i]
+XXX Thierry : je ne comprends pas ce que tu veux dire avec s[i,j,k] ???
 s[i,j,k]
 ]]
 
