@@ -28,7 +28,7 @@ CO12AL-W2-VIDEO02.txt
 calculette.ipynb : utiliser python comme une calculette - introduit aussi les conversions
 precision-flottants.ipynb : limitation de la précision des floats  
 entiers-bitwise.ipynb : opérations bitwise : et/ou/ou exclusifs décalages 
-affectations-operations : illustrer += et les autres variantes, mentionner les autres types
+affectations-operations.ipynb : illustrer += et les autres variantes, mentionner les autres types
 
 ## Quizz Vidéo 2 
 types-numeriques.quiz
@@ -134,21 +134,22 @@ exo-for.ipynb : trier toutes les listes dans une liste; idem avec une direction
 CO12AL-W2-VIDEO08.txt 
 
 ## Compléments Vidéo 8 
+string-formatting.ipynb
+# XXX : Thierry : je dois postponer ceci car je n'ai pas de reseau et
+# j'ai besoin de reviser tout ceci...
 *bytearray
 *unicode
 *Parler du l'opérateur % pour le formatage des chaînes (on ne doit plus l'utiliser, mais on le trouve encore dans du vieux code) et notamment des notations pour les décimaux %e, %f, %g et les variantes
 *parler de rjust(), ljust(), center() et format()
 
-# xxx Thierry : je serais favorable a introduire aussi quelques outils 
-# de base sur les strings, comme strip, split, index 
-# xxx Arnaud : je parle de split dans le cours, mais bien sur, ma liste est juste 
-# une proposition (non exhaustive), strip et index sont très important aussi. 
-* davantages de conversions : chr - ord  (quoique ce serait peut-être mieux + tard, genre sujets avancés aussi) 
-
+# TODO : module-string.ipynb : un truc qui introduit aussi strip,
+# index, upper/lower, et qui pointe vers la doc pour le reste
 
 ## Quizz Vidéo 8
+TODO le quiz se prete bien surement aux basiques des strings
 
 ## Exercices Vidéo 8
+TODO exo-strings.ipynb
 
 ###################################################################
 
@@ -216,13 +217,13 @@ is-id.ipynb : function id(), operateur is,  les entiers implementes comme des si
 * introduire http://pythontutor.com 
 [[construire des exemples montrant des problèmes de ref partagées sur des mutables, e.g., 
 a = [ 1, [2, 3], 4]
-b = a[:]                  #shallow copy
+b = a[:]           #shallow copy
 a[0] = 'x'        #ok
 a[1][1] = 'y'     #ref partagée
 ]]
 
 * voir copy.copy() pour faire les shallows copies et copy.deepcopy() pour les deep copy 
-* voir sys.getrefcount(1) et expliquer le résultat -- sans doute moyen de refourguer le morceau de fonction-type.ipynb sur les entiers comme singletons
+* voir sys.getrefcount(1) et expliquer le résultat 
 
 ## Quizz Vidéo 12
 
