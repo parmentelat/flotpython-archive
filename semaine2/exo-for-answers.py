@@ -13,6 +13,22 @@ def multi_tri_reverse (listes, reverses):
         liste.sort(reverse=reverse)
     return listes
 
+def afficher_racines (p):
+    "affiche les racines p-iemes de l'unite"
+    for n in range(p):
+        print "racine d'indice",n,"=", e**((2*pi*1j*n)/3)
+        # ou pour la variante
+        #print "valeur pour n=",n,n*(n+1)/2
+
+def liste_racines (p):
+    "retourne la liste des racines p-iemes de l'unite"
+    resultat = []
+    for n in range(p):
+        resultat.append(e**((2*pi*1j*n)/3))
+        # ou pour la variante
+        #resultat.append(n*(n+1)/2)
+    return resultat
+
 def produit_scalaire (X,Y):
     """retourne le produit scalaire de deux listes de même taille"""
     # la dimension
