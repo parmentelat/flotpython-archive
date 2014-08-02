@@ -61,7 +61,7 @@ CO12AL-W2-VIDEO04.txt (9 minutes)
 XXX thierry: voir si on conserve la fin (qui passe une fonction en
 # parametre...) à cet endroit ou si on bouge ça + tard dans le cours  
 OK listes-sort.ipynb : sort avec les paramètres reverse et key, et sorted
-#buffer : XXX thierry je connais pas du tout, et je n'ai pas de reseau pour l'instant
+#buffer : XXX thierry je connais pas du tout; voir la note concernant bytearray + bas
 
 ## Quizz Vidéo 4 
 OK listes.quiz : pop append extend del sort sorted (j'utilise aussi += a un moment)
@@ -132,10 +132,10 @@ CO12AL-W2-VIDEO08.txt
 OK string-formatting.ipynb : format et % - je laisse tomber rjust/ljust/center pour le moment
 OK string-tools.ipynb : # help(str)  #split join  #replace strip #index find rfind count startswith endswith upper lower swapcase capitalize title  renvoie sur la doc
 
-# XXX : Thierry : je dois postponer ceci car je n'ai pas de reseau et
-# j'ai besoin de reviser tout ceci...
-*bytearray
-*unicode
+TODO: unicode.ipynb (je vais devoir réviser d'abord)
+https://docs.python.org/2/howto/unicode.html
+
+# XXX bytearray : je connaissais pas du tout ce truc non plus, après une lecture rapide j'ai le sentiment que ça a / peut avoir un lien avec buffer; je propose de bouger ces deux trucs en semaine 7 - ou de virer complètement, ou d'en parler très très vite. 
 
 
 ## Quizz Vidéo 8
@@ -143,6 +143,7 @@ TODO strings.quiz - le quiz se prete bien surement aux basiques des strings
 le string n'est pas mutable
 les methodes sur les strings
 le formattage
+unicode ?
 
 ## Exercices Vidéo 8
 
