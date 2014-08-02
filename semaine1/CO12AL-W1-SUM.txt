@@ -5,6 +5,7 @@
 OK notebooks.ipynb : expliquer le fonctionnement des notebooks
 OK notebook-vs-interpreter.ipynb : illustrer un bout de programme executé sous interpréteur, par python et sous notebook
 
+# XXX une mention peut-être à http://en.wikipedia.org/wiki/History_of_Python
 ###################################################################
 
 ## Vidéo 1 
