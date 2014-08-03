@@ -132,6 +132,7 @@ CO12AL-W2-VIDEO08.txt
 ## Compléments Vidéo 8 
 OK string-formatting.ipynb : format et % - je laisse tomber rjust/ljust/center pour le moment
 OK string-tools.ipynb : # help(str)  #split join  #replace strip #index find rfind count startswith endswith upper lower swapcase capitalize title  renvoie sur la doc
+TODO raw_input
 
 TODO:pending- unicode.ipynb : je propose de bouger ça carrément en semaine 7
 
