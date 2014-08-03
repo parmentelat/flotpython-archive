@@ -94,9 +94,8 @@ OK tuples.quiz
 CO12AL-W2-VIDEO06.txt (5 minutes 40 secondes)
 
 ## Compléments Vidéo 6
-# XXX Thierry: je ne comprends pas ce commentaire 
-# expliquer <> et dire qu'il est obsolète mais qu'on le trouve dans du code ancien 
 OK indentations.ipynb : imbrications, espaces vs tabulations, utilisez des indentations de 4 espaces
+TODO bool-expressions.ipynb : introduire les opérateurs logiques - expliquer <> pour !=, obsolète mais dans du code ancien 
 OK elif.ipynb : if elif else - évaluation paresseuse
 
 ## Quizz Vidéo 6
@@ -104,7 +103,7 @@ OK elif.ipynb : if elif else - évaluation paresseuse
 # sur plusieurs lignes dans les questions a choix multiples
 
 ## Exercices Vidéo 6
-# je postpone à après la vidéo 7 car on aura les fonctions; bref pas d'exo après cette semaine-là
+# je postpone à après la vidéo 7 car on aura les fonctions; bref pas d'exo après cette vidéo-là
 
 ###################################################################
 
@@ -114,7 +113,8 @@ CO12AL-W2-VIDEO07.txt
 
 ## Compléments Vidéo 7 
 OK for-multi.ipynb: affectation a,b dans un for, la fonction zip
-OK listes-sort-functions.ipynb : suite de listes-sort, sort avec le paramètre key, et sorted 
+OK for-comprehension.ipynb: [ exp(x) for x in .... if ] - XXX reduce ?
+OK listes-sort-functions.ipynb : suite de listes-sort: sort avec le paramètre key (une fonction), et sorted 
 
 ## Quizz Vidéo 7
 
@@ -133,8 +133,7 @@ CO12AL-W2-VIDEO08.txt
 OK string-formatting.ipynb : format et % - je laisse tomber rjust/ljust/center pour le moment
 OK string-tools.ipynb : # help(str)  #split join  #replace strip #index find rfind count startswith endswith upper lower swapcase capitalize title  renvoie sur la doc
 
-TODO:pending- unicode.ipynb (je vais devoir réviser d'abord)
-https://docs.python.org/2/howto/unicode.html
+TODO:pending- unicode.ipynb : je propose de bouger ça carrément en semaine 7
 
 # XXX bytearray : je connaissais pas du tout ce truc non plus, après une lecture rapide j'ai le sentiment que ça a / peut avoir un lien avec buffer; je propose de bouger ces deux trucs en semaine 7 - ou de virer complètement, ou d'en parler très très vite. 
 
