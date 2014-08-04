@@ -97,7 +97,7 @@ CO12AL-W2-VIDEO06.txt (5 minutes 40 secondes)
 OK bool-expressions.ipynb : introduire les opérateurs logiques - expliquer <> pour !=, obsolète mais dans du code ancien 
 OK indentations.ipynb : imbrications, espaces vs tabulations, utilisez des indentations de 4 espaces
 OK elif.ipynb : if elif else - évaluation paresseuse
-TODO if-expression.ipynb: return 0 if n<=1 else n*factoriel (n-1)
+OK if-expression.ipynb: return 0 if n<=1 else n*factoriel (n-1)
 
 ## Quizz Vidéo 6
 # J'arrive un peu à la limite du quiz car je ne sais pas si je peux mettre des réponses
@@ -116,11 +116,11 @@ CO12AL-W2-VIDEO07.txt
 OK for-multi.ipynb: affectation a,b dans un for, la fonction zip
 OK for-comprehension.ipynb: [ exp(x) for x in .... if ] - XXX reduce ?
 OK listes-sort-functions.ipynb : suite de listes-sort: sort avec le paramètre key (une fonction), et sorted 
+OK function-return.ipynb : il nous faut 'return' pour les exercices please 
 
 ## Quizz Vidéo 7
 
 ## Exercices Vidéo 7 
-OK function-return.ipynb : il nous faut 'return' pour les exercices please
 OK exo-if.ipynb : une petite fonction qui calcule si deux entiers sont divisibles ou pas
 OK exo-for.ipynb : trier toutes les listes dans une liste; idem avec une direction
 
