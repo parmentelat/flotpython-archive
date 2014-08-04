@@ -18,6 +18,8 @@ intérêt.
 -discuter de l'intêret de l'indentation comme base de la syntaxe (montrer
 une fonction avec accolades et ; et une fonction Python standard)
 
+-inroduire dir() et help()
+
 TODO sur les autres semaines
 -parler de la taille des type de base avec sys.getsizeof() et expliquer
 qu'avec les références partagés Python n'est pas trop mauvais

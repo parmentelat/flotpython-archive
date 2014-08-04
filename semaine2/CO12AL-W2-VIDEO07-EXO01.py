@@ -68,3 +68,15 @@ f(L2)
 
 ## 6 minutes ##
 
+## Une fonction peut exécuter du code comme on vient de le voir,
+## et elle peut en plus retourner un objet en fin d'exécution
+## avec l'instruction return
+
+def f(L):
+    for x in L:
+        print x, x**2
+    return 'fin du calcul'
+
+s = f(L1)
+print s
+

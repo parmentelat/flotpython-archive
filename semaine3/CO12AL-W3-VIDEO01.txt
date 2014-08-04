@@ -8,16 +8,61 @@
 
 ## Sujet de la semaine ()
 
-Cette semaine, nous verrons en détails les instructions if else et for, 
+En Python tout est un objet. C'est une caractéristique centrale de Python qui permet une 
+grande uniformité dans la syntaxe, et donc une grande simplicité de programmation. Je vous
+rappelle qu'autour de cette notion d'objets s'articule les trois notions clefs : 
+[les références partagées], [les itérateurs], et [les espaces de nommage]. Nous avons vu 
+la semaine dernière les types de base et la notion de références partagées. Nous verrons 
+cette semaine en détails les instructions if else et for, les fonctions et 
 nous introduirons la notion d'itérateur, notion clef en Python pour parcourir
-de manière intuitive et efficace des objets, et nous finirons par les fonctions. 
+de manière intuitive et efficace des objets. 
 
-
+[[
+références partagées
+itérateurs
+espace de nommage
+]]
 
 ## Résumé de la vidéo ()
 
+Dans cette vidéo, nous allons introduire la notion de modules et en particulier
+comment utiliser des modules. Nous verrons la création de modules plus tard.
 
->>>>>>>>>> CO12AL-W3-VIDEO01-SLIDE01.pptx <<<<<<<<<<
+Un module est un fichier python standard finissant par .py et tous les fichiers 
+python sont des modules. Donc les notions de fichier python et de module sont 
+équivallentes. Alors pourquoi introduire cette notion de module ? En Python 
+tout est un objet et lorsque l'on importe un fichier python dans un programme, 
+cela crée un objet que l'on appelle un module. On peut accéder a tout ce qui a
+été défini dans le fichier importé, en particulier les fonctions, par l'objet module. 
 
+Par conséquent, on peut voir un module comme une boite à outils, c'est-à-dire
+un fichier définissant des fonctions pour une tâche particuliére. Si l'on veut
+utiliser un module il suffit de l'importer avec l'instruction import. 
+
+Il y a en Python des dizaines de modules dans ce que
+l'on appelle la librairie standard. C'est la librairie
+qui est installée par défaut avec toutes les installations
+de Python. Donc quelque soit le système d'exploitation
+que l'on utilise, un programme utilisant les librairies
+standards fonctionnera avec toutes les installations de
+Python.
+
+Il y a dans la librairie standard des modules pour faire
+toutes la taches courantes en programmation comme
+par exemple, faire des opérations mathématiques de base,
+travailler avec le système de fichiers ou le système
+d'exploitation, enregistrer des informations générées
+par un programme dans des fichiers ou dans une base de
+données, faire des applications graphiques, communiquer
+sur Internet et bien plus encore. 
+
+Ouvrons un terminal pour commencer à jouer avec les modules...
 
 >>>>>>>>>> INCLUDE CO12AL-W3-VIDEO01-EXO01.py <<<<<<<<<<
+
+On a vu une introduction rapide à l'utilisation des modules 
+de la librairie standard. Il y a bien sur un grand nombre d'autres
+modules externe pour faire des taches spécialisées. 
+Ces modules n'étant pas standards, ils demandent une installation 
+supplémentaire à Python, mais s'importent et s'utilisent ensuite comme un
+module de la librairie standard.

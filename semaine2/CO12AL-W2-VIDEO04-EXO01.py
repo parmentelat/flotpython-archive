@@ -78,7 +78,9 @@ print range(10)
 print range(1, 10)
 
 print range(1, 10, 2)
-# suggestion Thierry : souligner l'analogie avec les slices
+
+## la notation de range est similaire à la notation
+## que l'on a vu avec le slicing. 
 range(100)[4:10:2] == range(4,10,2)
 range(100)[18:12:-2] == range(18,12,-2)
 
