@@ -1,8 +1,13 @@
 ###################################################################
 
-## Vidéo 1 
+## Vidéo 1 (101 des modules)
+
+CO12AL-W3-VIDEO01.txt
 
 ## Compléments Vidéo 1
+
+-ajouter un lien vers la Python Standard Library
+
 
 ## Quizz Vidéo 1
 
