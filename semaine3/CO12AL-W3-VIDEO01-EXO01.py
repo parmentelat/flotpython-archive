@@ -13,15 +13,20 @@ import math
 print dir(math)
 
 ## un attribut est une variable reférencant un objet.
-## Comme en Python tout est un objet, un attribut peut être
-## n'importe quoi en Python : un type de base, une fonction,
-## un module, ou d'autres objets que l'on verra dans
-## les semaines qui viennent comme les classes.
+## Comme en Python tout est un objet, un attribut peut
+## référencer n'importe quoi en Python : un type de base,
+## une fonction, un module, ou d'autres objets que l'on
+## verra dans les semaines qui viennent comme les classes.
 
 ## Pour accéder à l'attribut d'un objet, on utilise
 ## le nom de l'objet point le nom de l'attribut. 
 
 print math.log(10)
+
+## et on peut bien sur combiner des attributs de modules
+## puisque ce sont de simples variables.
+print math.tan(math.pi/4)
+
 
 ## Pour connaître à quoi correspond un attribut on peut
 ## utiliser la fonction built-in help()
@@ -35,7 +40,9 @@ help(math.log)
 
 help(math)
 
-## et on peut bien sur combiner des attributs de modules
-print math.tan(math.pi/4)
+## Les fontions built-in dir() et help() ne sont pas limitées
+## aux modules et fonctionnent sur n'importe quel objet.
 
+print dir(str)
+help(str.title)
 

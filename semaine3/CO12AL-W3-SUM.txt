@@ -8,7 +8,6 @@ CO12AL-W3-VIDEO01.txt
 
 -ajouter un lien vers la Python Standard Library
 
-
 ## Quizz Vidéo 1
 
 ## Exercices Vidéo 1
@@ -16,9 +15,12 @@ CO12AL-W3-VIDEO01.txt
 
 ###################################################################
 
-## Vidéo 2
+## Vidéo 2 (indentation comme syntaxe de base)
 
 ## Compléments Vidéo 2
+
+-ajouter un lien vers la PEP 008 (sur les conventions de codage)
+-ajouter un lien vers cette FAQ https://docs.python.org/2/faq/design.html#why-are-colons-required-for-the-if-while-def-class-statements
 
 ## Quizz Vidéo 2
 
@@ -27,7 +29,7 @@ CO12AL-W3-VIDEO01.txt
 
 ###################################################################
 
-## Vidéo 3 
+## Vidéo 3 (if elif else + and/or/not
 
 ## Compléments Vidéo 3
 

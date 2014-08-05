@@ -1,0 +1,54 @@
+## FORMAT DU FICHIER
+## Tout ce qui commence avec un ## est un commentaire
+##
+## le texte entre double crochets ouvrants et fermants
+## est à afficher en surimpression pendant que je parle et à 
+## synchroniser avec le texte entre crochet 
+
+
+
+
+## Résumé de la vidéo ()
+
+On a déjà vu la semaine dernière, lorsque l'on a parlé
+des instruction if et for, que l'indentation des blocs
+d'instructions était centrale dans la syntaxe de Python. 
+Mais on n'a pas parlé des raisons de l'indentation et 
+de ses avantages. 
+
+Un problème classique dans des langages comme le C++ ou le 
+java est de suivre des conventions de codage, c'est-à-dire
+de suivre des règles de présentation du code que l'on écrit.
+Les conventions de codage ne concernent que la présentation du 
+code, elles n'ont jamais d'impact sur l'exécution du code. 
+Par conséquent, c'est règles peuvent paraître facultatives, voir
+futiles pour le programmeur débutant. Cependant, la clarté du code
+et la facilité de le lire font partie intégrante de la qualité 
+du code. Plus un code est facile à lire, plus il sera facile
+à maintenir et à améliorer. En particulier, un programmeur
+expérimenté sait que même si un code est écrit
+et maintenu par uniquement lui, la clarté du code sera  
+primordiale pour pouvoir reprendre du code qu'il a écrit
+il y a des semaines ou des mois. 
+
+En Python, comme l'indentation des blocs d'instructions
+est dans la syntaxe, les règles de présentation deviennent
+obligatoires et les mêmes pour tout le monde. Cela enlève
+les ambiguïtés liés aux convention de codage en les réduisant
+au strict minimum. De plus, Python a supprimé de la syntaxe 
+tout ce qui n'est pas nécessaire comme le point virgule qui
+est la principale raison d'erreur de syntaxe en C++ ou en Java. 
+
+Regardons maintenant un exemple. 
+
+>>>>>>>>>> CO12AL-W3-VIDEO02-SLIDE01.pptx <<<<<<<<<<
+
+L'indentation comme règle de syntaxe est une des raisons 
+du succès de Python. Cette règle n'a presque que des avantages, 
+elle a cependant un inconvénient dont il faut se méfier.
+Il est courant de copier du code du Web ou d'autres programmes
+pour les inclure dans notre propre code. Cependant, le copier coller
+va copier l'indentation du code que l'on copie, mais l'indentation
+peut ne pas être conforme. Il est par conséquent plus prudent
+de toujours refaire soit même l'indentation dans l'éditeur
+que l'on a l'habitude d'utiliser. 
