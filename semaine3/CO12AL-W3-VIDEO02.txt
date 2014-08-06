@@ -8,7 +8,7 @@
 
 
 
-## Résumé de la vidéo ()
+## Résumé de la vidéo (1 minute 20 secondes)
 
 On a déjà vu la semaine dernière, lorsque l'on a parlé
 des instruction if et for, que l'indentation des blocs
@@ -41,7 +41,7 @@ est la principale raison d'erreur de syntaxe en C++ ou en Java.
 
 Regardons maintenant un exemple. 
 
->>>>>>>>>> CO12AL-W3-VIDEO02-SLIDE01.pptx <<<<<<<<<<
+>>>>>>>>>> CO12AL-W3-VIDEO02-SLIDE01.pptx (3 minutes) <<<<<<<<<<
 
 L'indentation comme règle de syntaxe est une des raisons 
 du succès de Python. Cette règle n'a presque que des avantages, 
@@ -52,3 +52,19 @@ va copier l'indentation du code que l'on copie, mais l'indentation
 peut ne pas être conforme. Il est par conséquent plus prudent
 de toujours refaire soit même l'indentation dans l'éditeur
 que l'on a l'habitude d'utiliser. 
+
+Pour finir, en Python, il est recommandé de faire des lignes ne dépassant 
+pas 79 caractères. Cette recommandation peut paraître étrange étant donné
+la taille de nos écrans aujourd'hui. Cependant, il y a plusieurs raisons
+à cette recommandation : l'expérience montre qu'il 
+est plus facile de lire du code avec des lignes de dépassant pas 79 
+caractères, lorsque l'on a de grands écrans cela permet d'avoir plusieurs
+éditeurs de texte cote à cote, cela permet de lire et d'écrire du code sur 
+n'importe quel terminal comme par exemple une tablette. 
+
+Python permet très facilement de limiter la taille des lignes à 79 caractères. 
+En effet, tout ce qui est entre (), {}, ou [] peut contenir des retours chariots
+sans que cela n'affecte le code exécuté. 
+Regardons quelques exemples .
+
+>>>>>>>>>> CO12AL-W3-VIDEO02-EXO01.py (? minutes) <<<<<<<<<<
