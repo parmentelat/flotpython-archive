@@ -3,6 +3,8 @@
 
 # XXX la semaine est deja tres grosse, je laisse tomber reduce qu'il faudra mettre autre part
 
+# TODO : numéroter tous les exos
+
 ## Vidéo 1 (objets, variables, typage dynamique)
 
 CO12AL-W2-VIDEO01.txt
