@@ -134,7 +134,7 @@ CO12AL-W2-VIDEO08.txt
 
 ## Compléments Vidéo 8 
 OK string-formatting.ipynb : format et % - je laisse tomber rjust/ljust/center pour le moment
-OK string-tools.ipynb : # help(str)  #split join  #replace strip #index find rfind count startswith endswith upper lower swapcase capitalize title  renvoie sur la doc
+OK string-tools.ipynb : # help(str)  #split join  #replace strip #index find rfind count startswith endswith upper lower swapcase capitalize title  renvoi sur la doc
 OK pending-raw_input - XXX je ne suis pas encore 100% sûr que c'est utile et la bonne place pour ceci, mais le texte est +ou- OK
 
 TODO:pending- unicode.ipynb : je propose de bouger ça carrément en semaine 7
@@ -143,13 +143,11 @@ TODO:pending- unicode.ipynb : je propose de bouger ça carrément en semaine 7
 
 
 ## Quizz Vidéo 8
-TODO strings.quiz - le quiz se prete bien surement aux basiques des strings
-le string n'est pas mutable
-les methodes sur les strings
-le formattage
-unicode ?
+OK strings.quiz - le quiz se prete bien surement aux basiques des strings
 
 ## Exercices Vidéo 8
+TODO? exo-strings.ipynb il serait peut-être bien de faire faire quelques exos plus construits, mais le quiz est assez limité avec les réponses sur une seule ligne
+pour travailler les méthodes du module string principalement
 
 ###################################################################
 
