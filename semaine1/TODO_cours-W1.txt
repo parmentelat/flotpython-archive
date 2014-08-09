@@ -20,6 +20,9 @@ une fonction avec accolades et ; et une fonction Python standard)
 
 -inroduire dir() et help()
 
+-explique de que l'on couvre des notions importantes dans les compléments
+de cours. 
+
 TODO sur les autres semaines
 -parler de la taille des type de base avec sys.getsizeof() et expliquer
 qu'avec les références partagés Python n'est pas trop mauvais

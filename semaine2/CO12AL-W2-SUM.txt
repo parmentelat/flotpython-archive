@@ -121,6 +121,10 @@ OK for-multi.ipynb: affectation a,b dans un for, la fonction zip
 OK for-comprehension.ipynb: [ exp(x) for x in .... if ] - XXX reduce ?
 OK listes-sort-functions.ipynb : suite de listes-sort: sort avec le paramètre key (une fonction), et sorted 
 OK function-return.ipynb : il nous faut 'return' pour les exercices please 
+XXX Arnaud : ajouter sur les conventions de style: un espace après les
+virgules, en espace avant et après les opérateurs
+(a = f(1, 2) + g(3, 4)), un saut
+de ligne pour séparer les bloc d'instructions et les fonctions. 
 
 ## Quizz Vidéo 7
 

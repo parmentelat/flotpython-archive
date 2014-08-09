@@ -13,9 +13,9 @@
 On a vu la semaine dernière une rapide introduction à l'instruction
 if else. On va voir dans cette vidéo tous les détails. 
 
->>>>>>>>>> CO12AL-W3-VIDEO02-SLIDE01.pptx <<<<<<<<<<
+>>>>>>>>>> CO12AL-W3-VIDEO03-SLIDE01.pptx <<<<<<<<<<
 
->>>>>>>>>> CO12AL-W3-VIDEO02-EXO01.py <<<<<<<<<<
+>>>>>>>>>> CO12AL-W3-VIDEO03-EXO01.py <<<<<<<<<<
 
 
 

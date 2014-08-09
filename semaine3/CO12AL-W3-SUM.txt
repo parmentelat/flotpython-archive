@@ -17,6 +17,8 @@ CO12AL-W3-VIDEO01.txt
 
 ## Vidéo 2 (indentation comme syntaxe de base)
 
+CO12AL-W3-VIDEO02.txt
+
 ## Compléments Vidéo 2
 
 -ajouter un lien vers la PEP 008 (sur les conventions de codage)
@@ -29,7 +31,9 @@ CO12AL-W3-VIDEO01.txt
 
 ###################################################################
 
-## Vidéo 3 (if elif else + and/or/not
+## Vidéo 3 (if elif else + and/or/not)
+
+CO12AL-W3-VIDEO03.txt
 
 ## Compléments Vidéo 3
 
@@ -40,34 +44,52 @@ CO12AL-W3-VIDEO01.txt
 -opérateurs de tests booléens and, or, not (vu en cours, montrer
 d'autres exemples)
 -opération shortcircuit and et or (vu en cours, montrer d'autres exemples)
-
+-discuter de == : quand peut-on comparer des objets de types différents
+(seulement les numériques, et les set et frozenset, mais
+(1, 2) n'est pas égal à [1, 2])
+-quel sens à des comparaisons (avec < ou >) de listes ou dicts. 
 
 
 ###################################################################
 
-## Vidéo 4 (while, continue, break, pass)
+## Vidéo 4 (for, continue, break)
+
+CO12AL-W3-VIDEO04.txt
 
 ## Compléments Vidéo 4
+
+-présenter pass qui est utilisé pour rendre syntaxiquement correct un bloc
+de code que l'on n'a pas encore écrit (voir pour les fonctions, for, if)
+-voir le else du for
+-présenter enumerate, zip, et les itérateurs des dictionnaires)
+-présenter la méthode built-in iter() en expliquant que comme
+__iter__() est une méthode Python privée, on ne doit pas l'appeler
+directement dans un programme, on doit utiliser la built-in iter()
+à la place.
+-présenter xrange() et sont avantage par rapport à range() (pas 
+d'occupation mémoire). 
 
 ## Quizz Vidéo 4
 
 ## Exercices Vidéo 4
 
-x='spam'
-while x:
-    print x
-    x = x[1:]
 
 
 ###################################################################
 
-## Vidéo 5
+## Vidéo 5 (while)
 
 ## Compléments Vidéo 5
+-voir le else du while
 
 ## Quizz Vidéo 5
 
 ## Exercices Vidéo 5
+
+x='spam'
+while x:
+    print x
+    x = x[1:]
 
 
 ###################################################################
