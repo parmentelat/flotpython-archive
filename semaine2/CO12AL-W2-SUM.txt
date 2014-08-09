@@ -13,6 +13,8 @@ CO12AL-W2-VIDEO01.txt
 
 OK noms-variables.ipynb : noms de variables
 
+XXX Arnaud : mots réservés interdits pour les variables (donner la ref vers https://docs.python.org/2/reference/lexical_analysis.html#keywords)
+
 ## Quizz Vidéo 1 
 
 ## Exercices Vidéo 1
@@ -131,6 +133,7 @@ de ligne pour séparer les bloc d'instructions et les fonctions.
 ## Exercices Vidéo 7 
 OK exo-if.ipynb : une petite fonction qui calcule si deux entiers sont divisibles ou pas
 OK exo-for.ipynb : trier toutes les listes dans une liste; idem avec une direction
+XXX Arnaud: montrer une boucle for sur une chaine de caractères.
 
 ###################################################################
 
@@ -228,6 +231,12 @@ a[1][1] = 'y'     #ref partagée
 
 * voir copy.copy() pour faire les shallows copies et copy.deepcopy() pour les deep copy 
 * voir sys.getrefcount(1) et expliquer le résultat 
+*assignation: a, b = 1, 2 (tuple unpacking, expliquer que ce sont
+des tuples et qu'il faut le même nombre d'éléments à gauche et à droite) et a=b='spam' avec le problèmes des reférences multiples
+sur un mutable a=b=[1] puis a[0] = 2, et aussi a, b = b, a (et pourquoi ca marche,
+grace au tuple unpacking qui crée la variable temporaire)
+*del a, del L[i:j:k], del d[clef]
+
 
 ## Quizz Vidéo 12
 

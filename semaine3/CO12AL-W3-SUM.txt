@@ -58,33 +58,47 @@ CO12AL-W3-VIDEO04.txt
 
 ## Compléments Vidéo 4
 
+-présenter break
+-présenter continue (en expliquant que, comme pour les goto, les sauts
+dans le code nuisent à la compréhension, il faut donc l'éviter)
 -présenter pass qui est utilisé pour rendre syntaxiquement correct un bloc
 de code que l'on n'a pas encore écrit (voir pour les fonctions, for, if)
 -voir le else du for
--présenter enumerate, zip, et les itérateurs des dictionnaires)
+-présenter enumerate, zip, et les itérateurs des dictionnaires
+-présenter xrange() et sont avantage par rapport à range() (pas 
+d'occupation mémoire). Dans le même esprit expliquer l'avantage
+des itérateurs sur des dict (iteritems/itervalues/iterkeys) par rapport
+aux listes. 
 -présenter la méthode built-in iter() en expliquant que comme
 __iter__() est une méthode Python privée, on ne doit pas l'appeler
 directement dans un programme, on doit utiliser la built-in iter()
 à la place.
--présenter xrange() et sont avantage par rapport à range() (pas 
-d'occupation mémoire). 
 
 ## Quizz Vidéo 4
 
 ## Exercices Vidéo 4
 
-
-
 ###################################################################
 
-## Vidéo 5 (while)
+## Vidéo 5 (files)
 
 ## Compléments Vidéo 5
--voir le else du while
 
 ## Quizz Vidéo 5
 
 ## Exercices Vidéo 5
+
+
+###################################################################
+
+## Vidéo 6 (while)
+
+## Compléments Vidéo 6
+-voir le else du while
+
+## Quizz Vidéo 6
+
+## Exercices Vidéo 6
 
 x='spam'
 while x:
@@ -92,15 +106,6 @@ while x:
     x = x[1:]
 
 
-###################################################################
-
-## Vidéo 6
-
-## Compléments Vidéo 6
-
-## Quizz Vidéo 6
-
-## Exercices Vidéo 6
 
 
 ###################################################################
