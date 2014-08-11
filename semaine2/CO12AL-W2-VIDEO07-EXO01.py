@@ -28,6 +28,19 @@ print "on est sorti de la boucle"
 ## for, c'est-à dire que l'on continu avec le bloc de code aligné avec
 ## la boucle for.
 
+## comme un boucle for fonctionne sur toutes les séquences, on peut
+## faire une boucle for sur un chaîne de caractères par exemple
+for i in 'spam':
+    print i + ' ',
+    
+print
+## ou sur une liste d'éléments quelconques.
+L = [1, 'spam', 3.2, True]
+for i in L:
+    print i
+
+#2 minutes 50 secondes
+
 ## regardons maintenant un autre problème. Je veux a différents moments
 ## de mon programme faire une opération, par exemple, afficher
 ## sur la sortie standard tous les éléments d'une liste et leur carré.
@@ -66,17 +79,28 @@ def f(L):
 f(L1)
 f(L2)
 
-## 6 minutes ##
+# 6 minutes ##
 
-## Une fonction peut exécuter du code comme on vient de le voir,
-## et elle peut en plus retourner un objet en fin d'exécution
-## avec l'instruction return
+## Une caractéristique importante des fonctions est sa valeur de retour.
+## En effet, une fonction retourne toujours un objet. Par défaut
+## elle retourne l'objet None qui est un objet vide, sans valeur,
+## mais on peut définir un autre objet retourné avec l'instruction
+## return.
+
+## la valeur de retour d'une fonction peut-être affecté à une variable
+## de la manière suivante
+
+r = f(L1) ## c'est None qui est retourné.
+print r
 
 def f(L):
     for x in L:
         print x, x**2
     return 'fin du calcul'
 
-s = f(L1)
+##
+
+r = f(L1)
 print s
 
+# 7 mintes 10 secondes

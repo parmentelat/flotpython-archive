@@ -181,6 +181,8 @@ CO12AL-W2-VIDEO10.txt
 *voir la construction D=dict(clef1=obj1, clef2=obj2) 
 *voir d.get('marc', '?') et son usage par rapport à d['marc']
 *voir un exemple de dict dans un dict et de l'accès à ses éléments D={'alice': 35, 'enfants':{'bob' : 9, 'charlie' : 6}}
+*expliquer que d.has_key() est ancien et qu'il faut utiliser in 
+maintenant. 
 
 ## Quizz Vidéo 10
 

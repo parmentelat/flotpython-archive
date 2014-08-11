@@ -82,7 +82,20 @@ directement dans un programme, on doit utiliser la built-in iter()
 
 ## Vidéo 5 (files)
 
+CO12AL-W3-VIDEO05.txt
+
 ## Compléments Vidéo 5
+
+*donner le lien vers https://docs.python.org/2/tutorial/inputoutput.html#reading-and-writing-files
+*exemple de flush()
+*voire read, tell, seek, writelines
+*introduire json et pickle
+*inroduire le mode b pour ouvrir des fichiers binaires et les autres
+modes utilise (e.g., a, r+)
+*expliquer pourquoi le fichier est un itérateur et n'a pas des itérateurs
+comme les autres types built-in (c'est lié à la manières des OS de gérer
+les accès aux fichiers). 
+
 
 ## Quizz Vidéo 5
 
