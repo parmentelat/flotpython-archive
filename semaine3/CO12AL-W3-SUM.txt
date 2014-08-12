@@ -78,6 +78,15 @@ directement dans un programme, on doit utiliser la built-in iter()
 
 ## Exercices Vidéo 4
 
+Il ne faut pas modifier l'objet sur lequel on itère dans boucle for.
+Si on modifier l'objet, il faut itérer sur copie
+>>> L = ['a', 'b' , 'c']
+>>> for i in L[:]:
+	if i == 'c':
+		L.append(i)	
+
+Ici, sinon on a une boucle infinie.
+
 ###################################################################
 
 ## Vidéo 5 (files)
@@ -95,6 +104,16 @@ modes utilise (e.g., a, r+)
 *expliquer pourquoi le fichier est un itérateur et n'a pas des itérateurs
 comme les autres types built-in (c'est lié à la manières des OS de gérer
 les accès aux fichiers). 
+*introduire sys.stdout (comparer avec print), sys.stdin (comparer 
+sys.stdin.readline() avec raw_input), et sys.stderr
+*montrer que sys.stdout n'est q'une variable qui peut référencer un 
+autre fichier. Comme print écrit dans sys.stdout, c'est un moyen simple
+de rediriger les print vers un fichier. 
+*en complément introduire le module logging (ça va bien ici, mais
+si ça fait trop de compléments, on peut le bouger en semaine 6 ou 7)
+avec les références https://docs.python.org/2/library/logging.html
+et https://docs.python.org/2/howto/logging.html#logging-basic-tutorial
+
 
 
 ## Quizz Vidéo 5
@@ -106,8 +125,13 @@ les accès aux fichiers).
 
 ## Vidéo 6 (while)
 
+CO12AL-W3-VIDEO06.txt
+
 ## Compléments Vidéo 6
+-voir le break et le continue (déjà vu pour for, mais
+à revoir dans le contexte du while)
 -voir le else du while
+
 
 ## Quizz Vidéo 6
 
@@ -123,9 +147,13 @@ while x:
 
 ###################################################################
 
-## Vidéo 7
+## Vidéo 7 (fonction lambda, map, filter)
+
+CO12AL-W3-VIDEO07.txt
 
 ## Compléments Vidéo 7
+
+*voir reduce 
 
 ## Quizz Vidéo 7
 
