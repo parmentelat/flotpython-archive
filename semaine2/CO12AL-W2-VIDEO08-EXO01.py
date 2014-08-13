@@ -90,11 +90,9 @@ print s
 
 ## il y a ensuite deux fonctions très importantes qui
 ## permettent de passer d'une chaîne de caractère à une liste
-## et vice versa. Je rappelle que la liste est le type central
-## en Python, XXX Thierry ah bon ? pourtant ca s'appelle pas lisp XXX, 
-## il est donc naturel pour travailler
-## sur une chaîne de caractère de la transformer en liste
-## regardons un example
+## et vice versa. Comme la liste est un type mutable 
+## il est naturel pour travailler sur une chaîne de caractères
+## de la transformer en liste. Regardons un example.
 
 string = 'marc 35 175'
 liste = string.split()
