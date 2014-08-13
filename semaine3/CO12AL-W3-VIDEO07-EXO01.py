@@ -67,5 +67,39 @@ func(g)
 ## de la programmation et qu'avec les boucles for,
 ## on peut de manière simple et efficace exploiter la
 ## puissance des itérateurs. Il existe cependant d'autres
-## moyen d'exploiter les itérateurs en Python
+## moyen d'exploiter les itérateurs en Python comme les
+## fonctions map et filter que nous allons voir maintenant. 
 
+## La fonction map prend comme argument une fonction et
+## un objet itérable, et retourne une liste de la fonction
+## appliquée à chaque élément de l'objet itérable. 
+
+print map(g, range(10))
+
+## les fonctions lambda permette d'avoir un code
+## plus compact et plus rapide à écrire. Ce code
+## est aussi plus facile à lire pour ceux habitués
+## à la syntaxe des fonctions lambda, mais plus difficile
+## à lire pour les débutants. On s'habitue cependant vite
+## aux fonctions lambda. 
+
+print map(lambda x: x**2 -3, range(10))
+
+## regardons maintenant la fonction filter. Comme la fonction
+## map, la fonction filter prend comme argument une
+## fonction et un objet itérable, mais elle retourne une
+## liste des éléments de l'objet itérable pour les lequels
+## la fonction retourne True. Je vous rappelle qu'en Python
+## 0, None, les types de base vides et False sont faux, tout le
+## reste est vrai.
+
+## rehardons un exemple de fonction filter, je veux
+## obtenir tous les éléments d'un séquence qui sont pairs.
+
+print filter(lambda x: x % 2 == 0, range(10))
+
+## ou divisible par 3
+print filter(lambda x: x % 3 == 0, range(10))
+
+
+# 6 minutes 30 seconces

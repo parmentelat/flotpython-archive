@@ -36,5 +36,11 @@ argument d'une fonction.
 Ouvrons un terminal pour jouer avec les fonction lambda...
 
 
->>>>>>>>>> CO12AL-W3-VIDEO057-EXO01.py <<<<<<<<<< ()
+>>>>>>>>>> CO12AL-W3-VIDEO07-EXO01.py <<<<<<<<<< (6 minutes 30 secondes)
 
+Les fonctions map et filter sont plus rapide que les
+boucles for, plus facile à écrire et souvent plus lisible
+c'est pourquoi il faut les préférer aux boucles for lorsque
+c'est possible, c'est-à-dire lorsque l'on applique une fonction
+à chaque élément d'un objet itérable ou lorsque l'on filtre
+des éléments d'un objet itérable. 

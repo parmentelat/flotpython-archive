@@ -52,7 +52,7 @@ d'autres exemples)
 
 ###################################################################
 
-## Vidéo 4 (for, continue, break)
+## Vidéo 4 (boucle for et itérateurs)
 
 CO12AL-W3-VIDEO04.txt
 
@@ -159,12 +159,41 @@ CO12AL-W3-VIDEO07.txt
 
 ## Exercices Vidéo 7
 
+*faire de beaux exemples pratiques d'application de map et filter
+
 
 ###################################################################
 
-## Vidéo 8 
+## Vidéo 8 (compréhension listes, set, dictionnaires)
+
+CO12AL-W3-VIDEO08.txt
 
 ## Compléments Vidéo 8
+
+*Comparer la performance des boucles for, de map, de la compréhension. 
+S'inspirer de :
+http://www-sop.inria.fr/members/Arnaud.Legout/EDU/Python/performanceFonctions2.py
+
+*Donner le lien vers http://python-history.blogspot.fr/2010/06/from-list-comprehensions-to-generator.html 
+pour une discussion intéressante sur la compréhension, les expression
+génératrice et Python 2 et 3.
+
+*montrer le cas d'une compréhension sur plusieurs variables et montrer
+comment lire cette expression, par exemple, 
+[(x,y) for x in range(5) if x % 2 == 0 
+	     for y in range(5) if y % 2 == 1]
+
+
+L = []
+for x in range(5):
+    if x % 2 == 0:
+        for y in range(5):
+            if y % 2 == 1:
+                L.append((x,y))
+
+
+Expliquer que la compréhension sur plusieurs variables est difficile
+à lire et que c'est par conséquent une mauvaise idée en général.
 
 ## Quizz Vidéo 8
 
