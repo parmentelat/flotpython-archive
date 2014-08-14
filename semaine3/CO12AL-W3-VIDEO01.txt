@@ -25,19 +25,23 @@ espace de nommage
 
 ## Résumé de la vidéo ()
 
-Dans cette vidéo, nous allons introduire la notion de modules et en particulier
-comment utiliser des modules. Nous verrons la création de modules plus tard.
+Dans cette vidéo, nous allons introduire la notion de modules et 
+en particulier comment utiliser des modules. Nous verrons la création 
+de modules plus tard.
 
-Un module est un fichier python standard finissant par .py et tous les fichiers 
-python sont des modules. Donc les notions de fichier python et de module sont 
-équivalentes. Alors pourquoi introduire cette notion de module ? En Python 
-tout est un objet et lorsque l'on importe un fichier python dans un programme, 
-cela crée un objet que l'on appelle un module. On peut accéder a tout ce qui a
-été défini dans le fichier importé, en particulier les fonctions, par l'objet module. 
+Un module est un fichier python standard finissant par .py et 
+tous les fichiers python sont des modules. Donc les notions 
+de fichier python et de module sont équivalentes. Alors pourquoi
+introduire cette notion de module ? En Python tout est un objet et
+lorsque l'on importe un fichier python dans un programme, 
+cela crée un objet que l'on appelle un module. On peut accéder 
+a tout ce qui a été défini dans le fichier importé, en particulier 
+les fonctions, par l'objet module. 
 
-Par conséquent, on peut voir un module comme une boite à outils, c'est-à-dire
-un fichier définissant des fonctions pour une tâche particulière. Si l'on veut
-utiliser un module il suffit de l'importer avec l'instruction import. 
+Par conséquent, on peut voir un module comme une boite à outils,
+c'est-à-dire un fichier définissant des fonctions pour une tâche
+particulière. Si l'on veut utiliser un module il suffit de 
+l'importer avec l'instruction import. 
 
 Il y a en Python des dizaines de modules dans ce que
 l'on appelle la librairie standard. C'est la librairie

@@ -202,10 +202,29 @@ Expliquer que la compréhension sur plusieurs variables est difficile
 
 ###################################################################
 
-## Vidéo 9 
+## Vidéo 9 (fonctions : objet, passage d'arguments par ref, return, polymorphisme)
+
+CO12AL-W3-VIDEO09.txt
 
 ## Compléments Vidéo 9
 
+* cas pratique de plusieurs return 
+* effet de bord du passage par ref de mutable (illustration de la video)
+* expliquer comment ne pas modifier un mutable passé en argument:
+reprendre l'exemple de la video
+
+L = []
+def h(a):
+	a.append(1)
+
+Comment ne pas modifier L. Trois possibilité:
+-à l'appel h(L[:]) on passe une shallow copy, ça permet
+de choisir la modification par effect de bord à l'appel
+(peut-être utile lorsque la fonction fait autre chose avec L)
+-à l'appel si on veut une exception en cas de tentative
+de modification (utile pour les librairies) h(tuple(L))
+-dans h en ajoutant a = a[:] avant le append pour garantir
+que h ne modifiera jamais L. 
 ## Quizz Vidéo 9
 
 ## Exercices Vidéo 9
@@ -213,7 +232,9 @@ Expliquer que la compréhension sur plusieurs variables est difficile
 
 ###################################################################
 
-## Vidéo 10 
+## Vidéo 10 (fonctions : scope des variables, global, regle LEGB)
+
+CO12AL-W3-VIDEO010.txt
 
 ## Compléments Vidéo 10
 

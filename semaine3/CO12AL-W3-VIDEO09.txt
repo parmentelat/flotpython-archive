@@ -20,3 +20,12 @@ ouvrons un terminal pour jouer avec les fonctions...
 
 ## conclusion ()
 
+Nous avons, dans cette vidéo, présenté les caractéristiques
+générales des fonctions. Les fonctions en Python sont des objets
+référencé par une variable qui est le nom de la fonction. Tous
+les arguments sont passé par référence, il faut donc faire
+attention aux effets de bord sur les type mutable. Une fonction
+retourne toujours une valeur, soit None, soit la valeur
+spécifiée par l'instruction return. Et, pour finir, les fonctions
+en sont polymorphe, ce qui veut simplement dire que les fonctions
+acceptent en argument des objets de n'importe quel type.

@@ -104,5 +104,17 @@ f(1)
 ## représente un concept tout simple.
 
 ## Une fonction est polymorphe lorsqu'elle accepte en argument
-## des objets de types différents. 
+## des objets de n'importe quel type. En Python, le typage est
+## dynamique, donc toutes les fonctions sont naturellement
+## polymorphes. Regardons un exemple
+
+def my_add(a, b):
+    print "j'ajoute", a, "et", b
+    return a + b
+
+my_add(1,2)
+my_add(1.5,2.3)
+my_add('spam', 'good')
+my_add([1], [2])
+
 
