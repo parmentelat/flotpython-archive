@@ -111,7 +111,7 @@ référencent qui ont un type. Prenons un exemple.
 ## Résumé typage dynamique (15s)
 
 Nous verrons dans la suite que le typage dynamique est une notion
-essentielle du Python qui offre beaucoup de flexibilité et facilite
+essentielle de Python qui offre beaucoup de flexibilité et facilite
 grandement l'écriture des programmes.
 
 ## Instruction print

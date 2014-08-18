@@ -23,4 +23,6 @@ str
 
 >>>>>>>>>> INCLUDE CO12AL-W2-VIDEO03-SLIDE01.pptx () <<<<<<<<<<
 
-### XXX missing : conclusion (on a fait ceci, on fera cela...)
+On a vu dans cette vidéo les caractéristiques des types séquences.
+Ce sont des types puissants qui permettent de faire simplement
+des opérations sophistiquées comme le slicing. 
