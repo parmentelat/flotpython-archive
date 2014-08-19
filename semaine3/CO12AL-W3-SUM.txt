@@ -239,17 +239,41 @@ CO12AL-W3-VIDEO010.txt
 ## Compléments Vidéo 10
 
 -parler du scope built-in et montrer le module built-in. 
+-expliquer que les variables dans l'entête des fonctions sont
+aussi des variables locales. 
+-montrer que l'on peut redéfinir un nom built-in et que c'est
+une mauvaise idée. 
+-rappeler qu'il faut utiliser des bons noms de variables et qu'il
+faut éviter d'utiliser localement un nom de variable globales
+(ça peut conduire à des erreurs ou a des comportement étranges
+que j'expliquerai plus tard dans les vidéos). 
 
 ## Quizz Vidéo 10
 
 ## Exercices Vidéo 10
 
+-nombreux exemple de scope avec fonctions englobantes. 
 
 ###################################################################
 
 ## Vidéo 11 (fonctions : scope global)
 
+CO12AL-W3-VIDEO011.txt
+
 ## Compléments Vidéo 11
+
+*montrer que global crée une variable global si elle n'existe
+pas encore. 
+x = 1
+def f():
+    global y
+	y = x + 1
+print y # n'existe pas encore
+f()
+print y # existe dans le scope global. 
+
+*revenir sur les bonnes pratiques de programmation avec global (en 
+limitant son usage et en favorisant les retours explicite de fonction). 
 
 ## Quizz Vidéo 11
 
