@@ -1,0 +1,13 @@
+## FORMAT DU FICHIER
+## Tout ce qui commence avec un ## est un commentaire
+##
+## le texte entre double crochets ouvrants et fermants
+## est à afficher en surimpression pendant que je parle et à 
+## synchroniser avec le texte entre crochet 
+
+
+## Sujet de la semaine ()
+
+>>>>>>>>>> INCLUDE CO12AL-W6-VIDEO01-EXO01.py <<<<<<<<<<
+
+## Conclusion ()
