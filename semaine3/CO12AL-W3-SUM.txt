@@ -154,6 +154,9 @@ CO12AL-W3-VIDEO07.txt
 ## Compléments Vidéo 7
 
 *voir reduce 
+*voir exec et eval. Ça n'est pas en lien direct, mais il faut
+le voir et il y a peu de compléments pour cette vidéo alors
+autant le placer ici. 
 
 ## Quizz Vidéo 7
 
@@ -225,6 +228,23 @@ de choisir la modification par effect de bord à l'appel
 de modification (utile pour les librairies) h(tuple(L))
 -dans h en ajoutant a = a[:] avant le append pour garantir
 que h ne modifiera jamais L. 
+-parler de la documentation automatique sur les fonctions 
+et de l'argument __doc__ utilisé par help()
+def func(a, b, c, d):
+    """
+    Cette fonction imprime 4 parametres a la suite
+    """
+    print a, b, c, d
+	
+>>>print func.__doc__
+ Cette fonction imprime 4 parametres a la suite
+>>>help(func)
+Help on function func in module __main__:
+
+func(a, b, c, d)
+    Cette fonction imprime 4 parametres a la suite
+
+
 ## Quizz Vidéo 9
 
 ## Exercices Vidéo 9
@@ -247,6 +267,26 @@ une mauvaise idée.
 faut éviter d'utiliser localement un nom de variable globales
 (ça peut conduire à des erreurs ou a des comportement étranges
 que j'expliquerai plus tard dans les vidéos). 
+-montrer est expliquer l'erreur UnboundLocalError
+var = 0
+def func():
+    print var
+
+def func2():
+    print var
+    var = 1
+
+func()
+func2()
+>>> 
+0
+
+Traceback (most recent call last):
+  File "C:/Users/alegout/Desktop/test.py", line 12, in <module>
+    func2()
+  File "C:/Users/alegout/Desktop/test.py", line 8, in func2
+    print var
+UnboundLocalError: local variable 'var' referenced before assignment
 
 ## Quizz Vidéo 10
 
@@ -282,3 +322,71 @@ limitant son usage et en favorisant les retours explicite de fonction).
 
 ###################################################################
 
+## Vidéo 12 (fonctions : passage d'arguments)
+
+CO12AL-W3-VIDEO012.txt
+
+## Compléments Vidéo 11
+
+*introduire sys.argv en remarquant que c'est une forme *Targs
+et introduire le module argparse. 
+*donner des exemples pratiques de forme * et ** (si tu en as)
+*montrer un exemple de mélange des 4 déclarations d'arguments
+def f(a, c = 3, *d, **e)
+*montrer l'erreur qu'il peut se produire lorsque l'on combine
+des formes positionnelles et des formes nommés lors de l'appel.
+def func(a, b, c, d):
+    print a, b, c, d
+func(1, c = 3, *(2,), **{'d':4})
+>>>
+1 2 3 4
+>>> func(1, b = 3, *(2,), **{'d':4})
+Traceback (most recent call last):
+  File "<pyshell#170>", line 1, in <module>
+    func(1, b = 3, *(2,), **{'d':4})
+TypeError: func() got multiple values for keyword argument 'b'
+
+Expliquer que les arguments ne sont pas pris dans l'ordre 
+de l'appel, mais les arguments positionnel sont utilisé en premier. 
+les arguments ordonnés et *args, ne donnent pas le nom des arguments, donc ils ne peut être que positionnel. Par contre, les arguments nommés et **args fournissent le nom. Ils sont donc traités en dernier. 
+C'est expliqué dans Dans Python Language Reference: 5.3.4. Calls
+https://docs.python.org/2/reference/expressions.html#calls
+
+*montrer le piège des arguments par défaut qui ne sont initialisé
+qu'une fois à la création de l'objet fonction, donc problème avec 
+les mutables
+https://docs.python.org/2/tutorial/controlflow.html#default-argument-values
+def f(a, L = []):
+    L.append(a)
+    print L
+f(1)
+f(2)
+f(3)
+>>>
+[1]
+[1, 2]
+[1, 2, 3]
+
+Solutions
+def f(a, L = None):
+    if L is None:
+        L = []
+    L.append(a)
+    print L
+f(1)
+f(2)
+f(3)
+>>>
+[1]
+[2]
+[3]
+
+
+
+
+## Quizz Vidéo 11
+
+## Exercices Vidéo 11
+
+
+###################################################################
