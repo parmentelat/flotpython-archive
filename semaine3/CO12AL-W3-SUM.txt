@@ -7,6 +7,7 @@ CO12AL-W3-VIDEO01.txt
 ## Compléments Vidéo 1
 
 -ajouter un lien vers la Python Standard Library
+https://docs.python.org/2/library/index.html
 
 ## Quizz Vidéo 1
 
@@ -22,6 +23,7 @@ CO12AL-W3-VIDEO02.txt
 ## Compléments Vidéo 2
 
 -ajouter un lien vers la PEP 008 (sur les conventions de codage)
+http://legacy.python.org/dev/peps/pep-0008/
 -ajouter un lien vers cette FAQ https://docs.python.org/2/faq/design.html#why-are-colons-required-for-the-if-while-def-class-statements
 
 ## Quizz Vidéo 2

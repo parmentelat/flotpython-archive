@@ -8,6 +8,41 @@
 
 ## Sujet de la semaine ()
 
+Cette semaine nous allons voir deux sujets très importants.
+Nous allons finir notre présentation des itérateurs en expliquant
+comment vous pouvez simplement créer vos propre itérateurs. Puis
+nous parlerons des modules et des espaces de nommage. Je vous 
+rappelle que les trois notions fondamentales en Python sont 
+les références partagées, les itérateurs et les espaces
+de nommage. Nous avons déjà couvert les références partagées, 
+nous finirons les itérateurs cette semaine, et nous 
+commencerons les espaces de nommage cette semaine pour les finir
+la semaine prochaine. 
+
+## Sujet de la vidéo ()
+
+Dans cette vidéo nous allons parler d'un type de fonction 
+particulier : les fonctions génératrices. Ce sont des fonctions
+qui sont des itérateurs et qui permettent très simplement, 
+comme on le verra dans une prochaine vidéo, de faire des 
+itérateurs pour vos propres objets. Mais comme toujours en Python,
+vous allez voir que faire une fonction génératrice est très simple. 
+
+Avec une fonction classique, lorsque l'interpréteur arrive 
+à une instruction return ou à la fin de la fonction, toutes
+les variables locales de la fonction sont supprimées. Donc
+une fonction classique ne garde aucun état entre deux appels
+successifs. 
+
+Une fonction génératrice se comporte différemment. Ouvrons un 
+terminal pour commencer à jouer avec des fonction génératrices...
+
 >>>>>>>>>> INCLUDE CO12AL-W4-VIDEO01-EXO01.py <<<<<<<<<<
 
 ## Conclusion ()
+
+Les fonctions génératrices sont des objets très simple à 
+écrire, mais très puissant puisqu'ils permettent en quelques
+lignes de code de faire des itérateurs pour vos propres
+objets. Nous reviendrons sur la création des itérateurs pour
+vos objets un peu plus tard.  
