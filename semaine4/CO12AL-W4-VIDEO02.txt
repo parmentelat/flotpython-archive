@@ -19,6 +19,21 @@ de nommages.
 Nous allons voir dans cette vidéo la subtilité des espaces 
 de nommage. 
 
->>>>>>>>>> INCLUDE CO12AL-W4-VIDEO02-EXO01.py <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W4-VIDEO02-SLIDE01.pptx (5 minutes) <<<<<<<<<<
 
 ## Conclusion ()
+
+C'est important de comprendre que les espaces de nommage isolent 
+uniquement les variables, mais pas les objets. Il est possible 
+d'avoir des références partagées par différents espaces de nommage vers le même objet. Si l'objet est mutable, il peut alors être modifié
+depuis un espace de nommage et sera vu modifié par tous les autres. 
+
+En résumé, les espaces de nommage permettent une parfaite isolation
+des variables. Par contre, on peut accéder à toutes les variables 
+de l'espace de nommage d'un autre module en utilisant le nom du
+module point le nom de la variable, du moment que le module a été 
+importé avant. Cette isolation des espaces de nommage est une des 
+grandes forces de Python puisque l'accès à une variable en dehors de son
+espace de nommage doit toujours être fait explicitement. 
+
+

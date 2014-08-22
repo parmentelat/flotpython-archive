@@ -23,19 +23,38 @@ expressions génératrices sont un peu plus lente que les compréhensions
 
 ###################################################################
 
-## Vidéo 2 (modules)
+## Vidéo 2 (espaces de nommage)
+
+CO12AL-W4-VIDEO02.txt
 
 ## Compléments Vidéo 2
+
+*introduire __dict__, globals(), locals() et dir(mod) dans le contexte
+des modules uniquement. (on parlera de __dict__ pour les classes
+et les instance plus tard, mais tu peux déjà y faire allusion)
+
+*introduire sys.modules
+
+*parler de l'impossibilité de faire __dict__ du module courant
+(en particulier du prompt interactif) et expliquer que l'on 
+ne peut y accéder que depuis sys.modules[__name__].__dict__
+Citer 
+http://docs.python.org/2.6/tutorial/classes.html#id2
+et
+http://stackoverflow.com/questions/4877290/what-is-the-dict-dict-attribute-of-a-python-class
 
 ## Quizz Vidéo 2
 
 ## Exercices Vidéo 2
 
+
 ###################################################################
 
-## Vidéo 3 ()
+## Vidéo 3 (importatation des modules : compilation et chemin de recherche)
 
 ## Compléments Vidéo 3
+
+CO12AL-W4-VIDEO03.txt
 
 ## Quizz Vidéo 3
 
@@ -43,9 +62,22 @@ expressions génératrices sont un peu plus lente que les compréhensions
 
 ###################################################################
 
-## Vidéo 4 ()
+## Vidéo 4 (importation des modules : import et from )
+
+CO12AL-W4-VIDEO04.txt
 
 ## Compléments Vidéo 4
+
+*introduire 
+import modulename as name
+et
+from modulename import attrname as name
+
+*introduire 
+from mod import *
+en expliquant qu'il ne faut jamais le faire avec des modules
+que l'on n'a pas écrit nous même parce qu'il y a un fort risque
+de collision des espaces de nommage
 
 ## Quizz Vidéo 4
 
