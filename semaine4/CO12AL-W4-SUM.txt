@@ -52,9 +52,22 @@ http://stackoverflow.com/questions/4877290/what-is-the-dict-dict-attribute-of-a-
 
 ## Vidéo 3 (importatation des modules : compilation et chemin de recherche)
 
+CO12AL-W4-VIDEO03.txt
+
 ## Compléments Vidéo 3
 
-CO12AL-W4-VIDEO03.txt
+*exécuter un module comme un script avec 
+if __name__ == '__main__':
+
+*parler de sys.builtin_module_names et de, par exemple, math 
+et sys, qui sont des modules built-in implémentés en C pour
+des questions de vitesse. 
+
+*compléter la discussion de la video sur les .pyc. Par exemple,
+on peut directement distribuer les .pyc sans les .py
+
+*parler de reload() et du problème classique de modifier un module,
+l'importer de nouveau et ne pas voir les modifications. 
 
 ## Quizz Vidéo 3
 
@@ -78,6 +91,10 @@ from mod import *
 en expliquant qu'il ne faut jamais le faire avec des modules
 que l'on n'a pas écrit nous même parce qu'il y a un fort risque
 de collision des espaces de nommage
+Citer https://docs.python.org/2.7/reference/simple_stmts.html#the-import-statement
+Introduire aussi les variables commençant par _ en expliquant que 
+l'on ne doit pas les modifier et qu'elles ne sont pas importée par 
+un import *
 
 ## Quizz Vidéo 4
 

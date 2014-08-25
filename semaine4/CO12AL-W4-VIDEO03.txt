@@ -1,0 +1,24 @@
+## FORMAT DU FICHIER
+## Tout ce qui commence avec un ## est un commentaire
+##
+## le texte entre double crochets ouvrants et fermants
+## est à afficher en surimpression pendant que je parle et à 
+## synchroniser avec le texte entre crochet 
+
+
+## Sujet de la vidéo ()
+
+Revenons maintenant sur le processus d'importation d'un module.
+Lorsque vous importez un module, la machine virtuelle effectue
+plusieurs étapes qu'il est important de bien comprendre. 
+
+Ouvrons un terminal interactif pour jouer avec le processus
+d'importation des modules...
+
+>>>>>>>>>> INCLUDE CO12AL-W4-VIDEO03-EXO01.py <<<<<<<<<<
+
+
+
+## Conclusion ()
+
+
