@@ -104,6 +104,8 @@ un import *
 
 ## Vidéo 5 (Programmation objet, concepts de base)
 
+CO12AL-W4-VIDEO05.txt
+
 ## Compléments Vidéo 5
 
 ## Quizz Vidéo 5
@@ -112,7 +114,9 @@ un import *
 
 ###################################################################
 
-## Vidéo 6 (Programmation objet: classes et instances)
+## Vidéo 6 (Programmation objet: classes, instances et méthodes)
+
+CO12AL-W4-VIDEO06.txt
 
 ## Compléments Vidéo 6
 
@@ -122,7 +126,9 @@ un import *
 
 ###################################################################
 
-## Vidéo 7 ()
+## Vidéo 7 (Programmation objet: héritage)
+
+CO12AL-W4-VIDEO07.txt
 
 ## Compléments Vidéo 7
 
