@@ -23,6 +23,8 @@ une fonction avec accolades et ; et une fonction Python standard)
 -explique de que l'on couvre des notions importantes dans les compléments
 de cours. 
 
+-parler des Thierry et moi et du rôle de chacun. 
+
 TODO sur les autres semaines
 -parler de la taille des type de base avec sys.getsizeof() et expliquer
 qu'avec les références partagés Python n'est pas trop mauvais

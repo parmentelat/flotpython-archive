@@ -1,0 +1,34 @@
+## FORMAT DU FICHIER
+## Tout ce qui commence avec un ## est un commentaire
+##
+## le texte entre double crochets ouvrants et fermants
+## est à afficher en surimpression pendant que je parle et à 
+## synchroniser avec le texte entre crochet 
+
+
+## Sujet de la vidéo ()
+
+En Python tout est un objet, donc les classes aussi sont des 
+objets. De même qu'un module est un fichier contenant du code 
+Python et que ce code devient un objet lorsqu'il est importé, 
+une classe est du code Python dans un module, code qui devient 
+un objet lorsque le module contenant la classe est importé. 
+
+Une fois que l'objet classe est créé, il va devenir une usine à 
+instance, c'est à dire que chaque appel à cet objet classe
+va créer une nouvelle instance. 
+
+Ouvrons un terminal interactif pour commencer à jouer avec 
+les classes et les instances...
+
+>>>>>>>>>> INCLUDE CO12AL-W4-VIDEO06-EXO01.py <<<<<<<<<<
+
+
+## Conclusion ()
+
+Nous avons vu que les classes sont des usines à instances et que
+les instances ont accès aux variables des classes qui les ont créées. 
+On a vu également que l'on peut définir dans les classes des méthodes 
+qui travaillent sur les instances de la classe. 
+Nous verrons dans la prochaine vidéo la notion d'héritage. 
+
