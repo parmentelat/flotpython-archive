@@ -1,0 +1,70 @@
+## FORMAT DU FICHIER
+## Tout ce qui commence avec un ## est un commentaire
+##
+## le texte entre double crochets ouvrants et fermants
+## est à afficher en surimpression pendant que je parle et à 
+## synchroniser avec le texte entre crochet 
+
+
+## Sujet de la vidéo ()
+
+Nous allons maintenant aborder une grosse partie de la programmation
+en Python, c'est la programmation objet. Nous savons qu'en Python
+tout est un objet, donc lorsque vous créez un entier, une liste, ou
+un dictionnaire, vous créez des objets, mais des objets déjà 
+définis par le langage. Par contre, lorsque vous créez
+une fonction ou un module, vous créez des objets dont vous
+avez défini le comportement. Mais il existe une
+autre manière de faire des objets dont on définit le comportement
+en Python, ce sont les classes.
+
+Alors quelle est la différence entre une fonction, un module
+et une classe pour créer nos propres objets en Python ?
+
+>>>>>>>>>> INCLUDE CO12AL-W4-VIDEO05-SLIDE01.pptx <<<<<<<<<<
+
+On voit donc que ce qui différencie les classes des modules
+c'est la possibilité d'avoir de [multiples instances] et l'[héritage]. 
+
+En Python, chaque instance a son propre espace de nommage, donc 
+l'intérêt d'avoir des instances multiples et d'avoir des objets
+qui vont évoluer indépendamment. C'est, par exemple, le cas des 
+listes. Chaque objet liste a son propre état qui évolue indépendamment
+des autres objets liste. Le seul moyen de créer des objets
+comme les listes et de passer par la création de classes. Donc 
+si vous voulez juste une [boite à outils] avec son propre espace 
+de nommage, le module est suffisant, mais si vous des créer des [objets
+qui évoluent indépendamment], vous devez passer par les classes. 
+
+La notion d'héritage est plus difficile à appréhender. Lorsqu'une classe
+A hérite d'une classe B, la classe A a accès a toutes les fonctions
+définies dans la classe B ainsi qu'à l'espace de nommage de B. 
+
+Nous reviendrons dessus prochainement, mais il faut comprendre que la 
+programmation objet et l'héritage n'est pas un dogme, mais juste un
+outil destiné à vous simplifier la vie. Alors, ne prenez pas cela 
+comme une contrainte, mais comme une facilité si un jour vous avez besoin
+d'héritage. Il est possible d'écrire de gros programmes sans
+héritage, et en aucun cas l'héritage et l'abstraction qu'il impose au travers
+de diagrammes de classes ne doit vous compliquer la vie. 
+
+Si vous passez plus de temps à concevoir
+des diagrammes de classes qu'à programmer, c'est la garantie qu'au final
+vous aurez des diagrammes, mais pas de programme. Commencez toujours par 
+programmer, par faire un prototype, par documenter votre code. 
+Et ensuite seulement, si ça s'impose à vous, vous pourrez améliorer 
+la structure de votre programme en exploitant pleinement les classes 
+et l'héritage. 
+
+
+[[
+Multiples instances
+Héritage
+[effacer]
+Boîte à outils -> modules
+Instances multiples -> classes
+]]
+
+## Conclusion ()
+
+

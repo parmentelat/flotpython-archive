@@ -15,13 +15,14 @@ print spam.x
 print spam.f()
 
 ## si on crée un variable x, elle sera dans l'espace
-## de nommage du prompte interactif et nom de spam
+## de nommage du prompte interactif et non de spam
 x = 10
 
 ## x dans spam vaut toujours 1
 print spam.x
 
-## Par contre, on peut modifier x dans spam
+## Par contre, on peut modifier x dans spam puisque les modules
+## sont des objets mutables
 spam.x = 2
 
 print spam.x
@@ -31,6 +32,21 @@ spam.f()
 ## objet module par module importé, par exemple
 ## le module spam, tous les autres modules qui importeront
 ## spam verrons les variables de spam modifiées.
+
+## En particulier, comme un module est mutable, on peut
+## ajouter n'importe quel objet dans l'espace de nommage
+## du module
+
+spam.y = 100
+def g():
+    print spam.y ## attention le scope est textuel,
+                 ## donc y est cherché dans l'espace de
+                 ## nommage du terminal interactif.
+                 ## Pour bien trouver y,
+                 ## il faut donner son espace de nommage
+spam.g = g
+spam.g()
+
 
 ## Regardons maintenant une autre manière d'importer un module
 

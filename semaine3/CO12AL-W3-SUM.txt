@@ -328,7 +328,7 @@ limitant son usage et en favorisant les retours explicite de fonction).
 
 CO12AL-W3-VIDEO012.txt
 
-## Compléments Vidéo 11
+## Compléments Vidéo 12
 
 *introduire sys.argv en remarquant que c'est une forme *Targs
 et introduire le module argparse. 
@@ -386,9 +386,9 @@ f(3)
 
 
 
-## Quizz Vidéo 11
+## Quizz Vidéo 12
 
-## Exercices Vidéo 11
+## Exercices Vidéo 12
 
 
 ###################################################################

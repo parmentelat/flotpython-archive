@@ -102,7 +102,7 @@ un import *
 
 ###################################################################
 
-## Vidéo 5 ()
+## Vidéo 5 (Programmation objet, concepts de base)
 
 ## Compléments Vidéo 5
 
@@ -112,7 +112,7 @@ un import *
 
 ###################################################################
 
-## Vidéo 6 ()
+## Vidéo 6 (Programmation objet: classes et instances)
 
 ## Compléments Vidéo 6
 
