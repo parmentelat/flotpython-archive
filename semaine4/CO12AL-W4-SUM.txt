@@ -120,6 +120,8 @@ CO12AL-W4-VIDEO06.txt
 
 ## Compléments Vidéo 6
 
+* introduire getattr() et setattr()
+
 ## Quizz Vidéo 6
 
 ## Exercices Vidéo 6
@@ -132,13 +134,20 @@ CO12AL-W4-VIDEO07.txt
 
 ## Compléments Vidéo 7
 
+*introduire la MRO (Method Resolution Order)
+http://python-history.blogspot.fr/2010/06/method-resolution-order.html
+(attention cet article parle aussi des nouvelles classes)
+
+*expliquer que seules les classes built-in ne sont pas mutables
+parce que sinon ça pourrait rendre l'interpréteur instable. 
+
 ## Quizz Vidéo 7
 
 ## Exercices Vidéo 7
 
 ###################################################################
 
-## Vidéo 8 ()
+## Vidéo 8 (Programmation objet: surcharge d'opérateurs)
 
 ## Compléments Vidéo 8
 
@@ -148,7 +157,7 @@ CO12AL-W4-VIDEO07.txt
 
 ###################################################################
 
-## Vidéo 9 ()
+## Vidéo 9 (Scopes et espaces de nommage)
 
 ## Compléments Vidéo 9
 
