@@ -24,6 +24,11 @@ print I
 
 print C.__dict__, I.__dict__
 
+## Notons que toutes les variables commençant et finissant
+## par des double tirets bas sont des variables définies par
+## le langage. On ne doit donc jamais utiliser cette notation
+## pour nos propres variables.
+
 ## La relation d'héritage permet à un
 ## objet d'accéder à l'espace de nommage de l'objet dont
 ## il hérite. Une instance hérite toujours de la classe qui

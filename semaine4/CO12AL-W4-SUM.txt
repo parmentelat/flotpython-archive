@@ -121,6 +121,8 @@ CO12AL-W4-VIDEO06.txt
 ## Compléments Vidéo 6
 
 * introduire getattr() et setattr()
+* introduire la notion de variables privées _var
+(privée et pas d'import par from mod import *), __var__ 
 
 ## Quizz Vidéo 6
 
@@ -141,6 +143,12 @@ http://python-history.blogspot.fr/2010/06/method-resolution-order.html
 *expliquer que seules les classes built-in ne sont pas mutables
 parce que sinon ça pourrait rendre l'interpréteur instable. 
 
+*citer (et peut-être discuter en montrer des exemples) 
+design patterns et le livre de Gramma et al.
+
+* introduire les variables __var (name mangling)
+http://docs.python.org/2/reference/lexical_analysis.html#reserved-classes-of-identifiers
+
 ## Quizz Vidéo 7
 
 ## Exercices Vidéo 7
@@ -151,9 +159,15 @@ parce que sinon ça pourrait rendre l'interpréteur instable.
 
 ## Compléments Vidéo 8
 
+*Citer ce lien pour toutes les surcharges d'opérateurs. 
+http://docs.python.org/2/reference/datamodel.html#special-method-names
+*couvrir d'autres opérateurs (je couvre __init__ et __str__ en vidéo)
+Il faut voir au minimum __add__, __contains__, __len__, 
+
 ## Quizz Vidéo 8
 
 ## Exercices Vidéo 8
+
 
 ###################################################################
 
