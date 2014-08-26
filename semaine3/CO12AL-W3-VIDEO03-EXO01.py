@@ -4,6 +4,7 @@
 ## and, or et not. A and B est vrai si A et B sont vrais,
 ## A or B est vrai A ou B est vrai, not A est vrai si A
 ## est faux.Regardons quelques exemples. 
+
 print 1 < 2 and 3 < 4
 
 print 1 < 2 or 3 > 4
@@ -27,8 +28,8 @@ print 3 < 2 and func()
 print 1 < 2 or func()
 
 ## pour finir on peut combiner les opérateurs, chaque
-## opérateur ayant un priorité spécifique. Je ne vous
+## opérateur ayant une priorité spécifique. Je ne vous
 ## expliquerai pas ces règles, parce qu'il vaut mieux
-## les rendre explicites en utilisant des paranthèses
+## les rendre explicites en utilisant des parenthèses
 
 print (1 < 2 and (not 3 > 4)) or 1 == 1
