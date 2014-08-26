@@ -18,7 +18,7 @@ def truncate (s, n):
 
 notebookname = "notebookname"
 
-class Notebook (dict):
+class Notebook:
     def __init__ (self, name):
         if name.endswith(".ipynb"): 
             name=name.replace(".ipynb","")
