@@ -36,6 +36,8 @@ http://legacy.python.org/dev/peps/pep-0008/
 ###################################################################
 
 ## Vidéo 3 (if elif else + and/or/not)
+# if avec resultat non booleen
+# operateurs booleens - priorites..
 
 CO12AL-W3-VIDEO03.txt
 
@@ -49,7 +51,7 @@ CO12AL-W3-VIDEO03.txt
 d'autres exemples)
 -opération shortcircuit and et or (vu en cours, montrer d'autres exemples)
 -discuter de == : quand peut-on comparer des objets de types différents
-(seulement les numériques, et les set et frozenset, mais
+(seulement les numériques, et les set et frozenset, str/unicode, mais
 (1, 2) n'est pas égal à [1, 2])
 -quel sens à des comparaisons (avec < ou >) de listes ou dicts. 
 
@@ -59,6 +61,8 @@ d'autres exemples)
 ## Vidéo 4 (boucle for et itérateurs)
 
 CO12AL-W3-VIDEO04.txt
+# for sur une sequence - for sur un objet qui a un iterateur -
+# __iter__  / next / StopIteration
 
 ## Compléments Vidéo 4
 
@@ -78,18 +82,20 @@ __iter__() est une méthode Python privée, on ne doit pas l'appeler
 directement dans un programme, on doit utiliser la built-in iter()
 à la place.
 
-## Quizz Vidéo 4
-
-## Exercices Vidéo 4
-
+# xxx ceci n'est définitivement pas un exo..
 Il ne faut pas modifier l'objet sur lequel on itère dans boucle for.
-Si on modifier l'objet, il faut itérer sur copie
+Si on modifie l'objet, il faut itérer sur copie
 >>> L = ['a', 'b' , 'c']
 >>> for i in L[:]:
 	if i == 'c':
 		L.append(i)	
 
 Ici, sinon on a une boucle infinie.
+
+## Quizz Vidéo 4
+
+## Exercices Vidéo 4
+
 
 ###################################################################
 
