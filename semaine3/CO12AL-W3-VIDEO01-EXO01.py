@@ -7,28 +7,28 @@ import math
 
 ## ensuite, pour utiliser le module, on utilise le même nom
 ## que celui que l'on a utilisé pour l'import. On peut
-## voit tous les attributs d'un module avec l'instruction
+## voir tous les attributs d'un module avec l'instruction
 ## dir
 
 print dir(math)
 
-## un attribut est une variable reférencant un objet.
+## un attribut est une variable reférençant un objet.
 ## Comme en Python tout est un objet, un attribut peut
-## référencer n'importe quoi en Python : un type de base,
+## référencer n'importe quel type d'objet : un type de base,
 ## une fonction, un module, ou d'autres objets que l'on
 ## verra dans les semaines qui viennent comme les classes.
 
 ## Pour accéder à l'attribut d'un objet, on utilise
-## le nom de l'objet point le nom de l'attribut. 
+## le nom de l'objet - point - le nom de l'attribut. 
 
 print math.log(10)
 
-## et on peut bien sur combiner des attributs de modules
+## et on peut bien sûr combiner des attributs de modules
 ## puisque ce sont de simples variables.
 print math.tan(math.pi/4)
 
 
-## Pour connaître à quoi correspond un attribut on peut
+## Pour savoir à quoi correspond un attribut on peut
 ## utiliser la fonction built-in help()
 
 help(math.log)
@@ -46,3 +46,9 @@ help(math)
 print dir(str)
 help(str.title)
 
+# xxx peut-etre l'occasion de rappeler comment donner la doc d'une fonction
+# def foo ():
+#     "un fonction qui fait le café"
+#     pass
+# 
+# help(foo)

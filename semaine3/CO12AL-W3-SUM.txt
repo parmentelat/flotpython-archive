@@ -3,6 +3,7 @@
 ## Vidéo 1 (101 des modules)
 
 CO12AL-W3-VIDEO01.txt
+# import - dir - help
 
 ## Compléments Vidéo 1
 
@@ -19,6 +20,7 @@ https://docs.python.org/2/library/index.html
 ## Vidéo 2 (indentation comme syntaxe de base)
 
 CO12AL-W3-VIDEO02.txt
+# indentation - syntaxe minimale - presentation unifiee - 79 cars
 
 ## Compléments Vidéo 2
 

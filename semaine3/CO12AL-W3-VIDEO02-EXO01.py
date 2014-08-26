@@ -29,3 +29,11 @@ print (1 + 2 + 3 +
 
 print 'une grande\
  phrase'
+
+# xxx comme la fois précédente, perso je ne mettrais pas l'exemple des strings
+# 1. les strings multilignes sont beaucoup mieux avec des """
+# 2. c'est plus utile je pense de montrer un appel de fonction - il n'y en a pas ci-dessus
+
+    monobjet.mamethode (le_premier_argument,
+                        on_doit_appeler_une_fonction (x,y,z),
+                        le_dernier_argument)
