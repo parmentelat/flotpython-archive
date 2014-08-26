@@ -16,6 +16,8 @@ def truncate (s, n):
     if len(s)<n: return s
     return s[:n-2]+".."
 
+notebookname = "notebookname"
+
 class Notebook (dict):
     def __init__ (self, name):
         if name.endswith(".ipynb"): 
@@ -44,23 +46,30 @@ class Notebook (dict):
 
     def set_name_from_heading1(self, force=False):
         """set 'name' in notebook metadata from the first heading 1 cell
-        if force is True, always set 'name'
+        if force is True, always set 'notebookname'
         if force is False, set 'name' only if it is not set"""
-        current_name = self.xpath ( ['metadata', 'name'])
-        if current_name and not force : 
+        metadata = self.xpath ( ['metadata'])
+        if metadata.get(notebookname,"") and not force:
             return
         heading1 = self.first_heading1()
-        self.notebook['metadata']['name']=heading1
-        notary = Notary ()
-        signature=notary.compute_signature (self.notebook)
-        self.notebook['metadata']['signature'] = signature
-        #print "{}: signature={}".format(self.filename, signature)
+        metadata[notebookname]=heading1
+        # keep both 'name' and 'notebookname' in sync
+        metadata['name']=heading1
+
+    def set_version (self, version="1.0"):
+        metadata = self.xpath (['metadata'])
+        metadata['version']=version
 
     def clear_all_outputs (self):
         for worksheet in self.notebook.worksheets:
             for cell in worksheet.cells:
                 if cell['cell_type'] == 'code' and cell['language'] == 'python':
                     cell['outputs'] = []
+
+    def sign (self):
+        notary = Notary ()
+        signature=notary.compute_signature (self.notebook)
+        self.notebook['metadata']['signature'] = signature
 
     def save (self, alt=True):
         if alt:
@@ -72,18 +81,22 @@ class Notebook (dict):
             current_notebook.write (self.notebook,f,'ipynb')
         print "{} saved into {}".format(self.name, outfilename)
             
-                            
+    def full_monty (self, force_name, alt):
+        self.parse()
+        self.set_name_from_heading1(force=force_name)
+        self.set_version()
+        self.clear_all_outputs ()
+        self.sign()
+        self.save(alt=alt)
 
-def full_monty (name, force_name):
+def full_monty (name, force_name, alt):
     nb=Notebook(name)
-    nb.parse ()
-    nb.set_name_from_heading1 (force=force_name)
-    nb.clear_all_outputs ()
-    nb.save(alt=False)
+    nb.full_monty (force_name=force_name, alt=alt)
 
-force_name = False
+force_name = True
+alt=False
 for a in sys.argv[1:]:
     if a.find ('.alt') >=0 :
 #        print 'ignoring', a
         continue
-    full_monty (a, force_name)
+    full_monty (a, force_name, alt)
