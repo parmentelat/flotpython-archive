@@ -4,9 +4,9 @@
 ## for peut directement itérer sur un objet qui a un itérateur,
 ## on peut faire une boucle for sur tous les types built-in.
 
-ensemble = {1, 2, 3, 'a'}
-for element in ensemble:
-    print element, 
+s = {1, 2, 3, 'a'}
+for i in s:
+    print i, 
 
 ## Mais regardons comment une boucle for fait pour utiliser
 ## un objet qui a un itérateur.
@@ -16,8 +16,8 @@ for element in ensemble:
 
 print
 
-iterateur = ensemble.__iter__()
-print iterateur
+it = s.__iter__()
+print it
 
 ## ensuite, la boucle for appelle la méthode next() pour obtenir
 ## chaque élément de l'objet. Lorsqu'on a parcouru tous les
@@ -25,11 +25,11 @@ print iterateur
 ## s'appelle StopIteration. La boucle for capture automatiquement
 ## cette exception et se termine
 
-print iterateur.next()
-print iterateur.next()
-print iterateur.next()
-print iterateur.next()
-print iterateur.next()
+print it.next()
+print it.next()
+print it.next()
+print it.next()
+print it.next()
 
 ## Évidement, vous n'avez pas à appeler vous-même les méthodes
 ## __iter__() et next(), le but de cet exemple est de vous montrer le
