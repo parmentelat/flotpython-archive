@@ -14,10 +14,10 @@
 ## bloc d'instruction sous le while, lorsque le
 ## test est faux, on sort du while. 
 
-liste = range(10)
+L = range(10)
 
-while liste.pop():
-    print liste
+while L.pop():
+    print L
 
 ## Notons que le while, comme la boucle for, accepte
 ## les instructions break, pour sortir du while, et
@@ -31,7 +31,7 @@ while liste.pop():
 ## un programme qui répond à des entrées utilisateur. 
     
 while True:
-    reponse = raw_input('Quelle est votre question ?\n')
-    if 'aucune' in reponse:
+    s = raw_input('Quelle est votre question ?\n')
+    if 'aucune' in s:
         break
-    #answer(reponse) # fonction pour le traitement de la reponse
+    #answer(s) # fonction pour le traitement de la reponse
