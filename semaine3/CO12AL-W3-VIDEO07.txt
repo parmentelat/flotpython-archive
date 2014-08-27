@@ -1,3 +1,5 @@
+# -*- fill-column: 54 -*-
+#
 ## FORMAT DU FICHIER
 ## Tout ce qui commence avec un ## est un commentaire
 ##
@@ -11,7 +13,7 @@
 ## Résumé de la vidéo ( 1 minute)
 
 Nous avons vu la puissance des itérateurs dans le contexte
-des boucles for. Les itérateurs sont des outils tellement puissant 
+des boucles for. Les itérateurs sont des outils tellement puissants
 que leur utilisation a été étendue à d'autres contextes comme
 les fonctions built-in map et filter que nous allons voir dans 
 cette vidéo ou la compréhension de liste, la technique la plus 
@@ -19,7 +21,7 @@ puissante exploitant les itérateurs, que nous verrons dans la
 prochaine vidéo. 
 
 Mais avant de parler des fonctions map et filter, je dois
-introduire la notions de fonctions lambda. Nous vous inquiétez
+introduire la notion de fonctions lambda. Nous vous inquiétez
 pas c'est un nom étrange pour quelque chose de très simple.
 
 Une fonction lambda est une forme simplifiée de fonction. Tout 
@@ -28,7 +30,13 @@ le faire avec une fonction classique. Par contre, on ne peut pas tout
 faire dans une fonction lambda. Alors quel est l'intérêt des
 fonctions lambda ? Leur unique intérêt est que les fonctions
 lambda sont des expressions et non des instructions comme une 
-fonction classique. Cela veut dire que l'on peut définir une
+fonction classique. 
+
+XXX je ne suis pas d'accord pour dire qu'une fonction classique est
+une instruction; c'est 'def' qui est une instruction, pas l'objet
+fonction XXX
+
+Cela veut dire que l'on peut définir une
 fonction lambda partout ou l'on peut mettre une expression : 
 par exemple, dans une liste, dans un dictionnaire, ou en 
 argument d'une fonction.
@@ -38,9 +46,12 @@ Ouvrons un terminal pour jouer avec les fonction lambda...
 
 >>>>>>>>>> CO12AL-W3-VIDEO07-EXO01.py <<<<<<<<<< (6 minutes 30 secondes)
 
-Les fonctions map et filter sont plus rapide que les
-boucles for, plus facile à écrire et souvent plus lisible
+Les fonctions map et filter sont plus rapides que les
+boucles for, plus facile à écrire et souvent plus lisibles
 c'est pourquoi il faut les préférer aux boucles for lorsque
 c'est possible, c'est-à-dire lorsque l'on applique une fonction
 à chaque élément d'un objet itérable ou lorsque l'on filtre
 des éléments d'un objet itérable. 
+
+XXX je ne suis pas du tout sûr de tout ça et à nouveau je pense qu'on
+ne devrait pas faire une vidéo là dessus XXX

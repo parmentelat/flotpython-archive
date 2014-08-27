@@ -2,8 +2,8 @@
 
 ## La syntaxe d'une fonction lambda est simple.
 ## Elle commence par le mot clef lambda, suivi
-## d'une liste d'argument séparé par des virgules
-## et d'un expression pouvant utiliser ses arguments.
+## d'une liste d'arguments séparés par des virgules
+## et d'une expression pouvant utiliser ses arguments.
 
 lambda x: x**2 + 2*x -1
 
@@ -14,7 +14,7 @@ lambda x: x**2 + 2*x -1
 
 ## On peut donc utiliser une fonction lambda de deux
 ## manieres, soit on lui donne un nom en l'assignant à
-## une variable, soit on la définie directement là où
+## une variable, soit on la définit directement là où
 ## elle va être utilisée. 
 
 f = lambda x: x**2 + 2*x - 1
@@ -52,7 +52,7 @@ def g(x):
 func(g)
 
 ## la fonction lambda permet simplement d'écrire
-## plus rapidement les fonctions qui sont limitée
+## plus rapidement une fonction qui est limitée
 ## à une seule expression. En effet, dans une fonction
 ## lambda, on ne peut pas mettre d'instructions comme
 ## des if ou des for. 
@@ -93,8 +93,8 @@ print map(lambda x: x**2 -3, range(10))
 ## 0, None, les types de base vides et False sont faux, tout le
 ## reste est vrai.
 
-## rehardons un exemple de fonction filter, je veux
-## obtenir tous les éléments d'un séquence qui sont pairs.
+## regardons un exemple de fonction filter, je veux
+## obtenir tous les éléments d'une séquence qui sont pairs.
 
 print filter(lambda x: x % 2 == 0, range(10))
 
