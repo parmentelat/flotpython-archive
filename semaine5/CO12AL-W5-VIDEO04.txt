@@ -5,6 +5,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Programmation objet, concepts de base
 
 ## Sujet de la vidéo ()
 
@@ -21,7 +22,7 @@ en Python, ce sont les classes.
 Alors quelle est la différence entre une fonction, un module
 et une classe pour créer nos propres objets en Python ?
 
->>>>>>>>>> INCLUDE CO12AL-W4-VIDEO05-SLIDE01.pptx <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W5-VIDEO04-SLIDE01.pptx <<<<<<<<<<
 
 On voit donc que ce qui différencie les classes des modules
 c'est la possibilité d'avoir de [multiples instances] et l'[héritage]. 

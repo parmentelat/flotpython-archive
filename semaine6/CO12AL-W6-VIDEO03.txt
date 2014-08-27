@@ -5,6 +5,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Exceptions
 
 ## Sujet de la vidéo ()
 
@@ -34,7 +35,7 @@ des objets.
 Ouvrons maintenant un éditeur IDLE pour commencer à jouer 
 avec les exceptions...
 
->>>>>>>>>> INCLUDE CO12AL-W4-VIDEO11-EXO01.py <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W6-VIDEO03-EXO01.py <<<<<<<<<<
 
 
 ## Conclusion ()

@@ -7,6 +7,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Les boucles for et les itérateurs
 
 # XXX: IMHO on a saute l'etape essentielle ici, pourquoi veut-on 
 # faire des iterateurs ?

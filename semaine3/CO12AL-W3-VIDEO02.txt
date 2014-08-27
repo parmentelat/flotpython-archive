@@ -5,6 +5,8 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Les dictionnaires 
+
 ## dictionaires 
 
 Dans cette vidéo nous allons voir comment utiliser les
@@ -22,7 +24,7 @@ longue et fastidieuse à écrire. Ouvrons un terminal interactif
 pour commencer à jouer avec les dictionnaires. 
 
 
->>>>>>>>>> CO12AL-W2-VIDEO10-EXO01.py <<<<<<<<<<
+>>>>>>>>>> CO12AL-W3-VIDEO02-EXO01.py <<<<<<<<<<
 
 Nous avons vu dans cette vidéo le fonctionnement des dictionnaires, 
 et on imagine facilement la puissance de ce type. Créer un agenda

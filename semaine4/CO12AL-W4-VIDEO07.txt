@@ -5,6 +5,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Portée des variables dans les fonctions et références partagées
 
 ## Résumé de la vidéo (40 secondes)
 
@@ -25,7 +26,7 @@ mutable, une fonction peut modifier cet objet.
 
 Regardons un exemple...
 
->>>>>>>>>> CO12AL-W3-VIDEO11-SLIDE01.pptx <<<<<<<<<< (2 minutes 30 secondes)
+>>>>>>>>>> CO12AL-W4-VIDEO07-SLIDE01.pptx <<<<<<<<<< (2 minutes 30 secondes)
 
 ## résumé et transition (40 secondes)
 
@@ -46,7 +47,7 @@ Comment faire alors pour modifier depuis une fonction
 une variable globale. On peut le faire grâce a l'instruction global
 Ouvrons un éditeur IDLE pour découvrir cette instruction global...
 
->>>>>>>>>> CO12AL-W3-VIDEO11-EXO01.py <<<<<<<<<< (4 minutes)
+>>>>>>>>>> CO12AL-W4-VIDEO07-EXO01.py <<<<<<<<<< (4 minutes)
 
 ## conclusion ()
 On voit donc que l'on peut communiquer entre le scope local 

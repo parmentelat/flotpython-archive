@@ -5,6 +5,8 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Les tuples
+
 ## Résumé de la vidéo (1 minute)
 
 Dans cette vidéo nous allons presenter un autre type

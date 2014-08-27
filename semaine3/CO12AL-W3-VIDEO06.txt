@@ -6,7 +6,7 @@
 ## synchroniser avec le texte entre crochet 
 
 
-
+## TITRE : L'indentation comme syntaxe de base
 
 ## Résumé de la vidéo (1 minute 20 secondes)
 
@@ -39,7 +39,7 @@ Java.
 
 Regardons maintenant un exemple. 
 
->>>>>>>>>> CO12AL-W3-VIDEO02-SLIDE01.pptx (3 minutes) <<<<<<<<<<
+>>>>>>>>>> CO12AL-W3-VIDEO06-SLIDE01.pptx (3 minutes) <<<<<<<<<<
 
 L'indentation comme règle de syntaxe est une des raisons du succès de
 Python. Cette règle n'a presque que des avantages, elle a cependant un
@@ -65,4 +65,4 @@ caractères.  En effet, tout ce qui est entre (), {}, ou [] peut
 contenir des retours chariots sans que cela n'affecte le code exécuté.
 Regardons quelques exemples .
 
->>>>>>>>>> CO12AL-W3-VIDEO02-EXO01.py (? minutes) <<<<<<<<<<
+>>>>>>>>>> CO12AL-W3-VIDEO06-EXO01.py (? minutes) <<<<<<<<<<

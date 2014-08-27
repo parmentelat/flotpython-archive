@@ -8,7 +8,7 @@
 ## synchroniser avec le texte entre crochet 
 
 
-
+## TITRE : Boucle while
 
 ## Résumé de la vidéo ()
 
@@ -21,7 +21,7 @@ possibilités.
 Ouvrons un terminal pour jouer avec l'instruction while...
 
 
->>>>>>>>>> CO12AL-W3-VIDEO06-EXO01.py <<<<<<<<<< ()
+>>>>>>>>>> CO12AL-W4-VIDEO02-EXO01.py <<<<<<<<<< ()
 
 L'instruction while ne présente pas de difficultés particulières
 et son utilisation est limitée à la répétition d'un bloc d'instruction 

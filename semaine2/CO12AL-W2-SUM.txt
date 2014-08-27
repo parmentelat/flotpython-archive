@@ -5,7 +5,9 @@
 
 # TODO : numéroter tous les exos
 
-## Vidéo 1 (objets, variables, typage dynamique)
+###################################################################
+
+## Vidéo 1 (Introduction au typage dynamique)
 
 CO12AL-W2-VIDEO01.txt
 
@@ -21,7 +23,7 @@ XXX Arnaud : mots réservés interdits pour les variables (donner la ref vers http
 
 ###################################################################
 
-## Vidéo 2 (types numériques : int, long, float, complex, bool)
+## Vidéo 2 (Les types numériques)
 
 CO12AL-W2-VIDEO02.txt
 
@@ -40,7 +42,7 @@ OK exo-flottants-min.ipynb : exercice pour trouver la valeur approximative du + 
 
 ###################################################################
 
-## Vidéo 3 (séquences)
+## Vidéo 3 (Les séquences)
 
 CO12AL-W2-VIDEO03.txt
 
@@ -58,7 +60,7 @@ OK exo-slicing.ipynb: un peu de slicing, et des indices négatifs, le slicing ave
 
 ###################################################################
 
-## Vidéo 4 (les listes)
+## Vidéo 4 (Les listes)
 
 CO12AL-W2-VIDEO04.txt (9 minutes)
 
@@ -76,7 +78,7 @@ OK listes.quiz : pop append extend del sort sorted (j'utilise aussi += a un mome
 
 ###################################################################
 
-## Vidéo 5 (les tuples)
+## Vidéo 5 (Les tuples)
 
 CO12AL-W2-VIDEO05 ()
 
@@ -95,7 +97,7 @@ OK tuples.quiz
 
 ###################################################################
 
-## Vidéo 6 (101 if else)
+## Vidéo 6 (Introduction aux tests if/else et aux expressions conditionnelles)
 
 CO12AL-W2-VIDEO06.txt (5 minutes 40 secondes)
 
@@ -114,7 +116,7 @@ OK if-expression.ipynb: return 0 if n<=1 else n*factoriel (n-1)
 
 ###################################################################
 
-## Vidéo 7 (101 boucle for et fonctions)
+## Vidéo 7 (Introduction aux boucles for et aux fonctions)
 
 CO12AL-W2-VIDEO07.txt 
 
@@ -137,7 +139,7 @@ XXX Arnaud: montrer une boucle for sur une chaine de caractères.
 
 ###################################################################
 
-## Vidéo 8 (str)
+## Vidéo 8 (Les chaînes de caractères )
 
 CO12AL-W2-VIDEO08.txt 
 
@@ -158,92 +160,3 @@ OK strings.quiz - le quiz se prete bien surement aux basiques des strings
 TODO? exo-strings.ipynb il serait peut-être bien de faire faire quelques exos plus construits, mais le quiz est assez limité avec les réponses sur une seule ligne
 pour travailler les méthodes du module string principalement
 
-###################################################################
-
-## Vidéo 9 (tables de hash)
-
-CO12AL-W2-VIDEO09.txt 
-
-## Compléments Vidéo 9 
-
-## Quizz Vidéo 9
-
-## Exercices Vidéo 9
-
-
-###################################################################
-
-## Vidéo 10 (dict)
-
-CO12AL-W2-VIDEO10.txt 
-
-## Compléments Vidéo 10
-*voir la construction D=dict(clef1=obj1, clef2=obj2) 
-*voir d.get('marc', '?') et son usage par rapport à d['marc']
-*voir un exemple de dict dans un dict et de l'accès à ses éléments D={'alice': 35, 'enfants':{'bob' : 9, 'charlie' : 6}}
-*expliquer que d.has_key() est ancien et qu'il faut utiliser in 
-maintenant. 
-
-## Quizz Vidéo 10
-
-## Exercices Vidéo 10
-
-###################################################################
-
-## Vidéo 11 (set, frozenset)
-
-CO12AL-W2-VIDEO11.txt 
-
-## Compléments Vidéo 11
-*autre fonctions sur les sets non vue dans la vidéo (e.g., <=, <, discard, pop, clear)
-*test de performance sur le test d'appartenance entre list et set
-pour expliquer qu'il faut toujours utiliser des sets
->>> timeit.timeit(setup= "x = range(2)", stmt = '"c" in x', number = 6000000)
-1.042163089558322
->>> timeit.timeit(setup= "x = set(range(2))", stmt = '"c" in x', number = 6000000)
-0.32964897792466274
-
->>> timeit.timeit(setup= "x = range(2)", stmt = '0 in x', number = 6000000)
-0.3086782596151636
->>> timeit.timeit(setup= "x = set(range(2))", stmt = '0 in x', number = 6000000)
-0.3819173343944584
-
-## Quizz Vidéo 11
-
-## Exercices Vidéo 11
-
-###################################################################
-
-## Vidéo 12 (références partagées)
-
-CO12AL-W2-VIDEO12.txt 
-
-## Compléments Vidéo 12
-OK references-circulaires.ipynb : une liste infinie; un exemple + utile de reference circulaire
-OK is-id.ipynb : function id(), operateur is,  les entiers implementes comme des singletons
-
-
-* introduire http://pythontutor.com 
-[[construire des exemples montrant des problèmes de ref partagées sur des mutables, e.g., 
-a = [ 1, [2, 3], 4]
-b = a[:]           #shallow copy
-a[0] = 'x'        #ok
-a[1][1] = 'y'     #ref partagée
-]]
-
-* voir copy.copy() pour faire les shallows copies et copy.deepcopy() pour les deep copy 
-* voir sys.getrefcount(1) et expliquer le résultat 
-*assignation: a, b = 1, 2 (tuple unpacking, expliquer que ce sont
-des tuples et qu'il faut le même nombre d'éléments à gauche et à droite) et a=b='spam' avec le problèmes des reférences multiples
-sur un mutable a=b=[1] puis a[0] = 2, et aussi a, b = b, a (et pourquoi ca marche,
-grace au tuple unpacking qui crée la variable temporaire)
-*del a, del L[i:j:k], del d[clef]
-
-
-## Quizz Vidéo 12
-
-## Exercices Vidéo 12
-
-*montrer le problème suivant L=[[1]]*5 et demander une solution pour ne pas avoir de ref. partagées
-
-* exo pour voir jusqu'à quelle taille de chaîne de caractères (et quelle taille d'entier) Python arrête de faire des références partagées pour optimiser la mémoire. 

@@ -5,6 +5,8 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Les ensembles
+
 ## set
 
 Un set est un ensemble non ordonnées d'objets uniques. Il est 
@@ -29,7 +31,7 @@ set mutable
 frozenset immuable
 ]]
 
->>>>>>>>>> CO12AL-W2-VIDEO11-EXO01.py <<<<<<<<<<
+>>>>>>>>>> CO12AL-W3-VIDEO03-EXO01.py <<<<<<<<<<
 
 nous avons fini la présentation des principaux type de base en Python.
 On a vu que ces types étaient riches et très puissants. Ils constituent

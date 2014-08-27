@@ -8,7 +8,7 @@
 ## synchroniser avec le texte entre crochet 
 
 
-
+## Fonction lambda, programmation fonctionnelle
 
 ## Résumé de la vidéo ( 1 minute)
 
@@ -44,14 +44,13 @@ argument d'une fonction.
 Ouvrons un terminal pour jouer avec les fonction lambda...
 
 
->>>>>>>>>> CO12AL-W3-VIDEO07-EXO01.py <<<<<<<<<< (6 minutes 30 secondes)
+>>>>>>>>>> CO12AL-W4-VIDEO03-EXO01.py <<<<<<<<<< (6 minutes 30 secondes)
 
-Les fonctions map et filter sont plus rapides que les
-boucles for, plus facile à écrire et souvent plus lisibles
-c'est pourquoi il faut les préférer aux boucles for lorsque
-c'est possible, c'est-à-dire lorsque l'on applique une fonction
-à chaque élément d'un objet itérable ou lorsque l'on filtre
-des éléments d'un objet itérable. 
+Les fonctions map et filter offrent une alternative utilisant 
+la programmation fonctionnelle aux boucles for. Cependant, nous
+verrons dans la prochaine vidéo qu'il existe une autre manière de remplacer 
+les boucles for qui est plus intuitive et plus efficace que ces
+fonctions : c'est la compréhension de liste.  
 
 XXX je ne suis pas du tout sûr de tout ça et à nouveau je pense qu'on
 ne devrait pas faire une vidéo là dessus XXX

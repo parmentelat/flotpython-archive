@@ -5,6 +5,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Processus d'importation des modules
 
 ## Sujet de la vidéo ()
 
@@ -15,7 +16,7 @@ plusieurs étapes qu'il est important de bien comprendre.
 Ouvrons un terminal interactif pour jouer avec le processus
 d'importation des modules...
 
->>>>>>>>>> INCLUDE CO12AL-W4-VIDEO03-EXO01.py <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W5-VIDEO02-EXO01.py <<<<<<<<<<
 
 Comme le processus d'importation est une opération coûteuse,
 un module n'est importé qu'une seule fois dans un programme

@@ -5,9 +5,11 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Les listes
+
 ## Résumé de la vidéo (1 minute)
 
-Dans cette vidéo nous allons presenter le type de plus important
+Dans cette vidéo nous allons présenter le type de plus important
 en Python, c'est le type list. La liste est une séquence qui permet 
 de regrouper des objets hétérogènes de n'importe
 quel type. Les objets ne sont jamais stockés directement 

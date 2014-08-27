@@ -5,6 +5,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Classes, instances et méthodes
 
 ## Sujet de la vidéo ()
 
@@ -21,7 +22,7 @@ va créer une nouvelle instance.
 Ouvrons un terminal interactif pour commencer à jouer avec 
 les classes et les instances...
 
->>>>>>>>>> INCLUDE CO12AL-W4-VIDEO06-EXO01.py <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W5-VIDEO05-EXO01.py <<<<<<<<<<
 
 
 ## Conclusion ()

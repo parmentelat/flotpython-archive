@@ -5,6 +5,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Conception d'itérateurs
 
 ## Sujet de la vidéo ()
 
@@ -31,7 +32,7 @@ dire que vous pourrez exploiter toute la puissance
 des itérateurs pour vos objets.  Ouvrons un éditeur
 IDLE pour commencer à jouer avec les itérateurs...
 
->>>>>>>>>> INCLUDE CO12AL-W4-VIDEO10-EXO01.py <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W6-VIDEO02-EXO01.py <<<<<<<<<<
 
 
 ## Conclusion ()

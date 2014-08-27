@@ -1,14 +1,10 @@
 ###################################################################
 
-## Vidéo 1 (101 des modules)
+## Vidéo 1 (Tables de hash)
 
-CO12AL-W3-VIDEO01.txt
-# import - dir - help
+CO12AL-W3-VIDEO01.txt 
 
-## Compléments Vidéo 1
-
--ajouter un lien vers la Python Standard Library
-https://docs.python.org/2/library/index.html
+## Compléments Vidéo 1 
 
 ## Quizz Vidéo 1
 
@@ -17,35 +13,129 @@ https://docs.python.org/2/library/index.html
 
 ###################################################################
 
-## Vidéo 2 (indentation comme syntaxe de base)
+## Vidéo 2 (Les dictionnaires)
 
-CO12AL-W3-VIDEO02.txt
-# indentation - syntaxe minimale - presentation unifiee - 79 cars
+CO12AL-W3-VIDEO02.txt 
 
 ## Compléments Vidéo 2
-
--ajouter un lien vers la PEP 008 (sur les conventions de codage)
-http://legacy.python.org/dev/peps/pep-0008/
--ajouter un lien vers cette FAQ https://docs.python.org/2/faq/design.html#why-are-colons-required-for-the-if-while-def-class-statements
+*voir la construction D=dict(clef1=obj1, clef2=obj2) 
+*voir d.get('marc', '?') et son usage par rapport à d['marc']
+*voir un exemple de dict dans un dict et de l'accès à ses éléments D={'alice': 35, 'enfants':{'bob' : 9, 'charlie' : 6}}
+*expliquer que d.has_key() est ancien et qu'il faut utiliser in 
+maintenant. 
 
 ## Quizz Vidéo 2
 
 ## Exercices Vidéo 2
 
-
 ###################################################################
 
-## Vidéo 3 (if elif else + and/or/not)
-# if avec resultat non booleen
-# operateurs booleens - priorites..
+## Vidéo 3 (Les ensembles)
 
-CO12AL-W3-VIDEO03.txt
+CO12AL-W3-VIDEO03.txt 
 
 ## Compléments Vidéo 3
+*autre fonctions sur les sets non vue dans la vidéo (e.g., <=, <, discard, pop, clear)
+*test de performance sur le test d'appartenance entre list et set
+pour expliquer qu'il faut toujours utiliser des sets
+>>> timeit.timeit(setup= "x = range(2)", stmt = '"c" in x', number = 6000000)
+1.042163089558322
+>>> timeit.timeit(setup= "x = set(range(2))", stmt = '"c" in x', number = 6000000)
+0.32964897792466274
+
+>>> timeit.timeit(setup= "x = range(2)", stmt = '0 in x', number = 6000000)
+0.3086782596151636
+>>> timeit.timeit(setup= "x = set(range(2))", stmt = '0 in x', number = 6000000)
+0.3819173343944584
 
 ## Quizz Vidéo 3
 
 ## Exercices Vidéo 3
+
+###################################################################
+
+## Vidéo 4 (Les références partagées)
+
+CO12AL-W3-VIDEO04.txt 
+
+## Compléments Vidéo 4
+OK references-circulaires.ipynb : une liste infinie; un exemple + utile de reference circulaire
+OK is-id.ipynb : function id(), operateur is,  les entiers implementes comme des singletons
+
+
+* introduire http://pythontutor.com 
+[[construire des exemples montrant des problèmes de ref partagées sur des mutables, e.g., 
+a = [ 1, [2, 3], 4]
+b = a[:]           #shallow copy
+a[0] = 'x'        #ok
+a[1][1] = 'y'     #ref partagée
+]]
+
+* voir copy.copy() pour faire les shallows copies et copy.deepcopy() pour les deep copy 
+* voir sys.getrefcount(1) et expliquer le résultat 
+*assignation: a, b = 1, 2 (tuple unpacking, expliquer que ce sont
+des tuples et qu'il faut le même nombre d'éléments à gauche et à droite) et a=b='spam' avec le problèmes des reférences multiples
+sur un mutable a=b=[1] puis a[0] = 2, et aussi a, b = b, a (et pourquoi ca marche,
+grace au tuple unpacking qui crée la variable temporaire)
+*del a, del L[i:j:k], del d[clef]
+
+
+## Quizz Vidéo 4
+
+## Exercices Vidéo 4
+
+*montrer le problème suivant L=[[1]]*5 et demander une solution pour ne pas avoir de ref. partagées
+
+* exo pour voir jusqu'à quelle taille de chaîne de caractères (et quelle taille d'entier) Python arrête de faire des références partagées pour optimiser la mémoire. 
+
+###################################################################
+
+## Vidéo 5 (Introduction aux modules)
+
+CO12AL-W3-VIDEO05.txt
+# import - dir - help
+
+## Compléments Vidéo 5
+
+-ajouter un lien vers la Python Standard Library
+https://docs.python.org/2/library/index.html
+
+## Quizz Vidéo 5
+
+## Exercices Vidéo 5
+
+
+###################################################################
+
+## Vidéo 6 (L'indentation comme syntaxe de base)
+
+CO12AL-W3-VIDEO06.txt
+# indentation - syntaxe minimale - presentation unifiee - 79 cars
+
+## Compléments Vidéo 6
+
+-ajouter un lien vers la PEP 008 (sur les conventions de codage)
+http://legacy.python.org/dev/peps/pep-0008/
+-ajouter un lien vers cette FAQ https://docs.python.org/2/faq/design.html#why-are-colons-required-for-the-if-while-def-class-statements
+
+## Quizz Vidéo 6
+
+## Exercices Vidéo 6
+
+
+###################################################################
+
+## Vidéo 7 (Les tests if/elif/else et les opérateurs booléens)
+# if avec resultat non booleen
+# operateurs booleens - priorites..
+
+CO12AL-W3-VIDEO07.txt
+
+## Compléments Vidéo 7
+
+## Quizz Vidéo 7
+
+## Exercices Vidéo 7
 
 -opérateurs de tests booléens and, or, not (vu en cours, montrer
 d'autres exemples)
@@ -58,13 +148,13 @@ d'autres exemples)
 
 ###################################################################
 
-## Vidéo 4 (boucle for et itérateurs)
+## Vidéo 8 (Les boucles for et les itérateurs)
 
-CO12AL-W3-VIDEO04.txt
+CO12AL-W3-VIDEO08.txt
 # for sur une sequence - for sur un objet qui a un iterateur -
 # __iter__  / next / StopIteration
 
-## Compléments Vidéo 4
+## Compléments Vidéo 8
 
 -présenter break
 -présenter continue (en expliquant que, comme pour les goto, les sauts
@@ -92,329 +182,9 @@ Si on modifie l'objet, il faut itérer sur copie
 
 Ici, sinon on a une boucle infinie.
 
-## Quizz Vidéo 4
-
-## Exercices Vidéo 4
-
-
-###################################################################
-
-## Vidéo 5 (files)
-# open('w') - close - write - "\n
-# je suggere de mentionner 'with'
-
-CO12AL-W3-VIDEO05.txt
-
-## Compléments Vidéo 5
-
-*donner le lien vers https://docs.python.org/2/tutorial/inputoutput.html#reading-and-writing-files
-*exemple de flush()
-*voire read, tell, seek, writelines
-*introduire json et pickle
-*inroduire le mode b pour ouvrir des fichiers binaires et les autres
-modes utilise (e.g., a, r+)
-*expliquer pourquoi le fichier est un itérateur et n'a pas des itérateurs
-comme les autres types built-in (c'est lié à la manières des OS de gérer
-les accès aux fichiers). 
-*introduire sys.stdout (comparer avec print), sys.stdin (comparer 
-sys.stdin.readline() avec raw_input), et sys.stderr
-*montrer que sys.stdout n'est q'une variable qui peut référencer un 
-autre fichier. Comme print écrit dans sys.stdout, c'est un moyen simple
-de rediriger les print vers un fichier. 
-*en complément introduire le module logging (ça va bien ici, mais
-si ça fait trop de compléments, on peut le bouger en semaine 6 ou 7)
-avec les références https://docs.python.org/2/library/logging.html
-et https://docs.python.org/2/howto/logging.html#logging-basic-tutorial
-
-
-
-## Quizz Vidéo 5
-
-## Exercices Vidéo 5
-
-
-###################################################################
-
-## Vidéo 6 (while)
-
-CO12AL-W3-VIDEO06.txt
-
-## Compléments Vidéo 6
--voir le break et le continue (déjà vu pour for, mais
-à revoir dans le contexte du while)
--voir le else du while 
-XXX OMG! and I thought I knew a lot about python!!  :)
-xxx je suggere de zapper le else du while completement
-
-## Quizz Vidéo 6
-
-## Exercices Vidéo 6
-
-x='spam'
-while x:
-    print x
-    x = x[1:]
-
-
-
-
-###################################################################
-
-## Vidéo 7 (fonction lambda, map, filter)
-# xxx je suggere d'enlever carrement cette video et de la remplacer
-# par des complements aux comprehensions
-# ce qui est bien dans l'exo est que pour la premiere fois on manipule
-# des objets fonction, ca ca vaut le coup de le garder
-
-CO12AL-W3-VIDEO07.txt
-
-## Compléments Vidéo 7
-
-*voir reduce 
-*voir exec et eval. Ça n'est pas en lien direct, mais il faut
-le voir et il y a peu de compléments pour cette vidéo alors
-autant le placer ici. 
-
-## Quizz Vidéo 7
-
-## Exercices Vidéo 7
-
-*faire de beaux exemples pratiques d'application de map et filter
-
-xxx map et filter ne servent plus a rien avec les comprehensions de
-liste, et du coup lambda sert a peine.
-j'ai deja un complement for-comprehension qui touche a ca
-il faut lur apprendre a coder proprement avec les comprehensions, et
-leur dire ensuite que oui ya aussi map et filter et que dans certains
-cas ils peuvent esperer gagner un peu de performance..
-
-IMHO ce qui reste a expliquer la-dedans c'est 
-* reduce, qui lui reste tres utile
-* eval et exec 
-
-
-###################################################################
-
-## Vidéo 8 (compréhension listes, set, dictionnaires)
-
-CO12AL-W3-VIDEO08.txt
-
-## Compléments Vidéo 8
-
-*Comparer la performance des boucles for, de map, de la compréhension. 
-S'inspirer de :
-http://www-sop.inria.fr/members/Arnaud.Legout/EDU/Python/performanceFonctions2.py
-
-*Donner le lien vers http://python-history.blogspot.fr/2010/06/from-list-comprehensions-to-generator.html 
-pour une discussion intéressante sur la compréhension, les expression
-génératrice et Python 2 et 3.
-
-*montrer le cas d'une compréhension sur plusieurs variables et montrer
-comment lire cette expression, par exemple, 
-[(x,y) for x in range(5) if x % 2 == 0 
-	     for y in range(5) if y % 2 == 1]
-
-
-L = []
-for x in range(5):
-    if x % 2 == 0:
-        for y in range(5):
-            if y % 2 == 1:
-                L.append((x,y))
-
-
-Expliquer que la compréhension sur plusieurs variables est difficile
-à lire et que c'est par conséquent une mauvaise idée en général.
-
 ## Quizz Vidéo 8
 
 ## Exercices Vidéo 8
 
 
-###################################################################
 
-## Vidéo 9 (fonctions : objet, passage d'arguments par ref, return, polymorphisme)
-
-CO12AL-W3-VIDEO09.txt
-
-## Compléments Vidéo 9
-
-* cas pratique de plusieurs return 
-* effet de bord du passage par ref de mutable (illustration de la video)
-* expliquer comment ne pas modifier un mutable passé en argument:
-reprendre l'exemple de la video
-
-L = []
-def h(a):
-	a.append(1)
-
-Comment ne pas modifier L. Trois possibilité:
--à l'appel h(L[:]) on passe une shallow copy, ça permet
-de choisir la modification par effect de bord à l'appel
-(peut-être utile lorsque la fonction fait autre chose avec L)
--à l'appel si on veut une exception en cas de tentative
-de modification (utile pour les librairies) h(tuple(L))
--dans h en ajoutant a = a[:] avant le append pour garantir
-que h ne modifiera jamais L. 
--parler de la documentation automatique sur les fonctions 
-et de l'argument __doc__ utilisé par help()
-def func(a, b, c, d):
-    """
-    Cette fonction imprime 4 parametres a la suite
-    """
-    print a, b, c, d
-	
->>>print func.__doc__
- Cette fonction imprime 4 parametres a la suite
->>>help(func)
-Help on function func in module __main__:
-
-func(a, b, c, d)
-    Cette fonction imprime 4 parametres a la suite
-
-
-## Quizz Vidéo 9
-
-## Exercices Vidéo 9
-
-
-###################################################################
-
-## Vidéo 10 (fonctions : scope des variables, regle LEG)
-
-CO12AL-W3-VIDEO010.txt
-
-## Compléments Vidéo 10
-
--parler du scope built-in et montrer le module built-in. 
--expliquer que les variables dans l'entête des fonctions sont
-aussi des variables locales. 
--montrer que l'on peut redéfinir un nom built-in et que c'est
-une mauvaise idée. 
--rappeler qu'il faut utiliser des bons noms de variables et qu'il
-faut éviter d'utiliser localement un nom de variable globales
-(ça peut conduire à des erreurs ou a des comportement étranges
-que j'expliquerai plus tard dans les vidéos). 
--montrer est expliquer l'erreur UnboundLocalError
-var = 0
-def func():
-    print var
-
-def func2():
-    print var
-    var = 1
-
-func()
-func2()
->>> 
-0
-
-Traceback (most recent call last):
-  File "C:/Users/alegout/Desktop/test.py", line 12, in <module>
-    func2()
-  File "C:/Users/alegout/Desktop/test.py", line 8, in func2
-    print var
-UnboundLocalError: local variable 'var' referenced before assignment
-
-## Quizz Vidéo 10
-
-## Exercices Vidéo 10
-
--nombreux exemple de scope avec fonctions englobantes. 
-
-###################################################################
-
-## Vidéo 11 (fonctions : scope global)
-
-CO12AL-W3-VIDEO011.txt
-
-## Compléments Vidéo 11
-
-*montrer que global crée une variable global si elle n'existe
-pas encore. 
-x = 1
-def f():
-    global y
-	y = x + 1
-print y # n'existe pas encore
-f()
-print y # existe dans le scope global. 
-
-*revenir sur les bonnes pratiques de programmation avec global (en 
-limitant son usage et en favorisant les retours explicite de fonction). 
-
-## Quizz Vidéo 11
-
-## Exercices Vidéo 11
-
-
-###################################################################
-
-## Vidéo 12 (fonctions : passage d'arguments)
-
-CO12AL-W3-VIDEO012.txt
-
-## Compléments Vidéo 12
-
-*introduire sys.argv en remarquant que c'est une forme *Targs
-et introduire le module argparse. 
-*donner des exemples pratiques de forme * et ** (si tu en as)
-*montrer un exemple de mélange des 4 déclarations d'arguments
-def f(a, c = 3, *d, **e)
-*montrer l'erreur qu'il peut se produire lorsque l'on combine
-des formes positionnelles et des formes nommés lors de l'appel.
-def func(a, b, c, d):
-    print a, b, c, d
-func(1, c = 3, *(2,), **{'d':4})
->>>
-1 2 3 4
->>> func(1, b = 3, *(2,), **{'d':4})
-Traceback (most recent call last):
-  File "<pyshell#170>", line 1, in <module>
-    func(1, b = 3, *(2,), **{'d':4})
-TypeError: func() got multiple values for keyword argument 'b'
-
-Expliquer que les arguments ne sont pas pris dans l'ordre 
-de l'appel, mais les arguments positionnel sont utilisé en premier. 
-les arguments ordonnés et *args, ne donnent pas le nom des arguments, donc ils ne peut être que positionnel. Par contre, les arguments nommés et **args fournissent le nom. Ils sont donc traités en dernier. 
-C'est expliqué dans Dans Python Language Reference: 5.3.4. Calls
-https://docs.python.org/2/reference/expressions.html#calls
-
-*montrer le piège des arguments par défaut qui ne sont initialisé
-qu'une fois à la création de l'objet fonction, donc problème avec 
-les mutables
-https://docs.python.org/2/tutorial/controlflow.html#default-argument-values
-def f(a, L = []):
-    L.append(a)
-    print L
-f(1)
-f(2)
-f(3)
->>>
-[1]
-[1, 2]
-[1, 2, 3]
-
-Solutions
-def f(a, L = None):
-    if L is None:
-        L = []
-    L.append(a)
-    print L
-f(1)
-f(2)
-f(3)
->>>
-[1]
-[2]
-[3]
-
-
-
-
-## Quizz Vidéo 12
-
-## Exercices Vidéo 12
-
-
-###################################################################

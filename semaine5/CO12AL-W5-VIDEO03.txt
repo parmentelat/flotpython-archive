@@ -5,6 +5,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Importation de modules et espace de nommage
 
 ## Sujet de la vidéo ()
 
@@ -15,7 +16,7 @@ Ouvrons un terminal interactif pour jouer avec les importations
 de modules...
 
 
->>>>>>>>>> INCLUDE CO12AL-W4-VIDEO03-EXO01.py <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W5-VIDEO03-EXO01.py <<<<<<<<<<
 
 En résumé, un module est un objet mutable que l'on peut 
 modifier après importation. 

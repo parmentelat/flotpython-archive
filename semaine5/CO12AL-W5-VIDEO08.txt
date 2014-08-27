@@ -5,6 +5,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Assignation et référencement des variables et des attributs
 
 ## Sujet de la vidéo (2 minutes 20 secondes)
 
@@ -59,7 +60,7 @@ une variable peut-être assigné de plusieurs manières. Regardons les...
 global 
 ]]
 
->>>>>>>>>> INCLUDE CO12AL-W4-VIDEO09-SLIDE01.pptx () <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W5-VIDEO08-SLIDE01.pptx () <<<<<<<<<<
 
 ## Conclusion ()
 

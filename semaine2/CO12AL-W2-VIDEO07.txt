@@ -5,6 +5,8 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Introduction aux boucles for et aux fonctions
+
 ## Boucle for (15 secondes)
 
 Un principe fondateur de la programmation est la factorisation du code, 

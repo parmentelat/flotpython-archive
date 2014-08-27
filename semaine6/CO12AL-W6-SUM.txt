@@ -1,10 +1,20 @@
 ###################################################################
 
-## Vidéo 1 ()
+## Vidéo 1 (Fonctions génératrices)
 
 CO12AL-W6-VIDEO01.txt
 
 ## Compléments Vidéo 1
+
+*parler des expressions génératrice et de leur intérêt (faible occupation
+mémoire)
+(x**6 + 3*x for x in xrange(100000000))
+
+*redonner le lien vers http://python-history.blogspot.fr/2010/06/from-list-comprehensions-to-generator.html 
+déjà cité en W3, VIDEO8
+*faire un test de performance avec timeit pour montrer que les 
+expressions génératrices sont un peu plus lente que les compréhensions
+
 
 ## Quizz Vidéo 1
 
@@ -13,7 +23,9 @@ CO12AL-W6-VIDEO01.txt
 
 ###################################################################
 
-## Vidéo 2 ()
+## Vidéo 2 (Conception d'itérateurs)
+
+CO12AL-W6-VIDEO02.txt
 
 ## Compléments Vidéo 2
 
@@ -21,15 +33,28 @@ CO12AL-W6-VIDEO01.txt
 
 ## Exercices Vidéo 2
 
+Donnes des exos pratiques de création d'objets avec des itérateurs
+
 ###################################################################
 
-## Vidéo 3 ()
+## Vidéo 3 (Exceptions)
+
+CO12AL-W6-VIDEO03.txt
 
 ## Compléments Vidéo 3
+
+*parler des Warning et du module warning
+https://docs.python.org/2.7/library/warnings.html#module-warnings
+
+*donner la référence de la documentation de toutes les 
+exceptions built-in https://docs.python.org/2.7/library/exceptions.html#bltin-exceptions
+
 
 ## Quizz Vidéo 3
 
 ## Exercices Vidéo 3
+
+
 
 ###################################################################
 

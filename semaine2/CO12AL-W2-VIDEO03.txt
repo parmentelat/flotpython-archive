@@ -5,6 +5,8 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Les séquences
+
 ## Résumé de la vidéo (20s)
 
 Nous allons aborber un ensemble de types de base en Python

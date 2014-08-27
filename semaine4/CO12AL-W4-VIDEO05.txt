@@ -5,6 +5,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Les fonctions
 
 ## Résumé de la vidéo ()
 
@@ -15,7 +16,7 @@ d'une fonction.
 
 ouvrons un terminal pour jouer avec les fonctions...
 
->>>>>>>>>> CO12AL-W3-VIDEO09-EXO01.py <<<<<<<<<< ()
+>>>>>>>>>> CO12AL-W4-VIDEO05-EXO01.py <<<<<<<<<< ()
 
 
 ## conclusion ()

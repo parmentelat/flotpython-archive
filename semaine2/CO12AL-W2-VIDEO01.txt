@@ -5,6 +5,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Introduction au typage dynamique
 
 ## Sujet de la semaine (18s)
 

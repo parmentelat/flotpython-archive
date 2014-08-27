@@ -5,6 +5,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Portée des variables dans les fonctions : règle LEG
 
 ## Résumé de la vidéo (1 minute 20 secondes)
 
@@ -45,7 +46,7 @@ Ouvrons un éditeur IDLE pour commencer à jouer avec la
 notion de scope. 
 
 
->>>>>>>>>> CO12AL-W3-VIDEO10-EXO01.py <<<<<<<<<< (7 minutes 30)
+>>>>>>>>>> CO12AL-W4-VIDEO06-EXO01.py <<<<<<<<<< (7 minutes 30)
 
 
 ## conclusion ()

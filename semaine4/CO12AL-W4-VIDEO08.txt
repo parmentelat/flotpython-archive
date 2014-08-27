@@ -5,6 +5,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Passage d'arguments et appel de fonctions
 
 ## Résumé de la vidéo (40 secondes)
 
@@ -23,7 +24,7 @@ Nous allons voir dans cette vidéo les 4 manières de déclarer des
 arguments et les 4 manières de passer des arguments à une fonction.
 Ouvrons un terminal pour jouer avec les arguments d'une fonction...
 
->>>>>>>>>> CO12AL-W3-VIDEO12-EXO01.py <<<<<<<<<< (8 minutes 40 secondes)
+>>>>>>>>>> CO12AL-W4-VIDEO08-EXO01.py <<<<<<<<<< (8 minutes 40 secondes)
 
 
 ## conclusion ()

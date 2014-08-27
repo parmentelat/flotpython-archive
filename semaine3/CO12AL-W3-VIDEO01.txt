@@ -5,6 +5,30 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Tables de hash
+
+## Résumé de la semaine
+
+## Sujet de la semaine ()
+
+En Python tout est un objet. C'est une caractéristique centrale de Python qui permet une 
+grande uniformité dans la syntaxe, et donc une grande simplicité de programmation. Je vous
+rappelle qu'autour de cette notion d'objets s'articulent les trois notions clefs : 
+[les références partagées], [les itérateurs], et [les espaces de nommage]. 
+[[
+références partagées
+itérateurs
+espace de nommage
+]]
+
+Nous avons vu la semaine dernière certains types de base.
+Cette semaine nous allons couvrir les derniers types de base
+qu'il nous reste à voir, notamment les dictionnaires et les set, 
+puis nous reviendrons sur le typage dynamique et nous discuterons
+des références partagées. Pour finir, nous approfondirons le 
+fontionnement des test if/else et des boucles for avec en particulier
+une présentation des itérateurs côté utilisateur. 
+
 ## tables de hash
 Nous avons vu jusqu'à maintenant les types séquences qui sont
 des types très puissants combinant souplesse et facilité d'utilisation. 
@@ -12,9 +36,9 @@ Mais est-ce qu'il y a des limitations à l'utilisation des types
 séquences. 
 Ouvrons un terminal interactif pour répondre à cette question...
 
->>>>>>>>>> CO12AL-W2-VIDEO09-EXO01.py <<<<<<<<<<
+>>>>>>>>>> CO12AL-W3-VIDEO01-EXO01.py <<<<<<<<<<
 
->>>>>>>>>> CO12AL-W2-VIDEO09-SLIDE01.py (5 minutes) <<<<<<<<<<
+>>>>>>>>>> CO12AL-W3-VIDEO01-SLIDE01.pptx (5 minutes) <<<<<<<<<<
 
 Comme la fonction de hash fait un calcul sur la valeur de la clef
 et que pour une même clef, elle doit toujours donner

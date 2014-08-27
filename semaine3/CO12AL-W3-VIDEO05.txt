@@ -5,23 +5,7 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
-
-## Sujet de la semaine ()
-
-En Python tout est un objet. C'est une caractéristique centrale de Python qui permet une 
-grande uniformité dans la syntaxe, et donc une grande simplicité de programmation. Je vous
-rappelle qu'autour de cette notion d'objets s'articulent les trois notions clefs : 
-[les références partagées], [les itérateurs], et [les espaces de nommage]. Nous avons vu 
-la semaine dernière les types de base et la notion de références partagées. Nous verrons 
-cette semaine en détails les instructions if else et for, les fonctions et 
-nous introduirons la notion d'itérateur, notion clef en Python pour parcourir
-de manière intuitive et efficace des objets. 
-
-[[
-références partagées
-itérateurs
-espace de nommage
-]]
+## TITRE : Introduction aux modules
 
 ## Résumé de la vidéo ()
 
@@ -62,7 +46,7 @@ graphiques, communiquer sur Internet, et bien plus encore.
 
 Ouvrons un terminal pour commencer à jouer avec les modules...
 
->>>>>>>>>> INCLUDE CO12AL-W3-VIDEO01-EXO01.py <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W3-VIDEO05-EXO01.py <<<<<<<<<<
 
 On a vu une introduction rapide à l'utilisation des modules de la
 librairie standard. 

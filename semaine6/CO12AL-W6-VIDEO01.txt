@@ -5,19 +5,10 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Fonctions génératrices
 
 ## Sujet de la semaine ()
-
-Cette semaine nous allons voir deux sujets très importants.
-Nous allons finir notre présentation des itérateurs en expliquant
-comment vous pouvez simplement créer vos propre itérateurs. Puis
-nous parlerons des modules et des espaces de nommage. Je vous 
-rappelle que les trois notions fondamentales en Python sont 
-les références partagées, les itérateurs et les espaces
-de nommage. Nous avons déjà couvert les références partagées, 
-nous finirons les itérateurs cette semaine, et nous 
-commencerons les espaces de nommage cette semaine pour les finir
-la semaine prochaine. 
+TODO
 
 ## Sujet de la vidéo ()
 
@@ -37,7 +28,7 @@ successifs.
 Une fonction génératrice se comporte différemment. Ouvrons un 
 terminal pour commencer à jouer avec des fonction génératrices...
 
->>>>>>>>>> INCLUDE CO12AL-W4-VIDEO01-EXO01.py <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W6-VIDEO01-EXO01.py <<<<<<<<<<
 
 ## Conclusion ()
 

@@ -5,6 +5,11 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+## TITRE : Modules et espaces de nommage
+
+## Résumé de la semaine()
+
+TODO
 
 ## Sujet de la vidéo ()
 
@@ -19,7 +24,7 @@ de nommages.
 Nous allons voir dans cette vidéo la subtilité des espaces 
 de nommage. 
 
->>>>>>>>>> INCLUDE CO12AL-W4-VIDEO02-SLIDE01.pptx (5 minutes) <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W5-VIDEO01-SLIDE01.pptx (5 minutes) <<<<<<<<<<
 
 ## Conclusion ()
 
