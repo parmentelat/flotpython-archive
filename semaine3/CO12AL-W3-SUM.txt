@@ -101,6 +101,7 @@ Ici, sinon on a une boucle infinie.
 
 ## Vidéo 5 (files)
 # open('w') - close - write - "\n
+# je suggere de mentionner 'with'
 
 CO12AL-W3-VIDEO05.txt
 
@@ -141,8 +142,9 @@ CO12AL-W3-VIDEO06.txt
 ## Compléments Vidéo 6
 -voir le break et le continue (déjà vu pour for, mais
 à revoir dans le contexte du while)
--voir le else du while
-
+-voir le else du while 
+XXX OMG! and I thought I knew a lot about python!!  :)
+xxx je suggere de zapper le else du while completement
 
 ## Quizz Vidéo 6
 
@@ -159,6 +161,10 @@ while x:
 ###################################################################
 
 ## Vidéo 7 (fonction lambda, map, filter)
+# xxx je suggere d'enlever carrement cette video et de la remplacer
+# par des complements aux comprehensions
+# ce qui est bien dans l'exo est que pour la premiere fois on manipule
+# des objets fonction, ca ca vaut le coup de le garder
 
 CO12AL-W3-VIDEO07.txt
 
@@ -174,6 +180,17 @@ autant le placer ici.
 ## Exercices Vidéo 7
 
 *faire de beaux exemples pratiques d'application de map et filter
+
+xxx map et filter ne servent plus a rien avec les comprehensions de
+liste, et du coup lambda sert a peine.
+j'ai deja un complement for-comprehension qui touche a ca
+il faut lur apprendre a coder proprement avec les comprehensions, et
+leur dire ensuite que oui ya aussi map et filter et que dans certains
+cas ils peuvent esperer gagner un peu de performance..
+
+IMHO ce qui reste a expliquer la-dedans c'est 
+* reduce, qui lui reste tres utile
+* eval et exec 
 
 
 ###################################################################

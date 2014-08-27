@@ -2,38 +2,38 @@
 
 ## Prenons une liste de 3 éléments
 
-liste = [1, 2, 3]
+L = [1, 2, 3]
 
 ## essayons d'appeler next() sur la liste L
-#liste.next()
+#L.next()
 
-## ça retourne une exception parce que la list L
+## ça retourne une exception parce que la liste L
 ## n'est pas un itérateur. Par contre les listes ont
 ## des itérateurs.
 
 ## recupérons l'itérateur de cette liste
 
-iterateur = liste.__iter__()
+it = L.__iter__()
 
 ## nous voyons que la liste et l'itérateur sont différents
-print liste is iterateur
+print L is it
 
 ## par contre si on appelle __iter__() sur l'itérateur
 ## on remarque de l'on a le même objet, donc
 ## l'appelle de __iter__() sur un itérateur retourne bien
 ## l'itérateur lui même.
 
-iterateur2 = iterateur.__iter__()
+it2 = it.__iter__()
 
-print iterateur is iterateur2
+print it is it2
 
 ## on peut faire directement une boucle for sur l'itérateur
 ## c'est équivallent à faire une boucle for sur l'objet
 ## qui a cet itérateur puisque la boucle for appélera toujours
 ## en premier la fonction __iter__() sur l'objet.
 
-for element in iterateur:
-    print element,
+for i in it:
+    print i,
 
 ## par contre, une fois que l'itérateur a retourné tous les
 ## éléments, next() retournera toujours StopIteration, on ne
@@ -42,16 +42,16 @@ for element in iterateur:
 
 #iterateur.next()
 
-for element in iterateur:
-    print element, 
+for i in it:
+    print i, 
 
-iterateur3 = liste.__iter__() # nouvel itérateur
+it3 = L.__iter__() # nouvel itérateur
 
 print
-print iterateur is iterateur3
+print it is it3
 
-for element in iterateur3:
-    print element,
+for i in it3:
+    print i,
     
 ## Il faut faire attention lorsque l'on manipule directement des itérateurs
 ## de générer un nouvel itérateur à chaque fois que l'on fait une nouvelle
