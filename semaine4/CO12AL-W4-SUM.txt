@@ -206,6 +206,47 @@ Traceback (most recent call last):
     b = list(a + i for i in range(10))
 NameError: global name 'a' is not defined
 
+*faire un notebook sur les règles pour ne pas tomber dans les
+cas dangereux:
+   -ne jamais utiliser comme nom de variable locale
+   un nom qui existe en global
+   -toujours mettre la directive global avec l'utilisation
+   de la variable.
+puis montrer quelques exemples d'erreurs quand on ne suit
+pas ses règles
+1) binding static au scope local pour les fonction uniquement
+(optimisation de CPython) et la fameuse UnboundLocalError
+var = 0
+def func():
+    print var
+    var = 1
+>>> func()
+
+Traceback (most recent call last):
+  File "<pyshell#102>", line 1, in <module>
+    func()
+  File "C:/Users/alegout/Desktop/test2.py", line 25, in func
+    print var
+UnboundLocalError: local variable 'var' referenced before assignment
+
+x = "x dans module"
+def f():
+    if False:
+        x = "x dans f()"
+    print x
+f()
+>>> 
+Traceback (most recent call last):
+  File "C:/Users/alegout/Desktop/temp.py", line 6, in <module>
+    f()
+  File "C:/Users/alegout/Desktop/temp.py", line 5, in f
+    print x
+UnboundLocalError: local variable 'x' referenced before assignment
+
+2) le bug http://bugs.python.org/issue532860
+
+3) directive global apres l'utilisation de la variable
+
 ## Quizz Vidéo 9
 
 ## Exercices Vidéo 9

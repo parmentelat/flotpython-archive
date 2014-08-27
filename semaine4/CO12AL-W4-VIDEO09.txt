@@ -6,7 +6,7 @@
 ## synchroniser avec le texte entre crochet 
 
 
-## Sujet de la vidéo ()
+## Sujet de la vidéo (2 minutes 20 secondes)
 
 Nous avons vu la notion de scope lorsque l'on a parlé des fonctions,
 la notion d'espace de nommage lorsque l'on a parlé de modules,
@@ -59,7 +59,7 @@ une variable peut-être assigné de plusieurs manières. Regardons les...
 global 
 ]]
 
->>>>>>>>>> INCLUDE CO12AL-W4-VIDEO09-SLIDE01.pptx <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W4-VIDEO09-SLIDE01.pptx () <<<<<<<<<<
 
 ## Conclusion ()
 
