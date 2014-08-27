@@ -1,0 +1,41 @@
+## FORMAT DU FICHIER
+## Tout ce qui commence avec un ## est un commentaire
+##
+## le texte entre double crochets ouvrants et fermants
+## est à afficher en surimpression pendant que je parle et à 
+## synchroniser avec le texte entre crochet 
+
+
+## Sujet de la vidéo ()
+
+Depuis que nous avons commencé à jouer avec Python, vous les 
+avez sans doute souvent rencontré, mais vous ne savez toujours
+pas quoi en faire, ni exactement ce que c'est...
+Ce sont les exceptions. 
+
+Les exceptions sont le moyen en Python de gérer toutes
+les erreurs de fonctionnement de votre programme. Mais il y 
+a deux choses importantes à savoir sur les exceptions. 
+Premièrement, les exceptions 
+est très [performante] en Python, c'est d'ailleurs pour cela 
+que l'exception StopIteration est utilisé par les itérateurs. 
+Deuxièmement, une exception n'est pas une fatalité qui conduit
+à l'arrêt du programme, on peut [capturer les exceptions] et prévoir
+des traitements spécifiques pour continuer le programme. C'est
+ce que nous allons voir dans cette vidéo.
+
+[[
+[Les exceptions sont performantes]
+[On peut capturer les exceptions]
+]]
+
+Et comme en Python tout est un objet, les exceptions aussi sont 
+des objets. 
+Ouvrons maintenant un éditeur IDLE pour commencer à jouer 
+avec les exceptions...
+
+>>>>>>>>>> INCLUDE CO12AL-W4-VIDEO11-EXO01.py <<<<<<<<<<
+
+
+## Conclusion ()
+

@@ -256,7 +256,7 @@ englobantes, etc.)
 
 ###################################################################
 
-## Vidéo 10 (Scopes et espaces de nommage: les pièges)
+## Vidéo 10 (Itérateurs côté concepteurs)
 
 ## Compléments Vidéo 10
 
@@ -264,11 +264,20 @@ englobantes, etc.)
 
 ## Exercices Vidéo 10
 
+Donnes des exos pratiques de création d'objets avec des itérateurs
+
 ###################################################################
 
-## Vidéo 11 ()
+## Vidéo 11 (exceptions)
 
 ## Compléments Vidéo 11
+
+*parler des Warning et du module warning
+https://docs.python.org/2.7/library/warnings.html#module-warnings
+
+*donner la référence de la documentation de toutes les 
+exceptions built-in https://docs.python.org/2.7/library/exceptions.html#bltin-exceptions
+
 
 ## Quizz Vidéo 11
 
