@@ -48,7 +48,10 @@ https://docs.python.org/2.7/library/warnings.html#module-warnings
 
 *donner la référence de la documentation de toutes les 
 exceptions built-in https://docs.python.org/2.7/library/exceptions.html#bltin-exceptions
+et du tutorial Python sur les exceptions
+https://docs.python.org/2.7/tutorial/errors.html
 
+*parler de assert
 
 ## Quizz Vidéo 3
 
@@ -58,7 +61,7 @@ exceptions built-in https://docs.python.org/2.7/library/exceptions.html#bltin-ex
 
 ###################################################################
 
-## Vidéo 4 ()
+## Vidéo 4 (Conception d'exceptions personnalisées)
 
 ## Compléments Vidéo 4
 

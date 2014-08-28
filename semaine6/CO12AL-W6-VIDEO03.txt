@@ -15,10 +15,12 @@ pas quoi en faire, ni exactement ce que c'est...
 Ce sont les exceptions. 
 
 Les exceptions sont le moyen en Python de gérer toutes
-les erreurs de fonctionnement de votre programme. Mais il y 
+les erreurs de fonctionnement de votre programme. 
+Et comme en Python tout est un objet, les exceptions aussi sont 
+des objets. Mais il y 
 a deux choses importantes à savoir sur les exceptions. 
 Premièrement, les exceptions 
-est très [performante] en Python, c'est d'ailleurs pour cela 
+sont très [performantes] en Python, c'est d'ailleurs pour cela 
 que l'exception StopIteration est utilisé par les itérateurs. 
 Deuxièmement, une exception n'est pas une fatalité qui conduit
 à l'arrêt du programme, on peut [capturer les exceptions] et prévoir
@@ -30,13 +32,26 @@ ce que nous allons voir dans cette vidéo.
 [On peut capturer les exceptions]
 ]]
 
-Et comme en Python tout est un objet, les exceptions aussi sont 
-des objets. 
+ 
 Ouvrons maintenant un éditeur IDLE pour commencer à jouer 
 avec les exceptions...
 
->>>>>>>>>> INCLUDE CO12AL-W6-VIDEO03-EXO01.py <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W6-VIDEO03-EXO01.py (6 minutes 50 s) <<<<<<<<<<
 
 
 ## Conclusion ()
+Vous avez remarqué que je faisais toujours suivre une clause except
+d'un nom d'exception. Ça n'est pas une obligation, je peux avoir
+une clause except sans nom d'exception, et dans ce cas, ma clause
+va capturer toutes les exceptions. C'est toujours une très mauvaise
+idée de faire ça parce que vous risquez de capturer des exceptions
+que vous n'avez pas prévu ou que vous ne connaissez pas. Votre
+traitement ne sera donc pas approprié et votre programme risque
+de planter sans message d'erreur ou avec un message d'erreur
+ne correspondant pas au problème. 
 
+Pour finir, vous devez sans doute vous demander comment connaître les
+exceptions à capturer et leur signification. Il n'y a ici
+aucune magie, la seule solution est de lire la documentation
+pour connaître les exceptions built-in et la documentation
+des modules que vous utilisez.  

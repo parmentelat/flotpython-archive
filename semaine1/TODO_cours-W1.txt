@@ -17,7 +17,7 @@ intérêt.
 -discuter du zen de python
 -discuter de l'intêret de l'indentation comme base de la syntaxe (montrer
 une fonction avec accolades et ; et une fonction Python standard)
-
+-expliquer la différence entre terminal interactif et éditeur IDLE
 -inroduire dir() et help()
 
 -explique de que l'on couvre des notions importantes dans les compléments
