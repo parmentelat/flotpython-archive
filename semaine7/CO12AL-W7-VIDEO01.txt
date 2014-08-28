@@ -5,12 +5,15 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
+##  TITRE : Méthodes statiques et de classe
 
 ## Sujet de la semaine (18s)
 
 
 
 ## Résumé de la vidéo (20s)
+
+Nous avons vu que les 
 
 
 

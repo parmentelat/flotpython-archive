@@ -24,6 +24,8 @@ une fonction avec accolades et ; et une fonction Python standard)
 à une lettre pour simplifier la saisie, mais il faut
 en réaliter utiliser de bons noms de variables. 
 
+-expliquer les anglisism librairie, backslash, underscore 
+
 -explique de que l'on couvre des notions importantes dans les compléments
 de cours. 
 
