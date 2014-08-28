@@ -10,16 +10,19 @@
 ## Sujet de la semaine (18s)
 
 Cette semaine nous allons aborder deux sujets importants. Le premier
-sujet est sur les notions d'objets, de variables et de typage
-dynamique qui représentent une des clefs de la compréhension de
-Python. Le deuxième sujet est sur la présentation des types de base en
+sujet concerne les notions d'objets, de variables et de typage
+dynamique, qui représentent une des clefs de la compréhension de
+Python. C'est l'objet de cette vidéo.
+
+Le deuxième sujet est sur la présentation des types de base en
 Python qui sont des objets puissants, polyvalents, mais très souples et
-faciles à utiliser.
+faciles à utiliser. Nous les verrons les uns après les autres jusqu'au
+début de la semaine prochaine.
 
 ## Résumé de la vidéo (20s)
 
-Dans cette vidéo, je vais introduire les notions d'objets, de
-variables et de typage dynamique. À la fin de cette vidéo, vous saurez
+Dans cette vidéo, je vais introduire les notions d'objet, de
+variable et de typage dynamique. À la fin de cette vidéo, vous saurez
 assigner un objet à une variable et vous aurez compris les bases du
 typage dynamique en Python.
 
@@ -39,7 +42,6 @@ Objet
 
 Type
 	information et méthodes par défaut
-
 ]]
 
 >>>>>>>>>> INCLUDE CO12AL-W2-VIDEO1-SLIDE01.pptx <<<<<<<<<<
@@ -59,18 +61,22 @@ détail cette notion de variable...
 a = 1
 ]]
 
-## Notion de variables (50s)
+## Notion de variable (50s)
 
 Une variable est un nom que l'on donne à un objet pour le retrouver en
 mémoire.
 
 Il y a trois règles importantes pour le nom d'une variable en Python.
-Une variable peut être composée [de tirets bas] et d'une suite
-quelconque de caractères alphanumériques, c'est-à-dire les [lettres de
-l'alphabet en minuscule], [en majuscule] et les [chiffres de 0 à 9].  Une
-variable commence soit par une [lettre soit pas un tiret bas], mais
-[jamais par un chiffre].  Les majuscules et minuscules sont prises en
-compte, donc [Ma_variable] est différent de [ma_variable].
+Une variable peut être composée d'une suite quelconque de caractères
+alphanumériques, c'est-à-dire les [lettres de l'alphabet en
+minuscule], [en majuscule] et les [chiffres de 0 à 9].  
+Le [tiret bas] est également autorisé. 
+
+Une variable commence soit par une [lettre soit par un tiret bas],
+mais [jamais par un chiffre].
+
+Les majuscules et minuscules sont prises en compte, donc [Ma_variable]
+est différent de [ma_variable].
 
 Il est recommandé d'utiliser des noms explicites de variable, de tout
 écrire en minuscule, et de séparer les mots par des tirets bas. Par
@@ -78,10 +84,10 @@ exemple, [moyenne_age_francais] est un bon nom de variable, meilleur que
 [moy_age_f] et bien meilleur que simplement [x]
 
 [[
-_
 abcdefghijklmnopqrstuvwxyz
 ABCDEFGHIJKLMNOPQRSTUVWXYZ
 0123456789
+_
 
 ma_variable (vert)
 _ma_variable (vert)

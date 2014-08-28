@@ -1,7 +1,8 @@
 # -*- coding: iso-8859-15 -*-
 
-## l'instruction print d'afficher simplement la valeur d'un objet sur le terminal
-## on dit également que l'on affiche une valeur sur la sortie standard
+## l'instruction print permet d'afficher simplement la valeur d'un
+## objet sur le terminal. On dit également que l'on affiche une valeur
+## sur la sortie standard
 
 ## print peut aussi bien accepter une variable (et dans ce cas il affiche
 ## la valeur de l'objet référencé par la variable) ou directement un objet.
@@ -30,7 +31,7 @@ print i, s
 i
 
 ## On voit ainsi la représentation interne de l'objet.
-## c'est souvent équivallent à print (mais pas toujours).
+## C'est la plupart du temps équivalent à print
 ## La représentation interne peut donner des informations
 ## supplémentaires.
 
