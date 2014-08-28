@@ -7,11 +7,11 @@
 
 ##  TITRE : Méthodes statiques et de classe
 
-## Sujet de la semaine (18s)
+## Sujet de la semaine ()
 
 
 
-## Résumé de la vidéo (20s)
+## Résumé de la vidéo ()
 
 Nous avons vu que les méthodes dans les classes devaient 
 obligatoirement avoir comme premier paramètre une instance. 
@@ -33,4 +33,11 @@ ces méthodes des méthodes statiques.
 
 Ouvrons un terminal pour jouer avec les méthodes statiques...
 
->>>>>>>>>> INCLUDE CO12AL-W7-VIDEO01-EXO01.py <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W7-VIDEO01-EXO01.py (8 minutes) <<<<<<<<<<
+
+Les méthodes statiques et de classes permettent de définir des méthodes
+dans une classe qui n'ont pas besoin d'instance pour s'exécuter. 
+Ces deux types de méthode sont proches, on préfèrera la methode 
+statiques lorsque l'on a besoin du même comportement pour toutes
+les sous classes, et la méthode de classe si l'on veut un 
+comportement différencié. 
