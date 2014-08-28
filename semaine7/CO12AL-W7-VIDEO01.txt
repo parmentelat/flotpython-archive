@@ -13,7 +13,24 @@
 
 ## Résumé de la vidéo (20s)
 
-Nous avons vu que les 
+Nous avons vu que les méthodes dans les classes devaient 
+obligatoirement avoir comme premier paramètre une instance. 
+On appelle ces méthodes des méthodes d'instance. Par conséquent, 
+on ne peut pas appeler une méthode d'instance sur une classe 
+si on n'a pas d'instance. 
+
+Dans certains cas, il peut être utile d'appeler une méthode sur
+une classe sans passer par une instance. Par exemple, 
+on pourrait concevoir une classe comme une boite à outils
+qui regroupe des méthodes ne travaillant pas sur des 
+instances de la classe, mais sur d'autres objets. 
+On peut déjà faire ça avec des modules, mais avec les modules
+on ne peut pas structurer des classes en exploitant l'héritage. 
+
+
+Il est possible en Python de créer des méthodes dans une 
+classe qui 
+
 
 
 
