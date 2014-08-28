@@ -11,7 +11,7 @@ INDEX_POST= sed -e 's,\(\#\# Vid\),==================== \1,'
 index: force
 	export LC_ALL=en_US.ISO8859-15;\
 	ls semaine*/CO12AL*SUM.txt | xargs egrep '(^CO12AL.*txt|^\#\# Vid)' | $(INDEX_POST) > index.short;\
-	ls semaine*/CO12AL*SUM.txt | xargs egrep '(^CO12AL.*txt|^\#\# Vid|^OK)' | $(INDEX_POST) > index.long
+	ls semaine*/CO12AL*SUM.txt | xargs egrep '(^CO12AL.*txt|^\#\# Vid|^OK|^TODO)' | $(INDEX_POST) > index.long
 
 #
 # builds a html index of the ipynb files expected to be reachable on connect.inria.fr

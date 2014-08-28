@@ -12,6 +12,7 @@ CO12AL-W2-VIDEO01.txt
 
 OK noms-variables.ipynb : noms de variables
 OK mots-cles.ipynb: liste des mots clés
+OK fonction-type.ipynb: type() et premier contact avec isinstance ()
 
 ## Quizz Vidéo 1 
 OK identifiants.quiz
