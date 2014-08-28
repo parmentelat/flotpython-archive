@@ -1,9 +1,4 @@
-# XXX j'utilise pour l'instant des noms plus simples qui  
-# me permettent mieux de m'y retrouver, je renommerai le tout plus tard  
-
-# XXX la semaine est deja tres grosse, je laisse tomber reduce qu'il faudra mettre autre part
-
-# TODO : numéroter tous les exos
+# XXX TODO : numéroter tous les exos
 
 ###################################################################
 
@@ -48,8 +43,7 @@ CO12AL-W2-VIDEO03.txt
 
 ## Compléments Vidéo 3 
 
-# deprecated-slicing-step.ipynb : était un notebook sur les slicing avec pas (a:b:c)
-# en fait cela etait couvert dans les slides mais je n'avais vu que la page 1
+# slicing.ipynb : reprend le slicing 
 
 ## Quizz Vidéo 3 
 
@@ -146,7 +140,7 @@ CO12AL-W2-VIDEO08.txt
 ## Compléments Vidéo 8 
 OK string-formatting.ipynb : format et % - je laisse tomber rjust/ljust/center pour le moment
 OK string-tools.ipynb : # help(str)  #split join  #replace strip #index find rfind count startswith endswith upper lower swapcase capitalize title  renvoi sur la doc
-OK pending-raw_input - XXX je ne suis pas encore 100% sûr que c'est utile et la bonne place pour ceci, mais le texte est +ou- OK
+OK raw_input.ipynb
 
 TODO:pending- unicode.ipynb : je propose de bouger ça carrément en semaine 7
 
