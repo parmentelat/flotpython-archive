@@ -27,12 +27,10 @@ instances de la classe, mais sur d'autres objets.
 On peut déjà faire ça avec des modules, mais avec les modules
 on ne peut pas structurer des classes en exploitant l'héritage. 
 
+En Python, Il est possible de créer des méthodes dans une 
+classe qui peuvent être appelées sans instance. On appelle 
+ces méthodes des méthodes statiques. 
 
-Il est possible en Python de créer des méthodes dans une 
-classe qui 
-
-
-
-
+Ouvrons un terminal pour jouer avec les méthodes statiques...
 
 >>>>>>>>>> INCLUDE CO12AL-W7-VIDEO01-EXO01.py <<<<<<<<<<
