@@ -1,5 +1,7 @@
 # XXX TODO : numéroter tous les exos
 
+# TITRE SEMAINE 2 : Types de bases 
+
 ###################################################################
 
 ## Vidéo 1 (Introduction au typage dynamique)

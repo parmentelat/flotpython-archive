@@ -1,3 +1,6 @@
+
+# TITRE SEMAINE 6 : Conception d'itérateurs et gestion d'exceptions
+
 ###################################################################
 
 ## Vidéo 1 (Fonctions génératrices)
@@ -63,6 +66,8 @@ https://docs.python.org/2.7/tutorial/errors.html
 
 ## Vidéo 4 (Conception d'exceptions personnalisées)
 
+CO12AL-W6-VIDEO04.txt
+
 ## Compléments Vidéo 4
 
 ## Quizz Vidéo 4
@@ -71,7 +76,9 @@ https://docs.python.org/2.7/tutorial/errors.html
 
 ###################################################################
 
-## Vidéo 5 ()
+## Vidéo 5 (Context manager)
+
+CO12AL-W6-VIDEO05.txt
 
 ## Compléments Vidéo 5
 

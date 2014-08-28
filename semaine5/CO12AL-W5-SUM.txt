@@ -1,3 +1,6 @@
+
+# TITRE SEMAINE 5 : Modules, classes et espaces de nommage
+
 ###################################################################
 
 ## Vidéo 1 (Modules et espaces de nommage)

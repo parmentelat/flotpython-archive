@@ -1,3 +1,6 @@
+
+# TITRE SEMAINE 3 : Références partagées et itérateurs 
+
 ###################################################################
 
 ## Vidéo 1 (Tables de hash)

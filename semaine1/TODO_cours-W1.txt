@@ -19,6 +19,10 @@ intérêt.
 une fonction avec accolades et ; et une fonction Python standard)
 -expliquer la différence entre terminal interactif et éditeur IDLE
 -inroduire dir() et help()
+-expliquer que dans les vidéo les exemples sont uniquement destiné
+à comprendre le point discuter. Les variables sont aussi choisi
+à une lettre pour simplifier la saisie, mais il faut
+en réaliter utiliser de bons noms de variables. 
 
 -explique de que l'on couvre des notions importantes dans les compléments
 de cours. 
