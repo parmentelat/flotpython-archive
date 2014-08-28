@@ -93,7 +93,7 @@ def full_monty (name, force_name, alt):
     nb=Notebook(name)
     nb.full_monty (force_name=force_name, alt=alt)
 
-force_name = True
+force_name = False
 alt=False
 for a in sys.argv[1:]:
     if a.find ('.alt') >=0 :
