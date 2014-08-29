@@ -10,7 +10,10 @@ print L
 f()
 print L
 
+XXX ouh la que ceci est mal dit...
+en fait ce sont deux variables différentes
 ## La variable locale L ne modifie par la variable globale L
+
 ## Par contre, si l'on rajoute l'instruction global, alors
 ## ça veut dire que la variable L assignée dans la fonction
 ## est bien la variable globale. L'instruction global permet
@@ -25,8 +28,8 @@ print L
 f()
 print L
 
-## globale est une intruction un peu particulière en Python
-## Ça n'est pas une instruction interprété comme toutes les
+## global est une intruction un peu particulière en Python
+## Ça n'est pas une instruction interprétée comme toutes les
 ## autres instruction, c'est une directive au compilateur
 ## qui génère le byte code avant l'exécution. Donc, une
 ## variable définie comme étant globale le sera pour tout le
@@ -39,21 +42,24 @@ def f():
 f()
 print L
 
-## L est globale pour toute la fonction h(), même si globale
+## L est globale pour toute la fonction h(), même si global
 ## est définie après l'assignation 'L = 12'. Attention,
-## dans les nouvelles version de Python, il sera interdit
+## dans les nouvelles versions de Python, il sera interdit
 ## de mettre la directive global après la variable que l'on
-## veut rendre global. Il faut donc prendre l'habitude
+## veut rendre globale. Il faut donc prendre l'habitude
 ## de mettre global au tout début des fonctions. 
+## NON : !!! il faut prendre l'habitude de NE PAS utiliser global !!!
 
 # 2 minutes 30
 
 ## Pour finir, la directive global doit être utilisée avec
-## parcimonie. En effet, modifier une variable global
+## parcimonie. 
+XXX pas avec parcomonie: JAMAIS - never ever - ohhhh!!
+En effet, modifier une variable global
 ## dans une fonction en utilisant la directive globale
 ## rend le code difficile à suivre. Il faut toujours
-## privilégier les moficication explicite par retour
-## de fonction. Regardon ces deux exemples
+## privilégier les modifications explicites par retour
+## de fonction. Regardons ces deux exemples
 
 x = 100
 def f():
@@ -71,8 +77,22 @@ def f():
 x = f()
 print x
 
+XXX - non plus !!!
+Deja ca:
+def f():
+    return x + 10
+c'est pas bon, on utilise en fait la variable globale en lecture, le terme n'est pas clos !
+
+pour etre propre avec ton exemple il faut faire 
+
+x = 100
+def f(x):
+    return x + 10
+x = f(x)
+print x
+
 ## dans le premier cas la modification de x est implicite,
-## mais dans le deuxième cas  c'est explicique avec
+## mais dans le deuxième cas  c'est explicite avec
 ## l'assignation du resultat de f() à la variable x. Il faut
 ## toujours privilégier ce deuxième cas. 
 

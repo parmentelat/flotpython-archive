@@ -1,3 +1,5 @@
+# -*- fill-column: 54 -*-
+#
 ## FORMAT DU FICHIER
 ## Tout ce qui commence avec un ## est un commentaire
 ##
@@ -9,10 +11,10 @@
 
 ## Résumé de la vidéo ()
 
-Nous avons succinctement introduit les fonctions la semaine dernière. 
-Nous allons dans cette vidéo et les vidéos suivantes approfondir 
-cette notion importante. Commençons par revenir sur la déclaration 
-d'une fonction. 
+Nous avons succinctement introduit les fonctions la semaine dernière.
+Nous allons dans cette vidéo et les vidéos suivantes approfondir cette
+notion importante. Commençons par revenir sur la déclaration d'une
+fonction.
 
 ouvrons un terminal pour jouer avec les fonctions...
 
@@ -21,12 +23,12 @@ ouvrons un terminal pour jouer avec les fonctions...
 
 ## conclusion ()
 
-Nous avons, dans cette vidéo, présenté les caractéristiques
-générales des fonctions. Les fonctions en Python sont des objets
-référencé par une variable qui est le nom de la fonction. Tous
-les arguments sont passé par référence, il faut donc faire
-attention aux effets de bord sur les type mutable. Une fonction
-retourne toujours une valeur, soit None, soit la valeur
-spécifiée par l'instruction return. Et, pour finir, les fonctions
-en sont polymorphe, ce qui veut simplement dire que les fonctions
-acceptent en argument des objets de n'importe quel type.
+Nous avons, dans cette vidéo, présenté les caractéristiques générales
+des fonctions. Les fonctions en Python sont des objets référencés par
+une variable qui est le nom de la fonction. Tous les arguments sont
+passés par référence, il faut donc faire attention aux effets de bord
+sur les types mutables. Une fonction retourne toujours une valeur,
+soit None, soit la valeur spécifiée par l'instruction return. Et, pour
+finir, les fonctions en python sont polymorphes, ce qui veut
+simplement dire que les fonctions acceptent en argument des objets de
+n'importe quel type.

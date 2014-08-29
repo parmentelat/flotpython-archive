@@ -20,7 +20,7 @@
 ## c'est ce que l'on va voir dans cette vidéo. La deuxième
 ## notion est celle d'espace de nommage qui explique
 ## comment accéder aux variables d'autres modules et d'autres
-## objets. C'est ce que l'on verra lorsque l'on parlera
+## objets. C'est ce que l'on verra lorsque l'on reparlera
 ## des modules un peu plus tard. En résumé, le scope
 ## concerne l'accès aux variables internes au module,
 ## et les espaces de nommage concernent l'accès
@@ -42,7 +42,7 @@ for i in range(10):
 ## elles sont locales, c'est-à-dire accessibles uniquement
 ## dans la fonction, mais pas à l'extérieur.
 ## De plus, les variables locales sont créées uniquement à
-## l'appelle de la fonction et détruite lorsque la fonction
+## l'appel de la fonction et détruites lorsque la fonction
 ## retourne (c'est-à-dire lorsque l'on sort de la fonction).
 
 def f():
@@ -76,7 +76,7 @@ print b
 ## définie dans le scope global. 
 #print c
 
-## Maintenant, que ce passe-t-il si on définit une fonction
+## Maintenant, que se passe-t-il si on définit une fonction
 ## dans une fonction.
 
 a, b, c = 1, 1, 1
@@ -115,4 +115,5 @@ g()
 ## est accessible
 ## uniquement localement ou dans les fonctions englobées,
 ## c'est-à-dire dans les fonctions définies à l'intérieur
-## de la fonction qui définie notre variable.
+## de la fonction qui définit notre variable.
+

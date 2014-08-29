@@ -36,6 +36,9 @@ et https://docs.python.org/2/howto/logging.html#logging-basic-tutorial
 
 ## Exercices Vidéo 1
 
+# pour creer un ou plusieurs fichiers exemple je vais devoir publier un module qui
+  cree des fichires dans l'espace des apprenants pour qu'ils puissent
+  l'ouvrir ensuite
 
 ###################################################################
 
@@ -176,6 +179,8 @@ Help on function func in module __main__:
 func(a, b, c, d)
     Cette fonction imprime 4 parametres a la suite
 
+peut-etre l'occasion de reparler de isinstance en complement de la
+    video qui parle de polymorphisme
 
 ## Quizz Vidéo 5
 

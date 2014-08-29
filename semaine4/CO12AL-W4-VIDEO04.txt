@@ -1,3 +1,5 @@
+# -*- fill-column: 54 -*-
+#
 ## FORMAT DU FICHIER
 ## Tout ce qui commence avec un ## est un commentaire
 ##
@@ -39,7 +41,7 @@ intuitive que la boucle for.
 
 Suite au grand succès rencontré par les compréhensions de listes
 chez le programmeur Python, les compréhensions de set et de 
-dictionnaires ont été introduite à partir de Python 2.7
+dictionnaires ont été introduites à partir de Python 2.7
 
 Ouvrons un terminal pour jouer avec la compréhension de sets 
 et de dictionnaires. 

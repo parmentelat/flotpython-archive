@@ -1,3 +1,5 @@
+# -*- fill-column: 54 -*-
+#
 ## FORMAT DU FICHIER
 ## Tout ce qui commence avec un ## est un commentaire
 ##
@@ -11,11 +13,14 @@
 
 Nous allons voir dans cette vidéo la notion de scope. Le [scope]
 définit ce que l'on appelle la [portée des variables], c'est-à-dire
-quel morceau de code à accès à quelles variables. En Python
-le scope est définit de manière purement textuelle, c'est-à-dire
-en fonction de l'endroit dans le code source où une variable est 
-définie. On dit qu'une variable est [définie] lorsque l'on fait
-'une variable = un objet'. On peut également dire qu'une variable
+quel morceau de code à accès à quelles variables. En Python le scope
+est défini de manière purement textuelle, c'est-à-dire en fonction de
+l'endroit dans le code source où une variable est définie. On dit
+qu'une variable est [définie] lorsque l'on fait
+
+'une variable = un objet'
+
+On peut également dire qu'une variable
 est [affectée] ou [assignée]. En Anglais, vous trouverez le terme
 [binding].
 
@@ -23,10 +28,10 @@ On appelle le code qui définit un scope particulier un [bloc de
 code]. Nous allons voir dans cette vidéo deux types différents
 de blocs de de code. 
 
-Le corps de chaque fonction définit un bloc de code. Ce bloc
-de codes correspond à ce que l'on appelle le scope local. 
-Le code dans un module définit également à un bloc de code
-qui correspond à ce que l'on appelle le scope global. 
+Le corps de chaque fonction définit un bloc de code. Ce bloc de code
+correspond à ce que l'on appelle le scope local.  Le code dans un
+module définit également à un bloc de code qui correspond à ce que
+l'on appelle le scope global.
 
 En Python un module est équivalent à un fichier finissant par
 .py et contenant, bien sûr, du code Python valide. 

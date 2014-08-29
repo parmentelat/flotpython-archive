@@ -71,7 +71,7 @@ print f(1, 11, 2)
 
 # 4 minutes 20
 
-## il y a un autre point important que je voudrai aborder
+## il y a un autre point important que je voudrais aborder
 ## dans cette introduction générale des fonctions. Lorsque
 ## le code d'une fonction est évalué, c'est-à-dire lorsque
 ## l'on tape un retour chariot au prompt interactif après la
