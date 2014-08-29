@@ -1,14 +1,14 @@
 # -*- coding: iso-8859-15 -*-
 
 ## les séquences sont des structures de données qui
-## ont été optimisée pour l'accès, la modification,
+## ont été optimisées pour l'accès, la modification,
 ## et l'effacement d'éléments par numéro de séquence.
 ## Donc lorsque je connais le numéro de séquence
 ## d'un élément, la vitesse d'accès, de modification,
 ## et d'effacement est indépendante de la position
 ## de l'élément dans la séquence. 
 ##
-## Mais comment de comporte une séquence avec
+## Mais comment se comporte une séquence avec
 ## le test d'appartenance...
 
 def f(a):
@@ -21,14 +21,14 @@ f(range(50000000))
 ## on voit que le test d'appartenance est fonction du nombre
 ## d'élément dans la séquence. C'est normal puisque le seul
 ## moyen de trouver un élément dans une séquence est de la
-## parcourir séquentiellement. Donc si on test un élément
+## parcourir séquentiellement. Donc si on teste un élément
 ## qui n'est pas dans la séquence on doit comparer cet
-## élément avec tout ceux de la séquence, plus il y a d'élement
+## élément avec tous ceux de la séquence, plus il y a d'éléments
 ## plus c'est long. 
 
 ## Cependant, le test d'appartenance est une opération très
-## courrente, par conséquent, il serait très utile d'avoir
-## une structure de donnée optimisée non seulement pour
+## courante, par conséquent, il serait très utile d'avoir
+## une structure de données optimisée non seulement pour
 ## l'accès, la modification et l'effacement, mais aussi pour
 ## le test d'appartenance.
 
@@ -43,7 +43,7 @@ a = []
 ## il existe une structure de données qui permet un accès
 ## une modification, un effacement et un test d'appartenance
 ## avec une performance indépendante de la taille de la
-## strucuture, et qui, de plus, permet d'avoir des indices
+## structure, et qui, de plus, permet d'avoir des indices
 ## d'un type immuable quelconque, c'est la table de hash.
 ## regardons comment fonctionne une table de hash
 

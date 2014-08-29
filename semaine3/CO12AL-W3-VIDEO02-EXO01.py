@@ -9,16 +9,19 @@ d = {}
 d = {'marc':35, 'alice':30, 'eric':38}
 
 ## la deuxième manière est très utile lorsque les couples
-## clefs valeurs sont obtenues par une opération, dans
+## clefs-valeurs sont obtenues par une opération, dans
 ## ce cas on peut automatiquement créer un dictionnaire
-## à partir d'une liste de tuple clef,valeur
+## à partir d'une liste de tuples clef,valeur
 
 a = [('marc', 35), ('alice', 30), ('eric', 38)]
 d = dict(a)
 
+# xxx je ferais remarquer qu'il s'agit d'un cas particulier de conversion
+# comme on en a déjà vu pour les types numériques e.g. float(12)
+
 ## je rappelle qu'il n'y a pas d'ordre dans un dictionnaire
 ## donc le dictionnaire n'affiche pas nécéssairement
-## les valeurs dans l'ordre dans lesquels on les a entré
+## les valeurs dans l'ordre dans lequel on les a entrées
 
 print d
 
@@ -32,7 +35,7 @@ print 'marc' not in d
 
 ## même si les dictionnaires ne sont pas des séquences,
 ## dans un soucis d'uniformité et de simplification,
-## la fonction len et l'opérateur in ont été implémenté
+## la fonction len et l'opérateur in ont été implémentés
 ## sur les dictionnaires.
 
 ## on peut accéder et modifier la valeur d'une clef de la
@@ -41,7 +44,7 @@ print 'marc' not in d
 print d['marc']
 d['marc'] = 40
 
-## on peut effacer une la clef et sa valeur dans le dictionnaire
+## on peut effacer la clef et sa valeur dans le dictionnaire
 ## avec l'instruction del
 
 del d['marc']
@@ -49,10 +52,16 @@ del d['marc']
 d.copy() # shallow copie du dictionnaire
 print 
 
-## et on a des méthodes pour récupérer les clefs dans une liste
-## les valeurs dans une liste, et les tuples (clefs, valeur)
-## dans une liste. 
+## et on a des méthodes pour récupérer sous forme de liste:
+## les clefs, les valeurs, et les tuples (clefs, valeur)
 
 print d.keys()
 print d.values()
 print d.items()
+
+# xxx on a a ce stade tout le bagage pour montrer ceci
+for k,v in d.items():
+    print "cle={} -> valeur={}".format(k,v)
+
+# qui est tout de meme un truc majeur a montrer
+# pour les dicts je pense

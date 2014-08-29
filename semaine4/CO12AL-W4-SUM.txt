@@ -152,7 +152,7 @@ L = []
 def h(a):
 	a.append(1)
 
-Comment ne pas modifier L. Trois possibilité:
+Comment ne pas modifier L. Trois possibilités:
 -à l'appel h(L[:]) on passe une shallow copy, ça permet
 de choisir la modification par effect de bord à l'appel
 (peut-être utile lorsque la fonction fait autre chose avec L)
