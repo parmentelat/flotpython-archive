@@ -152,7 +152,9 @@ in :  __contains__ puis __iter__ puis __getitem__
 Test vrai/faux : __nonzero__ puis __len__ (faux si __len__ retourne 0)
 print : __str__ puis __repr__
 
-*parler des optimisation de CPython sur les opérateurs
+* parler de __call__ qui transforme une instance en un callable
+
+*parler des optimisations de CPython sur les opérateurs
 Plus rapide d'utiliser un opérateur que l'appel direct sur le méthode
 >>> timeit.timeit(setup = "L = range(1000)", number = 100000000, stmt = "0 in L")
 3.1706046182752914
