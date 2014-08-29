@@ -4,7 +4,7 @@
 
 ###################################################################
 
-## Vidéo 1 (Introduction au typage dynamique objets - affectation - print)
+## Vidéo 1 (Introduction au typage dynamique objets)
 
 CO12AL-W2-VIDEO01.txt
 

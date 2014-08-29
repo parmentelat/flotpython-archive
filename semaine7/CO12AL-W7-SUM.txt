@@ -9,8 +9,6 @@ CO12AL-W7-VIDEO01.txt
 
 ## Compléments Vidéo 1
 
-
-
 ## Quizz Vidéo 1
 
 ## Exercices Vidéo 1
@@ -24,6 +22,8 @@ CO12AL-W7-VIDEO02.txt
 
 ## Compléments Vidéo 2
 
+*les exemples pratiques que tu as déjà fait. 
+
 ## Quizz Vidéo 2
 
 ## Exercices Vidéo 2
@@ -31,7 +31,7 @@ CO12AL-W7-VIDEO02.txt
 
 ###################################################################
 
-## Vidéo 3 
+## Vidéo 3 (Les classes new-style)
 
 ## Compléments Vidéo 3
 
