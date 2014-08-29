@@ -1,3 +1,5 @@
+# -*- fill-column: 54 -*-
+#
 ## FORMAT DU FICHIER
 ## Tout ce qui commence avec un ## est un commentaire
 ##
@@ -22,7 +24,24 @@ Nous avons vu qu'une variable locale n'était pas accessible
 en dehors de la fonction. Par contre, s'il existe une référence
 partagée entre une variable dans le scope local de la fonction et 
 une variable dans le scope global du module vers le même objet 
-mutable, une fonction peut modifier cet objet. 
+mutable, une fonction peut modifier cet objet.
+
+
+XXX IMPORTANT 
+Bon alors moi perso je trouve 
+* assez déviante la relation entre visibilité et références partagées
+  de mon point de vue les deux concepts sont entièrement orthogonaux
+* et du coup je trouve la phrase ci-dessus incompréhensible
+en fait je ne comprends pas le point que tu cherches à faire avec cet
+exemple ...
+
+XXX de plus, si on doit absolument garder l'exemple:
+d'un point de vue pedagogique le powerpoint est confusant, car
+a la fin on a L qui vaut [1,2,3] mais ca ne permet pas de savoir
+duquel des deux [1,2,3] il s'agit
+Ce serait mieux je trouve si a l'interieur de la fonction on faisait 
+L = [1,2,4] mais bon, je pinaille sans doute...
+
 
 Regardons un exemple...
 
@@ -34,7 +53,7 @@ Nous avons vu qu'il est important de faire une distinction entre
 la notion de scope qui ne concerne que les variables et la notion
 de références partagées qui concerne les variables et les objets. 
 En effet, le scope isole des variables, mais pas les objets. Nous
-verrons prochainement que cette propriété d'isolation est liées 
+verrons prochainement que cette propriété d'isolation est liée
 à la notion, centrale en Python, d'espace de nommage. 
 
 Mais revenons à la notion de scope. Une variable dans le scope

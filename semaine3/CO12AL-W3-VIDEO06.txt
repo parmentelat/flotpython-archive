@@ -1,3 +1,5 @@
+# -*- fill-column: 54 -*-
+#
 ## FORMAT DU FICHIER
 ## Tout ce qui commence avec un ## est un commentaire
 ##
@@ -10,11 +12,10 @@
 
 ## Résumé de la vidéo (1 minute 20 secondes)
 
-On a déjà vu la semaine dernière, lorsque l'on a parlé
-des instruction if et for, que l'indentation des blocs
-d'instructions était centrale dans la syntaxe de Python. 
-Mais on n'a pas parlé des raisons de l'indentation et 
-de ses avantages. 
+On a déjà vu la semaine dernière, lorsque l'on a parlé des instructions
+if et for, que l'indentation des blocs d'instructions était centrale
+dans la syntaxe de Python.  Mais on n'a pas parlé des raisons de
+l'indentation et de ses avantages.
 
 Un problème classique dans des langages comme le C++ ou le java est de
 suivre des conventions de codage, c'est-à-dire de suivre des règles de
@@ -45,7 +46,7 @@ L'indentation comme règle de syntaxe est une des raisons du succès de
 Python. Cette règle n'a presque que des avantages, elle a cependant un
 inconvénient dont il faut se méfier.  Il est courant de copier du code
 du Web ou d'autres programmes pour les inclure dans notre propre
-code. Cependant, le copier coller va copier l'indentation du code que
+code. Cependant, le copier-coller va copier l'indentation du code que
 l'on copie, mais l'indentation peut ne pas être conforme. Il est par
 conséquent plus prudent de toujours refaire soit même l'indentation
 dans l'éditeur que l'on a l'habitude d'utiliser.
@@ -53,10 +54,10 @@ dans l'éditeur que l'on a l'habitude d'utiliser.
 Pour finir, en Python, il est recommandé de faire des lignes ne
 dépassant pas 79 caractères. Cette recommandation peut paraître
 étrange étant donné la taille de nos écrans aujourd'hui. Cependant, il
-y a plusieurs raisons à cette recommandation : l'expérience montre
-qu'il est plus facile de lire du code avec des lignes de dépassant pas
-79 caractères, lorsque l'on a de grands écrans cela permet d'avoir
-plusieurs éditeurs de texte cote à cote, cela permet de lire et
+y a plusieurs raisons à cette pratique: l'expérience montre qu'il est
+plus facile de lire du code avec des lignes de dépassant pas 79
+caractères, lorsque l'on a de grands écrans cela permet d'avoir
+plusieurs éditeurs de texte côte à côte, cela permet de lire et
 d'écrire du code sur n'importe quel terminal comme par exemple une
 tablette.
 

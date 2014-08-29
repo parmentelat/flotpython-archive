@@ -48,7 +48,10 @@ jouer avec les boucles for et les itérateurs...
 
 Nous avons vu comment une boucle for utilisait les
 objets qui ont un itérateur, mais nous n'avons
-toujours définit exactement ce qu'était un itérateur.
+toujours pas défini exactement ce qu'était un
+itérateur. 
+XXX je ne comprends pas bien cette transision, dans EXO01 on a justement
+déjà montré __iter__ et next()
 
 Un itérateur est un objet (en Python tout est un objet
 donc ça ne devrait plus vous surprendre qu'un
@@ -82,7 +85,7 @@ boucle for fonctionnera. Si vous faites une boucle for
 sur un itérateur, la méthode __iter__() va retourner
 l'itérateur et la boucle for fonctionnera également.
 
-Donc vous n'avez jamais à vour préoccuper de savoir si
+Donc vous n'avez jamais à vous préoccuper de savoir si
 votre objet a un itérateur ou est déjà un itérateur,
 dans les deux cas, la boucle for pourra l'utiliser.
 

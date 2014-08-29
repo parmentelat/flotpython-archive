@@ -71,6 +71,7 @@ CO12AL-W3-VIDEO04.txt
 ## Compléments Vidéo 4
 OK references-circulaires.ipynb : une liste infinie; un exemple + utile de reference circulaire
 OK is-id.ipynb : function id(), operateur is,  les entiers implementes comme des singletons
+TODO del.ipynb pour annuler une affectation 
 
 
 * introduire http://pythontutor.com 
