@@ -1,0 +1,49 @@
+## FORMAT DU FICHIER
+## Tout ce qui commence avec un ## est un commentaire
+##
+## le texte entre double crochets ouvrants et fermants
+## est à afficher en surimpression pendant que je parle et à 
+## synchroniser avec le texte entre crochet 
+
+##  TITRE : Les décorateurs
+
+
+## Résumé de la vidéo ()
+
+On vient de voir les méthodes statiques et les méthodes de classe. 
+Vous avez pu remarquer que rien de différencie dans la syntaxe 
+une méthode statique ou de classe d'une méthode d'instance. Tout 
+au plus on pourrait regarder la liste des arguments de la méthode, 
+mais si la methode prend au moins un argument, ça pourrait être une
+méthode de n'importe quel type. Il faut attendre de voir les
+méthode built-in staticmethod ou classmethod pour être sur qu'une
+méthode est d'un type ou d'un autre. Comme la fonction built-in
+staticmethod ou classmethod peut être n'importe où dans la classe, 
+ça peut rendre d'identification du type de chaque méthode peu pratique.
+
+C'est pour cette raison que Python a introduit la notion de décorateur. 
+Mais nous allons voir que cela va bien plus loin qu'une simple astuce 
+syntaxique pour rendre le type d'une méthode explicite. 
+
+>>>>>>>>>> INCLUDE CO12AL-W7-VIDEO02-EXO01.py () <<<<<<<<<<
+
+
+## Conclusion()
+
+Vous devez sans doute vous demander à quoi peut servir un décorateur.
+Il faut le voir comme un moyen d'ajouter une couche de 
+logique autour d'une fonction ou d'une classe à la demande. En effet, 
+il suffit d'ajouter la ligne @decorateur avant la fonction ou la 
+classe pour ajouter cette couche. 
+
+Cette couche de logique peut-être simple, comme une fonction, ou très
+sophistiquée, comme une classe. Le décorateur peut faire des opérations
+et retourner la fonction ou la classe originale, ou retourner un 
+autre objet callable,
+c'est à dire soit une fonction, soit une classe qui implémente la
+ méthode __call__. Les possibilités sont donc énorme. 
+ Par exemple, un décorateur peut simplement valider des arguments 
+ passés à une fonction ou profiler le temps d'exécution. Nous allons 
+ voir dans les compléments des exemples concrets d'utilisation des 
+ décorateurs.
+

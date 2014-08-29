@@ -18,7 +18,9 @@ CO12AL-W7-VIDEO01.txt
 
 ###################################################################
 
-## Vidéo 2 ()
+## Vidéo 2 (Les décorateurs)
+
+CO12AL-W7-VIDEO02.txt
 
 ## Compléments Vidéo 2
 

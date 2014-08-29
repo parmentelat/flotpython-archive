@@ -144,7 +144,7 @@ CO12AL-W5-VIDEO07.txt
 *Citer ce lien pour toutes les surcharges d'opérateurs. 
 http://docs.python.org/2/reference/datamodel.html#special-method-names
 *couvrir d'autres opérateurs (je couvre __init__ et __str__ en vidéo)
-Il faut voir au minimum __add__, __contains__, __len__, 
+Il faut voir au minimum __call__, __add__, __contains__, __len__, __getattr__
 * rappeler que le __iter__ est également une surcharge
 * parler des fallback 
 Itération : __iter__ puis __getitem__
