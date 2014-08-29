@@ -24,8 +24,10 @@ CO12AL-W3-VIDEO02.txt
 *voir la construction D=dict(clef1=obj1, clef2=obj2) 
 *voir d.get('marc', '?') et son usage par rapport à d['marc']
 *voir un exemple de dict dans un dict et de l'accès à ses éléments D={'alice': 35, 'enfants':{'bob' : 9, 'charlie' : 6}}
-*expliquer que d.has_key() est ancien et qu'il faut utiliser in 
-maintenant. 
+*expliquer que d.has_key() est ancien et qu'il faut utiliser in maintenant
+* remontrer sur un exemple les cles immuables / mutables e.g. tuple de listes
+
+https://docs.python.org/2/library/stdtypes.html#mapping-types-dict
 
 ## Quizz Vidéo 2
 
@@ -51,9 +53,14 @@ pour expliquer qu'il faut toujours utiliser des sets
 >>> timeit.timeit(setup= "x = set(range(2))", stmt = '0 in x', number = 6000000)
 0.3819173343944584
 
+https://docs.python.org/2/library/stdtypes.html#set-types-set-frozenset
+
 ## Quizz Vidéo 3
 
 ## Exercices Vidéo 3
+
+Mettre l'accent sur le choix judicieux du type de base en fonction du
+probleme posé
 
 ###################################################################
 

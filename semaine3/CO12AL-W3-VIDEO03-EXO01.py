@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-15 -*-
 
-## On peut créer un set de deux manières, soit avec un literal
+## On peut créer un set de deux manières, soit avec un littéral
 ## soit en passant une une liste comme argument de la
 ## fonction set
 
@@ -24,8 +24,8 @@ print 8 not in s1
 
 print len(s1)
 
-## je peux calcular la différence, l'union et l'intersection
-## de deux set
+## je peux calculer la différence, l'union et l'intersection
+## de deux sets
 
 print s1 - s2
 print s1 | s2
@@ -35,8 +35,7 @@ print s1 & s2
 ## vous encourage à découvrir dans la documentation Python.
 
 ## pour finir vous pouvez créer un frozen set à partir
-## d'un séquence ou d'un set ainsi
+## d'une séquence ou d'un set ainsi
 
 fs = frozenset(s1)
 print fs
-

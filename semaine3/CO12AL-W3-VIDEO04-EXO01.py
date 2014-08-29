@@ -18,6 +18,9 @@ s2 = s.copy()
 
 print s, s2
 
+# xxx il y a un complement deja ecrit sur ce sujet, si tu veux gagner 
+# un peu de temps tu peux zapper ca
+
 ## pour finir, j'aimerais aborder un problème d'optimisation de CPython
 a = [1, 2]
 b = a
