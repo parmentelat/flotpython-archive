@@ -1,3 +1,5 @@
+# -*- fill-column: 54 -*-
+#
 ## FORMAT DU FICHIER
 ## Tout ce qui commence avec un ## est un commentaire
 ##
@@ -13,14 +15,13 @@ Dans cette vidéo, nous allons introduire la notion de modules et
 en particulier comment utiliser des modules. Nous verrons la création 
 de modules plus tard.
 
-Un module est un fichier python standard finissant par .py et 
-tous les fichiers python sont des modules. Donc les notions 
-de fichier python et de module sont équivalentes. Alors pourquoi
-introduire cette notion de module ? En Python tout est un objet et
-lorsque l'on importe un fichier python dans un programme, 
-cela crée un objet que l'on appelle un module. On peut accéder 
-a tout ce qui a été défini dans le fichier importé, en particulier 
-les fonctions, par l'objet module. 
+Un module est un fichier python standard finissant par .py et tous les
+fichiers python sont des modules. Donc les notions de fichier python
+et de module sont équivalentes. Alors pourquoi introduire cette notion
+de module ? En Python tout est un objet et lorsque l'on importe un
+fichier python dans un programme, cela crée un objet que l'on appelle
+un module. On peut accéder a tout ce qui a été défini dans le fichier
+importé, en particulier les fonctions, par l'objet module.
 
 Par conséquent, on peut voir un module comme une boite à outils,
 c'est-à-dire un fichier définissant des fonctions pour une tâche
@@ -28,14 +29,13 @@ particulière. Si l'on veut utiliser un module il suffit de
 l'importer avec l'instruction import. 
 
 # xxx à ce stade un exemple en incrustation ?
+# xxx thierry à mon avis oui, avec import math / math.pi qu'on a déjà vu
 
-Il y a en Python des dizaines de modules dans ce que
-l'on appelle la librairie standard. C'est la librairie
-qui est disponible avec toutes les installations
-de Python. Donc quelque soit le système d'exploitation
-que l'on utilise, un programme utilisant les librairies
-standards fonctionnera avec toutes les installations de
-Python.
+Il y a en Python des dizaines de modules dans ce que l'on appelle la
+librairie standard. C'est la librairie qui est disponible avec toutes
+les installations de Python. Donc quelque soit le système
+d'exploitation que l'on utilise, un programme utilisant les librairies
+standards fonctionnera avec toutes les installations de Python.
 
 Il y a dans la librairie standard des modules pour faire toutes les
 tâches courantes en programmation, comme par exemple, faire des
@@ -52,7 +52,7 @@ On a vu une introduction rapide à l'utilisation des modules de la
 librairie standard. 
 
 Il y a bien sûr un grand nombre d'autres modules externes pour faire
-des taches spécialisées. Ces modules n'étant pas standards, ils
+des tâches spécialisées. Ces modules n'étant pas standard, ils
 demandent une installation supplémentaire à Python, mais ils
 s'importent et s'utilisent ensuite comme un module de la librairie
 standard.
