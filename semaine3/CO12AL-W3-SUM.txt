@@ -149,7 +149,9 @@ CO12AL-W3-VIDEO07.txt
 
 -opérateurs de tests booléens and, or, not (vu en cours, montrer
 d'autres exemples)
--opération shortcircuit and et or (vu en cours, montrer d'autres exemples)
+-insister sur le fait qu'il vaut mieux mettre des paranthèses que 
+de compter sur les priorités. 
+-opération shortcircuit and et or. Montrer des exemples pour les 2.
 -discuter de == : quand peut-on comparer des objets de types différents
 (seulement les numériques, et les set et frozenset, str/unicode, mais
 (1, 2) n'est pas égal à [1, 2])
