@@ -59,9 +59,10 @@ print d.keys()
 print d.values()
 print d.items()
 
+
 # xxx on a a ce stade tout le bagage pour montrer ceci
-for k,v in d.items():
-    print "cle={} -> valeur={}".format(k,v)
+#for k,v in d.items():
+#    print "cle={} -> valeur={}".format(k,v)
 
 # qui est tout de meme un truc majeur a montrer
 # pour les dicts je pense

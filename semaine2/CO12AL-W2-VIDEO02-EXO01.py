@@ -36,17 +36,14 @@ print l * l     # précision illimitée sur les long
 
 type(i + l)     
 
-## Les décimaux, qu'on appelle aussi 'flottants'. 
+## Les décimaux, qu'on appelle aussi 'flottants' on une
+## précision limité à environ 15 chiffres significatifs
 # On sépare la partie entière et décimale par un .
 f = 4.3
 
-### XXX Thierry
-# le texte suivant a mon avis n'apporte rien ici; on en dit trop ou pas assez..
-# par contre on ne dit rien sur les complexes qui arrivent juste apres..
-### XXX
-## les float sont en général équivalents aux 'double' en C,
-## c'est à dire que ce sont des nombres codés sur 53 bits
-## avec un maximum de 15 à 17 chiffres significatifs
+## Pour finir on a les nombres complexes qui sont
+## construit comme deux nombre décimaux. Ils ont donc
+## les mêmes limitations de précision. 
 
 c = 1 + 3j
 

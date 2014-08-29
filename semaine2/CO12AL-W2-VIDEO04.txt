@@ -28,5 +28,6 @@ Ouvrons un terminal interactif et commençons a jouer avec les listes.
 
 >>>>>>>>>> INCLUDE CO12AL-W2-VIDEO04-EXO01.py (8 minutes) <<<<<<<<<<
 
-### XXX missing : conclusion (on a fait ceci, on fera cela...)
-
+Nous venons de voir le type list qui est central en Python. Vous 
+utiliserez, quelque soit votre programme, sans aucun doute de nombreuses
+listes. Alors jouez avec les listes pour les maitriser rapidement. 

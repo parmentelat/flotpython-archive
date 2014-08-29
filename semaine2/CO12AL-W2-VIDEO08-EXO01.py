@@ -47,20 +47,6 @@ print nom
 nom = r'c:\temp\test\f.py'
 print nom
 
-# XXX : Thierry: je propose de supprimer ceci;
-# (ou alors à la limite de le mettre APRÈS les triples apostrophes)
-# on a déjà dit qu'on pouvait mettre un backslash 
-# devant un caractère spécial, là le caractère spécial
-# c'est le retour à la ligne, donc bref ça n'apporte rien 
-# et ça risque juste de créer de la confusion puisque, 
-# essentiellement, il ne faut pas le faire... XXX
-## un dernière utilisation du backslash est lorsque l'on
-## veut écrire une chaine de caractères sur plusieurs lignes
-
-text = 'Spam, Spam, Spam, Spam, \
-lovely Spam, wonderful Spam'
-print text
-
 ## il exite un dernier type de notation, en plus de l'apostrophe
 ## et du guillemet, pour créer une chaîne de caractères,
 ## c'est la triple apostrophe ou le triple guillemet.
