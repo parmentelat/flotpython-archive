@@ -172,6 +172,8 @@ CO12AL-W3-VIDEO08.txt
 
 ## Compléments Vidéo 8
 
+- expliquer l'intérêt au niveau occupation mémoire des itérateurs
+des types built-in.
 -présenter break
 -présenter continue (en expliquant que, comme pour les goto, les sauts
 dans le code nuisent à la compréhension, il faut donc l'éviter)
@@ -188,13 +190,7 @@ __iter__() est une méthode Python privée, on ne doit pas l'appeler
 directement dans un programme, on doit utiliser la built-in iter()
 à la place.
 
-# xxx ceci n'est définitivement pas un exo..
-Il ne faut pas modifier l'objet sur lequel on itère dans boucle for.
-Si on modifie l'objet, il faut itérer sur copie
->>> L = ['a', 'b' , 'c']
->>> for i in L[:]:
-	if i == 'c':
-		L.append(i)	
+
 
 Ici, sinon on a une boucle infinie.
 
@@ -202,5 +198,11 @@ Ici, sinon on a une boucle infinie.
 
 ## Exercices Vidéo 8
 
+Il ne faut pas modifier l'objet sur lequel on itère dans boucle for.
+Si on modifie l'objet, il faut itérer sur copie
+>>> L = ['a', 'b' , 'c']
+>>> for i in L[:]:
+	if i == 'c':
+		L.append(i)	
 
 

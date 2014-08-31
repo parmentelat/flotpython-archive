@@ -1,9 +1,8 @@
 # -*- coding: iso-8859-15 -*-
 
 ## L'instruction while évalue un test qui peut s'écrire
-## exactement comme un test dans un if. En particulier,
-## je vous rappelle qu'un test doit retourner un booléen ***xxx NON xxx***
-## et peut être le résultat d'une comparaison, d'un retour
+## exactement comme un test dans un if. Ce test peut-être
+## par exemple le résultat d'une comparaison, d'un retour
 ## fonction, d'un opérateur de test booléen (and, or, not)
 ## ou directement un type built-in qui vaut faux lorsque
 ## c'est 0, None, ou un objet vide (liste vide, set vide)

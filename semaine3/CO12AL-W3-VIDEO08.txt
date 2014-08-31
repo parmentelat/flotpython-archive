@@ -9,11 +9,16 @@
 
 ## TITRE : Les boucles for et les itérateurs
 
-# XXX: IMHO on a saute l'etape essentielle ici, pourquoi veut-on 
+# IMHO on a saute l'etape essentielle ici, pourquoi veut-on 
 # faire des iterateurs ?
 # on pourrait parler de l'optimisation memoire, range() vs. xrange()
 # avant de se lancer dans ces details qui sont assez obscurs tout de
 # meme...
+# AL : non, je ne suis pas convaincu. Oui l'occupation mémoire est 
+# importante, mais même sans ça, une interface commune à tous les objets
+# pour les parcourir, ça serait déjà suffisant pour justifier les
+# itérateurs. C'est à mon avis la grande contribution. Je propose
+# de déplacer la discussion de l'occupation mémoire en complément. 
 
 
 ## Résumé de la vidéo (1 minute)

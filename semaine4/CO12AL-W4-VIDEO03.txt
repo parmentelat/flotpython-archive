@@ -29,12 +29,9 @@ ce que l'on peut faire avec une fonction lambda, on peut également
 le faire avec une fonction classique. Par contre, on ne peut pas tout
 faire dans une fonction lambda. Alors quel est l'intérêt des
 fonctions lambda ? Leur unique intérêt est que les fonctions
-lambda sont des expressions et non des instructions comme une 
-fonction classique. 
-
-XXX je ne suis pas d'accord pour dire qu'une fonction classique est
-une instruction; c'est 'def' qui est une instruction, pas l'objet
-fonction XXX
+lambda peuvent être déclarées comme des expressions, alors
+que les fonctions classiques doivent être déclarées avec 
+l'instruction def. 
 
 Cela veut dire que l'on peut définir une
 fonction lambda partout ou l'on peut mettre une expression : 
@@ -52,5 +49,4 @@ verrons dans la prochaine vidéo qu'il existe une autre manière de remplacer
 les boucles for qui est plus intuitive et plus efficace que ces
 fonctions : c'est la compréhension de liste.  
 
-XXX je ne suis pas du tout sûr de tout ça et à nouveau je pense qu'on
-ne devrait pas faire une vidéo là dessus XXX
+

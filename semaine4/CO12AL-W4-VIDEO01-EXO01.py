@@ -15,7 +15,6 @@ f = open('C:\Temp\spam.txt', 'w')
 ## le mode w ouvre le fichier en écriture et efface le
 ## contenu précédent. Attention w est une chaîne de caractères
 
-#@ xxx jái modifié pour utiliser format puisqu'on l'a déjà vu
 ## on ne peut écrire dans un fichier que des chaînes de
 ## caractères, en d'autres termes write s'attend a recevoir un string
 ## on utilise donc format; remarquez bien la fin de ligne qui s'écrit "\n"

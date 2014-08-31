@@ -9,15 +9,6 @@
 
 ## TITRE : Les fichiers
 
-XXX je suggere de raccourcir la discussion sur l'OS et
-sur close, tout ça est certes intéressant mais ça
-prend du temps
-mais PAR CONTRE je ferais TOUT DE SUITE un 'with' 
-je suis dac qu'il faut savoir qu'il y a un close a
-faire, mais en pratique on ne le fait plus grace au
-with; ce serait mieux de leur donner tout de suite la
-bonne habitude..
-
 ## Résumé de la semaine (35 secondes)
 
 TODO

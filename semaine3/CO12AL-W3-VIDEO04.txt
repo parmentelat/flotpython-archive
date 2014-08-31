@@ -21,10 +21,6 @@ mutable.
 Regardons le fonctionnement des références partagées sur 
 les mutables et les immuables. 
 
-# xxx au sujet du powerpoint, dans la video draft j'ai remarque que
-  tu as tendance a decrire le partage comme un 'probleme' 
-  j'eviterais quant a moi le terme de probleme, c'est bien souvent
-  tout a fait souhaitable de partager une donnee...
 
 >>>>>>>>>> CO12AL-W3-VIDEO04-SLIDE01.pptx <<<<<<<<<<
 

@@ -10,9 +10,8 @@ print L
 f()
 print L
 
-XXX ouh la que ceci est mal dit...
-en fait ce sont deux variables différentes
-## La variable locale L ne modifie par la variable globale L
+## La variable locale L est différente de la
+## variable gobale L
 
 ## Par contre, si l'on rajoute l'instruction global, alors
 ## ça veut dire que la variable L assignée dans la fonction
@@ -48,16 +47,15 @@ print L
 ## de mettre la directive global après la variable que l'on
 ## veut rendre globale. Il faut donc prendre l'habitude
 ## de mettre global au tout début des fonctions. 
-## NON : !!! il faut prendre l'habitude de NE PAS utiliser global !!!
 
 # 2 minutes 30
 
-## Pour finir, la directive global doit être utilisée avec
-## parcimonie. 
-XXX pas avec parcomonie: JAMAIS - never ever - ohhhh!!
-En effet, modifier une variable global
-## dans une fonction en utilisant la directive globale
-## rend le code difficile à suivre. Il faut toujours
+## Pour finir, comme la directive global nuit à la clareté
+## du code en rendant les modifications
+## aux variable globales implicite, on doit éviter de
+## l'utiliser.
+
+## En effet, il faut toujours
 ## privilégier les modifications explicites par retour
 ## de fonction. Regardons ces deux exemples
 
@@ -77,13 +75,10 @@ def f():
 x = f()
 print x
 
-XXX - non plus !!!
-Deja ca:
-def f():
-    return x + 10
-c'est pas bon, on utilise en fait la variable globale en lecture, le terme n'est pas clos !
-
-pour etre propre avec ton exemple il faut faire 
+## Maintenant, la modification de la variable globale x
+## est explicite, mais on peut faire mieux en rendant aussi
+## explicite l'accès à la variable globale x dans la
+## fonction f. 
 
 x = 100
 def f(x):
