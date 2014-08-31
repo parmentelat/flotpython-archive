@@ -29,8 +29,8 @@ y = 'a'
 
 try:
     raise SplitError('message...', x, y)
-except SplitError as i:
-    print i.args
+except SplitError as e:
+    print e.args
 
 
 ## Mais comme une exception est une vraie classe, on peut
@@ -54,6 +54,6 @@ class SplitError(Exception):
 
 try:
     raise SplitError(res = 8, val = 'message...')
-except SplitError as i:
-    print i.res, i.val
+except SplitError as e:
+    print e.res, e.val
 

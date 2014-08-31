@@ -30,7 +30,8 @@ de nommage.
 
 C'est important de comprendre que les espaces de nommage isolent 
 uniquement les variables, mais pas les objets. Il est possible 
-d'avoir des références partagées par différents espaces de nommage vers le même objet. Si l'objet est mutable, il peut alors être modifié
+d'avoir des références partagées par différents espaces de nommage 
+vers le même objet. Si l'objet est mutable, il peut alors être modifié
 depuis un espace de nommage et sera vu modifié par tous les autres. 
 
 En résumé, les espaces de nommage permettent une parfaite isolation

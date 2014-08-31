@@ -11,7 +11,7 @@ class Mots():
     ## ma classe Objet prend un phrase à la contruction
     ## et la découpe en mots
     def __init__(self, phrase):
-        self.listMots = phrase.split()
+        self.list_mots = phrase.split()
         self.count = 0
 
     ## mon objet et son propre itérateur
@@ -21,10 +21,10 @@ class Mots():
     ## next retourne le mot suivant jusqu'à ce
     ## qu'il n'y ait plus de mots dans la phrase.
     def next(self):
-        if self.count == len(self.listMots):
+        if self.count == len(self.list_mots):
             raise StopIteration
         self.count = self.count + 1
-        return self.listMots[self.count - 1]
+        return self.list_mots[self.count - 1]
 
 m = Mots("spam spam spam egg beans spam")
 print [x for x in m]
@@ -40,24 +40,24 @@ print [x for x in m]
 
 class Mots():
     def __init__(self, phrase):
-        self.listMots = phrase.split()
+        self.list_mots = phrase.split()
 
     def __iter__(self):
-        return IterMots(self.listMots)
+        return IterMots(self.list_mots)
 
 class IterMots():
     def __init__(self, phrase):
-        self.listMots = phrase
+        self.list_mots = phrase
         self.count = 0
 
     def __iter__(self):
         return self
     
     def next(self):
-        if self.count == len(self.listMots):
+        if self.count == len(self.list_mots):
             raise StopIteration
         self.count = self.count + 1
-        return self.listMots[self.count - 1]
+        return self.list_mots[self.count - 1]
 
 m = Mots("spam spam spam egg beans spam")
 print [x for x in m]
@@ -69,10 +69,10 @@ print [x for x in m]        #il y a de multiples itérateurs
 
 class Mots():
     def __init__(self, phrase):
-        self.listMots = phrase.split()
+        self.list_mots = phrase.split()
 
     def __iter__(self):
-        for i in self.listMots:
+        for i in self.list_mots:
             yield i
 
 m = Mots("spam spam spam egg beans spam")

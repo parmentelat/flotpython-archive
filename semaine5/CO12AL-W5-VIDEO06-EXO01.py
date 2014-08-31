@@ -15,27 +15,27 @@ class sousC(C):
         print 'x est :', self.x
 
 
-I = sousC()
-J = C()
+c = sousC()
+sc = C()
 
 ## on peut remonter tout l'arbre d'héritage avec la variable
 ##  __class__ que l'on a déjà vu et __bases__ qui
 ## sur un classe retourne un tuple de ses super-classes. 
 
-print I.__class__, I.__class__.__bases__
-print J.__class__, J.__class__.__bases__
+print c.__class__, c.__class__.__bases__
+print sc.__class__, sc.__class__.__bases__
 
-## On voit que donc que I et J n'ont pas le même arbre d'héritage.
-## get_x sera celle de sousC pour I et celle de C pour J
+## On voit que donc que c et sc n'ont pas le même arbre d'héritage.
+## get_x sera celle de sousC pour c et celle de C pour sc
 
-I.set_x(10) # set_x de C
-J.set_x(20) # set_x de C
+c.set_x(10) # set_x de C
+sc.set_x(20) # set_x de C
 
-I.get_x() #get_x de sousC
-J.get_x() #get_x de sousC
+c.get_x() #get_x de sousC
+sc.get_x() #get_x de sousC
 
 ## finissons par regarder les différents espaces de nommage
-print I.__dict__, C.__dict__, sousC.__dict__ #noter les addresses differentes
+print c.__dict__, C.__dict__, sousC.__dict__ #noter les addresses differentes
                                              # de get_x dans C et sousC
 
 ## En Python tout est un objet, et les classes sont mutables,
@@ -48,6 +48,6 @@ def f(self):
 ## de C pour référencer l'objet fonction référencé par f
 C.get_x = f
 
-## et J vois la nouvelle fonction dans C
-J.get_x()
+## et sc vois la nouvelle fonction dans C
+sc.get_x()
                                             

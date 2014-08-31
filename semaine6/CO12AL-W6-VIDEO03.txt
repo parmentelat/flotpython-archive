@@ -19,17 +19,17 @@ les erreurs de fonctionnement de votre programme.
 Et comme en Python tout est un objet, les exceptions aussi sont 
 des objets. Mais il y 
 a deux choses importantes à savoir sur les exceptions. 
-Premièrement, les exceptions 
-sont très [performantes] en Python, c'est d'ailleurs pour cela 
-que l'exception StopIteration est utilisé par les itérateurs. 
-Deuxièmement, une exception n'est pas une fatalité qui conduit
+Premièrement, une exception n'est pas une fatalité qui conduit
 à l'arrêt du programme, on peut [capturer les exceptions] et prévoir
 des traitements spécifiques pour continuer le programme. C'est
 ce que nous allons voir dans cette vidéo.
+Deuxièmement, les exceptions 
+sont très [performantes] en Python, c'est d'ailleurs pour cela 
+que l'exception StopIteration est utilisé par les itérateurs. 
 
 [[
-[Les exceptions sont performantes]
 [On peut capturer les exceptions]
+[Les exceptions sont performantes]
 ]]
 
  

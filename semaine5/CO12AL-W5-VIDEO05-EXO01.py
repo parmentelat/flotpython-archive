@@ -26,8 +26,9 @@ print C.__dict__, I.__dict__
 
 ## Notons que toutes les variables commençant et finissant
 ## par des double tirets bas sont des variables définies par
-## le langage. On ne doit donc jamais utiliser cette notation
-## pour nos propres variables.
+## le langage. On ne doit donc jamais créer de nouvelles
+## variables utilisant cette notion, par contre, comme
+## on le verra bientôt, on peut surcharger ces variables.
 
 ## La relation d'héritage permet à un
 ## objet d'accéder à l'espace de nommage de l'objet dont
@@ -85,7 +86,7 @@ print C.y, I.y
 
 ## Comme les modules, les classes peuvent contenir des fonctions
 ## que l'on appelle habituellement méthodes. 
-## Le métthodes des classes sont des fonctions un peu particulières,
+## Le méthodes des classes sont des fonctions un peu particulières,
 ## elles doivent obligatoirement avoir comme premier argument
 ## une instance. Cela permet aux méthodes de travailler sur les
 ## variables de l'instance puisque la méthode a un référence vers

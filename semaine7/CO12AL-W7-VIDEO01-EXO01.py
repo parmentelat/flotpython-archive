@@ -21,11 +21,11 @@ print C.nb_i
 
 ## Je peux aussi faire une fonction dans mon module
 
-def f():
+def num():
     return C.nb_i
 
 
-print f()
+print num()
 
 ## Mais cela complique la maintenance d'avoir une fonction
 ## travaillant sur une classe en dehors de la classe.
@@ -44,19 +44,19 @@ class C:
     nb_i = 0
     def __init__(self):
         C.nb_i  = C.nb_i + 1
-    def f():
+    def num():
         return C.nb_i
-    f = staticmethod(f)
+    num = staticmethod(num)
 
 C()
 C()
-print C.f()
+print C.num()
 
 ## notons qu'une méthode statique peut aussi être appelée sur
 ## une instance, mais que l'instance n'est pas passée à la
 ## méthode
 
-print C().f()
+print C().num()
 
 ## Une sous classe hérite des méthodes statiques, par
 ## contre, si la sous classe surcharge la méthode
@@ -69,22 +69,22 @@ class SousC(C):
 
 ## je redéfinis pas la méthode statique
 class SousC(C):
-    def f():
-        return 'de sousC {}'.format(C.f())
-    f = staticmethod(f)
+    def num():
+        return 'de sousC {}'.format(C.num())
+    num = staticmethod(num)
 
 ## L'inconvénient ici est que il y a un seul compteur
 ## pour les instances de C et SousC
 
 SousC()
-SousC.f()
+SousC.num()
 
 ## il existe en Python a dernier type de methode pour
 ## les classes, ce sont les méthodes de classe.
 ## Lorsqu'une méthode de classe est appelée sur une
-## classe, elle reçoit comme premier argument une référence
-## de la classe qui l'appelle. C'est très intéressant
-## lorsque qu'un méthode de classe est défini dans une classe
+## classe C, elle reçoit comme premier argument une référence
+## sur C. C'est très intéressant
+## lorsque qu'une méthode de classe est défini dans une classe
 ## et hérité dans plusieurs sous classe. Il sera ainsi
 ## possible de faire un traitement différent en fonction
 ## de la sous classe. 
@@ -99,12 +99,12 @@ class C:
     def __init__(self):
         self.count()
     ## affiche le nombre d'instances de la classe cls
-    def f(cls):
+    def num(cls):
         return cls.nb_i
     ## compte de nombre d'instances de la classe cls
     def count(cls):
         cls.nb_i = cls.nb_i + 1
-    f = classmethod(f)
+    num = classmethod(num)
     count = classmethod(count)
 
 class SousC(C):
@@ -112,5 +112,5 @@ class SousC(C):
 
 C()
 C()
-print C.f(), SousC.f()
+print C.num(), SousC.num()
 

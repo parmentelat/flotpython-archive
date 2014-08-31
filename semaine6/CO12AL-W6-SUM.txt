@@ -32,9 +32,16 @@ CO12AL-W6-VIDEO02.txt
 
 ## Compléments Vidéo 2
 
+*Itérateurs et thread. 
+
+
 ## Quizz Vidéo 2
 
 ## Exercices Vidéo 2
+
+* dire que comme on a des itérateurs partout en Python, on peut
+souvent directement les utiliser. Proposer de réécrire la deuxième
+version de Mots avec un itérateur sur la liste de mots. 
 
 Donnes des exos pratiques de création d'objets avec des itérateurs
 
@@ -70,6 +77,7 @@ CO12AL-W6-VIDEO04.txt
 
 ## Compléments Vidéo 4
 
+* définit __str__ sur SplitError
 ## Quizz Vidéo 4
 
 ## Exercices Vidéo 4

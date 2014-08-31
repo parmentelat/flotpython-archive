@@ -67,8 +67,8 @@ print agenda('durant', 'marc', '0720202020')
 ## regardons maintenant la forme *. C'est un nom étrange
 ## pour quelque chose de très simple. Regardons un exemple
 
-def f(*Targs):
-    print Targs
+def f(*t):
+    print t
 
 ## le nom Targs est juste un nom de variable, on peut prendre
 ## n'importe quel nom seul l'étoile est importante. Avec
@@ -82,8 +82,8 @@ f(1, 2, 3, 'a')
 ## Ici encore c'est un nom étrange pour quelque chose
 ## de simple, regardons alors un exemple...
 
-def f(**Dargs):
-    print Dargs
+def f(**d):
+    print d
 
 ## Ici aussi, Dargs est juste un nom de variable, seule
 ## la double * est importante. Avec cette déclaration

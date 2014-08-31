@@ -9,8 +9,8 @@
 
 ## Sujet de la vidéo ()
 
-Nous avons vu précédemment la notion d'itérateur côté 
-utilisateur. Je vous rappelle que les itérateurs permettent
+Nous avons vu précédemment la notion d'itérateur du point
+de vue des utilisateurs. Je vous rappelle que les itérateurs permettent
 de parcourir des objets de manière intuitive, simple
 et efficace avec les boucle for, avec les fonctions map et filter,
 et avec les compréhensions. 

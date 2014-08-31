@@ -2,10 +2,10 @@
 
 ## Lorsque l'on importe un module on utilise l'instruction
 ## import suivi du nom du module. Ce nom a deux rôles,
-## le premier est de donner le nom de la variable qui
-## pointera vers l'objet module importé. Le deuxième est
-## de donner le nom du fichier devant être importé pour créer
-## l'objet module. Prenons l'exemple du module os. 
+## Le premier est de donner le nom du fichier devant
+## être importé pour créer l'objet module. Le deuxième
+## est de donner le nom de la variable qui pointera vers
+## l'objet module importé. Prenons l'exemple du module os. 
 
 import os
 
@@ -60,9 +60,11 @@ print sys.path
 ## module (en fait, il va exécuter le byte code) pour créer
 ## l'objet module est tous les objets qu'il contient. 
 ## L'interpréteur va exécuter le code sequentiellement en
-## créant chaque objet au fur et à mesure, par contre
-## le corps des fonctions n'est exécuté qu'à l'appel de la
-## fonction.
+## créant chaque objet au fur et à mesure. Les fonctions
+## sont un cas un peu particulier. L'objet fonction est bien
+## créé à l'import séquentiel du module. Par contre, le code
+## contenu dans le corps de la fonction ne sera exécuté
+## qu'a l'appel de la fonction.
 
 ## Ouvrons un éditeur IDLE pour comprendre cette exécution
 ## séquentielle

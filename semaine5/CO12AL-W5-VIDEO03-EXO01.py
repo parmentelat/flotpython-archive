@@ -101,5 +101,7 @@ cos(10)
 ## de nommage local, il faut faire attention aux collisions,
 ## c'est-à-dire que le nom de variable importé n'existe
 ## par déjà localement, sinon il sera remplacé par le
-## nom de variable importé. 
+## nom de variable importé. De plus, l'instruction
+## from math import cos ne va importer que la fonction cos,
+## mais ni le module math, ni aucune autre fonction de math. 
 

@@ -157,6 +157,9 @@ de compter sur les priorités.
 (seulement les numériques, et les set et frozenset, str/unicode, mais
 (1, 2) n'est pas égal à [1, 2])
 -quel sens à des comparaisons (avec < ou >) de listes ou dicts. 
+-parler de bool (qui permet de connaitre le résultat d'un test) 
+(je rajoute __nonzero__ lorsque l'on parlera de surcharge, c'est trop
+tôt maintenant)
 
 
 ###################################################################

@@ -1,8 +1,6 @@
 . debugger
 . module re et expressions régulières 
 . argparse
-. decorateurs
-. methodes statiques - methodes de classe
 . framework de tests
 
 -- intrduire rapidement (essentiellement mentionner et montrer des exemples)
