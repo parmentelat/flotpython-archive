@@ -46,7 +46,7 @@ CO12AL-W2-VIDEO03.txt
 
 ## Compléments Vidéo 3 
 
-# slicing.ipynb : reprend le slicing 
+OK slicing.ipynb : reprend le slicing 
 
 ## Quizz Vidéo 3 
 
