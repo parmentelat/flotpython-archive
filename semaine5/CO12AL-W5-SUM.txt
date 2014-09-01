@@ -84,11 +84,15 @@ un import *
 
 ###################################################################
 
-## Vidéo 4 (Programmation objet : concepts de base)
+## Vidéo 4 (Classes, instances et méthodes)
 
 CO12AL-W5-VIDEO04.txt
 
 ## Compléments Vidéo 4
+
+* introduire getattr() et setattr()
+* introduire la notion de variables privées _var
+(privée et pas d'import par from mod import *), __var__ 
 
 ## Quizz Vidéo 4
 
@@ -96,27 +100,11 @@ CO12AL-W5-VIDEO04.txt
 
 ###################################################################
 
-## Vidéo 5 (Classes, instances et méthodes)
+## Vidéo 5 (Héritage)
 
 CO12AL-W5-VIDEO05.txt
 
 ## Compléments Vidéo 5
-
-* introduire getattr() et setattr()
-* introduire la notion de variables privées _var
-(privée et pas d'import par from mod import *), __var__ 
-
-## Quizz Vidéo 5
-
-## Exercices Vidéo 5
-
-###################################################################
-
-## Vidéo 6 (Héritage)
-
-CO12AL-W5-VIDEO06.txt
-
-## Compléments Vidéo 6
 
 *introduire la MRO (Method Resolution Order)
 http://python-history.blogspot.fr/2010/06/method-resolution-order.html
@@ -131,17 +119,17 @@ design patterns et le livre de Gramma et al.
 * introduire les variables __var (name mangling)
 http://docs.python.org/2/reference/lexical_analysis.html#reserved-classes-of-identifiers
 
-## Quizz Vidéo 6
+## Quizz Vidéo 5
 
-## Exercices Vidéo 6
+## Exercices Vidéo 5
 
 ###################################################################
 
-## Vidéo 7 (Surcharge d'opérateurs)
+## Vidéo 6 (Surcharge d'opérateurs)
 
-CO12AL-W5-VIDEO07.txt
+CO12AL-W5-VIDEO06.txt
 
-## Compléments Vidéo 7
+## Compléments Vidéo 6
 
 *Citer ce lien pour toutes les surcharges d'opérateurs. 
 http://docs.python.org/2/reference/datamodel.html#special-method-names
@@ -163,6 +151,19 @@ Plus rapide d'utiliser un opérateur que l'appel direct sur le méthode
 3.1706046182752914
 >>> timeit.timeit(setup = "L = range(1000)", number = 100000000, stmt = "L.__contains__(0)")
 11.681099249275206
+
+## Quizz Vidéo 6
+
+## Exercices Vidéo 6
+
+
+###################################################################
+
+## Vidéo 7 (Quand utiliser fonctions, classes ou modules ?)
+
+CO12AL-W5-VIDEO07.txt
+
+## Compléments Vidéo 7
 
 ## Quizz Vidéo 7
 
