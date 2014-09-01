@@ -89,7 +89,7 @@ régulièrement.
 
 [[
 close()
-'/n'
+'\n'
 flush()
 ]]
 

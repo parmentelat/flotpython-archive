@@ -9,18 +9,7 @@
 
 ## Sujet de la vidéo ()
 
-Nous allons maintenant aborder une grosse partie de la programmation
-en Python, c'est la programmation objet. Nous savons qu'en Python
-tout est un objet, donc lorsque vous créez un entier, une liste, ou
-un dictionnaire, vous créez des objets, mais des objets déjà 
-définis par le langage. Par contre, lorsque vous créez
-une fonction ou un module, vous créez des objets dont vous
-avez défini le comportement. Mais il existe une
-autre manière de faire des objets dont on définit le comportement
-en Python, ce sont les classes.
 
-Alors quelle est la différence entre une fonction, un module
-et une classe pour créer nos propres objets en Python ?
 
 >>>>>>>>>> INCLUDE CO12AL-W5-VIDEO04-SLIDE01.pptx <<<<<<<<<<
 
