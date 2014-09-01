@@ -159,7 +159,7 @@ Plus rapide d'utiliser un opérateur que l'appel direct sur le méthode
 
 ###################################################################
 
-## Vidéo 7 (Quand utiliser fonctions, classes ou modules ?)
+## Vidéo 7 (Quand utiliser fonctions, modules ou classes ?)
 
 CO12AL-W5-VIDEO07.txt
 

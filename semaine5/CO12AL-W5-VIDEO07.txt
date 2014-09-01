@@ -5,10 +5,15 @@
 ## est à afficher en surimpression pendant que je parle et à 
 ## synchroniser avec le texte entre crochet 
 
-## TITRE : Programmation objet, concepts de base
+## TITRE : Quand utiliser fonctions, modules ou classes ?
 
 ## Sujet de la vidéo ()
 
+Nous avons vu maintenant tous les principaux objets en Python.
+En particulier, nous avons vu trois types d'objets qui permettent
+de factoriser du code : les fonctions, les modules et les classes. 
+Même s'il s'agit d'objets très différent, il est important de 
+clarifier quel est l'usage de chacun de ces objets. 
 
 
 >>>>>>>>>> INCLUDE CO12AL-W5-VIDEO04-SLIDE01.pptx <<<<<<<<<<
@@ -26,11 +31,14 @@ si vous voulez juste une [boite à outils] avec son propre espace
 de nommage, le module est suffisant, mais si vous des créer des [objets
 qui évoluent indépendamment], vous devez passer par les classes. 
 
-La notion d'héritage est plus difficile à appréhender. Lorsqu'une classe
-A hérite d'une classe B, la classe A a accès a toutes les fonctions
-définies dans la classe B ainsi qu'à l'espace de nommage de B. 
+L'intérêt de l'héritage est de structurer son code en fonction 
+de types de comportements qui peuvent être hérité. On peut imaginer
+une classe employée qui définit les informations standards pour 
+tous les employés (nom, adresses, numéro sécu, etc.) et une 
+classe cadre qui hérite de tous les attributs de la classe employé, 
+mais qui définit en plus une liste de personnes encadrées. 
 
-Nous reviendrons dessus prochainement, mais il faut comprendre que la 
+Il faut comprendre que la 
 programmation objet et l'héritage n'est pas un dogme, mais juste un
 outil destiné à vous simplifier la vie. Alors, ne prenez pas cela 
 comme une contrainte, mais comme une facilité si un jour vous avez besoin
