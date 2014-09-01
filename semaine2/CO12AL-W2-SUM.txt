@@ -62,14 +62,12 @@ OK exo-slicing.ipynb: un peu de slicing, et des indices négatifs, le slicing ave
 CO12AL-W2-VIDEO04.txt (9 minutes)
 
 ## Compléments Vidéo 4 
-
-XXX thierry: voir si on conserve la fin (qui passe une fonction en
-# parametre...) à cet endroit ou si on bouge ça + tard dans le cours  
+OK: listes-methodes.ipynb: un complément sur les méthodes des listes
 OK listes-sort.ipynb : sort avec les paramètres reverse, et sur des strings 
-#buffer : XXX thierry je connais pas du tout; voir la note concernant bytearray + bas
 
 ## Quizz Vidéo 4 
 OK listes.quiz : pop append extend del sort sorted (j'utilise aussi += a un moment)
+xxx -- ?? comparer l.insert (i,shmol) avec l[i:i] = [ shmol ]
 
 ## Exercices Vidéo 4 
 
