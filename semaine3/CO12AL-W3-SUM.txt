@@ -8,9 +8,8 @@
 CO12AL-W3-VIDEO01.txt 
 
 ## Compléments Vidéo 1 
-
+pas de complement ni exercice sur ce topic tres abstrait
 ## Quizz Vidéo 1
-
 ## Exercices Vidéo 1
 
 
@@ -21,13 +20,9 @@ CO12AL-W3-VIDEO01.txt
 CO12AL-W3-VIDEO02.txt 
 
 ## Compléments Vidéo 2
-*voir la construction D=dict(clef1=obj1, clef2=obj2) 
-*voir d.get('marc', '?') et son usage par rapport à d['marc']
-*voir un exemple de dict dans un dict et de l'accès à ses éléments D={'alice': 35, 'enfants':{'bob' : 9, 'charlie' : 6}}
-*expliquer que d.has_key() est ancien et qu'il faut utiliser in maintenant
-* remontrer sur un exemple les cles immuables / mutables e.g. tuple de listes
-
-https://docs.python.org/2/library/stdtypes.html#mapping-types-dict
+OK dict-extras.ipynb - recapitulatif sur comment utiliser un dict + url vers la doc python
+OK dict-key-immutable.ipynb - types immuables et clés globalement immuables
+OK dict-as-struct.ipynb - une utilisation standard du dicctionnaire pour faire un struct
 
 ## Quizz Vidéo 2
 
@@ -69,6 +64,7 @@ probleme posé
 CO12AL-W3-VIDEO04.txt 
 
 ## Compléments Vidéo 4
+TODO recapitulatif shallow/deep copy sur les diff'erents types - copy() sur dict et set
 OK references-circulaires.ipynb : une liste infinie; un exemple + utile de reference circulaire
 OK is-id.ipynb : function id(), operateur is,  les entiers implementes comme des singletons
 TODO del.ipynb pour annuler une affectation 
@@ -121,9 +117,10 @@ https://docs.python.org/2/library/index.html
 ## Vidéo 6 (L'indentation comme syntaxe de base)
 
 CO12AL-W3-VIDEO06.txt
-# indentation - syntaxe minimale - presentation unifiee - 79 cars
 
 ## Compléments Vidéo 6
+TODO parler des coupures de ligne - les parentheses et autres crochets
+   # indentation - syntaxe minimale - presentation unifiee - 79 cars
 
 -ajouter un lien vers la PEP 008 (sur les conventions de codage)
 http://legacy.python.org/dev/peps/pep-0008/

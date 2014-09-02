@@ -44,7 +44,7 @@ print c.__dict__, C.__dict__, sousC.__dict__ #noter les addresses differentes
 def f(self):
     print 'depuis C, x est:', self.x
 
-## je redéfini simplement la variable get_x dans l'espace de nommage
+## je redéfinis simplement la variable get_x dans l'espace de nommage
 ## de C pour référencer l'objet fonction référencé par f
 C.get_x = f
 

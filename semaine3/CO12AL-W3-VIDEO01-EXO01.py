@@ -19,7 +19,7 @@ f(range(10))
 f(range(50000000))
 
 ## on voit que le test d'appartenance est fonction du nombre
-## d'élément dans la séquence. C'est normal puisque le seul
+## d'éléments dans la séquence. C'est normal puisque le seul
 ## moyen de trouver un élément dans une séquence est de la
 ## parcourir séquentiellement. Donc si on teste un élément
 ## qui n'est pas dans la séquence on doit comparer cet

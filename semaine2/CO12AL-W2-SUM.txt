@@ -28,9 +28,9 @@ CO12AL-W2-VIDEO02.txt
 ## Compléments Vidéo 2
 
 OK calculette.ipynb : utiliser python comme une calculette - introduit aussi les conversions
+OK affectations-operations.ipynb : illustrer += et les autres variantes, mentionner les autres types  
 OK precision-flottants.ipynb : limitation de la précision des floats  
 OK entiers-bitwise.ipynb : opérations bitwise : et/ou/ou exclusifs décalages 
-OK affectations-operations.ipynb : illustrer += et les autres variantes, mentionner les autres types
 
 ## Quizz Vidéo 2 
 OK types-numeriques.quiz
@@ -139,6 +139,7 @@ XXX Arnaud: montrer une boucle for sur une chaine de caractères.
 CO12AL-W2-VIDEO08.txt 
 
 ## Compléments Vidéo 8 
+TODO raw-strings.ipynb - backslashes - \n \t 
 OK string-formatting.ipynb : format et % - je laisse tomber rjust/ljust/center pour le moment
 OK string-tools.ipynb : # help(str)  #split join  #replace strip #index find rfind count startswith endswith upper lower swapcase capitalize title  renvoi sur la doc
 OK raw_input.ipynb
@@ -154,4 +155,3 @@ OK strings.quiz - le quiz se prete bien surement aux basiques des strings
 ## Exercices Vidéo 8
 TODO? exo-strings.ipynb il serait peut-être bien de faire faire quelques exos plus construits, mais le quiz est assez limité avec les réponses sur une seule ligne
 pour travailler les méthodes du module string principalement
-
