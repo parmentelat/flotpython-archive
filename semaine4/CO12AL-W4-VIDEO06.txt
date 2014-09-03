@@ -42,9 +42,9 @@ définies dans une fonction qui appartiennent au scope local.
 
 [[
 Le scope définit la portée des variables
-Bloc de code
 définie = affectée = assignée 
 binding
+Bloc de code
 ]]
 
 Ouvrons un éditeur IDLE pour commencer à jouer avec la
