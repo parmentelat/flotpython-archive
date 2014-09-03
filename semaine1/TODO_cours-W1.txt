@@ -4,7 +4,7 @@
 
 -plan du MOOC
 
--expliquer que beaucoup d'approfondissement seront vu en exercice (exemple du marteau :
+-expliquer que beaucoup d'approfondissements seront vu en exercice (exemple du marteau :
 si je vous apprends comment utiliser un marteau, vous saurez utiliser n'importe quel
 marteau, il vous faudra peut-être un peu d'entrainement, mais vous n'aurez pas à 
 surmonter de grosses difficultés) 
@@ -22,6 +22,9 @@ de cours.
 
 ========== avantages de python
 
+situer python parmi les autres langages
+destiné à rester 
+
 ? -discuter de l'intêret de l'indentation comme base de la syntaxe (montrer
 ? une fonction avec accolades et ; et une fonction Python standard)
 
@@ -33,6 +36,9 @@ de cours.
 https://www.youtube.com/watch?v=anwy2MPT5RE
 
 -discuter du zen de python
+
+# XXX une mention peut-être à http://en.wikipedia.org/wiki/History_of_Python
+
 
 ========== comment utiliser les différents environnements
 
