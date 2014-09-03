@@ -15,19 +15,31 @@ différents outils.
 fondements du langage. 
 
 _*_ comment est organisé le matériau pédagogique: 
-pas de certificat dans cette première itération 
 
 vidéo, compléments, exercices
+* vidéo - format assez court - (petits exemples, uniquement pour
+illustrer le point, avec des noms courts)
 * compléments : 3 niveaux basique - intermédiaire - avancé -
 possiblement mélangé dans un notebook
-* exercices : selon les cas, quiz ou notebook; notebook -> self evaluation 
+* exercices : selon les cas, quiz ou notebook; 
+notebook -> évaluation personnelle
+quiz -> permet d'avoir un retour
 
 mentionner vaguement des projets 
 
-_*_ python - langage versus bibliothèques 
+malheureusement pas de certificat 
+
+_*_ python - python2
+
+langage versus bibliothèques 
 bibliothèques standard (qui viennent avec python)
 outils tiers - plus ou moins gros
-demande une bonne connaissance du langage pour les utiliser et les
+compte tenu du format, pas possible de couvrir tout
+meme pas possible de simplement tous les citer
+gros trucs (django, numpy, matplotlib, sage) -> un mooc a soi tout
+seul
+
+dans tous les cas demande une bonne connaissance du langage pour les utiliser et les
 apprivoiser au mieux
 
 
