@@ -1,0 +1,18 @@
+-installer Python 2.x
+
+
+-introduire la notion de terminal interactif et d'éditeur de texte (on
+ utilise l'un ou l'autre suivant le besoin)
+-expliquer la différence entre terminal interactif et éditeur IDLE 
+- (python -i)
+- IDLE - raccourcis
+-définir le retour chariot (saut de ligne / Entrée)
+-discuter des exceptions et de SyntaxError en particulier (expliquer que python montre l'endroit de la première erreur)
+-introduire la notion de commentaires avec le # (tout ce qu'il y a
+ après n'est pas interprété)
+
+-inroduire dir() et help()
+
+- mentionner les accents - encodages - pas d'accents 
+-expliquer les anglisism librairie, backslash, underscore 
+

@@ -1,14 +1,8 @@
-# XXX j'utilise pour l'instant des noms plus simples qui  
-# me permettent mieux de m'y retrouver, je renommerai le tout plus tard  
-
-# ceci est definitivement pour la semaine 1, je ne sais pas du tout ou le mettre dans le flot mais les notebooks sont prets
-OK notebooks.ipynb : expliquer le fonctionnement des notebooks
-OK notebook-vs-interpreter.ipynb : illustrer un bout de programme executé sous interpréteur, par python et sous notebook
-
-# XXX une mention peut-être à http://en.wikipedia.org/wiki/History_of_Python
 ###################################################################
 
-## Vidéo 1 
+## Vidéo 1 (Organisation du MOOC)
+
+C012AL-W1-S1.txt 
 
 ## Compléments Vidéo 1
 
@@ -19,20 +13,20 @@ OK notebook-vs-interpreter.ipynb : illustrer un bout de programme executé sous i
 
 ###################################################################
 
-## Vidéo 2
+## Vidéo 2 (la distribution standard)
 
 ## Compléments Vidéo 2
 
 ## Quizz Vidéo 2
 
-## Exercices Vidéo 2
-
 
 ###################################################################
 
-## Vidéo 3 
+## Vidéo 3 (les notebooks - ipython)
 
 ## Compléments Vidéo 3
+OK notebooks.ipynb : expliquer le fonctionnement des notebooks
+OK notebook-vs-interpreter.ipynb : illustrer un bout de programme executé sous interpréteur, par python et sous notebook
 
 ## Quizz Vidéo 3
 
@@ -41,7 +35,7 @@ OK notebook-vs-interpreter.ipynb : illustrer un bout de programme executé sous i
 
 ###################################################################
 
-## Vidéo 4
+## Vidéo 4 (Pourquoi python)
 
 ## Compléments Vidéo 4
 

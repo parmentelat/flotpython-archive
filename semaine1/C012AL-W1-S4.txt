@@ -1,0 +1,20 @@
+situer python parmi les autres langages
+destiné à rester 
+tout objet - passage par référence (pas de passage par valeur)
+pas hyper-efficace ni très pointu sur la gestion mémoire
+
+? -discuter de l'intêret de l'indentation comme base de la syntaxe (montrer
+? une fonction avec accolades et ; et une fonction Python standard)
+
+-pourquoi Python 2.x et pas 3.x 
+
+-langage interprété ((was fonctionnement machine virtuelle))
+
+-expliquer l'histoire des monthy python (et les mots spam egg beans)
+https://www.youtube.com/watch?v=anwy2MPT5RE
+
+-discuter du zen de python
+
+# XXX une mention peut-être à http://en.wikipedia.org/wiki/History_of_Python
+
+
