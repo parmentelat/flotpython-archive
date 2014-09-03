@@ -25,7 +25,7 @@ C'est pour cette raison que Python a introduit la notion de décorateur.
 Mais nous allons voir que cela va bien plus loin qu'une simple astuce 
 syntaxique pour rendre le type d'une méthode explicite. 
 
->>>>>>>>>> INCLUDE CO12AL-W7-VIDEO02-EXO01.py () <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W7-VIDEO02-SLIDE01.pptx () <<<<<<<<<<
 
 
 ## Conclusion()
