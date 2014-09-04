@@ -24,18 +24,18 @@ légèrement incompatibles.
 Nous avons choisi de construire ce cours sur python2 et plus précisément en 2.7. 
 
 Les raisons de ce choix sont simples
-d'une part et surtout la grande majorité du code existant dans la sphère python, et qui constitue
-une des grandes forces du langage, fonctionne toujours exclusivement en python2.
-d'autre part les concepts les nouveautés de python 3 sont bien souvent
-rapportés dans python2, de sorte que les différences entre les deux
-langages restent minimes; vous trouverez un complément là dessus en
-semaine 7
+* d'une part et surtout la grande majorité du code existant dans la
+sphère python, et qui constitue une des grandes forces du langage,
+fonctionne toujours exclusivement en python2.
+* d'autre part les concepts les nouveautés de python 3 sont bien
+souvent rapportés dans python2, de sorte que les différences entre les
+deux langages restent minimes; vous trouverez un complément là dessus
+en semaine 7
 
 ---------- partie 1.2
 [ remettre le plan du cours avec les 7 semaines ]
 
-XXX pourquoi d'autres part
-D'autre part, notre parti-pris a été de nous concentrer sur le coeur du
+Par ailleurs, notre parti-pris a été de nous concentrer sur le coeur du
 langage. À partir de la semaine 2, Arnaud vous présentera dans les vidéos,
 les fondements du langage dans le détail.
 
@@ -46,7 +46,12 @@ permettent de rendre le code réutilisable et modulaire. Enfin nous
 aborderons le système de classes, qui permet à chacun de définir
 ses propres types de données, et les espaces de nommage.
 
-XXX je ne sais pas ce qu'est la liaison lexicale. 
+XXX je ne sais pas ce qu'est la liaison lexicale
+yyy c'est le fait que les variables sont résolues textuellement à
+partir de leur apparition dans le texte, comme e.g. la règle LEG; par
+opposition à liaison dynamique, comme dans certains langages anciens,
+ou on cherche la variable dans la pile d'exécution.
+
 Tout au long du cours nous insisterons sur les grands choix de
 conception du langage, à savoir le fait que tout est objet, 
 le typage dynamique, la liaison lexicale, et sur l'importance de
