@@ -24,5 +24,3 @@ et il n'y a qu'un seul objet module par module importé. Tous
 les imports sur un module utilise donc le même objet module. 
 
 ## Conclusion ()
-
-

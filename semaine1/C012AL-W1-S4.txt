@@ -1,20 +1,56 @@
-situer python parmi les autres langages
-destiné à rester 
+Situer python parmi les autres langages
+destiné à rester - comme C // et non pas à disparaître - comme Ada 
+
 tout objet - passage par référence (pas de passage par valeur)
-pas hyper-efficace ni très pointu sur la gestion mémoire
+nombreux types disponibles par défaut
 
-? -discuter de l'intêret de l'indentation comme base de la syntaxe (montrer
-? une fonction avec accolades et ; et une fonction Python standard)
+pas hyper-efficace ni très pointu sur la gestion mémoire (utiliser C
+pour ce genre de choses), mais très raisonnable compte tenu de la
+vitesse de développement
+bon rapport qualité-prix
 
--pourquoi Python 2.x et pas 3.x 
+langage interprété - pas de compilation 
+interpréteur permet beaucoup de flexibilité
 
--langage interprété ((was fonctionnement machine virtuelle))
+énorme base d'outils disponibles sous forme de modules
+grâce notamment à sa capacité à s'interfacer avec C/C++
+
+pourquoi Python 2.x et pas 3.x 
+
+
+**portable**
+
+syntaxe simple
+pas de délimitations ( ni ; ni begin/end ni {} )
+uniquement les indentations
+
+pas d'extravagance comme perl
+typage dynamique; pas besoin de sous-titrer le type, toute variable
+peut désigner tout objet, nombre, dictionnaire, fonction, classe...
+
+gestion automatique de la mémoire - garbage collector
+
+
+- Licence
+La PSF (Python Software Foundation) possède les droits sur python et
+assure son développement
+
+langage gratuit, et aucune restriction sur le langage et son usage
+même commercial
+http://docs.python.org/2/license.html 
+
+
+-discuter du zen de python 
+import this
+
 
 -expliquer l'histoire des monthy python (et les mots spam egg beans)
+
 https://www.youtube.com/watch?v=anwy2MPT5RE
 
--discuter du zen de python
 
 # XXX une mention peut-être à http://en.wikipedia.org/wiki/History_of_Python
 
+http://python-history.blogspot.com
 
+préparer des bookmarks et montrer les pages

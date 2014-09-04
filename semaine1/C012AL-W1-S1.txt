@@ -14,6 +14,18 @@ différents outils.
 Puis à partir de la semaine 2, nous verrons dans les vidéos avec Arnaud les
 fondements du langage dans le détail.
 
+Nous commencerons par l'étude des différents types de base, qui avec
+notamment les dictionnaires et les ensembles sont une des grandes
+forces de python; nous verrons ensuite les structures de contrôle
+élémentaires ainsi que les fonctions, et les modules qui permettent de
+rendre le code réutilisable et modulaire. Enfin nous aborderons le
+système de classes, qui permet à chacun de se définir ses propres
+types de données.
+
+Tout au long du cours nous insisterons sur les grands choix de
+conception du langage, à savoir le typage dynamique, le fait que tout
+est objet en python, la liaison lexicale, et les itérateurs.
+
 ====================
 
 Voici comment nous avons choisi d'organiser le matériel pédagogique du
@@ -51,6 +63,9 @@ forme de notebooks. Nous y reviendrons, mais vous aurez avec ces
 exercices les moyens de faire une auto-évaluation en vérifiant que
 votre code répond bien à la question.
 
+Vous remarquerez d'ailleurs que le contenu du cours est allégé en
+semaines 6 et 7 pour vous laisser davantage de temps pour les exercices.
+
 J'aimerais enfin attirer votre attention sur le fait que dans les
 vidéos, pour des raisons pratiques, on utilise massivement des noms de
 variables très courts - sinon on passerait trop de temps au clavier. 
@@ -58,14 +73,10 @@ Toutefois il nous faut insister, si vous écrivez du code qui risque de
 durer au delà de la demie-heure, prenez bien soin d'utiliser des noms
 de variables parlants, comme nous vous le rappelerons très bientôt.
 
-XXX Je me demande si je ne ferais pas mieux de faire une 5eme video
-sur l'évaluation, de façon à pouvoir la remplacer si on décide de
-délivrer un certificat dans les itérations suivantes. XXX
 Dans l'état actuel toutefois, nous ne sommes pas en mesure de délivrer
 un certificat à l'issue du mooc.
 
 ====================
-
 Pour préciser un peu mieux le programme du mooc: 
 
 Tout d'abord, comme vous le savez sans doute, python est actuellement
@@ -74,7 +85,7 @@ la version 3, et nous avons choisi de construire ce cours sur
 python2. python3 est certes la version sur laquelles se font les
 nouveaux développements, mais d'une part les concepts les plus avancés
 ont été rapportés dans python2, et d'autre part et surtout la plus
-grande majorité du code existant fonctionne toujours en python2.
+grande majorité du code existant fonctionne toujours exclusivement en python2.
 
 
 D'autre part, notre parti-pris a été de se concentrer sur le coeur du
@@ -83,26 +94,26 @@ base, les classes, ainsi que la modularité dans python, c'est à dire
 la notion de module, héritée de modula-3.
 
 Ce sont ces notions qui sont la clé pour être capable de rapidement
-comprendre et appréhender comment utiliser telle ou telle
-bibliothèque. 
-Naturellement nous étudierons aussi quelques unes de ces
-bibliothèques, et notamment parmi ce qu'il est convenu d'appeler la
-bibliotheque standard, c'est à dire les outils qui font partie
-intégrante de la distribution standard python; on ne peut pas
-installer python sans la bibliothèque standard. Nous signalons
-également quelques outils tiers - c'est à dire qui ne sont pas dans la
-bibliothèque standard - importants.
+comprendre et appréhender comment utiliser telle ou telle librairie.
+Naturellement nous étudierons aussi quelques unes de ces librairies,
+et notamment parmi ce qu'il est convenu d'appeler la librairie
+standard, c'est à dire les outils qui font partie intégrante de la
+distribution standard python; on ne peut pas installer python sans la
+librairie standard. Nous signalerons également quelques outils tiers -
+c'est à dire qui ne sont pas dans la bibliothèque standard -
+importants.
 
-Mais il n'est pas envisageable de tout présenter, même dans la
-bibliothèque standard, et donc a fortiori sur l'énorme base de code
+Mais il n'est pas envisageable de tout présenter, même si l'on voulait
+se limiter à la librairie standard, et donc a fortiori sur l'énorme base de code
 disponible. Certains outils, comme django pour réaliser un serveur
 web, ou encore numpy pour le calcul scientifique, pourraient
 facilement faire l'objet d'un mooc à eux tout seuls.
 
 Notre objectif est donc plutôt de vous fournir une très bonne base de
 départ, un socle, pour que vous puissiez par vous même découvrir, choisir et
-apprendre facilement telle ou telle biblitohèque tierce en fonction de
+apprendre facilement telle ou telle biblitohèque en fonction de
 vos besoins.
+
 
 Pour conclure, je vous invite à utiliser également le forum, de façon
 à échanger entre vous sur tous les sujets qui peuvent vous poser
@@ -110,7 +121,7 @@ problème. N'oubliez pas que vous n'êtes pas seul, aussi n'hésitez pas
 à soumettre vos idées et suggestions à la communauté des étudiants.
 
 Avant de nous retrouver dans la prochaine vidéo, il est nécessaire
-d'installer python sur votre machine, c'est le moment d'y penser si
+d'installer python 2.7 sur votre machine, c'est le moment d'y penser si
 vous ne l'avez pas encore fait; vous trouverez dans un
 complément quelques indications à ce sujet.
 
