@@ -22,13 +22,6 @@ vidéos vont vous expliquer méthodiquement les mécanismes fondamentaux
 du langage.
 
 ==========
-XXX ce serait mieux ailleurs - sans doute à la fin ...
-Je dois tout d'abord attirer votre attention sur le fait que les
-vidéos, pour des raisons pratiques, utilisent massivement des noms de
-variables très courts - sinon on passerait trop de temps au clavier -
-ce qui n'est pas recommandé pour le code que vous écrirez vous mêmes,
-comme on le verra très bientôt.
-
 Cela dit le format de la vidéo ne se prête pas à l'exhaustivité; et c'est
 pourquoi vous trouverez la plupart du temps un certain nombre de
 compléments, qui reprennent et approfondissent le sujet de la vidéo.
@@ -57,6 +50,13 @@ La partie la plus substantielle des exercices seront proposés sous
 forme de notebooks. Nous y reviendrons, mais vous aurez avec ces
 exercices les moyens de faire une auto-évaluation en vérifiant que
 votre code répond bien à la question.
+
+J'aimerais enfin attirer votre attention sur le fait que dans les
+vidéos, pour des raisons pratiques, on utilise massivement des noms de
+variables très courts - sinon on passerait trop de temps au clavier. 
+Toutefois il nous faut insister, si vous écrivez du code qui risque de
+durer au delà de la demie-heure, prenez bien soin d'utiliser des noms
+de variables parlants, comme nous vous le rappelerons très bientôt.
 
 XXX Je me demande si je ne ferais pas mieux de faire une 5eme video
 sur l'évaluation, de façon à pouvoir la remplacer si on décide de
@@ -109,7 +109,9 @@ Pour conclure, je vous invite à utiliser également le forum, de façon
 problème. N'oubliez pas que vous n'êtes pas seul, aussi n'hésitez pas
 à soumettre vos idées et suggestions à la communauté des étudiants.
 
-Je vous retrouve dans la prochaine video, ou nous verrons comment
-utiliser les outils installés avec python. 
+Avant de nous retrouver dans la prochaine vidéo, il est nécessaire
+d'installer python sur votre machine, c'est le moment d'y penser si
+vous ne l'avez pas encore fait; vous trouverez dans un
+complément quelques indications à ce sujet.
 
 À bientôt.

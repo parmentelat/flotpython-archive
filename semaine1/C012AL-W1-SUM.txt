@@ -5,6 +5,7 @@
 C012AL-W1-S1.txt 
 
 ## Compléments Vidéo 1
+TODO install-python.ipynb quelques ressources pour l'installation de python
 
 ## Quizz Vidéo 1
 
