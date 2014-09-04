@@ -6,12 +6,16 @@ force:
 #
 # rough index based on the *SUM.txt
 # I need to set LC_ALL otherwise grep misreads line with accents and gives truncated results
-INDEX_POST= sed -e 's,\(\#\# Vid\),==================== \1,'
+INDEX_POST= sed -e 's,\(\#\# Vid\),========== \1,'
 
 index: force
 	export LC_ALL=en_US.ISO8859-15;\
-	ls semaine*/C[0O]12AL*SUM.txt | xargs egrep '(^C[0O]12AL.*txt|^\#\# Vid)' | $(INDEX_POST) > index.short;\
-	ls semaine*/C[0O]12AL*SUM.txt | xargs egrep '(^C[0O]12AL.*txt|^\#\# Vid|^OK|^TODO)' | $(INDEX_POST) > index.long
+	for s in semaine?; do echo ==================== $$s; \
+	    ls $$s/C[0O]12AL*SUM.txt | xargs egrep '(^C[0O]12AL.*txt|^\#\# Vid|^OK|^TODO)' | $(INDEX_POST) ; \
+	    echo ""; \
+	    echo ""; \
+	    echo ""; \
+	done > index.long
 
 #
 # builds a html index of the ipynb files expected to be reachable on connect.inria.fr

@@ -1,7 +1,9 @@
+# tout ceci sans doute dans les compléments
 . debugger
 . module re et expressions régulières 
 . argparse
 . framework de tests
+. accents
 
 -- intrduire rapidement (essentiellement mentionner et montrer des exemples)
 . django

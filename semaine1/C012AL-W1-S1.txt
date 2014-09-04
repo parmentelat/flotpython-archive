@@ -11,48 +11,105 @@ prise en mains, pour vous laisser le temps d'installer le logiciel
 nécessaire sur votre propre machine, et de vous familiariser avec les
 différents outils.
 
-À partir de la semaine 2, nous verrons dans les vidéos avec Arnaud les
-fondements du langage. 
+Puis à partir de la semaine 2, nous verrons dans les vidéos avec Arnaud les
+fondements du langage dans le détail.
 
-_*_ comment est organisé le matériau pédagogique: 
+====================
 
-vidéo, compléments, exercices
-* vidéo - format assez court - (petits exemples, uniquement pour
-illustrer le point, avec des noms courts)
-* compléments : 3 niveaux basique - intermédiaire - avancé -
-possiblement mélangé dans un notebook
-* exercices : selon les cas, quiz ou notebook; 
-notebook -> évaluation personnelle
-quiz -> permet d'avoir un retour
+Voici comment nous avons choisi d'organiser le matériel pédagogique du
+MOOC. Chaque semaine contient quelques vidéos, 8 au maximum. Ces
+vidéos vont vous expliquer méthodiquement les mécanismes fondamentaux
+du langage.
 
-mentionner vaguement des projets 
+==========
+XXX ce serait mieux ailleurs - sans doute à la fin ...
+Je dois tout d'abord attirer votre attention sur le fait que les
+vidéos, pour des raisons pratiques, utilisent massivement des noms de
+variables très courts - sinon on passerait trop de temps au clavier -
+ce qui n'est pas recommandé pour le code que vous écrirez vous mêmes,
+comme on le verra très bientôt.
 
-malheureusement pas de certificat 
+Cela dit le format de la vidéo ne se prête pas à l'exhaustivité; et c'est
+pourquoi vous trouverez la plupart du temps un certain nombre de
+compléments, qui reprennent et approfondissent le sujet de la vidéo.
 
-_*_ python - python2
+Il nous faut insister sur la nécessité de suivre aussi ces compléments.
 
-langage versus bibliothèques 
-bibliothèques standard (qui viennent avec python)
-outils tiers - plus ou moins gros
-compte tenu du format, pas possible de couvrir tout
-meme pas possible de simplement tous les citer
-gros trucs (django, numpy, matplotlib, sage) -> un mooc a soi tout
-seul
+Comme nous le verrons dans la 3eme vidéo de cette semaine, les
+compléments sont rédigés avec ipython, sous forme de documents qu'on
+appelle des notebooks, pardon pour le néologisme, et qui contiennent
+du code que vous pourrez exécuter vous même, et même éventuellement
+modifier, de façon à vous permettre de facilement expérimenter par
+vous mêmes.
 
-dans tous les cas demande une bonne connaissance du langage pour les utiliser et les
-apprivoiser au mieux
+Vous constaterez aussi que les compléments sont classés - à titre
+indicatif - en trois niveaux: basique, intermédiaire et avancé. Nous
+savons que le temps est une ressource rare, nous espérons que ceci
+pourra vous aider à composer votre propre cursus en fonction de vos
+objectifs.
+
+Enfin, nous proposerons naturellement un certain nombre de quiz et
+d'exercices.  Le format des quiz est certes un peu limité  compte tenu
+du sujet du cours, mais nous est nécessaire pour obtenir un retour de
+votre part. 
+
+La partie la plus substantielle des exercices seront proposés sous
+forme de notebooks. Nous y reviendrons, mais vous aurez avec ces
+exercices les moyens de faire une auto-évaluation en vérifiant que
+votre code répond bien à la question.
+
+XXX Je me demande si je ne ferais pas mieux de faire une 5eme video
+sur l'évaluation, de façon à pouvoir la remplacer si on décide de
+délivrer un certificat dans les itérations suivantes. XXX
+Dans l'état actuel toutefois, nous ne sommes pas en mesure de délivrer
+un certificat à l'issue du mooc.
+
+====================
+
+Pour préciser un peu mieux le programme du mooc: 
+
+Tout d'abord, comme vous le savez sans doute, python est actuellement
+disponible dans deux versions légèrement différentes, la version 2 et
+la version 3, et nous avons choisi de construire ce cours sur
+python2. python3 est certes la version sur laquelles se font les
+nouveaux développements, mais d'une part les concepts les plus avancés
+ont été rapportés dans python2, et d'autre part et surtout la plus
+grande majorité du code existant fonctionne toujours en python2.
 
 
-dans la prochaine vidéo nous allons ...
+D'autre part, notre parti-pris a été de se concentrer sur le coeur du
+langage. Nous allons par exemple étudier en profondeur les types de
+base, les classes, ainsi que la modularité dans python, c'est à dire
+la notion de module, héritée de modula-3.
 
-[[[
-organisation du cours - 
+Ce sont ces notions qui sont la clé pour être capable de rapidement
+comprendre et appréhender comment utiliser telle ou telle
+bibliothèque. 
+Naturellement nous étudierons aussi quelques unes de ces
+bibliothèques, et notamment parmi ce qu'il est convenu d'appeler la
+bibliotheque standard, c'est à dire les outils qui font partie
+intégrante de la distribution standard python; on ne peut pas
+installer python sans la bibliothèque standard. Nous signalons
+également quelques outils tiers - c'est à dire qui ne sont pas dans la
+bibliothèque standard - importants.
 
-vidéo - très court, pas le temps d'approfondir -> compléments
+Mais il n'est pas envisageable de tout présenter, même dans la
+bibliothèque standard, et donc a fortiori sur l'énorme base de code
+disponible. Certains outils, comme django pour réaliser un serveur
+web, ou encore numpy pour le calcul scientifique, pourraient
+facilement faire l'objet d'un mooc à eux tout seuls.
 
-même avec compléments, on ne peut pas être exhaustif -> apprendre à chercher dans la doc python
+Notre objectif est donc plutôt de vous fournir une très bonne base de
+départ, un socle, pour que vous puissiez par vous même découvrir, choisir et
+apprendre facilement telle ou telle biblitohèque tierce en fonction de
+vos besoins.
 
-exercices - pas de validation
+Pour conclure, je vous invite à utiliser également le forum, de façon
+à échanger entre vous sur tous les sujets qui peuvent vous poser
+problème. N'oubliez pas que vous n'êtes pas seul, aussi n'hésitez pas
+à soumettre vos idées et suggestions à la communauté des étudiants.
 
-échanger entre étudiants sur le forum 
-]]]
+Je vous retrouve dans la prochaine video, ou nous verrons comment
+utiliser les outils installés avec python. 
+
+À bientôt.
