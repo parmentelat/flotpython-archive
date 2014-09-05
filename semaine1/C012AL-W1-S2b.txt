@@ -1,0 +1,99 @@
+Bonjour, nous allons dans cette video voir rapidement les fonctions principale de l'editeur idle
+
+XXX ceci n'est pas encode redige, juste une collection de trucs a (essayer de) dire
+
+==================== 
+lancer idle
+
+xxx
+les trucs utilisés par arnaud
+Sauver
+F5 -> evalue le code du fichier courant
+donne la main dans le terminal (comme python -i)
+dans l'interpréteur: 
+fleche : monter sur la ligne, appuyer sur Entrée : recopie la ligne
+comme la ligne courante
+
+aussi parler des identifiants courts dans les vidéos
+xxx
+
+cette fois le programme 'idle' lui même fait partie de la distribution
+
+idle a deux composantes 
+   un editeur de texte: ecrire un fichier 
++ un interpréteur python
+
+interet : avec un 'vrai' programme une fois developpe on ne voit bien
+sur jamais l'interpreteur interactif comme on vient de l'utiliser
+on ecrit tout le code dans des fichiers, avec un "point d'entree"
+qui est le fichier par lequel le programme commence. Voyons cela
+
+Créer un fichier foo.py qui est auto-suffisant: definit une fonction
+et l' appelle, montrer qu'il faut le sauver, faire F5, montrer le "RESTART"
+
+mettre l'appel dans un second fichier qui importe le premier, refaire
+F5 sur le second fichier
+
+montrer dans l'interpréteur la complétion 
+
+montrer help() et dir()
+
+- lancer idle
+. montrer l'interpréteur; montrer l'aide sur les fonctions (le popup), introduire dir() et help() 
+
+------
+
+. si possible illustrer les indentations
+parler des autres editeurs qui doivent au minimum se charger de ça
+
+. montrer idle, qu'il faut sauver, la touche F5
+
+basique mais suffisant pour nos besoins
+n'hésitez pas à utiliser votre propre éditeur (emacs, vi, eclipse,
+...) - mais pas word !
+
+. expliquer la différence entre terminal interactif et éditeur IDLE 
+parler si possible de python -i, mais je pense que c'est trop tôt
+
+-définir le retour chariot (saut de ligne / Entrée)
+
+-discuter des exceptions et de SyntaxError en particulier (expliquer que python montre l'endroit de la première erreur)
+
+-introduire la notion de commentaires avec le # (tout ce qu'il y a après n'est pas interprété)
+
+
+ressources python (docs, ...)
+
+- mentionner les accents - encodages - pas d'accents 
+-expliquer les anglisism librairie, backslash, underscore 
+
+- parler rapidement du répertoire courant
+os.getcwd()
+'/Users/parmentelat/git/flotpython/semaine2'
+
+====================
+TODO : mentionner les accents (ici ou dans une autre vidéo ?)
+expliquer que c'est à peu près safe dans les notebooks
+expliquer la théorie dans les grandes lignes (coding: ..)
+mais que ça peut demander une configuration supplémentaire pour ceux
+qui utilisent une machine configurée pour e.g. l'anglais
+
+
+
+
+J'aimerais attirer votre attention sur le fait que dans les
+vidéos, pour des raisons pratiques, on utilise massivement des noms de
+variables très courts - pour ne pas passer trop de temps au clavier.
+Nous vous recommandons contrairement à ce qui est fait dans la vidéo,
+de bien prendre l'habitude, et même dans les exercices, d'utiliser des
+identifiants qui soient parlants. 
+
+
+====================
+
+XXX a recaser + loin avec idle XXX
+Quand vous ecrivez un petit script simple il est naturel de tout regrouper en un seul fichier. Cependant des que vous commencez a programmer vous etes amenes a ecrire des utilitaires; puis vous passez d'un projet a l'autre et vous vous dites, tiens, j'ai deja ecrit du code pour faire ca, mais c'etait dans un autre fichier. Vous pouvez penser a copier-coller, mais c'est une pratique que vous deconseillerons tous les developpeurs un peu experimentes; il n'est jamais agreable de devoir apporter une correction dans les n exemplaires d'un meme code
+
+C'est a cela que servent les modules en python: rendre le code reutilisable, permettre la mise au point de librairies qui sont largement reutilisables, et vous pouvez bien sur utiliser ceci a votre echelle.
+
+
