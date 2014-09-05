@@ -61,6 +61,9 @@ exceptions built-in https://docs.python.org/2.7/library/exceptions.html#bltin-ex
 et du tutorial Python sur les exceptions
 https://docs.python.org/2.7/tutorial/errors.html
 
+en profiter pour signaler les dangers du except sans clause - parler
+du print_exc()
+
 *parler de assert
 
 ## Quizz Vidéo 3
