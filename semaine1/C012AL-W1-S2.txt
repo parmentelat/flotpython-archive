@@ -42,16 +42,28 @@ fermer
 
 ====================
 
+J'aimerais attirer votre attention sur le fait que dans les
+vidéos, pour des raisons pratiques, on utilise massivement des noms de
+variables très courts - pour ne pas passer trop de temps au clavier.
+Nous vous recommandons contrairement à ce qui est fait dans la vidéo,
+de bien prendre l'habitude, et même dans les exercices, d'utiliser des
+identifiants qui soient parlants. 
+
+
+
 ====================
 lancer idle
 
-xxx les trucs utilisés par arnaud
+xxx
+les trucs utilisés par arnaud
 Sauver
 F5 -> evalue le code du fichier courant
 donne la main dans le terminal (comme python -i)
 dans l'interpréteur: 
 fleche : monter sur la ligne, appuyer sur Entrée : recopie la ligne
 comme la ligne courante
+
+aussi parler des identifiants courts dans les vidéos
 xxx
 
 cette fois le programme 'idle' lui même fait partie de la distribution
