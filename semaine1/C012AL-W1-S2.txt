@@ -1,7 +1,19 @@
 Bonjour
 
-Aujourd'hui nous allons voir rapidement comment utiliser les outils
-qui viennent avec la dsitribution standard python, c'est à dire
+Aujourd'hui nous allons voir rapidement comment utiliser les 2 outils majeurs
+qui viennent avec la dsitribution standard python. 
+Je suppose donc que vous avez installé python 2.7 sur votre
+machine. 
+
+Dans la première partie de cette vidéo nous allons voir le
+fonctionnement de l'interpréteur python. Pour cela nous aurons
+également besoin de lancer un terminal alphanumérique; selon les
+systèmes, vous pouvez lancer une console de ce genre en utilisant
+"cmd" sur windows, "xterm" sur linux, ou l'application "Terminal" sur
+macos, comme je vais le faire tout de suite.
+
+
+, c'est à dire
 essentiellement l'interpréteur - le programme qui s'appelle
 naturellement python - et l'éditeur associé, qui s'appelle idle.
 
