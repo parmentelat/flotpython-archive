@@ -49,16 +49,7 @@ objet.x = val
 objet.x
 ]]
  
-Parlons maintenant du cas d'une variable. Une variable est 
-toujours assignée dans le code source d'un objet, module, 
-classe ou fonction,  et devient locale à cette objet sauf
-si elle est déclarée comme globale avec la directive [global].
-La subtilité ici est liée à la notion d'assignation. En effet,
-une variable peut-être assigné de plusieurs manières. Regardons les...
-
-[[
-global 
-]]
+Parlons maintenant du cas d'une variable. 
 
 >>>>>>>>>> INCLUDE CO12AL-W5-VIDEO08-SLIDE01.pptx () <<<<<<<<<<
 
