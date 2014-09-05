@@ -24,18 +24,18 @@ légèrement incompatibles.
 Nous avons choisi de construire ce cours sur python2 et plus précisément en 2.7. 
 
 Les raisons de ce choix sont simples
-d'une part et surtout la grande majorité du code existant dans la sphère python, et qui constitue
-une des grandes forces du langage, fonctionne toujours exclusivement en python2.
-d'autre part les concepts les nouveautés de python 3 sont bien souvent
-rapportés dans python2, de sorte que les différences entre les deux
-langages restent minimes; vous trouverez un complément là dessus en
-semaine 7
+* d'une part et surtout la grande majorité du code existant dans la
+sphère python, et qui constitue une des grandes forces du langage,
+fonctionne toujours exclusivement en python2.
+* d'autre part les concepts les nouveautés de python 3 sont bien
+souvent rapportés dans python2, de sorte que les différences entre les
+deux langages restent minimes; vous trouverez un complément là dessus
+en semaine 7
 
 ---------- partie 1.2
 [ remettre le plan du cours avec les 7 semaines ]
 
-XXX pourquoi d'autres part
-D'autre part, notre parti-pris a été de nous concentrer sur le coeur du
+Par ailleurs, notre parti-pris a été de nous concentrer sur le coeur du
 langage. À partir de la semaine 2, Arnaud vous présentera dans les vidéos,
 les fondements du langage dans le détail.
 
@@ -46,7 +46,6 @@ permettent de rendre le code réutilisable et modulaire. Enfin nous
 aborderons le système de classes, qui permet à chacun de définir
 ses propres types de données, et les espaces de nommage.
 
-XXX je ne sais pas ce qu'est la liaison lexicale. 
 Tout au long du cours nous insisterons sur les grands choix de
 conception du langage, à savoir le fait que tout est objet, 
 le typage dynamique, la liaison lexicale, et sur l'importance de
@@ -55,6 +54,7 @@ concepts propres à python comme les itérateurs.
 
 Toutes ces notions -- sont la clé pour être capable de rapidement
 comprendre et appréhender comment utiliser telle ou telle librairie.
+
 Naturellement nous étudierons aussi quelques unes de ces librairies,
 et notamment parmi ce qu'il est convenu d'appeler la librairie
 standard, c'est à dire les outils qui font partie intégrante de la
@@ -77,13 +77,12 @@ vos besoins.
 ==================== partie 2
 
 Voici comment nous avons choisi d'organiser le matériel pédagogique du
-MOOC. Chaque semaine contient quelques vidéos, 8 au maximum. Ces
-vidéos vont vous expliquer méthodiquement les mécanismes fondamentaux
-du langage.
+MOOC. Chaque semaine contient quelques vidéos, 8 au maximum. 
 
-Cela dit le format de la vidéo ne se prête pas à l'exhaustivité; et c'est
-pourquoi vous trouverez la plupart du temps un certain nombre de
-compléments, qui reprennent et approfondissent le sujet de la vidéo.
+Chaque vidéo se concentre sur un point précis, mais le format de la
+vidéo ne se prête pas à l'exhaustivité; et c'est pourquoi vous
+trouverez la plupart du temps un certain nombre de compléments, qui
+reprennent et approfondissent le sujet de la vidéo.
 
 Je voudrais insister sur la nécessité de suivre aussi ces
 compléments, car dans la plupart des cas la vidéo seule peut se
@@ -119,13 +118,6 @@ vérifiant que votre code répond bien à la question.
 Vous remarquerez d'ailleurs que le contenu du cours est allégé en
 semaines 6 et 7 pour vous laisser davantage de temps pour les exercices.
 
-J'aimerais enfin attirer votre attention sur le fait que dans les
-vidéos, pour des raisons pratiques, on utilise massivement des noms de
-variables très courts - pour ne pas passer trop de temps au clavier.
-Nous vous recommandons contrairement à ce qui est fait dans la vidéo,
-de bien prendre l'habitude, et même dans les exercices, d'utiliser des
-identifiants qui soient parlants. 
-
 Dans l'état actuel des choses nous ne sommes malheureusement pas en
 mesure de délivrer un certificat à l'issue du mooc. Nous ne doutons
 pas toutefois que tout ceci vous sera rapidement utile et profitable.
@@ -135,6 +127,17 @@ Pour conclure sur l'organisation du MOOC, je vous invite à utiliser
 qui peuvent vous poser problème. N'oubliez pas que vous n'êtes pas
 seul, aussi n'hésitez pas à soumettre vos idées et suggestions à la
 communauté des étudiants.
+
+==============================
+
+Un dernier mot sur la langue; le cours naturellement est en français
+ainsi que tous les exercices; mais vous allez le voir très vite,
+toutes les documentations en ligne que nous citons sont en
+anglais. C'est aussi le cas pour quasiment la totalité du code
+disponible en open source. L'anglais est donc nécessaire dans tous les
+cas. Nous nous sommes efforcés de produire au maximum les supports de
+cours en français, mais vous voudrez bien nous pardonner quelques
+anglicismes
 
 ========== conclusion
 
@@ -147,3 +150,8 @@ utiliser l'interpréteur python, et l'éditeur IDLE qui font tous deux
 partie de la distribution standard.
 
 À bientôt.
+
+==============================
+xxx j' ai finalement supprimé l'incise sur les identifiants courts
+dans les vidéos - qui tombait comme un cheveu sur la soupe
+j'en parlerai dans W1-S2 ce sera bcp mieux
