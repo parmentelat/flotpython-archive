@@ -1,125 +1,185 @@
+xxx manque encore : les commentaires avec #
+
 Bonjour
 
-Aujourd'hui nous allons voir rapidement comment utiliser les 2 outils majeurs
-qui viennent avec la distribution standard python, à savoir
-l'interpréteur, qui s'appelle tout simplement python, et l'éditeur,
-qui s'appelle IDLE.
+Aujourd'hui nous allons voir rapidement comment utiliser les 2 outils
+ que nous utiliserons dans les vidéos, et qui vous seront utiles de
+ toute manière pour programmer en python.
 
-Je suppose donc que vous avez installé python 2.7 sur votre
-machine. 
+D'une part, pour développer, c'est-à-dire pour écrire votre programme,
+vous aurez besoin d'un environnement de développement, c'est-à-dire un
+outil pour écrire votre code, et l'essayer au fur et à mesure. 
 
-Dans la première partie de cette vidéo nous allons voir le
-fonctionnement de l'interpréteur python. Pour cela nous aurons
-également besoin de lancer un terminal alphanumérique; selon les
-systèmes, vous pouvez lancer une console de ce genre en utilisant
-"cmd" sur windows, "xterm" sur linux, ou l'application "Terminal" sur
-macos, comme je vais le faire tout de suite. Vous pouvez bien sûr
-utiliser d'autres outils analogues.
+D'autre part, pour utiliser un programme écrit en python, il faut
+disposer du "coeur" du langage, c'est-à-dire l'interpréteur python
+lui-même.
 
-Attention le terminal lui-même ne fait pas partie de la distribution
-python, bien entendu.
+==================== 
+Je vais commencer par l'environnement de développement. Nous avons
+choisi d'utiliser IDLE dans les vidéos, car il fait partie de la
+distribution standard. Si vous avez une expérience de programmation
+dans un autre langage et que vous utilisez déjà, par exemple vim,
+emacs ou eclipse ou un outil de ce genre (mais pas word), vous pouvez bien sûr
+l'utiliser au lien de IDLE, mais il est utile même dans ce cas que
+vous compreniez comment fonctionne IDLE au moins dans les grandes
+lignes, pour suivre les vidéos avec un maximum de confort.
 
-====================
-[[Ouvrir terminal]]
-
-je me deplace dans le repertoire ou je veux travailler
-$ cd MOOC/brouillon
-
-je vais a present lancer python, comme on dit, en "mode interactif" c'est a dire sans argument
-
-$ python 
+Je vais lancer IDLE. 
 
 # Montrer le numero de version
+vérifier 2.7
 
-# Taper un truc basique
-3 * 5
+Vous voyez d'abord une fenêtre qui contient ce qu'on appele
+l'interpréteur interactif. Il est interactif car je peux y taper
+directement du code, qui est exécuté immédiatement au fur et à mesure.
 
-10*20
+expression arithmétique
 
-# montrer un truc simple - si possible sans erreur
-  (calculer la liste ou la somme des 10 premiers carrés)
-from operator import add
-reduce (add, [ i**2 for i in range (1,11) ] )
+<<digression sur la poule et l'oeuf ?   >>
 
-langage interprete - pas besoin de compilation - retour immediat
+une petite fonction, par exemple factoriel
+def factoriel (n):
+    return 1 if n <=1 else n * factoriel (n-1)
+
+Montrer les indentations xxx a travailler 
+
+appeler la fonction
+factoriel (2)
+factoriel (10)
 
 # faire expres de se tromper : mauvais nom de variable
-reduce (add, [ x**2 for i in range (1,11) ] )
+def factoriel (n):
+    return 1 if i <=1 else n * factoriel (n-1)
+                ^
 les messages d'erreur - exception - essaient de donner le maximum d'informations 
-
-# faire expres de se tromper a nouveau avec une erreur de syntaxe
-reduce (add, [ x**2 for i in range (1,11) ] )
 
 a la fin du cours : a l'aise avec les messages d'erreur
 
--------------------- aide
-Voyons maintenant un peu un outil simple obtenir de la documentation en ligne
+========== parler de la doc (ou bien bouger avec idle...)
+help (len)
 
-help(add)
+import math
+dir(
+s'arreter sur le popup
+dir(math)
 
-disponible generalement sur les objets de type fonction ou classe
 
-import operator
-dir(operator)
-'add' in dir(operator)
+montrer comment reprendre une ligne : utiliser les fleches, faire "entree" sur cette ligne, expliquer
 
 ----
-
-[[ Sortir de python ]]
-parler de exit() ou Control-D
-
-
-==================== 
 C'est tres bien pour faire de tous petits calculs, et nous utiliserons beaucoup l'interpreteur python pendant ce cours 
 
 Mais on ne peut pas s'amuser a retaper le programme a chaque fois - ni meme bien sur a utiliser un terminal...
 
 C'est pourquoi un programme est stocke dans un ou plusieurs fichiers
 
-Je voudrais vous montrer comment on utilise python pour lancer un vrai programme
+Je vais donc utiliser IDLE pour creer un fichier
+XXX verifier ou on se trouve quand on lance IDLE XXX
 
-J'ai cree a l'avance un fichier qui reprend le calcul de tout a l'heure sur la somme des premiers carres; 
-nous verrons comment ecrire ca avec IDLE, pour l'instant je vous montre le contenu du fichier
+retaper la fonction dans un fichier factoriel.py
+(copier-coller ?) - ajouter des commentaires et un __doc__
 
-$ cat programme.py (type en windows)
-version un peu plus avancee 
+Dire que pour executer ce morceau de code on fait F5
 
-Pour executer ce programme avec python je le lance en lui donnant le nom du fichier en argument
+Montrer que la premiere fois IDLE nous demande de sauver le fichier, le sauver
 
-$ python programme.py
+Puis aller dans le terminal et appeler la fonction de nouveau avec
+factoriel (4)
 
-[[ programme.py est le point d'entree 
-python va evaluer tout ce fichier, on dit un module en python, on y reviendra, et vous "rendra la main" comme on dit une fois qu' il aura termine
-meme un programme qui fait plusieurs milliers de ligne a toujours un unique point d'entree
+Montrer rapidement ce qui se passe quand on change un peu le fichier
+par exemple ajouter une impression, et changer le nom de la fonction
+en fact_print
+attention a bien le faire dans les deux occurences du nom de fonction
 
-une premiere chose a remarquer est la chose suivante; lorsqu'on execute un programme avec cette technique, on n'a plus, comme c'etait le cas avec le mode interactif, de "retour" sur chaque ligne qu'on execute; voyons ca sur un second exemple
+refaire F5, et montrer que l'interpréteur affiche "RESTART", expliquer
+ce que ca veut dire (on efface l'environnement)
+montrer que l'ancien nom "factoriel" n'est plus disponible
 
-$ cat arith.py (type en windows)
+Conclure sur IDLE:
+* creer des fichiers 
+* les sauver 
+* les executer dans un environnement "propre"
+
+========================================
+Je vais a present vous montrer comment utiliser l'interpréteur python.
+
+Comme je l'ai mentionné tout à l'heure, l'interpréteur est nécessaire
+pour exécuter le code. Que vous développiez avec IDLE, ou avec autre
+chose, vous avez besoin de l'interpréteur. Et si vous publiez votre
+code, vos utilisateurs auront besoin de l'interpréteur.
+
+Je vais vous montrer son utilisation dans un terminal. Naturellement
+une fois votre programme terminé et distribué, vos utilisateurs
+n'auront pas besoin de lancer un terminal, mais quelle que soit la
+façon de lancer votre programme, il y aura une instance de
+l'interpréteur à la manoeuvre quelque part dans les processus de
+l'ordinateur.
+
+Je lance donc un terminal. 
+Selon les systèmes, vous pouvez lancer une console de ce genre en utilisant
+"cmd" sur windows, "xterm" sur linux, ou l'application "Terminal" sur
+macos, comme je vais le faire tout de suite. Vous pouvez bien sûr
+utiliser d'autres outils analogues.
+Attention le terminal lui-même ne fait pas partie de la distribution
+python, bien entendu.
+
+====================
+[[Ouvrir terminal]]
+
+je me deplace dans le repertoire ou j'ai créé factoriel.py
+$ cd MOOC/brouillon
+
+Pour lancer python en mode interactif comme on dit, on le lance sans
+argument comme ceci
+
+$ python 
+
+# Taper un truc basique
 3 * 5
-10*20
-Control-D
 
-$ python arith.py
-$ 
+c'est aussi simple que possible, cela fonctionne presque exactement comme tout
+à l'heure, en plus basique (pas de couleur, d'indentation..)
 
-Ce programme ne produit aucun effet; c'est delibere car on ne pourrait pas imprimer tous les resultats de toutes les lignes d'un programme de plusieurs millers de lignes. A la place dans ce mode dit de "mode batch" python n'imprime que exactement ce que vous lui demandez d'imprimer
+exit() 
 
-$ cat arith_print.py
-montrer print sur une des deux lignes
+[[ Sortir de python ]]
 
-$ python arith_print.py
+==================== 
 
-Je vous signale enfin un mode de fonctionnement qui peut etre utile egalement, une sorte d'hybride entre les modes interactif et batch, comme ceci
+Je voudrais maintenant vous montrer comment on utilise python pour lancer un vrai programme
 
-$ cat continue.py
+reprendre factoriel.py (montrer le contenu)
 
-$ python -i continue.py
-n
-exit()
+lancer python factoriel.py, montrer que ça ne fait rien car on n'a pas appelé la fonction
 
-execution, puis mode interactif
+expliquer que c'est le mode de fonctionnement "normal" de python
+que le fichier passé en argument s'appelle le point d'entrée
+((qu'on peut aussi ajouter des arguments -> vu + tard))
+
+relancer sur factoriel.py avec python -i
+appeler la fonction 
+
+sortir
+
+conclure ... xxx
+
+====================
+J'aimerais attirer votre attention sur le fait que dans les
+vidéos, pour des raisons pratiques, on utilise massivement des noms de
+variables très courts - pour ne pas passer trop de temps au clavier.
+Nous vous recommandons contrairement à ce qui est fait dans la vidéo,
+de bien prendre l'habitude, et même dans les exercices, d'utiliser des
+identifiants qui soient parlants. 
 
 
-Nous venons de voir les deux grands modes d'utilisation de l'interpreteur python, interactif et batch, et le mode mineur hybride 'python -i'
+====================
+incise sur les accents - scabreux - pas propre à python
+commencer sans accent - juste indiquer l'astuce
+-*- coding: iso-8859-15 -*-
 
-Nous allons a present voir comment utiliser IDLE, a tout de suite
+TODO : mentionner les accents (ici ou dans une autre vidéo ?)
+expliquer que c'est à peu près safe dans les notebooks
+expliquer la théorie dans les grandes lignes (coding: ..)
+mais que ça peut demander une configuration supplémentaire pour ceux
+qui utilisent une machine configurée pour e.g. l'anglais
+
