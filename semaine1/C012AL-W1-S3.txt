@@ -1,12 +1,34 @@
-comment ça fonctionne
+XXX creer des bookmarks dans l'environnement safari de MOOC pour
+notebooks.ipynb
+	exo-if.ipynb
 
-un exemple, montrer le retour en arrière
+Accueil
 
-utilisation des notebooks 
+Commencer avec le notebook 'notebooks.ipynb' déjà affiché - utiliser
+ un bookmark
 
-montrer aussi un exemple d'exercice avec la correction embarquée
+montrer comment on selectionne une cellule
 
-parler de la version user vs la version master
-les modules
-les initialisations de fichier pour les entrées
+montrer la fleche pour avancer; s'arreter sur la cellule ou on parle
+de "Shift-Enter"
+
+continuer avec Shift-Enter
+
+montrer qu'on peut modifier du code -> calculer sqrt(3)
+
+insister sur l'ordre d'evaluation, montrer le [Out] :
+
+Montrer la fonction "restart" - comme avec IDLE finalement
+
+Parler de la version user vs la version master  
+
+Montrer la fonction "Reset to Origin" 
+
+Passer à l'exercice exo-if
+
+Remplir avec du code faux
+
+Montrer comment se présente le résultat
+
+---
 
