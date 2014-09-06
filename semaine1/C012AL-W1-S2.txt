@@ -35,27 +35,29 @@ directement du code, qui est exécuté immédiatement au fur et à mesure.
 
 expression arithmétique
 
-<<digression sur la poule et l'oeuf ?   >>
+<< digression sur la poule et l'oeuf ? >>
 
 une petite fonction, par exemple factoriel
 def factoriel (n):
-    return 1 if n <=1 else n * factoriel (n-1)
+    return 1 if n <= 1 else n * factoriel (n-1)
 
-Montrer les indentations xxx a travailler 
+mentionner les indentations : touche tabulation
 
 appeler la fonction
 factoriel (2)
+
+montrer comment reprendre une ligne : utiliser les fleches, faire "entree" sur cette ligne
+il faut s'entrainer, comportement un peu perturbant, si on ne fait pas entree il ne passe rien
+
 factoriel (10)
 
 # faire expres de se tromper : mauvais nom de variable
-def factoriel (n):
-    return 1 if i <=1 else n * factoriel (n-1)
-                ^
+facoriel (20)
 les messages d'erreur - exception - essaient de donner le maximum d'informations 
 
 a la fin du cours : a l'aise avec les messages d'erreur
 
-========== parler de la doc (ou bien bouger avec idle...)
+========== parler de la doc
 help (len)
 
 import math
@@ -63,8 +65,7 @@ dir(
 s'arreter sur le popup
 dir(math)
 
-
-montrer comment reprendre une ligne : utiliser les fleches, faire "entree" sur cette ligne, expliquer
+laisser ouvert...
 
 ----
 C'est tres bien pour faire de tous petits calculs, et nous utiliserons beaucoup l'interpreteur python pendant ce cours 
