@@ -1,6 +1,6 @@
 XXX creer des bookmarks dans l'environnement safari de MOOC pour
 notebooks.ipynb
-	exo-if.ipynb
+exo-if.ipynb
 
 Accueil
 
@@ -30,5 +30,17 @@ Remplir avec du code faux
 
 Montrer comment se présente le résultat
 
+Les modalités peuvent changer à chaque exercice, lire les instructions
+
 ---
 
+J'espère que cette rapide présentation vous clarifie les idées
+concernant l'utilisation des notebooks, que nous allons massivement
+utiliser dans ce cours.
+
+La prochaine fois je concluerai la semaine en discutant les grands
+principes qui gouvernent la conception du langage, qui expliquent à
+notre avis son succès, et pourquoi nous pensons que python est un
+langage aussi agréable à utiliser,
+
+À bientôt

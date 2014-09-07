@@ -1,5 +1,3 @@
-xxx manque encore : les commentaires avec #
-
 Bonjour
 
 Aujourd'hui nous allons voir rapidement comment utiliser les 2 outils
@@ -78,7 +76,9 @@ Je vais donc utiliser IDLE pour creer un fichier
 XXX verifier ou on se trouve quand on lance IDLE XXX
 
 retaper la fonction dans un fichier factoriel.py
-(copier-coller ?) - ajouter des commentaires et un __doc__
+(*) ajouter un commentaire, expliquer que la fin de la ligne apres # est ignore par le langage
+sauf bien sur si le # est dans une chaine de caracteres
+(*) ajouter une ligne de documentation
 
 Dire que pour executer ce morceau de code on fait F5
 
