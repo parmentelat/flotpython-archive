@@ -1,59 +1,170 @@
+xxx manque encore : les commentaires avec #
+
 Bonjour
 
-Aujourd'hui nous allons voir rapidement comment utiliser les 2 outils majeurs
-qui viennent avec la dsitribution standard python. 
-Je suppose donc que vous avez installé python 2.7 sur votre
-machine. 
+Aujourd'hui nous allons voir rapidement comment utiliser les 2 outils
+ que nous utiliserons dans les vidéos, et qui vous seront utiles de
+ toute manière pour programmer en python.
 
-Dans la première partie de cette vidéo nous allons voir le
-fonctionnement de l'interpréteur python. Pour cela nous aurons
-également besoin de lancer un terminal alphanumérique; selon les
-systèmes, vous pouvez lancer une console de ce genre en utilisant
+D'une part, pour développer, c'est-à-dire pour écrire votre programme,
+vous aurez besoin d'un environnement de développement, c'est-à-dire un
+outil pour écrire votre code, et l'essayer au fur et à mesure. 
+
+D'autre part, pour utiliser un programme écrit en python, il faut
+disposer du "coeur" du langage, c'est-à-dire l'interpréteur python
+lui-même.
+
+==================== 
+Je vais commencer par l'environnement de développement. Nous avons
+choisi d'utiliser IDLE dans les vidéos, car il fait partie de la
+distribution standard. Si vous avez une expérience de programmation
+dans un autre langage et que vous utilisez déjà, par exemple vim,
+emacs ou eclipse ou un outil de ce genre (mais pas word), vous pouvez bien sûr
+l'utiliser au lien de IDLE, mais il est utile même dans ce cas que
+vous compreniez comment fonctionne IDLE au moins dans les grandes
+lignes, pour suivre les vidéos avec un maximum de confort.
+
+Je vais lancer IDLE. 
+
+# Montrer le numero de version
+vérifier 2.7
+
+Vous voyez d'abord une fenêtre qui contient ce qu'on appele
+l'interpréteur interactif. Il est interactif car je peux y taper
+directement du code, qui est exécuté immédiatement au fur et à mesure.
+
+expression arithmétique
+
+<< digression sur la poule et l'oeuf ? >>
+
+une petite fonction, par exemple factoriel
+def factoriel (n):
+    return 1 if n <= 1 else n * factoriel (n-1)
+
+mentionner les indentations : touche tabulation
+
+appeler la fonction
+factoriel (2)
+
+montrer comment reprendre une ligne : utiliser les fleches, faire "entree" sur cette ligne
+il faut s'entrainer, comportement un peu perturbant, si on ne fait pas entree il ne passe rien
+
+factoriel (10)
+
+# faire expres de se tromper : mauvais nom de variable
+facoriel (20)
+les messages d'erreur - exception - essaient de donner le maximum d'informations 
+
+a la fin du cours : a l'aise avec les messages d'erreur
+
+========== parler de la doc
+help (len)
+
+import math
+dir(
+s'arreter sur le popup
+dir(math)
+
+laisser ouvert...
+
+----
+C'est tres bien pour faire de tous petits calculs, et nous utiliserons beaucoup l'interpreteur python pendant ce cours 
+
+Mais on ne peut pas s'amuser a retaper le programme a chaque fois - ni meme bien sur a utiliser un terminal...
+
+C'est pourquoi un programme est stocke dans un ou plusieurs fichiers
+
+Je vais donc utiliser IDLE pour creer un fichier
+XXX verifier ou on se trouve quand on lance IDLE XXX
+
+retaper la fonction dans un fichier factoriel.py
+(copier-coller ?) - ajouter des commentaires et un __doc__
+
+Dire que pour executer ce morceau de code on fait F5
+
+Montrer que la premiere fois IDLE nous demande de sauver le fichier, le sauver
+
+Puis aller dans le terminal et appeler la fonction de nouveau avec
+factoriel (4)
+
+Montrer rapidement ce qui se passe quand on change un peu le fichier
+par exemple ajouter une impression, et changer le nom de la fonction
+en fact_print
+attention a bien le faire dans les deux occurences du nom de fonction
+
+refaire F5, et montrer que l'interpréteur affiche "RESTART", expliquer
+ce que ca veut dire (on efface l'environnement)
+montrer que l'ancien nom "factoriel" n'est plus disponible
+
+Conclure sur IDLE:
+* creer des fichiers 
+* les sauver 
+* les executer dans un environnement "propre"
+
+========================================
+Je vais a present vous montrer comment utiliser l'interpréteur python.
+
+Comme je l'ai mentionné tout à l'heure, l'interpréteur est nécessaire
+pour exécuter le code. Que vous développiez avec IDLE, ou avec autre
+chose, vous avez besoin de l'interpréteur. Et si vous publiez votre
+code, vos utilisateurs auront besoin de l'interpréteur.
+
+Je vais vous montrer son utilisation dans un terminal. Naturellement
+une fois votre programme terminé et distribué, vos utilisateurs
+n'auront pas besoin de lancer un terminal, mais quelle que soit la
+façon de lancer votre programme, il y aura une instance de
+l'interpréteur à la manoeuvre quelque part dans les processus de
+l'ordinateur.
+
+Je lance donc un terminal. 
+Selon les systèmes, vous pouvez lancer une console de ce genre en utilisant
 "cmd" sur windows, "xterm" sur linux, ou l'application "Terminal" sur
-macos, comme je vais le faire tout de suite.
-
-
-, c'est à dire
-essentiellement l'interpréteur - le programme qui s'appelle
-naturellement python - et l'éditeur associé, qui s'appelle idle.
-
-Durant le cours nous utiliserons l'un ou l'autre selon les
-besoins.
+macos, comme je vais le faire tout de suite. Vous pouvez bien sûr
+utiliser d'autres outils analogues.
+Attention le terminal lui-même ne fait pas partie de la distribution
+python, bien entendu.
 
 ====================
-Ouvrir terminal - attention le terminal lui-meme ne fait pas partie de
-la distribution python
-windows -> cmd
-linux -> xterm
-mac -> Terminal
-$ python -V
+[[Ouvrir terminal]]
+
+je me deplace dans le repertoire ou j'ai créé factoriel.py
+$ cd MOOC/brouillon
+
+Pour lancer python en mode interactif comme on dit, on le lance sans
+argument comme ceci
 
 $ python 
 
-truc basique 
+# Taper un truc basique
 3 * 5
 
-montrer le numero de version
-import sys
-sys.version_info
+c'est aussi simple que possible, cela fonctionne presque exactement comme tout
+à l'heure, en plus basique (pas de couleur, d'indentation..)
 
+exit() 
 
-dire qu'on veut faire un truc simple : montrer un truc simple (calculer la somme des 10 premiers carrés)
+[[ Sortir de python ]]
 
-faire expres de se tromper - utiliser un mauvais nom de variable
-les messages d'erreur essaient de donner le maximum d'informations 
+==================== 
 
-faire expres de se tromper a nouveau avec une erreur de syntaxe
-s'agissant d'une erreur de syntaxe : un peu d'habitude
-d'autant que le sucre syntaxique est reduit au strict minimum
-parentheses mal fermees, ...
- 
-a la fin du cours vous saurez les interpreter rapidement
+Je voudrais maintenant vous montrer comment on utilise python pour lancer un vrai programme
 
-fermer
+reprendre factoriel.py (montrer le contenu)
+
+lancer python factoriel.py, montrer que ça ne fait rien car on n'a pas appelé la fonction
+
+expliquer que c'est le mode de fonctionnement "normal" de python
+que le fichier passé en argument s'appelle le point d'entrée
+((qu'on peut aussi ajouter des arguments -> vu + tard))
+
+relancer sur factoriel.py avec python -i
+appeler la fonction 
+
+sortir
+
+conclure ... xxx
 
 ====================
-
 J'aimerais attirer votre attention sur le fait que dans les
 vidéos, pour des raisons pratiques, on utilise massivement des noms de
 variables très courts - pour ne pas passer trop de temps au clavier.
@@ -62,79 +173,14 @@ de bien prendre l'habitude, et même dans les exercices, d'utiliser des
 identifiants qui soient parlants. 
 
 
-
 ====================
-lancer idle
+incise sur les accents - scabreux - pas propre à python
+commencer sans accent - juste indiquer l'astuce
+-*- coding: iso-8859-15 -*-
 
-xxx
-les trucs utilisés par arnaud
-Sauver
-F5 -> evalue le code du fichier courant
-donne la main dans le terminal (comme python -i)
-dans l'interpréteur: 
-fleche : monter sur la ligne, appuyer sur Entrée : recopie la ligne
-comme la ligne courante
-
-aussi parler des identifiants courts dans les vidéos
-xxx
-
-cette fois le programme 'idle' lui même fait partie de la distribution
-
-idle a deux composantes 
-   un editeur de texte: ecrire un fichier 
-+ un interpréteur python
-
-interet : avec un 'vrai' programme une fois developpe on ne voit bien
-sur jamais l'interpreteur interactif comme on vient de l'utiliser
-on ecrit tout le code dans des fichiers, avec un "point d'entree"
-qui est le fichier par lequel le programme commence. Voyons cela
-
-Créer un fichier foo.py qui est auto-suffisant: definit une fonction
-et l' appelle, montrer qu'il faut le sauver, faire F5, montrer le "RESTART"
-
-mettre l'appel dans un second fichier qui importe le premier, refaire
-F5 sur le second fichier
-
-montrer dans l'interpréteur la complétion 
-
-montrer help() et dir()
-
-- lancer idle
-. montrer l'interpréteur; montrer l'aide sur les fonctions (le popup), introduire dir() et help() 
-
-------
-
-. si possible illustrer les indentations
-parler des autres editeurs qui doivent au minimum se charger de ça
-
-. montrer idle, qu'il faut sauver, la touche F5
-
-basique mais suffisant pour nos besoins
-n'hésitez pas à utiliser votre propre éditeur (emacs, vi, eclipse,
-...) - mais pas word !
-
-. expliquer la différence entre terminal interactif et éditeur IDLE 
-parler si possible de python -i, mais je pense que c'est trop tôt
-
--définir le retour chariot (saut de ligne / Entrée)
-
--discuter des exceptions et de SyntaxError en particulier (expliquer que python montre l'endroit de la première erreur)
-
--introduire la notion de commentaires avec le # (tout ce qu'il y a après n'est pas interprété)
-
-
-ressources python (docs, ...)
-
-- mentionner les accents - encodages - pas d'accents 
--expliquer les anglisism librairie, backslash, underscore 
-
-- parler rapidement du répertoire courant
-os.getcwd()
-'/Users/parmentelat/git/flotpython/semaine2'
-
-====================
 TODO : mentionner les accents (ici ou dans une autre vidéo ?)
 expliquer que c'est à peu près safe dans les notebooks
 expliquer la théorie dans les grandes lignes (coding: ..)
 mais que ça peut demander une configuration supplémentaire pour ceux
 qui utilisent une machine configurée pour e.g. l'anglais
+

@@ -53,4 +53,8 @@ https://www.youtube.com/watch?v=anwy2MPT5RE
 
 http://python-history.blogspot.com
 
-préparer des bookmarks et montrer les pages
+préparer des bookmarks et montrer les pages : NON fournir les liens
+dans un complément plutôt
+
+parler bien sûr de la doc 
+ressources python (docs, ...) 

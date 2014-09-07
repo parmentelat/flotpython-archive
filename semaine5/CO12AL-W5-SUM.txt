@@ -49,6 +49,13 @@ on peut directement distribuer les .pyc sans les .py
 *parler de reload() et du problème classique de modifier un module,
 l'importer de nouveau et ne pas voir les modifications. 
 
+* directory courant 
+import os
+os.getcwd()
+cette astuce pourra vous etre utile surtout si vous lancez idle a
+partir d'un menu, comme c'est presque toujours le cas, et dans ces
+cas-la il n'est pas toujours facile de savoir quel est exactement le repertoire courant, selon les systemes et les environnements
+
 ## Quizz Vidéo 2
 
 ## Exercices Vidéo 2
