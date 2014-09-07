@@ -19,8 +19,8 @@ programmation objet.
 Ouvrons un terminal interactif pour commencer à jouer avec les 
 classe new-style.
 
->>>>>>>>>> INCLUDE CO12AL-W7-VIDEO03-EXO01.py () <<<<<<<<<<
+>>>>>>>>>> INCLUDE CO12AL-W7-VIDEO03-EXO01.py (5 minutes) <<<<<<<<<<
 
->>>>>>>>>> INCLUDE CO12AL-W7-VIDEO03-SLIDE01.pptx () <<<<<<<<<<
+
 
 ## Conclusion()

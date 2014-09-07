@@ -33,7 +33,13 @@ CO12AL-W7-VIDEO02.txt
 
 ## Vidéo 3 (Les classes new-style)
 
+CO12AL-W7-VIDEO3.txt
+
 ## Compléments Vidéo 3
+
+* lien vers
+https://www.python.org/download/releases/2.2.3/descrintro
+
 
 ## Quizz Vidéo 3
 
@@ -42,9 +48,12 @@ CO12AL-W7-VIDEO02.txt
 
 ###################################################################
 
-## Vidéo 4
+## Vidéo 4 (Les métaclasses)
+
+CO12AL-W7-VIDEO4.txt
 
 ## Compléments Vidéo 4
+
 
 ## Quizz Vidéo 5
 

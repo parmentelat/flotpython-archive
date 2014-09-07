@@ -31,7 +31,7 @@ print 'a'.__class__
 ## des classes classiques sont du type instance.
 ## c'est inconsistant avec les types built-in, en effet
 ## on aurait préféré que le type des instances soit
-## soit la classe qui a créé l'instance.
+## la classe qui a créé l'instance.
 
 class C:
     pass
@@ -63,7 +63,7 @@ print type(s)
 ##  classes classiques et new-style cohabitent. La principale
 ## raison est de ne pas casser la compatibilité avec du code
 ## ancien. Il faut noter que les classes classiques sont les
-## classes par défaut. 
+## classes par défaut en Python 2.
 
 ## Heureusement, les différences entre classes classiques
 ## et new-style sont sur des applications avancées, donc
@@ -71,7 +71,13 @@ print type(s)
 ## par défaut pose rarement un problème. De plus, dès que
 ## l'on est dans un cas qui à nécessite des classes new-style
 ## comme l'héritage d'un type built-in ou d'une classe new-style
-## la classe sera automatiquement new-style. 
+## la classe sera automatiquement new-style.
+
+## Cependant, c'est une bonne
+## habitude de toujours démarrer un nouveau projet avec les
+## classes new-style et de ne réserver les classes classiques
+## que pour les projets existants utilisant déjà des classes
+## classiques. 
 
 ## regardons maintenant comment créer une classe new style.
 ## Il faut soit hériter d'un type built-in, soit d'une classe
@@ -92,12 +98,5 @@ class D(list):
 d = D()
 print type(d)
 
-## revenons maintenant au fonctionnement des classes new-style
-## On va dans la suite aborder des notions très avancées sur
-## le fonctionnement des objets. Vous pouvez tout a fait
-## programmer en Python sans connaître les détails qui suivent
-## Mais si vous aimez savoir comment les choses fonctionnent
-## ou si vous envisagez un utilisation avancée de la
-## programmation objet en Python, ce qui suit sera éclairant.
 
 
