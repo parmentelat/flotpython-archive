@@ -54,6 +54,8 @@ CO12AL-W7-VIDEO4.txt
 
 ## Compléments Vidéo 4
 
+* lien vers
+https://www.python.org/download/releases/2.2.3/descrintro
 
 ## Quizz Vidéo 5
 
