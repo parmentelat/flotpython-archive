@@ -10,28 +10,21 @@
 
 ## Résumé de la vidéo ()
 
-On vient de voir les méthodes statiques et les méthodes de classe. 
-Vous avez pu remarquer que rien de différencie dans la syntaxe 
-une méthode statique ou de classe d'une méthode d'instance. Tout 
-au plus on pourrait regarder la liste des arguments de la méthode, 
-mais si la methode prend au moins un argument, ça pourrait être une
-méthode de n'importe quel type. Il faut attendre de voir les
-méthode built-in staticmethod ou classmethod pour être sur qu'une
-méthode est d'un type ou d'un autre. Comme la fonction built-in
-staticmethod ou classmethod peut être n'importe où dans la classe, 
-ça peut rendre d'identification du type de chaque méthode peu pratique.
+Dans cette vidéo nous allons parler de la notion de décorateur.
+Cette notion a été introduire initialement pous simplifier
+la déclaration des méthodes statiques et de classes. Mais
+les décorateur vont beaucoup plus loin en offrant un moyen
+puissant d'ajouter une couche de logique à la demande aux
+fonctions et aux classes. 
 
-C'est pour cette raison que Python a introduit la notion de décorateur. 
-Mais nous allons voir que cela va bien plus loin qu'une simple astuce 
-syntaxique pour rendre le type d'une méthode explicite. 
+Mais revenons sur notre exemple de méthodes statiques et de classe. 
 
 >>>>>>>>>> INCLUDE CO12AL-W7-VIDEO02-SLIDE01.pptx () <<<<<<<<<<
 
 
 ## Conclusion()
 
-Vous devez sans doute vous demander à quoi peut servir un décorateur.
-Il faut le voir comme un moyen d'ajouter une couche de 
+En résumé un décorateur est un moyen d'ajouter une couche de 
 logique autour d'une fonction ou d'une classe à la demande. En effet, 
 il suffit d'ajouter la ligne @decorateur avant la fonction ou la 
 classe pour ajouter cette couche. 
