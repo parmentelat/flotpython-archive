@@ -4,17 +4,43 @@ exo-if.ipynb
 
 Accueil
 
-Commencer avec le notebook 'notebooks.ipynb' déjà affiché - utiliser
- un bookmark
+Aujourd'hui je vais vous montrer rapidement comment utiliser les
+notebooks. Nous allons d'abord voir ensemble le complément de cette vidéo, pour
+voir les mécanismes de base, et ensuite je vous montrerai un exercice,
+pour vous montrer comment vous pouvez faire votre propre correction.
 
-montrer comment on selectionne une cellule
+Si je prends le premier notebook
+Vous pouvez d'abord voir que le document est découpé en cellules. Si
+je clique ici, je sélectionne la première cellule. Il faut prendre
+l'habitude d'avoir une cellule sélectionnée, nous allons voir
+pourquoi. 
 
-montrer la fleche pour avancer; s'arreter sur la cellule ou on parle
-de "Shift-Enter"
+Vous pouvez passer d'une cellule à l'autre en utilisant cette petite
+flêche ici; 
 
-continuer avec Shift-Enter
+[[ cliquer jusqu'à Shift Enter']]
 
-montrer qu'on peut modifier du code -> calculer sqrt(3)
+Pour ceux qui comme moi sont plus clavier que souris, vous pouvez
+utiliser le raccourci "Majuscule-Entrée", qui fait la même chose. 
+
+Tant que vous êtes dans une cellule de code on a l'impression qu'on ne
+fait qu'avancer dans le document, mais sur une cellule de code comme
+ici
+[[ s'arrêter sur la premiere expression ]]
+quand j'avance vous voyez qu'il se passe quelque chose de plus, le
+fragment de code se fait évaluer et le browser me montre le résultat.
+
+Remarquez la ligne Out[] qui nous donne le résultat, c'est un peu
+comme avec l'interpréteur interactif qu'on a vu la dernière fois.
+
+Ce code, vous pouvez le modifier 
+[[ descendre et s'arrêter sur la cellule avec la racine carree 
+  montrer qu'on peut modifier du code -> calculer sqrt(25)
+ ]]
+
+Montrer qu'il faut remonter, modifier le code, et refaire le triangle
+ou shift-enter]]
+
 
 insister sur l'ordre d'evaluation, montrer le [Out] :
 
