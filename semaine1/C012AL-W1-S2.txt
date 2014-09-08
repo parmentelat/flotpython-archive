@@ -127,7 +127,7 @@ python, bien entendu.
 ====================
 [[Ouvrir terminal]]
 
-je me deplace dans le repertoire ou j'ai créé factoriel.py
+Je me deplace dans le repertoire ou j'ai créé factoriel.py
 $ cd MOOC/brouillon
 
 Pour lancer python en mode interactif comme on dit, on le lance sans
@@ -140,6 +140,12 @@ $ python
 
 c'est aussi simple que possible, cela fonctionne presque exactement comme tout
 à l'heure, en plus basique (pas de couleur, d'indentation..)
+
+retaper factoriel 
+montrer qu'on peut remonter dans l'historique cette fois avec les
+fleches
+
+en fait python dans ce mode n'est pas connecté à la souris ni aux menus 
 
 exit() 
 
