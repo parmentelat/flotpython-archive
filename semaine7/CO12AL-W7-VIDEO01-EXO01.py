@@ -67,7 +67,9 @@ print C().num()
 class SousC(C):
     pass
 
-## je redéfinis pas la méthode statique
+print SousC.num()
+
+## je redéfinis la méthode statique
 class SousC(C):
     def num():
         return 'de sousC {}'.format(C.num())
@@ -79,7 +81,7 @@ class SousC(C):
 SousC()
 SousC.num()
 
-## il existe en Python a dernier type de methode pour
+## il existe en Python un autre type de methode pour
 ## les classes, ce sont les méthodes de classe.
 ## Lorsqu'une méthode de classe est appelée sur une
 ## classe C, elle reçoit comme premier argument une référence
