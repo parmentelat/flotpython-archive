@@ -21,5 +21,8 @@
 
 >>>>>>>>>> INCLUDE CO12AL-W7-VIDEO04-SLIDE01.pptx () <<<<<<<<<<
 
+Les décorateurs sont utile pour modifier une fonction ou une classe
+après son instanciation. Les métaclasses sont utiles pour modifier
+les attributs d'une classe avant sa création. 
 
 ## Conclusion()
