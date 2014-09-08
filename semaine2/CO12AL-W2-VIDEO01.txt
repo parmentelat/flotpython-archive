@@ -14,9 +14,11 @@ sujet concerne les notions d'objets, de variables et de typage
 dynamique, qui représentent une des clefs de la compréhension de
 Python. C'est l'objet de cette vidéo.
 
-Le deuxième sujet est sur la présentation des types de base en
+Le deuxième sujet est sur la présentation des types de base, 
+que nous appelons également types built-in, en
 Python qui sont des objets puissants, polyvalents, mais très souples et
-faciles à utiliser. Nous les verrons les uns après les autres jusqu'au
+faciles à utiliser. Les types built-in viennent avec toutes les installations
+de Python. Nous les verrons les uns après les autres jusqu'au
 début de la semaine prochaine.
 
 ## Résumé de la vidéo (20s)
