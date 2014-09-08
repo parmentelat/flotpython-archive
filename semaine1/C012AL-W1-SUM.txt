@@ -42,11 +42,12 @@ OK notebook-vs-interpreter.ipynb : illustrer un bout de programme executé sous i
 ## Vidéo 4 (Pourquoi python)
 
 ## Compléments Vidéo 4
+ONGOING resources.ipynb : collection de liens utiles 
+ONGOIGNtype-checking.ipynb:  typage dynamique / typage statique / inference de type 
 
 ## Quizz Vidéo 5
 
 ## Exercices Vidéo 5
-
 
 ###################################################################
 

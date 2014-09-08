@@ -16,6 +16,8 @@ pragmatique. Il n'y a pas de dogme en python, mais plutôt quelque
 chose qu'on pourrait appeler une philosophie ou quelque chose de ce
 genre. On en parlera tout à l'heure avec le zen de python.
 
+xxx actuellement je ne montre pas le zen; il faut que je travaille les illustrations
+
 Un très bon exemple de ce pragmatisme est le choix d'une syntaxe basée
 sur l'indentation, qui dans les années 1990 était disons assez peu
 orthodoxe. Et même en 2014 c'est une caractéristique qui reste
@@ -76,8 +78,8 @@ C'est la PSF - Python Software Foundation - qui possède les droits sur
 python et se charge de son développement. Elle diffuse python sous une
 licence très flexible, là encore je vous donnerai les pointeurs pour
 ceux que ça intéresse, mais pour faire simple vous pouvez utiliser
-python pour virtuellement n'importe quelle application, même
-commerciale.
+python gratuitement pour virtuellement n'importe quelle application,
+même commerciale.
 
 En conclusion, python est un langage qui est sans aucun doute destiné
 à rester pour de nombreuses années encore un joueur incontournable
@@ -95,29 +97,35 @@ programme, et/ou de performances irréprochables.
 
 En effet avec son modèle objet, python est assez gourmand en
 mémoire. Bien que sa vitesse d'exécution soit très correcte, certaines
-applications embarquées ou temps-réel peuvent représenter un challenge.
+applications embarquées ou temps-réel peuvent représenter un
+challenge.
 
 Par exemple personne n'envisagerait sérieusement d'écrire un système
-d'exploitation en python. 
+d'exploitation en python; on utilise typiquement un langage de plus
+bas niveau pour cela, mais cela vient avec un coût en termes de
+rapidité de développement.
 
-Mais à part ce type de besoin très spécifique vous pouvez utiliser
-python pour écrire tout ce que vous voulez. J'entends des gens décrire
-python comme un langage de script, on peut bien sûr écrire des scripts
-en python - un script ça sous-entend un programme assez petit qui
-automatise des activités courantes dans la vie de tous les jours -
-mais je trouve que cette appellation ne rend pas justice au langage.
-Vous pouvez utiliser python pour réellement toute sorte
-d'applications, en partant des cas standard avec base de données,
-interface graphique, jusqu'aux applications Internet, le prototypage
-rapide, ou tout ce qui est calcul numérique ou symbolique. Il n'y a
-pas de limite de taille à ce qu'on peut faire ne python.
+Dans tous les autres cas vous aurez avec python un excellent
+compromis, un langage raisonnablement efficace et une vitesse de
+développement optimale. Vous pouvez utiliser python pour écrire tout
+ce que vous voulez. J'entends des gens décrire python comme un langage
+de script, on peut bien sûr écrire des scripts en python - un script
+ça sous-entend un programme assez petit qui automatise des activités
+courantes dans la vie de tous les jours - mais je trouve que cette
+appellation ne rend pas justice au langage.  Vous pouvez utiliser
+python pour réellement toute sorte d'applications, en partant des cas
+standard avec base de données, interface graphique, jusqu'aux
+applications Internet, le prototypage rapide, ou tout ce qui est
+calcul numérique ou symbolique. Il n'y a pas de limite de taille à ce
+qu'on peut faire ne python.
 
 Voila ce que je voulais vous dire concernant python.  Vous trouverez
 en complément une liste de liens vers des lectures qui peuvent être
-utiles; ça couvre bien entendu la documentation, l'historique, la
-communauté, quelques textes de Guido van Rossum, ainsi que son speech
-à la conférence PyCon cette année que je vous recommande, et un peu de
-folklore aussi.
+utiles; ça couvre bien entendu la documentation, l'historique [[et
+notamment quelques éléments sur python2 vs python3]], la communauté,
+quelques textes de Guido van Rossum, ainsi que son intervention à la
+conférence PyCon cette année sur youtube, que je vous recommande, et
+un peu de folklore aussi. Malheureusement pour la plupart tout ceci est en anglais.
 
 Je vous souhaite bonne lecture, et vous donne rendez-vous la semaine
 prochaine avec Arnaud
@@ -135,98 +143,10 @@ typage pour expliquer ce qu'on veut dire réellement avec typage
 dynamique, les langages qui font le typage statique, et l'inférence de
 types, et mypy.
 
-==================== 
-II. ressources -- URLs en complément - just flash some stuff 
-. doc en ligne
-. historique - en dire deux mots
-  http://en.wikipedia.org/wiki/History_of_Python
-  http://python-history.blogspot.com
-
-https://wiki.python.org/moin/FrenchLanguage
-
-http://fr.wikipedia.org/wiki/Python_%28langage%29
-
-Guido van Rossum keynote talk at PyCon 2014 
-https://www.youtube.com/watch?v=EBRMq2Ioxsc
-
-. zen de python
-
-. expliquer l'histoire des monthy python (et les mots spam egg beans)
-https://www.youtube.com/watch?v=anwy2MPT5RE
-
-
-. mypy : adding type inference into python
-http://www.mypy-lang.org/index.html
-
-
-Situer python parmi les autres langages
-destiné à rester - comme C // et non pas à disparaître - comme Ada 
-
-tout objet - passage par référence (pas de passage par valeur)
-nombreux types disponibles par défaut
-
-pas hyper-efficace ni très pointu sur la gestion mémoire (utiliser C
-pour ce genre de choses), mais très raisonnable compte tenu de la
-vitesse de développement
-bon rapport qualité-prix
-
-langage interprété - pas de compilation 
-interpréteur permet beaucoup de flexibilité
-
-pourquoi Python 2.x et pas 3.x 
-
-
-**portable**
-
-syntaxe simple
-pas de délimitations ( ni ; ni begin/end ni {} )
-uniquement les indentations
-
-pas d'extravagance comme perl
-typage dynamique; pas besoin de sous-titrer le type, toute variable
-peut désigner tout objet, nombre, dictionnaire, fonction, classe...
-
-gestion automatique de la mémoire - garbage collector
-
-
-- Licence
-La PSF (Python Software Foundation) possède les droits sur python et
-assure son développement
-
-langage gratuit, et aucune restriction sur le langage et son usage
-même commercial
-http://docs.python.org/2/license.html 
-
-
--discuter du zen de python 
-import this
-
-
-# XXX une mention peut-être à 
-
-
-préparer des bookmarks et montrer les pages : NON fournir les liens
-dans un complément plutôt
-
-parler bien sûr de la doc 
-ressources python (docs, ...) 
-
------ montrer le zen de python d'une manière ou d'une autre
-
-langage non typé - + rapide à écrire mais plus difficile à valider
-exhaustivement - aucune erreur de type détectée à la compilation
-
-
-
-
-
-
-
-
 ============================== 
 === un debut de texte pour faire une revue des autres langages mais je
 vois bien que ça ne va pas passer dans le budget temps. je laisse de
-cote pour l'instant
+coté pour l'instant
 
 Si j'essaie de comparer python avec d'autres langages dont vous avez
 pu entendre parler: 
