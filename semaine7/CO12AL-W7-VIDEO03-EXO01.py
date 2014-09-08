@@ -12,7 +12,7 @@
 print type('a')
 print 'a'.__class__
 
-## les classes new style ont été introduite
+## les classes new style ont été introduites
 ## pour répondre à deux problèmes majeurs
 ## avec les classes classiques qui étaient les
 ## seuls à exister.
@@ -22,9 +22,9 @@ print 'a'.__class__
 ## que l'on peut imaginer beaucoup de cas où l'on
 ## veut simplement légèrement modifier le comportement
 ## d'un type built-in. En effet, les types built-in
-## sont très puissant et constitue une bonne base
+## sont très puissant et constituent une bonne base
 ## de départ pour de nouvelles classes.
-## 2) le type d'une instance d'une type built-in
+## 2) le type d'une instance d'un type built-in
 ## est le type built-in. Mais le type d'une intance
 ## d'une classe classique, n'est pas la classe,
 ## mais un objet instance. Donc toutes les instances
