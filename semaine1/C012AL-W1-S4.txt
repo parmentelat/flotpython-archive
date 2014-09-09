@@ -1,4 +1,4 @@
-XXX préparer des illustrations
+Il faudra retravailler les illustrations apres coup comme pour w1s1
 
 Bonjour.
 
@@ -8,9 +8,8 @@ raisons de sons succès, avant que vous ne commenciez la semaine
 prochaine à voir avec Arnaud tous les détails qu'il faut savoir.
 
 Pour commencer je vais essayer de vous situer un peu le langage python
-dans la jungle de tous les langages existants, enfin disons par
-rapport au moins aux langages les plus utilisés qui sont C/C++, Java,
-perl, ruby, lisp, et javascript.
+par rapport aux autres langages dont on parle c'est à dire C/C++, Java,
+perl, ruby, et javascript.
 
 C et C++ sont des langages compilés, de bas niveau; le programmeur a
 un accès extrêmement fin sur l'exécution de son programme, et à la
@@ -104,7 +103,7 @@ comme par exemple la gestion de la mémoire, grâce à ce qui s'appelle
 le garbage collector. Vous pouvez donc vous concentrer sur l'essentiel.
 
 Comme en plus c'est un langage interprété, mais efficacement, cela
-donne un cycle de développement est extrêmement rapide, je vous l'ai
+donne un cycle de développement extrêmement rapide, je vous l'ai
 montré dans les vidéos précédentes. Nous seulement on écrit moins de
 code, mais on n'est pas obligé de passer par une phase de compilation
 qui peut rendre la vie du programmeur infernale, surtout sur de gros
