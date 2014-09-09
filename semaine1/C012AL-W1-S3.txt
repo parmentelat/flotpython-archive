@@ -102,6 +102,13 @@ J'espère que cette rapide présentation vous clarifie les idées
 concernant l'utilisation des notebooks, que nous allons massivement
 utiliser dans ce cours.
 
+D'ici la semaine prochaine je vous invite à vous familiariser avec
+tout ceci; vous trouverez en complément quelques petits morceaux de
+code que vous pouvez télécharger et faire tourner sur votre propre
+machine. Ceux que ça intéresse peuvent essayer de mettre des
+caractères accentués dans un message pour voir comment ça se comporte
+sur votre système.
+
 La prochaine fois je concluerai la semaine en discutant les grands
 principes qui gouvernent la conception du langage, qui expliquent à
 notre avis son succès, et pourquoi nous pensons que python est un
