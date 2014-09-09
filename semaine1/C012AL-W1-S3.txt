@@ -1,15 +1,34 @@
-Accueil
+[[
+Voir avec Mathieu pour la taille de la capture
+Je peux créer un safari en 16/9eme
+ou bien un peu moins plat pour laisser de la place a incruster mon visage
+il faudra ajouter les transparents apres coup 
+]]
 
+Bonjour
+
+La dernière fois nous avons vu comment utiliser python et IDLE sur
+votre ordinateur.
+ 
 Aujourd'hui je vais vous montrer rapidement comment utiliser les
-notebooks. Nous allons d'abord voir ensemble le complément de cette vidéo, pour
+notebooks. Alors tout d'abord, par rapport à ce qu'on a vu la dernière
+fois, j'insiste bien sur le fait que tout ce que nous allons faire
+aujourd'hui utilise des ressources python qui sont distantes,
+c'est-à-dire hébergées dans la plateforme fun. 
+{{Vous pouvez utiliser
+tout ceci même si vous n'avez pas encore installé python sur votre
+ordinateur. Vous pourriez par exemple utiliser une tablette.}}
+
+[[ ouvrir safari ]]
+
+Nous allons d'abord parcourir ensemble le complément de cette vidéo, pour
 voir les mécanismes de base, et ensuite je vous montrerai un exercice,
 pour vous montrer comment vous pouvez faire votre propre correction.
 
 Si je prends le premier notebook
+
 Vous pouvez d'abord voir que le document est découpé en cellules. Si
-je clique ici, je sélectionne la première cellule. Il faut prendre
-l'habitude d'avoir une cellule sélectionnée, nous allons voir
-pourquoi. 
+je clique ici, je sélectionne la première cellule.
 
 Vous pouvez passer d'une cellule à l'autre en utilisant cette petite
 flêche ici; 
@@ -19,7 +38,7 @@ flêche ici;
 Pour ceux qui comme moi sont plus clavier que souris, vous pouvez
 utiliser le raccourci "Majuscule-Entrée", qui fait la même chose. 
 
-Tant que vous êtes dans une cellule de code on a l'impression qu'on ne
+Tant que vous êtes dans une cellule de texte on a l'impression qu'on ne
 fait qu'avancer dans le document, mais sur une cellule de code comme
 ici
 [[ s'arrêter sur la premiere expression ]]
@@ -55,6 +74,14 @@ serveur, et n'utilise pas votre installation python à vous)
 
 Si par hasard vous défigurez votre notebook vous pouvez revenir à
 cette version 'enseignants' avec le menu "File -> Reset to Origin"
+
+Je vous signale enfin la possibilité de télécharger le contenu du
+notebook au format python, [[ File -> Download as -> python ]]
+
+Et aussi, qui peut être pratique pour échanger entre vous, la
+possibilité de créer un snapshot en lecture seule [[ File -> Share
+static version ]]; vous obtenez comme ça une adresse URL que vous
+pouvez poster sur le forum pour que d'autres puissent lire votre code.
 
 -------------
 Je vous montre à présent rapidement un des tous premiers exercices.

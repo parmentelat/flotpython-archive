@@ -1,5 +1,9 @@
-Bonjour
+[[ commencer avec le transparent ]]
+[[ capturer tout l'ecran ]]
+[[ voir avec mathieu quel fond je prends ]]
 
+Bonjour  
+ 
 Aujourd'hui nous allons voir rapidement comment utiliser les 2 outils
  que nous utiliserons dans les vidéos.
 
@@ -53,8 +57,6 @@ facoriel (20)
 les messages d'erreur - exception - essaient de donner le maximum d'informations 
 
 ========== parler de la doc
-help (len)
-
 import math
 dir(
 s'arreter sur le popup
@@ -71,7 +73,8 @@ C'est tres bien pour faire de tous petits calculs, et nous utiliserons beaucoup 
 
 Mais on ne peut pas s'amuser a retaper le programme a chaque fois - ni meme bien sur a utiliser un terminal...
 
-C'est pourquoi un programme est stocke dans un ou plusieurs fichiers
+C'est pourquoi le programme est stocke dans un ou plusieurs fichiers,
+en python on dit des modules, nous y reviendrons naturellement
 
 Je vais donc utiliser IDLE pour creer un fichier
 
