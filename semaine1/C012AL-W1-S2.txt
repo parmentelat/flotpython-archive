@@ -1,26 +1,26 @@
 Bonjour
 
 Aujourd'hui nous allons voir rapidement comment utiliser les 2 outils
- que nous utiliserons dans les vidéos, et qui vous seront utiles de
- toute manière pour programmer en python.
+ que nous utiliserons dans les vidéos.
 
-D'une part, pour développer, c'est-à-dire pour écrire votre programme,
-vous aurez besoin d'un environnement de développement, c'est-à-dire un
-outil pour écrire votre code, et l'essayer au fur et à mesure. 
+D'une part, vous aurez besoin d'un environnement de développement,
+c'est-à-dire un outil pour écrire votre code, et l'essayer au fur et à
+mesure.
 
-D'autre part, pour utiliser un programme écrit en python, il faut
+D'autre part, pour exécuter un programme écrit en python, il faut
 disposer du "coeur" du langage, c'est-à-dire l'interpréteur python
 lui-même.
 
 ==================== 
 Je vais commencer par l'environnement de développement. Nous avons
 choisi d'utiliser IDLE dans les vidéos, car il fait partie de la
-distribution standard. Si vous avez une expérience de programmation
-dans un autre langage et que vous utilisez déjà, par exemple vim,
-emacs ou eclipse ou un outil de ce genre (mais pas word), vous pouvez bien sûr
-l'utiliser au lien de IDLE, mais il est utile même dans ce cas que
-vous compreniez comment fonctionne IDLE au moins dans les grandes
-lignes, pour suivre les vidéos avec un maximum de confort.
+distribution standard. 
+
+Si vous préférez vous pouvez utiliser autre chose bien sûr, comme
+emacs, vim, eclipse, mais même dans ce cas il est utile que vous
+sachiez comment fonctionne IDLE pour suivre les vidéos avec un maximum
+de confort.
+
 
 Je vais lancer IDLE. 
 
@@ -33,8 +33,6 @@ directement du code, qui est exécuté immédiatement au fur et à mesure.
 
 expression arithmétique
 
-<< digression sur la poule et l'oeuf ? >>
-
 une petite fonction, par exemple factoriel
 def factoriel (n):
     return 1 if n <= 1 else n * factoriel (n-1)
@@ -42,18 +40,17 @@ def factoriel (n):
 mentionner les indentations : touche tabulation
 
 appeler la fonction
-factoriel (2)
+
+factoriel (10)
 
 montrer comment reprendre une ligne : utiliser les fleches, faire "entree" sur cette ligne
 il faut s'entrainer, comportement un peu perturbant, si on ne fait pas entree il ne passe rien
 
-factoriel (10)
+factoriel (100)
 
 # faire expres de se tromper : mauvais nom de variable
 facoriel (20)
 les messages d'erreur - exception - essaient de donner le maximum d'informations 
-
-a la fin du cours : a l'aise avec les messages d'erreur
 
 ========== parler de la doc
 help (len)
@@ -62,6 +59,10 @@ import math
 dir(
 s'arreter sur le popup
 dir(math)
+
+help (math.sqrt)
+
+math.sqrt(10)
 
 laisser ouvert...
 
@@ -73,12 +74,12 @@ Mais on ne peut pas s'amuser a retaper le programme a chaque fois - ni meme bien
 C'est pourquoi un programme est stocke dans un ou plusieurs fichiers
 
 Je vais donc utiliser IDLE pour creer un fichier
-XXX verifier ou on se trouve quand on lance IDLE XXX
 
 retaper la fonction dans un fichier factoriel.py
 (*) ajouter un commentaire, expliquer que la fin de la ligne apres # est ignore par le langage
 sauf bien sur si le # est dans une chaine de caracteres
 (*) ajouter une ligne de documentation
+(*) utiliser un autre style avec if et else
 
 Dire que pour executer ce morceau de code on fait F5
 
@@ -87,14 +88,17 @@ Montrer que la premiere fois IDLE nous demande de sauver le fichier, le sauver
 Puis aller dans le terminal et appeler la fonction de nouveau avec
 factoriel (4)
 
-Montrer rapidement ce qui se passe quand on change un peu le fichier
-par exemple ajouter une impression, et changer le nom de la fonction
-en fact_print
-attention a bien le faire dans les deux occurences du nom de fonction
+definir une variable 
+n=10
+
+print n
 
 refaire F5, et montrer que l'interpréteur affiche "RESTART", expliquer
 ce que ca veut dire (on efface l'environnement)
-montrer que l'ancien nom "factoriel" n'est plus disponible
+
+montrer que la variable n n'est plus disponible
+
+print n
 
 Conclure sur IDLE:
 * creer des fichiers 
@@ -104,7 +108,7 @@ Conclure sur IDLE:
 ========================================
 Je vais a present vous montrer comment utiliser l'interpréteur python.
 
-Comme je l'ai mentionné tout à l'heure, l'interpréteur est nécessaire
+Comme je l'ai dit tout à l'heure, l'interpréteur est nécessaire
 pour exécuter le code. Que vous développiez avec IDLE, ou avec autre
 chose, vous avez besoin de l'interpréteur. Et si vous publiez votre
 code, vos utilisateurs auront besoin de l'interpréteur.
@@ -117,12 +121,10 @@ l'interpréteur à la manoeuvre quelque part dans les processus de
 l'ordinateur.
 
 Je lance donc un terminal. 
+
 Selon les systèmes, vous pouvez lancer une console de ce genre en utilisant
 "cmd" sur windows, "xterm" sur linux, ou l'application "Terminal" sur
-macos, comme je vais le faire tout de suite. Vous pouvez bien sûr
-utiliser d'autres outils analogues.
-Attention le terminal lui-même ne fait pas partie de la distribution
-python, bien entendu.
+macos, comme je vais le faire tout de suite. 
 
 ====================
 [[Ouvrir terminal]]
@@ -161,16 +163,15 @@ lancer python factoriel.py, montrer que ça ne fait rien car on n'a pas appelé la
 
 expliquer que c'est le mode de fonctionnement "normal" de python
 que le fichier passé en argument s'appelle le point d'entrée
-((qu'on peut aussi ajouter des arguments -> vu + tard))
 
 relancer sur factoriel.py avec python -i
 appeler la fonction 
 
 sortir
 
-conclure ... xxx
-
 ====================
+Voila qui conclut la présentation des deux outils
+
 J'aimerais attirer votre attention sur le fait que dans les
 vidéos, pour des raisons pratiques, on utilise massivement des noms de
 variables très courts - pour ne pas passer trop de temps au clavier.
@@ -180,13 +181,9 @@ identifiants qui soient parlants.
 
 
 ====================
-incise sur les accents - scabreux - pas propre à python
-commencer sans accent - juste indiquer l'astuce
--*- coding: iso-8859-15 -*-
+Enfin, je voudrais ajouter un mot sur les caractères accentués.  Le
+sujet des accents est -- en informatique en général, ce n'est pas propre
+à python -- extrêmement scabreux.
+Vous trouverez dans les compléments quelques indications sommaires sur ce point.
 
-TODO : mentionner les accents (ici ou dans une autre vidéo ?)
-expliquer que c'est à peu près safe dans les notebooks
-expliquer la théorie dans les grandes lignes (coding: ..)
-mais que ça peut demander une configuration supplémentaire pour ceux
-qui utilisent une machine configurée pour e.g. l'anglais
-
+Je vous retrouve la prochaine fois pour vous montrer les notebooks; à bientôt

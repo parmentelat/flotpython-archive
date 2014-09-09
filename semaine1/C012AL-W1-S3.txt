@@ -1,7 +1,3 @@
-XXX creer des bookmarks dans l'environnement safari de MOOC pour
-notebooks.ipynb
-exo-if.ipynb
-
 Accueil
 
 Aujourd'hui je vais vous montrer rapidement comment utiliser les
