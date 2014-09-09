@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 input1 = ( [ 1,2,3,5,8,13],
            [ 'a','b','c','e','h','m'] )
 

@@ -29,6 +29,10 @@ TODO shebang & coding: -- commencer à parler des accents
 OK notebooks.ipynb : expliquer le fonctionnement des notebooks
 OK notebook-vs-interpreter.ipynb : illustrer un bout de programme executé sous interpréteur, par python et sous notebook
 
+OK fibonacci_prompt.py & .ipynb : un notebook qui calcule et affiche fibonacci avec raw_input  
+OK fibonacci.py & .ipynb : un notebook qui calcule et affiche fibonacci avec argument passé sur la ligne de commande
+OK turtle_square.py & .ipynb : un notebook pour publier du code a telecharger et a jouer sur son ordi
+
 ## Quizz Vidéo 3
 
 ## Exercices Vidéo 3
