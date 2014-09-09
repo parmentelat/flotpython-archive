@@ -5,8 +5,7 @@
 C012AL-W1-S1.txt 
 
 ## Compléments Vidéo 1
-ONGOING install-standard.ipynb quelques ressources pour l'installation de python
-insister sur le numero de version
+OK install-standard.ipynb quelques ressources pour l'installation de python
 
 ## Quizz Vidéo 1
 
@@ -18,11 +17,9 @@ insister sur le numero de version
 ## Vidéo 2 (la distribution standard)
 
 ## Compléments Vidéo 2
-TODO shebang
-TODO coding:
+TODO shebang & coding: -- commencer à parler des accents
 
 ## Quizz Vidéo 2
-
 
 ###################################################################
 
@@ -43,7 +40,8 @@ OK notebook-vs-interpreter.ipynb : illustrer un bout de programme executé sous i
 
 ## Compléments Vidéo 4
 ONGOING resources.ipynb : collection de liens utiles 
-ONGOIGNtype-checking.ipynb:  typage dynamique / typage statique / inference de type 
+ONGOING type-checking.ipynb:  typage dynamique / typage statique / inference de type 
+TODO garbage-collector.ipynb
 
 ## Quizz Vidéo 5
 
