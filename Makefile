@@ -10,7 +10,7 @@ INDEX_POST= sed -e 's,\(\#\# Vid\),========== \1,'
 
 index: force
 	export LC_ALL=en_US.ISO8859-15;\
-	for s in semaine?; do echo ==================== $$s; \
+	for s in W?; do echo ==================== $$s; \
 	    ls $$s/C[0O]12AL*SUM.txt | xargs egrep '(^C[0O]12AL.*txt|^\#\# Vid|^OK|^TODO|^ONGO)' | $(INDEX_POST) ; \
 	    echo ""; \
 	    echo ""; \
@@ -31,7 +31,7 @@ tags: force
 
 # run nbtool on all notebooks
 norm normalize normalize-notebooks: force
-	find semaine[0-9]* -name '*.ipynb' | fgrep -v '/.ipynb_checkpoints/' | xargs tools/nbtool.py
+	find W[0-9]* -name '*.ipynb' | fgrep -v '/.ipynb_checkpoints/' | xargs tools/nbtool.py
 
 #
 CLEAN_FIND= -name '*~' -o -name '.\#*' -o -name '*pyc'
