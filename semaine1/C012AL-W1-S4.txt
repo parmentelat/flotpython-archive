@@ -1,27 +1,29 @@
 Il faudra retravailler les illustrations apres coup comme pour w1s1
 
+
 Bonjour.
 
 Aujourd'hui je vais finir la semaine en vous exposant quelques
-généralités sur le langage python, en essayant de dessiner les
+généralités sur le langage python, en essayant de souligner les
 raisons de sons succès, avant que vous ne commenciez la semaine
 prochaine à voir avec Arnaud tous les détails qu'il faut savoir.
 
 Pour commencer je vais essayer de vous situer un peu le langage python
-par rapport aux autres langages dont on parle c'est à dire C/C++, Java,
-perl, ruby, et javascript.
+par rapport aux autres langages dont on parle en ce moment, c'est à
+dire C/C++, Java, perl, ruby, et javascript.
 
 C et C++ sont des langages compilés, de bas niveau; le programmeur a
 un accès extrêmement fin sur l'exécution de son programme, et à la
 mémoire. Les types de base sont très rustiques, ils correspondent pour
-faire simple à ce que le hardware est capable de faire. Cela permet
-d'un coté de réaliser des choses très performantes, mais au prix d'un
-effort de développement substantiel. C'est donc approprié notamment
-pour les applications très exigeantes en termes de performance.
+faire simple à ce que le hardware est capable de faire. C'est pourquoi
+le langage n'est pas très portable.  Cela permet d'un coté de réaliser
+des choses très performantes, mais au prix d'un effort de
+développement substantiel. C'est donc approprié notamment pour les
+applications très exigeantes en termes de performance.
 
 Java d'un autre coté est un langage de plus haut niveau, qui à
 première vue pourrait ressembler à python. Il me semble qu'il y a
-toutefois des différences culturelles importatnes. Java est par
+toutefois des différences culturelles importantes. Java est par
 exemple plus dogmatique que python il me semble, et comme Java vient
 du monde industriel, les communautés fonctionnent de manière très
 différentes. Vous le voyez quand il s'agit de comparer java et python,
@@ -40,20 +42,22 @@ influence déterminante sur toute cette famille de langages, malgré les
 apparences.
 
 Javascript par contre est un langage très ciblé dans ses applications
-du moins actuellement, puisqu'il tourne uniquement dans un browser
-Web. D'un point de vue de la conception du langage, il est fréquemment
+puisqu'il est conçu pour tourner dans un browser Web. 
+D'un point de vue de la conception du langage, il est fréquemment
 assez peu considéré, à tort à mon avis, il faut dire que le nom de
 javascript n'aide pas car beaucoup de monde le pense en relation avec
 java. Javascript est très innovant, et bien adapté à la programmation
-des applications web, mais bien entendu pas une alternative à python à
-cause de son caractère très spécialisé.
+des applications web, mais bien entendu pas une alternative à python
+en terme de champ d'application.
 
-====================
-Pour revenir à python, je vais commencer par un peu d'histoire. L'auteur principal du
-langage, Guido Van Rossum, a commencé les premiers développements en
-1990, pour une sortie de la version 1.0 en Janvier 1994. La version
-2.0 a été publiée en Octobre 2000. Et la version 3.0 date de décembre
-2008. Vous voyez que tout cela ne date pas d'hier.
+==================== 
+
+Pour revenir à python, je vais commencer par un peu
+d'histoire. L'auteur principal du langage, Guido Van Rossum, a
+commencé les premiers développements en 1990, pour une sortie de la
+version 1.0 en Janvier 1994. La version 2.0 a été publiée en Octobre
+2000. Et la version 3.0 date de décembre 2008. Vous voyez que tout
+cela ne date pas d'hier.
 
 L'approche de départ, qui ne s'est pas démentie depuis, est très
 pragmatique. Il n'y a pas de dogme en python, mais plutôt quelque
@@ -61,25 +65,23 @@ chose qu'on pourrait appeler une philosophie ou quelque chose de ce
 genre. Cela se voit à la lecture du "zen de python", qui montre aussi
 que cette équipe est capable de ne pas trop se prendre au sérieux :)
 
-Un très bon exemple de ce pragmatisme est le choix d'une syntaxe basée
-sur l'indentation, qui dans les années 1990 était disons assez peu
-orthodoxe. Et même en 2014 c'est une caractéristique qui reste
-relativement peu répandue. 
+Dans cette espèce de manifesto, vous remarquerez que les mots-clés du
+langage sont élégance, simplicité, et uniformité.  Le pragmatisme de
+python, c'est que tous les moyens sont bons pour arriver à ça. Par
+exemple avec une syntaxe basée sur l'indentation, qui dans les années
+1990 était disons assez peu orthodoxe. Et même en 2014 c'est une
+caractéristique qui reste relativement peu répandue.
 
-Si vous lisez le zen de python, à nouveau, cette espèce de manifesto,
-vous remarquerez que les mots-clés du langage sont 
-élégance, simplicité, et uniformité. 
+La syntaxe de python vise à éliminer au maximum ce qu'on appelle
+le sucre syntaxique; un programme python est facile à écrire
+et facile à lire; on a enlevé tout ce qui nuit à la clarté.
 
-La syntaxe de python a été conçue avec soin pour éliminer au maximum
-ce qu'on appelle parfois le sucre syntaxique; un programme python est
-facile à écrire et facile à lire. Et par construction les styles de
-programmation sont très homogènes. Vous verrez qu'il est très facile
-de lire du code python. 
+====================
 
 Par ailleurs python possède tout un tas de bonnes propriétés qui le
 rendent attractif pour écrire des programmes de n'importe quelle
-taille et pour résoudre n'importe quel type de problème - enfin
-presque, je vais y revenir.
+taille et pour résoudre presque n'importe quel type de problème, je
+vais y revenir.
 
 python est portable. Ça veut dire que je peux écrire mon programme sur
 mac et le publier pour windows avec un surcoût extrêmement faible. Bon
@@ -91,13 +93,14 @@ l'ai déjà signalé, et comme la modularité est très bien faite la
 réutilisabilité joue à plein, on n'écrit jamais que ce qui est
 strictement nécessaire, et on ne l'écrit qu'une seule fois.
 
-Aussi ça ne gâche rien d'avoir la possibilité d'intégrer facilement du
-code C ou C++ très facilement, ça fait partie des tous premieres
-"features" comme on dit, ce qui fait qu'en plus des librairies
-nativement écrites en python on peut utiliser presque toutes les
-librairies C.
+Aussi on a la possibilité d'intégrer facilement du code C ou C++, ça
+fait partie des tous premieres "features" comme on dit, ce qui fait
+qu'en plus des librairies nativement écrites en python on peut
+utiliser presque toutes les librairies C.
 
-C'est aussi un langage de relativement haut niveau, vous avec des
+====================
+
+C'est aussi un langage de relativement haut niveau, vous avez des
 objets de base très puissants, et vous êtes débarrassés des détails
 comme par exemple la gestion de la mémoire, grâce à ce qui s'appelle
 le garbage collector. Vous pouvez donc vous concentrer sur l'essentiel.
@@ -124,9 +127,7 @@ ceux que ça intéresse, mais pour faire simple vous pouvez utiliser
 python gratuitement pour virtuellement n'importe quelle application,
 même commerciale.
 
-En conclusion, python est un langage qui est sans aucun doute destiné
-à rester pour de nombreuses années encore un joueur incontournable
-dans le monde des langages de programmation.
+En conclusion, python c'est le langage qu'il vous faut
 
 ==============================
 Je vais à présent vous donner quelques éléments pour vous aider à
@@ -134,7 +135,7 @@ déterminer si python est ou non le bon choix pour résoudre tel ou tel
 besoin en matière de programmation.
 
 Pour faire simple, on peut utiliser python pour presque tout.
-Les seuls sujets qui ne prêtent guère sont les cas où vous avez
+Les seuls sujets qui se ne prêtent guère sont les cas où vous avez
 absolument besoin d'un contrôle fin sur l'exécution de votre
 programme, et/ou de performances irréprochables.
 
@@ -144,23 +145,23 @@ applications embarquées ou temps-réel peuvent représenter un
 challenge.
 
 python n'est clairement pas le premier candidat pour écrire un système
-d'exploitation ou un driver; on utilise typiquement un langage de plus
-bas niveau pour cela, mais cela vient avec un coût en termes de
+d'exploitation ou un driver; on utilise typiquement C ou C++ pour
+cela, mais comme on l'a vu cela vient avec un coût en termes de
 développement.
+--------------------
 
 Dans tous les autres cas vous aurez avec python un excellent
 compromis, un langage raisonnablement efficace et une vitesse de
 développement optimale. Vous pouvez utiliser python pour écrire tout
-ce que vous voulez. J'entends des gens décrire python comme un langage
-de script, on peut bien sûr écrire des scripts en python - un script
-ça sous-entend un programme assez petit qui automatise des activités
-courantes dans la vie de tous les jours - mais je trouve que cette
-appellation ne rend pas justice au langage.  Vous pouvez utiliser
-python pour réellement toute sorte d'applications, en partant des cas
-standard avec base de données, interface graphique, jusqu'aux
-applications Internet, le prototypage rapide, ou tout ce qui est
-calcul numérique ou symbolique. Il n'y a pas de limite de taille à ce
-qu'on peut faire ne python.
+ce que vous voulez. J'entends parfois dire que python est un langage
+de script; un script ça sous-entend un programme assez petit qui
+automatise des activités courantes dans la vie de tous les jours -
+mais je trouve que cette appellation ne rend pas justice au langage.
+Vous pouvez utiliser python pour réellement toute sorte
+d'applications, en partant des cas standard avec base de données,
+interface graphique, jusqu'aux applications Internet, le prototypage
+rapide, ou tout ce qui est calcul numérique ou symbolique. Il n'y a
+pas de limite de taille à ce qu'on peut faire en python.
 
 Voila ce que je voulais vous dire concernant python.  Vous trouverez
 en complément une liste de liens vers des lectures qui peuvent être
@@ -168,15 +169,16 @@ utiles; ça couvre bien entendu la documentation, l'historique [[et
 notamment quelques éléments sur python2 vs python3]], la communauté,
 quelques textes de Guido van Rossum, ainsi que son intervention à la
 conférence PyCon cette année sur youtube, que je vous recommande, et
-un peu de folklore aussi. Malheureusement pour la plupart tout ceci est en anglais.
+un peu de folklore aussi. Malheureusement pour la plupart tout ceci
+est en anglais.
 
 Enfin vous trouverez des compléments sur deux notions, standard dans
-le domaine des langages de programmation : que sont le typage statique et
-dynamique, dont on parlera beaucoup dans le cours, et la
-gestion mémoire et le garbage collector.
+le domaine des langages de programmation; un premier sur le typage
+statique et dynamique, dont on parlera beaucoup dans le cours; et un
+second sur la gestion mémoire et le garbage collector.
 
 Je vous souhaite bonne lecture, et vous donne rendez-vous la semaine
-prochaine avec Arnaud
+prochaine pour entrer dans le vif du sujet avec Arnaud 
 
 ----------------------------------------
 ----------------------------------------
