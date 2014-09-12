@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
+
 import sys
 
 # compute signature
@@ -30,7 +32,7 @@ class Notebook:
             with open(self.filename) as f:
                 self.notebook = current_notebook.read(f,'ipynb')
         except:
-            print "Could not parse {}".format(self.filename)
+            print("Could not parse {}".format(self.filename))
             import traceback
             traceback.print_exc()
 
@@ -71,32 +73,54 @@ class Notebook:
         signature=notary.compute_signature (self.notebook)
         self.notebook['metadata']['signature'] = signature
 
-    def save (self, alt=True):
-        if alt:
+    def save (self, keep_alt=True):
+        if keep_alt:
             # xxx store in alt filename
             outfilename = "{}.alt.ipynb".format(self.name)
         else:
             outfilename = self.filename
         with open (outfilename, "w") as f:
             current_notebook.write (self.notebook,f,'ipynb')
-        print "{} saved into {}".format(self.name, outfilename)
+        print("{} saved into {}".format(self.name, outfilename))
             
-    def full_monty (self, force_name, alt):
+    def full_monty (self, force_name, keep_alt):
         self.parse()
         self.set_name_from_heading1(force=force_name)
         self.set_version()
         self.clear_all_outputs ()
         self.sign()
-        self.save(alt=alt)
+        self.save(keep_alt=keep_alt)
 
-def full_monty (name, force_name, alt):
+def full_monty (name, force_name, keep_alt):
     nb=Notebook(name)
-    nb.full_monty (force_name=force_name, alt=alt)
+    nb.full_monty (force_name=force_name, keep_alt=keep_alt)
 
-force_name = False
-alt=False
-for a in sys.argv[1:]:
-    if a.find ('.alt') >=0 :
-#        print 'ignoring', a
-        continue
-    full_monty (a, force_name, alt)
+from argparse import ArgumentParser
+
+usage="""normalize notebooks
+ * clear all outputs
+ * check for notebookname
+"""
+
+def main ():
+    parser = ArgumentParser(usage=usage)
+    parser.add_argument ("-f", "--force", dest="force", type=bool, default=False,
+                         help="force writing notebookname even if already present")
+    parser.add_argument ("-k", "--keep", dest="keep_alt", type=bool, default=False,
+                         help="if set, output is saved into <>.alt.ipynb instead of overwriting")
+    parser.add_argument ("notebooks", metavar="IPYNBS", nargs="*", 
+                         help="the notebooks to normalize")
+
+    args = parser.parse_args ()
+
+    if not args.notebooks:
+        import glob
+        notebooks = glob.glob("*.ipynb")
+
+    for notebook in args.notebooks:
+        if notebook.find ('.alt') >=0 :
+            print ('ignoring', notebook)
+            continue
+        full_monty (notebook, args.force, args.keep_alt)
+
+main()

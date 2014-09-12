@@ -29,9 +29,9 @@ connect.html: force
 tags: force
 	git ls-files | xargs etags
 
-# run nbtool on all notebooks
+# run nbnorm on all notebooks
 norm normalize normalize-notebooks: force
-	find W[0-9]* -name '*.ipynb' | fgrep -v '/.ipynb_checkpoints/' | xargs tools/nbtool.py
+	find W[0-9]* -name '*.ipynb' | fgrep -v '/.ipynb_checkpoints/' | xargs tools/nbnorm.py
 
 #
 CLEAN_FIND= -name '*~' -o -name '.\#*' -o -name '*pyc'
