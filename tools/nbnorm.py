@@ -63,10 +63,13 @@ class Notebook:
         metadata['version']=version
 
     def clear_all_outputs (self):
+        """clear the 'outputs' field of python code cells, and remove 'prompt_number' as well when present"""
         for worksheet in self.notebook.worksheets:
             for cell in worksheet.cells:
                 if cell['cell_type'] == 'code' and cell['language'] == 'python':
                     cell['outputs'] = []
+                    if 'prompt_number' in cell:
+                        del cell['prompt_number'] 
 
     def sign (self):
         notary = Notary ()
