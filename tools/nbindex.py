@@ -10,7 +10,7 @@ url_format = "<li><a href='https://connect.inria.fr/ipythonExercice/CoursPythonS
 def main ():
     with open ("connect.html", "w") as f:
         f.write(skel_pre)
-        for ipynb in glob ("semaine[0-9]*/*.ipynb"):
+        for ipynb in glob ("W[0-9]*/*.ipynb"):
             dir,file = ipynb.split('/')
             week=dir.replace('semaine','')
             name=file.replace('.ipynb','')

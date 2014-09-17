@@ -1,5 +1,7 @@
 all: index connect tags
 
+WEEKS=$(wildcard W?) 
+
 # for phony targets
 force:
 
@@ -10,7 +12,7 @@ INDEX_POST= sed -e 's,\(\#\# Vid\),========== \1,'
 
 index: force
 	export LC_ALL=en_US.ISO8859-15;\
-	for s in W?; do echo ==================== $$s; \
+	for s in $(WEEKS); do echo ==================== $$s; \
 	    ls $$s/C[0O]12AL*SUM.txt | xargs egrep '(^C[0O]12AL.*txt|^\#\# Vid|^OK|^TODO|^ONGO)' | $(INDEX_POST) ; \
 	    echo ""; \
 	    echo ""; \
