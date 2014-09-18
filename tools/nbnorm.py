@@ -76,6 +76,20 @@ class Notebook:
                     if 'prompt_number' in cell:
                         del cell['prompt_number'] 
 
+    def remove_empty_cells (self):
+        """remove any empty cell - code cells only for now"""
+        nb_empty = 0
+        for worksheet in self.notebook.worksheets:
+            cells_to_remove = []
+            for cell in worksheet.cells:
+                if cell['cell_type'] == 'code' and cell['language'] == 'python' and not cell['input']:
+                    cells_to_remove.append (cell)
+            nb_empty += len (cells_to_remove)
+            for cell_to_remove in cells_to_remove:
+                worksheet.cells.remove(cell_to_remove)
+        if nb_empty:
+            print ("found and removed {} empty cells".format(nb_empty))
+
     def sign (self):
         notary = Notary ()
         signature=notary.compute_signature (self.notebook)
@@ -96,6 +110,7 @@ class Notebook:
         self.set_name_from_heading1(force_name=force_name, verbose=verbose)
         self.set_version()
         self.clear_all_outputs ()
+        self.remove_empty_cells ()
         self.sign()
         self.save(keep_alt=keep_alt)
 
