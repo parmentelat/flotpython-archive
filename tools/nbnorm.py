@@ -49,14 +49,16 @@ class Notebook:
     def set_name_from_heading1(self, force=False):
         """set 'name' in notebook metadata from the first heading 1 cell
         if force is True, always set 'notebookname'
-        if force is False, set 'name' only if it is not set"""
+        if force is False, set 'notebookname' only if it is not set"""
         metadata = self.xpath ( ['metadata'])
         if metadata.get(notebookname,"") and not force:
-            return
-        heading1 = self.first_heading1()
-        metadata[notebookname]=heading1
-        # keep both 'name' and 'notebookname' in sync
-        metadata['name']=heading1
+            pass
+        else:
+            heading1 = self.first_heading1()
+            metadata[notebookname]=heading1
+        # remove 'name' metadata that might come from previous versions of this scrip
+        if 'name' in metadata:
+            del metadata['name'] 
 
     def set_version (self, version="1.0"):
         metadata = self.xpath (['metadata'])
