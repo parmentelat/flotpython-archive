@@ -2,7 +2,10 @@
 
 from glob import glob
 
-user="pthierry"
+import os
+
+# god only knows how to do this properly on windows
+user=os.getenv("USER") or "legout"
 
 skel_pre = "<html><body><ul>\n"
 skel_post = "</ul></body></html>\n"
