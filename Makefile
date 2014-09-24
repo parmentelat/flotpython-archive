@@ -1,4 +1,4 @@
-all: index connect tags
+all: index connect tags norm
 
 WEEKS=$(wildcard W?) 
 
