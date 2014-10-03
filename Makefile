@@ -6,14 +6,14 @@ WEEKS=$(wildcard W?)
 force:
 
 #
-# rough index based on the *SUM.txt
+# rough index based on the *SUMMARY.txt
 # I need to set LC_ALL otherwise grep misreads line with accents and gives truncated results
 INDEX_POST= sed -e 's,\(\#\# Vid\),========== \1,'
 
 index: force
 	export LC_ALL=en_US.ISO8859-15;\
 	for s in $(WEEKS); do echo ==================== $$s; \
-	    ls $$s/C[0O]12AL*SUM.txt | xargs egrep '(^C[0O]12AL.*txt|^\#\# Vid|^OK|^TODO|^ONGO|^NICE)' | $(INDEX_POST) ; \
+	    ls $$s/C[0O]12AL*SUMMARY.txt | xargs egrep '(^C[0O]12AL.*txt|^\#\# Vid|^OK|^TODO|^ONGO|^NICE)' | $(INDEX_POST) ; \
 	    echo ""; \
 	    echo ""; \
 	    echo ""; \
