@@ -2,7 +2,7 @@
 Noms de variables
 =====
 
-Parmi les noms de variables suivants, lesquels sont autorisés par le langage
+Parmi les noms de variables suivants, lesquels sont autorisÃ©s par le langage
 
 [x] nom_de_variable
 [ ] nom-de-variable
@@ -13,11 +13,11 @@ Parmi les noms de variables suivants, lesquels sont autorisés par le langage
 [x] _nom_de_variable
 
 [explanation]
-Seules les réponses d'indice impair sont correctes.
+Seules les rÃ©ponses d'indice impair sont correctes.
 
-le caractère deux-points ':' n'est pas autorisé
+le caractÃ¨re deux-points ':' n'est pas autorisÃ©
 
-le caractère '-' n'est pas autorisé
+le caractÃ¨re '-' n'est pas autorisÃ©
 
 un identifiant ne peut pas commencer par un chiffre
 [explanation]
@@ -26,7 +26,7 @@ un identifiant ne peut pas commencer par un chiffre
 Tirets dans les noms de variables
 =====
 
-Parmi les noms de variables suivants, lesquels sont autorisés par le langage
+Parmi les noms de variables suivants, lesquels sont autorisÃ©s par le langage
 
 [x] _
 [x] _A
@@ -35,16 +35,16 @@ Parmi les noms de variables suivants, lesquels sont autorisés par le langage
 [x] __
 
 [explanation]
-Toutes ces formes sont légales, y compris la première malgré l'absence de caractère alphanumérique
+Toutes ces formes sont lÃ©gales, y compris la premiÃ¨re malgrÃ© l'absence de caractÃ¨re alphanumÃ©rique
 
-On notera toutefois qu'elles sont toutes non recommandées
+On notera toutefois qu'elles sont toutes non recommandÃ©es
 
 [explanation]
 <hr/>
-Types numériques (1)
+Types numÃ©riques (1)
 =====
 
-Comment calculer la 16-ème puissance de 2
+Comment calculer la 16-Ã¨me puissance de 2
 
 ( ) 2 &amp; 16
 (x) 2 ** 16
@@ -56,7 +56,7 @@ Le signe puissance en python est **
 [explanation]
 
 <hr/>
-Types numériques (2)
+Types numÃ©riques (2)
 =====
 
 Comment entrer la valeur du complexe 3 + 2i
@@ -67,12 +67,12 @@ Comment entrer la valeur du complexe 3 + 2i
 ( ) 3 + 2 * j
 
 [explanation]
-Les anglais utilisent 'j' plutôt que notre 'i'
-Les deux dernières formes font référence à une variable "normale" qui s'appellerait 'i' ou 'j'
+Les anglais utilisent 'j' plutÃ´t que notre 'i'
+Les deux derniÃ¨res formes font rÃ©fÃ©rence Ã  une variable "normale" qui s'appellerait 'i' ou 'j'
 [explanation]
 
 <hr/>
-Types numériques (3)
+Types numÃ©riques (3)
 =====
 
 Que retourne la formule
@@ -83,11 +83,11 @@ Que retourne la formule
 ( ) False
 
 [explanation]
-Ces deux puissances de 2 sont toutes deux assez petites pour être représentées par des entiers simples
+Ces deux puissances de 2 sont toutes deux assez petites pour Ãªtre reprÃ©sentÃ©es par des entiers simples
 [explanation]
 
 <hr/>
-Types numériques (4)
+Types numÃ©riques (4)
 =====
 
 Que retourne la formule
@@ -98,14 +98,14 @@ Que retourne la formule
 (x) False
 
 [explanation]
-Par contre ici 2 ** 200 est beaucoup trop gros pour être représenté par un entier simple, c'est un entier long.
+Par contre ici 2 ** 200 est beaucoup trop gros pour Ãªtre reprÃ©sentÃ© par un entier simple, c'est un entier long.
 [explanation]
 
 <hr/>
-Types numériques (5)
+Types numÃ©riques (5)
 =====
 
-Que retourne la formule (avancé)
+Que retourne la formule (avancÃ©)
 
 <pre>(2 ** 200) >> 196 == 2 ** 4</pre>
 
@@ -113,16 +113,16 @@ Que retourne la formule (avancé)
 ( ) False
 
 [explanation]
-On a vu que le décalage vers la droite représente une division entière par 2 ** n
+On a vu que le dÃ©calage vers la droite reprÃ©sente une division entiÃ¨re par 2 ** n
 
-Donc 2 puissance 200, décalé à droite de 196 vaut bien 2 puissance 4
+Donc 2 puissance 200, dÃ©calÃ© Ã  droite de 196 vaut bien 2 puissance 4
 
-Par ailleurs, la comparaison d'un entier long et d'un entier simple de même valeur retourne - heureusement - True
+Par ailleurs, la comparaison d'un entier long et d'un entier simple de mÃªme valeur retourne - heureusement - True
 [explanation]
 
 # -*- python -*-
 
-Opérations sur les séquences
+OpÃ©rations sur les sÃ©quences
 =====
 
 On se donne les variables suivantes
@@ -168,7 +168,7 @@ On a
 <pre>liste = [ 1, 3, 2, 4 ]</pre>
 On veut modifier liste pour obtenir [ 1, 3, 5, 2, 4 ]
 
-Que faut-il faire (plusieurs réponses possibles):
+Que faut-il faire (plusieurs rÃ©ponses possibles):
 
 [ ] liste[2] = 5
 [ ] liste[2] = [5]
@@ -177,11 +177,11 @@ Que faut-il faire (plusieurs réponses possibles):
 [x] liste[2:2] = [5]
 
 [explanation]
-La première formule remplace 2 par 5, la liste conserve 4 éléments
+La premiÃ¨re formule remplace 2 par 5, la liste conserve 4 Ã©lÃ©ments
 La seconde, idem mais la liste devient [1, 2, [5], 4]
-La troisième est correcte
-La quatrième est équivalente à la première, elle remplace 2 par 5
-La cinquième est correcte
+La troisiÃ¨me est correcte
+La quatriÃ¨me est Ã©quivalente Ã  la premiÃ¨re, elle remplace 2 par 5
+La cinquiÃ¨me est correcte
 [explanation]
 
 
@@ -189,11 +189,11 @@ La cinquième est correcte
 Listes (2)
 =====
 
-À nouveau on a 
+Ã€ nouveau on a 
 <pre>liste = [ 1, 3, 2, 4 ]</pre>
 
 On souhaite "extraire" et retourner la valeur '1', tout en la retirant de la liste.
-Plus précisément on veut affecter à la variable 'suivant' la valeur '1' de telle sorte qu'après l'exécution, liste ne contienne plus que [ 3, 2, 4 ]
+Plus prÃ©cisÃ©ment on veut affecter Ã  la variable 'suivant' la valeur '1' de telle sorte qu'aprÃ¨s l'exÃ©cution, liste ne contienne plus que [ 3, 2, 4 ]
 
 Que faut-il faire:
 
@@ -203,9 +203,9 @@ Que faut-il faire:
 ( ) suivant = del liste[0]
 
 [explanation]
-La première formule retourne bien '1' mais ne modifie pas la liste
-La troisième enlève bien '1' de liste mais ne retourne rien
-La dernière formule est syntaxiquement incorrecte
+La premiÃ¨re formule retourne bien '1' mais ne modifie pas la liste
+La troisiÃ¨me enlÃ¨ve bien '1' de liste mais ne retourne rien
+La derniÃ¨re formule est syntaxiquement incorrecte
 [explanation]
 
 
@@ -216,9 +216,9 @@ Listes (3)
 On a encore
 <pre>liste = [ 1, 3, 2, 4 ]</pre>
 
-On veut trier la liste en ordre décroissant, sans le besoin de mémoriser l'état initial.
+On veut trier la liste en ordre dÃ©croissant, sans le besoin de mÃ©moriser l'Ã©tat initial.
 
-Faut-il faire (plusieurs réponses possibles) :
+Faut-il faire (plusieurs rÃ©ponses possibles) :
 
 [x] liste.sort(reverse=True)
 [ ] liste.sort()
@@ -226,11 +226,11 @@ Faut-il faire (plusieurs réponses possibles) :
 [x] liste.sort(); liste.reverse()
 
 [explanation]
-Il faut bien préciser reverse=True pour obtenir un tri décroissant
+Il faut bien prÃ©ciser reverse=True pour obtenir un tri dÃ©croissant
 
-Il n'est pas nécessaire ici de copier la liste initiale, c'est pourquoi ce n'est pas une bonne idée d'utiliser sorted.
+Il n'est pas nÃ©cessaire ici de copier la liste initiale, c'est pourquoi ce n'est pas une bonne idÃ©e d'utiliser sorted.
 
-La dernière formule fonctionne très bien également.
+La derniÃ¨re formule fonctionne trÃ¨s bien Ã©galement.
 [explanation]
 
 
@@ -241,9 +241,9 @@ Listes (4)
 On a toujours
 <pre>liste = [ '1', '3', '2', '4' ]</pre>
 
-On veut ajouter à la fin de la liste les valeurs '5' et '6' pour obtenir [ '1', '3', '2', '4', '5', '6' ]
+On veut ajouter Ã  la fin de la liste les valeurs '5' et '6' pour obtenir [ '1', '3', '2', '4', '5', '6' ]
 
-Faut-il faire (plusieurs réponses possibles) :
+Faut-il faire (plusieurs rÃ©ponses possibles) :
 
 [x] liste = liste + ['5','6']
 [x] liste.extend (['5','6'])
@@ -257,14 +257,14 @@ Toutes les formules sauf la 3 sont correctes
 
 La formule 3 donne pour liste [ 1, 3, 2, 4, [5, 6] ]
 
-Notez que la formule 5 fonctionne, car extend attend un iterable (ici un string) et ajoute tous les éléments de cet iterable; on aurait pu utiliser aussi un tuple par exemple.
+Notez que la formule 5 fonctionne, car extend attend un iterable (ici un string) et ajoute tous les Ã©lÃ©ments de cet iterable; on aurait pu utiliser aussi un tuple par exemple.
 
 [explanation]
 <hr/>
 Tuples (1)
 =====
 
-On se donne en entrée 
+On se donne en entrÃ©e 
 <pre>triple = (1,2,3,)</pre>
 
 Parmi les expressions et instructions ci-dessous, lesquelles sont valides
@@ -275,10 +275,10 @@ Parmi les expressions et instructions ci-dessous, lesquelles sont valides
 [ ] triple[0] = 0
 
 [explanation]
-La première expression est correcte et renvoie 1
+La premiÃ¨re expression est correcte et renvoie 1
 La seconde expression est correcte et renvoie une copie du tuple
-La troisième expression n'est pas valable, "index out of range", triple n'a pas de case numéro 3
-L'affection en quatrième place n'est pas autorisée, un tuple est immuable 
+La troisiÃ¨me expression n'est pas valable, "index out of range", triple n'a pas de case numÃ©ro 3
+L'affection en quatriÃ¨me place n'est pas autorisÃ©e, un tuple est immuable 
 [explanation]
 
 <hr/>
@@ -293,10 +293,10 @@ Quelles sont les expressions qui renvoient True
 [ ] [ ('spam'), ] [0][0] == 'spam'
 
 [explanation]
-Dans la première expression, l'absence de virgule rend les parenthèses vides de sens
+Dans la premiÃ¨re expression, l'absence de virgule rend les parenthÃ¨ses vides de sens
 Dans la seconde expression la partie droite n'est pas un tuple
-Dans la troisième expression, on a une liste contenant un tuple contenant le string, l'expression renvoie True
-Dans la quatrième expression, la virgule n'est pas correctement placée et la parenthèse ne crée pas un tuple.
+Dans la troisiÃ¨me expression, on a une liste contenant un tuple contenant le string, l'expression renvoie True
+Dans la quatriÃ¨me expression, la virgule n'est pas correctement placÃ©e et la parenthÃ¨se ne crÃ©e pas un tuple.
 [explanation]
 
 <hr/>
@@ -306,7 +306,7 @@ Tuples (3)
 On pose
 <pre>quadruple = (1, [2, 3], 'spam', [ [ (4,) ] ] )</pre>
 
-Quelles sont parmi les affectations suivantes celles qui sont valables, et qui affectent 4 à four
+Quelles sont parmi les affectations suivantes celles qui sont valables, et qui affectent 4 Ã  four
 
 [ ] ( one, (two, three), ignored, ( ( ( four ) ) ) ) = quadruple
 [x] ( one, (two, three,), _, ( ( ( four, ), ), ) ) = quadruple
@@ -315,39 +315,39 @@ Quelles sont parmi les affectations suivantes celles qui sont valables, et qui a
 
 
 [explanation]
-Dans la première forme, 'four' ne se trouve pas dans un tuple à cause de l'absence de virgule. On obtient donc four == [ [ (4,) ] ]
+Dans la premiÃ¨re forme, 'four' ne se trouve pas dans un tuple Ã  cause de l'absence de virgule. On obtient donc four == [ [ (4,) ] ]
 La seconde forme est correcte
-Dans la troisième forme, 'one' est inclus dans un tuple, ce qui empêche l'affectation de fonctionner
-La dernière forme est correcte, malgré la présence d'une liste à gauche et d'un tuple à droite au dernier niveau de profondeur.
+Dans la troisiÃ¨me forme, 'one' est inclus dans un tuple, ce qui empÃªche l'affectation de fonctionner
+La derniÃ¨re forme est correcte, malgrÃ© la prÃ©sence d'une liste Ã  gauche et d'un tuple Ã  droite au dernier niveau de profondeur.
 [explanation]
 
 <hr/>
 Tuples (4)
 =====
 
-On cherche à écrire un code qui permette d'intervertir les deux derniers éléments dans une liste. On suppose que la liste en entrée a au moins deux éléments. Quelles sont parmi les variantes suivantes celles qui réalisent bien l'opération demandée
+On cherche Ã  Ã©crire un code qui permette d'intervertir les deux derniers Ã©lÃ©ments dans une liste. On suppose que la liste en entrÃ©e a au moins deux Ã©lÃ©ments. Quelles sont parmi les variantes suivantes celles qui rÃ©alisent bien l'opÃ©ration demandÃ©e
 
 [x] tmp = liste[-1]; liste[-1] = liste [-2]; liste[-2] = tmp
 [ ] liste.reverse(-2,-1)
 [x] liste[-2],liste[-1] = liste[-1],liste[-2]
 
 [explanation] 
-La première formule fonctionne, quoi que pas très "pythonique"
+La premiÃ¨re formule fonctionne, quoi que pas trÃ¨s "pythonique"
 La seconde formule est une invention, list.reverse() n'accepte pas d'argument, comme le montrerait help(reverse)
-La dernière formule fonctionne, ce serait notre préférée. Comme on l'a vu déjà, les expressions à gauche de l'affectation sont toutes évaluées, puis l'affectation est réalisée.
+La derniÃ¨re formule fonctionne, ce serait notre prÃ©fÃ©rÃ©e. Comme on l'a vu dÃ©jÃ , les expressions Ã  gauche de l'affectation sont toutes Ã©valuÃ©es, puis l'affectation est rÃ©alisÃ©e.
 [explanation]
 
 <hr/>
 Strings (1)
 =====
 
-On reçoit en entrée une chaîne dont on sait qu'elle est de taille impaire, et on veut écrire dans la case du milieu un caractère "-", c'est-à-dire que par exemple
+On reÃ§oit en entrÃ©e une chaÃ®ne dont on sait qu'elle est de taille impaire, et on veut Ã©crire dans la case du milieu un caractÃ¨re "-", c'est-Ã -dire que par exemple
 
 <pre>chaine = ""  => chaine = ""</pre>
 <pre>chaine = "a"  => chaine = "-"</pre>
 <pre>chaine = "abcde"  => chaine = "ab-de"</pre>
 
-Comment peut-on faire (plusieurs réponses possibles)
+Comment peut-on faire (plusieurs rÃ©ponses possibles)
 
 [ ] chaine [ len(chaine)/2 ] = "-"
 [ ] chaine = chaine [:len(chaine)/2] + "-" + chaine [-len(chaine)/2:]
@@ -355,11 +355,11 @@ Comment peut-on faire (plusieurs réponses possibles)
 [x] chaine = "" if not chaine else chaine [:len(chaine)/2] + "-" + chaine [-len(chaine)/2+1:]
 
 [explanation]
-Le premier choix n'est pas valide car le type chaîne n'est pas mutable
+Le premier choix n'est pas valide car le type chaÃ®ne n'est pas mutable
 
-Le second choix n'est pas correct, car le résultat contient un caractere de trop
+Le second choix n'est pas correct, car le rÃ©sultat contient un caractere de trop
 
-Le troisieme choix est presque correct, sauf pour la chaine vide, ce qui est corrigé dans le quatrième choix, qui est le seul correct ici
+Le troisieme choix est presque correct, sauf pour la chaine vide, ce qui est corrigÃ© dans le quatriÃ¨me choix, qui est le seul correct ici
 
 [explanation]
 
@@ -367,13 +367,13 @@ Le troisieme choix est presque correct, sauf pour la chaine vide, ce qui est cor
 Strings (2)
 =====
 
-À partir d'une chaine, on veut calculer une chaine dérivée où le caractère '-' est inséré entre les caractères de la chaine originelle, c'est-à-dire que par exemple
+Ã€ partir d'une chaine, on veut calculer une chaine dÃ©rivÃ©e oÃ¹ le caractÃ¨re '-' est insÃ©rÃ© entre les caractÃ¨res de la chaine originelle, c'est-Ã -dire que par exemple
 
 <pre>chaine = ""  => resultat = ""</pre>
 <pre>chaine = "a"  => resultat = "a"</pre>
 <pre>chaine = "abcd"  => resultat = "a-b-c-d"</pre>
 
-Comment peut-on faire (plusieurs réponses possibles)
+Comment peut-on faire (plusieurs rÃ©ponses possibles)
 
 [x] "-".join ( chaine )
 [x] "-".join ( list (chaine) )
@@ -382,13 +382,13 @@ Comment peut-on faire (plusieurs réponses possibles)
 
 
 [explanation]
-La première clause est correcte, c'est bien sûr le plus simple
+La premiÃ¨re clause est correcte, c'est bien sÃ»r le plus simple
 
-La seconde est correcte également, et reste acceptable car elle convertit la chaine en liste; si on n'est plus très sûr de savoir si "join" se comporte correctement avec une chaine en argument, au moins comme ceci on est sûr de son coup.
+La seconde est correcte Ã©galement, et reste acceptable car elle convertit la chaine en liste; si on n'est plus trÃ¨s sÃ»r de savoir si "join" se comporte correctement avec une chaine en argument, au moins comme ceci on est sÃ»r de son coup.
 
-La troisième est presque correcte; cependant zip recoit en argument 1 la chaine entiere, et en argument 2 une chaine moins longue de 1 caractère. Dans ce cas zip tronque le résultat et en sortie de cette expression il manque le dernier caractère de la chaîne en entrée.
+La troisiÃ¨me est presque correcte; cependant zip recoit en argument 1 la chaine entiere, et en argument 2 une chaine moins longue de 1 caractÃ¨re. Dans ce cas zip tronque le rÃ©sultat et en sortie de cette expression il manque le dernier caractÃ¨re de la chaÃ®ne en entrÃ©e.
 
-La quatrième est correcte également, on construit d'abord "a-b-c-d-" puis on élimine le dernier "-". Elle fonctionne aussi pour une chaîne à 0 ou 1 caractère.
+La quatriÃ¨me est correcte Ã©galement, on construit d'abord "a-b-c-d-" puis on Ã©limine le dernier "-". Elle fonctionne aussi pour une chaÃ®ne Ã  0 ou 1 caractÃ¨re.
 
 [explanation]
 
@@ -396,13 +396,13 @@ La quatrième est correcte également, on construit d'abord "a-b-c-d-" puis on éli
 Strings - formattage
 =====
 
-Dans du code nouveau on veut mettre en forme un message à partir de 3 variables (nom, no_secu, age) pour obtenir, par exemple
+Dans du code nouveau on veut mettre en forme un message Ã  partir de 3 variables (nom, no_secu, age) pour obtenir, par exemple
 
 <pre>nom = "Dupont",  no_secu="1975787", age="25" => message = "Dupont, 25 ans, 1975787"</pre>
 
 <pre>nom = "Durand",  no_secu=None, age="12" => message = "Durand, 12 ans, pas de no de SS"</pre>
 
-Faut-il écrire (plusieurs réponses possibles)
+Faut-il Ã©crire (plusieurs rÃ©ponses possibles)
 
 [x] message = "{nom}, {age} ans, {secu}".format(nom=nom, age=age, secu = no_secu if no_secu else "pas de no de SS")
 [x] message = "{}, {} ans, {}".format(nom, age, no_secu if no_secu else "pas de no de SS")
@@ -411,11 +411,11 @@ Faut-il écrire (plusieurs réponses possibles)
 [ ] message = "%s, %s, %s" % (nom, age, no_secu if no_secu else "pas de no de SS" )
 
 [explanation]
-Les clauses 1, 2 et 4 sont correctes - on voit cependant que la clause 4 est plus difficile à relire et donc à modifier
+Les clauses 1, 2 et 4 sont correctes - on voit cependant que la clause 4 est plus difficile Ã  relire et donc Ã  modifier
 
-La clause 3 est erronée, elle mélange les '%s' de l'opérateur % avec la méthode format
+La clause 3 est erronÃ©e, elle mÃ©lange les '%s' de l'opÃ©rateur % avec la mÃ©thode format
 
-La dernière clause, quoique correcte, est à éviter dans du nouveau code.
+La derniÃ¨re clause, quoique correcte, est Ã  Ã©viter dans du nouveau code.
 
 [explanation]
 
@@ -429,7 +429,7 @@ Le type dictionnaire en python est un type
 [x] mutable
 
 [explanation]
-On peut ajouter ou enlever des couples (clé,valeur) dans un dictionnaire
+On peut ajouter ou enlever des couples (clÃ©,valeur) dans un dictionnaire
 [explanation]
 
 
@@ -437,21 +437,21 @@ On peut ajouter ou enlever des couples (clé,valeur) dans un dictionnaire
 Dictionnaires (2)
 =====
 
-Dans un dictionnaire les couples (clé,valeur), peut-on connaître l'ordre dans lequel les clés ont été insérées:
+Dans un dictionnaire les couples (clÃ©,valeur), peut-on connaÃ®tre l'ordre dans lequel les clÃ©s ont Ã©tÃ© insÃ©rÃ©es:
 
 [ ] oui
 [x] non
 
 [explanation]
-Nous avons vu l'implémentation des dictionnaires sous forme d'une table de hash.
-Comme les clés sont rangées en fonction de la fonction de hachage, l'implémentation de base des dictionnaires ne se souvient pas de l'ordre dans lequel les clés sont insérées.
+Nous avons vu l'implÃ©mentation des dictionnaires sous forme d'une table de hash.
+Comme les clÃ©s sont rangÃ©es en fonction de la fonction de hachage, l'implÃ©mentation de base des dictionnaires ne se souvient pas de l'ordre dans lequel les clÃ©s sont insÃ©rÃ©es.
 [explanation]
 
 <hr/>
 Dictionnaires (3)
 =====
 
-Parmi les objets suivants, quels sont ceux qui peuvent être utilisés comme une clé dans un dictionnaire
+Parmi les objets suivants, quels sont ceux qui peuvent Ãªtre utilisÃ©s comme une clÃ© dans un dictionnaire
 
 [x] 1
 [ ] [ 1,2 ]
@@ -459,7 +459,7 @@ Parmi les objets suivants, quels sont ceux qui peuvent être utilisés comme une c
 [ ] ( [1,2], [3,4] )
 
 [explanation]
-Les objets 2 et 4 peuvent être modifiés car ils contiennent au moins une liste, ils ne peuvent donc pas servir de clé
+Les objets 2 et 4 peuvent Ãªtre modifiÃ©s car ils contiennent au moins une liste, ils ne peuvent donc pas servir de clÃ©
 [explanation]
 
 
@@ -467,7 +467,7 @@ Les objets 2 et 4 peuvent être modifiés car ils contiennent au moins une liste, 
 Dictionnaires (4)
 =====
 
-Pour modifier la valeur de la clé 'marc' dont on sait qu'elle est dans le dictionnaire 'annuaire', on peut faire
+Pour modifier la valeur de la clÃ© 'marc' dont on sait qu'elle est dans le dictionnaire 'annuaire', on peut faire
 
 [x] annuaire ['marc'] = 50
 [ ] d.get('marc',50)
@@ -476,14 +476,14 @@ Pour modifier la valeur de la clé 'marc' dont on sait qu'elle est dans le dictio
 [explanation]
 La seconde forme retourne la valeur pour 'marc' si elle existe, et sinon 50, mais ne modifie pas la valeur.
 
-La troisième forme ne créé la clé 'marc' que si elle n'est pas encore présente
+La troisiÃ¨me forme ne crÃ©Ã© la clÃ© 'marc' que si elle n'est pas encore prÃ©sente
 [explanation]
 
 <hr/>
 Dictionnaires (5)
 =====
 
-Pour accéder à la valeur de la clé 'marc' dont on ne sait pas si elle est dans le dictionnaire 'annuaire', on peut faire
+Pour accÃ©der Ã  la valeur de la clÃ© 'marc' dont on ne sait pas si elle est dans le dictionnaire 'annuaire', on peut faire
 
 [ ] annuaire ['marc']
 [x] d.get('marc')
@@ -492,66 +492,66 @@ Pour accéder à la valeur de la clé 'marc' dont on ne sait pas si elle est dans l
 [x] 'marc' in annuaire and annuaire['marc']
 
 [explanation]
-La première forme lève une exception si 'marc' n'est pas présent
+La premiÃ¨re forme lÃ¨ve une exception si 'marc' n'est pas prÃ©sent
 
-Les formes 2 et 3 sont exactement équivalentes: on obtient la valeur, ou None si la clé n'est pas présente
+Les formes 2 et 3 sont exactement Ã©quivalentes: on obtient la valeur, ou None si la clÃ© n'est pas prÃ©sente
 
 La forme 4 est fantaisiste, il n'y a pas de fonction "built-in" get
 
-La dernière forme fonctionne aussi, mais remarquez qu'ici on retourne False - et non pas None - si la clé n'est pas présente
+La derniÃ¨re forme fonctionne aussi, mais remarquez qu'ici on retourne False - et non pas None - si la clÃ© n'est pas prÃ©sente
 [explanation]
 <hr/>
-Références partagées (1)
+RÃ©fÃ©rences partagÃ©es (1)
 =====
 
-On définit une liste comme étant
+On dÃ©finit une liste comme Ã©tant
 
 <pre>liste = 3 * [ 0 ] </pre>
 
-après quoi on fait 
+aprÃ¨s quoi on fait 
 
 <pre>liste [0] = 1</pre>
 
-qu'obtient-on si on imprime liste à ce stade ?
+qu'obtient-on si on imprime liste Ã  ce stade ?
 
 [x] [1, 0, 0]
 [ ] [1, 1, 1]
 
 [explanation]
-l'affectation de liste[0] ne change pas les deux autres éléments de la liste
+l'affectation de liste[0] ne change pas les deux autres Ã©lÃ©ments de la liste
 [explanation]
 
 <hr/>
-Références partagées (2)
+RÃ©fÃ©rences partagÃ©es (2)
 =====
 
-À présent on définit une liste 
+Ã€ prÃ©sent on dÃ©finit une liste 
 
 <pre>liste = 3 * [ [ 0 ] ]</pre>
 
-après quoi on fait 
+aprÃ¨s quoi on fait 
 
 <pre>liste [0][0] = 1</pre>
 
-qu'obtient-on si on imprime liste à ce stade ?
+qu'obtient-on si on imprime liste Ã  ce stade ?
 
 [ ] [ [1], [0], [0] ]
 [x] [ [1], [1], [1] ]
 
 [explanation]
-Cette fois l'affectation concerne la liste à un élément qui est partagée par les trois éléments de liste, on est dans le cas d'une référence partagée, la modification affecte les 3 élément de la liste
+Cette fois l'affectation concerne la liste Ã  un Ã©lÃ©ment qui est partagÃ©e par les trois Ã©lÃ©ments de liste, on est dans le cas d'une rÃ©fÃ©rence partagÃ©e, la modification affecte les 3 Ã©lÃ©ment de la liste
 [explanation]
 
 <hr/>
-Références partagées (3)
+RÃ©fÃ©rences partagÃ©es (3)
 =====
 
-Dans l'exercice précédent, comment faire pour éviter que les trois éléments de liste ne soient modifiées ?
+Dans l'exercice prÃ©cÃ©dent, comment faire pour Ã©viter que les trois Ã©lÃ©ments de liste ne soient modifiÃ©es ?
 
-( ) il n'y a rien à faire, la modification ne concerne que le premier élément
+( ) il n'y a rien Ã  faire, la modification ne concerne que le premier Ã©lÃ©ment
 ( ) il faut faire une "shallow copy"
 (x) il faut faire une "deep copy"
 
 [explanation]
-Il faut faire une copie en profondeur car le premier niveau de la liste reste en fait inchangé lors de l'affectation
+Il faut faire une copie en profondeur car le premier niveau de la liste reste en fait inchangÃ© lors de l'affectation
 [explanation]
