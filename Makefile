@@ -1,4 +1,4 @@
-all: index connect tags norm
+all: 
 
 WEEKS=$(wildcard W?) 
 
@@ -19,6 +19,8 @@ index: force
 	    echo ""; \
 	done > index.long
 
+all: index
+
 #
 # builds a html index of the ipynb files expected to be reachable on connect.inria.fr
 # pthierry is built-in 
@@ -27,6 +29,8 @@ connect: connect.html
 connect.html: force
 	tools/nbindex.py
 
+all: connect
+
 #
 tags: force
 	git ls-files | xargs etags
@@ -34,6 +38,8 @@ tags: force
 # run nbnorm on all notebooks
 norm normalize normalize-notebooks: force
 	find W[0-9]* -name '*.ipynb' | fgrep -v '/.ipynb_checkpoints/' | xargs tools/nbnorm.py
+
+all: norm
 
 #
 CLEAN_FIND= -name '*~' -o -name '.\#*' -o -name '*pyc'
@@ -44,3 +50,9 @@ toclean: force
 clean: force
 	find . $(CLEAN_FIND) -name '*~' -o -name '.#*' -print0 | xargs -0 rm -f
 
+
+all: quiz
+quiz: 00-all.quiz
+
+00-all.quiz:
+	cat */*.quiz > $@
