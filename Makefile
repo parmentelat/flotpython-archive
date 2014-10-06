@@ -51,8 +51,8 @@ clean: force
 	find . $(CLEAN_FIND) -name '*~' -o -name '.#*' -print0 | xargs -0 rm -f
 
 
+# xxx we need to have the quiz files encoded in UTF-8 right at the beginning
 all: quiz
-quiz: 00-all.quiz
-
-00-all.quiz:
-	cat */*.quiz > $@
+quiz: 
+	cat */*.quiz > 00-all.quiz
+	recode ISO-8859-15..UTF-8 00-all.quiz
