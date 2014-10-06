@@ -120,14 +120,12 @@ Donc 2 puissance 200, décalé à droite de 196 vaut bien 2 puissance 4
 Par ailleurs, la comparaison d'un entier long et d'un entier simple de même valeur retourne - heureusement - True
 [explanation]
 
-# -*- python -*-
-
 Opérations sur les séquences
 =====
 
 On se donne les variables suivantes
 
-chaine = "douarnenez"
+<pre>chaine = "douarnenez"</pre>
 
 Trouver la valeur des expressions suivantes
 
@@ -315,7 +313,7 @@ Quelles sont parmi les affectations suivantes celles qui sont valables, et qui a
 
 
 [explanation]
-Dans la première forme, 'four' ne se trouve pas dans un tuple à cause de l'absence de virgule. On obtient donc four == [ [ (4,) ] ]
+Dans la première forme, 'four' ne se trouve pas dans un tuple à cause de l'absence de virgule
 La seconde forme est correcte
 Dans la troisième forme, 'one' est inclus dans un tuple, ce qui empêche l'affectation de fonctionner
 La dernière forme est correcte, malgré la présence d'une liste à gauche et d'un tuple à droite au dernier niveau de profondeur.
