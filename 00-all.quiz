@@ -77,7 +77,7 @@ Types numériques (3)
 
 Que retourne la formule
 
-<pre>type ( 2 ** 16 ) == type ( 2 ** 8 )</pre>
+<pre>type(2 ** 16) == type(2 ** 8)</pre>
 
 (x) True
 ( ) False
@@ -92,7 +92,7 @@ Types numériques (4)
 
 Que retourne la formule
 
-<pre>type ( 2 ** 200 ) == type ( 2 ** 8 )</pre>
+<pre>type(2 ** 200) == type(2 ** 8)</pre>
 
 ( ) True
 (x) False
@@ -129,12 +129,12 @@ On se donne les variables suivantes
 
 Trouver la valeur des expressions suivantes
 
-<pre>chaine.index('z') == len (chaine) </pre>
+<pre>chaine.index('z') == len(chaine) </pre>
 
 ( ) True
 (x) False
 
-<pre>chaine.index('z') == len (chaine) - 1</pre>
+<pre>chaine.index('z') == len(chaine) - 1</pre>
 
 (x) True
 ( ) False
@@ -149,12 +149,12 @@ Trouver la valeur des expressions suivantes
 (x) True
 ( ) False
 
-<pre>chaine [ -3: ] == 'nez'</pre>
+<pre>chaine[-3:] == 'nez'</pre>
 
 (x) True
 ( ) False
 
-<pre>chaine[1:3] + chaine [3:5] + chaine [5:] == chaine [ 1: ]</pre>
+<pre>chaine[1:3] + chaine[3:5] + chaine[5:] == chaine[1:]</pre>
 
 (x) True
 ( ) False
@@ -163,14 +163,14 @@ Listes (1)
 =====
 
 On a 
-<pre>liste = [ 1, 3, 2, 4 ]</pre>
-On veut modifier liste pour obtenir [ 1, 3, 5, 2, 4 ]
+<pre>liste = [1, 3, 2, 4]</pre>
+On veut modifier liste pour obtenir [1, 3, 5, 2, 4]
 
 Que faut-il faire (plusieurs réponses possibles):
 
 [ ] liste[2] = 5
 [ ] liste[2] = [5]
-[x] liste.insert (2,5)
+[x] liste.insert(2,5)
 [ ] liste[2:3] = [5]
 [x] liste[2:2] = [5]
 
@@ -188,14 +188,14 @@ Listes (2)
 =====
 
 À nouveau on a 
-<pre>liste = [ 1, 3, 2, 4 ]</pre>
+<pre>liste = [1, 3, 2, 4]</pre>
 
 On souhaite "extraire" et retourner la valeur '1', tout en la retirant de la liste.
-Plus précisément on veut affecter à la variable 'suivant' la valeur '1' de telle sorte qu'après l'exécution, liste ne contienne plus que [ 3, 2, 4 ]
+Plus précisément on veut affecter à la variable 'suivant' la valeur '1' de telle sorte qu'après l'exécution, liste ne contienne plus que [3, 2, 4]
 
 Que faut-il faire:
 
-( ) suivant = liste [0]
+( ) suivant = liste[0]
 (x) suivant = liste.pop(0)
 ( ) del liste[0]
 ( ) suivant = del liste[0]
@@ -212,15 +212,15 @@ Listes (3)
 =====
 
 On a encore
-<pre>liste = [ 1, 3, 2, 4 ]</pre>
+<pre>liste = [1, 3, 2, 4]</pre>
 
-On veut trier la liste en ordre décroissant, sans le besoin de mémoriser l'état initial.
+On veut trier la liste en ordre décroissant et en place, c'est-à-dire sans duplication de liste.
 
 Faut-il faire (plusieurs réponses possibles) :
 
 [x] liste.sort(reverse=True)
 [ ] liste.sort()
-[ ] sorted (liste, reverse=True)
+[ ] sorted(liste, reverse=True)
 [x] liste.sort(); liste.reverse()
 
 [explanation]
@@ -237,18 +237,18 @@ Listes (4)
 =====
 
 On a toujours
-<pre>liste = [ '1', '3', '2', '4' ]</pre>
+<pre>liste = ['1', '3', '2', '4']</pre>
 
-On veut ajouter à la fin de la liste les valeurs '5' et '6' pour obtenir [ '1', '3', '2', '4', '5', '6' ]
+On veut ajouter à la fin de la liste les valeurs '5' et '6' pour obtenir ['1', '3', '2', '4', '5', '6']
 
 Faut-il faire (plusieurs réponses possibles) :
 
-[x] liste = liste + ['5','6']
-[x] liste.extend (['5','6'])
-[ ] liste.append (['5','6'])
+[x] liste = liste + ['5', '6']
+[x] liste.extend(['5', '6'])
+[ ] liste.append(['5', '6'])
 [x] liste.append('5'); liste.append('6')
-[x] liste.extend ('56')
-[x] liste += [5,6] 
+[x] liste.extend('56')
+[x] liste += ['5', '6'] 
 
 [explanation]
 Toutes les formules sauf la 3 sont correctes
@@ -373,10 +373,10 @@ Strings (2)
 
 Comment peut-on faire (plusieurs réponses possibles)
 
-[x] "-".join ( chaine )
-[x] "-".join ( list (chaine) )
-[ ] "".join([ x+y for (x,y) in zip(chaine, (len(chaine)-1)*"-") ] )
-[x] "".join([ x+y for (x,y) in zip(chaine, len(chaine)*"-") ] )[:-1]
+[x] "-".join(chaine)
+[x] "-".join(list(chaine))
+[ ] "".join([x + y for (x, y) in zip(chaine, (len(chaine)-1)*"-")])
+[x] "".join([x + y for (x, y) in zip(chaine, len(chaine)*"-")])[:-1]
 
 
 [explanation]
@@ -384,7 +384,7 @@ La première clause est correcte, c'est bien sûr le plus simple
 
 La seconde est correcte également, et reste acceptable car elle convertit la chaine en liste; si on n'est plus très sûr de savoir si "join" se comporte correctement avec une chaine en argument, au moins comme ceci on est sûr de son coup.
 
-La troisième est presque correcte; cependant zip recoit en argument 1 la chaine entiere, et en argument 2 une chaine moins longue de 1 caractère. Dans ce cas zip tronque le résultat et en sortie de cette expression il manque le dernier caractère de la chaîne en entrée.
+La troisième est presque correcte; cependant zip reçoit en argument 1 la chaine entière, et en argument 2 une chaine moins longue de 1 caractère. Dans ce cas zip tronque le résultat et en sortie de cette expression il manque le dernier caractère de la chaîne en entrée.
 
 La quatrième est correcte également, on construit d'abord "a-b-c-d-" puis on élimine le dernier "-". Elle fonctionne aussi pour une chaîne à 0 ou 1 caractère.
 
@@ -396,9 +396,9 @@ Strings - formattage
 
 Dans du code nouveau on veut mettre en forme un message à partir de 3 variables (nom, no_secu, age) pour obtenir, par exemple
 
-<pre>nom = "Dupont",  no_secu="1975787", age="25" => message = "Dupont, 25 ans, 1975787"</pre>
+<pre>nom = "Dupont",  no_secu = "1975787", age = "25" => message = "Dupont, 25 ans, 1975787"</pre>
 
-<pre>nom = "Durand",  no_secu=None, age="12" => message = "Durand, 12 ans, pas de no de SS"</pre>
+<pre>nom = "Durand",  no_secu = None, age = "12" => message = "Durand, 12 ans, pas de no de SS"</pre>
 
 Faut-il écrire (plusieurs réponses possibles)
 
@@ -452,9 +452,9 @@ Dictionnaires (3)
 Parmi les objets suivants, quels sont ceux qui peuvent être utilisés comme une clé dans un dictionnaire
 
 [x] 1
-[ ] [ 1,2 ]
+[ ] [1, 2]
 [x] (1, 2)
-[ ] ( [1,2], [3,4] )
+[ ] ([1, 2], [3, 4])
 
 [explanation]
 Les objets 2 et 4 peuvent être modifiés car ils contiennent au moins une liste, ils ne peuvent donc pas servir de clé
@@ -467,7 +467,7 @@ Dictionnaires (4)
 
 Pour modifier la valeur de la clé 'marc' dont on sait qu'elle est dans le dictionnaire 'annuaire', on peut faire
 
-[x] annuaire ['marc'] = 50
+[x] annuaire['marc'] = 50
 [ ] d.get('marc',50)
 [ ] d.setdefault('marc',50)
 
@@ -483,10 +483,10 @@ Dictionnaires (5)
 
 Pour accéder à la valeur de la clé 'marc' dont on ne sait pas si elle est dans le dictionnaire 'annuaire', on peut faire
 
-[ ] annuaire ['marc']
+[ ] annuaire['marc']
 [x] d.get('marc')
-[x] d.get('marc',None)
-[ ] get(d,'marc)
+[x] d.get('marc', None)
+[ ] get(d, 'marc')
 [x] 'marc' in annuaire and annuaire['marc']
 
 [explanation]
@@ -504,11 +504,11 @@ Références partagées (1)
 
 On définit une liste comme étant
 
-<pre>liste = 3 * [ 0 ] </pre>
+<pre>liste = 3 * [0] </pre>
 
 après quoi on fait 
 
-<pre>liste [0] = 1</pre>
+<pre>liste[0] = 1</pre>
 
 qu'obtient-on si on imprime liste à ce stade ?
 
@@ -525,11 +525,11 @@ Références partagées (2)
 
 À présent on définit une liste 
 
-<pre>liste = 3 * [ [ 0 ] ]</pre>
+<pre>liste = 3 * [ [0] ]</pre>
 
 après quoi on fait 
 
-<pre>liste [0][0] = 1</pre>
+<pre>liste[0][0] = 1</pre>
 
 qu'obtient-on si on imprime liste à ce stade ?
 
