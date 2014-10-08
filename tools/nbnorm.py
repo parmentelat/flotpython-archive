@@ -183,4 +183,5 @@ def main ():
             continue
         full_monty (notebook, args.force_name, args.keep_alt, args.verbose)
 
-main()
+if __name__ == '__main__':
+    main()
