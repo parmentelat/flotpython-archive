@@ -36,8 +36,13 @@ tags: force
 	git ls-files | xargs etags
 
 # run nbnorm on all notebooks
-norm normalize normalize-notebooks: force
+norm normalize: normalize-notebook normalize-quiz
+
+normalize-nb normalize-notebook: force
 	find W[0-9]* -name '*.ipynb' | fgrep -v '/.ipynb_checkpoints/' | xargs tools/nbnorm.py
+
+normalize-quiz: force
+	find W[0-9]* -name '*.quiz' | xargs tools/quiznorm.py
 
 all: norm
 
