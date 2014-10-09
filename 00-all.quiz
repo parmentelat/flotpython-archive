@@ -123,7 +123,7 @@ Par ailleurs, la comparaison d'un entier long et d'un entier simple de même val
 Opérations sur les séquences
 =====
 
-On se donne les variables suivantes
+On se donne la variable suivante
 
 <pre>chaine = "douarnenez"</pre>
 
