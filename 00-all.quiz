@@ -345,7 +345,7 @@ On reçoit en entrée une chaîne dont on sait qu'elle est de taille impaire, et
 <pre>chaine = "a"  => chaine = "-"</pre>
 <pre>chaine = "abcde"  => chaine = "ab-de"</pre>
 
-Comment peut-on faire (plusieurs réponses possibles)
+Comment peut-on faire
 
 [ ] chaine [ len(chaine)/2 ] = "-"
 [ ] chaine = chaine [:len(chaine)/2] + "-" + chaine [-len(chaine)/2:]
@@ -423,8 +423,8 @@ Dictionnaires (1)
 =====
 
 Le type dictionnaire en python est un type
-[ ] immuable
-[x] mutable
+( ) immuable
+(x) mutable
 
 [explanation]
 On peut ajouter ou enlever des couples (clé,valeur) dans un dictionnaire
@@ -437,8 +437,8 @@ Dictionnaires (2)
 
 Dans un dictionnaire les couples (clé,valeur), peut-on connaître l'ordre dans lequel les clés ont été insérées:
 
-[ ] oui
-[x] non
+( ) oui
+(x) non
 
 [explanation]
 Nous avons vu l'implémentation des dictionnaires sous forme d'une table de hash.
@@ -512,8 +512,8 @@ après quoi on fait
 
 qu'obtient-on si on imprime liste à ce stade ?
 
-[x] [1, 0, 0]
-[ ] [1, 1, 1]
+(x) [1, 0, 0]
+( ) [1, 1, 1]
 
 [explanation]
 l'affectation de liste&#91;0&#93; ne change pas les deux autres éléments de la liste
@@ -533,8 +533,8 @@ après quoi on fait
 
 qu'obtient-on si on imprime liste à ce stade ?
 
-[ ] [ [1], [0], [0] ]
-[x] [ [1], [1], [1] ]
+( ) [ [1], [0], [0] ]
+(x) [ [1], [1], [1] ]
 
 [explanation]
 Cette fois l'affectation concerne la liste à un élément qui est partagée par les trois éléments de liste, on est dans le cas d'une référence partagée, la modification affecte les 3 élément de la liste
@@ -546,9 +546,9 @@ Références partagées (3)
 
 Dans l'exercice précédent, comment faire pour éviter que les trois éléments de liste ne soient modifiées ?
 
-( ) il n'y a rien à faire, la modification ne concerne que le premier élément
-( ) il faut faire une "shallow copy"
-(x) il faut faire une "deep copy"
+[ ] il n'y a rien à faire, la modification ne concerne que le premier élément
+[ ] il faut faire une "shallow copy"
+[x] il faut faire une "deep copy"
 
 [explanation]
 Il faut faire une copie en profondeur car le premier niveau de la liste reste en fait inchangé lors de l'affectation
@@ -613,3 +613,33 @@ float et complex ne sont pas itérables.
 str ne possède pas la méthode __iter__(), c'est un itérable implémenté avec la méthode __getitem__()
 S'agissant des 4 types restants (list, tuple, dict et set), les itérateurs sont implémentés comme des objets séparés de l'itérable. Cela permet notamment d'autoriser deux boucles imbriquées sur le même objet.
 [explanation]
+<hr/>
+Fonctions (1)
+=====
+
+Une fonction en python 
+
+( ) doit contenir une instruction return 
+( ) peut contenir 0 ou 1 instruction return
+(x) peut contenir 0 on n instructions return
+
+[explananation]
+Le return est opionnel, si la fonction retourne sans avoir rencontré return elle retourne 'None'
+
+On peut utiliser autant de return que l'on veut dans une fonction
+
+[explananation]
+
+<hr/>
+Fonctions (2)
+=====
+
+Est-il possible pour une fonction de modifier l'objet qui lui est passé en argument
+
+(x) Oui, si l'objet est mutable
+( ) Oui, on peut modifier tous les objets
+( ) Non, une fonction travaille sur une copie et elle ne peut modifier l'objet dans l'espace de l'appelant
+
+[explananation]
+Comme les arguments sont passés par référence, les objets de l'appelant, s'ils sont mutables, peuvent être modifiés à l'intérieur de la fonction.
+[explananation]
