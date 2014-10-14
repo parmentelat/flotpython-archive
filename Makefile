@@ -13,7 +13,7 @@ INDEX_POST= sed -e 's,\(\#\# Vid\),========== \1,'
 index: force
 	export LC_ALL=en_US.ISO8859-15;\
 	for s in $(WEEKS); do echo ==================== $$s; \
-	    ls $$s/C012AL*SUMMARY.txt | xargs egrep '(^C[0O]12AL.*txt|^\#\# Vid|^OK|^TODO|^ONGO|^NICE|^DROP)' | $(INDEX_POST) ; \
+	    ls $$s/C012AL*SUMMARY.txt | xargs egrep '(^C[0O]12AL.*txt|^NIVEAU|^\#\# Vid|^OK|^TODO|^ONGO|^NICE|^DROP)' | $(INDEX_POST) ; \
 	    echo ""; \
 	    echo ""; \
 	    echo ""; \
