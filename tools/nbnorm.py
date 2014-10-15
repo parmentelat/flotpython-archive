@@ -130,7 +130,7 @@ class Notebook:
         signature=notary.compute_signature (self.notebook)
         self.notebook['metadata']['signature'] = signature
 
-    def save (self, keep_alt=True):
+    def save (self, keep_alt=False):
         if keep_alt:
             # xxx store in alt filename
             outfilename = "{}.alt.ipynb".format(self.name)
@@ -140,18 +140,19 @@ class Notebook:
         if replace_file_with_string (outfilename, new_contents):
             print("{} saved into {}".format(self.name, outfilename))
             
-    def full_monty (self, force_name, keep_alt, verbose):
+    def full_monty (self, force_name, sign, verbose):
         self.parse()
         self.set_name_from_heading1(force_name=force_name, verbose=verbose)
         self.set_version()
         self.clear_all_outputs ()
         self.remove_empty_cells ()
-        self.sign()
-        self.save(keep_alt=keep_alt)
+        if sign:
+            self.sign()
+        self.save()
 
-def full_monty (name, force_name, keep_alt, verbose):
+def full_monty (name, force_name, sign, verbose):
     nb=Notebook(name)
-    nb.full_monty (force_name=force_name, keep_alt=keep_alt, verbose=verbose)
+    nb.full_monty(force_name=force_name, sign=sign, verbose=verbose)
 
 from argparse import ArgumentParser
 
@@ -164,8 +165,8 @@ def main ():
     parser = ArgumentParser(usage=usage)
     parser.add_argument ("-f", "--force", action="store", dest="force_name", default=None,
                          help="force writing notebookname even if already present")
-    parser.add_argument ("-k", "--keep", dest="keep_alt", type=bool, default=False,
-                         help="if set, output is saved into <>.alt.ipynb instead of overwriting")
+    parser.add_argument ("-s", "--sign", action="store_true", dest="sign", default=False,
+                         help="sign notebooks")
     parser.add_argument ("-v", "--verbose", dest="verbose", action="store_true", default=False,
                          help="show current notebookname")
     parser.add_argument ("notebooks", metavar="IPYNBS", nargs="*", 
@@ -181,7 +182,7 @@ def main ():
         if notebook.find ('.alt') >=0 :
             print ('ignoring', notebook)
             continue
-        full_monty (notebook, args.force_name, args.keep_alt, args.verbose)
+        full_monty (notebook, force_name=args.force_name, sign=args.sign, verbose=args.verbose)
 
 if __name__ == '__main__':
     main()

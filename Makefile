@@ -38,8 +38,15 @@ tags: force
 # run nbnorm on all notebooks
 norm normalize: normalize-notebook normalize-quiz
 
+# add the --sign option only on Thierry's macos to reduce noise-only changes
+NORM = tools/nbnorm.py
+UNAME := $(shell uname)
+ifeq ($(UNAME),Darwin)
+NORM_OPTIONS = --sign
+endif
+
 normalize-nb normalize-notebook: force
-	find W[0-9]* -name '*.ipynb' | fgrep -v '/.ipynb_checkpoints/' | xargs tools/nbnorm.py
+	find W[0-9]* -name '*.ipynb' | fgrep -v '/.ipynb_checkpoints/' | xargs $(NORM) $(NORM_OPTIONS)
 
 normalize-quiz: force
 	find W[0-9]* -name '*.quiz' | xargs tools/quiznorm.py
