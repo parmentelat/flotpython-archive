@@ -3,6 +3,12 @@
 
 from argparse import ArgumentParser
 
+class Function:
+    def __init__ (self, week, section, name):
+        self.week=week
+        self.section=section
+        self.name=name
+
 class Source (object):
     
     def __init__ (self, filename):
@@ -10,29 +16,32 @@ class Source (object):
 
     def parse (self):
         "return a list of tuples (function_name -> body)"
-        function_name = None
+        function = None
         body = None
         result = []
         with open(self.filename) as input:
             for line in input:
                 if '@BEG@' in line:
                     index = line.find("@BEG@")
-                    function_name = line[index+5:].strip()
+                    end_of_line = line[index+5:].strip()
+                    try:
+                        week, section, name = end_of_line.split(' ')
+                        function = Function (week, section, name)
+                    except:
+                        print "ERROR - ignored {} in {}".format(line,filename)
                     body = []
                 elif '@END@' in line:
-                    result.append( (function_name,body) )
-                    function_name = None
+                    result.append( (function,body) )
+                    function = None
                     body = None
-                elif function_name:
+                elif function:
                     body.append(line)
         return result
-
-
-
 
 class Latex (object):
 
     header=r"""\documentclass [12pt]{article}
+\usepackage[latin1]{inputenc}
 \usepackage{verbatim}
 \begin{document}
 \tableofcontents
@@ -45,10 +54,12 @@ class Latex (object):
 # utiliser les {} comme un marqueur dans du latex ne semble pas
 # être l'idée du siècle
     function_format=r"""
-\section{%(function_latex)s}
+\begin{samepage}
+\section{\texttt{%(function_latex)s} ({\small Sem. %(week)s Séance %(section)s})}
 \begin{verbatim}
 %(body_latex)s
 \end{verbatim}
+\end{samepage}
 """
 
     def __init__ (self, output):
@@ -57,9 +68,11 @@ class Latex (object):
     def write (self, a_list):
         with open(self.output, 'w') as output:
             output.write (Latex.header)
-            for function_name,lines in a_list:
+            for function,lines in a_list:
                 body_latex = "".join(lines)
-                function_latex = Latex.escape (function_name)
+                function_latex = Latex.escape (function.name)
+                week = function.week
+                section = function.section
                 output.write (Latex.function_format %locals())
             output.write (Latex.footer)
         print "{} (over)written".format(self.output)
