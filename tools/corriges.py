@@ -26,6 +26,27 @@ a function name, plus the code as a list of lines
 #    def key (self):
 #        return 100*self.week+self.sequence
 
+    # utiliser les {} comme un marqueur dans du latex ne semble pas
+    # être l'idée du siècle -> je prends pour une fois %()s et l'opérateur %
+    latex_format=r"""
+%%\section{\texttt{%(name)s} ({\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s})}
+\begin{Verbatim}[frame=single,fontsize=\%(size)s,numbers=left, samepage=true,
+label=%(name)s ({\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s})]
+%(code)s\end{Verbatim}
+\vspace{1cm}
+"""
+    # on peut tricher un peu si un problème ne rentre pas bien dans les clous
+    # \tiny, \scriptsize, \footnotesize, \small, \normalsize
+    exceptions_size = { 'diff': 'footnotesize' }
+
+    def latex (self):
+        name = Latex.escape (self.name)
+        week = self.week
+        sequence = self.sequence
+        size = Function.exceptions_size.get(self.name,'small')
+        code = "".join(self.code)
+        return Function.latex_format % locals()
+
 class Source (object):
     
     def __init__ (self, filename):
@@ -67,23 +88,12 @@ class Latex (object):
 \begin{document}
 \centerline{\huge{%(title)s}}
 \vspace{2cm}
-\tableofcontents
-\newpage
+%%\tableofcontents
+%%\newpage
 """
 
     footer=r"""
 \end{document}
-"""
-
-# utiliser les {} comme un marqueur dans du latex ne semble pas
-# être l'idée du siècle
-    function_format=r"""
-\begin{minipage}{\textwidth}
-\section{\texttt{%(function_latex)s} ({\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s})}
-\begin{Verbatim}[frame=single,fontsize=\small]
-%(code_latex)s\end{Verbatim}
-\end{minipage}
-\vspace{1cm}
 """
 
     def __init__ (self, output):
@@ -93,11 +103,7 @@ class Latex (object):
         with open(self.output, 'w') as output:
             output.write (Latex.header%(dict(title=title)))
             for function in functions:
-                code_latex = "".join(function.code)
-                function_latex = Latex.escape (function.name)
-                week = function.week
-                sequence = function.sequence
-                output.write (Latex.function_format %locals())
+                output.write (function.latex())
             output.write (Latex.footer)
         print "{} (over)written".format(self.output)
 
