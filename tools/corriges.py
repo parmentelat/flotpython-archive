@@ -4,10 +4,27 @@
 from argparse import ArgumentParser
 
 class Function:
-    def __init__ (self, week, section, name):
+    """
+an object that describe one occurrence of a function solution
+provided in the corrections/ pacakge
+it comes with a week number, a sequence number, 
+a function name, plus the code as a list of lines
+    """
+    def __init__ (self, week, sequence, name):
         self.week=week
-        self.section=section
+        self.sequence=sequence
         self.name=name
+        self.code=[]
+    def add_line (self, line):
+        "convenience for the parser code"
+        self.code.append(line)
+# corriges.py would have the ability to do sorting, but..
+# I turn it off because it is less accurate
+# functions appear in the right week/sequence order, but
+# not necessarily in the order of the sequence..
+#    @staticmethod
+#    def key (self):
+#        return 100*self.week+self.sequence
 
 class Source (object):
     
@@ -15,36 +32,43 @@ class Source (object):
         self.filename = filename
 
     def parse (self):
-        "return a list of tuples (function_name -> body)"
+        "return a list of Function objects"
         function = None
-        body = None
-        result = []
+        functions = []
         with open(self.filename) as input:
             for line in input:
                 if '@BEG@' in line:
                     index = line.find("@BEG@")
                     end_of_line = line[index+5:].strip()
                     try:
-                        week, section, name = end_of_line.split(' ')
-                        function = Function (week, section, name)
+                        week, sequence, name = end_of_line.split(' ')
+                        function = Function (week, sequence, name)
                     except:
                         print "ERROR - ignored {} in {}".format(line,filename)
-                    body = []
                 elif '@END@' in line:
-                    result.append( (function,body) )
+                    functions.append(function)
                     function = None
-                    body = None
                 elif function:
-                    body.append(line)
-        return result
+                    function.add_line(line)
+        return functions
 
 class Latex (object):
 
     header=r"""\documentclass [12pt]{article}
 \usepackage[latin1]{inputenc}
-\usepackage{verbatim}
+\usepackage[francais]{babel}
+\usepackage{fancyvrb}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\textwidth}{16cm}
+\setlength{\topmargin}{0cm}
+\setlength{\textheight}{21cm}
+\setlength{\headsep}{1.5cm}
+\setlength{\parindent}{0.5cm}
 \begin{document}
+\centerline{\huge{%(title)s}}
+\vspace{2cm}
 \tableofcontents
+\newpage
 """
 
     footer=r"""
@@ -54,25 +78,25 @@ class Latex (object):
 # utiliser les {} comme un marqueur dans du latex ne semble pas
 # être l'idée du siècle
     function_format=r"""
-\begin{samepage}
-\section{\texttt{%(function_latex)s} ({\small Sem. %(week)s Séance %(section)s})}
-\begin{verbatim}
-%(body_latex)s
-\end{verbatim}
-\end{samepage}
+\begin{minipage}{\textwidth}
+\section{\texttt{%(function_latex)s} ({\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s})}
+\begin{Verbatim}[frame=single,fontsize=\small]
+%(code_latex)s\end{Verbatim}
+\end{minipage}
+\vspace{1cm}
 """
 
     def __init__ (self, output):
         self.output = output
 
-    def write (self, a_list):
+    def write (self, functions,title):
         with open(self.output, 'w') as output:
-            output.write (Latex.header)
-            for function,lines in a_list:
-                body_latex = "".join(lines)
+            output.write (Latex.header%(dict(title=title)))
+            for function in functions:
+                code_latex = "".join(function.code)
                 function_latex = Latex.escape (function.name)
                 week = function.week
-                section = function.section
+                sequence = function.sequence
                 output.write (Latex.function_format %locals())
             output.write (Latex.footer)
         print "{} (over)written".format(self.output)
@@ -84,15 +108,19 @@ class Latex (object):
 def main ():
     parser = ArgumentParser ()
     parser.add_argument ("-o","--output", default=None)
+    parser.add_argument ("-t","--title", default="Donnez un titre avec --title")
     parser.add_argument ("files", nargs='+')
     args = parser.parse_args()
 
-    complete = []
+    functions = []
     for filename in args.files:
-        complete += Source(filename).parse()
+        functions += Source(filename).parse()
+
+# see above
+#    functions.sort(key=Function.key)
 
     output = args.output if args.output else "corriges.tex"
-    Latex(output).write (complete)
+    Latex(output).write (functions, title=args.title)
 
 if __name__ == '__main__':
     main ()
