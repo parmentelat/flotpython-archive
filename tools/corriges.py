@@ -29,15 +29,23 @@ a function name, plus the code as a list of lines
     # utiliser les {} comme un marqueur dans du latex ne semble pas
     # être l'idée du siècle -> je prends pour une fois %()s et l'opérateur %
     latex_format=r"""
-%%\section{\texttt{%(name)s} ({\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s})}
-\begin{Verbatim}[frame=single,fontsize=\%(size)s,numbers=left, samepage=true,
-label=%(name)s ({\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s})]
+\addcontentsline{toc}{section}{
+\texttt{%(name)s} -- {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s}
+%%%(name)s
+}
+\begin{Verbatim}[frame=single,fontsize=\%(size)s,numbers=left, samepage=true, 
+framesep=3mm, framerule=3px,
+rulecolor=\color{Gray},
+%%fillcolor=\color{Plum},
+label=%(name)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s}]
 %(code)s\end{Verbatim}
 \vspace{1cm}
 """
     # on peut tricher un peu si un problème ne rentre pas bien dans les clous
     # \tiny, \scriptsize, \footnotesize, \small, \normalsize
-    exceptions_size = { 'diff': 'footnotesize' }
+    exceptions_size = { 'diff': 'footnotesize',
+#                        'decode_zen' : 'small',
+                    }
 
     def latex (self):
         name = Latex.escape (self.name)
@@ -78,7 +86,9 @@ class Latex (object):
     header=r"""\documentclass [12pt]{article}
 \usepackage[latin1]{inputenc}
 \usepackage[francais]{babel}
+%% for Verbatim
 \usepackage{fancyvrb}
+\usepackage[usenames,dvipsnames]{color}
 \setlength{\oddsidemargin}{0cm}
 \setlength{\textwidth}{16cm}
 \setlength{\topmargin}{0cm}
@@ -88,9 +98,13 @@ class Latex (object):
 \begin{document}
 \centerline{\huge{%(title)s}}
 \vspace{2cm}
-%%\tableofcontents
-%%\newpage
 """
+
+    contents=r"""
+\tableofcontents
+\newpage
+"""
+
 
     footer=r"""
 \end{document}
@@ -99,9 +113,11 @@ class Latex (object):
     def __init__ (self, output):
         self.output = output
 
-    def write (self, functions,title):
+    def write (self, functions, title, contents):
         with open(self.output, 'w') as output:
             output.write (Latex.header%(dict(title=title)))
+            if contents:
+                output.write(Latex.contents)
             for function in functions:
                 output.write (function.latex())
             output.write (Latex.footer)
@@ -115,6 +131,7 @@ def main ():
     parser = ArgumentParser ()
     parser.add_argument ("-o","--output", default=None)
     parser.add_argument ("-t","--title", default="Donnez un titre avec --title")
+    parser.add_argument ("-c","--contents", action='store_true', default=False)
     parser.add_argument ("files", nargs='+')
     args = parser.parse_args()
 
@@ -126,7 +143,7 @@ def main ():
 #    functions.sort(key=Function.key)
 
     output = args.output if args.output else "corriges.tex"
-    Latex(output).write (functions, title=args.title)
+    Latex(output).write (functions, title=args.title, contents=args.contents)
 
 if __name__ == '__main__':
     main ()
