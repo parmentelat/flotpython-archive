@@ -3,21 +3,22 @@
 
 from argparse import ArgumentParser
 
+############################################################
 class Function:
     """
-an object that describe one occurrence of a function solution
-provided in the corrections/ pacakge
+an object that describes one occurrence of a function solution
+provided in the corrections/ package
 it comes with a week number, a sequence number, 
-a function name, plus the code as a list of lines
+a function name, plus the code as a string
     """
     def __init__ (self, week, sequence, name):
         self.week=week
         self.sequence=sequence
         self.name=name
-        self.code=[]
+        self.code=""
     def add_line (self, line):
         "convenience for the parser code"
-        self.code.append(line)
+        self.code += line
 # corriges.py would have the ability to do sorting, but..
 # I turn it off because it is less accurate
 # functions appear in the right week/sequence order, but
@@ -26,6 +27,7 @@ a function name, plus the code as a list of lines
 #    def key (self):
 #        return 100*self.week+self.sequence
 
+########################################
     # utiliser les {} comme un marqueur dans du latex ne semble pas
     # être l'idée du siècle -> je prends pour une fois %()s et l'opérateur %
     latex_format=r"""
@@ -33,7 +35,7 @@ a function name, plus the code as a list of lines
 \texttt{%(name)s} -- {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s}
 %%%(name)s
 }
-\begin{Verbatim}[frame=single,fontsize=\%(size)s, samepage=true, %%numbers=left,
+\begin{Verbatim}[frame=single,fontsize=\%(size)s, samepage=true, numbers=left,
 framesep=3mm, framerule=3px,
 rulecolor=\color{Gray},
 %%fillcolor=\color{Plum},
@@ -52,9 +54,20 @@ label=%(name)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence}
         week = self.week
         sequence = self.sequence
         size = Function.exceptions_size.get(self.name,'small')
-        code = "".join(self.code)
-        return Function.latex_format % locals()
+        code = self.code
+        return self.latex_format % locals()
 
+########################################
+    text_format = r"""
+##################################################
+# %(name)s - Semaine %(week)s Séquence %(sequence)s
+##################################################
+%(code)s
+"""
+    def text (self):
+        return self.text_format %self.__dict__
+
+############################################################
 class Source (object):
     
     def __init__ (self, filename):
@@ -81,6 +94,7 @@ class Source (object):
                     function.add_line(line)
         return functions
 
+############################################################
 class Latex (object):
 
     header=r"""\documentclass [12pt]{article}
@@ -110,22 +124,45 @@ class Latex (object):
 \end{document}
 """
 
-    def __init__ (self, output):
-        self.output = output
+    def __init__ (self, filename):
+        self.filename = filename
 
     def write (self, functions, title, contents):
-        with open(self.output, 'w') as output:
+        with open(self.filename, 'w') as output:
             output.write (Latex.header%(dict(title=title)))
             if contents:
                 output.write(Latex.contents)
             for function in functions:
                 output.write (function.latex())
             output.write (Latex.footer)
-        print "{} (over)written".format(self.output)
+        print "{} (over)written".format(self.filename)
 
     @staticmethod
     def escape (str):
         return str.replace ("_",r"\_")
+
+########################################
+
+class Text (object):
+    
+    def __init__ (self, filename):
+        self.filename = filename
+
+    header = """# -*- coding: iso-8859-15 -*-
+############################################################ 
+#
+# %(title)s
+#
+############################################################
+"""
+    
+
+    def write (self, functions, title):
+        with open (self.filename, 'w') as output:
+            output.write (self.header%dict(title=title))
+            for function in functions:
+                output.write (function.text())
+        print "{} (over)written".format(self.filename)
 
 def main ():
     parser = ArgumentParser ()
@@ -142,8 +179,11 @@ def main ():
 # see above
 #    functions.sort(key=Function.key)
 
-    output = args.output if args.output else "corriges.tex"
-    Latex(output).write (functions, title=args.title, contents=args.contents)
+    output = args.output if args.output else "corriges"
+    texoutput = "{}.tex".format(output)
+    txtoutput = "{}.txt".format(output)
+    Latex(texoutput).write (functions, title=args.title, contents=args.contents)
+    Text (txtoutput).write (functions, title=args.title)
 
 if __name__ == '__main__':
     main ()
