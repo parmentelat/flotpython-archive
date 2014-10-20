@@ -33,7 +33,7 @@ a function name, plus the code as a list of lines
 \texttt{%(name)s} -- {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s}
 %%%(name)s
 }
-\begin{Verbatim}[frame=single,fontsize=\%(size)s,numbers=left, samepage=true, 
+\begin{Verbatim}[frame=single,fontsize=\%(size)s, samepage=true, %%numbers=left,
 framesep=3mm, framerule=3px,
 rulecolor=\color{Gray},
 %%fillcolor=\color{Plum},
