@@ -375,71 +375,6 @@ Le troisième choix est correct
 [explanation]
 
 <hr/>
-Strings - formattage
-=====
-
-Dans du code nouveau on veut mettre en forme un message à partir de 3 variables (nom, no_secu, age) pour obtenir, par exemple
-
-<pre>nom = "Dupont",  no_secu = "1975787", age = "25" 
-     => message = "Dupont, 25 ans, 1975787"</pre>
-
-<pre>nom = "Durand",  no_secu = None, age = "12" 
-     => message = "Durand, 12 ans, pas de no de SS"</pre>
-
-On envisage plusieurs solutions pour réaliser cela
-
-Solution 1
-
-<pre>
-message = "{nom}, {age} ans, {secu}".\
-          format(nom=nom, age=age, 
-                 secu = no_secu if no_secu else "pas de no de SS")
-</pre>
-
-Solution 2
-
-<pre>
-message = "{}, {} ans, {}".\
-	  format(nom, age, no_secu if no_secu else "pas de no de SS")
-</pre>
-
-Solution 3
-
-<pre>
-message = "%s, %s ans, %s".\
-          format(nom, age, no_secu if no_secu else "pas de no de SS")
-</pre>
-
-Solution 4
-
-<pre>
-message = nom + ", " + age + " ans, " + no_secu if no_secu else "pas de no de SS" 
-</pre>
-
-Solution 5
-
-<pre>
-message = "%s, %s, %s" % (nom, age, no_secu if no_secu else "pas de no de SS" )
-</pre>
-
-Quelle(s) solution(s) est(sont) correcte(s) ?
-
-[x] 1
-[x] 2
-[ ] 3
-[x] 4
-[ ] 5
-
-[explanation]
-Les clauses 1, 2 et 4 sont correctes - on voit cependant que la clause 4 est plus difficile à relire et donc à modifier
-
-La clause 3 est erronée, elle mélange les '%s' de l'opérateur % avec la méthode format
-
-La dernière clause, quoique correcte, est à éviter dans du nouveau code.
-
-[explanation]
-
-<hr/>
 Strings (2)
 =====
 
@@ -461,21 +396,68 @@ La seconde est correcte également, et reste acceptable car elle convertit la ch
 
 [explanation]
 
-<hr />
-Le même problème (avancé)
+<hr/>
+Strings - formattage
 =====
 
-On cherche à résoudre le même problème que ci-dessus, mais cette fois en utilisant la fonction zip
+Dans du code nouveau on veut mettre en forme un message à partir de 3 variables (nom, no_secu, age) pour obtenir, par exemple
 
+<pre>nom = "Dupont",  no_secu = "1975787", age = "25" 
+     => message = "Dupont, 25 ans, 1975787"</pre>
 
-[ ] "".join([x + y for (x, y) in zip(chaine, (len(chaine)-1)*"-")])
-[x] "".join([x + y for (x, y) in zip(chaine, len(chaine)*"-")])[:-1]
+<pre>nom = "Durand",  no_secu = None, age = "12" 
+     => message = "Durand, 12 ans, pas de no de SS"</pre>
+
+On envisage plusieurs solutions pour réaliser cela
+
+Solution 1
+<pre>
+message = "{nom}, {age} ans, {secu}".\
+          format(nom=nom, age=age, 
+                 secu = no_secu if no_secu else "pas de no de SS")
+</pre>
+
+Solution 2
+<pre>
+message = "{}, {} ans, {}".\
+          format(nom, age, no_secu if no_secu else "pas de no de SS")
+</pre>
+
+Solution 3
+<pre>
+message = "%s, %s ans, %s".\
+          format(nom, age, no_secu if no_secu else "pas de no de SS")
+</pre>
+
+Solution 4
+<pre>
+message = nom + ", " + age + " ans, " +\
+          no_secu if no_secu else "pas de no de SS" 
+</pre>
+
+Solution 5
+<pre>
+message = "%s, %s, %s" % (nom, age, 
+                          no_secu if no_secu else "pas de no de SS" )
+</pre>
+
+Quelle(s) solution(s) est(sont) correcte(s) ?
+
+[x] 1
+[x] 2
+[ ] 3
+[x] 4
+[ ] 5
 
 [explanation]
-La première clause est presque correcte; cependant zip reçoit en argument 1 la chaîne entière, et en argument 2 une chaîne moins longue de 1 caractère. Dans ce cas zip tronque le résultat et en sortie il manque le dernier caractère de la chaîne en entrée.
+Les clauses 1, 2 et 4 sont correctes - on voit cependant que la clause 4 est plus difficile à relire et donc à modifier
 
-La seconde forme est cette fois correcte, on construit d'abord "a-b-c-d-" puis on élimine le dernier "-". Elle fonctionne aussi pour une chaîne à 0 ou 1 caractère. Bon mais clairement aucune de ces deux solutions n'est à recommander :)
+La clause 3 est erronée, elle mélange les '%s' de l'opérateur % avec la méthode format
+
+La dernière clause, quoique correcte, est à éviter dans du nouveau code.
+
 [explanation]
+
 <hr/>
 Dictionnaires (1)
 =====
@@ -681,12 +663,12 @@ Une fonction en python
 ( ) peut contenir 0 ou 1 instruction return
 (x) peut contenir 0 on n instructions return
 
-[explananation]
+[explanation]
 Le return est opionnel, si la fonction retourne sans avoir rencontré return elle retourne 'None'
 
 On peut utiliser autant de return que l'on veut dans une fonction
 
-[explananation]
+[explanation]
 
 <hr/>
 Fonctions (2)
@@ -698,6 +680,355 @@ Est-il possible pour une fonction de modifier l'objet qui lui est passé en argu
 ( ) Oui, on peut modifier tous les objets
 ( ) Non, une fonction travaille sur une copie et elle ne peut modifier l'objet dans l'espace de l'appelant
 
-[explananation]
+[explanation]
 Comme les arguments sont passés par référence, les objets de l'appelant, s'ils sont mutables, peuvent être modifiés à l'intérieur de la fonction.
-[explananation]
+[explanation]
+<hr/>
+Variable locale à une fonction (1)
+=====
+
+Dans quel cas la variable var est locale à la fonction.
+
+Proposition 1
+<pre>
+var = 'globale'
+def f():
+    tmp = 'locale'
+    return var
+</pre>
+
+Proposition 2
+<pre>
+var = 'globale'
+def f():
+    var = 'locale'
+    return var
+</pre>
+
+Proposition 3
+<pre>
+var = 'globale'
+def f():
+    print var
+    var = 'locale'
+    return var
+</pre>
+
+
+Choisissez une ou plusieurs propositions.
+
+[ ] Proposition 1
+[x] Proposition 2
+[ ] Proposition 3
+
+[explanation]
+Dans la proposition 1, la variable var n'est jamais affectée dans la fonction, donc elle n'est pas une variable locale à la fonction, mais une variable globale. 
+
+Dans la proposition 2, la variable var est affectée à la première ligne de la fonction. Elle devient donc locale à la fonction. 
+
+Dans la proposition 3, la variable var est affectée à la deuxième ligne de la fonction, mais après avoir été référencée à la première ligne. Dans ce cas, Python juge qu'il y a une ambiguïté et va lancer une exception particulière qui n'est lancée que dans ce cas précis : UnboundLocalError. Il y a un complément spécifique sur cette erreur qu'il est très important de comprendre. 
+[explanation]
+
+<hr/>
+Portée (scope) des variables (2)
+=====
+
+Que va afficher : print f() ?
+
+<pre>
+var = 10
+def f():
+    var = 20
+    def g():
+        return var
+    return g()
+print f()	
+</pre>
+
+Choisissez une proposition.
+
+( ) 10
+(x) 20
+( ) None
+( ) Une exception
+
+[explanation]
+Suivant la règle LEG, la valeur de var dans g est 20. Comme g retourne la valeur de var et que f retourne la valeur de retour de g, print f() affiche 20. 
+
+Si ce résultat vous semble clair et que vous avez déjà lu l'errata de cette vidéo, vous pouvez passer l'explication suivante, sinon, lisez la attentivement.
+
+Cette semaine, nous considérons deux notions de blocs de code : le bloc de code d'un module et le bloc de code d'une fonction (nous verrons en semaine 5 un nouveau bloc de code, celui des classes). 
+
+Une variable est soit affectée, on lui donne alors une valeur qui est l'objet référencé par la variable, soit référencée, on utilise alors la valeur d'une variable précédemment affectée. Regardons maintenant le lien entre ces notions d'affectation et de référencement avec les notions de bloc de code et de scope.  
+
+Une variable qui est affectée dans un bloc de code devient locale à ce bloc. On dit que la variable est locale à la fonction ou au module et par définition, une variable locale à un module est appelée une variable globale. 
+
+En résumé, une variable affectée dans une fonction est locale à la fonction. La valeur de cette variable sera accessible à toutes les instructions dans le bloc de code de cette fonction et à toutes les instructions dans les blocs de code des fonctions définies dans cette fonction. Une variable affectée dans  un module (en dehors d'une fonction) est une variable globale du module. La valeur de cette variable sera accessible à toutes les instructions dans le module, y compris aux instructions dans les blocs de code des fonctions du module. 
+
+On appelle l'accessibilité de la valeur d'une variable le scope (ou la portée) de cette variable. 
+
+Lorsque l'on référence une variable, on va chercher sa valeur suivant la règle LEG. On cherche la variable localement au bloc de code dans lequel elle est référencée, puis, si elle n'est pas définie, dans le bloc de code des fonctions englobantes, puis, si elle n'est toujours pas définie,  dans le bloc de code du module. De manière équivalente, on pourrait dire que la valeur de la variable référencée est celle de la variable locale du même bloc de code, puis de la variable locale des fonctions englobantes, puis de la variable globale. 
+[explanation]
+<hr/>
+Variables et objets (1)
+=====
+
+Dans quel cas la fonction modifie en place l'objet référencé par la variable var ?
+
+Proposition 1
+<pre>
+var = [1, 2]
+def f():
+    var = 20
+f()
+</pre> 
+
+Proposition 2
+<pre>
+var = [1, 2]
+def f():
+    var = [1, 3]
+f()
+</pre> 
+
+Proposition 3
+<pre>
+var = [1, 2]
+def f():
+    var.append(3)
+f()
+</pre> 
+
+Proposition 4
+<pre>
+var = [1, 2]
+def f():
+    global var
+    var = 1
+f()
+</pre> 
+
+Proposition 5
+<pre>
+var = [1, 2]
+def f():
+    global var
+    var.append(10)
+f()
+</pre> 
+
+Choisissez une ou plusieurs propositions.
+
+[ ] Proposition 1
+[ ] Proposition 2
+[x] Proposition 3
+[ ] Proposition 4
+[x] Proposition 5
+
+[explanation]
+Ce quiz joue avec les notions de modification d'objets et de références. Une variable référence un objet et l'opération d'affectation permet de changer l'objet référencé par une variable. Par contre, sans changer l'objet référencé par une variable, on peut modifier un objet mutable par effet de bord. Regardons maintenant les différentes propositions. 
+
+La fonction dans la proposition 1 ne modifie pas l'objet puisque la fonction crée une variable locale var distincte de la variable globale var. 
+
+La fonction dans la proposition 2 ne modifie pas non plus l'objet puisqu'ici encore la fonction crée une variable locale var distincte de la variable globale var
+
+La fonction dans la proposition 3 modifie bien en place l'objet référencé par la variable globale var. En effet, la fonction accède à la variable var qui d'après la règle LEG est la variable globale. Ensuite, la fonction fait un append sur var, elle modifie donc en place l'objet référencé par la variable globale var. 
+
+La fonction dans la proposition 4 ne modifie pas l'objet référencé. C'est le cas le plus subtile. La fonction déclare la variable var comme globale, donc, dans la fonction, on modifie bien la variable globale var en lui affectant l'objet entier 1, mais on ne modifie pas en place l'objet initialement référencé par var.
+
+La fonction dans la proposition 5 modifie bien en place l'objet référencé. Dans ce cas, l'utilisation de la directive global est inutile. 
+[explanation]
+
+<hr/>
+Passage d'arguments par défaut
+=====
+
+Quelles sont les manières correctes de déclarer un argument var par défaut dans une fonction.
+
+Proposition 1
+<pre>
+def f(a, b, var == 10):
+    print a, b, var
+</pre>
+
+Proposition 2
+<pre>
+def f(a, b, var=10):
+    print a, b, var
+</pre>
+
+Proposition 3
+<pre>
+def f(a, var=10, b):
+    print a, b, var
+</pre>
+
+Proposition 4
+<pre>
+def f(a, var=10, b=30):
+    print a, b, var
+</pre>
+
+Proposition 5
+<pre>
+def f(a, b, var, var=10):
+    print a, b, var
+</pre>
+
+Choisissez une ou plusieurs propositions.
+
+[ ] Proposition 1
+[x] Proposition 2
+[ ] Proposition 3
+[x] Proposition 4
+[ ] Proposition 5
+
+[explanation]
+La proposition 1 est syntaxiquement incorrecte. On doit déclarer un argument par défaut avec le signe = et non ==.
+
+La proposition 2 est correcte.
+
+La proposition 3 est incorrecte, les arguments par défaut doivent toujours apparaitre après les arguments ordonnés.
+
+La proposition 4 est correcte puisque dans ce cas, b est également un argument par défaut.
+
+La proposition 5 est incorrecte, on ne peut pas dupliquer un argument dans l'entête d'une fonction, ici var est dupliqué. 
+[explanation]
+
+<hr/>
+Unpacking des arguments
+=====
+
+Comment passer les éléments de la liste suivante
+<pre>
+L = [1, 2, 'a']
+</pre>
+comme argument de la fonction
+<pre>
+def f(a, b, c):
+    print a, b, c
+</pre>
+
+Proposition 1
+<pre>
+f(L)
+</pre>
+
+Proposition 2
+<pre>
+f(L[0], L[1], L[2])
+</pre>
+
+Proposition 3
+<pre>
+f(*L)
+</pre>
+
+Choisissez une ou plusieurs propositions.
+
+[ ] Proposition 1
+[x] Proposition 2
+[x] Proposition 3
+
+[explanation]
+La proposition 1 est incorrecte parce que L correspond à un seul argument alors que f attend 3 arguments.
+
+La proposition 2 est correcte, mais pas pythonique. On passe en effet trois arguments à f, par contre, on découpe la liste L à la main, ce qui est presque toujours le signe d'une mauvaise utilisation de python. 
+
+La proposition 3 est correcte et pythonique. On utilise la notion de liste unpacking pour automatiquement passer chaque élément de la liste à un argument de la fonction. 
+[explanation]
+<hr/>
+Modules et espaces de nommage 
+=====
+
+Dans un fichier spam.py on a 
+<pre>
+# fichier spam.py
+spam = 1
+def egg():
+    return spam
+</pre>
+
+et dans un fichier egg.py on a
+<pre>
+# fichier egg.py
+import spam
+egg = 2
+def f():
+    return spam.egg(), spam.spam, egg
+print f()
+</pre>
+
+On exécute le fichier egg.py en ligne de commande. Que va imprimer le programme ?
+
+( ) Une exception
+( ) La liste [2, 1, 2]
+( ) Le tuple (None, 1, 1)
+( ) La chaîne de caractère '112'
+(x) Le tuple (1, 1, 2)
+
+[explanation]
+Le module egg.py import la module spam. La variable spam dans le module egg permet alors d'accéder à l'espace de nommage du module spam. Par conséquent, spam.egg() appelle la fonction egg dans le module spam. Suivant la règle LEG, la variable spam retournée par la fonction egg est la variable spam du module spam.py, donc 1. spam.spam représente la variable spam dans le module spam, et egg est la variable egg dans le module egg. 
+
+Notons que le choix des noms de variables et de modules entraîne volontairement de la confusion pour tester votre compréhension dans ce quiz. Dans un cas réel de programme, on évitera au maximum d'utiliser dans deux modules que l'on écrit des variables avec un nom générique qui ont un rôle différent (entier et fonction pour egg). D'une manière générale, il est souhaitable que le nom du module et de ses attributs soient suffisamment explicites pour comprendre leur rôle sans regarder la documentation (ça n'est évidemment pas le cas ici). 
+[explanation]
+
+<hr/>
+Processus d'importation d'un module
+=====
+
+Comment est-ce que l'interpréteur python trouve la localisation du fichier d'un module sur le disque dur ? Il y a un ou plusieurs choix possibles. 
+
+[x] Dans le répertoire courant, c'est-à-dire le répertoire depuis lequel on a lancé l'interpréteur python. 
+[ ] Dans un des répertoires d'installation du système d'exploitation.
+[ ] Python trouve automatiquement le fichier quelque soit sa localisation grâce à un mécanisme d'indexation. 
+[x] Dans une liste de répertoires contenue dans la variable d'environnement système PYTHONPATH.
+[x] Dans les répertoires de la librairie standard. 
+[ ] Il faut donner explicitement le chemin complet du fichier lorsque l'on importe un module.
+[x] Dans la liste des répertoires contenue dans la variable sys.path qui regroupe tous les chemins de recherche. 
+
+[explanation]
+Lorsque l'on importe un module mod, l'interpréteur python cherche en premier le fichier correspondant (mod.py) dans le répertoire courant, puis dans la liste des répertoires contenue dans la variable d'environnement système PYTHONPATH, puis dans les répertoires de la librairie standard. Tous ces chemins sont contenus dans la variable sys.path au démarrage de l'interpréteur. 
+[explanation]
+
+<hr/>
+Importation et espace de nommage
+=====
+
+Supposons que nous avons le code suivant.
+Dans un fichier spam.py on a 
+<pre>
+# fichier spam.py
+beans = 1
+def f():
+    return beans
+</pre>
+
+et dans un fichier egg.py on a
+<pre>
+# fichier egg.py
+import spam
+from spam import beans
+def g(L):
+    L.append(spam.beans)
+    L.append(beans)
+    spam.beans = 2
+    L.append(spam.beans)
+    L.append(beans)
+    L.append(spam.f())
+    return L
+print g([])
+</pre>
+
+On exécute le fichier egg.py en ligne de commande. Qu'imprime le programme ?
+( ) [1, 1, 2, 2, 2]
+(x) [1, 1, 2, 1, 2]
+( ) [1, 1, 2, 2, 1]
+( ) [1, 1, 2, 1, 1]
+
+[explanation]
+L'instruction "import spam" va importer le module spam et la variable spam va référencer ce module. spam.beans fait donc référence à la variable beans dans l'espace de nommage de spam. Par contre, "from spam import beans" importe le module spam et crée une variable beans dans l'espace de nommage du module egg, qui référence l'objet entier 1. On a donc une référence partagée sur l'entier 1 entre la variable beans dans le module spam et la variable beans dans le module egg. 
+
+spam.beans référence donc l'entier 1, puis beans référence également l'entier 1. L'instruction "spam.beans = 2" change la variable beans dans l'espace de nommage de spam, mais pas dans l'espace de nommage de egg. Donc spam.beans référence maintenant l'entier 2, mais beans référence toujours l'entier 1. Pour finir, spam.f() retourne la variable globale beans dans l'espace de nommage de spam, c'est donc maintenant l'entier 2. 
+[explanation]
+
