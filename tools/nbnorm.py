@@ -100,7 +100,8 @@ class Notebook:
 
     def set_version (self, version="1.0"):
         metadata = self.xpath (['metadata'])
-        metadata['version']=version
+        if 'version' not in metadata:
+            metadata['version']=version
 
     def clear_all_outputs (self):
         """clear the 'outputs' field of python code cells, and remove 'prompt_number' as well when present"""
