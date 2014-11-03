@@ -64,7 +64,8 @@ clean: force
 
 
 # xxx we need to have the quiz files encoded in UTF-8 right at the beginning
-all: quiz
+# I don't maintain all.quiz anymore
+#all: quiz
 quiz: 
 	cat */*.quiz > 00-all.quiz
 	recode ISO-8859-15..UTF-8 00-all.quiz
