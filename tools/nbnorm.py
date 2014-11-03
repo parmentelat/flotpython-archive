@@ -129,6 +129,8 @@ class Notebook:
     def sign (self):
         notary = Notary ()
         signature=notary.compute_signature (self.notebook)
+        if not signature.startswith ("sha256:"):
+            signature = "sha256:" + signature
         self.notebook['metadata']['signature'] = signature
 
     def save (self, keep_alt=False):
