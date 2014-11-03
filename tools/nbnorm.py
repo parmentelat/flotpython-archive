@@ -168,8 +168,8 @@ def main ():
     parser = ArgumentParser(usage=usage)
     parser.add_argument ("-f", "--force", action="store", dest="force_name", default=None,
                          help="force writing notebookname even if already present")
-    parser.add_argument ("-s", "--sign", action="store_true", dest="sign", default=False,
-                         help="sign notebooks")
+    parser.add_argument ("-s", "--sign", action="store_false", dest="sign", default=True,
+                         help="skip signing the notebooks")
     parser.add_argument ("-v", "--verbose", dest="verbose", action="store_true", default=False,
                          help="show current notebookname")
     parser.add_argument ("notebooks", metavar="IPYNBS", nargs="*", 
