@@ -69,3 +69,33 @@ clean: force
 quiz: 
 	cat */*.quiz > 00-all.quiz
 	recode ISO-8859-15..UTF-8 00-all.quiz
+
+######################################## the markdowns
+# list of notebooks
+NOTEBOOKS = $(wildcard W*/S[0-9]*.ipynb)
+
+define week
+$(subst /,,$(dir $(1)))
+endef
+define mybasename
+$(basename $(notdir $(1)))
+endef
+define markdown_location
+markdown/$(1)-$(2).md
+endef
+define mymarkdown
+$(call markdown_location,$(call week,$(1)),$(call mybasename,$(1)))
+endef
+
+MARKDOWNS = $(foreach notebook,$(NOTEBOOKS),$(call mymarkdown,$(notebook)))
+
+# on applique cette règle à tous ces notebooks
+define notebook_rule
+$(call mymarkdown,$(1)): $(1)
+	ipython nbconvert --to markdown $(1) --stdout > $(call mymarkdown,$(1))
+endef
+
+$(foreach notebook,$(NOTEBOOKS),$(eval $(call notebook_rule,$(notebook))))
+
+md: $(MARKDOWNS)
+
