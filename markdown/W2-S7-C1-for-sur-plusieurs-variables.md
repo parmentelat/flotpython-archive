@@ -3,8 +3,8 @@
 
 ## Complément - niveau basique
 
-Nous avons vu précédemment (séquence 'Les tuples', complément 'Affectation
-multiple') la possibilité d'affecter plusieurs variables par filtrage à partir
+Nous avons vu précédemment (séquence 'Les tuples', complément 'Sequence
+unpacking') la possibilité d'affecter plusieurs variables par filtrage à partir
 d'un seul objet, comme ceci&nbsp;:
 
 
