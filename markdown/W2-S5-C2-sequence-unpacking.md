@@ -9,9 +9,20 @@ unpacking* ou encore parfois *tuple unpacking*, aussi pour éviter de créer de 
 confusion nous avons finalement décidé de conserver le terme anglais à
 l'identique.
 
+### Déjà rencontré
+
+L'affectation dans python peut concerner plusieurs variables à la fois. En fait
+nous en avons déjà vu un exemple en Semaine 1, avec la fonction `fibonacci` dans
+laquelle il y avait ce fragment&nbsp;:
+
+    for i in range(2, n + 1):
+        f2, f1 = f1, f1 + f2
+
+Nous allons dans ce complément décortiquer les mécanismes derrière cette phrase
+qui a probablement excité votre curiosité :)
+
 ### Un exemple simple
 
-L'affectation dans python peut concerner plusieurs variables à la fois.
 Commençons par un exemple simple à base de tuple. Imaginons qu'on dispose d'un
 tuple `couple` dont on sait qu'il a deux éléments&nbsp;:
 
