@@ -201,10 +201,9 @@ Et on reçoit bien une exception si on essaie d'accéder par clé&nbsp;:
 
 ##### L'objet est itérable (même sans avoir `__iter__`)
 
-Avec seulement `__len__` et `__getitem__`, on peut **faire une boucle** sur
-l'objet queue. On l'a mentionné rapidement dans la séquence sur les itérateurs,
-mais la **méthode `__iter__` n'est pas la seule façon** de rendre un objet
-itérable&nbsp;:
+Avec seulement `__getitem__`, on peut **faire une boucle** sur l'objet queue. On
+l'a mentionné rapidement dans la séquence sur les itérateurs, mais la **méthode
+`__iter__` n'est pas la seule façon** de rendre un objet itérable&nbsp;:
 
 
     for item in queue:
