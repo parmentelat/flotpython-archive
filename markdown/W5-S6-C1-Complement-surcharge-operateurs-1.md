@@ -332,8 +332,3 @@ Mais en python, un opérateur binaire comme `*` envoie la méthode `__mul__` au
 **premier** opérateur, dans notre cas un réel. Et les classes *builtin* étant
 non mutables (pour garantir la stabilité de l'interpréteur), il n'est pas
 possible de reproduire en python ce comportement.
-
-****
-
-
-    xxxxxx

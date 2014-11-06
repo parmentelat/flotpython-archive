@@ -3,6 +3,11 @@
 
 ## Complément - niveau avancé
 
+Nous poursuivons dans ce complément la sélection de méthodes spéciales
+entreprise en première partie.
+
+***
+
 ### `__contains__`, `__len__`, `__getitem__` et apparentés
 
 La méthode `__contains__` permet de donner un sens à&nbsp;:
@@ -377,16 +382,20 @@ Ainsi l'application utilise la classe de cette façon&nbsp;:
 
     # création d'une instance de RPCProxy
     
-    rpc_proxy = RPCProxy (url='http://cloud.provider.com/JSONAPI', login='dupont', password='***')
+    rpc_proxy = RPCProxy (url='http://cloud.provider.com/JSONAPI', 
+                          login='dupont',
+                          password='***')
     
-    # obtenir la liste des noeuds
-    # cette partie du code, en tant qu'utilisateur de l'API, est supposée
-    # connaître les détails des arguments à passer 
+    # cette partie du code, en tant qu'utilisateur de l'API, 
+    # est supposée connaître les détails
+    # des arguments à passer 
     # et de comment utiliser les valeurs de retour
-    nodes_list = rpc_proxy.GetNodes ( [ ('cpu', '>=', 64), ('phymem', '>=', '32G') ] )
+    nodes_list = rpc_proxy.GetNodes ( 
+        [ ('phy_mem', '>=', '32G') ] )
     
     # reserver un noeud
-    node_lease = rpc_proxy.BookNode ( {'id' : 1002, 'nb_cpus' : 4, 'phy_mem' : '4G' } )
+    node_lease = rpc_proxy.BookNode (
+        { 'id' : 1002, 'phy_mem' : '32G' } )
 
 
 ##### Discussion
@@ -441,20 +450,27 @@ utiliser exactement comme tout à l'heure&nbsp;:
 
     # création d'une instance de RPCProxy
     
-    rpc_proxy = RPCProxy (url='http://cloud.provider.com/JSONAPI', login='dupont', password='***')
+    rpc_proxy = RPCProxy (url='http://cloud.provider.com/JSONAPI', 
+                          login='dupont',
+                          password='***')
     
-    # obtenir la liste des noeuds
-    nodes_list = rpc_proxy.GetNodes ( [ ('cpu', '>=', 64), ('phymem', '>=', '32G') ] )
+    # cette partie du code, en tant qu'utilisateur de l'API, 
+    # est supposée connaître les détails
+    # des arguments à passer 
+    # et de comment utiliser les valeurs de retour
+    nodes_list = rpc_proxy.GetNodes ( 
+        [ ('phy_mem', '>=', '32G') ] )
     
     # reserver un noeud
-    node_lease = rpc_proxy.BookNode ( {'id' : 1002, 'nb_cpus' : 4, 'phy_mem' : '4G' } )
+    node_lease = rpc_proxy.BookNode (
+        { 'id' : 1002, 'phy_mem' : '32G' } )
 
 
 ##### Exercice
 
-Les courageux peuvent s'amuser à reprendre cette dernière version de `RPCProxy`
-mais en utilisant une classe de **callables** comme une *factory* pour générer
-les attributs.
+Les étudiants courageux et/ou inspirés peuvent s'amuser à reprendre cette
+dernière version de `RPCProxy`, mais en utilisant une classe de **callables**
+comme une *factory* pour générer les attributs.
 
 
     # une troisième implémentation de RPCProxy
@@ -470,7 +486,7 @@ les attributs.
             self.password = password
             
         def __getattr__ (self, function):
-            "votre code"s
+            "votre code"
 
 Nous ne proposons pas de correction en ligne mais vous pouvez simplement évaluer
 le même code&nbsp;:
@@ -478,11 +494,18 @@ le même code&nbsp;:
 
     # création d'une instance de RPCProxy
     
-    rpc_proxy = RPCProxy (url='http://cloud.provider.com/JSONAPI', login='dupont', password='***')
+    rpc_proxy = RPCProxy (url='http://cloud.provider.com/JSONAPI', 
+                          login='dupont',
+                          password='***')
     
-    # obtenir la liste des noeuds
-    nodes_list = rpc_proxy.GetNodes ( [ ('cpu', '>=', 64), ('phymem', '>=', '32G') ] )
+    # cette partie du code, en tant qu'utilisateur de l'API, 
+    # est supposée connaître les détails
+    # des arguments à passer 
+    # et de comment utiliser les valeurs de retour
+    nodes_list = rpc_proxy.GetNodes ( 
+        [ ('phy_mem', '>=', '32G') ] )
     
     # reserver un noeud
-    node_lease = rpc_proxy.BookNode ( {'id' : 1002, 'nb_cpus' : 4, 'phy_mem' : '4G' } )
+    node_lease = rpc_proxy.BookNode (
+        { 'id' : 1002, 'phy_mem' : '32G' } )
 
