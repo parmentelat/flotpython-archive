@@ -3,9 +3,9 @@
 
 ## Complément - niveau basique
 
-Voici un premier exemple de code que vous pouvez utiliser dans ce notebook, mais
-aussi télécharger sur votre ordinateur en utilisant le menu *"File -> Download
-as -> python"*, pour l'exécuter grâce à IDLE ou `python`.
+Voici un premier exemple de code que vous pouvez commencer par utiliser dans ce
+notebook. Nous verrons en fin de séance comment le faire également fonctionner
+localement sur votre ordinateur.
 
 Le but de ce programme est de calculer la fonction de Fibonacci, qui comme vous
 vous en souvenez sûrement est  définie comme
@@ -64,11 +64,14 @@ On imprime le résultat
 
 ### Exercice
 
-Vous pouvez donc à présent
+Vous pouvez donc à présent&nbsp:
  * exécuter le code dans ce notebook
  * télécharger ce code sur votre disque comme un fichier `fibonacci_prompt.py`
+   * utilisez pour cela le menu *"File -> Download as -> python"*
+   * et renommez le fichier obtenu au besoin
  * l'exécuter sous IDLE
  * le modifier, par exemple pour afficher les résultats intermédiaires
+   * on a laissé exprès des commentaires que vous pouvez réactiver simplement
  * l'exécuter avec simplement python comme ceci
 
      `$ python fibonacci_prompt.py`
