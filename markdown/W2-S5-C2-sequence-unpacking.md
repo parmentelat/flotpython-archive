@@ -76,7 +76,8 @@ En fait c'est même encore plus flexible que ça puisqu'on pourrait même
 C'est presque magique, on a comparé un tuple avec une liste !
 
 En réalité, les seules contraintes fixées par `python` sont que
- * le terme à droite du signe *=* est un *iterable* (tuple, liste, string, ...),
+ * le terme à droite du signe *=* est un *iterable* (tuple, liste, string,
+etc.),
  * le terme à gauche soit écrit comme un tuple ou une liste,
  * les deux termes ont la même longueur.
 
@@ -104,7 +105,7 @@ on peut extraire des données plus profondément imbriquées dans la structure d
 départ; par exemple avec en entrée la liste&nbsp;:
 
 
-    structure = ['abc', [(1,2), ([3], 4)], 5]
+    structure = ['abc', [(1, 2), ([3], 4)], 5]
 
 Si on souhaite extraire la valeur qui se trouve à l'emplacement de 3, on peut
 écrire&nbsp;:

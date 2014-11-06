@@ -18,9 +18,6 @@ exemple simple&nbsp;:
     a = b = 1
     print 'a', a, 'b', b
 
-    a 1 b 1
-
-
 La raison pour laquelle nous abordons cette construction maintenant est qu'elle
 a une forte relation avec les références partagées; pour bien le voir, nous
 allons utiliser une valeur mutable comme valeur à affecter&nbsp;:
@@ -37,9 +34,6 @@ désignent **le même objet**&nbsp;:
     a.append(1)
     print 'a', a, 'b', b
 
-    a [1] b [1]
-
-
 Ceci est à mettre en contraste avec plusieurs affectations séparées&nbsp;:
 
 
@@ -51,15 +45,9 @@ Ceci est à mettre en contraste avec plusieurs affectations séparées&nbsp;:
     a.append(1)
     print 'a', a, 'b', b
 
-    a [1] b []
-
-
 On voit que dans ce cas chaque affectation crée une liste vide différente, et
 les deux variables ne partagent plus de donnée.
 
 D'une manière générale, utiliser l'affectation simultanée vers un objet mutable
-crée mécaniquement des **références partagées**, aussi vérifiez bien dans ce
-genre de cas que c'est votre intention.
-
-
-    
+crée mécaniquement des **références partagées**, aussi vérifiez bien dans ce cas
+que c'est votre intention.
