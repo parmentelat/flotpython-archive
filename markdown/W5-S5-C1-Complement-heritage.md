@@ -1,13 +1,7 @@
 
 # Héritage
 
-xxx
-j'ai beacoup de mal avec ce complément - je passe pour l'instant
-xxx
-
 ## Complément - niveau basique
-
-### À quoi sert l'héritage en python ?
 
 La notion d'héritage, qui fait partie intégrante de la Programmation Orientée
 Objet, permet principalement de maximiser la **réutilisabilité**.
@@ -19,11 +13,20 @@ d'une instance en cherchant :
  * puis dans la classe de l'instance,
  * puis dans les super-classes de la classe.
 
-Le propos de ce complément est de montrer, sur des **exemples extraits de code
-réel**, comment ces mécanismes permettent en effet de contribuer à la
-réutilisabilité du code.
+    L'objet de ce complément est de vous donner, d'un point de vue plus
+appliqué, des idées de ce qu'on peut faire ou non avec ce mécanisme. Le sujet
+étant assez rabâché par ailleurs, nous nous concentrerons sur deux points&nbsp;:
 
-### Factorisation de code
+ * les pratiques de base utilisées pour la conception de classes, et notamment
+pour bien distinguer **héritage** et **composition**;
+ * nous verrons ensuite, sur des **exemples extraits de code réel**, comment ces
+mécanismes permettent en effet de contribuer à la réutilisabilité du code.
+
+### Héritage *vs* composition
+
+## Complément - niveau intermédiaire
+
+### Des exemples de code
 
 ##### Le module `calendar`
 
@@ -83,39 +86,13 @@ https://docs.python.org/2/library/socketserver.html#examples
     import BaseHTTPServer
     help (BaseHTTPServer)
 
-
-    Voir aussi http://www.pasteur.fr/formation/infobio/python/ch19s04.html
+Voir aussi http://www.pasteur.fr/formation/infobio/python/ch19s04.html
 
 ##### Spécialisation
 
 ##### Composition (plutôt dire aggrégation ?)
 
+
+    http://learnpythonthehardway.org/book/ex44.html
+
 ## Complément - niveau intermédiaire
-
-### À quoi l'héritage ne sert pas en python
-
-##### Familles de classe / typage
-
-Si vous êtes habitués à coder dans un langage fortement typé comme C++, vous
-êtes sans doute habitués à appréhender l'héritage *aussi* en terme de types.
-
-Voyons ceci sur un exemple. Imaginons que l'on veuille écrire un analyseur
-syntaxique pour un langage simple d'expressions arithmétiques. Un pratique cela
-voudra dire disposer d'un parser pour transformer un texte comme
-
-    (10 + 12) * (32 + 5)
-
-en un arbre syntaxique construit avec les opérateurs `Entier`, `Plus`, `Fois`,
-chacun représenté comme une classe; pour ce texte on obtiendrait donc l'objet
-
-    Fois(Plus(Entier(10), Entier(12)), Plus(Entier(32), Entier(5)))
-
-
-    Avec un langage fortement typé on va avoir tendance à définir un type *chapeau* qu'on appelle par exemple `Expression`, et on va concevoir un arbre d'héritage du genre de
-    
-        Expression
-        |-- Entier
-        |-- Plus
-        |-- Fois
-        
-    De cette façon on pourra 
