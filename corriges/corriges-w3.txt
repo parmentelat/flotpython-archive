@@ -1,0 +1,141 @@
+# -*- coding: iso-8859-15 -*-
+############################################################ 
+#
+# Corrigés de la semaine 3
+#
+############################################################
+
+##################################################
+# merge - Semaine 3 Séquence 2
+##################################################
+def merge(extended, abbreviated):
+    """
+Consolide des données étendues et des données abrégées
+comme décrit dans l'énoncé
+Le coût de cette fonction est linéaire dans la taille 
+des données (longueur des listes)
+    """
+    # on initialise le résultat avec un dictionnaire vide
+    result = {}
+    # pour les données étendues
+    for ship in extended:
+        # on affecte les 6 premiers champs
+        # et on ignore les champs de rang 6 et au delà
+        id, latitude, longitude, timestamp, name, country = ship[:6]
+        # on crée une entrée dans le résultat, 
+        # avec la mesure correspondant aux données étendues
+        result[id] = [name, country, (latitude, longitude, timestamp)]
+    # maintenant on peut compléter le résultat avec les données abrégées
+    for id, latitude, longitude, timestamp in abbreviated:
+        # et avec les hypothèses on sait que le bateau a déjà été 
+        # inscrit dans le résultat, donc on peut se contenter d'ajouter 
+        # la mesure abrégée correspondant au bateau
+        result[id].append((latitude, longitude, timestamp))
+    # et retourner le résultat
+    return result
+
+
+##################################################
+# diff - Semaine 3 Séquence 3
+##################################################
+def diff(extended, abbreviated):
+    """Calcule comme demandé dans l'exercice, et sous formes d'ensembles
+(*) les noms des bateaux seulement dans extended
+(*) les noms des bateaux présents dans les deux listes
+(*) les ids des bateaux seulement dans abbreviated
+    """
+    # on n'utilise que des ensembles dans tous l'exercice
+    # les ids de tous les bateaux dans extended
+    # en utilisant une compréhension d'ensemble
+    extended_ids = {ship[0] for ship in extended}
+    # les ids de tous les bateaux dans abbreviated
+    # en utilisant une compréhension d'ensemble
+    abbreviated_ids = {ship[0] for ship in abbreviated}
+    # les ids des bateaux seulement dans abbreviated
+    # en utilisant la difference des ensembles
+    abbreviated_only_ids = abbreviated_ids - extended_ids
+    # les ids des bateaux dans les deux listes
+    # en utilisant l'intersection des ensembles
+    both_ids = abbreviated_ids & extended_ids
+    # les ids des bateaux seulement dans extended
+    # en utilisant la difference des ensembles
+    extended_only_ids = extended_ids - abbreviated_ids
+    # on recalcule les noms pour les deux catégories où c'est possible
+    # par une compréhension d'ensemble
+    both_names = \
+          {ship[4] for ship in extended if ship[0] in both_ids}
+    extended_only_names = \
+          {ship[4] for ship in extended if ship[0] in extended_only_ids}
+    # enfin on retourne les 3 ensembles sous forme d'un tuple
+    return extended_only_names, both_names, abbreviated_only_ids
+
+
+##################################################
+# decode_zen - Semaine 3 Séquence 5
+##################################################
+# le module this est implémenté comme une petite énigme 
+# comme le laissent entrevoir les indices, on y trouve
+# (*) dans l'attribut 's' une version encodée du manifeste
+# (*) dans l'attribut 'd' le code à utiliser pour décoder
+# 
+# ce qui veut dire qu'en première approximation on pourrait 
+# obtenir une liste des caractères du manifeste en faisant
+# 
+# [ this.d [c] for c in this.s ]
+# 
+# mais ce serait le cas seulement si le code agissait sur 
+# tous les caractères
+
+def decode_zen(this_module):
+    # la version encodée du manifeste
+    encoded = this_module.s
+    # le 'code' 
+    code = this_module.d
+    # si un caractère est dans le code, on applique le code
+    # sinon on garde le caractère tel quel
+    # aussi, on appelle 'join' pour refaire une chaîne à partir
+    # de la liste des caractères décodés
+    return ''.join([code[c] if c in code else c for c in encoded])
+
+# une autre version qui marche aussi, en utilisant 
+# dict.get(key, default)
+def decode_zen_bis(this_module):
+    return "".join([this_module.d.get(c, c) for c in this_module.s])
+
+
+##################################################
+# dispatch1 - Semaine 3 Séquence 7
+##################################################
+def dispatch1(a, b):
+    """dispatch1 comme spécifié"""
+    # si les deux arguments sont pairs
+    if a%2 == 0 and b%2 == 0:
+        return a*a + b*b
+    # si a est pair et b est impair
+    elif a%2 == 0 and b%2 != 0:
+        return a*(b-1)
+    # si a est impair et b est pair
+    elif a%2 != 0 and b%2 == 0:
+        return (a-1)*b
+    # sinon - c'est que a et b sont impairs
+    else:
+        return a*a - b*b
+
+
+##################################################
+# dispatch2 - Semaine 3 Séquence 7
+##################################################
+def dispatch2(a, b, A, B):
+    """dispatch2 comme spécifié"""
+    # les deux cas de la diagonale \ 
+    if (a in A and b in B) or (a not in A and b not in B):
+        return a*a + b*b
+    # sinon si b n'est pas dans B
+    # ce qui alors implique que a est dans A
+    elif b not in B: 
+        return a*(b-1)
+    # le dernier cas, on sait forcément que
+    # b est dans B et a n'est pas dans A
+    else:
+        return (a-1)*b
+

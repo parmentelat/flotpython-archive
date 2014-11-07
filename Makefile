@@ -59,7 +59,7 @@ CLEAN_FIND= -name '*~' -o -name '.\#*' -o -name '*pyc'
 toclean: force
 	find . $(CLEAN_FIND) -print0 | xargs -0 ls
 
-clean: force
+clean:: force
 	find . $(CLEAN_FIND) -name '*~' -o -name '.#*' -print0 | xargs -0 rm -f
 
 
@@ -99,3 +99,6 @@ $(foreach notebook,$(NOTEBOOKS),$(eval $(call notebook_rule,$(notebook))))
 
 md: $(MARKDOWNS)
 
+#################### corriges
+corr:
+	$(MAKE) -C corriges

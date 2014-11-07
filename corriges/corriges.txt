@@ -1,0 +1,550 @@
+# -*- coding: iso-8859-15 -*-
+############################################################ 
+#
+# Tous les corrigés
+#
+############################################################
+
+##################################################
+# composite - Semaine 2 Séquence 3
+##################################################
+# Pour calculer inconnue, on extrait une sous-chaine de composite
+# qui commence a l'index len(connue)
+# qui se termine a l'index len(composite)-len(connue)
+# ce qui donne en utilisant une slice
+inconnue = composite [len(connue):len(composite)-len(connue)]
+
+
+##################################################
+# divisible - Semaine 2 Séquence 7
+##################################################
+def divisible(a, b): 
+    "renvoie True si un des deux arguments divise l'autre"
+    # b divise a si et seulement si le reste 
+    # de la division de a par b est nul
+    # et il faut regarder aussi si a divise b
+    return a%b==0 or b%a==0
+
+
+##################################################
+# spam - Semaine 2 Séquence 7
+##################################################
+def spam(l):
+    """
+Prend en argument une liste, et retourne la liste modifiée:
+ * taille paire: on intervertit les deux premiers éléments
+ * taille impaire, on retire le dernier élément
+"""
+    # si la liste est vide il n'y a rien à faire
+    if not l:
+        pass
+    # si la liste est de taille paire
+    elif len(l)%2 == 0:
+        # on intervertit les deux premiers éléments
+        l[0], l[1] = l[1], l[0]
+    # si elle est de taille impaire
+    else:
+        # on retire le dernier élément
+        l.pop()
+    # et on n'oublie pas de retourner la liste dans tous les cas
+    return l
+
+
+##################################################
+# multi_tri - Semaine 2 Séquence 7
+##################################################
+def multi_tri(listes):
+    "trie toutes les sous-listes, et retourne listes"
+    for liste in listes:
+        # sort fait un effet de bord 
+        liste.sort()
+    # et on retourne la liste de départ
+    return listes
+
+
+##################################################
+# multi_tri_reverse - Semaine 2 Séquence 7
+##################################################
+def multi_tri_reverse(listes, reverses):
+    """trie toutes les sous listes, dans une direction
+    precisée par le second argument"""
+    # zip() permet de faire correspondre les éléments 
+    # de listes avec ceux de reverses
+    for liste, reverse in zip(listes, reverses):
+        # on appelle sort en précisant reverse=
+        liste.sort(reverse=reverse)
+    # on retourne la liste de départ
+    return listes
+
+
+##################################################
+# liste_racines - Semaine 2 Séquence 7
+##################################################
+from math import e, pi
+
+def liste_racines(p):
+    "retourne la liste des racines p-ièmes de l'unité"
+    # une simple compréhension fait l'affaire
+    # souvenez vous que 1j c'est notre 'i' complexe
+    return [e**((2*pi*1j*n)/p) for n in range(p)]
+
+# Il est tout à fait possible aussi de contruire les racines pas à pas
+# C'est un peu moins élégant mais ça fonctionne très bien aussi
+def liste_racines_bis(p):
+    "retourne la liste des racines p-ièmes de l'unité"
+    # on va construire le résultat petit à petit
+    # en partant d'une liste vide
+    resultat = []
+    # pour chaque n dans {0 .. p-1}
+    for n in range(p):
+        # on ajoute dans le résultat la racine d'ordre n
+        resultat.append(e**((2*pi*1j*n)/p))
+    # et on retourne le résultat
+    return resultat
+
+
+##################################################
+# produit_scalaire - Semaine 2 Séquence 7
+##################################################
+def produit_scalaire(X,Y):
+    # initialisation du resultat
+    scalaire = 0
+    # ici encore avec zip() on peut faire correspondre 
+    # les X avec les Y
+    for x,y in zip(X,Y):
+        scalaire += x*y
+    # on retourne le résultat
+    return scalaire
+
+# Il y a plein d'autres solutions qui marchent aussi
+# en voici notamment une qui utilise la fonction builtin sum
+# (que nous n'avons pas encore vue, nous la verrons en semaine 4)
+# en voici toutefois un avant-goût: la fonction sum est très pratique
+# pour faire la somme de toute une liste de valeurs
+def produit_scalaire_bis(X,Y):
+    """retourne le produit scalaire de deux listes de même taille"""
+    return sum([x*y for x, y in zip(X, Y)])
+
+
+##################################################
+# affichage - Semaine 2 Séquence 8
+##################################################
+def affichage(s):
+    # pour ignorer les espaces et les tabulations 
+    # le plus simple est de les enlever
+    s=s.replace(' ', '').replace('\t','')
+    # la liste des mots séparés par une virgule 
+    # nous est donnée par un simple appel à split
+    mots = s.split(',')
+    # si on n'a même pas deux mots, on retourne None
+    if len(mots) < 2:
+        return None
+    # maintenant qu'on sait qu'on a deux mots
+    # on peut extraire le prénom et le nom
+    prenom = mots.pop(0)
+    nom = mots.pop(0)
+    # on veut afficher "??" si l'âge est inconnu
+    age = "??"
+    # mais si l'âge est précisé dans la ligne
+    if len(mots) >= 2:
+        # alors on le prend
+        age = mots.pop(1)
+    # il ne reste plus qu'à formater
+    return "N:>{}< P:>{}< A:>{}<".format(nom, prenom, age)
+
+
+##################################################
+# carre - Semaine 2 Séquence 8
+##################################################
+def carre(s):
+    # on enlève les espaces et les tabulations
+    s = s.replace(' ', '').replace('\t','')
+    # la ligne suivante fait le plus gros du travail
+    # d'abord on appelle split() pour découper selon les ';'
+    # dans le cas où on a des ';' en trop, on obtient dans le 
+    #    résultat du split un 'token' vide, que l'on ignore 
+    #    ici avec le clause 'if token'
+    # enfin on convertit tous les tokens restants en entiers avec int()
+    entiers = [int(token) for token in s.split(";") if token]
+    # il n'y a plus qu'à mettre au carré, et à recoudre (join) avec ':'
+    return ":".join (["{}".format(entier**2) for entier in entiers])
+
+
+##################################################
+# merge - Semaine 3 Séquence 2
+##################################################
+def merge(extended, abbreviated):
+    """
+Consolide des données étendues et des données abrégées
+comme décrit dans l'énoncé
+Le coût de cette fonction est linéaire dans la taille 
+des données (longueur des listes)
+    """
+    # on initialise le résultat avec un dictionnaire vide
+    result = {}
+    # pour les données étendues
+    for ship in extended:
+        # on affecte les 6 premiers champs
+        # et on ignore les champs de rang 6 et au delà
+        id, latitude, longitude, timestamp, name, country = ship[:6]
+        # on crée une entrée dans le résultat, 
+        # avec la mesure correspondant aux données étendues
+        result[id] = [name, country, (latitude, longitude, timestamp)]
+    # maintenant on peut compléter le résultat avec les données abrégées
+    for id, latitude, longitude, timestamp in abbreviated:
+        # et avec les hypothèses on sait que le bateau a déjà été 
+        # inscrit dans le résultat, donc on peut se contenter d'ajouter 
+        # la mesure abrégée correspondant au bateau
+        result[id].append((latitude, longitude, timestamp))
+    # et retourner le résultat
+    return result
+
+
+##################################################
+# diff - Semaine 3 Séquence 3
+##################################################
+def diff(extended, abbreviated):
+    """Calcule comme demandé dans l'exercice, et sous formes d'ensembles
+(*) les noms des bateaux seulement dans extended
+(*) les noms des bateaux présents dans les deux listes
+(*) les ids des bateaux seulement dans abbreviated
+    """
+    # on n'utilise que des ensembles dans tous l'exercice
+    # les ids de tous les bateaux dans extended
+    # en utilisant une compréhension d'ensemble
+    extended_ids = {ship[0] for ship in extended}
+    # les ids de tous les bateaux dans abbreviated
+    # en utilisant une compréhension d'ensemble
+    abbreviated_ids = {ship[0] for ship in abbreviated}
+    # les ids des bateaux seulement dans abbreviated
+    # en utilisant la difference des ensembles
+    abbreviated_only_ids = abbreviated_ids - extended_ids
+    # les ids des bateaux dans les deux listes
+    # en utilisant l'intersection des ensembles
+    both_ids = abbreviated_ids & extended_ids
+    # les ids des bateaux seulement dans extended
+    # en utilisant la difference des ensembles
+    extended_only_ids = extended_ids - abbreviated_ids
+    # on recalcule les noms pour les deux catégories où c'est possible
+    # par une compréhension d'ensemble
+    both_names = \
+          {ship[4] for ship in extended if ship[0] in both_ids}
+    extended_only_names = \
+          {ship[4] for ship in extended if ship[0] in extended_only_ids}
+    # enfin on retourne les 3 ensembles sous forme d'un tuple
+    return extended_only_names, both_names, abbreviated_only_ids
+
+
+##################################################
+# decode_zen - Semaine 3 Séquence 5
+##################################################
+# le module this est implémenté comme une petite énigme 
+# comme le laissent entrevoir les indices, on y trouve
+# (*) dans l'attribut 's' une version encodée du manifeste
+# (*) dans l'attribut 'd' le code à utiliser pour décoder
+# 
+# ce qui veut dire qu'en première approximation on pourrait 
+# obtenir une liste des caractères du manifeste en faisant
+# 
+# [ this.d [c] for c in this.s ]
+# 
+# mais ce serait le cas seulement si le code agissait sur 
+# tous les caractères
+
+def decode_zen(this_module):
+    # la version encodée du manifeste
+    encoded = this_module.s
+    # le 'code' 
+    code = this_module.d
+    # si un caractère est dans le code, on applique le code
+    # sinon on garde le caractère tel quel
+    # aussi, on appelle 'join' pour refaire une chaîne à partir
+    # de la liste des caractères décodés
+    return ''.join([code[c] if c in code else c for c in encoded])
+
+# une autre version qui marche aussi, en utilisant 
+# dict.get(key, default)
+def decode_zen_bis(this_module):
+    return "".join([this_module.d.get(c, c) for c in this_module.s])
+
+
+##################################################
+# dispatch1 - Semaine 3 Séquence 7
+##################################################
+def dispatch1(a, b):
+    """dispatch1 comme spécifié"""
+    # si les deux arguments sont pairs
+    if a%2 == 0 and b%2 == 0:
+        return a*a + b*b
+    # si a est pair et b est impair
+    elif a%2 == 0 and b%2 != 0:
+        return a*(b-1)
+    # si a est impair et b est pair
+    elif a%2 != 0 and b%2 == 0:
+        return (a-1)*b
+    # sinon - c'est que a et b sont impairs
+    else:
+        return a*a - b*b
+
+
+##################################################
+# dispatch2 - Semaine 3 Séquence 7
+##################################################
+def dispatch2(a, b, A, B):
+    """dispatch2 comme spécifié"""
+    # les deux cas de la diagonale \ 
+    if (a in A and b in B) or (a not in A and b not in B):
+        return a*a + b*b
+    # sinon si b n'est pas dans B
+    # ce qui alors implique que a est dans A
+    elif b not in B: 
+        return a*(b-1)
+    # le dernier cas, on sait forcément que
+    # b est dans B et a n'est pas dans A
+    else:
+        return (a-1)*b
+
+
+##################################################
+# comptage - Semaine 4 Séquence 1
+##################################################
+def comptage(in_filename, out_filename):
+    """
+retranscrit le fichier in_filename dans le fichier out_filename
+en ajoutant des annotations sur les nombres de lignes, de mots
+et de caractÃ¨res
+    """
+    # on ouvre le fichier d'entrÃ©e en lecture
+    # on aurait pu mettre open (in_filename, 'r')
+    with open(in_filename) as input:
+        # on ouvre la sortie en Ã©criture
+        with open(out_filename, "w") as output:
+            # initialisations
+            lineno = 0
+            total_words = 0
+            total_chars = 0
+            # pour toutes les lignes du fichier d'entrÃ©e
+            for line in input:
+                # on maintient le nombre de lignes
+                # qui est aussi la ligne courante
+                lineno += 1
+                # autant de mots que d'Ã©lÃ©ments dans split()
+                nb_words = len(line.split())
+                total_words += nb_words
+                # autant de caractÃ¨res que d'Ã©lÃ©ments dans la ligne
+                nb_chars = len(line)
+                total_chars += nb_chars
+                # on Ã©crit la ligne de sortie
+                output.write("{}:{}:{}:{}".\
+                            format(lineno, nb_words, nb_chars,line))
+            # on Ã©crit la ligne de synthÃ¨se
+            output.write("{}:{}:{}\n".format(lineno, total_words, total_chars))
+
+
+##################################################
+# pgcd - Semaine 4 Séquence 2
+##################################################
+def pgcd(a, b):
+    "le pgcd de a et b par l'algorithme d'Euclide"
+    # on suppose que a >= b, il faut inverser sinon
+    if b > a : 
+        a, b = b, a
+    # boucle sans fin
+    while True:
+        # on calcule le reste 
+        r = a % b
+        # si le reste est nul, on a terminé
+        if r == 0:
+            return b
+        # sinon on passe à l'itération suivante
+        a, b = b, r
+
+
+##################################################
+# numbers - Semaine 4 Séquence 3
+##################################################
+from operator import mul
+
+def numbers(liste):
+    """
+retourne un tuple contenant
+ la somme
+ le produit
+ le minimum
+ le maximum
+des elements de la liste
+    """
+    
+    return ( 
+        # la builtin 'sum' renvoie la somme
+        sum(liste),
+        # pour la multiplication, reduce est nécessaire
+        reduce(mul, liste, 1),
+        # les builtin 'min' et 'max' font ce qu'on veut aussi
+        min(liste),
+        max(liste)
+    )
+
+
+##################################################
+# validation - Semaine 4 Séquence 3
+##################################################
+def validation(f, g, entrees):
+    """
+retourne une liste de booleens, un par entree dans entrees
+qui indique si f(entree) == g(entree)
+    """
+    # on vérifie pour chaque entrée si f et g retournent
+    # des résultats égaux avec ==
+    # et on assemble le tout avec une comprehension de liste 
+    return [f(entree) == g(entree) for entree in entrees]
+
+
+##################################################
+# aplatir - Semaine 4 Séquence 4
+##################################################
+def aplatir(conteneurs):
+    "retourne une liste des éléments des éléments de conteneurs"
+    # on peut concaténer les éléments de deuxième niveau 
+    # par une simple imbrication de deux compréhensions de liste
+    return [element for conteneur in conteneurs for element in conteneur]
+
+
+##################################################
+# alternat - Semaine 4 Séquence 4
+##################################################
+def alternat(l1, l2):
+    "renvoie une liste des éléments pris un sur deux dans l1 et dans l2"
+    # pour réaliser l'alternance on peut combiner zip avec aplatir
+    # telle qu'on vient de la réaliser
+    return aplatir(zip(l1, l2))
+
+
+##################################################
+# intersect - Semaine 4 Séquence 4
+##################################################
+def intersect(A, B):
+    """
+avec en entrée deux listes de tuples de la forme
+(entier, valeur)
+renvoie la liste des valeurs associées dans A ou B
+aux entiers présents dans A et B
+    """
+    # une fonction qui renvoie l'ensemble des entiers
+    # présent dans une des deux listes d'entrée
+    def values(S):
+        return {i for i, val in S}
+    # on l'applique à A et B
+    val_A = values(A)
+    val_B = values(B)
+    # les entiers présents dans A et B 
+    # avec une intersection d'ensembles
+    common_keys = val_A & val_B
+    # et pour conclure on fait une union sur deux
+    # compréhensions d'ensembles
+    return {vala for a, vala in A if a in common_keys} \
+         | {valb for b, valb in B if b in common_keys} 
+
+
+##################################################
+# distance - Semaine 4 Séquence 8
+##################################################
+import math
+
+def distance(*args):
+    "la racine de la somme des carrés des arguments"
+    # avec une compréhension on calcule la liste des carrés des arguments
+    # on applique ensuite sum pour en faire la somme
+    # vous pourrez d'ailleurs vérifier que sum ([]) = 0
+    # enfin on extrait la racine avec math.sqrt
+    return math.sqrt(sum([x**2 for x in args]))
+
+
+##################################################
+# doubler_premier - Semaine 4 Séquence 8
+##################################################
+def doubler_premier(f, first, *args):
+    """
+renvoie le résultat de la fonction f appliquée sur
+f(2 * first, *args)
+    """
+    # une fois qu'on a écrit la signature on a presque fini le travail
+    # en effet on a isolé la fonction, son premier argument, et le reste
+    # des arguments
+    # il ne reste qu'à appeler f, après avoir doublé first
+    return f(2*first, *args)
+
+
+##################################################
+# doubler_premier2 - Semaine 4 Séquence 8
+##################################################
+def doubler_premier2(f, first, *args, **keywords):
+    """
+comme doubler_premier mais on peut aussi passer des arguments nommés
+    """
+    # c'est exactement la même chose
+    return f(2*first, *args, **keywords)
+
+# Complément - niveau avancé
+# ----
+# Il y a un cas qui ne fonctionne pas avec cette implémentation, 
+# c'est si le premier argument de f a une valeur par défaut 
+# *et* on veut pouvoir appeler doubler_premier en nommant ce premier argument 
+#
+# par exemple - avec f=muln telle que définie dans l'énoncé 
+#def muln(x=1, y=1): return x*y
+
+# alors ceci
+#doubler_premier2(muln, x=1, y=2)
+# ne marche pas car on n'a pas les deux arguments requis
+# par doubler_premier2
+# 
+# et pour écrire, disons doubler_permier3, qui marcherait aussi comme cela
+# il faudrait faire une hypothèse sur le nom du premier argument...
+
+
+##################################################
+# validation2 - Semaine 4 Séquence 8
+##################################################
+def validation2(f, g, argument_tuples):
+    """
+retourne une liste de booleens, un par entree dans entrees
+qui indique si f(*tuple) == g(*tuple)
+    """
+    # c'est presque exactement comme validation, sauf qu'on s'attend 
+    # à recevoir une liste de tuples d'arguments, qu'on applique
+    # aux deux fonctions avec la forme * au lieu de les passer directement
+    return [f(*tuple) == g(*tuple) for tuple in argument_tuples]
+
+
+##################################################
+# RPCProxy - Semaine 5 Séquence 6
+##################################################
+# une troisième implémentation de RPCProxy
+
+class Forwarder(object):
+    def __init__(self, rpc_proxy, function):
+        self.function = function
+        self.rpc_proxy = rpc_proxy
+    # en rendant cet objet callable, on peut l'utiliser
+    # comme méthode dans RPCProxy
+    def __call__(self, *args):
+        print "Envoi à {}\nde la fonction {} -- args= {}".\
+            format(self.rpc_proxy.url, self.function, args)
+        return "retour de la fonction " + self.function
+
+class RPCProxy(object):
+    
+    def __init__(self, url, login, password):
+        self.url = url
+        self.login = login
+        self.password = password
+        
+    def __getattr__ (self, function):
+        """
+        Crée à la volée une instance de Forwarder
+        correspondant à 'function'
+        """
+        return Forwarder(self, function)
+
+
