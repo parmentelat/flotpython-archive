@@ -313,6 +313,8 @@ avait défini un ordre sur les matrices, on aurait pu alors utiliser les
 *builtin* `min` et `max` pour calculer une borne supérieure ou inférieure dans
 une séquence de matrices.
 
+## Complément - niveau avancé
+
 ##### Le produit avec un scalaire
 
 On implémenterait la multiplication de deux matrices d'une façon identique
@@ -323,12 +325,31 @@ les idées), comme ici&nbsp;:
 
     matrice2 = reel * matrice1
 
-est par contre plus problématique en python.
+peut être également réalisée par surcharge de l'opérateur `__rmul__`.
 
-En C++ par exemple, la technique utilisée pour la surcharge des opérateurs vous
-permettrait de donner un sens à un tel produit.
+Il s'agit d'une astuce, destinée précisément à ce genre de situations, où on
+veut étendre la classe de l'opérande de **droite**, sachant que dans ce cas
+précis l'opérande de gauche est un type de base, qu'on ne peut pas étendre (les
+classes *builtin* sont non mutables, pour garantir la stabilité de
+l'interpréteur).
 
-Mais en python, un opérateur binaire comme `*` envoie la méthode `__mul__` au
-**premier** opérateur, dans notre cas un réel. Et les classes *builtin* étant
-non mutables (pour garantir la stabilité de l'interpréteur), il n'est pas
-possible de reproduire en python ce comportement.
+Voici donc comment on s'y prendrait. Pour éviter de reproduire tout le code de
+la classe, on va l'étendre à la volée.
+
+
+    from types import IntType, FloatType, ComplexType
+    
+    # remarquez que les opérandes sont apparemment inversés
+    # mais n'oubliez pas qu'on est en fait en train
+    # d'écrire une méthode sur la classe `Matrix2`
+    def multiplication_scalaire(self, alpha):
+        return Matrix2 ([ alpha*coef for coef in self.coefs ])
+    
+    # on ajoute la méthode spéciale __rmul__
+    Matrix2.__rmul__ = multiplication_scalaire
+
+
+    matrice1
+
+
+    12*matrice1
