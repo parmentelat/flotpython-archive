@@ -97,8 +97,10 @@ endef
 
 $(foreach notebook,$(NOTEBOOKS),$(eval $(call notebook_rule,$(notebook))))
 
+all: md
 md: $(MARKDOWNS)
 
 #################### corriges
+all: corr
 corr:
 	$(MAKE) -C corriges
