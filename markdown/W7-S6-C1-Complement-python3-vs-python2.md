@@ -31,6 +31,10 @@ défauts, avec en contrepartie la nécessité de migrer tout la base de code.
 Commençons par faire un survol des changements, avant de voir dans la deuxième
 partie comment se passe cette migration.
 
+Les différences sont résumées dans [cette liste
+exhaustive](https://docs.python.org/3/whatsnew/3.0.html), en voici une version
+abrégée.
+
 ##### `print`
 
 On a déjà eu l'occasion de l'évoquer, la différence la plus visible entre les
@@ -48,30 +52,166 @@ Cela dit, `print` est une construction très visible pendant la période
 d'apprentissage, mais dans du vrai code son usage est **beaucoup moins répandu**
 qu'on ne pourrait le penser, on utilise la plupart du temps des modules de
 `logging` ou autres fonctions d'écriture sur fichier, aussi l'évolution de
-`print` est en réalité beaucoup moins cruciale qu'il n'y paraît.
+`print` est en réalité, entre python2 et python3, beaucoup moins cruciale qu'il
+n'y paraît.
 
 ##### types `str` et `unicode`
 
 Le changement le plus radical, dans le sens, le changement auquel il est le plus
-délicat de s'adapter, est sans doute celui qui
+délicat de s'adapter, est sans doute celui qui concerne la représentation des
+caractères.
+
+Comme [il est expliqué ici](https://docs.python.org/3/whatsnew/3.0.html#text-vs-
+data-instead-of-unicode-vs-8-bit) Python3 distingue entre les concepts de *text*
+et de *(binary) data*, là où python2 distinguait entre les types `str` et
+`unicode`. La phrase d'introduction vous donne une idée de l'étendue des
+changements qui ont été faits dans ce domaine&nbsp;:
 
 <pre style="font-size:small;background-color:'#ccc';">
 Everything you thought you knew about binary data and Unicode has changed.
 </pre>
 
+C'est d'ailleurs une des raisons pour lesquelles dans ce MOOC nous avons choisi
+de soigneusement laisser de coté le type `unicode`.
+
+Dans le compléments sur les accents en Semaine 1 (Séquence "Les outils de la
+distribution standard python"), nous avions expliqué que le modèle mental, selon
+lequel un caractère est équivalent à un octet est, avec les encodages modernes
+Unicode, devenu obsolète. C'est en fait ce modèle mental qui était véhiculé par
+le type `str` de python2.
+
+En python3, le type `unicode` n'existe plus (enfin il serait plus précis de dire
+que le type `str` n'existe plus et que le type `unicode` de python2 s'appelle
+`str` en python3); et on a introduit le nouveau type `bytes` qui permet de
+manipuler de la donnée binaire pure. Nous vous renvoyons à l'article cité ci-
+dessus pour davantage de détails sur cet aspect de la migration.
 
 ##### types `int` et `long`
 
+Le type `long` a disparu (enfin, un peu comme avec les chaînes, `long` a
+remplacé `int` et on a supprimé le nom `long`). Cette différence a généralement
+assez peu d'impact dans un portage.
+
 ##### classes *new-style*
 
-https://docs.python.org/3/whatsnew/3.0.html#text-vs-data-instead-of-unicode-
-vs-8-bit
+On l'a déjà mentionné dans le cours, toutes les classes en python3 sont des
+**classes *new-style***, qu'elles héritent ou non de `object`; on n'a donc plus
+besoin d'hériter d'object, mais on peut le faire si on récupère du vieux code.
 
-##### Variables locales à une boucle `for`
+Là encore l'impact de ce changement lors d'un portage est généralament faible ou
+nul.
+
+##### Utilisation massive des itérateurs
+
+Un grand nombre de fonctions et méthodes - qu'elles soient *builtin* ou qu'elle
+viennent d'une librairie - retournent en python2 des listes. C'est le cas, on
+l'a vu, pour
+ * `range()`,
+ * `dict.items()` ou ses voisines `values()` et `keys()`,
+et un très grand nombre d'autres.
+
+En python3, dans tous les cas où c'était possible on a préféré **retourner des
+itérateurs** en lieu et place des listes.
+
+Ce qui a du même coup permis de supprimer les fonctions et méthodes python2, qui
+avaient été rajoutées après coup, pour proposer ce mode de fonctionnement sans
+casser la compatibilité. Pour prendre des exemples, en python2 vous aviez le
+choix entre
+
+
+    range(10)
+
+et
+
+
+    xrange(10)
+
+parce que `xrange` avait été introduit **après** les itérateurs. En python3 il
+n'y a plus que `range`, qui renvoie un itérateur; il n'y a plus non plus
+`dict.itervalues` mais seulement `dict.values` qui renvoie un itérateur.
+
+##### Variables locales à un `for`
+
+Pour des raisons principalement historiques, la variable de boucle `fuitait`
+(*leaked* en anglais si vous voulez googler), c'est-à-dire restait définie à la
+sortie d'une boucle. Ceci est modifié en python3, au moins pour les
+compréhensions, comme on le voit sur cet exemple&nbsp;:
+
+<table>
+<tr><th>python2</th><th>python3</th></tr>
+<tr><td>
+<pre style='font-size:small'>
+>>> x = 'avant'
+>>>
+>>> [ x*2 for x in [0]]
+[0]
+>>>
+>>> x
+0
+</pre>
+</td><td>
+<pre style='font-size:small'>
+>>> x = 'avant'
+>>>
+>>> [ x*2 for x in [0]]
+[0]
+>>>
+>>> x
+'avant'
+</pre>
+</td></tr>
+</table>
+
+
+On observe bien entendu le même comportement avec les compréhensions de
+dictionnaire ou d'ensembles. Par contre on aurait pu penser que le même
+comportement serait adopté pour les boucles `for` à part entière, ce n'est **pas
+le cas malheureusement**&nbsp;:
+
+<table>
+<tr><th>python2</th><th>python3</th></tr>
+<tr><td>
+<pre style='font-size:small'>
+>>> x = 'avant'
+>>>
+>>> for x in [0]: pass
+...
+>>> x
+0
+</pre>
+</td><td>
+<pre style='font-size:small'>
+*ditto*
+</pre>
+</td></tr>
+</table>
+
+À ce sujet notez d'ailleurs que - dans les deux versions du langage - la boucle
+for ne définit la variable **que si** au moins une itération de la boucle est
+effectuée&nbsp;:
+
+<table>
+<tr><th>python2</th><th>python3</th></tr>
+<tr><td>
+<pre style='font-size:small'>
+>>> for i in []: pass
+...
+>>> i
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'i' is not defined
+</pre>
+</td><td>
+<pre style='font-size:small'>
+*ditto*
+</pre>
+</td></tr>
+</table>
 
 ##### Autres changements
 
 Citons également, en vrac&nbsp;:
+ * le fait qu'un itérateur doit maintenant définir `__next__()` et non `next()`;
  * la possibilité d'annoter au niveau syntaxique les arguments et valeur de
 retour des fonctions ([voir PEP3107](http://www.python.org/dev/peps/pep-3107));
 dans l'état actuel il s'agit d'annotations à vocation **surtout documentaire**
@@ -80,10 +220,19 @@ strict dans ce domaine;
  * une nouvelle notation pour spécifier la métaclasse;
  * et tout un tas d'autres améliorations moins significatives, dont vous
 trouverez [une liste plus exhaustive
-ici](https://docs.python.org/3/whatsnew/3.0.html).
+ici](https://docs.python.org/3/whatsnew/3.0.html) (c'est la même référence que
+celle donnée ci-dessus dans le chapeau sur "Les différences".
 
 Signalons enfin l'existence d'un [guide pour le portage de python2 à
 python3](https://docs.python.org/3/howto/pyporting.html)
+
+##### Conclusion
+
+Comme vous le voyez, ce que vous avez appris dans ce MOOC est pratiquement
+utilisable tel quel dans un environnement python3. Si vous devez coder en
+python3 à partir des connaissances acquises dans ce cours, il vous reste
+principalement à maîtriser les deux types `str` et `bytes`, et les notions
+d'encodage qui y sont rattachées.
 
 ### Un point sur la migration
 
