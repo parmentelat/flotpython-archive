@@ -10,7 +10,7 @@ sortes d'objets en python, et notamment à
  * une classe,
  * une instance de classe.
 
-Nous avons vu également, si vous vous souvenez de la classe `Matrix2`, que **en
+Nous avons vu également, si vous vous souvenez de la classe `Matrix2`, qu'**en
 règle générale** :
  * une *méthode* est un *attribut de la classe*,
  * et que les *données* qui décrivent l'objet sont rangées dans des *attributs
@@ -40,7 +40,7 @@ complément qui est de niveau avancée.
 
 ### Un attribut de donnée défini sur la classe
 
-Voyons pour commencer un exemple de classe avec un attribut de données qui est
+Voyons, pour commencer, un exemple de classe avec un attribut de données qui est
 en fait un attribut qui référence un objet `builtin` contenant des données,
 comme par exemple `int`, `list` ou `str`.
 
@@ -49,7 +49,7 @@ comme par exemple `int`, `list` ou `str`.
         attribut = "attribut de classe"
 
 Naturellement, on aurait pu aussi définir des méthodes dans cette classe, mais
-nous avons choisi de montrer le plus petit exemple possible.
+nous avons choisi de montrer un exemple très simple.
 
 La classe `Spam` possède donc maintenant l'attribut `attribut` qui vaut
 
@@ -103,15 +103,11 @@ l'interpréteur python accède à l'objet qu'il peut finalement connaître son t
 ### Conclusion
 
 Comme on l'a vu, le mécanisme d'attributs, bien qu'extrêmement simple, est très
-souple et très puissant.
-
-Le langage ne fait pas de différence entre attributs de données et de méthodes
-puisqu'un attribut référence n'importe quel objet et qu'en python tout est en
-objet, donc en particulier les données et les méthodes.
-
-On peut attacher, au choix, **à une instance ou à une classe**, des attributs
-représentant **n'importe quel objet**, et la recherche de ces attributs se fait
-dans l'ordre **instance** puis **classe**.
+souple et très puissant. Le langage ne fait pas de différence entre attributs de
+données et de méthodes puisqu'un attribut référence n'importe quel objet et
+qu'en python tout est en objet. On peut attacher, au choix, **à une instance ou
+à une classe**, des attributs représentant **n'importe quel objet**, et la
+recherche de ces attributs se fait dans l'ordre **instance** puis **classe**.
 
 Nous verrons dans la prochaine vidéo que les mécanismes d'héritage ne font que
 prolonger ce mécanisme de recherche d'attributs.
@@ -185,15 +181,15 @@ Avant d'aller plus loin, souvenez-vous qu'avant de parler de classes on a parlé
 de fonctions; on pourrait très bien avoir envie de ranger dans un attribut une
 vraie fonction et de pouvoir l'appeler comme une fonction, mais pas comme une
 méthode, c'est-à-dire sans mettre en œuvre la *magie* qui consiste à mettre
-l'objet lui-même comme premier argument.
+l'instance elle-même comme premier argument.
 
-Il faut donc pouvoir différencier entre ces deux cas, selon que l'on veut ou non
-ajouter l'instance comme premier objet de l'appel qui est fait lorsqu'on écrit
-`obj.foo()`.
+Il faut donc pouvoir différencier entre le cas d'une fonction simple et le cas
+d'une méthode à laquelle l'interpréteur passe automatiquement une référence de
+l'instance comme premier argument.
 
-C'est exactement ce qui se passe ici: la fonction que nous avons attachée à
-l'instance n'est pas de même nature que celle attachée à la classe; voyons ces
-deux objets :
+C'est exactement ce que l'on fait ici&nbsp;: la fonction que nous avons attachée
+à l'instance n'est pas de même nature que celle attachée à la classe; voyons ces
+deux objets&nbsp;:
 
 
     print "sur la classe", Eggs.__repr__

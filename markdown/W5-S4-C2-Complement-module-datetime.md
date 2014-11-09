@@ -27,15 +27,15 @@ Et comme on le voit, les calculs se font sous une forme pas très lisible. En
 effet, la méthode `time` retourne le nombre de secondes écoulées depuis le 1
 janvier 1970 à l'instant de l'appel. Pour rendre ce nombre de secondes plus
 lisible, on utilise des conversions, pas vraiment explicites non plus; voici par
-exemple un appel à `gmtime` qui convertit un flottant en heure UTC (`gm` est
-pour Greenwhich Meridian) :
+exemple un appel à `gmtime` qui convertit le flottant obtenu par la méthode
+`time()` en heure UTC (`gm` est pour Greenwhich Meridian) :
 
 
     struct_later = time.gmtime(t_later)
     print struct_later
 
-Et on met en forme en utilisant des fonctions, comme par exemple pour afficher
-l'heure UTC dans 3 heures :
+Et on met en forme ce résultat en utilisant des méthodes comme, par exemple,
+`strftime()` pour afficher l'heure UTC dans 3 heures :
 
 
     print 'heure UTC dans trois heures', time.strftime("%Y-%m-%d at %H:%M", struct_later)
@@ -95,7 +95,7 @@ classes de python en particulier.
 Si vous devez manipuler des dates ou des heures, le module `datetime` constitue
 très certainement un bon candidat; voyez la [documentation complète du
 module](https://docs.python.org/2/library/datetime.html) pour plus de précisions
-sur ce module.
+sur ses possibilités.
 
 ## Complément - niveau intermédiaire
 
@@ -121,11 +121,11 @@ Ceci nous procure une transition pour un sujet beaucoup plus général.
 Nous avons évoqué, en début de semaine 4, les formats comme JSON pour échanger
 les données entre applications, au travers de fichiers ou d'un réseau.
 
-On a vu par exemple que JSON est un format "proche des langages" en ce sens
+On a vu, par exemple, que JSON est un format "proche des langages" en ce sens
 qu'il est capable d'échanger des objets de base comme des listes ou des
-dictionnaires, entre plusieurs langages comme, par exemple, JavaScript, python
-ou ruby. En XML, on a davantage de flexibilité puisqu'on peut définir une
-syntaxe sur les données échangées.
+dictionnaires entre plusieurs langages comme, par exemple, JavaScript, python ou
+ruby. En XML, on a davantage de flexibilité puisqu'on peut définir une syntaxe
+sur les données échangées.
 
 Mais il faut être bien lucide sur le fait que, aussi bien pour JSON que pour
 XML, il n'est **pas  possible** d'échanger entre applications des **objets** en

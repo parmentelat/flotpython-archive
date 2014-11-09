@@ -48,7 +48,8 @@ Avant de détailler le code de cette classe, voyons comment on l'utiliserait :
 
 Le code de cette classe devrait être limpide à présent, sauf peut-être la
 dernière ligne de `__repr__`. On utilise ici [la fonction *builtin*
-`vars`](https://docs.python.org/2/library/functions.html#vars) :
+`vars`](https://docs.python.org/2/library/functions.html#vars) qui retourne le
+dictionnaire des attributs d'un objet :
 
 
     vars(personnes[0])
@@ -110,7 +111,7 @@ Nous allons toutefois profiter de cet exemple pour montrer comment il est
 fait que **les méthodes sont implémentées comme des attributs de l'objet
 classe**.
 
-Aussi on peut étendre l'objet `classe` lui-même dynamiquement comme ceci
+Ainsi, on peut étendre l'objet `classe` lui-même dynamiquement comme ceci
 
 
     def anniversaire(self):
@@ -124,7 +125,7 @@ la méthode. Comme cette méthode ne prend pas d'argument, la fonction accepte u
 argument `self`; exactement comme si on avait défini la méthode dans
 l'instruction `class`.
 
-Ensuite il suffit d'affecter la fonction ainsi définie à **l'attribut
+Ensuite, il suffit d'affecter la fonction ainsi définie à **l'attribut
 `aniversaire`** de l'objet classe.
 
 Vous voyez que c'est très simple, et à présent la classe a connaissance de cette
