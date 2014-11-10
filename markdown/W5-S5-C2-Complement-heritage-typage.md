@@ -3,7 +3,7 @@
 
 ## Complément - niveau intermédiaire
 
-Dans ce complément nous allons tenter d'attirer votre attention sur une
+Dans ce complément, nous allons tenter d'attirer votre attention sur une
 différence assez essentielle entre python et les langages statiquement typés,
 quand il s'agit de concevoir une hiérarchie d'héritage.
 
@@ -15,7 +15,7 @@ d'essayer de l'exécuter.
 
 On l'a mentionné rapidement au cours des semaines précédentes, mais les langages
 typés statiquement ont pour l'essentiel un système de types basés sur les
-classes. Pour faire simple un objet est d'un type `Foo` si et seulement si sa
+classes. Pour faire simple, un objet est d'un type `Foo` si et seulement si sa
 classe est une sous-classe de Foo.
 
 En python, ce n'est pas du tout comme cela qu'on a pris le problème. Le système
@@ -39,9 +39,9 @@ qu'il faut&nbsp;:
 
 J'espère qu'à ce stade vous êtes convaincus qu'on ne **peut pas** exprimer ces
 propriétés en termes simplement de relation d'héritage à la `isinstance` -
-quoique [cette initiative]() vise précisément à permettre de tester des
-propriétés comme *"l'objet x est-il itérable ?"* au moyen d'un `isinstance` sur
-stéroides.
+quoique [cette initiative](http://legacy.python.org/dev/peps/pep-3119/) vise
+précisément à permettre de tester des propriétés comme *"l'objet x est-il
+itérable ?"* au moyen d'un `isinstance` sur stéroides.
 
 ### À quoi l'héritage **ne sert pas** en python
 

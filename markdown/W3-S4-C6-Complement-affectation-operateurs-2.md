@@ -84,18 +84,18 @@ puisque&nbsp;:
     # comme on vient de le voir
     
     a = []
-    print "avant",id(a)
+    print "avant", id(a)
     a += [1]
-    print "après",id(a)
+    print "après", id(a)
 
 
     # alors que si on fait x = x + y sur une liste
     # on crée un nouvel objet liste
     
     a = []
-    print "avant",id(a)
+    print "avant", id(a)
     a = a + [1]
-    print "après",id(a)
+    print "après", id(a)
 
 Vous voyez donc que vis-à-vis des références partagées, ces deux façons de faire
 mènent à un résultat différent.

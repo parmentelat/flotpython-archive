@@ -26,7 +26,7 @@ régler quelques problèmes qui existaient dans le système de types. En substan
 et pour rester synthétique :
 
  * Il n'était pas possible dans les anciennes versions de spécialier un type
-prédéfini. Par exemple si vous vous souvenez de la classe
+prédéfini. Par exemple, si vous vous souvenez de la classe
 `collections.OrderedDict`, il s'agit d'une spécialisation du type *builtin*
 `dict`. Il n'aurait pas été possible d'implémenter cette classe avec les
 anciennes versions du langage.
@@ -35,40 +35,58 @@ anciennes versions du langage.
 différent. Or dans la logique d'un langage orienté objet, le type d'une
 instance, c'est sa classe. Nous allons y revenir avec des exemples.
 
-Pour améliorer le langage, on a alors introduit la notion de classe *new-style*.
-
-Pour **ne pas casser la compatibilité ascendante**, on a convenu que pour qu'une
+Pour améliorer le langage, on a alors introduit la notion de classe *new-style*
+et pour
+**ne pas casser la compatibilité ascendante**, on a convenu que pour qu'une
 classe soit ***new-style***, il faut qu'elle **hérite** - directement ou
-indirectement - de la classe *builtin* `object`.
+indirectement - de la classe *builtin* `object`. Les classes qui n'héritent pas
+d'`object` sont appelées les *classes classiques*.
+
+Nous reviendrons largement sur ces notions de types, de *classes classiques* et
+de classes *new-style* en semaine 7. Il faut retenir pour le moment qu'il y a en
+python 2 deux types différents de classes, les classes *new-style* et les
+*classes classiques* qui sont incompatibles. Cependant, pour la majorités de
+usages, le comportement de ces deux types de classes est le même. Les classes
+*new-style* sont utiles pour des usages avancées comme l'héritage multiple sur
+lequel nous allons revenir dans un prochain complément et nécessaire pour, par
+exemple, l'extension des types de bases.
+
+Vous pouvez alors vous demander quand utiliser les classes *new-style* et les
+*classe classiques*. La réponse est simple&nbsp;: les classes *new-style* sont
+supérieures aux *classes classiques*, les classes *new-style* doivent donc être
+utilisées pour tous vos nouveaux programmes. D'ailleurs, en python 3, toutes les
+classes sont maintenant *new-style* par défaut (on n'a donc plus besoin
+d'hériter explicitement d'`object`) et les *classes classiques* n'existe plus.
+Attention cependant si vous travaillez avec du code python 2 existant qui
+utilise des *classes classiques*, il est recommandé dans ce cas de continuer à
+utiliser les classes classiques. En effet, même si pour la majorité des usages,
+les classes classiques et *new-style* ont le même comportement, dans certains
+cas avancés, elles ont un comportement incompatible.
 
 ### Illustration
 
-Une instance d'une classe *old-style* a pour type le type `instance` :
+Une instance d'une *classe classique* a pour type le type `instance` :
 
 
-    # une classe old-style
-    class OldStyle: pass
+    # une classe classique
+    class OldStyle: 
+        pass
     # une instance
     old_style = OldStyle()
     # son type est juste 'instance'
     type(old_style)
 
-Par contre une instance d'une classe *new-style* a pour type la classe qu'on a
+Par contre, une instance d'une classe *new-style* a pour type la classe qu'on a
 utilisée pour créer l'objet :
 
 
     # une classe new-style : elle hérite de 'object'
-    class NewStyle(object): pass
+    class NewStyle(object): 
+        pass
     # une instance
     new_style = NewStyle()
     # le type de l'instance est bien la classe
     type(new_style) is NewStyle
-
-### Digression sur python3
-
-En python 3, toutes les classes sont maintenant *new-style*, qu'elles héritent
-ou non de `object`. C'est pourquoi il est **conseillé**, dans vos programmes
-python2, de **systématiquement écrire des classes new-style**.
 
 ## Complément - niveau avancé
 

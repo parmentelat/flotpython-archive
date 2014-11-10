@@ -45,7 +45,7 @@ Commençons par illustrer tout ceci sur un petit exemple&nbsp;:
     # Une classe fille
     class Rose(Fleur):
         # on ne definit pas implicite
-        # on redefinit complement implicite
+        # on redefinit complement redefinie
         def redefinie(self):
             print 'Rose.redefinie'
         def modifiee(self):
@@ -56,8 +56,11 @@ Nous avons fait hériter la classe `Fleur` de la classe `object`, qui est la
 pratique recommandée; cela fait de toutes nos classes des *classes new-style*,
 un concept que nous allons étudier dans un tout prochain complément.
 
+On peut à présent créer une instance de Rose et appeler sur cette instance les
+trois méthodes.
 
-    # on peut à présent créer un objet et lui envoyer les 3 méthodes
+
+    # fille est une instance de Rose
     fille = Rose()
     
     fille.implicite()
@@ -65,8 +68,10 @@ un concept que nous allons étudier dans un tout prochain complément.
 
     fille.redefinie()
 
-S'agissant des deux premières catégories, le comportement qu'on observe est
-simplement la conséquence de l'algorithme de recherche d'attributs.
+S'agissant des deux premières méthodes, le comportement qu'on observe est
+simplement la conséquence de l'algorithme de recherche d'attributs&nbsp;:
+`implicite` est trouvée dans la classe Fleur et `redefinie` est trouvée dans la
+classe Rose.
 
 
     fille.modifiee()
@@ -89,7 +94,7 @@ comme on le fait ici&nbsp;:
     # Une version allégée de la classe fille, qui utilise super()
     class Rose(Fleur):
         def modifiee(self):
-            super(Rose,self).modifiee()
+            super(Rose, self).modifiee()
             print 'Rose.modifiee apres Fleur'    
 
 
@@ -111,10 +116,11 @@ multiple, dont on va parler dans un prochain complément) et dans ce cas
 ### Héritage *vs* Composition
 
 Dans le domaine de la conception orientée objet, on fait la différence entre
-deux constructions, qui à une analyse superficielle peuvent paraître procurer
-des résultats similaires, mais qu'il est important de bien distinguer.
+deux constructions, l'héritage et la composition, qui à une analyse
+superficielle peuvent paraître procurer des résultats similaires, mais qu'il est
+important de bien distinguer.
 
-Voyons d'abord, en quoi consiste la composition, et pourquoi le résultat est
+Voyons d'abord en quoi consiste la composition et pourquoi le résultat est
 voisin&nbsp;:
 
 
@@ -141,9 +147,11 @@ voisin&nbsp;:
         # sauf qu'il faut definir implicite
         def implicite(self):
             self.externe.implicite()
-        # on redefinit complement implicite
+            
+        # on redefinit complement redefinie
         def redefinie(self):
             print 'Rose.redefinie'
+            
         def modifiee(self):
             self.externe.modifiee()
             print 'Rose.modifiee apres Tige'        
@@ -185,7 +193,7 @@ On trouve dans la librairie standard [le module
 `calendar`](https://docs.python.org/2/library/calendar.html).
 Ce module expose deux classes `TextCalendar` et `HTMLCalendar`. Sans entrer du
 tout dans le détail, ces deux classes permettent d'imprimer dans des formats
-différents, le même type d'informations du type rendez-vous.
+différents le même type d'informations du type rendez-vous.
 
 Le point ici est que les concepteurs ont choisi un graphe d'héritage comme
 ceci&nbsp;:
@@ -197,7 +205,7 @@ ceci&nbsp;:
 qui permet de grouper le code concernant la logique dans la classe `Calendar`,
 puis dans les deux sous-classes d'implémenter le type de sortie qui va bien.
 
-De cette manière le maximum de code est partagé entre les deux classes; et de
+De cette manière, le maximum de code est partagé entre les deux classes; et de
 plus si vous avez besoin d'une sortie au format, disons PDF, vous pouvez
 envisager d'hériter de `Calendar` et n'implémenter que la partie spécifique au
 format PDF.
@@ -231,8 +239,10 @@ Ici encore notre propos n'est pas d'entrer dans les détails, mais d'observer le
 fait que les différents *niveaux d'intelligence* sont ajoutés les uns aux les
 autres au fur et à mesure que l'on descend le graphe d'héritage.
 
-Cette hiérarchie est par ailleurs étendue par le [module `BaseHTTPServer`]() et
-notamment au travers de la [classe `HTTPServer`] qui hérite de `TCPServer`.
+Cette hiérarchie est par ailleurs étendue par le [module
+`BaseHTTPServer`](https://docs.python.org/2/library/basehttpserver.html) et
+notamment au travers de la classe [`HTTPServer`](https://docs.python.org/2/libra
+ry/basehttpserver.html#BaseHTTPServer.HTTPServer) qui hérite de `TCPServer`.
 
 Pour revenir au module `SocketServer`, j'attire votre attention dans [la page
 d'exemples](https://docs.python.org/2/library/socketserver.html#examples) sur
