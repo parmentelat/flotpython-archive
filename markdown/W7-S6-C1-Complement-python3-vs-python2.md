@@ -23,8 +23,8 @@ nettement, même si les choses semblent bouger comme on le verra plus bas.
 Pendant toute la maturation de python, au moins depuis l'introduction de python2
 en 2000, toutes les évolutions ont été faites avec compatibilité ascendante, et
 vous pouvez en théorie faire tourner du code 2.1 dans un interprèteur 2.7. Avec
-cette approche il n'est naturellement pas possible d'enlever ou de changer les
-traits du langages qui ont été ratés :)
+cette approche, il n'est naturellement pas possible d'enlever ou de changer les
+traits du langage qui ont été ratés :)
 
 La décision de créer python3 a été prise dans le but de corriger ce genre de
 défauts, avec en contrepartie la nécessité de migrer tout la base de code.
@@ -57,7 +57,7 @@ n'y paraît.
 
 ##### types `str` et `unicode`
 
-Le changement le plus radical, dans le sens, le changement auquel il est le plus
+Le changement le plus radical, dans le sens le changement auquel il est le plus
 délicat de s'adapter, est sans doute celui qui concerne la représentation des
 caractères.
 
@@ -110,10 +110,10 @@ l'a vu, pour
  * `dict.items()` ou ses voisines `values()` et `keys()`,
 et un très grand nombre d'autres.
 
-En python3, dans tous les cas où c'était possible on a préféré **retourner des
+En python3, dans tous les cas où c'était possible, on a préféré **retourner des
 itérateurs** en lieu et place des listes.
 
-Ce qui a du même coup permis de supprimer les fonctions et méthodes python2, qui
+Ce qui a du même coup permis de supprimer les fonctions et méthodes python2 qui
 avaient été rajoutées après coup, pour proposer ce mode de fonctionnement sans
 casser la compatibilité. Pour prendre des exemples, en python2 vous aviez le
 choix entre
@@ -126,9 +126,10 @@ et
 
     xrange(10)
 
-parce que `xrange` avait été introduit **après** les itérateurs. En python3 il
-n'y a plus que `range`, qui renvoie un itérateur; il n'y a plus non plus
-`dict.itervalues` mais seulement `dict.values` qui renvoie un itérateur.
+parce que `xrange` avait été introduit **après** les itérateurs. En python3, il
+n'y a plus que `range`, qui renvoie un itérateur; il n'y a plus non plus, par
+exemple, `dict.itervalues` mais seulement `dict.values` qui renvoie un
+itérateur.
 
 ##### Variables locales à une compréhension
 
@@ -145,7 +146,7 @@ exemple&nbsp;:
 <pre style='font-size:small'>
 >>> x = 'avant'
 >>>
->>> [ x*2 for x in [0]]
+>>> [x*2 for x in [0]]
 [0]
 >>>
 >>> x
@@ -155,7 +156,7 @@ exemple&nbsp;:
 <pre style='font-size:small'>
 >>> x = 'avant'
 >>>
->>> [ x*2 for x in [0]]
+>>> [x*2 for x in [0]]
 [0]
 >>>
 >>> x
@@ -166,7 +167,7 @@ exemple&nbsp;:
 
 
 On observe bien entendu le même comportement avec les compréhensions de
-dictionnaire ou d'ensembles. Par contre on aurait pu penser que le même
+dictionnaires ou d'ensembles. Par contre, on aurait pu penser que le même
 comportement serait adopté pour les boucles `for` à part entière, ce n'est **pas
 le cas malheureusement**&nbsp;:
 
@@ -183,7 +184,12 @@ le cas malheureusement**&nbsp;:
 </pre>
 </td><td>
 <pre style='font-size:small'>
-*ditto*
+>>> x = 'avant'
+>>>
+>>> for x in [0]: pass
+...
+>>> x
+0
 </pre>
 </td></tr>
 </table>
@@ -193,13 +199,13 @@ le cas malheureusement**&nbsp;:
 Citons également, en vrac&nbsp;:
  * les orthographes ont été homogénéisées, comme le fait qu'un itérateur doit
 maintenant définir `__next__()` et non `next()`;
- * en python3 on a la possibilité d'annoter, au niveau syntaxique les arguments
+ * en python3, on a la possibilité d'annoter, au niveau syntaxique les arguments
 et valeur de retour des fonctions ([voir
 PEP3107](http://www.python.org/dev/peps/pep-3107)); dans l'état actuel il s'agit
 d'annotations à vocation **surtout documentaire** et il ne semble pas que le
 langage se dirige vers un contrôle de type plus strict dans ce domaine;
- * une nouvelle notation pour spécifier la métaclasse;
- * et tout un tas d'autres améliorations moins significatives, dont vous
+ * une nouvelle notation a été introduire pour spécifier la métaclasse;
+ * et tout un tas d'autres améliorations moins significatives dont vous
 trouverez [une liste plus exhaustive
 ici](https://docs.python.org/3/whatsnew/3.0.html) (c'est la même référence que
 celle donnée ci-dessus dans le chapeau sur "Les différences".
@@ -221,17 +227,18 @@ sur une librairie majeure dont on avait besoin et qui n'était pas disponible en
 python3; du coup, même des projets relativement récents ont choisi de cibler
 python2.
 
-Il me semble que la situation est en train de changer un peu; en tous cas les
+Il me semble que la situation est en train de changer un peu; en tous cas, les
 deux gros joueurs que sont [`django`, *the web framework for perfectionists with
 deadlines*](https://www.djangoproject.com), et [`NumPy` - *fundamental package
 for scientific computing with Python *](http://www.numpy.org), sont à présent
-disponibles&nbsp;:
+disponibles en python3&nbsp;:
 
  * `django` depuis la version 1.5
- * `numpy depuis 1.5.0 et scipy depuis 0.9.0
+ * `numpy` depuis 1.5.0 et scipy depuis 0.9.0
 
-Cela dit, la date de *End-Of-Life* pour python2.7, dont la date avait en 2009
-été fixée à 2105, a été dans un [update du PEP373 en date d'Avril
+Cela dit, la date de *End-Of-Life* pour python2.7 qui représente la date de fin
+de maintenance qui avait été initialement fixée à 2015 lors de la sortie de
+python3, a été dans un [update du PEP373 en date d'Avril
 2014](https://hg.python.org/peps/rev/76d43e52d978) retardée de cinq ans  pour
 courir jusqu'en 2020.
 
@@ -245,12 +252,12 @@ forcément résoudre tous les problèmes mais permet d'en évacuer la plus gross
 partie.
 
 Le souci toutefois avec cette approche est qu'une fois qu'on a fait la
-traduction on se retrouve avec **deux codes**. Pour tous les projets qui sont
+traduction, on se retrouve avec **deux codes**. Pour tous les projets qui sont
 **réutilisables** - qui offrent des librairies, soit parce que c'est l'objectif
 principal du projet, soit comme *by-product* - cette approche signifie de
 **maintenir** ces deux codes, ce qui est le plus souvent inacceptable.
 
-Aussi ces derniers temps il semble qu'on se dirige plus vers une approche de
+Aussi, ces derniers temps, il semble qu'on se dirige plus vers une approche de
 **code unique**, au travers de librairies comme
 [`six`](https://pypi.python.org/pypi/six) - disponible via `pypi`.
 
@@ -258,9 +265,10 @@ Aussi ces derniers temps il semble qu'on se dirige plus vers une approche de
 
 Vous pouvez consulter également&nbsp;:
  * [Should I use Python 2 or Python 3 for my development
-activity?](https://wiki.python.org/moin/Python2orPython3) dans le wiki python;
+activity?](https://wiki.python.org/moin/Python2orPython3) dans le wiki
+python&nbsp;;
  * Le [sentiment du BDFL Guido Van
 Rossum](https://www.youtube.com/watch?v=EBRMq2Ioxsc) dans son talk à PyCon 2014,
-aux environs de 09:00;
+aux environs de 09:00&nbsp;;
  * Un [guide de portage de python2 à
 python3](https://docs.python.org/3/howto/pyporting.html).

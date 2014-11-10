@@ -113,8 +113,8 @@ trouver le fichier python chargé par l'import du module, on peut utiliser la
 variable `__file__` sur le module. Notez que les modules écrits en C, comme le
 module `math`, [n'ont pas une telle variable (chercher la discussion sur les
 modules dans la
-documentation)](https://docs.python.org/3/reference/datamodel.html#the-standard-
-type-hierarchy).
+documentation)](https://docs.python.org/2.7/reference/datamodel.html#the-
+standard-type-hierarchy).
 
 
     math.__file__
