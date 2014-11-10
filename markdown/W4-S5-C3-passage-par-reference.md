@@ -84,39 +84,3 @@ commodité `sorted`, que nous avions vues en semaine 2.
 
 De cette façon, on saura s'il faut ou non copier l'argument avant de le passer à
 votre fonction.
-
-## Complément - niveau avancé
-
-Notez bien enfin un comportement un peu étrange des opérateurs du genre de `+=`.
-
-
-    # += sur une liste dans une fonction donne un resultat un peu surprenant
-    def insert(liste, valeur):
-        liste += [valeur]
-        
-    liste = range(3)
-    insert(liste, 3)
-    print liste
-
-Ce résultat est surprenant si on considère cette forme, qu'on pourrait croire
-équivalente
-
-
-    # sur une liste, l += queue n'est pas tout a fait equivalent
-    # a l = l + queue, la preuve:
-    def insert(liste, valeur):
-        liste = liste + [valeur]
-        
-    liste = range(3)
-    insert(liste, 3)
-    print liste
-
-mais dont vous voyez qu'elle donne un résultat différent.
-
-Historiquement, ces opérateurs viennent du C où ils opèrent sur des types
-numériques, et où ils fonctionnent par effet de bord sur l'opérande.
-
-Dans le cas des types numériques en python, qui sont immuables, on ne peut pas
-les implémenter de cette façon. Par contre sur les listes, qui sont mutables,
-c'est le choix qui a été fait pour les implémenter, c'est-à-dire de respecter
-l'esprit initial de l'opérateur et de procéder par effet de bord.

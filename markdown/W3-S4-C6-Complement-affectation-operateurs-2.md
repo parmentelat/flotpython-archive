@@ -8,9 +8,9 @@ introduction aux instructions `+=` et ses dérivées comme `*=`, `**=`, etc.
 
 ### Ces constructions ont une définition à géométrie variable
 
-Historiquement, en C quand on utilise `+=` (ou encore `++`) on modifie la
-mémoire en place - en utilisant lorsque c'est possible l'instruction qui va bien
-du CPU.
+En C quand on utilise `+=` (ou encore `++`) on modifie la mémoire en place -
+historiquement, cet opérateur permettait au programmeur d'aider à l'optimisation
+du code pour utiliser les instructions assembleur idoines.
 
 Ces constructions en python s'inspirent clairement de C, aussi dans l'esprit ces
 constructions devraient fonctionner en **modifiant** l'objet référencé par la
@@ -50,7 +50,7 @@ simples.
     # pareil, on fait += sur une des variables
     a += [1]
     
-    # cette fois on a modifié a et b
+    # cette fois on a modifié a *et* b
     # car += a pu modifier la liste en place
     print a
     print b
@@ -64,3 +64,44 @@ les autres formes d'instructions qui combinent l'affectation avec un opérateur)
 Pour cette raison, c'est là une opinion personnelle, cette famille
 d'instructions n'est pas le trait le plus réussi dans le langage, et je ne
 recommande pas de l'utiliser.
+
+### Précision sur la définition de `+=`
+
+Nous avions dit en première semaine, en première approximation, que
+
+    x += y
+
+était équivalent à
+
+    x = x + y
+
+Au vu de ce qui précède, on voit que cece n'est **pas tout à fait exact**,
+puisque&nbsp;:
+
+
+    # si on fait x += y sur une liste on fait un effet de bord sur la liste
+    # comme on vient de le voir
+    
+    a = []
+    print "avant",id(a)
+    a += [1]
+    print "après",id(a)
+
+
+    # alors que si on fait x = x + y sur une liste
+    # on crée un nouvel objet liste
+    
+    a = []
+    print "avant",id(a)
+    a = a + [1]
+    print "après",id(a)
+
+mais dont vous voyez qu'elle donne un résultat différent.
+
+Historiquement, ces opérateurs viennent du C où ils opèrent sur des types
+numériques, et où ils fonctionnent par effet de bord sur l'opérande.
+
+Dans le cas des types numériques en python, qui sont immuables, on ne peut pas
+les implémenter de cette façon. Par contre sur les listes, qui sont mutables,
+c'est le choix qui a été fait pour les implémenter, c'est-à-dire de respecter
+l'esprit initial de l'opérateur et de procéder par effet de bord.
