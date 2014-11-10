@@ -130,12 +130,14 @@ parce que `xrange` avait été introduit **après** les itérateurs. En python3 
 n'y a plus que `range`, qui renvoie un itérateur; il n'y a plus non plus
 `dict.itervalues` mais seulement `dict.values` qui renvoie un itérateur.
 
-##### Variables locales à un `for`
+##### Variables locales à une compréhension
 
-Pour des raisons principalement historiques, la variable de boucle `fuitait`
-(*leaked* en anglais si vous voulez googler), c'est-à-dire restait définie à la
-sortie d'une boucle. Ceci est modifié en python3, au moins pour les
-compréhensions, comme on le voit sur cet exemple&nbsp;:
+Pour des raisons principalement historiques, les variables de boucle `fuitent`
+(*leak* en anglais), c'est-à-dire restaient définies à la sortie d'une boucle,
+comme on l'a vu en Semaine 3 (séquence "Les boucles `for` et les itérateurs");
+
+Ceci est modifié en python3 pour les compréhensions, comme on le voit sur cet
+exemple&nbsp;:
 
 <table>
 <tr><th>python2</th><th>python3</th></tr>
@@ -186,45 +188,21 @@ le cas malheureusement**&nbsp;:
 </td></tr>
 </table>
 
-À ce sujet notez d'ailleurs que - dans les deux versions du langage - la boucle
-for ne définit la variable **que si** au moins une itération de la boucle est
-effectuée&nbsp;:
-
-<table>
-<tr><th>python2</th><th>python3</th></tr>
-<tr><td>
-<pre style='font-size:small'>
->>> for i in []: pass
-...
->>> i
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-NameError: name 'i' is not defined
-</pre>
-</td><td>
-<pre style='font-size:small'>
-*ditto*
-</pre>
-</td></tr>
-</table>
-
 ##### Autres changements
 
 Citons également, en vrac&nbsp;:
- * le fait qu'un itérateur doit maintenant définir `__next__()` et non `next()`;
- * la possibilité d'annoter au niveau syntaxique les arguments et valeur de
-retour des fonctions ([voir PEP3107](http://www.python.org/dev/peps/pep-3107));
-dans l'état actuel il s'agit d'annotations à vocation **surtout documentaire**
-et il ne semble pas que le langage se dirige vers un contrôle de type plus
-strict dans ce domaine;
+ * les orthographes ont été homogénéisées, comme le fait qu'un itérateur doit
+maintenant définir `__next__()` et non `next()`;
+ * en python3 on a la possibilité d'annoter, au niveau syntaxique les arguments
+et valeur de retour des fonctions ([voir
+PEP3107](http://www.python.org/dev/peps/pep-3107)); dans l'état actuel il s'agit
+d'annotations à vocation **surtout documentaire** et il ne semble pas que le
+langage se dirige vers un contrôle de type plus strict dans ce domaine;
  * une nouvelle notation pour spécifier la métaclasse;
  * et tout un tas d'autres améliorations moins significatives, dont vous
 trouverez [une liste plus exhaustive
 ici](https://docs.python.org/3/whatsnew/3.0.html) (c'est la même référence que
 celle donnée ci-dessus dans le chapeau sur "Les différences".
-
-Signalons enfin l'existence d'un [guide pour le portage de python2 à
-python3](https://docs.python.org/3/howto/pyporting.html)
 
 ##### Conclusion
 
@@ -236,15 +214,53 @@ d'encodage qui y sont rattachées.
 
 ### Un point sur la migration
 
-##### 2to3
+##### Les gros joueurs
 
-##### six
+Jusqu'à récemment, quand on commençait un nouveau projet, on tombait rapidement
+sur une librairie majeure dont on avait besoin et qui n'était pas disponible en
+python3; du coup, même des projets relativement récents ont choisi de cibler
+python2.
 
-##### timeframe
+Il me semble que la situation est en train de changer un peu; en tous cas les
+deux gros joueurs que sont [`django`, *the web framework for perfectionists with
+deadlines*](https://www.djangoproject.com), et [`NumPy` - *fundamental package
+for scientific computing with Python *](http://www.numpy.org), sont à présent
+disponibles&nbsp;:
 
-##### django/numpy available (since when ?)
+ * `django` depuis la version 1.5
+ * `numpy depuis 1.5.0 et scipy depuis 0.9.0
+
+Cela dit, la date de *End-Of-Life* pour python2.7, dont la date avait en 2009
+été fixée à 2105, a été dans un [update du PEP373 en date d'Avril
+2014](https://hg.python.org/peps/rev/76d43e52d978) retardée de cinq ans  pour
+courir jusqu'en 2020.
+
+##### Outils et stratégies
+
+Au départ, l'idée étant de nettoyer le langage, on a incité les gens à
+**basculer** d'une version à l'autre; il existe pour cela un outil qui s'appelle
+**`2to3`** - qui fait partie de la distribution standard - et qui permet de
+**traduire** un code python2 en python3 en le **modifiant**. `2to3` ne sait pas
+forcément résoudre tous les problèmes mais permet d'en évacuer la plus grosse
+partie.
+
+Le souci toutefois avec cette approche est qu'une fois qu'on a fait la
+traduction on se retrouve avec **deux codes**. Pour tous les projets qui sont
+**réutilisables** - qui offrent des librairies, soit parce que c'est l'objectif
+principal du projet, soit comme *by-product* - cette approche signifie de
+**maintenir** ces deux codes, ce qui est le plus souvent inacceptable.
+
+Aussi ces derniers temps il semble qu'on se dirige plus vers une approche de
+**code unique**, au travers de librairies comme
+[`six`](https://pypi.python.org/pypi/six) - disponible via `pypi`.
 
 ### Pour en savoir plus
 
- * https://wiki.python.org/moin/Python2orPython3
-
+Vous pouvez consulter également&nbsp;:
+ * [Should I use Python 2 or Python 3 for my development
+activity?](https://wiki.python.org/moin/Python2orPython3) dans le wiki python;
+ * Le [sentiment du BDFL Guido Van
+Rossum](https://www.youtube.com/watch?v=EBRMq2Ioxsc) dans son talk à PyCon 2014,
+aux environs de 09:00;
+ * Un [guide de portage de python2 à
+python3](https://docs.python.org/3/howto/pyporting.html).
