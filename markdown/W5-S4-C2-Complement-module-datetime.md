@@ -114,6 +114,8 @@ en général en convenant d'échanger systématiquement des heures UTC. Par cont
 il existe une réelle diversité quant au format utilisé pour échanger ce type
 d'information, et cela reste une source d'erreurs assez fréquente.
 
+## Complément - niveau avancé
+
 ### Classes et *marshalling*
 
 Ceci nous procure une transition pour un sujet beaucoup plus général.
@@ -134,9 +136,71 @@ tant que tel. Ce que nous voulons dire, c'est que ces technologies de
 pas les informations de type, et *a fortiori* pas non plus le code qui
 appartient à la classe.
 
-On peut toujours, naturellement, s'en sortir en utilisant JSON pour échanger les
-données d'un objet, et en reconstruisant plus ou moins à la main les objets à
-l'autre extrémité de l'échange. Mais il est important d'être conscient de cette
-limitation lorsqu'on fait des choix de conception, notamment lorsqu'on est amené
-à choisir entre classe et dictionnaire pour l'implémentation de telle ou telle
-abstraction.
+Il est important d'être conscient de cette limitation lorsqu'on fait des choix
+de conception, notamment lorsqu'on est amené à choisir entre classe et
+dictionnaire pour l'implémentation de telle ou telle abstraction.
+
+Voyons cela sur un exemple inspiré de notre fichier de données liées au trafic
+maritime. En version simplifiée un bateau est décrit par trois valeurs, son
+identité (id), son nom et son pays d'attachement.
+
+Nous allons voir comment on peut échanger ces informations entre, disons, deux
+programmes dont l'un est en python, via un support réseau ou disque.
+
+Si on choisit de se contenter de manipuler un dictionnaire standard, avec trois
+couples *(cle', valeur)*, on peut utiliser essentiellement tels quels les
+mécanismes d'encodage et décodage de, disons, JSON. En effet c'est exactement ce
+genre d'informations que sait gérer la couche JSON (ou XMLRPC par exemple).
+
+Si au contraire on choisit de manipuler les données sous forme d'une classe on
+pourrait avoir envie d'écrire quelque chose comme ceci&nbsp;:
+
+
+    class Bateau:
+        def __init__(self, id, name, country):
+            self.id = id
+            self.name = name
+            self.country = country
+            
+    bateau = Bateau (1000, "Toccata", "FRA")
+
+Maintenant, si vous avez besoin d'échanger cet objet avec le reste du monde, en
+utilisant par exemple JSON, tout ce que vous allez pouvoir faire passer par ce
+médium, c'est la valeur des trois champs, dans un dictionnaire. Vous pouvez
+facilement obtenir le dictionnaire en question pour le passer à la couche
+d'encodage&nbsp;:
+
+
+    vars(bateau)
+
+Mais à l'autre bout de la communication il va vous falloir&nbsp;:
+ * déterminer d'une manière ou d'une autre que les données échangées sont en
+rapport avec la classe `Bateau`,
+ * et construire vous même un objet de cette classe, par exemple avec un code
+comme&nbsp;:
+
+
+    class Bateau:
+        def __init__(self, *args):
+            if len(args) == 1 and isinstance(args[0], dict):
+                self.__dict__ = args[0]
+            elif len(args) == 3:
+                id, name, country = args
+                self.id = id
+                self.name = name
+                self.country = country
+                
+    bateau1 = Bateau ( {'id': 1000, 'name': 'Leon', 'country': 'France'})
+    bateau2 = Bateau (1001, 'Maluba', 'SUI' )
+
+### Conclusion
+
+Pour reformuler ce dernier point, il n'y a pas en python l'équivalent de [jmi
+(Java Metadata Interface)](http://en.wikipedia.org/Java_metadata_interface) - en
+tous cas pas intégré à la distribution standard.
+
+Et, là aussi contrairement à Java, on peut écrire du code en dehors des classes.
+On n'est pas forcément obligé d'écrire une classe pour tout. Chaque situation
+doit être jugée dans son contexte naturellement, mais de manière générale la
+classe n'est pas la solution universelle, il peut y avoir des mérites dans le
+fait de manipuler certaines données sous une forme allégée comme un type natif.
