@@ -18,7 +18,7 @@ liste ou un dictionnaire vide, voici comment faire
         "faire quelque chose"
 
 
-    # mais plutot comme ceci
+    # mais plutôt comme ceci
     def mais_plutot_ceci(options=None):
         if options is None: 
             options = {}

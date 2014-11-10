@@ -126,7 +126,7 @@ argument `self`; exactement comme si on avait défini la méthode dans
 l'instruction `class`.
 
 Ensuite, il suffit d'affecter la fonction ainsi définie à **l'attribut
-`aniversaire`** de l'objet classe.
+`anniversaire`** de l'objet classe.
 
 Vous voyez que c'est très simple, et à présent la classe a connaissance de cette
 méthode exactement comme si on l'avait définie dans la clause `class`, comme le

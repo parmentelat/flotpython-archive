@@ -102,7 +102,7 @@ actuellement chargés.
 La [documentation sur cette
 variable](https://docs.python.org/2/library/sys.html#sys.modules) indique qu'il
 est possible de forcer le rechargement d'un module en l'enlevant de cette
-variable.
+`sys.modules.
 
 
     del sys.modules['multiple_import']

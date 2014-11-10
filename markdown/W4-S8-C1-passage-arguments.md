@@ -176,9 +176,9 @@ Et à en déduire une implémentation de `ligne_rouge` comme ceci
     ligne_rouge(0, 0, 100, 100)
 
 Toutefois, avec cette implémentation, si la signature de `ligne` venait à
-changer, on serait vraisembablement amené à changer celle de `ligne_rouge`, sauf
-à perdre en fonctionnalité. Imaginons en effet que `ligne` devienne dans une
-version suivante
+changer, on serait vraisemblablement amené à changer celle de `ligne_rouge`,
+sauf à perdre en fonctionnalité. Imaginons en effet que `ligne` devienne dans
+une version suivante
 
 
     # on ajoute encore une fonctionnalité à la fonction ligne
@@ -187,9 +187,9 @@ version suivante
                 format(x1, y1, x2, y2, couleur, epaisseur))
 
 Alors le wrapper ne nous permet plus de profiter de la nouvelle fonctionnalité.
-De manière générale, on cherche au maximum à se prémunir contre de tels
+De manière générale, on cherche au maximum à se prémunir contre de telles
 dépendances.
-Aussi, il est de beacoup préférable d'implémenter `ligne_rouge` comme suit, où
+Aussi, il est de beaucoup préférable d'implémenter `ligne_rouge` comme suit, où
 vous remarquerez que **la seule hypothèse** faite sur `ligne` est qu'elle
 accepte un argument nommé `couleur`.
 

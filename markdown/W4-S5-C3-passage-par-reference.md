@@ -12,7 +12,7 @@ Entre le code qui appelle une fonction, et le code de la fonction elle-même:
     dans_appelant = 12
     ma_fonction(dans_appelant)
 
-on peut se demander quel est exactement la nature de la relation entre
+on peut se demander quelle est exactement la nature de la relation entre
 l'appelant et l'appelé, c'est-à-dire ici `dans_appelant` et `dans_fonction`.
 
 C'est l'objet de ce complément.

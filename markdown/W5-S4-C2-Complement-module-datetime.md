@@ -141,16 +141,17 @@ de conception, notamment lorsqu'on est amené à choisir entre classe et
 dictionnaire pour l'implémentation de telle ou telle abstraction.
 
 Voyons cela sur un exemple inspiré de notre fichier de données liées au trafic
-maritime. En version simplifiée un bateau est décrit par trois valeurs, son
+maritime. En version simplifiée, un bateau est décrit par trois valeurs, son
 identité (id), son nom et son pays d'attachement.
 
 Nous allons voir comment on peut échanger ces informations entre, disons, deux
 programmes dont l'un est en python, via un support réseau ou disque.
 
 Si on choisit de se contenter de manipuler un dictionnaire standard, avec trois
-couples *(cle', valeur)*, on peut utiliser essentiellement tels quels les
-mécanismes d'encodage et décodage de, disons, JSON. En effet c'est exactement ce
-genre d'informations que sait gérer la couche JSON (ou XMLRPC par exemple).
+couples *("id", 1000), ("name", "Toccata"), ("country", "FRA")*, on peut
+utiliser essentiellement tels quels les mécanismes d'encodage et décodage de,
+disons, JSON. En effet c'est exactement ce genre d'informations que sait gérer
+la couche JSON (ou XMLRPC par exemple).
 
 Si au contraire on choisit de manipuler les données sous forme d'une classe on
 pourrait avoir envie d'écrire quelque chose comme ceci&nbsp;:
@@ -162,7 +163,7 @@ pourrait avoir envie d'écrire quelque chose comme ceci&nbsp;:
             self.name = name
             self.country = country
             
-    bateau = Bateau (1000, "Toccata", "FRA")
+    bateau = Bateau(1000, "Toccata", "FRA")
 
 Maintenant, si vous avez besoin d'échanger cet objet avec le reste du monde, en
 utilisant par exemple JSON, tout ce que vous allez pouvoir faire passer par ce
@@ -190,17 +191,18 @@ comme&nbsp;:
                 self.name = name
                 self.country = country
                 
-    bateau1 = Bateau ( {'id': 1000, 'name': 'Leon', 'country': 'France'})
-    bateau2 = Bateau (1001, 'Maluba', 'SUI' )
+    bateau1 = Bateau({'id': 1000, 'name': 'Leon', 'country': 'France'})
+    bateau2 = Bateau(1001, 'Maluba', 'SUI' )
 
 ### Conclusion
 
 Pour reformuler ce dernier point, il n'y a pas en python l'équivalent de [jmi
-(Java Metadata Interface)](http://en.wikipedia.org/Java_metadata_interface) - en
-tous cas pas intégré à la distribution standard.
+(Java Metadata Interface)](http://en.wikipedia.org/Java_metadata_interface)
+intégré à la distribution standard.
 
-Et, là aussi contrairement à Java, on peut écrire du code en dehors des classes.
-On n'est pas forcément obligé d'écrire une classe pour tout. Chaque situation
-doit être jugée dans son contexte naturellement, mais de manière générale la
-classe n'est pas la solution universelle, il peut y avoir des mérites dans le
-fait de manipuler certaines données sous une forme allégée comme un type natif.
+Et, là aussi, contrairement à Java, on peut écrire du code en dehors des
+classes. On n'est pas forcément obligé d'écrire une classe pour tout. Chaque
+situation doit être jugée dans son contexte naturellement, mais, de manière
+générale, la classe n'est pas la solution universelle&nbsp;; il peut y avoir des
+mérites dans le fait de manipuler certaines données sous une forme allégée comme
+un type natif.
