@@ -1,0 +1,2 @@
+
+# variables de boucle
