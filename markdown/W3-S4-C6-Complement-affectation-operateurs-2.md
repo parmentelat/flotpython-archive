@@ -67,7 +67,7 @@ recommande pas de l'utiliser.
 
 ### Précision sur la définition de `+=`
 
-Nous avions dit en première semaine, en première approximation, que
+Nous avions dit en première semaine, et en première approximation, que
 
     x += y
 
@@ -75,11 +75,12 @@ Nous avions dit en première semaine, en première approximation, que
 
     x = x + y
 
-Au vu de ce qui précède, on voit que cece n'est **pas tout à fait exact**,
+Au vu de ce qui précède, on voit que ce n'est **pas tout à fait exact**,
 puisque&nbsp;:
 
 
-    # si on fait x += y sur une liste on fait un effet de bord sur la liste
+    # si on fait x += y sur une liste 
+    # on fait un effet de bord sur la liste
     # comme on vient de le voir
     
     a = []
@@ -96,12 +97,5 @@ puisque&nbsp;:
     a = a + [1]
     print "après",id(a)
 
-mais dont vous voyez qu'elle donne un résultat différent.
-
-Historiquement, ces opérateurs viennent du C où ils opèrent sur des types
-numériques, et où ils fonctionnent par effet de bord sur l'opérande.
-
-Dans le cas des types numériques en python, qui sont immuables, on ne peut pas
-les implémenter de cette façon. Par contre sur les listes, qui sont mutables,
-c'est le choix qui a été fait pour les implémenter, c'est-à-dire de respecter
-l'esprit initial de l'opérateur et de procéder par effet de bord.
+Vous voyez donc que vis-à-vis des références partagées, ces deux façons de faire
+mènent à un résultat différent.
