@@ -11,7 +11,7 @@ Vous pouvez trouver du code dans lequel les classes héritent de la classe
 
     from modtools import show_module
     import zipfile
-    show_module(zipfile,beg='class ZipFile(', end="file:")
+    show_module(zipfile, beg='class ZipFile(', end="file:")
 
 Ceci nous donne l'occasion de citer le module `zipfile`, qui permet de lire ou
 écrire, de manière transparente, des fichiers compressés au format `zip`.

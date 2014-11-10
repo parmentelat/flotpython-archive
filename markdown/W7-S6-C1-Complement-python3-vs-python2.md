@@ -199,6 +199,9 @@ le cas malheureusement**&nbsp;:
 Citons également, en vrac&nbsp;:
  * les orthographes ont été homogénéisées, comme le fait qu'un itérateur doit
 maintenant définir `__next__()` et non `next()`;
+ * on peut utiliser des caractères Unicode dans les noms de variables, donc des
+accents, des cédilles, on peut appeler une fonction Σ - non pas que cela semble
+forcément une très bonne idée à première vue mais bon;
  * en python3, on a la possibilité d'annoter, au niveau syntaxique les arguments
 et valeur de retour des fonctions ([voir
 PEP3107](http://www.python.org/dev/peps/pep-3107)); dans l'état actuel il s'agit
