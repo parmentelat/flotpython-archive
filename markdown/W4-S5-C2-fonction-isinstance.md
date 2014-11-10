@@ -16,7 +16,7 @@ d'autres contextes - vous pouvez facilement:
 Voyons tout de suite sur un exemple simple comment on pourrait définir une
 fonction qui travaille sur un entier, mais qui par commmodité peut aussi
 accepter un entier passé comme une chaîne de caractères, ou même une liste
-d'entiers (auquel cas on renvoie la liste des factoriels)
+d'entiers (auquel cas on renvoie la liste des factorielles)&nbsp;:
 
 
     from types import StringTypes

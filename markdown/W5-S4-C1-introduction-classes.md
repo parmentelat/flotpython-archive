@@ -3,9 +3,9 @@
 
 ## Complément - niveau basique
 
-On définit une classe lorsqu'on a besoin de se créer un type spécifique au
-contexte de l'application. Il faut donc voir une classe au même niveau qu'un
-type *builtin* comme `list` ou `dict`.
+On définit une classe lorsqu'on a besoin de créer un type spécifique au contexte
+de l'application. Il faut donc voir une classe au même niveau qu'un type
+*builtin* comme `list` ou `dict`.
 
 ### Un exemple simpliste
 
@@ -172,7 +172,7 @@ en donne une illustration.
 
 Malgré cette simplicité revendiquée, les classes de python permettent
 d'implémenter en pratique une encapsulation tout à fait acceptable, on peut en
-juger rien que par le nombre de librairies tierces existants dans l'écosystème
+juger rien que par le nombre de librairies tierces existantes dans l'écosystème
 python.
 
 ##### Résolution dynamique de méthode
