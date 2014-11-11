@@ -3,6 +3,8 @@
 
 ## Complément - niveau intermédiaire
 
+xxx à reprendre xxx
+
 Dans ce complément, nous allons tenter d'attirer votre attention sur une
 différence assez essentielle entre python et les langages statiquement typés,
 quand il s'agit de concevoir une hiérarchie d'héritage.
