@@ -16,8 +16,8 @@ langage et donner un sens à des fragments de code comme&nbsp;:
  * etc..
 
 que jusqu'ici on n'a expliqué que pour des objets de type prédéfini - sauf pour
-la boucle `for`, rappelez-vous de la méthode `__iter__()` que l'on a vu à propos
-des itérables en fin de Semaine 3.
+la boucle `for`, rappelez-vous de la méthode `__iter__()` que l'on a vue à
+propos des itérables en fin de Semaine 3.
 
 Le mécanisme général pour cela consiste à définir des **méthodes spéciales**,
 avec un nom en `__nom__`. Comme annoncé dans la vidéo, il existe un total de
@@ -59,12 +59,12 @@ Pour rappel, on a vu dans la vidéo&nbsp;:
 Nous commençons par signaler la méthode `__repr__` qui est assez voisine de
 `__str__`, et qui donc doit retourner un objet de type chaîne de caractères,
 sauf que&nbsp;:
- * `__str__` est utilisé par `print` (affichage orienté utilisateur du
+ * `__str__` est utilisée par `print` (affichage orienté utilisateur du
 programme; priorité au confort visuel),
  * alors que `__repr__` est utilisée par la fonction `repr()` (affichage orienté
 programmeur, aussi peu ambigü que possible);
- * il faut savoir que `__repr__` est utilisé **aussi** par `print` si `__str__`
-n'est pas défini.
+ * il faut savoir que `__repr__` est utilisée **aussi** par `print` si `__str__`
+n'est pas définie.
 
 Pour cette seconde raison, on trouve dans la nature `__repr__` plutôt plus
 souvent que `__str__`; voyez [ce
@@ -86,7 +86,7 @@ vous affichez un objet sans passer par `print`, c'est-à-dire par exemple&nbsp;:
 
 ##### Deux exemples
 
-Voici deux exemples simples de classes; dans le premier on on n'a défini que
+Voici deux exemples simples de classes; dans le premier on n'a défini que
 `__repr__`, dans le second on a redéfini les deux méthodes&nbsp;:
 
 
@@ -226,10 +226,12 @@ l'addition, comme on va le voir.
             on considère que la matrice est non nulle 
             si un au moins de ses coefficients est non nul
             """
-            # ATTENTION le retour doit être un booléen ou à la rigueur 0 ou 1
-            # cette version-ci ne serait PAS CORRECTE :
-            # return [coef for coef in self.coefs if coef != 0.]
-            return len([coef for coef in self.coefs if coef != 0.])!=0
+            # ATTENTION le retour doit être un booléen 
+            # ou à la rigueur 0 ou 1
+            for c in self.coefs:
+                if c:
+                    return True
+            return False
 
 On peut à présent créer deux objets, les ajouter, et vérifier que la matrice
 nulle se comporte bien comme attendu&nbsp;:
@@ -282,6 +284,12 @@ de matrices puisque maintenant on sait les additionner, (mais on a dû toutefois
 passer à `sum` comme élément neutre `zero`)&nbsp;:
 
 
+    # il se trouve que dans l'environnement de FUN 
+    # le symbole sum correspond à celui de numpy
+    # je préfère vous montrer la fonction sum builtin,
+    # et donc je vais utiliser l'astuce qu'on a vue 
+    # en semaine 4 sequence 6
+    from __builtin__
     sum ( [matrice1, matrice2, matrice1] , zero)
 
 C'est un effet de bord du typage dynamique. On ne vérifie pas *a priori* que

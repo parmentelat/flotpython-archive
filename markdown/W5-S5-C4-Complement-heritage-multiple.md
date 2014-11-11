@@ -64,9 +64,9 @@ Il y a un certain nombre de bonnes propriétés que l'on attend de cet algorithm
 
 ##### Priorité au spécifique
 
-Lorsqu'une classe B hérite d'une classe A, on s'attend à ce que les méthodes
-définies sur B, qui sont en principe plus spécifiques, soient utilisées de
-préférence à celles définies sur A.
+Lorsqu'une classe A hérite d'une classe B, on s'attend à ce que les méthodes
+définies sur A, qui sont en principe plus spécifiques, soient utilisées de
+préférence à celles définies sur B.
 
 ##### Priorité à gauche
 
