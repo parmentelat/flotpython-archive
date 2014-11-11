@@ -62,7 +62,7 @@ sauf que&nbsp;:
  * `__str__` est utilisée par `print` (affichage orienté utilisateur du
 programme; priorité au confort visuel),
  * alors que `__repr__` est utilisée par la fonction `repr()` (affichage orienté
-programmeur, aussi peu ambigü que possible);
+programmeur, aussi peu ambigu que possible);
  * il faut savoir que `__repr__` est utilisée **aussi** par `print` si `__str__`
 n'est pas définie.
 
@@ -289,7 +289,8 @@ passer à `sum` comme élément neutre `zero`)&nbsp;:
     # je préfère vous montrer la fonction sum builtin,
     # et donc je vais utiliser l'astuce qu'on a vue 
     # en semaine 4 sequence 6
-    from __builtin__
+    from __builtin__ import sum
+    
     sum ( [matrice1, matrice2, matrice1] , zero)
 
 C'est un effet de bord du typage dynamique. On ne vérifie pas *a priori* que
@@ -311,7 +312,7 @@ ordre sur les instances d'une classe.
 Signalons à cet égard qu'il existe un mécanisme "intelligent" qui permet de
 définir un ordre à partir d'un sous-ensemble seulement de ces méthodes, l'idée
 étant que si vous savez faire `>`
- et '=', vous savez sûrement faire tout le reste. Ce mécanisme est [documenté
+ et `=`, vous savez sûrement faire tout le reste. Ce mécanisme est [documenté
 ici](https://docs.python.org/2/library/functools.html#functools.total_ordering);
 il repose sur **un décorateur** (`@total_ordering`), un mécanisme que nous
 étudierons en semaine 7, mais que vous pouvez utiliser dès à présent.
@@ -345,9 +346,11 @@ Voici donc comment on s'y prendrait. Pour éviter de reproduire tout le code de
 la classe, on va l'étendre à la volée.
 
 
-    from types import IntType, FloatType, ComplexType
-    
     # remarquez que les opérandes sont apparemment inversés
+    # dans le sens où pour evaluer 
+    #     reel * matrice
+    # on écrit une méthode qui prend en argument
+    #   la matrice, puis le réel
     # mais n'oubliez pas qu'on est en fait en train
     # d'écrire une méthode sur la classe `Matrix2`
     def multiplication_scalaire(self, alpha):
