@@ -45,14 +45,15 @@ seulement que la constante complexe que nous notons en français `i` se note en
 anglais `j`
 
 
-    (2 + 3j) * 2j
+    (2 + 3j) * 2.5j
 
 Aussi pour entrer ce nombre complexe `j` il faut toujours le faire précéder d'un
 nombre, donc ne pas entrer simplement `j` (qui serait compris comme un nom de
-variable, nous allons voir ça tout de suite) mais plutôt `1j` comme ceci
+variable, nous allons voir ça tout de suite) mais plutôt `1j` ou encore `1.j`,
+comme ceci
 
 
-    1j * 1j
+    1j * 1.j
 
 ### Utiliser des variables
 
