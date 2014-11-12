@@ -23,7 +23,7 @@ utilise ci-dessous.
 
 
     import string
-    chaine = string.lowercase
+    chaine = string.ascii_lowercase
     print chaine
 
 Pour chacune des sous-chaînes ci-dessous, écrire une expression de slicing sur
