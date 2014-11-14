@@ -3,10 +3,10 @@
 
 ## Complément - niveau (très) avancé
 
-Le mécanisme des décorateurs, (qui rappelle un peu, pour ceux qui connaissent,
-les macros Lisp), est un mécanisme très puissant. Sa portée va bien au delà de
+Le mécanisme des décorateurs - qui rappelle un peu, pour ceux qui connaissent,
+les macros Lisp - est un mécanisme très puissant. Sa portée va bien au delà de
 simplement rajouter du code avant et après une fonction, comme dans le cas de
-`NbAppels` que vous avez vu dans la vidéo.
+`NbAppels` que nous avons vu dans la vidéo.
 
 Par exemple les notions de méthodes de classe (`@classmethod`) et de méthodes
 statiques (`@staticmethod`) sont implémentées comme des décorateurs. Pour une
@@ -328,9 +328,10 @@ singleton.
 
 La subtilité ici réside dans le fait que
 
-La méthode spéciale `__new__`, dont on n'avait pas parlé dans la Semaine 5,
-Séquence 'surcharge des opérateurs', fait partie de la même famille que
-`__init__` et autres `__repr__`.
+La méthode spéciale `__new__`, dont on n'avait pas parlé dans la [Semaine 5,
+Séquence 'surcharge des
+opérateurs'](/jump_to_id/a9a9b67ccf2b4ed5abe0cb3b3dfdf3ff), fait partie de la
+même famille que `__init__` et autres `__repr__`.
 C'est une méthode spéciale également, et comme `__init__` elle est mise en jeu
 au moment de la création d'un objet.
 
