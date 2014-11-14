@@ -17,9 +17,8 @@ différente. Ainsi:
     Factoriel = 100
     factoriel == Factoriel
 
-Le signe `==` permet de tester si deux variables ont la même valeur (nous dirons
-plus tard : "si les deux variables référencent le même objet"). Si les variables
-ont la même valeur, le test retournera `True` et `False` sinon.
+Le signe `==` permet de tester si deux variables ont la même valeur. Si les
+variables ont la même valeur, le test retournera `True` et `False` sinon.
 
 ### Conventions habituelles
 
