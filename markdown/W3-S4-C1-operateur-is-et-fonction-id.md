@@ -36,7 +36,9 @@ Voyons ceci sur quelques exemples simples
 ### Utilisez `is` plutôt que `==` lorsque c'est possible
 
 La pratique usuelle est d'utiliser `is` lorsqu'on compare avec un objet qui est
-un singleton, comme typiquement `None`, c'est-à-dire qu'on préfère écrire
+un singleton, comme typiquement `None`.
+
+Par exemple on préfèrera écrire&nbsp;:
 
 
     if a is None:
@@ -48,8 +50,8 @@ plutôt que
     if a == None:
         print 'a est indéfini'
 
-qui se comporte de la même manière, mais est légèrement moins lisible, et
-franchement moins pythonique :)
+qui se comporte de la même manière (à nouveau, parce qu'on compare avec `None`),
+mais est légèrement moins lisible, et franchement moins pythonique :)
 
 Notez aussi et surtout que `is` est **plus efficace** que `==`. En effet `is`
 peut être évalué en temps constant, puisqu'il s'agit essentiellement de comparer
