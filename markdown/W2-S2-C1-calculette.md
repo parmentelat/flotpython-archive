@@ -156,7 +156,7 @@ On a illustré cette même technique dans les exemples suivants:
     # imaginons que l'utilisateur a entré un entier en tapant '100'
     chaine = '100'
     
-    # on voudrait le mettre au carré; mais ceci ne fonctionne pas:
+    # on voudrait le mettre au carré, mais ceci ne fonctionne pas:
     chaine**2
 
 
@@ -199,6 +199,6 @@ passant un argument supplémentaire:
 ### Fonctions mathématiques
 
 python fournit naturellement un ensemble très complet d'opérateurs mathématiques
-pour les fonctions exponentielles, trigonométriques, et autres, mais leur
+pour les fonctions exponentielles, trigonométriques et autres, mais leur
 utilisation ne nous est pas encore accessible à ce stade et nous les verrons
 ultérieurement.
