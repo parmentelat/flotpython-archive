@@ -1,16 +1,37 @@
 
-# Expressions régulières
+# Expressions régulières et le module `re`
 
 ## Complément - niveau intermédiaire
 
-Le langage perl avait été le premier à populariser l'utilisation des expressions
-régulières, en en faisant un "citoyen de première classe" dans le langage
-(c'est-à-dire supporté nativement dans le langage, et non au travers d'une
-librairie).
+Une expression régulière est un objet mathématique permettant de décrire un
+ensemble de textes qui possèdent des propriétés communes;  vous en connaissez
+peut-être un exemple, si vous utilisez au moins parfois un terminal et que vous
+tapez&nbsp;:
+
+    $ dir *.txt
+
+et dans ce cas précis l'expression régulière *filtre* toutes les chaînes qui se
+terminent par `.txt`
+
+Le langage **Perl** avait été le premier à populariser l'utilisation des
+expressions régulières, en en faisant un "citoyen de première classe" dans le
+langage (c'est-à-dire supporté nativement dans le langage, et non au travers
+d'une librairie).
 
 En python, les expressions régulières sont disponibles de manière plus
 traditionnelle, via le module `re` de la librairie standard, dont nous allons
 dire quelques mots.
+
+Dans la commande ci-dessus, `*.txt` est une expression régulière très simple. Le
+module `re` fournit le moyen de construire des expressions régulières très
+élaborées et plus puissantes que ce que supporte le terminal. C'est pourquoi la
+syntaxe des regexps de `re` est un peu différente; par exemple pour rechercher
+(on dit encore filtrer, de l'anglais *pattern matching*) la même famille de
+chaînes que `*.txt` avec le module `re`, il nous faudra écrire l'expression
+régulière sous une forme légèrement différente.
+
+Le propos de ce complément est de vous donner une première introduction au
+module `re`.
 
 
     import re
@@ -29,25 +50,6 @@ Tant que vous exécutez ceci dans le notebook sur la plateforme, en principe tou
 le monde verra exactement la même chose. Par contre si vous faites tourner le
 même code sur votre ordinateur, il se peut que vous obteniez des résultats
 différents.
-
-##### Petits outils d'affichage
-
-Pour améliorer la présentation, nous allons nous définir deux petits
-outils&nbsp;:
-
-
-    # mettre en colonnes les inputs et les regexps
-    def i_r (input, cols_in, regexp=None, cols_re=0):
-        if regexp:
-            return "IN={} - RE={} ->".format(input.rjust(cols_in),
-                                             regexp.ljust(cols_re))
-        else:
-            return "IN={} ->".format(input.rjust(cols_in))
-    
-    # afficher 'Match' ou 'None' plutôt que l'objet Match
-    def m (match):
-        return 'MATCH' if match else 'Nope'
-        
 
 ### Un exemple simple
 
@@ -115,6 +117,36 @@ l'intérieur des expressions régulières est d'un usage assez courant. C'est
 pourquoi on **utilise fréquemment un *raw-string*** pour décrire une expression
 régulière, et en général à chaque fois qu'elle comporte un *backslash*.
 
+### (Petits outils d'affichage)
+
+Avant de voir un deuxième exemple, nous allons digresser à nouveau, et pour
+améliorer la présentation, nous allons nous écrire deux petits outils de mise en
+page, qui n'ont rien à voir avec les expressions régulières *per se*&nbsp;:
+
+
+    # mettre en colonnes les inputs et les regexps
+    def i_r (input, cols_in, regexp=None, cols_re=0):
+        if regexp:
+            return "IN={} - RE={} ->".format(input.rjust(cols_in),
+                                             regexp.ljust(cols_re))
+        else:
+            return "IN={} ->".format(input.rjust(cols_in))
+    
+    # afficher 'Match' ou 'None' plutôt que l'objet Match
+    def m (match):
+        return 'MATCH' if match else 'Nope'    
+
+Nous utiliserons `i_r` avec des tailles de colonnes choisies à la main,
+comme&nbsp;:
+
+
+    input = 'abd'
+    regexp = 'a[bc]d'
+    print i_r(input, 4, regexp, 7), m(re.match(regexp, input))
+
+Ici 4 et 7 représentent la largeur des colonnes pour afficher `abd` et `a[bc]d`
+respectivement.
+
 ### Un deuxième exemple
 
 Nous allons maintenant voir comment on peut, d'abord vérifier si une chaîne est
@@ -135,13 +167,14 @@ Avec ces trois chaines en entrée&nbsp;:
 
 ##### `match`
 
-Pour commencer, voyons que l'on peut facilement vérifier si une chaîne vérifie
-ou non ce critère&nbsp;:
+Pour commencer, voyons que l'on peut facilement **vérifier si une chaîne
+vérifie** ou non ce critère&nbsp;:
 
 
     regexp1 = "[0-9]+[A-Za-z]+[0-9]+[A-Za-z]+[0-9]+"
 
-Ce qui nous donne
+Ce qui nous donne, en utilisant les helpers `i_r` et `m` pour la mise en
+page&nbsp;:
 
 
     for input in inputs:
@@ -170,8 +203,8 @@ Maintenant, on va même pouvoir donner un nom à un morceau de la regexp, ici
     # la même regexp, mais on donne un nom à un morceau
     regexp2 = "[0-9]+[A-Za-z]+(?P<needle>[0-9]+)[A-Za-z]+[0-9]+"
 
-Et une fois que c'est fait on peut demander à l'outil de nous retrouver la
-partie correspondante dans la chaine initiale&nbsp;:
+Et une fois que c'est fait on peut demander à l'outil de nous **retrouver la
+partie correspondante** dans la chaine initiale&nbsp;:
 
 
     print re.match(regexp2, haystack).group('needle')
@@ -186,15 +219,66 @@ la chaîne; dans l'exemple ci-dessus on pourrait ajouter comme contrainte que le
 premier et le dernier groupes de chiffres soient identiques comme ceci&nbsp;:
 
 
-    regexp = "(?P<id>[0-9]+)[A-Za-z]+(?P<needle>[0-9]+)[A-Za-z]+(?P=id)"
+    regexp3 = "(?P<id>[0-9]+)[A-Za-z]+(?P<needle>[0-9]+)[A-Za-z]+(?P=id)"
 
 Avec les mêmes entrées que tout à l'heure
 
 
     for input in inputs:
-        print i_r(input,15), m(re.match(regexp, input))
+        print i_r(input,15), m(re.match(regexp3, input))
 
 La nouveauté ici est la **backreference** `(?P=id)`.
+
+### Comment utiliser la librairie
+
+##### Fonctions de commodité et *workflow*
+
+Comme vous le savez peut-être, une expression régulière décrite sous forme de
+chaîne, comme par exemple `"\w*[am]\W"`, peut être traduite dans un automate
+fini qui permet de faire le filtrage avec une chaîne. C'est ce qui explique le
+*workflow* que nous avons résumé dans cette figure&nbsp;:
+
+<img src="media/re-workflow.png">
+
+La méthode recommandée pour utiliser la librairie, lorsque vous avez le même
+*pattern* à appliquer à un grand nombre de chaînes, est de
+ * compiler **une seule fois** votre chaîne en un objet de la classe
+`re.RegexObject`, en utilisant `re.compile`,
+ * puis d'**utiliser directement cet objet** autant de fois que vous avez de
+chaînes.
+
+Nous avons utilisé dans les exemples plus haut (et nous continuerons plus bas
+pour une meilleure lisibilité) des **fonctions de commodité** du module, qui ne
+**sont pas forcément** adaptées dans tous les cas.
+
+Ces fonctions de commodité fonctionnent toutes sur le même thème&nbsp;:
+
+`re.match (regexp, input)`  $\Longleftrightarrow$
+`re.compile(regexp).match(input)`
+
+C'est ainsi qu'au lieu de faire comme plus haut&nbsp;:
+
+
+    # imaginez 10**4 chaînes dans inputs
+    for input in inputs:
+        print i_r(input,15), m(re.match(regexp3, input))
+
+dans du vrai code on fera plutôt&nbsp;:
+
+
+    # on compile la chaîne en automate une seule fois
+    re_obj3 = re.compile (regexp3)
+    
+    # ensuite on part directement de l'automate
+    for input in inputs:
+        print i_r(input,15), m(re_obj3.match(input))
+
+qui ne compile qu'une fois la chaîne en automate, et donc est plus efficace.
+
+##### Exploiter le résultat
+
+
+    Les fonctions qui retournent un objet de la classe `re.MatchObject` 
 
 ### Comment construire une expression régulière
 
@@ -297,6 +381,18 @@ Pour pouvoir faire des montages élaborés il faut pouvoir parenthéser&nbsp;:
     for input in [ 'abcf', 'adef', 'abf' ]:
         print i_r(input, 4, regexp, 9), m(re.match(regexp, input))
 
+Les parenthèses jouent un rôle additionel de **groupe**; ce qui signifie qu'on
+**peut retrouver** le texte correspondant à l'expression régulière comprise dans
+les `()`. Par exemple pour le premier match&nbsp;:
+
+
+    input = 'abcf'
+    print i_r(input, 4, regexp, 9), re.match(regexp, input).groups()
+
+dans cet exemple, on n'a utilisé qu'un seul groupe `()`, et le morceau de chaîne
+qui correspond à ce groupe se trouve donc être le seul groupe retourné par
+`MatchObject.group`.
+
 ##### Compter les répétitions
 
 Vous disposez des opérateurs suivants&nbsp;:
@@ -319,6 +415,11 @@ exactement équivalent à `*<re>*{0,1}`.
         line_regexp = r"\A{}\Z".format(regexp)
         for input in inputs:
             print i_r(input, 8, line_regexp, 13), m(re.match(line_regexp, input))
+
+##### Nommer les groupes
+
+Nous avons déjà vu un exemple de groupe nommé (voir `needle` plus haut); les
+opérateurs que l'on peut citer dans cette
 
 ### Greedy *vs* non-greedy
 
@@ -359,3 +460,12 @@ matche, dans une approche dite *non-greedy*&nbsp;:
 On peut mettre un "\n" comme caractère (et faire des RE multilignes)
 
 lexer + parser
+
+
+    faire un quiz avec plusieurs réponses possibles pour *.txt en shell -> re()
+    
+    regexp = r`.*\.txt`
+    
+    faire un exo sur les RE et les URLs
+    retrouver le protocole, le hostname, le numéro de port, le path
+    v2 : idem + login/password
