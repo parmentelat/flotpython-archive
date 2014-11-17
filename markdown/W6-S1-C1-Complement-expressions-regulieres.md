@@ -40,7 +40,7 @@ Voici deux exemples de chaînes.
 
 ##### `findall`
 
-On peut chercher tous les mots se terminant par a ou m dans une chaîne en
+On peut **chercher tous** les mots se terminant par a ou m dans une chaîne en
 faisant&nbsp;:
 
 
@@ -65,7 +65,7 @@ fonction de votre LOCALE, on y reviendra;
 ##### `split`
 
 Une autre forme simple d'utilisation des regexps est `re.split`, qui fournit une
-fonctionnalité voisine de `str.split` qu'on a vue en semaine 2, mais ou les
+**fonctionnalité voisine de `str.split`** qu'on a vue en semaine 2, mais ou les
 séparateurs sont exprimés comme une expression régulière; ou encore on peut le
 voir un peu comme la négation de `findall`&nbsp;:
 
@@ -80,8 +80,8 @@ c'est-à-dire toute suite d'au moins caractère non alphanumérique.
 ##### Pourquoi un *raw-string* ?
 
 En guise de digression, il n'y a aucune obligation à utiliser un *raw-string*;
-d'ailleurs il n'y a pas de différence de nature entre un *raw-string* et une
-chaîne usuelle&nbsp;:
+d'ailleurs on rappelle qu'il n'y a pas de différence de nature entre un *raw-
+string* et une chaîne usuelle&nbsp;:
 
 
     raw = r'abc'
@@ -94,7 +94,7 @@ chaîne usuelle&nbsp;:
 Il se trouve que, comme dans notre premier exemple, le *backslash* `\` à
 l'intérieur des expressions régulières est d'un usage assez courant. C'est
 pourquoi on **utilise fréquemment un *raw-string*** pour décrire une expression
-régulière.
+régulière, et en général à chaque fois qu'elle comporte un *backslash*.
 
 ### Un deuxième exemple
 
@@ -106,13 +106,15 @@ Pour cela supposons qu'on s'intéresse aux chaînes qui comportent 5 parties, un
 suite de chiffres, une suite de lettres, des chiffres à nouveau, des lettres, et
 enfin de nouveau des chiffres.
 
-Avec ces deux chaines en entrée&nbsp;:
+Avec ces trois chaines en entrée&nbsp;:
 
 
     inputs = [ '890hj000nnm890',    # cette entrée convient
                '123abc456def789',   # celle-ci aussi
                '8090abababab879',   # celle-ci non
                ]
+
+##### `match`
 
 Pour commencer, voyons que l'on peut facilement vérifier si une chaîne vérifie
 ou non ce critère&nbsp;:
@@ -124,7 +126,7 @@ Ce qui nous donne
 
 
     for input in inputs:
-        print '---> input',input
+        print 'input',input, "--> \t",
         print re.match(regexp1, input)
 
 Ici plutôt que d'utiliser les raccourcis comme `\w` j'ai préféré écrire
@@ -172,7 +174,7 @@ Avec les mêmes entrées que tout à l'heure
 
 
     for input in inputs:
-        print '---> input',input
+        print 'input',input,"-->\t",
         print re.match(regexp, input)
 
 La nouveauté ici est la **backreference** `(?P=id)`.
@@ -187,9 +189,11 @@ donne une version exhaustive.
 ##### La brique de base : le caractère
 
 Au commencement il faut spécifier des caractères&nbsp;:
- * **un seul** caractère : vous le citez tel quel, en le précédent d'un
-backslash `\` s'il a par ailleurs un sens spécial dans le micro-langage de
-regexps (comme `+`, `*`, `[` et autres ...);
+ * **un seul** caractère :
+   * vous le citez tel quel, en le précédent d'un backslash `\` s'il a par
+ailleurs un sens spécial dans le micro-langage de regexps (comme `+`, `*`, `[`
+et autres ...),
+   * sachant que par ailleurs le `.`  est le *wildcard* pour un seul caractère;
  * **un ensemble** de caractères avec la notation `[...]` qui permet de décrire
    * ex. `[a1=]` : un ensemble in extenso, ici un caractère parmi les 3: `a`,
 `1`, ou `=`,
@@ -206,12 +210,24 @@ et `\S` (les autres),
    * `\d` pour les chiffres, et `\D` (les autres),
 
 
+
+    input = "abcd"
+    
+    for regexp in ['abcd', 'ab[cd][cd]', r'abc.', r'abc\.']:
+        print regexp, "-> \t", re.match(regexp, input)
+
+Pour ce dernier exemple, comme on a backslashé le `.` il faut que la chaîne en
+entrée contienne vraiment un `.`&nbsp;:
+
+
+    print re.match (r"abc\.", "abc.")
+
 ##### En série ou en parallèle
 
 Si je fais une analogie avec les montages électriques, jusqu'ici on a vu le
 montage en série&nbsp;: on met des expressions régulières bout à bout, qui
-matchent la chaine en entrée séquentiellement du début à la fin. On a *un peu*
-de marge pour spécifier des alternatives, lorsqu'on fait par exemple
+filtrent (`match`) la chaine en entrée séquentiellement du début à la fin. On a
+*un peu* de marge pour spécifier des alternatives, lorsqu'on fait par exemple
 
     "ab[cd]ef"
 
@@ -220,8 +236,10 @@ n'ont pas grand-chose à voir comme `abc` **ou** `def`, il faut en quelque sorte
 mettre deux regexps en parallèle, et c'est ce que permet l'opérateur `|`
 
 
-    for input in [ 'abc', 'def', 'xxx' ]:
-        print input, re.match("abc|def", input)
+    regexp = "abc|def"
+    
+    for input in [ 'abc', 'def', 'aef' ]:
+        print input, re.match(regexp, input)
 
 ##### Fin(s) de chaîne
 
@@ -240,24 +258,39 @@ préférence à `^`qui est déjà pas mal surchargé;
 
 Reportez-vous à la documentation pour le détails des différences.
 
+
+    input = 'abcd'
+    
+    for regexp in [ 'bc', r'\Aabc', '^abc', r'\Abc', '^bc', r'bcd\Z', 'bcd$', r'bc\Z', 'bc$' ]:
+        print regexp, "->   \t", re.search(regexp,input)
+
+On a en effet bien le pattern `bc` dans la chaine en entrée, mais il n'est ni au
+début ni à la fin.
+
 ##### Parenthéser - (grouper)
 
-Du coup pour pouvoir faire des montages élaborés il faut pouvoir
-parenthéser&nbsp;:
+Pour pouvoir faire des montages élaborés il faut pouvoir parenthéser&nbsp;:
 
 
+    # une parenthése dans une RE pour mettre en ligne
+    # un début 'a', deux possibilités pour le milieu 'bc' ou 'de' 
+    # et une fin 'f'
     for input in [ 'abcf', 'adef', 'abf' ]:
         print input, re.match("a(bc|de)f", input)
 
-##### Comment compter
+##### Compter les répétitions
 
 Vous disposez des opérateurs suivants&nbsp;:
- * ex. `(ab)*` l'étoile `*` qui signifie n'importe quel nombre, même nul,
-d'occurrences,
- * ex. `(ab)+` le plus `+` qui signifie au moins une occurrence
- * ex. `(ab){3}` pour exactement 3 occurrences de `(ab)`, ici ce serait
-exactement équivalent à `ababab`
- * ex. `(ab){3,4}` entre 3 et 4 fois
+ * `*` l'étoile qui signifie n'importe quel nombre, même nul, d'occurrences  -
+par exemple, `(ab)*` pour indiquer `''` ou `'ab'` ou `'abab'` ou etc.,
+ * `+` le plus qui signifie au moins une occurrence - e.g. `(ab)+` pour `ab` ou
+`abab` ou `ababab` ou etc.
+ * `?` qui indique une option, c'est-à-dire 0 ou 1 occurence - e.g. `(ab)?` pour
+`''` ou `ab`,
+ * `{n}` pour exactement n occurrences de `(ab)` - e.g. `(ab){3}` qui serait
+exactement équivalent à `ababab`;
+ * `{m,n}` entre m et n fois inclusivement, c'est-à-dire que `*<re>*?` est
+exactement équivalent à `*<re>*{0,1}`.
 
 
     inputs = [ n*'ab'for n in [0, 1, 3, 4]] + [ 'foo' ]
@@ -266,9 +299,41 @@ exactement équivalent à `ababab`
         # on ajoute \A \Z pour matcher toute la chaine
         line_regexp = r"\A{}\Z".format(regexp)
         for input in inputs:
-            print 'RE', line_regexp, 'INPUT', input, '->', re.match(line_regexp, input)
+            print 'RE', line_regexp, '    \tINPUT', input, '->       \t', re.match(line_regexp, input)
 
 ### Greedy *vs* non-greedy
+
+Lorsqu'on stipule une répétition un nombre indéfini de fois, il se peut qu'il
+existe **plusieurs** façons de filtrer l'entrée avec l'expression régulière. Que
+ce soit avec `*`, ou `+`, ou `?`, l'algorithme va toujours essayer de trouver la
+**séquence la plus longue**, c'est pourquoi on qualifie l'approche de *greedy* -
+quelque chose comme glouton en français&nbsp;:
+
+
+    # si on cherche `<.*>` dans cette chaîne
+    line='<h1>Title</h1>'
+    
+    # sans rien préciser
+    re_greedy = '<(.*)>'
+    
+    # on obtient
+    match = re.match(re_greedy, line)
+    match.groups()
+
+
+Ça n'est pas forcément ce qu'on voulait faire; aussi on peut spécifier
+l'approche inverse, c'est-à-dire de trouver la **plus-petite** chaîne qui
+matche, dans une approche dite *non-greedy*&nbsp;:
+
+
+    # la version non-greedy a un point d'interrogation après +, * ou ?
+    re_non_greedy = re_greedy = '<(.*?)>'
+    
+    # et cette fois, on obtient
+    match = re.match(re_non_greedy, line)
+    match.groups()
+    
+
 
 ****
 
