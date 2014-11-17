@@ -30,9 +30,24 @@ le monde verra exactement la même chose. Par contre si vous faites tourner le
 même code sur votre ordinateur, il se peut que vous obteniez des résultats
 différents.
 
-### Préliminaire
+##### Petits outils d'affichage
 
-Nous allons nous définir un utilitaire de mise en page
+Pour améliorer la présentation, nous allons nous définir deux petits
+outils&nbsp;:
+
+
+    # mettre en colonnes les inputs et les regexps
+    def i_r (input, cols_in, regexp=None, cols_re=0):
+        if regexp:
+            return "IN={} - RE={} ->".format(input.rjust(cols_in),
+                                             regexp.ljust(cols_re))
+        else:
+            return "IN={} ->".format(input.rjust(cols_in))
+    
+    # afficher 'Match' ou 'None' plutôt que l'objet Match
+    def m (match):
+        return 'MATCH' if match else 'Nope'
+        
 
 ### Un exemple simple
 
@@ -120,22 +135,6 @@ Avec ces trois chaines en entrée&nbsp;:
 
 ##### `match`
 
-
-    def repr_i_r_m (input, cols_in, regexp, cols_re, match):
-        match_message = 'MATCH' if match else 'None'
-        return "IN:{} - RE:{} - {}".format(input.rjust(cols_in),regexp.ljust(cols_re),match_message)
-        
-    def repr_i_m (input, cols_in, match):
-        match_message = 'MATCH' if match else 'None'
-        return "IN:{} - {}".format(input.rjust(cols_in), match_message)    
-    
-    def i_r (input, cols_in, regexp=None, cols_re=0):
-        if regexp:
-            return "IN={} - RE={} ->".format(input.rjust(cols_in),regexp.ljust(cols_re))
-        else:
-            return "IN={} ->".format(input.rjust(cols_in))
-        
-
 Pour commencer, voyons que l'on peut facilement vérifier si une chaîne vérifie
 ou non ce critère&nbsp;:
 
@@ -146,7 +145,7 @@ Ce qui nous donne
 
 
     for input in inputs:
-        print i_r (input,15), re.match(regexp1, input)
+        print i_r (input,15), m(re.match(regexp1, input))
 
 Ici plutôt que d'utiliser les raccourcis comme `\w` j'ai préféré écrire
 explicitement les ensembles de caractères en jeu; ce cette façon on rend son
@@ -193,9 +192,7 @@ Avec les mêmes entrées que tout à l'heure
 
 
     for input in inputs:
-        print i_r(input,15),
-        print 'input',input,"-->\t",
-        print re.match(regexp, input)
+        print i_r(input,15), m(re.match(regexp, input))
 
 La nouveauté ici est la **backreference** `(?P=id)`.
 
@@ -234,7 +231,7 @@ et `\S` (les autres),
     input = "abcd"
     
     for regexp in ['abcd', 'ab[cd][cd]', r'abc.', r'abc\.']:
-        print i_r(input, 4, regexp,10), re.match(regexp, input)
+        print i_r(input, 4, regexp,10), m(re.match(regexp, input))
 
 Pour ce dernier exemple, comme on a backslashé le `.` il faut que la chaîne en
 entrée contienne vraiment un `.`&nbsp;:
@@ -259,7 +256,7 @@ mettre deux regexps en parallèle, et c'est ce que permet l'opérateur `|`
     regexp = "abc|def"
     
     for input in [ 'abc', 'def', 'aef' ]:
-        print i_r(input, 3, regexp,7), re.match(regexp, input)
+        print i_r(input, 3, regexp,7), m(re.match(regexp, input))
 
 ##### Fin(s) de chaîne
 
@@ -282,7 +279,7 @@ Reportez-vous à la documentation pour le détails des différences.
     input = 'abcd'
     
     for regexp in [ 'bc', r'\Aabc', '^abc', r'\Abc', '^bc', r'bcd\Z', 'bcd$', r'bc\Z', 'bc$' ]:
-        print i_r(input, 4, regexp, 5), re.search(regexp,input)
+        print i_r(input, 4, regexp, 5), m(re.search(regexp,input))
 
 On a en effet bien le pattern `bc` dans la chaine en entrée, mais il n'est ni au
 début ni à la fin.
@@ -298,7 +295,7 @@ Pour pouvoir faire des montages élaborés il faut pouvoir parenthéser&nbsp;:
     regexp = "a(bc|de)f"
     
     for input in [ 'abcf', 'adef', 'abf' ]:
-        print i_r(input, 4, regexp, 9), re.match(regexp, input)
+        print i_r(input, 4, regexp, 9), m(re.match(regexp, input))
 
 ##### Compter les répétitions
 
@@ -321,7 +318,7 @@ exactement équivalent à `*<re>*{0,1}`.
         # on ajoute \A \Z pour matcher toute la chaine
         line_regexp = r"\A{}\Z".format(regexp)
         for input in inputs:
-            print i_r(input, 8, line_regexp, 13), re.match(line_regexp, input)
+            print i_r(input, 8, line_regexp, 13), m(re.match(line_regexp, input))
 
 ### Greedy *vs* non-greedy
 
