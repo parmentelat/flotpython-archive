@@ -59,8 +59,18 @@ au début, à la fin, ou au milieu d'une ligne
 
 
     # écrivez votre code ici
-    def carre(ligne):
-        "<votre_code>"
+    def carre(s):
+        # on enlève les espaces et les tabulations
+        s = s.replace(' ', '').replace('\t','')
+        # la ligne suivante fait le plus gros du travail
+        # d'abord on appelle split() pour découper selon les ';'
+        # dans le cas où on a des ';' en trop, on obtient dans le 
+        #    résultat du split un 'token' vide, que l'on ignore 
+        #    ici avec le clause 'if token'
+        # enfin on convertit tous les tokens restants en entiers avec int()
+        entiers = [int(token) for token in s.split(";") if token]
+        # il n'y a plus qu'à mettre au carré, et à recoudre (join) avec ':'
+        return ":".join ([str(entier**2) for entier in entiers])
 
 
     # pour corriger

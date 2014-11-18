@@ -70,7 +70,7 @@ def multi_tri(listes):
 ##################################################
 def multi_tri_reverse(listes, reverses):
     """trie toutes les sous listes, dans une direction
-    precisée par le second argument"""
+    précisée par le second argument"""
     # zip() permet de faire correspondre les éléments 
     # de listes avec ceux de reverses
     for liste, reverse in zip(listes, reverses):
@@ -91,7 +91,7 @@ def liste_racines(p):
     # souvenez vous que 1j c'est notre 'i' complexe
     return [e**((2*pi*1j*n)/p) for n in range(p)]
 
-# Il est tout à fait possible aussi de contruire les racines pas à pas
+# Il est tout à fait possible aussi de construire les racines pas à pas
 # C'est un peu moins élégant mais ça fonctionne très bien aussi
 def liste_racines_bis(p):
     "retourne la liste des racines p-ièmes de l'unité"
@@ -175,8 +175,9 @@ def carre(s):
     #    ici avec le clause 'if token'
     # enfin on convertit tous les tokens restants en entiers avec int()
     entiers = [int(token) for token in s.split(";") if token]
-    # il n'y a plus qu'à mettre au carré, et à recoudre (join) avec ':'
-    return ":".join (["{}".format(entier**2) for entier in entiers])
+    # il n'y a plus qu'à mettre au carré, retraduire en strings,
+    # et à recoudre le tout avec join et ':'
+    return ":".join([str(entier**2) for entier in entiers])
 
 
 ##################################################
