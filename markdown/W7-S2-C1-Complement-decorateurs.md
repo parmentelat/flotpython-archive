@@ -503,16 +503,17 @@ après **la définition** de `fibo_cache`. Et donc on pourrait penser que la
 valeur de `timeout` ne serait plus disponible dans le contexte de `decoree`.
 
 Pour comprendre ce qui se passe, il faut se souvenir que python est un langage à
-liaison lexicale. Ce qui signifie que la *résolution* de la variable `timeout`
-se fait au moment de la compilation (de la production du byte-code), et non au
+liaison lexicale. Cela signifie que la *résolution* de la variable `timeout` se
+fait au moment de la compilation (de la production du byte-code), et non au
 moment où est appelé `decoree`.
 
-Ce type de construction s'appelle une **clotûre**, en référence au lambda
-calcul: on parle de terme clos lorsqu'il n'y a plus de référence non résolue
-dans une expression. C'est une technique de programmation très répandue
-notamment dans les applications réactives, où on programme beaucoup avec des
-*callbacks*; par exemple il est presque impossible de programmer en JavaScript
-sans écrire une clôture.
+Ce type de construction s'appelle [une
+**clotûre**](http://fr.wikipedia.org/wiki/Fermeture_%28informatique%29), en
+référence au lambda calcul&nbsp;: on parle de terme clos lorsqu'il n'y a plus de
+référence non résolue dans une expression. C'est une technique de programmation
+très répandue notamment dans les applications réactives, où on programme
+beaucoup avec des *callbacks*&nbsp;; par exemple il est presque impossible de
+programmer en JavaScript sans écrire une clôture.
 
 ### On peut chaîner les décorateurs
 
