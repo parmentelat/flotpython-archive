@@ -115,13 +115,20 @@ dans la vidéo&nbsp;:
         return n if n <= 1 else fibo_cache(n-1) + fibo_cache(n-2)
 
 Bien que l'implémentation utilise un algorithme épouvantablement lent, le fait
-de lui rajouter du caching redonne à l'ensemble un caractère linéaire et on peut
-calculer par exemple
+de lui rajouter du caching redonne à l'ensemble un caractère linéaire.
+
+En effet, si vous y réfléchissez une minute, vous verrez qu'avec le cache,
+lorsqu'on calcule `fibo_cache(n)`, on calcule d'abord `fibo_cache(n-1)`, puis
+lorsqu'on évalue `fibo_cache(n-2)` le résultat **est déjà dans le cache** si
+bien qu'on peut considérer ce deuxième calcul comme, sinon instantané, du moins
+du même ordre de grandeur qu'une addition.
+
+On peut calculer par exemple&nbsp;:
 
 
     fibo_cache(300)
 
-qu'il serait hors de question de calculer dans l'état.
+qu'il serait hors de question de calculer sans le caching.
 
 On peut naturellement inspecter le cache, qui est rangé dans l'attribut `cache`
 de l'objet fonction lui-même&nbsp;:
@@ -171,7 +178,8 @@ ce décorateur&nbsp;;
  * tout aussi évidemment, la consommation mémoire peut être importante si on
 applique le caching sans discrimination&nbsp;;
  * enfin en l'état la fonction decoree ne peut pas être appelée avec des
-arguments nommés.
+arguments nommés; en effet on utilise le tuple `args` comme clé pour retrouver
+dans le cache la valeur associée aux arguments.
 
 ### Décorateurs, *docstring* et `help`
 
@@ -251,8 +259,8 @@ De la même façon qu'on peut décorer une fonction, on peut décorer une classe
 Voyons comment tirer profit des décorateurs pour implémenter le pattern de
 `singleton`&nbsp;; une classe implémentée comme [un
 singleton](http://en.wikipedia.org/wiki/Singleton_pattern) est une classe qui
-n'existe qu'en un seul exemplaire&nbsp;; tous les appels au constructeur
-retournent une référence vers le même objet.
+n'existe qu'en un seul exemplaire (une seule instance); tous les appels au
+constructeur retournent une référence vers le même objet.
 
 Le décorateur `singleton` va nous permettre de transformer une classe en un
 singleton.
@@ -261,8 +269,11 @@ singleton.
     # le décorateur qui transforme une classe en singleton
     
     # le code gère correctement *args et **kwds, même si généralement
-    # dans le cas d'un singleton on ne peut pas passer d'argument
+    # dans le cas d'un singleton on n'a pas d'argument à passer
     # au constructeur
+    
+    # vous pouvez réactivier les lignes de print si vous voulez 
+    # mieux voir ce qui se passe
     
     class singleton(object):
         '''make the class a singleton'''
@@ -299,7 +310,7 @@ singleton.
         # il faut construire un objet de la classe a decorer
         def __call__(self, *args, **kwds):
     #        print 'in __call__','self', self, 'args', args, 'kwds', kwds
-            return self.classe(*args)
+            return self.classe(*args, **kwds)
 
 
 ##### Le décorateur en action
@@ -329,9 +340,9 @@ singleton.
 
 La subtilité ici réside dans le fait que
 
-La méthode spéciale `__new__`, dont on n'avait pas parlé dans la Semaine 5,
-Séquence 'surcharge des opérateurs', fait partie de la même famille que
-`__init__` et autres `__repr__`.
+La méthode `__new__` fait partie de la même famille que `__init__` et autres
+`__repr__` dont on a parlé dans la Semaine 5, Séquence 'surcharge des
+opérateurs'.
 C'est une méthode spéciale également, et comme `__init__` elle est mise en jeu
 au moment de la création d'un objet.
 
@@ -429,6 +440,10 @@ Ce qui nous mène au code suivant&nbsp;:
 
     import time
     
+    # comme pour caching, on est limité ici et on ne peut pas
+    # supporter les appels à la **kwds, voir plus haut 
+    # la discussion sur l'implémentation de caching
+    
     # caching_expire est une factory à décorateur
     def caching_expire(timeout):
     
@@ -469,20 +484,42 @@ Ce qui nous mène au code suivant&nbsp;:
 
 
     @caching_expire(0.5)
-    def fibo_cache(n):
-        return n if n<=1 else fibo_cache(n-2)+fibo_cache(n-1)
+    def fibo_cache_expire(n):
+        return n if n<=1 else fibo_cache_expire(n-2)+fibo_cache_expire(n-1)
 
 
-    fibo_cache(300)
+    fibo_cache_expire(300)
 
 
-    fibo_cache.cache[(200,)]
+    fibo_cache_expire.cache[(200,)]
+
+##### Remarquez la clôture
+
+Pour conclure sur cet exemple, vous remarquez que dans le code de `decoree` on
+accède à la variable `timeout`. Ça peut paraître un peu étonnant, si vous pensez
+que `decoree` est appelée **bien après** que la fonction `caching_expire` ait
+fini son travail. En effet, `caching_expire` est évaluée **une fois** juste
+après **la définition** de `fibo_cache`. Et donc on pourrait penser que la
+valeur de `timeout` ne serait plus disponible dans le contexte de `decoree`.
+
+Pour comprendre ce qui se passe, il faut se souvenir que python est un langage à
+liaison lexicale. Ce qui signifie que la *résolution* de la variable `timeout`
+se fait au moment de la compilation (de la production du byte-code), et non au
+moment où est appelé `decoree`.
+
+Ce type de construction s'appelle une **clotûre**, en référence au lambda
+calcul: on parle de terme clos lorsqu'il n'y a plus de référence non résolue
+dans une expression. C'est une technique de programmation très répandue
+notamment dans les applications réactives, où on programme beaucoup avec des
+*callbacks*; par exemple il est presque impossible de programmer en JavaScript
+sans écrire une clôture.
 
 ### On peut chaîner les décorateurs
 
-Signalons enfin que l'on peut aussi "chaîner les décorateurs"&nbsp;; imaginons
-par exemple qu'on dispose d'un décorateur `add_field` qui ajoute dans une classe
-un *getter* et un *setter* basés sur un nom d'attribut.
+Pour revenir à notre sujet, signalons enfin que l'on peut aussi "chaîner les
+décorateurs"&nbsp;; imaginons par exemple qu'on dispose d'un décorateur
+`add_field` qui ajoute dans une classe un *getter* et un *setter* basés sur un
+nom d'attribut.
 
 C'est-à-dire que
 
