@@ -28,9 +28,9 @@ en quelque sorte.
 
 Naturellement, l'objet obtenu est difficile à imprimer de manière convaincante.
 Pour faire en sorte que cet objet soit tout de même imprimable, et éviter une
-boucle infinie, python utilise l'élipse `...` pour indiquer ce qu'on appelle une
-référence circulaire. Si on n'y prenait pas garde en effet, il faudrait écrire
-`[[[[ etc.. ]]]]` avec une infinité de crochets.
+boucle infinie, python utilise l'éllipse `...` pour indiquer ce qu'on appelle
+une référence circulaire. Si on n'y prenait pas garde en effet, il faudrait
+écrire `[[[[ etc.. ]]]]` avec une infinité de crochets.
 
 Toutes les fonctions de python ne sont pas aussi intelligentes. Bien qu'on
 puisse comparer cette liste avec elle-même:
