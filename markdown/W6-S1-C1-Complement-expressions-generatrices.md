@@ -22,32 +22,41 @@ crochets par des parenthèses, regardons cela.
 
 
     # c'est une compréhension de liste
-    c = [x**2 for x in xrange(500) if x%17==0] 
-    print c
+    comprehension = [x**2 for x in xrange(100) if x%17==0] 
+    print comprehension
 
 
     # c'est une expression génératrice
-    g = (x**2 for x in xrange(500) if x%17==0) 
-    print g
+    generator = (x**2 for x in xrange(100) if x%17==0) 
+    print generator
 
 Ensuite pour utiliser une expression génératrice, c'est très simple, on
 l'utilise comme n'importe quel itérateur.
 
 
-    g is iter(g) # g est bien un itérateur
+    generator is iter(generator) # generator est bien un itérateur
 
 
-    # affiche les 30 premiers carrés des multiples de 17
-    for count, carre in enumerate(g):
-        print '{}: carré mutiple de 17{}'.format(count+1, carre)
+    # affiche les 6 premiers carrés des multiples de 17
+    for count, carre in enumerate(generator):
+        print 'Contenu de generator après {} itérations : {}'.format(count+1, carre)
 
 Avec une expression génératrice on n'est plus limité comme avec les
 compréhensions par le nombre d'éléments&nbsp;:
 
 
-    # trop grand pour une compréhension
-    g = (x**2-1 for x in xrange(1000000000) if x%17==0) 
-    print g
+    # trop grand pour une compréhension,
+    # mais on peut créer le générateur sans souci
+    generator = (x**2 for x in xrange(10**18) if x%17==0) 
+    
+    # et utiliser le début, on ne paie que ce qu'on utilise
+    mon_set = set([])
+    for x in generator:
+        if x > 10**10:
+            break
+        elif str(x)[-4:] == '1316':
+            mon_set.add(x)
+    print len(mon_set)
 
 ## Complément - niveau avancé
 
@@ -57,25 +66,25 @@ des variables. C'est donc un objet très différent des compréhensions. Regardo
 un exemple.
 
 
-    class A:
-        val = 10
-        liste = [a + val for a in range(10)]
+    class Comprehension:
+        increment = 10
+        liste = [a + increment for a in range(10)]
 
 Il n'y a pas de difficultés particulières ici, on peut regarder l'attribut liste
-de l'objet classe A.
+de l'objet classe `Comprehension`.
 
 
-    print A.liste
+    print Comprehension.liste
 
 Remplaçons maintenant la compréhension par une expression génératrice.
 
 
-    class B:
-        val = 10
-        liste = (a + val for a in range(10))
+    class Generator:
+        increment = 10
+        liste = (a + increment for a in range(10))
 
 
-    print B.liste
+    print Generator.liste
 
 Cela fonctionne toujours. Que se passe-t-il si l'on transforme maintenant
 immédiatement notre expression génétratrice en liste (notons que lorsque
@@ -83,57 +92,58 @@ l'expression génératrice est passée à une fonction, on peut omettre les
 parenthèses autour de l'expression).
 
 
-    class C:
-        val = 10
-        liste = list(a + val for a in range(10))
+    class Mixed:
+        increment = 10
+        liste = list(a + increment for a in range(10))
 
-On obtient ici une exception qui nous dit que la variable globale `val` n'est
-pas définie. Quelles sont les différences entre les classes `A`, `B` et `C` ?
-Je vous rappelle que l'objet classe est créé au moment du chargement du module
-(ici, au moment de l'évaluation de la cellule), mais que les objets de type
-fonction (donc les expressions génératrices) ne sont évalués qu'au moment de
-l'appel.
+On obtient ici une exception qui nous dit que la variable globale `increment`
+n'est pas définie. Quelles sont les différences entre les classes
+`Comprehension`, `Generator` et `Mixed` ?
+Je vous rappelle que les objets classe et fonction sont créés au moment du
+chargement du module (ici, au moment de l'évaluation de la cellule), mais que le
+corps de la fonction (donc aussi des expressions génératrices) n'est évalué
+qu'au moment de l'appel.
 
-Dans le cas de la classe `A`, la compréhension de liste est évaluée au moment de
-la création de l'objet classe `A`, lorsque l'on arrive sur la compréhension, la
-variable `var` est définie et vaut 10.
+Dans le cas de la classe `Comprehension`, la compréhension de liste est évaluée
+au moment de la création de l'objet classe `Comprehension`, lorsque l'on arrive
+sur la compréhension, la variable `increment` est définie et vaut 10.
 
-Dans le cas de la classe `B`, on a remplacé la compréhension par une expression
-génératrice. Cela a deux impacts&nbsp;: l'expression génératrice ne sera évaluée
-qu'à son premier appel, l'expression génératrice étant une fonction, elle ne
-peut pas accéder à l'espace de nommage de la classe. Donc, l'objet classe `B` a
-bien été créé, mais l'appel de la fonction génétratrice devrait échouer
-parqu'elle ne peut pas avoir accès à l'attribut `var` de la classe. Vérifions
-cela
+Dans le cas de la classe `Generator`, on a remplacé la compréhension par une
+expression génératrice. Cela a deux impacts&nbsp;: l'expression génératrice ne
+sera évaluée qu'à son premier appel, l'expression génératrice étant une
+fonction, elle ne peut pas accéder à l'espace de nommage de la classe. Donc,
+l'objet classe `Generator` a bien été créé, mais l'appel de la fonction
+génétratrice devrait échouer parqu'elle ne peut pas avoir accès à l'attribut
+`increment` de la classe. Vérifions cela
 
 
-    B.liste.next()
+    Generator.liste.next()
 
-Effectivement, on obtient bien une exception. Dans le cas de `C`, on a
+Effectivement, on obtient bien une exception. Dans le cas de `Mixed`, on a
 immédiatement une exception parce que dans la classe on transforme immédiatement
 la compréhension en liste avec le contructeur `list`. C'est donc un appel à
 l'expression génératrice qui force l'évaluation de son code au moment de la
 création de la classe.
 
-Mais alors, comment peut-on faire marcher ce code ? On pourrait utiliser `C.val`
-dans l'expression, regardons cela.
+Mais alors, comment peut-on faire marcher ce code ? On pourrait utiliser
+`Mixed.val` dans l'expression, regardons cela.
 
 
-    class C:
-        val = 10
-        liste = list(a + C.val for a in range(10))
+    class Mixed:
+        increment = 10
+        liste = list(a + C.increment for a in range(10))
 
-Ça ne fonctionne toujours pas avec une erreur étrange... Le nom global `C`
-n'existe pas lorsque l'on fait `C.var`. En y réfléchissant, c'est tout à fait
-normal. L'objet classe `C` ne sera créé qu'à la fin de l'évaluation de son bloc
-de code, or lorsque l'on appel C.var, on est toujours en cours d'évaluation du
-bloc de code de la classe.
+Ça ne fonctionne toujours pas avec une erreur étrange... Le nom global `Mixed`
+n'existe pas lorsque l'on fait `Mixed.var`. En y réfléchissant, c'est tout à
+fait normal. L'objet classe `Mixed` ne sera créé qu'à la fin de l'évaluation de
+son bloc de code, or lorsque l'on appel C.var, on est toujours en cours
+d'évaluation du bloc de code de la classe.
 
-Comment s'en sortir alors ? Il y a principalement deux possibilités. Soit on
-utilise la construction avec une compréhension de liste qui, comme on l'a vu
-avec la classe `A`, fonctionne bien. Soit, on met notre expression génératrice à
-l'intérieur d'une fonction que l'on appelera plus tard après la création de
-l'objet classe.
+Comment s'en sortir alors ? Il y a de nombreuses possibilités. Par exemple, on
+peut utiliser la construction avec une compréhension de liste qui, comme on l'a
+vu avec la classe `Comprehension`, fonctionne bien. On peut aussi mettre notre
+expression génératrice à l'intérieur d'une fonction que l'on appelera plus tard
+après la création de l'objet classe.
 
 ### Pour aller plus loin
 
