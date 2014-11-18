@@ -117,7 +117,7 @@ l'intérieur des expressions régulières est d'un usage assez courant. C'est
 pourquoi on **utilise fréquemment un *raw-string*** pour décrire une expression
 régulière, et en général à chaque fois qu'elle comporte un *backslash*.
 
-### (Petits outils d'affichage)
+### (Digression : petits outils d'affichage)
 
 Avant de voir un deuxième exemple, nous allons digresser à nouveau, et pour
 améliorer la présentation, nous allons nous écrire deux petits outils de mise en
@@ -256,6 +256,7 @@ Ces fonctions de commodité fonctionnent toutes sur le même thème&nbsp;:
 `re.match (regexp, input)`  $\Longleftrightarrow$
 `re.compile(regexp).match(input)`
 
+
 C'est ainsi qu'au lieu de faire comme plus haut&nbsp;:
 
 
@@ -277,8 +278,13 @@ qui ne compile qu'une fois la chaîne en automate, et donc est plus efficace.
 
 ##### Exploiter le résultat
 
+Les fonctions qui retournent un objet de la classe `re.MatchObject`
 
-    Les fonctions qui retournent un objet de la classe `re.MatchObject` 
+##### Les différents modes
+
+ignorecase, unicode, ....
+
+~~un texte barré~~
 
 ### Comment construire une expression régulière
 
