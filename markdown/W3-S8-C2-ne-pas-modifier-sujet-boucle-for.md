@@ -10,7 +10,8 @@ de la boucle.
 Ainsi par exemple il ne **faut pas faire** quelque chose comme ceci:
 
 
-    # on veut enlever de l'ensemble toutes les chaines qui ne commencent pas par 'a'
+    # on veut enlever de l'ensemble toutes les chaines 
+    # qui ne commencent pas par 'a'
     ensemble = {'marc', 'albert'}
     
     # ceci semble une bonne idée mais ne fonctionne pas
@@ -25,10 +26,11 @@ Lorsqu'on est dans ce cas de figure, il suffit de faire la boucle sur une
 
 
     from copy import copy
-    # on veut enlever de l'ensemble toutes les chaines qui ne commencent pas par 'a'
+    # on veut enlever de l'ensemble toutes les chaines 
+    # qui ne commencent pas par 'a'
     ensemble = {'marc', 'albert'}
     
-    # ceci semble une bonne idée mais ne fonctionne pas
+    # si on fait d'abord une copie tout va bien
     for valeur in copy(ensemble):
         if valeur[0] != 'a':
             ensemble.discard(valeur)
