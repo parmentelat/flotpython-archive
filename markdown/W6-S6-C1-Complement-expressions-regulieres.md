@@ -4,14 +4,13 @@
 ## Complément - niveau intermédiaire
 
 Une expression régulière est un objet mathématique permettant de décrire un
-ensemble de textes qui possèdent des propriétés communes;  vous en connaissez
-peut-être un exemple, si vous utilisez au moins parfois un terminal et que vous
-tapez&nbsp;:
+ensemble de textes qui possèdent des propriétés communes; par exemple, s'il vous
+arrive d'utiliser un terminal, et que vous tapez&nbsp;:
 
     $ dir *.txt
 
-et dans ce cas précis l'expression régulière *filtre* toutes les chaînes qui se
-terminent par `.txt`
+l'expression régulière `*.txt` *filtre* toutes les chaînes qui se terminent par
+`.txt`
 
 Le langage **Perl** avait été le premier à populariser l'utilisation des
 expressions régulières, en en faisant un "citoyen de première classe" dans le
@@ -19,12 +18,12 @@ langage (c'est-à-dire supporté nativement dans le langage, et non au travers
 d'une librairie).
 
 En python, les expressions régulières sont disponibles de manière plus
-traditionnelle, via le module `re` de la librairie standard, dont nous allons
-dire quelques mots.
+traditionnelle, via le module `re` de la librairie standard, que nous allons
+voir maintenant.
 
 Dans la commande ci-dessus, `*.txt` est une expression régulière très simple. Le
 module `re` fournit le moyen de construire des expressions régulières très
-élaborées et plus puissantes que ce que supporte le terminal. C'est pourquoi la
+élaborées et plus puissantes que ce que supporte le shell. C'est pourquoi la
 syntaxe des regexps de `re` est un peu différente; par exemple pour rechercher
 (on dit encore filtrer, de l'anglais *pattern matching*) la même famille de
 chaînes que `*.txt` avec le module `re`, il nous faudra écrire l'expression
@@ -43,7 +42,7 @@ complément.
 ### Avertissement
 
 Dans ce complément nous serons amenés à utiliser des traits qui dépendent du
-LOCALE, c'est-à-dire pour faire simple de comment un ordinateur est configuré
+LOCALE, c'est-à-dire pour faire simple de la configuration de l'ordinateur
 vis-à-vis de la langue.
 
 Tant que vous exécutez ceci dans le notebook sur la plateforme, en principe tout
@@ -53,16 +52,16 @@ différents.
 
 ### Un exemple simple
 
+##### `findall`
+
 Voici deux exemples de chaînes.
 
 
-    sentences = ['Lacus a donec, vitae gravida:; proin sociis.', 
+    sentences = ['Lacus a donec, vitae gravida proin sociis.', 
                  'Neque ipsum! rhoncus cras quam.']
 
-##### `findall`
-
-On peut **chercher tous** les mots se terminant par a ou m dans une chaîne en
-faisant&nbsp;:
+On peut **chercher tous** les mots se terminant par a ou m dans une chaîne avec
+`findall`&nbsp;:
 
 
     for sentence in sentences:
@@ -70,13 +69,13 @@ faisant&nbsp;:
         print re.findall (r"\w*[am]\W", sentence)
 
 Ce code permet de chercher toutes (`findall`) les occurrences de l'expression
-régulière, qui ici est le *raw-string* c'est-à-dire la chaîne
+régulière, qui ici est définie par le *raw-string*&nbsp;:
 
     `r"\w*[am]\W"`
 
 Nous verrons tout à l'heure comment fabriquer des expressions régulières plus en
-détail, mais pour démystifier au moins celle-ci, on a mis bout à bout des
-morceaux d'expression régulières&nbsp;:
+détail, mais pour démystifier au moins celle-ci, on a mis bout à bout les
+morceaux suivants&nbsp;:
  * `\w*` : il nous faut trouver une sous-chaîne qui commence par un nombre
 quelconque, y compris nul (`*`) de caractères alphanumériques (`\w`); ceci est
 défini en fonction de votre LOCALE, on y reviendra;
