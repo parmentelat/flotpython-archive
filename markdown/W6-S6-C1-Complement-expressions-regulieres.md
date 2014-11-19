@@ -307,6 +307,18 @@ dans du vrai code on fera plutôt&nbsp;:
 
 qui ne compile qu'une fois la chaîne en automate, et donc est plus efficace.
 
+##### Les méthodes sur la classe `RegexObject`
+
+Pour résumer ce qu'on a déjà vu pour l'essentiel, ce qu'on peut faire sur un
+objet de la classe `RegexObject`, ce sont entre autres les méthodes&nbsp;:
+ * `match` et `search`, qui cherchent un *match* soit uniquement au début
+(`match`) ou n'importe où dans la chaîne (`search`);
+ * `findall` et `split` pour chercher toutes les occurences (`findall`) ou leur
+négatif (`split`);
+ * `sub` (qui aurait pu sans doute s'appeler `replace`, mais c'est comme ça)
+pour remplacer les occurrences de pattern.
+
+
 ##### Exploiter le résultat
 
 Les **méthodes** disponibles sur la classe **`re.MatchObject`** sont
@@ -581,52 +593,60 @@ matche, dans une approche dite *non-greedy*&nbsp;:
 Il peut être utile, pour conclure cette présentation, de préciser un peu le
 comportement de la librairie vis-à-vis des fins de ligne.
 
-Le caractère de fin de ligne (qu'on peut, on le rappelle, insérer dans une
-chaîne avec un `\n` ou encore en utilisant des triples guillements) est
-(presque) considéré comme un caractère comme un autre.
+Historiquement, les expressions régulières telles qu'on les trouve dans les
+librairies C, donc dans `sed`, `grep` et autre utilitaires Unix, sont associées
+au modèle mental où on filtre les entrées ligne par ligne.
+
+Le module `re` en garde des traces, puisque&nbsp;:
 
 
     # un exemple de traitement des 'newline' 
-    input = """une entrée
+    input = u"""une entrée
     sur
     plusieurs
     lignes
     """
+
+
+    match = re.compile("(.*)").match(input)
+    match.groups()
+
+Vous voyez donc que l'attrape-tout `'.'` en fait n'attrape pas le caractère de
+fin de ligne `\n`, puisque si c'était le cas et  compte tenu du coté *greedy* de
+l'algorithme on devrait voir ici tout le contenu de `input`. Il existe un *flag*
+`re.DOTALL` qui permet de faire de `.` un vrai attrape-tout qui capture aussi
+les *newline*&nbsp;:
+
+
+    match = re.compile("(.*)", flags=re.DOTALL).match(input)
+    match.groups()
+
+Cela dit le caractère *newline* est par ailleurs considéré comme un caractère
+comme un autre, on peut le mentionner **dans une regexp** comme les autres;
+voici quelques exemples pour illustrer tout ceci&nbsp;:
+
+
+    # sans mettre le flag unicode \w ne matche que l'ASCII
+    match = re.compile("([\w ]*)").match(input)
+    match.groups()
+
+
+    # sans mettre le flag unicode \w ne matche que l'ASCII
+    match = re.compile("([\w ]*)", flags=re.U).match(input)
+    match.groups()
+
+
+    # si on ajoute \n à la liste des caractères attendus 
+    # on obtient bien tout le contenu initial
     
     # attention ici il ne FAUT PAS utiliser un raw string,
     # car on veut vraiment écrire un newline dans la regexp
-    match = re.compile("(?P<line1>.*)\n(?P<line2>.*)\n").match(input)
-    match.groups()
-
-Sauf que tout de même, on voit déjà que `.` est un peu spécial: il ne matche pas
-le '\n'.
-
-En effet si c'était le cas on devrait trouver pour `line1` toute l'entrée sauf
-la dernière ligne (rappelez vous le coté *greedy* de l'algorithme). Il existe un
-*flag* `re.DOTALL` qui permet de faire de `.` un vrai attrape-tout qui capture
-aussi les *newline*&nbsp;:
-
-
-    match = re.compile("(?P<line1>.*)\n(?P<line2>.*)\n", flags=re.DOTALL).match(input)
-    match.groups()
-
-Plutôt que de chercher à matcher un *newline*, la technique 'historique' pour
-gérer les débuts et fin de chaîne était basée sur les caractères spéciaux '^' et
-'$' qui matchent respectivement le début et la fin de la ligne (et qu'on trouve
-dans les librairies C, donc dans `sed`, `grep` et autre utilitaires Unix).
-
-
-    match = re.compile("(^.*$)", flags=re.DOTALL).match(input)
-    match.groups()
-
-
-    De la même façon,
-
-
-    faire un quiz avec plusieurs réponses possibles pour *.txt en shell -> re()
     
-    regexp = r`.*\.txt`
-    
-    faire un exo sur les RE et les URLs
-    retrouver le protocole, le hostname, le numéro de port, le path
-    v2 : idem + login/password
+    match = re.compile("([\w \n]*)", flags=re.UNICODE).match(input)
+    match.groups()
+
+### Conclusion
+
+La mise au point d'expressions régulières est certes un peu exigeante, et
+demande pas mal de pratique, mais permet d'écrire en quelques lignes des
+fonctionnalités très puissantes, c'est un investissement est rentable :)
