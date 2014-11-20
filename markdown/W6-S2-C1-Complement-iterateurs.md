@@ -5,14 +5,14 @@
 
 Dans ce complément nous allons&nbsp;:
  * tout d'abord dire quelques mots du module `itertools` qui fournit sous forme
-d'itérateurs des utilitaires communs qui peuvent être très utiles;
+d'itérateurs des utilitaires communs qui peuvent être très utiles&nbsp;;
  * puis dans la partie avancée du complément nous allons voir, comme un autre
 exemple d'itérateurs, comment implémenter notre propre itérateur des
 permutations d'un ensemble fini.
 
 ### Le module `itertools`
 
-À ce stade j'espère que vous savez trouver [la documentation du
+À ce stade, j'espère que vous savez trouver [la documentation du
 module](https://docs.python.org/2/library/itertools.html) que je vous invite à
 avoir sous la main.
 
@@ -27,7 +27,7 @@ comme les permutations, les combinaisons, le produit cartésien, etc.,
  * et enfin des itérateurs correspondants à des traits que nous avons déjà
 rencontrés, mais implémentés sous forme d'itérateurs.
 
-À nouveau toutes ces fonctionnalités sont offertes **sous la forme
+À nouveau, toutes ces fonctionnalités sont offertes **sous la forme
 d'itérateurs**.
 
 Pour détailler un tout petit peu cette dernière famille, signalons&nbsp;:
@@ -36,14 +36,14 @@ Pour détailler un tout petit peu cette dernière famille, signalons&nbsp;:
 **itérateur**&nbsp;:
 
 
-    for x in itertools.chain ( (1,2), [3,4] ):
+    for x in itertools.chain((1, 2), [3, 4]):
         print x
 
  * `izip` qui comme son nom l'indique fait comme `zip` mais sous la forme d'un
 itérateur&nbsp;:
 
 
-    for a,b in itertools.izip( (1,2), [3,4] ):
+    for a,b in itertools.izip((1, 2), [3, 4]):
         print a, b
 
  * `islice` qui est une généralisation de `xrange`. Vous vous souvenez que
@@ -56,21 +56,21 @@ de travailler sur une séquence qui n'est pas les premiers entiers&nbsp;:
     print 'rappel string.ascii_lowercase=', support
     
     # range
-    for x in range (2):
+    for x in range(2):
         print x
     # islice
-    for x in itertools.islice (support, 2):
+    for x in itertools.islice(support, 2):
         print x
 
  * `imap` et `ifilter` qui sont les équivalents de `filter` et `map`. Ces deux-
 là sont donc à mettre en rapport avec les fonctions génératrices que l'on a vues
-dans la séquence précédente, dans ce sens que nous allons expliciter.
+dans la séquence précédente, dans le sens que nous allons expliciter.
 
  Vous vous souvenez que `map` et `filter` sont devenus obsolètes avec les
 compréhensions de liste. Sauf que, les compréhensions retournent, eh bien
-justement, une liste. Alors qu'en fait une fois qu'on s'est habitués à penser en
-termes d'itérateurs, on réalise que c'est souvent dommage que les compréhensions
-ne retournent pas plutôt un itérateur aussi.
+justement, une liste. Alors qu'en fait, une fois qu'on s'est habitués à penser
+en termes d'itérateurs, on réalise que c'est souvent dommage que les
+compréhensions ne retournent pas plutôt un itérateur aussi.
 
  Dans tous les cas, vous voyez que `imap` et `ifilter` sont un peu aux
 expressions génératrices   ce que `map` et `filter` sont aux compréhensions de
@@ -83,14 +83,13 @@ liste.
 ##### C'est quoi déjà les permutations ?
 
 En guise de rappel, l'ensemble des permutations d'un ensemble fini correspond à
-toutes les façons d'ordonner ses éléments; si l'ensemble est de cardinal $n$, il
-possède $n!$ permutations&nbsp;: on a $n$ façons de choisir le premier élément,
-$n-1$ façons de choisir le second, etc.
+toutes les façons d'ordonner ses éléments&nbsp;; si l'ensemble est de cardinal
+$n$, il possède $n!$ permutations&nbsp;: on a $n$ façons de choisir le premier
+élément, $n-1$ façons de choisir le second, etc.
 
-Comme on vient de le voir, un itérateur sur les permutations est disponible au
-travers du module standard `itertools`. Cependant il nous a semblé intéressant
-de vous montrer comment on pourrait écrire nous-mêmes cette fonctionnalité, de
-manière relativement simple.
+Un itérateur sur les permutations est disponible au travers du module standard
+`itertools`. Cependant il nous a semblé intéressant de vous montrer comment on
+pourrait écrire nous-mêmes cette fonctionnalité, de manière relativement simple.
 
 Pour illustrer le concept, à quoi ressemblent les 6 permutations d'un ensemble à
 trois éléments&nbsp;:
@@ -99,9 +98,9 @@ trois éléments&nbsp;:
     from itertools import permutations
 
 
-    set = {1,2,3}
+    set = {1, 2, 3}
     
-    for p in permutations (set):
+    for p in permutations(set):
         print p
 
 ##### Une implémentation 
@@ -117,8 +116,9 @@ Voici une implémentation possible pour un itérateur de permutations&nbsp;:
         def __init__(self, n):
             # le constructeur bien sûr ne fait (presque) rien
             self.n = n
+            # au fur et à mesure des itérations
             # le compteur va aller de 0 à n-1
-            # puis comme ça en boucle sans fin
+            # puis retour à 0 et comme ça en boucle sans fin
             self.counter = 0
             # on se contente d'allouer un iterateur de rang n-1
             # si bien qu'une fois qu'on a fini de construire
@@ -153,16 +153,13 @@ Voici une implémentation possible pour un itérateur de permutations&nbsp;:
             if self.counter == 0:
                 self.subsequence = self.subiterator.next()
             #
-            # dans laquelle
-            # on va insérer n 
-            # à n places différentes
             # on insère alors n-1 (car les indices commencent à 0)
-            # successivement dans la sous-sequence à l'indice counter
+            # successivement dans la sous-sequence
             #
             # naivement on écrirait
             # result = self.subsequence[0:self.counter] \
-            #    + [ self.n - 1 ] \
-            #    + self.subsequence [self.counter:self.n-1]
+            #    + [self.n - 1] \
+            #    + self.subsequence[self.counter:self.n-1]
             # mais c'est mettre le nombre le plus élevé en premier
             # et donc à itérer les permutations dans le mauvais ordre,
             # en commençant par la fin
@@ -170,7 +167,7 @@ Voici une implémentation possible pour un itérateur de permutations&nbsp;:
             # donc on fait plutôt une symétrie
             # pour insérer en commençant par la fin
             cutter = self.n-1 - self.counter
-            result = self.subsequence[0:cutter] + [ self.n - 1 ] \
+            result = self.subsequence[0:cutter] + [self.n - 1] \
                      + self.subsequence[cutter:self.n-1]
             # 
             # on n'oublie pas de maintenir le compteur et de
@@ -228,24 +225,27 @@ $n!$ termes**.
 
 C'est une erreur fréquente chez les débutants que de calculer une telle liste
 dans le constructeur, mais procéder de cette façon c'est aller exactement à
-l'opposé de ce pourquoi les itérateurs ont été conçus; au contraire on veut
-éviter à tout prix le coût d'une telle construction.
+l'opposé de ce pourquoi les itérateurs ont été conçus&nbsp;; au contraire, on
+veut éviter à tout prix le coût d'une telle construction.
 
 On peut le voir sur un code qui n'utiliserait que les 20 premières valeurs de
 l'itérateur, vous constatez que ce code est immédiat&nbsp;:
 
 
-    def show_first_items  (iterable, nb_items=None):
+    def show_first_items(iterable, nb_items=None):
+        """
+        montre les <nb_items> premiers items de iterable
+        ou bien tous si nb_items n'est pas spécifié
+        """
         print "Il y a {} items dans l'iterable".format(len(iterable))
-        counter = 0
-        for item in iterable:
+        for i,item in enumerate(iterable):
             print item
-            counter += 1
-            if nb_items and counter >= nb_items:
+            if nb_items and i >= nb_items:
                 print '....'
                 break
-    
-    show_first_items (Permutations(12),20)
+
+
+    show_first_items(Permutations(12), 20)
 
 Ce tableau vous montre par ailleurs sous un autre angle comment fonctionne
 l'algorithme, si vous observez le `11` qui balaie en diagonale les 12 premières
@@ -276,7 +276,7 @@ loghorrée de commentaires ça redevient presque lisible ;)
         def __init__(self, n):
             self.n = n
             # on commence à insérer à la fin 
-            self.cycle = itertools.cycle (range(n)[::-1])
+            self.cycle = itertools.cycle(range(n)[::-1])
             if n >= 2:
                 self.subiterator = Permutations(n-1)
             # pour savoir quand terminer le cas n==1
@@ -302,7 +302,7 @@ loghorrée de commentaires ça redevient presque lisible ;)
             if cutter == self.n-1:
                 self.subsequence = self.subiterator.next()
             # dans laquelle on insére n-1
-            return self.subsequence[0:cutter] + [ self.n - 1 ] \
+            return self.subsequence[0:cutter] + [self.n-1] \
                      + self.subsequence[cutter:self.n-1]
     
         # la longeur de cet itérateur est connue
@@ -310,3 +310,6 @@ loghorrée de commentaires ça redevient presque lisible ;)
             import math
             return math.factorial(self.n)
 
+
+
+    show_first_items(Permutations2(5), 20)
