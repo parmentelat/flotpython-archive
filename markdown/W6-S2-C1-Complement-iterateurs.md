@@ -41,6 +41,7 @@ trois éléments&nbsp;:
 Voici une implémentation possible pour un itérateur de permutations&nbsp;:
 
 
+    # pour factorial
     import math
     
     class Permutations:
@@ -92,9 +93,10 @@ Voici une implémentation possible pour un itérateur de permutations&nbsp;:
             # successivement dans la sous-sequence à l'indice counter
             #
             # naivement on écrirait
-            # result = self.subsequence[0:self.counter] + [ self.n - 1 ] \
+            # result = self.subsequence[0:self.counter] \
+            #    + [ self.n - 1 ] \
             #    + self.subsequence [self.counter:self.n-1]
-            # mais ça revient à mettre le nombre le plus élevé en premier
+            # mais c'est mettre le nombre le plus élevé en premier
             # et donc à itérer les permutations dans le mauvais ordre,
             # en commençant par la fin
             #
@@ -112,3 +114,4 @@ Voici une implémentation possible pour un itérateur de permutations&nbsp;:
         # la longeur de cet itérateur est connue
         def __len__ (self):
             return math.factorial(self.n)
+
