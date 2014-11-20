@@ -48,11 +48,12 @@ class Permutations:
         # dans laquelle
         # on va insérer n 
         # à n places différentes
-        # on insère alors n (en fait n-1 car les indices commencent à 0)
+        # on insère alors n-1 (car les indices commencent à 0)
         # successivement dans la sous-sequence à l'indice counter
         #
-        # naivement on ecrirait
-        # result = self.subsequence[0:self.counter] + [ self.n - 1 ] + self.subsequence [self.counter:self.n-1]
+        # naivement on écrirait
+        # result = self.subsequence[0:self.counter] + [ self.n - 1 ] \
+        #    + self.subsequence [self.counter:self.n-1]
         # mais ça revient à mettre le nombre le plus élevé en premier
         # et donc à itérer les permutations dans le mauvais ordre,
         # en commençant par la fin
@@ -60,10 +61,11 @@ class Permutations:
         # donc on fait plutôt une symétrie
         # pour insérer en commençant par la fin
         cutter = self.n-1 - self.counter
-        result = self.subsequence[0:cutter] + [ self.n - 1 ] + self.subsequence[cutter:self.n-1]
+        result = self.subsequence[0:cutter] + [ self.n - 1 ] \
+                 + self.subsequence[cutter:self.n-1]
         # 
-        # on n'oublie pas de maintenir le compteur et de le remettre à zéro
-        # tous les n tours
+        # on n'oublie pas de maintenir le compteur et de
+        # le remettre à zéro tous les n tours
         self.counter = (self.counter+1) % self.n
         return result
 
