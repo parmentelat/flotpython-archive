@@ -5,8 +5,15 @@
 
 Nous venons de voir les règles pour l'affectation (ou l'assignation) et le
 référencement des variables et des attributs&nbsp;; en particulier, on doit
-faire une distinction entre les attributs et les variables. Résumons ces
-différentes règles.
+faire une distinction entre les attributs et les variables.
+
+ * Les attributs sont résolus de manière **dynamique**, c'est-à-dire au moment
+de l'exécution (à *run-time*),
+ * alors que la liaison des variables est par contre **statique** (à compile-
+time) et **lexicale**, en ce sens qu'elle se base uniquement sur les
+imbrications de code.
+
+Dans ce complément nous allons reprendre et résumer ces différentes règles.
 
 ##### Attributs
 
