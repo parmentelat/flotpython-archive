@@ -4,18 +4,17 @@
 ## Complément - niveau intermédiaire
 
 Une expression régulière est un objet mathématique permettant de décrire un
-ensemble de textes qui possèdent des propriétés communes; par exemple, s'il vous
-arrive d'utiliser un terminal, et que vous tapez&nbsp;:
+ensemble de textes qui possèdent des propriétés communes&nbsp;; par exemple,
+s'il vous arrive d'utiliser un terminal, et que vous tapez&nbsp;:
 
     $ dir *.txt
 
 l'expression régulière `*.txt` *filtre* toutes les chaînes qui se terminent par
 `.txt`
 
-Le langage **Perl** avait été le premier à populariser l'utilisation des
-expressions régulières, en en faisant un "citoyen de première classe" dans le
-langage (c'est-à-dire supporté nativement dans le langage, et non au travers
-d'une librairie).
+Le langage **Perl** a été le premier à populariser l'utilisation des expressions
+régulières en les supportant nativement dans le langage, et non au travers d'une
+librairie.
 
 En python, les expressions régulières sont disponibles de manière plus
 traditionnelle, via le module `re` de la librairie standard, que nous allons
@@ -24,10 +23,10 @@ voir maintenant.
 Dans la commande ci-dessus, `*.txt` est une expression régulière très simple. Le
 module `re` fournit le moyen de construire des expressions régulières très
 élaborées et plus puissantes que ce que supporte le shell. C'est pourquoi la
-syntaxe des regexps de `re` est un peu différente; par exemple pour rechercher
-(on dit encore filtrer, de l'anglais *pattern matching*) la même famille de
-chaînes que `*.txt` avec le module `re`, il nous faudra écrire l'expression
-régulière sous une forme légèrement différente.
+syntaxe des regexps de `re` est un peu différente&nbsp;; par exemple pour
+rechercher (on dit encore filtrer, de l'anglais *pattern matching*) la même
+famille de chaînes que `*.txt` avec le module `re`, il nous faudra écrire
+l'expression régulière sous une forme légèrement différente.
 
 Le propos de ce complément est de vous donner une première introduction au
 module `re`.
@@ -42,11 +41,11 @@ complément.
 ### Avertissement
 
 Dans ce complément nous serons amenés à utiliser des traits qui dépendent du
-LOCALE, c'est-à-dire pour faire simple de la configuration de l'ordinateur
+LOCALE, c'est-à-dire, pour faire simple, de la configuration de l'ordinateur
 vis-à-vis de la langue.
 
 Tant que vous exécutez ceci dans le notebook sur la plateforme, en principe tout
-le monde verra exactement la même chose. Par contre si vous faites tourner le
+le monde verra exactement la même chose. Par contre, si vous faites tourner le
 même code sur votre ordinateur, il se peut que vous obteniez des résultats
 différents.
 
@@ -66,36 +65,45 @@ On peut **chercher tous** les mots se terminant par a ou m dans une chaîne avec
 
     for sentence in sentences:
         print 4*'-','dans >{}<'.format(sentence)
-        print re.findall (r"\w*[am]\W", sentence)
+        print re.findall(r"\w*[am]\W", sentence)
 
 Ce code permet de chercher toutes (`findall`) les occurrences de l'expression
 régulière, qui ici est définie par le *raw-string*&nbsp;:
 
-    `r"\w*[am]\W"`
+    r"\w*[am]\W"
 
 Nous verrons tout à l'heure comment fabriquer des expressions régulières plus en
 détail, mais pour démystifier au moins celle-ci, on a mis bout à bout les
 morceaux suivants&nbsp;:
  * `\w*` : il nous faut trouver une sous-chaîne qui commence par un nombre
-quelconque, y compris nul (`*`) de caractères alphanumériques (`\w`); ceci est
-défini en fonction de votre LOCALE, on y reviendra;
+quelconque, y compris nul (`*`) de caractères alphanumériques (`\w`)&nbsp;; ceci
+est défini en fonction de votre LOCALE, on y reviendra&nbsp;;
  * `[am]` : immédiatement après, il nous faut trouver un caratère `a` ou `m`;
  * `\W` : et enfin, il nous faut un caractère qui ne soit pas alphanumérique.
+Ceci est important puisqu'on cherche les mots qui **se terminent** par un `a` ou
+un `m`; si on ne le mettait pas on obtiendrait ceci&nbsp;:
+
+
+    # le \W final est important
+    # voici ce qu'on obtient si on l'omet
+    for sentence in sentences:
+        print 4*'-','dans >{}<'.format(sentence)
+        print re.findall(r"\w*[am]", sentence)
 
 ##### `split`
 
 Une autre forme simple d'utilisation des regexps est `re.split`, qui fournit une
 **fonctionnalité voisine de `str.split`** qu'on a vue en semaine 2, mais ou les
-séparateurs sont exprimés comme une expression régulière; ou encore on peut le
-voir un peu comme la négation de `findall`&nbsp;:
+séparateurs sont exprimés comme une expression régulière&nbsp;; ou encore on
+peut le voir un peu comme la négation de `findall`&nbsp;:
 
 
     for sentence in sentences:
         print 4*'-','dans >{}<'.format(sentence)
-        print re.split (r"\W+", sentence)
+        print re.split(r"\W+", sentence)
 
 Ici l'expression régulière, qui donc décrit le séparateur, est simplement `\W+`
-c'est-à-dire toute suite d'au moins caractère non alphanumérique.
+c'est-à-dire toute suite d'au moins un caractère non alphanumérique.
 
 Nous avons donc là un moyen simple, et plus puissant que `str.split`, de couper
 un texte en mots.
@@ -108,7 +116,7 @@ occurrences d'une *regexp*, comme par exemple&nbsp;:
 
     for sentence in sentences:
         print 4*'-','dans >{}<'.format(sentence)
-        print re.sub (r"(\w+)", r"X\1X", sentence)    
+        print re.sub(r"(\w+)", r"X\1X", sentence)    
 
 Ici, l'expression régulière (le premier argument) contient un **groupe** : on a
 utilisé des parenthèses autour du `\w+`. Le second argument est la **chaîne de
@@ -120,9 +128,9 @@ caractères alphanumériques par une paire de `X`.
 
 ##### Pourquoi un *raw-string* ?
 
-En guise de digression, il n'y a aucune obligation à utiliser un *raw-string*;
-d'ailleurs on rappelle qu'il n'y a pas de différence de nature entre un *raw-
-string* et une chaîne usuelle&nbsp;:
+En guise de digression, il n'y a aucune obligation à utiliser un *raw-
+string*&nbsp;; d'ailleurs on rappelle qu'il n'y a pas de différence de nature
+entre un *raw-string* et une chaîne usuelle&nbsp;:
 
 
     raw = r'abc'
@@ -145,7 +153,7 @@ page, qui n'ont rien à voir avec les expressions régulières *per se*&nbsp;:
 
 
     # mettre en colonnes les inputs et les regexps
-    def i_r (input, cols_in, regexp=None, cols_re=0):
+    def i_r(input, cols_in, regexp=None, cols_re=0):
         if regexp:
             return "IN={} - RE={} ->".format(input.rjust(cols_in),
                                              regexp.ljust(cols_re))
@@ -153,7 +161,7 @@ page, qui n'ont rien à voir avec les expressions régulières *per se*&nbsp;:
             return "IN={} ->".format(input.rjust(cols_in))
     
     # afficher 'Match' ou 'None' plutôt que l'objet Match
-    def m (match):
+    def m(match):
         return 'MATCH' if match else 'Nope'    
 
 Nous utiliserons `i_r` avec des tailles de colonnes choisies à la main, ce qui
@@ -170,22 +178,22 @@ filtre effectivement cette entrée.
 
 ### Un deuxième exemple
 
-Reprenons; nous allons maintenant voir comment on peut, d'abord vérifier si une
+Reprenons, nous allons maintenant voir comment on peut d'abord vérifier si une
 chaîne est conforme au critère défini par l'expression régulière, mais aussi
 *extraire* les morceaux de la chaîne qui correspondent aux différentes parties
 de l'expression.
 
-Pour cela supposons qu'on s'intéresse aux chaînes qui comportent 5 parties, une
+Pour cela, supposons qu'on s'intéresse aux chaînes qui comportent 5 parties, une
 suite de chiffres, une suite de lettres, des chiffres à nouveau, des lettres, et
 enfin de nouveau des chiffres.
 
 Pour cela on considère ces trois chaines en entrée&nbsp;:
 
 
-    inputs = [ '890hj000nnm890',    # cette entrée convient
-               '123abc456def789',   # celle-ci aussi
-               '8090abababab879',   # celle-ci non
-               ]
+    inputs = ['890hj000nnm890',    # cette entrée convient
+              '123abc456def789',   # celle-ci aussi
+              '8090abababab879',   # celle-ci non
+              ]
 
 ##### `match`
 
@@ -200,19 +208,19 @@ page&nbsp;:
 
 
     for input in inputs:
-        print i_r (input,15), m(re.match(regexp1, input))
+        print i_r(input, 15), m(re.match(regexp1, input))
 
 Ici plutôt que d'utiliser les raccourcis comme `\w` j'ai préféré écrire
-explicitement les ensembles de caractères en jeu; de cette façon on rend son
-code indépendant du LOCALE si c'est ce qu'on veut faire. Il y a deux morceaux
-qui interviennent tour à tour&nbsp;:
+explicitement les ensembles de caractères en jeu&nbsp;; de cette façon, on rend
+son code indépendant du LOCALE si c'est ce qu'on veut faire. Il y a deux
+morceaux qui interviennent tour à tour&nbsp;:
  * `[0-9]+` signifie une suite de au moins un caractère dans l'intervalle
 `[0-9]`,
  * `[A-Za-z]+` pour une suite d'au moins un caractère dans l'intervalle `[A-Z]`
 ou dans l'intervalle `[a-z]`.
 
 Et comme tout à l'heure on a simplement juxtaposé les morceaux dans le bon ordre
-pour contruire l'expression régulière complète.
+pour construire l'expression régulière complète.
 
 ##### Nommer un morceau (un groupe)
 
@@ -228,21 +236,26 @@ Maintenant, on va même pouvoir **donner un nom** à un morceau de la regexp, ic
     # la même regexp, mais on donne un nom au groupe de chiffre central
     regexp2 = "[0-9]+[A-Za-z]+(?P<needle>[0-9]+)[A-Za-z]+[0-9]+"
 
-Et une fois que c'est fait on peut demander à l'outil de nous **retrouver la
+Et une fois que c'est fait, on peut demander à l'outil de nous **retrouver la
 partie correspondante** dans la chaine initiale&nbsp;:
 
 
     print re.match(regexp2, haystack).group('needle')
 
-Dans cette expression on a utilisé un **groupe nommé** `(?P<needle>[0-9]+)`.
+Dans cette expression on a utilisé un **groupe nommé** `(?P<needle>[0-9]+)`,
+dans lequel&nbsp;:
+ * les parenthèses définissent un groupe,
+ * `?P<needle>` spécifie que ce groupe pourra être référencé sous le nom
+`needle`. J'aimerais pouvoir vous donner une explication plus convaincante au
+sujet de cette syntaxe, mais je n'en connais pas.
 
 ### Un troisième exemple
 
 Enfin, et c'est un trait qui n'est pas présent dans tous les langages, on peut
 restreindre un morceau de chaîne à être identique à un groupe déjà vu plus tôt
-dans la chaîne; dans l'exemple ci-dessus on pourrait ajouter comme contrainte
-que le premier et le dernier groupes de chiffres soient identiques, comme
-ceci&nbsp;:
+dans la chaîne&nbsp;; dans l'exemple ci-dessus on pourrait ajouter comme
+contrainte que le premier et le dernier groupes de chiffres soient identiques,
+comme ceci&nbsp;:
 
 
     regexp3 = "(?P<id>[0-9]+)[A-Za-z]+(?P<needle>[0-9]+)[A-Za-z]+(?P=id)"
@@ -253,8 +266,11 @@ Si bien que maintenant, avec les mêmes entrées que tout à l'heure&nbsp;:
     for input in inputs:
         print i_r(input,15), m(re.match(regexp3, input))
 
+Comme précédemment on a défini le groupe nommé `id` comme étant la première
+suite de chiffres.
 La nouveauté ici est la **contrainte** qu'on a imposée sur le dernier groupe
-avec  `(?P=id)`.
+avec `(?P=id)`. Comme vous le voyez, on n'obtient un *match* qu'avec les entrées
+dans lesquelles le dernier groupe de chiffres est identique au premier.
 
 ### Comment utiliser la librairie
 
@@ -271,15 +287,15 @@ fini** qui permet de faire le filtrage avec une chaîne. C'est ce qui explique l
 <img src="media/re-workflow.png">
 
 La méthode recommandée pour utiliser la librairie, lorsque vous avez le même
-*pattern* à appliquer à un grand nombre de chaînes, est de
- * compiler **une seule fois** votre chaîne en un objet de la classe
-`re.RegexObject`, en utilisant `re.compile`,
+*pattern* à appliquer à un grand nombre de chaînes, est de&nbsp;:
+ * compiler **une seule fois** votre chaîne en un automate, qui est matérialisé
+par un objet de la classe `re.RegexObject`, en utilisant `re.compile`,
  * puis d'**utiliser directement cet objet** autant de fois que vous avez de
 chaînes.
 
 Nous avons utilisé dans les exemples plus haut (et nous continuerons plus bas
 pour une meilleure lisibilité) des **fonctions de commodité** du module, qui
-sont pratiques par exemple pour mettre au  point une expression régulière en
+sont pratiques, par exemple, pour mettre au  point une expression régulière en
 mode interactif, mais qui ne **sont pas forcément** adaptées dans tous les cas.
 
 Ces fonctions de commodité fonctionnent toutes sur le même principe&nbsp;:
@@ -287,6 +303,9 @@ Ces fonctions de commodité fonctionnent toutes sur le même principe&nbsp;:
 `re.match(regexp, input)`  $\Longleftrightarrow$
 `re.compile(regexp).match(input)`
 
+Donc à chaque fois qu'on utilise une fonction de commodité, on recompile la
+chaîne en automate, ce qui, dès qu'on a plus d'une chaîne à traiter, représente
+un surcoût.
 
 C'est ainsi qu'au lieu de faire comme plus haut&nbsp;:
 
@@ -299,7 +318,7 @@ dans du vrai code on fera plutôt&nbsp;:
 
 
     # on compile la chaîne en automate une seule fois
-    re_obj3 = re.compile (regexp3)
+    re_obj3 = re.compile(regexp3)
     
     # ensuite on part directement de l'automate
     for input in inputs:
@@ -309,15 +328,16 @@ qui ne compile qu'une fois la chaîne en automate, et donc est plus efficace.
 
 ##### Les méthodes sur la classe `RegexObject`
 
-Pour résumer ce qu'on a déjà vu pour l'essentiel, ce qu'on peut faire sur un
-objet de la classe `RegexObject`, ce sont entre autres les méthodes&nbsp;:
+Les objets de la classe `RegexObject` représentent donc l'automate à état fini
+qui est le résultat de la compilation de l'expression régulière.
+Pour résumer ce qu'on a déjà vu, les méthodes les plus utiles sur un objet
+`RegexObject` sont&nbsp;:
  * `match` et `search`, qui cherchent un *match* soit uniquement au début
 (`match`) ou n'importe où dans la chaîne (`search`);
  * `findall` et `split` pour chercher toutes les occurences (`findall`) ou leur
 négatif (`split`);
  * `sub` (qui aurait pu sans doute s'appeler `replace`, mais c'est comme ça)
 pour remplacer les occurrences de pattern.
-
 
 ##### Exploiter le résultat
 
@@ -328,8 +348,8 @@ rapide sur cet exemple très simple&nbsp;:
 
 
     # exemple
-    input = "Isaac Newton, physicist"
-    match = re.match(r"(\w+) (?P<name>\w+)", input)
+    input = "    Isaac Newton, physicist"
+    match = re.search(r"(\w+) (?P<name>\w+)", input)
 
  * `re` et `string` pour retrouver les données d'entrée du match&nbsp;:
 
@@ -341,9 +361,7 @@ rapide sur cet exemple très simple&nbsp;:
 
  * `group`, `groups`, `groupdict` pour retrouver les morceaux de la chaîne
 d'entrée qui correspondent aux **groupes** de la regexp; on peut y accéder par
-rang (basé sur l'ordre, mais on commence à un pour des raisons historiques) ou
-par nom (comme on l'a vu plus haut avec `needle`);
-
+rang, ou par nom (comme on l'a vu plus haut avec `needle`);
 
 
     match.groups()
@@ -360,6 +378,18 @@ par nom (comme on l'a vu plus haut avec `needle`);
 
     match.groupdict()
 
+ Comme on le voit pour l'accès par rang **les indices commencent à 1** pour des
+raisons historiques (on peut déjà référencer `\1` en sed depuis la fin des
+années 70).
+
+ On peut aussi accéder au **groupe 0** comme étant la partie de la chaîne de
+départ qui a effectivement été filtrée par l'expression régulière, et qui peut
+tout à fait être au beau milieu de la chaîne de départ, comme dans notre
+exemple&nbsp;:
+
+
+    match.group(0)
+
  * `expand` permet de faire une espèce de `str.format` avec les valeurs des
 groupes;
 
@@ -370,7 +400,7 @@ groupes;
 donné&nbsp;:
 
 
-    begin,end = match.span('name')
+    begin, end = match.span('name')
     input[begin:end]
 
 ##### Les différents modes (*flags*)
@@ -380,16 +410,16 @@ Enfin il faut noter qu'on peut passer à `re.compile` un certain nombre de
 rendre service.
 
 Vous trouverez [une liste exhaustive de ces *flags*
-ici](https://docs.python.org/2/library/re.html#module-contents); ils ont en
-général un nom long et parlant, et un alias court sur un seul caractère. Les
+ici](https://docs.python.org/2/library/re.html#module-contents)&nbsp;; ils ont
+en général un nom long et parlant, et un alias court sur un seul caractère. Les
 plus utiles sont sans doute&nbsp;:
- * `IGNORECASE` (*aka* `I`): pour, eh bien, ne pas faire la différence entre
+ * `IGNORECASE` (*alias* `I`): pour, eh bien, ne pas faire la différence entre
 minuscules et majuscules,
- * `UNICODE` (*aka* `U`): pour rendre les séquences `\w` et autres basées sur
+ * `UNICODE` (*alias* `U`): pour rendre les séquences `\w` et autres basées sur
 les propriétés des caractères dans la norme Unicode,
- * `LOCALE` (*aka* `L`): cette fois `\w` dépend du `locale` courant.
- * `MULTILINE` (*aka* `M`), et
- * `DOTALL` (*aka* S): pour ces deux flags voir la discussion à la fin du
+ * `LOCALE` (*alias* `L`): cette fois `\w` dépend du `locale` courant.
+ * `MULTILINE` (*alias* `M`), et
+ * `DOTALL` (*alias* S): pour ces deux flags voir la discussion à la fin du
 complément.
 
 Comme c'est souvent le cas, on doit passer à `re.compile` un **ou logique**
@@ -397,10 +427,10 @@ Comme c'est souvent le cas, on doit passer à `re.compile` un **ou logique**
 fera par exemple&nbsp;:
 
 
-    re_obj = re.compile ("a*b+", flags = re.IGNORECASE | re.DEBUG)
+    re_obj = re.compile("a*b+", flags=re.IGNORECASE | re.DEBUG)
 
 
-    re_obj.match ("AabB")
+    print m(re_obj.match("AabB"))
 
 ### Comment construire une expression régulière
 
@@ -412,24 +442,25 @@ donne une version exhaustive.
 ##### La brique de base : le caractère
 
 Au commencement il faut spécifier des caractères&nbsp;:
- * **un seul** caractère :
+ * **un seul** caractère&nbsp;:
    * vous le citez tel quel, en le précédent d'un backslash `\` s'il a par
-ailleurs un sens spécial dans le micro-langage de regexps (comme `+`, `*`, `[`
-et autres ...);
- * le **wildcard** un point `.` signifie "n'importe quel caractère";
+ailleurs un sens spécial dans le micro-langage de regexps (comme `+`, `*`, `[`,
+etc.)&nbsp;;
+ * le **wildcard**&nbsp;:
+    * un point `.` signifie "n'importe quel caractère"&nbsp;;
  * **un ensemble** de caractères avec la notation `[...]` qui permet de décrire
-   * ex. `[a1=]` : un ensemble in extenso, ici un caractère parmi les 3: `a`,
-`1`, ou `=`,
-   * ex. `[a-z]` : un intervalle de caractères,
-   * ex. `[15e-g]` : un mélange des deux, ici un ensemble qui contiendrait `1`,
-`5`, `e`, `f` et `g`,
-   * ex. `[^15e-g]` : une **négation**, qui a `^` comme premier caractère dans
-les `[]`, ici tout sauf l'ensemble précédent;
+par exemple&nbsp;:
+   * `[a1=]` un ensemble in extenso, ici un caractère parmi `a`, `1`, ou `=`,
+   * `[a-z]` un intervalle de caractères, ici de `a` à `z`,
+   * `[15e-g]` un mélange des deux, ici un ensemble qui contiendrait `1`, `5`,
+`e`, `f` et `g`,
+   * `[^15e-g]` une **négation**, qui a `^` comme premier caractère dans les
+`[]`, ici tout sauf l'ensemble précédent&nbsp;;
  * un **ensemble prédéfini** de caractères, qui peuvent alors dépendre de
-l'environnement (i.e. UNICODE et LOCALE) avec entre autres les notations&nbsp;:
+l'environnement (UNICODE et LOCALE) avec entre autres les notations&nbsp;:
    * `\w` les caractères alphanumériques, et `\W` (les autres),
-   * `\s` les caractères "blancs" - espace, tabulation, saut de ligne, etc...,
-et `\S` (les autres),
+   * `\s` les caractères "blancs" - espace, tabulation, saut de ligne, etc., et
+`\S` (les autres),
    * `\d` pour les chiffres, et `\D` (les autres).
 
 
@@ -442,7 +473,7 @@ Pour ce dernier exemple, comme on a backslashé le `.` il faut que la chaîne en
 entrée contienne vraiment un `.`&nbsp;:
 
 
-    print re.match (r"abc\.", "abc.")
+    print m(re.match (r"abc\.", "abc."))
 
 ##### En série ou en parallèle
 
@@ -460,7 +491,7 @@ mettre deux regexps en parallèle, et c'est ce que permet l'opérateur `|`
 
     regexp = "abc|def"
     
-    for input in [ 'abc', 'def', 'aef' ]:
+    for input in ['abc', 'def', 'aef']:
         print i_r(input, 3, regexp,7), m(re.match(regexp, input))
 
 ##### Fin(s) de chaîne
@@ -472,10 +503,10 @@ dans la chaîne.
 Mais indépendamment de cela, il peut être intéressant de "coller" l'expression
 en début ou en fin de ligne, et pour ça il existe des caractères spéciaux&nbsp;:
  * `^` lorsqu'il est utilisé comme un caractère (c'est à dire pas en début de
-`[]`) signifie un début de chaîne;
+`[]`) signifie un début de chaîne&nbsp;;
  * `\A` a le même sens (sauf en mode MULTILINE), et je le recommande de
-préférence à `^`qui est déjà pas mal surchargé;
- * `$` matche une fin de ligne;
+préférence à `^` qui est déjà pas mal surchargé&nbsp;;
+ * `$` matche une fin de ligne&nbsp;;
  * `\Z` est voisin mais pas tout à fait identique.
 
 Reportez-vous à la documentation pour le détails des différences. Attention
@@ -493,7 +524,7 @@ début ni à la fin.
 
 ##### Parenthéser - (grouper)
 
-Pour pouvoir faire des montages élaborés il faut pouvoir parenthéser&nbsp;:
+Pour pouvoir faire des montages élaborés, il faut pouvoir parenthéser&nbsp;:
 
 
     # une parenthése dans une RE pour mettre en ligne
@@ -501,12 +532,12 @@ Pour pouvoir faire des montages élaborés il faut pouvoir parenthéser&nbsp;:
     # et une fin 'f'
     regexp = "a(bc|de)f"
     
-    for input in [ 'abcf', 'adef', 'abf' ]:
+    for input in ['abcf', 'adef', 'abf']:
         print i_r(input, 4, regexp, 9), m(re.match(regexp, input))
 
-Les parenthèses jouent un rôle additionel de **groupe**; ce qui signifie qu'on
+Les parenthèses jouent un rôle additionel de **groupe**, ce qui signifie qu'on
 **peut retrouver** le texte correspondant à l'expression régulière comprise dans
-les `()`. Par exemple pour le premier match&nbsp;:
+les `()`. Par exemple, pour le premier match&nbsp;:
 
 
     input = 'abcf'
@@ -531,9 +562,9 @@ exactement équivalent à `ababab`;
 exactement équivalent à `*<re>*{0,1}`.
 
 
-    inputs = [ n*'ab'for n in [0, 1, 3, 4]] + [ 'foo' ]
+    inputs = [n*'ab'for n in [0, 1, 3, 4]] + ['foo']
     
-    for regexp in [ '(ab)*', '(ab)+', '(ab){3}', '(ab){3,4}' ]:
+    for regexp in ['(ab)*', '(ab)+', '(ab){3}', '(ab){3,4}']:
         # on ajoute \A \Z pour matcher toute la chaine
         line_regexp = r"\A{}\Z".format(regexp)
         for input in inputs:
@@ -541,20 +572,20 @@ exactement équivalent à `*<re>*{0,1}`.
 
 ##### Groupes et contraintes
 
-Nous avons déjà vu un exemple de groupe nommé (voir `needle` plus haut); les
-opérateurs que l'on peut citer dans cette catégorie sont&nbsp;:
- * `(..)` les parenthèses définissent un groupe anonyme,
- * `(?P<name>..)` définit un groupe nommé,
+Nous avons déjà vu un exemple de groupe nommé (voir `needle` plus haut)&nbsp;;
+les opérateurs que l'on peut citer dans cette catégorie sont&nbsp;:
+ * `(...)` les parenthèses définissent un groupe anonyme,
+ * `(?P<name>...)` définit un groupe nommé,
  * `(?:...)` permet de mettre des parenthèses mais sans créer un groupe, pour
 optimiser l'exécution puisqu'on n'a pas besoin de  conserver les liens vers la
 chaîne d'entrée,
  * `(?P=name)` qui ne matche que si l'on retrouve à cet endroit de l'entrée la
 même sous-chaîne que celle trouvée pour le groupe `name` en amont,
  * enfin `(?=...)`, `(?!...)`et `(?<=...)` permettent des contraintes encore
-plus élaborées, onbus vous laissons le soin d'expérimenter avec elles si vous
-êtes intéressés; sachez toutefois que l'utilisation de telles constructions peut
-en thérie rendre l'interprétation de votre expression régulière beaucoup moins
-efficace.
+plus élaborées, nous vous laissons le soin d'expérimenter avec elles si vous
+êtes intéressés&nbsp;; sachez toutefois que l'utilisation de telles
+constructions peut en théorie rendre l'interprétation de votre expression
+régulière beaucoup moins efficace.
 
 ##### Greedy *vs* non-greedy
 
@@ -576,12 +607,15 @@ quelque chose comme glouton en français&nbsp;:
     match.groups()
 
 
-Ça n'est pas forcément ce qu'on voulait faire; aussi on peut spécifier
+Ça n'est pas forcément ce qu'on voulait faire&nbsp;; aussi on peut spécifier
 l'approche inverse, c'est-à-dire de trouver la **plus-petite** chaîne qui
-matche, dans une approche dite *non-greedy*&nbsp;:
+matche, dans une approche dite *non-greedy*, avec les opérateurs suivants&nbsp;:
+ * `*?` : `*` mais *non-greedy*,
+ * `+?` : `+` mais *non-greedy*,
+ * `??` : `?` mais *non-greedy*,
 
 
-    # la version non-greedy a un point d'interrogation après +, * ou ?
+    # ici *? signifie * mais pas greedy
     re_non_greedy = re_greedy = '<(.*?)>'
     
     # et cette fois, on obtient
@@ -621,9 +655,9 @@ les *newline*&nbsp;:
     match = re.compile("(.*)", flags=re.DOTALL).match(input)
     match.groups()
 
-Cela dit le caractère *newline* est par ailleurs considéré comme un caractère
-comme un autre, on peut le mentionner **dans une regexp** comme les autres;
-voici quelques exemples pour illustrer tout ceci&nbsp;:
+Cela dit, le caractère *newline* est par ailleurs considéré comme un caractère
+comme un autre, on peut le mentionner **dans une regexp** comme les
+autres&nbsp;; voici quelques exemples pour illustrer tout ceci&nbsp;:
 
 
     # sans mettre le flag unicode \w ne matche que l'ASCII
@@ -649,4 +683,13 @@ voici quelques exemples pour illustrer tout ceci&nbsp;:
 
 La mise au point d'expressions régulières est certes un peu exigeante, et
 demande pas mal de pratique, mais permet d'écrire en quelques lignes des
-fonctionnalités très puissantes, c'est un investissement est rentable :)
+fonctionnalités très puissantes, c'est un investissement très rentable :)
+
+Je vous signale enfin l'existence de **sites web** qui évaluent une expression
+régulière **de manière interactive** et qui peuvent rendre la mise au point
+moins fastidieuse. Pour être honnête je n'ai pas d'expérience préalable avec ces
+sites, mais en préparant le cours j'ai essayé rapidement
+[regex101.com](http://regex101.com/#python) qui semble à première vue très bien
+fait; prenez garde toutefois à bien choisir le mode python dans la bannière de
+gauche car chaque langage de regexps a ses petites différences (ce ne serait pas
+drôle sinon:).
