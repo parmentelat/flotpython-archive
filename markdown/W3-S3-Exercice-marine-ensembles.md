@@ -85,3 +85,9 @@ dans `abbreviated`
     # pour utiliser ceci il faut que votre fonction renvoie un 3-tuple
     my_result = diff(extended, abbreviated)
     show_result(my_result)
+
+### Les fichiers de données
+
+Pour télécharger les deux fichiers de données&nbsp;:
+ * [data/marine-e2-ext.json](data/marine-e2-ext.json)
+ * [data/marine-e2-ext.json](data/marine-e2-abb.json)

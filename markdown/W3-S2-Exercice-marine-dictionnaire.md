@@ -107,3 +107,9 @@ printer](https://docs.python.org/2/library/pprint.html)
 
 
     exo_merge.correction(merge, extended, abbreviated)
+
+### Les fichiers de données
+
+Pour télécharger les deux fichiers de données&nbsp;:
+ * [data/marine-e1-ext.json](data/marine-e1-ext.json)
+ * [data/marine-e1-ext.json](data/marine-e1-abb.json)
