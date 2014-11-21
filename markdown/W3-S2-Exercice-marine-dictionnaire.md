@@ -193,18 +193,18 @@ Et ensuite exécuter votre propre code en dehors de la fonction de correction
     # en supposant que votre fonction index() renvoie un dictionnaire
     mon_index = index(extended)
     for key_value in mon_index.items():
-        pprint (key_value)
+        pprint(key_value)
         break
 
 Dans le cas de cet exercice, vous pouvez aussi vous fabriquer vous-mêmes des
 données plus courtes&nbsp;:
 
 
-    extended_sample = [ b for b in extended if b[0] <= 220000000 ]
+    extended_sample = [b for b in extended if b[0] <= 220000000]
     print len(extended_sample)
 
 
-    abbreviated_sample = [ b for b in abbreviated if b[0] <= 220000000 ]
+    abbreviated_sample = [b for b in abbreviated if b[0] <= 220000000]
     print len(extended_sample)
 
 Puisque comme ceci vous gardez la bonne propriété que les ids correspondent
