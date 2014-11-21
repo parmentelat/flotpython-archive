@@ -16,11 +16,11 @@ compléments, je décris  ici un **sentiment personnel** plutôt que des **faits
 
 Revenons sur la notion de type, et remarquons que les types peuvent jouer
 plusieurs rôles, comme on l'a évoqué rapidement en première semaine&nbsp;:
- 1. d'une part la notion de type a à voir avec l'implémentation; un compilateur
-C a besoin de savoir très précisément quel espace allouer à une variable, ce
-genre de choses,
+ 1. d'une part la notion de type a à voir avec l'implémentation, par exemple, un
+compilateur C a besoin de savoir très précisément quel espace allouer à une
+variable&nbsp;;
  1. d'autre part, les types sont cruciaux dans les systèmes de vérification
-statique au sens large, dont le but est de trouver un maximum de défauts à la
+statique au sens large dont le but est de trouver un maximum de défauts à la
 seule lecture du code (par opposition aux techniques qui nécessitent de le faire
 tourner).
 
@@ -132,10 +132,10 @@ qu'on peut faire par exemple&nbsp;:
     from collections import Iterable
 
 
-    isinstance ('ab', Iterable)
+    isinstance('ab', Iterable)
 
 
-    isinstance ([1, 2], Iterable)
+    isinstance([1, 2], Iterable)
 
 
     # comme on l'a vu un objet qui a une methode  __iter__()
@@ -147,8 +147,8 @@ qu'on peut faire par exemple&nbsp;:
             # ceci naturellement est bidon
             return 
             
-    foo = Foo ()
-    isinstance (foo, Iterable)
+    foo = Foo()
+    isinstance(foo, Iterable)
 
 L'implémentation du module `abc` donne l'**illusion** que `Iterable` est un
 objet dans la hiérarchie de classe, et que tous ces *types* `str`, `list`, et
@@ -170,7 +170,7 @@ point de vue ne remplit pas la fonction&nbsp;:
     # un tuple qui contient une liste ne convient 
     # pas comme clé dans un dictionnaire
     # et pourtant
-    isinstance ( ([1],[2]), Hashable)
+    isinstance (([1], [2]), Hashable)
 
 ### Tout ça pour dire quoi ?
 
