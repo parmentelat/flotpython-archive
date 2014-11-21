@@ -1,7 +1,19 @@
 
 # Fusionner des données
 
-## Exercice - niveau intermédiaire
+## Exercices
+
+Cet exercice vient en deux versions, une de niveau basique et une de niveau
+intermédiaire.
+
+La version basique est une application de la technique d'indexation qu'on a vue
+dans le complément "Gérer des enregistrements". On peut très bien faire les deux
+versions dans l'ordre, une fois qu'on a fait la version basique on est en
+principe un peu plus avancé pour aborder la version intermédiaire.
+
+Vous trouverez également en fin de page quelques astuces pour utiliser le
+framework d'exercices, et notamment pour calculer vous mêmes le résultat
+attendu.
 
 ### Contexte
 
@@ -69,9 +81,66 @@ intéressent pas pour cet exercice.
 
 On précise également que les deux listes `extended` et `abbreviated` possèdent
 exactement **le même nombre** d'entrées et correspondent **aux mêmes bateaux** -
-mais naturellement à des moments différents.
+mais naturellement à des moments différents, et **pas forcément dans le même
+ordre**.
 
-### But de l'exercice
+### Exercice - niveau basique
+
+##### But de l'exercice
+
+On vous demande d'écrire une fonction `index` qui calcule, à partir de la liste
+des données étendues, un dictionnaire qui est&nbsp;:
+ * indexé par l'`id` de chaque bateau,
+ * et qui a pour valeur la liste qui décrit le bateau correspondant.
+
+De manière plus imagée, si&nbsp;:
+
+    extended = [ bateau1, bateau2, ... ]
+
+et si
+
+    bateau1 = [ id_bateau1, latitude, ... ]
+
+on doit obtenir comme résultat de `index` un dictionnaire
+
+    id_bateau1 -> [ id_bateau1, latitude, ... ]
+
+Bref, on veut pourvoir retrouver les différents éléments de la liste `extended`
+par accès direct (un seul *lookup*) dans l'index.
+
+
+    # le résultat attendu
+    from corrections.w3_marine_dict import exo_index
+    result_index = exo_index.resultat(extended)
+    
+    # a quoi ressemble le résultat pour un bateau au hasard
+    from pprint import pprint
+    for key_value in result_index.iteritems():
+        pprint(key_value)
+        break
+
+##### Votre code
+
+
+    def index(extended):
+        "<votre_code>"
+
+##### Validation
+
+
+    exo_index.correction(index, extended)
+
+Vous remarquerez d'ailleurs que la seule chose qu'on utilise dans cet exercice,
+c'est que l'id des bateaux arrive en première position (dans la liste qui
+matérialise le bateau), aussi votre code doit marcher à l'identique avec les
+bateaux abrégés&nbsp;:
+
+
+    exo_index.correction(index, abbreviated)
+
+### Exercice - niveau intermédiaire
+
+##### But de l'exercice
 
 On vous demande d'écrire une fonction `merge` qui fasse une consolidation des
 données, de façon à obtenir en sortie un dictionnaire:
@@ -89,21 +158,63 @@ printer](https://docs.python.org/2/library/pprint.html)
 
     # le résultat attendu
     from corrections.w3_marine_dict import exo_merge
-    result = exo_merge.resultat(extended, abbreviated)
+    result_merge = exo_merge.resultat(extended, abbreviated)
     
     # a quoi ressemble le résultat pour un bateau au hasard
     from pprint import pprint
-    for key_value in result.iteritems():
+    for key_value in result_merge.iteritems():
         pprint(key_value)
         break
 
-### Votre code
+##### Votre code
 
 
     def merge(extended, abbreviated):
         "<votre_code>"
 
-### Validation
+##### Validation
 
 
     exo_merge.correction(merge, extended, abbreviated)
+
+### Quelques mots sur le framework d'exercices
+
+Le format de la page est très étroit, et cela rend assez compliqué le rendu des
+résultats sous la forme d'un tableau comparatif. Dans le cas de cet exercice,
+qui utilise des données réelles et bavardes, la mise au point peut nécessiter de
+travailler un peu autrement, et voici quelques suggestions.
+
+Tout d'abord rappelez-vous que vous pouvez créer un cellule où vous voulez avec
+le menu `Insert`.
+
+Et ensuite exécuter votre propre code en dehors de la fonction de correction
+
+
+    # en supposant que votre fonction index() renvoie un dictionnaire
+    mon_index = index(extended)
+    for key_value in mon_index.items():
+        pprint (key_value)
+        break
+
+Dans le cas de cet exercice, vous pouvez aussi vous fabriquer vous-mêmes des
+données plus courtes&nbsp;:
+
+
+    extended_sample = [ b for b in extended if b[0] <= 220000000 ]
+    print len(extended_sample)
+
+
+    abbreviated_sample = [ b for b in abbreviated if b[0] <= 220000000 ]
+    print len(extended_sample)
+
+Puisque comme ceci vous gardez la bonne propriété que les ids correspondent
+entre les deux listes.
+
+Vous pouvez utiliser la correction avec d'autres données si ça vous est utile.
+
+
+    exo_index.correction(index, abbreviated_sample)
+
+Bref le message principal ici est que vous avez toute la puissance de
+l'interpréteur python pour vous aider dans votre travail, n'hésitez pas à vous
+en servir !
