@@ -181,6 +181,35 @@ def carre(s):
 
 
 ##################################################
+# index - Semaine 3 Séquence 2
+##################################################
+def index(bateaux):
+    """
+    Calcule sous la forme d'un dictionnaire indexé par les ids
+    un index de tous les bateaux présents dans la liste en argument
+    Comme les données étendues et abrégées ont toutes leur id 
+    en première position on peut en fait utiliser ce code
+    avec les deux types de données
+    """
+    # c'est une simple compréhension de dictionnaire
+    return { bateau[0]: bateau for bateau in bateaux}
+
+
+##################################################
+# index - Semaine 3 Séquence 2
+##################################################
+def index2(bateaux):
+    """
+    La même chose mais ne manière itérative
+    """
+    # si on veut décortiquer
+    resultat = {}
+    for bateau in bateaux:
+        resultat [bateau[0]] = bateau
+    return resultat
+
+
+##################################################
 # merge - Semaine 3 Séquence 2
 ##################################################
 def merge(extended, abbreviated):
