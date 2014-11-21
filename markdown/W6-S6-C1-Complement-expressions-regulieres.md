@@ -596,16 +596,18 @@ ce soit avec `*`, ou `+`, ou `?`, l'algorithme va toujours essayer de trouver la
 quelque chose comme glouton en français&nbsp;:
 
 
-    # si on cherche `<.*>` dans cette chaîne
+    # un fragment d'HTML 
     line='<h1>Title</h1>'
     
-    # sans rien préciser
-    re_greedy = '<(.*)>'
+    # si on cherche un texte quelconque entre crochets
+    # c'est-à-dire l'expression régulière "<.*>"
+    re_greedy = '<.*>'
     
-    # on obtient
+    # on obtient ceci
+    # on rappelle que group(0) montre la partie du fragment
+    # HTML qui matche l'expression régulière
     match = re.match(re_greedy, line)
-    match.groups()
-
+    match.group(0)
 
 Ça n'est pas forcément ce qu'on voulait faire&nbsp;; aussi on peut spécifier
 l'approche inverse, c'est-à-dire de trouver la **plus-petite** chaîne qui
@@ -615,12 +617,13 @@ matche, dans une approche dite *non-greedy*, avec les opérateurs suivants&nbsp;
  * `??` : `?` mais *non-greedy*,
 
 
-    # ici *? signifie * mais pas greedy
-    re_non_greedy = re_greedy = '<(.*?)>'
+    # ici on va remplacer * par *? pour rendre l'opérateur * non-greedy
+    re_non_greedy = re_greedy = '<.*?>'
     
-    # et cette fois, on obtient
+    # mais on continue à cherche un texte entre <> naturellement
+    # si bien que cette fois, on obtient
     match = re.match(re_non_greedy, line)
-    match.groups()
+    match.group(0)
 
 ##### S'agissant du traitement des fins de ligne
 
