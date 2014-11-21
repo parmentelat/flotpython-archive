@@ -13,7 +13,9 @@ de l'exécution (à *run-time*),
 time) et **lexicale**, en ce sens qu'elle se base uniquement sur les
 imbrications de code.
 
-Dans ce complément nous allons reprendre et résumer ces différentes règles.
+Vous voyez donc que la différence entre attributs et variables est fondamentale.
+Dans ce complément, nous allons reprendre et résumer les différentes règles qui
+régissent l'affectation et le référencement des attributs et des variables.
 
 ##### Attributs
 
@@ -83,16 +85,17 @@ englobantes, la règle LEG s'applique. Par exemple
 
 ##### En résumé
 
-On a couvert tous les cas normaux, et même si python est un langage plutôt mieux
-fait, avec moins de cas particuliers, que d'autres langages, il a également ses
-cas étranges entre raisons historiques et bugs qui ne seront jamais corrigés
-(parce que ça casserait plus de choses que ça n'en réparerait). Pour éviter de
-tomber dans ces cas spéciaux, c'est simple vous n'avez qu'à suivre deux
-règles&nbsp;:
+Dans la vidéo et dans ce complément basique, on a couvert tous les cas
+standards, et même si python est un langage plutôt mieux fait, avec moins de cas
+particuliers, que d'autres langages, il a également ses cas étranges entre
+raisons historiques et bugs qui ne seront jamais corrigés (parce que ça
+casserait plus de choses que ça n'en réparerait). Pour éviter de tomber dans ces
+cas spéciaux, c'est simple vous n'avez qu'à suivre deux règles&nbsp;:
  * ne jamais affecter dans un bloc de code local une variable de même nom qu'une
 variable globale&nbsp;;
  * toujours mettre la directive `global` comme première instruction du bloc de
-code où elle s'applique.
+code où elle s'applique (mais nous vous rappelons qu'il faut éviter d'utiliser
+cette directive dans le code que vous écrivez).
 
 Si vous ne suivez pas ces règles, vous risquez de tomber dans un cas particulier
 que nous détaillons ci-dessous dans la partie avancée.
@@ -215,3 +218,22 @@ code.
 C'est source de confusion et d'erreurs, pour cette raison, dans les dernières
 versions de python 2, si une directive `global` arrive après une affectation
 locale de la variable, il y a une exception `SyntaxWarning`.
+
+Pour finir, rappelons que l'utilisation de la directive `global` est fortement
+déconseillée puisqu'elle rend implicite les communications entre espaces de
+nommage. Il faut à la place toujours favoriser les passages d'arguments et les
+retours de fonctions. Souvenons-nous du Zen de python...
+
+
+    import this
+
+Et en particulier
+
+
+    zens = ("".join([this.d.get(x, x) for x in this.s])).split('\n')
+    print zens[3]
+    print zens[-1]
+
+Et pour ceux qui se demandent pourquoi il faut une expression compliquée pour
+sortir deux phrases du Zen de python, c'est parce que le zen de python se mérite
+:)
