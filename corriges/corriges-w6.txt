@@ -1,0 +1,24 @@
+# -*- coding: iso-8859-15 -*-
+############################################################ 
+#
+# Corrigés de la semaine 6
+#
+############################################################
+
+##################################################
+# 6 - Semaine urls Séquence 6
+##################################################
+
+protos_list = ['http', 'https', 'ftp'] 
+
+protos      = "(?P<proto>" + "|".join(protos_list) + ")"
+
+user        = r"(?:(?P<user>\w+)(:(?P<password>[^:]+))@)?"
+
+hostname    = r"(?P<hostname>[\w_.]+)"
+
+port        = r"(:(?P<port>\d+))?"
+
+regexp_urls = protos + "://" + user + hostname + port
+
+
