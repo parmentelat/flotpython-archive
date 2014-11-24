@@ -283,7 +283,7 @@ for line in pages_responsivness:
 
 for url in dead_urls:
     print url
-    if url[0] == 404
+    if url[0] == 404:
         for site in crawl.sites_to_be_crawled_dict[url[1]]:
             print site 
         print '-'*60
