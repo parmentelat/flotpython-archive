@@ -3,11 +3,11 @@
 
 ## Complément - niveau avancé
 
-Dans ce bref complément, nous allons introduire la notion de *duck typing*, et
+Dans ce complément, nous allons introduire la notion de *duck typing*, et
 attirer votre attention sur cette différence assez essentielle entre python et
 les langages statiquement typés.
 
-### Type et type
+### Type concret et type abstrait
 
 Revenons sur la notion de type, et remarquons que les types peuvent jouer
 plusieurs rôles, comme on l'a évoqué rapidement en première semaine; et pour
