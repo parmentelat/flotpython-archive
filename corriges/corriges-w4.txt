@@ -46,7 +46,8 @@ et de caractÃ¨res
 ##################################################
 def pgcd(a, b):
     "le pgcd de a et b par l'algorithme d'Euclide"
-    # on suppose que a >= b, il faut inverser sinon
+    # on suppose que a >= b, si ce n'est pas le cas
+    # il faut inverser les deux entrées
     if b > a : 
         a, b = b, a
     # boucle sans fin
