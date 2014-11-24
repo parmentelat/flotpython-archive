@@ -7,8 +7,9 @@ On vous demande d'écrire une fonction qui calcule le pgcd de deux entiers, en
 utilisant [l'algorithme
 d'Euclide](http://fr.wikipedia.org/wiki/Algorithme_d'Euclide).
 
-def pgcd(a, b):
-    "<votre code>"
+
+    def pgcd(a, b):
+        "<votre code>"
 
 
     # pour vérifier votre code
