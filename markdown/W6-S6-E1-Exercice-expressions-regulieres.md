@@ -8,6 +8,15 @@ et pas sur l'utilisation de la librairie;
  * en particulier tous les exercices font appel à `re.match` entre votre
 *regexp* et une liste de chaînes d'entrée qui servent de jeux de test.
 
+##### Liens utiles
+
+Pour travailler sur ces exercices, vous pouvez profitablement avoir sous la
+main&nbsp;:
+ * la [documentation officielle](https://docs.python.org/2/library/re.html
+#regular-expression-syntax),
+ * et [cet outil interactif sur regexp101.com](http://regex101.com/#python) qui
+permet d'avoir un retour presque immédiat, et donc d'accélérer la mise au point.
+
 ## Exercice - niveau basique
 
 ##### Identificateurs python
