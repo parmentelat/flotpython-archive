@@ -54,9 +54,10 @@ def scan (dirname):
     total = ok + ko
     exos = len(attempts_by_exo)
     trials_per_student = total / float(nb_students)
+    ratio = float(ok)/total
     print """  {ok} ok (successful) trials
 + {ko} ko (unsuccessful) trials
-= {total} total attempts
+= {total} total attempts ({ratio}% success)
 
 {exos} different exercices -> an average of {trials_per_student} attempts per student"""\
     .format(**locals())
