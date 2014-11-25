@@ -35,6 +35,12 @@ ligne**.
     # pour vérifier votre code
     exo_comptage.correction(comptage)
 
+La méthode `debug` applique votre fonction au premier fichier d'entrée, et
+affiche le résultat comme dans l'exemple ci-dessus.
+
+**N'oubliez pas de vérifier** que vous ajoutez bien la dernière fin de ligne,
+car sa présence/absence n'apparaît pas clairement dans ce tableau.
+
 
     # debugging
     exo_comptage.debug(comptage)
