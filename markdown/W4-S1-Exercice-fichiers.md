@@ -19,6 +19,9 @@ nombre de caractères (y compris la fin de ligne), et la ligne d'origine;
 totaux de lignes, de mots et de caractères, **suivi d'une dernière fin de
 ligne**.
 
+Dans sa version simple, cet exercice ne s'occupe que de **fichiers sans
+caractères accentués**.
+
 
     # un exemple de ce qui est attendu
     from corrections.w4_files import exo_comptage
@@ -44,3 +47,16 @@ car sa présence/absence n'apparaît pas clairement dans ce tableau.
 
     # debugging
     exo_comptage.debug(comptage)
+
+### Accès aux fichiers d'exemples
+
+Vous pouvez télécharger les fichiers d'exemples&nbsp;:
+ * [Romeo and Juliet](data/romeo_and_juliet.txt)
+ * [Lorem Ipsum](data/lorem_ipsum.txt)
+
+Ainsi que pour les courageux, des fichiers avec accents&nbsp;:
+ * [Une charogne en Unicode](une_charogne_unicode.txt)
+ * [Une charogne en Iso-latin-15](une_charogne_iso15.txt)
+
+À nouveau ces deux fichiers ne sont pas à prendre en compte dans la version
+basique de l'exercice.
