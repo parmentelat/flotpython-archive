@@ -33,10 +33,6 @@ variable en python.
     regexp_pythonid = "<votre_code>"
 
 
-    # xxx remove me
-    from corrections.w6_regexp import regexp_pythonid
-
-
     # pour valider votre code
     exo_pythonid.correction(regexp_pythonid)
 
@@ -66,10 +62,6 @@ pas commencer ou finir par un underscore)
 
 
     regexp_specials = "<votre_regexp>"
-
-
-    # xxx remove me
-    from corrections.w6_regexp import regexp_specials
 
 
     # validation
@@ -149,11 +141,6 @@ c'est l'exercice qui s'en occupe.
     # n'hésitez pas à construire votre regexp petit à petit
     
     regexp_url = "<votre_regexp>"
-
-
-    # xxx remove me
-    from corrections.w6_regexp import regexp_url
-    print regexp_url
 
 
     exo_url.correction(regexp_url)
