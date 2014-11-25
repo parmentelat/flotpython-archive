@@ -16,7 +16,8 @@ et un nom de fichier de sortie (on suppose qu'on a le droit de l'écrire);
 donne le numéro de ligne, le nombre de mots (**séparés par des espaces**), le
 nombre de caractères (y compris la fin de ligne), et la ligne d'origine;
  * et enfin le fichier de sortie comporte une dernière ligne avec les nombres
-totaux de lignes, de mots et de caractères, suivi d'une dernière fin de ligne.
+totaux de lignes, de mots et de caractères, **suivi d'une dernière fin de
+ligne**.
 
 
     # un exemple de ce qui est attendu
