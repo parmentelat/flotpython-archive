@@ -31,7 +31,8 @@ d'entiers (auquel cas on renvoie la liste des factorielles)&nbsp;:
         # la liste des résultats si on reçoit un tuple ou une liste 
         elif isinstance(argument, (tuple, list)):
             return [factoriel(i) for i in argument]
-        # else:
+        # sinon on lève une exception
+        else:
             raise UnexpectedArgument, n
 
 
