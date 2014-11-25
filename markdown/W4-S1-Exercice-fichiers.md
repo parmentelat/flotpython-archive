@@ -55,8 +55,8 @@ Vous pouvez télécharger les fichiers d'exemples&nbsp;:
  * [Lorem Ipsum](data/lorem_ipsum.txt)
 
 Ainsi que pour les courageux, des fichiers avec accents&nbsp;:
- * [Une charogne en Unicode](une_charogne_unicode.txt)
- * [Une charogne en Iso-latin-15](une_charogne_iso15.txt)
+ * [Une charogne en Unicode](data/une_charogne_unicode.txt)
+ * [Une charogne en Iso-latin-15](data/une_charogne_iso15.txt)
 
 À nouveau ces deux fichiers ne sont pas à prendre en compte dans la version
 basique de l'exercice.
