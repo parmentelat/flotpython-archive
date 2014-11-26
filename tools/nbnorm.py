@@ -98,9 +98,9 @@ class Notebook:
         if verbose:
             print ("{} -> {}".format(self.filename,metadata[notebookname]))
 
-    def set_version (self, version="1.0"):
+    def set_version (self, version="1.0", force=False):
         metadata = self.xpath (['metadata'])
-        if 'version' not in metadata:
+        if 'version' not in metadata or force:
             metadata['version']=version
 
     def clear_all_outputs (self):
@@ -143,19 +143,22 @@ class Notebook:
         if replace_file_with_string (outfilename, new_contents):
             print("{} saved into {}".format(self.name, outfilename))
             
-    def full_monty (self, force_name, sign, verbose):
+    def full_monty (self, force_name, version, sign, verbose):
         self.parse()
         self.set_name_from_heading1(force_name=force_name, verbose=verbose)
-        self.set_version()
+        if version is None:
+            self.set_version()
+        else:
+            self.set_version(version, force=True)
         self.clear_all_outputs ()
         self.remove_empty_cells ()
         if sign:
             self.sign()
         self.save()
 
-def full_monty (name, force_name, sign, verbose):
+def full_monty (name, force_name, version, sign, verbose):
     nb=Notebook(name)
-    nb.full_monty(force_name=force_name, sign=sign, verbose=verbose)
+    nb.full_monty(force_name=force_name, version=version, sign=sign, verbose=verbose)
 
 from argparse import ArgumentParser
 
@@ -172,6 +175,8 @@ def main ():
                          help="skip signing the notebooks")
     parser.add_argument ("-v", "--verbose", dest="verbose", action="store_true", default=False,
                          help="show current notebookname")
+    parser.add_argument ("-V", "--version", dest="version", action="store", default=None,
+                         help="set version in notebook metadata")
     parser.add_argument ("notebooks", metavar="IPYNBS", nargs="*", 
                          help="the notebooks to normalize")
 
@@ -185,7 +190,7 @@ def main ():
         if notebook.find ('.alt') >=0 :
             print ('ignoring', notebook)
             continue
-        full_monty (notebook, force_name=args.force_name, sign=args.sign, verbose=args.verbose)
+        full_monty (notebook, force_name=args.force_name, version=args.version, sign=args.sign, verbose=args.verbose, )
 
 if __name__ == '__main__':
     main()
