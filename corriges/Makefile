@@ -19,7 +19,7 @@ all: $(foreach week, $(WEEKS), corriges-w$(week).tex) corriges.tex
 corriges.tex corriges.txt: $(SOURCES) $(TOOL)
 	$(TOOL) -o corriges -t "Tous les corrigés" -c $(SOURCES)
 corriges.pdf: corriges.tex
-	(cd corriges; pdflatex corriges.tex)
+	pdflatex corriges.tex
 clean::
 	rm -f corriges.*
 pdf: corriges.pdf
@@ -29,7 +29,7 @@ corriges-w$(1).tex: $(call week_sources,$(1)) $(TOOL)
 	$(TOOL) -o corriges-w$(1) -t "Corrigés de la semaine $(1)" $(call week_sources,$(1))
 
 corriges-w$(1).pdf: corriges-w$(1).tex
-	(cd corriges; pdflatex corriges-w$(1).tex)
+	pdflatex corriges-w$(1).tex
 
 clean::
 	rm -f corriges-w$(1).*
