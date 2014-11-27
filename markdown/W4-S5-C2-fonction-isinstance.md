@@ -33,7 +33,7 @@ d'entiers (auquel cas on renvoie la liste des factorielles)&nbsp;:
             return [factoriel(i) for i in argument]
         # sinon on lève une exception
         else:
-            raise UnexpectedArgument, n
+            raise TypeError, argument
 
 
     print "entier", factoriel(4)
