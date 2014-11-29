@@ -9,17 +9,17 @@ les langages statiquement typés.
 
 ### Type concret et type abstrait
 
-Revenons sur la notion de type, et remarquons que les types peuvent jouer
-plusieurs rôles, comme on l'a évoqué rapidement en première semaine; et pour
-reprendre des notions standard en langages de programmation nous allons
-distinguer entre&nbsp;:
- 1. **type concret:** d'une part la notion de type a bien entendu à voir avec
-l'implémentation; un compilateur C a besoin de savoir très précisément quel
-espace allouer à une variable, et de même l'interpréteur python sous-traite à la
-classe le soin d'initialiser un objet;
- 1. **type abstrait:** d'autre part, les types sont cruciaux dans les systèmes
-de vérification statique au sens large dont le but est de trouver un maximum de
-défauts à la seule lecture du code (par opposition aux techniques qui
+Revenons sur la notion de type et remarquons que les types peuvent jouer
+plusieurs rôles, comme on l'a évoqué rapidement en première semaine&nbsp;; et
+pour reprendre des notions standard en langages de programmation nous allons
+distinguer deux types.
+ 1. **type concret&nbsp;:** d'une part, la notion de type a bien entendu à voir
+avec l'implémentation&nbsp;; par exemple, un compilateur C a besoin de savoir
+très précisément quel espace allouer à une variable, et l'interpréteur python
+sous-traite à la classe le soin d'initialiser un objet&nbsp;;
+ 1. **type abstrait&nbsp;:** d'autre part, les types sont cruciaux dans les
+systèmes de vérification statique, au sens large, dont le but est de trouver un
+maximum de défauts à la seule lecture du code (par opposition aux techniques qui
 nécessitent de le faire tourner).
 
 ### *Duck typing*
@@ -82,11 +82,11 @@ Pour prendre un exemple plus simple, pour que cette expression&nbsp;:
 
 ait un sens, il faut que l'objet `graphic` ait une méthode `draw`.
 
-À nouveau dans un langage typé statiquement on serait amené à définir une classe
-abstraite `Graphic`. En python ce n'est **pas requis**; vous pouvez utiliser ce
-comme avec deux classes `Rectangle` et `Texte` qui n'ont pas de rapport entre
-elles - autres que, à nouveau, d'avoir `object` comme ancêtre commun, pourvu
-qu'elles aient toutes les deux une classe `draw`.
+À nouveau, dans un langage typé statiquement, on serait amené à définir une
+classe abstraite `Graphic`. En python ce n'est **pas requis**&nbsp;; vous pouvez
+utiliser ce code tel quel avec deux classes `Rectangle` et `Texte` qui n'ont pas
+de rapport entre elles - autres que, à nouveau, d'avoir `object` comme ancêtre
+commun, pourvu qu'elles aient toutes les deux une méthode `draw`.
 
 ### Héritage et type abstrait
 
@@ -108,7 +108,7 @@ pour parvenir à faire l'équivalent de la surcharge en C++ (la surcharge en C++
 c'est quand vous définissez plusieurs fonctions qui ont le même nom mais des
 types d'arguments différents).
 
-C'est pourquoi quand on a cherché à exposer au programmeur des propriétés comme
+C'est pourquoi, quand on a cherché à exposer au programmeur des propriétés comme
 "cet objet est-il iterable ?", on a choisi d'étendre *isinstance* au travers de
 [cette initiative](http://legacy.python.org/dev/peps/pep-3119/). C'est ainsi
 qu'on peut faire par exemple&nbsp;:
@@ -137,13 +137,13 @@ qu'on peut faire par exemple&nbsp;:
 
 L'implémentation du module `abc` donne l'**illusion** que `Iterable` est un
 objet dans la hiérarchie de classes, et que tous ces *types* `str`, `list`, et
-`Foo` lui sont asujettis, mais ce n'est pas le cas en réalité; comme on l'a vu
-plus tôt, ces trois types ne sont pas comparables dans la hiérarchie de classes,
-ils n'ont pas de plus petit (ou plus grand) élément.
+`Foo` lui sont asujettis, mais ce n'est pas le cas en réalité&nbsp;; comme on
+l'a vu plus tôt, ces trois types ne sont pas comparables dans la hiérarchie de
+classes, ils n'ont pas de plus petit (ou plus grand) élément.
 
 Je signale pour finir, à propos de `isinstance` et du module `collections`, que
 la définition du symbole `Hashable` est à mon avis beaucoup moins convaincante
-que `Iterable`; si vous vous souvenez qu'en Semaine 3, Séquence "les
+que `Iterable`&nbsp;; si vous vous souvenez qu'en Semaine 3, Séquence "les
 dictionnaires", on avait vu que les clés doivent être globalement immuables.
 C'est une caractéristique qui est assez difficile à écrire, et en tous cas ceci
 de mon point de vue ne remplit pas la fonction&nbsp;:
@@ -160,7 +160,8 @@ de mon point de vue ne remplit pas la fonction&nbsp;:
 ### python et les classes abstraites
 
 Les points à retenir de ce complément un peu digressif sont&nbsp;:
- * en python, on hérite des **implémentations** et pas des **spécifications**;
+ * en python, on hérite des **implémentations** et pas des
+**spécifications**&nbsp;;
  * et le langage n'est pas taillé pour tirer profit de **classes abstraites** -
 même si rien ne vous interdit d'écrire, pour des raisons documentaires, une
 classe qui résume l'interface qui est attendue par tel ou tel système de plugin.
