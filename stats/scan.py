@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 
-from argparse import ArgumentParser
+from __future__ import print_function
+
+import sys
+import os.path
+import traceback
 
 from glob import glob
 
-import os.path
-
-import traceback
+from argparse import ArgumentParser
 
 class Attempts:
     def __init__(self):
@@ -32,22 +34,22 @@ def scan (dirname):
         try:
             with open(os.path.join(subdir,".correction")) as log:
                 nb_students += 1
-                for line in log:
+                for lineno,line in enumerate(log):
                     try:
                         date, id1, id2, function, result = line.split()
                         attempts_by_exo.setdefault(function, Attempts())
                         attempts_by_exo[function].record(result)
                         total_attempts.record(result)
                     except:
-                        traceback.print_exc()
+                        print ('skipping line=', line, '\tin subdir', subdir, file=sys.stderr)
                         pass
         except:
             traceback.print_exc()
             pass
 
-    print "{nb_students} students have tried at least once".format(**locals())
+    print ("{nb_students} students have tried at least once".format(**locals()))
     if nb_dirs != nb_students:
-        print "{nb_dirs} dirs were found (should be {nb-students})".format(**locals())
+        print ("{nb_dirs} dirs were found (should be {nb-students})".format(**locals()))
 
     ok = total_attempts.ok
     ko = total_attempts.ko
@@ -55,17 +57,17 @@ def scan (dirname):
     exos = len(attempts_by_exo)
     trials_per_student = total / float(nb_students)
     ratio = float(ok)/total
-    print """  {ok} ok (successful) trials
+    print ("""  {ok} ok (successful) trials
 + {ko} ko (unsuccessful) trials
 = {total} total attempts ({ratio}% success)
 
 {exos} different exercices -> an average of {trials_per_student} attempts per student"""\
-    .format(**locals())
+    .format(**locals()))
 
-    print 
+    print ()
 
     for function in sorted(attempts_by_exo):
-        print function, attempts_by_exo[function]
+        print (function, attempts_by_exo[function])
 
     return nb_dirs, nb_students, total_attempts, attempts_by_exo
         
