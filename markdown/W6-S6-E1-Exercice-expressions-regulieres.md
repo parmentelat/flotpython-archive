@@ -4,9 +4,13 @@
 Nous vous proposons dans ce notebook quelques exercices sur les expressions
 régulières. Faisons quelques remarques avant de commencer&nbsp;:
  * nous nous concentrons sur l'écriture de l'expression régulière en elle-même,
-et pas sur l'utilisation de la librairie;
- * en particulier tous les exercices font appel à `re.match` entre votre
-*regexp* et une liste de chaînes d'entrée qui servent de jeux de test.
+et pas sur l'utilisation de la librairie&nbsp;;
+ * en particulier, tous les exercices font appel à `re.match` entre votre
+*regexp* et une liste de chaînes d'entrée qui servent de jeux de test - ce qui
+signifie notamment que vous pouvez ou pas commencer votre regexp par le
+caractère `^`, cela ne changera rien au résultat de la correction, puisqu'en
+utilisant `match` on impose que la correspondance doit avoir lieu au debut de la
+chaîne.
 
 ##### Liens utiles
 
@@ -45,11 +49,12 @@ vous permettre de redéfinir le comportement du langage avec les objets de vos
 classes.
 
 Le but de cet exercice est d'écrire une expression régulière qui décrive une
-classe de noms de méthodes susceptibles, d'être considérés comme des noms de
+classe de noms de méthodes, susceptibles d'être considérés comme des noms de
 méthodes spéciales.
 
 Pour préciser l'exercice, on recherche des noms de méthodes qui doivent&nbsp;:
- 1. commencer par exactement deux underscores - ou tirets-bas `_`,
+ 1. commencer par exactement deux underscores (appelés également tirets-bas)
+`_`,
  1. se terminer par exactement deux underscores,
  1. contenir dans la partie centrale un identificateur qui pourrait être un
 identificateur python (mais qui pour respecter les deux premiers points ne peut
@@ -70,17 +75,18 @@ pas commencer ou finir par un underscore)
 ## Exercice - niveau avancé
 
 Vu comment sont conçus les exercices, vous ne pouvez pas passer à `re.compile`
-un *flag* comme `re.IGNORECASE` ou autre; sachez cependant que vous pouvez
-***embarquer* ces flags dans la *regexp*** elle-même; par exemple pour rendre la
-regexp insensible à la casse de caractères, au lieu d'appeler `re.compile` avec
-le flag `re.I`, vous pouvez utiliser `(?i)` comme ceci&nbsp;:
+un *flag* comme `re.IGNORECASE` ou autre&nbsp;; sachez cependant que vous pouvez
+***embarquer* ces flags dans la *regexp*** elle-même&nbsp;; par exemple pour
+rendre la regexp insensible à la casse de caractères, au lieu d'appeler
+`re.compile` avec le flag `re.I`, vous pouvez utiliser `(?i)` comme ceci&nbsp;:
 
 
     import re
-    re.match ("(?i)abc","ABC").group(0)
+    re.match("(?i)abc","ABC").group(0)
 
 Remarquez bien que l'emplacement où vous ajoutez le *flag* dans la * regexp* n'a
-pas d'importance, le flag agit toujours sur toute la *regexp* .
+pas d'importance en général (lire la doc pour le flag `x`), le flag agit
+toujours sur toute la *regexp*.
 
 
     re.match("abc(?i)","ABC").group(0)
@@ -115,21 +121,21 @@ comme ceci&nbsp;:
    * `<location> = [<user>[:<password>]@]<hostname>[:<port>]`
  * le champ `<user>` ne peut contenir que des caractères alphanumériques; si le
 `@` est présent le champ `<user>` ne peut pas être vide
- * le champ `<password>` peut contenir tout sauf un `:`; de même si le `:` est
-présent le champs `<password>` ne peut pas être vide
+ * le champ `<password>` peut contenir tout sauf un `:` et de même, si le `:`
+est présent le champ `<password>` ne peut pas être vide
  * le champ `<hostname>` peut contenir un suite non-vide de caractères
 alphanumériques, underscores, ou `.`
  * le champ `<port>` ne contient que des chiffres, et il est non vide si le `:`
 est spécifié
- * le champ `<path>` peut 6etre vide.
+ * le champ `<path>` peut être vide.
 
 
-Enfin vous devez définir les groupes `proto`, `user`, `password`, `hostname`,
+Enfin, vous devez définir les groupes `proto`, `user`, `password`, `hostname`,
 `port` et `path` qui sont utilisés pour vérifier votre résultat. Dans la case
 `Résultat attendu`, vous trouverez soit `None` si la regexp ne filtre pas
 l'intégralité de l'entrée, ou bien une liste ordonnée de tuples qui donnent la
-valeur de ces groupes; vous n'avez rien à faire pour construire ces tuples,
-c'est l'exercice qui s'en occupe.
+valeur de ces groupes&nbsp;; vous n'avez rien à faire pour construire ces
+tuples, c'est l'exercice qui s'en occupe.
 
 
     from corrections.w6_regexp import exo_url
