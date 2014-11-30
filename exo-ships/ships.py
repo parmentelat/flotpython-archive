@@ -210,6 +210,36 @@ class KmlOutput():
 
                  
 ########################################
+class FileComparator(object):
+    def __init__(self, out_name, ref_name=None):
+        self.out_name = out_name
+        self.ref_name = ref_name or "{}.ref".format(self.out_name)
+        
+    def _compare(self):
+        """return True if files match"""
+        outputs = [None, None]
+        for i, name in enumerate( [self.out_name, self.ref_name] ):
+            try:
+                with open(name, "ru") as output:
+                    outputs[i] = output.read()
+            except Exception as e:
+                print ("Could not read output {}".format(name))
+                return False
+        if outputs[0] == outputs[1]:
+            return True
+        # xxx improve me : could use a little more details here
+        else:
+            return False
+
+    def compare(self):
+        bool_result = self._compare()
+        status = "OK" if bool_result else "KO"
+        message = "Comparison between {self.out_name} and {self.ref_name} -> {status}".\
+                  format(**locals())
+        print (message)
+        return bool_result
+
+########################################
 import gzip
 
 import json
@@ -249,6 +279,7 @@ class Merger(object):
             dict_by_name = { ship.name : ship for ship in ships }
             for name in sorted(dict_by_name):
                 ships_list.write ("{} ({} positions)\n".format(name, len(dict_by_name[name].positions)))
+        return FileComparator(filename).compare()
 
     def main(self):
         try:
@@ -259,7 +290,7 @@ class Merger(object):
             else:
                 ship_name = self.args.ship_name
                 ships = self.ships.ships_by_name(ship_name)
-            self.list_ships(ships)
+            overall = self.list_ships(ships)
             kml_output = KmlOutput()
             kml_text = kml_output.contents(ship_name, "some description", ships)
             suffix = "kmz" if self.args.gzip else "kml"
@@ -267,12 +298,13 @@ class Merger(object):
             print ("Opening {out_name} for ship {ship_name}".format(**locals()))
             with gzip.open(out_name, 'w') if self.args.gzip else open(out_name, 'w') as out:
                 out.write(kml_text)
-            return 0
+            overall = overall & FileComparator(out_name).compare()
+            return 0 if overall else 1
         except Exception as e:
             print ('Something went wrong',e)
             import traceback
             traceback.print_exc()
-            return 1
+            return 2
 
 if __name__ == '__main__':
     merger = Merger()
