@@ -131,8 +131,13 @@ import random
 from string import Template
 
 class KmlOutput():
+
+    random_inited = False
+    
     def __init__(self):
-        pass
+        if not self.random_inited:
+            random.seed(0)
+            self.random_inited = True
 
     def normalize (self, name):
         return name.replace("&","")
@@ -237,10 +242,13 @@ class Merger(object):
         self.ships.clean_unnamed()
 
     def list_ships(self, ships):
-        print ("Found {} ships with name {}", len(ships))
-        names = [ ship.name for ship in ships ]
-        names.sort()
-        for name in names: print (name)
+        filename = "ALL_SHIPS.txt"
+        print ("Opening {filename} for listing all named ships".format(**locals()))
+        with open(filename, 'w') as ships_list:
+            ships_list.write ("Found {} ships\n".format(len(ships)))
+            dict_by_name = { ship.name : ship for ship in ships }
+            for name in sorted(dict_by_name):
+                ships_list.write ("{} ({} positions)\n".format(name, len(dict_by_name[name].positions)))
 
     def main(self):
         try:
@@ -259,7 +267,6 @@ class Merger(object):
             print ("Opening {out_name} for ship {ship_name}".format(**locals()))
             with gzip.open(out_name, 'w') if self.args.gzip else open(out_name, 'w') as out:
                 out.write(kml_text)
-            print('Done')
             return 0
         except Exception as e:
             print ('Something went wrong',e)
