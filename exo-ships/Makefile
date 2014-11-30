@@ -3,6 +3,7 @@ all:
 
 REF-FILES =  ALL_SHIPS.kml.ref	ALL_SHIPS.txt.ref ALL_SHIPS-v.txt.ref
 
+
 ref-tar:
 	tar cf ../data/ships-ref.tar $(REF-FILES)
 
@@ -41,3 +42,19 @@ ship-help help-ship:
 	python -c "from shipdict import Ship; help(Ship)"
 position-help help-position:
 	python -c "from shipdict import Position; help(Position)"
+
+CODE-FILES = ./compare.py ./kml.py ./merger.py ./shipdict.py
+DATA-FILES = $(subst ./,../data/,$(CODE-FILES))
+
+define code_target
+../data/$(subst ./,,$(1)): $(1)
+	rsync -av $(1) ../data/
+endef
+
+$(foreach code,$(CODE-FILES),$(eval $(call code_target,$(code))))
+
+code: $(DATA-FILES)
+
+
+foo:
+	echo $(DATA-FILES)
