@@ -37,11 +37,11 @@ compare-help help-compare:
 kml-help help-kml:
 	python -c "from kml import KML; help(KML)"
 shipdict-help help-shipdict:
-	python -c "from shipdict import ShipDict; help(ShipDict)"
+	python -c "from shipdict import ShipDict; help(ShipDict)" > shipdict.help
 ship-help help-ship:
-	python -c "from shipdict import Ship; help(Ship)"
+	python -c "from shipdict import Ship; help(Ship)" > ship.help
 position-help help-position:
-	python -c "from shipdict import Position; help(Position)"
+	python -c "from shipdict import Position; help(Position)" > position.help
 
 CODE-FILES = ./compare.py ./kml.py ./merger.py ./shipdict.py
 DATA-FILES = $(subst ./,../data/,$(CODE-FILES))
