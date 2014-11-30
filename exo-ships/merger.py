@@ -3,7 +3,7 @@
 
 from __future__ import print_function
 
-from marine import Position, Ship, ShipDict
+from marine import ShipDict
 
 from kml import Kml
 
@@ -29,7 +29,7 @@ class Merger(object):
         parser.add_argument ("inputs", nargs='*')
         self.args = parser.parse_args()
 
-        self.ships = ShipDict()
+        self.ship_dict = ShipDict()
         
     def merge(self, inputs):
         for json_input_filename in inputs:
@@ -38,8 +38,8 @@ class Merger(object):
             with open(json_input_filename) as feed:
                 chunks = json.load(feed)
                 for chunk in chunks:
-                    self.ships.add_chunk(chunk)
-        self.ships.clean_unnamed()
+                    self.ship_dict.add_chunk(chunk)
+        self.ship_dict.clean_unnamed()
 
     def list_ships(self, ships, filename):
         print ("Opening {filename} for listing all named ships".format(**locals()))
@@ -54,11 +54,11 @@ class Merger(object):
         try:
             self.merge(self.args.inputs)
             if not self.args.ship_name:
-                ships = self.ships.all_ships()
+                ships = self.ship_dict.all_ships_as_list()
                 ship_name = "ALL_SHIPS"
             else:
                 ship_name = self.args.ship_name
-                ships = self.ships.ships_by_name(ship_name)
+                ships = self.ship_dict.ships_by_name(ship_name)
 
             summary_filename = "ALL_SHIPS.txt"
             self.list_ships(ships, summary_filename)
@@ -81,6 +81,7 @@ class Merger(object):
             traceback.print_exc()
             return 2
 
+# create a Merger instance and send it main()
 if __name__ == '__main__':
     merger = Merger()
     exit(merger.main())

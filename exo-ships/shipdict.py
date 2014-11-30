@@ -112,7 +112,7 @@ class ShipDict(dict):
         """
         return [ ship for ship in self.values() if ship.name == name ]
 
-    def all_ships(self):
+    def all_ships_as_list(self):
         return self.values()
 
     def clean_unnamed(self):

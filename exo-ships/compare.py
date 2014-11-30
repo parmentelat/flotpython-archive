@@ -27,7 +27,7 @@ class Compare(object):
     def compare_and_print(self):
         bool_result = self.bool_compare()
         status = "OK" if bool_result else "KO"
-        message = "Comparison between {self.out_name} and {self.ref_name} -> {status}".\
+        message = "Comparing {self.out_name} and {self.ref_name} -> {status}".\
                   format(**locals())
         print (message)
         return bool_result
