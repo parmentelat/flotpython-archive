@@ -43,18 +43,3 @@ ship-help help-ship:
 position-help help-position:
 	python -c "from shipdict import Position; help(Position)" > position.help
 
-CODE-FILES = ./compare.py ./kml.py ./merger.py ./shipdict.py
-DATA-FILES = $(subst ./,../data/,$(CODE-FILES))
-
-define code_target
-../data/$(subst ./,,$(1)): $(1)
-	rsync -av $(1) ../data/
-endef
-
-$(foreach code,$(CODE-FILES),$(eval $(call code_target,$(code))))
-
-code: $(DATA-FILES)
-
-
-foo:
-	echo $(DATA-FILES)
