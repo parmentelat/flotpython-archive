@@ -1,5 +1,5 @@
 all:
-	ships.py json/*
+	merger.py json/*
 
 REF-FILES =  ALL_SHIPS.kml.ref	ALL_SHIPS.txt.ref
 
