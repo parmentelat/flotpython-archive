@@ -5,10 +5,9 @@
 
 ##### Objectifs de l'exercice
 
-Cette semaine nous ne ferons qu'un seul exercice.
-
-Maintenant que vous avez un bagage qui couvre toutes les bases du langage, vous
-devez écrire quelques classes que vous intégrez ensuite dans un code écrit pas
+Maintenant que vous avez un bagage qui couvre toutes les bases du langage, cette
+semaine nous ne ferons qu'un seul exercice de taille un peu plus réaliste. Vous
+devez écrire quelques classes, que vous intégrez ensuite dans un code écrit pas
 nos soins.
 
 L'exercice comporte donc autant une part lecture qu'une part écriture. Vous êtes
@@ -21,10 +20,10 @@ Dans le prolongement des exercices de la semaine 3 sur les données maritimes,
 l'application dont il est question ici fait principalement ceci&nbsp;:
  * agréger des données obtenues auprès de marinetraffic,
  * et produire en sortie
-   * un fichier KML, pour exposer les chemins de tous les bateaux concernés à
-google earth, maps ou autre outil similaire,
-   * et un fichier texte qui résume les bateaux concernés et le nombre de
-positions trouvées pour chacun.
+   * un fichier texte qui liste par ordre alphabétique les bateaux concernés, et
+le nombre de positions trouvées pour chacun,
+   * et un fichier KML, pour exposer les trajectoires trouvées à google earth,
+maps ou autre outil similaire.
 
 Voici à quoi ressemble le fichier KML obtenu avec les données que nous
 fournissons, une fois ouvert sous google earth&nbsp;:
@@ -51,6 +50,8 @@ l'implémentation de référence.
 
 Du coup le fait de disposer de google earth sur votre ordinateur n'est pas
 strictement nécessaire, on ne s'en sert pas pour l'exercice.
+
+***
 
 ### Mise en place
 
