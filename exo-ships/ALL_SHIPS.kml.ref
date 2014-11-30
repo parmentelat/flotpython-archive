@@ -2,7 +2,7 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
     <name>ALL_SHIPS</name>
-    <description>some description</description>
+    <description>Positions for ship(s) ALL_SHIPS</description>
   <Style id="style_XIN HONG KONG">
       <LineStyle>
         <color>80d1bc6d</color>

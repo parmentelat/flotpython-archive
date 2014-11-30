@@ -5,11 +5,14 @@ from __future__ import print_function
 
 class Position(object):
     "a position atom with timestamp attached"
+    
     def __init__(self, latitude, longitude, timestamp):
+        "constructor"
         self.latitude = latitude
         self.longitude = longitude
         self.timestamp = timestamp
 
+# all these methods are only used when merger.py runs in verbose mode
     @staticmethod
     def _lat_str(f):
         if f>=0:        return "{}°N".format(f)
@@ -29,9 +32,14 @@ class Position(object):
 
 class Ship(object):
     """
-    a ship object, that also has a list of known positions
+    a ship object, that requires a ship id, 
+    and optionnally a ship name and country
+    which can also be set later on
+    
+    this object also manages a list of known positions
     """
     def __init__(self, id, name=None, country=None):
+        "constructor"
         self.id = id
         self.name = name
         self.country = country
@@ -39,24 +47,26 @@ class Ship(object):
         self.positions = []
 
     def add_position(self, position):
+        """
+        insert a position relating to this ship
+        positions are not kept in order so you need 
+        to call `sort_positions` once you're done
+        """
         self.positions.append(position)
 
-    def sort(self):
-        """sort list of positions by chronological order"""
-        # xxx - fixme - this is probably very wrong
-        self.positions.sort()
+    def sort_positions(self):
+        """
+        sort list of positions by chronological order
+        """
+        self.positions.sort(key=lambda position: position.timestamp)
 
-    def print(self):
-        print (40*'-', "Ship:{} ({})".format(self.name, self.country))
-        for position in self.positions:
-            print (position)
-        
 class ShipDict(dict):
     """
     a repository for storing all ships that we know about
     indexed by their id
     """
     def __init__(self):
+        "constructor"
         dict.__init__(self)
 
     def __repr__(self):
@@ -71,6 +81,9 @@ class ShipDict(dict):
         return len(chunk) <= 7
 
     def add_abbreviated(self, chunk):
+        """
+        adds an abbreviated data chunk to the repository
+        """
         id, latitude, longitude, _, _, _, timestamp = chunk
         # xxx improve me - setdefault could work but would create an object each time
         if id not in self:
@@ -79,6 +92,9 @@ class ShipDict(dict):
         ship.add_position (Position (latitude, longitude, timestamp))
         
     def add_extended(self, chunk):
+        """
+        adds an extended data chunk to the repository
+        """
         id, latitude, longitude = chunk[:3]
         timestamp, name = chunk[5:7]
         country = chunk[10]
@@ -91,20 +107,34 @@ class ShipDict(dict):
         self[id].add_position (Position (latitude, longitude, timestamp))
 
     def add_chunk(self, chunk):
+        """
+        chunk is a plain list coming from the JSON data and be either
+        extended or abbreviated
+
+        based on the result of is_abbreviated(), that chunk gets dealt with
+        using add_extended or add_abbreviated
+        """
         if self.is_abbreviated(chunk):
             self.add_abbreviated(chunk)
         else:
             self.add_extended(chunk)
 
     def sort(self):
+        """
+        makes sure all the ships have their positions in chronological order
+        """
         for id, ship in self.iteritems():
-            ship.sort()
+            ship.sort_positions()
 
-#    def list_names(self):
-#        all_ship_names = [ ship.name for ship in self.values() ]
-#        all_ship_names.sort()
-#        for name in all_ship_names:
-#            print (name)
+    def clean_unnamed(self):
+        """
+        Because we enter abbreviated and extended data in no particular order,
+        and for any time period, we might have ship instances with no name attached
+        This method removes such entries from the dict
+        """
+        unnamed_ids = { id for id, ship in self.iteritems() if ship.name is None }
+        for id in unnamed_ids:
+            del self[id]
 
     def ships_by_name(self, name):
         """
@@ -112,16 +142,9 @@ class ShipDict(dict):
         """
         return [ ship for ship in self.values() if ship.name == name ]
 
-    def all_ships_as_list(self):
+    def all_ships(self):
+        """
+        returns a list of all ships known to us 
+        """
         return self.values()
-
-    def clean_unnamed(self):
-        """
-        Because we enter abbreviated and extended data in no particular order,
-        we might have ship instances with no name attached
-        This method removes such entries from the dict
-        """
-        unnamed_ids = { id for id, ship in self.iteritems() if ship.name is None }
-        for id in unnamed_ids:
-            del self[id]
 

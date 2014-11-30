@@ -84,12 +84,14 @@ de données abrégées.
 De même il vous faut installer les résultats de référence que vous trouvez
 ici&nbsp;:
  * [format tar](data/ships-ref.tar)
+ * [format tgz](data/ships-ref.tgz)
  * [format zip](data/ships-ref.zip)
 
-ce qui vous doit vous donner deux fichiers
+ce qui vous doit vous donner trois fichiers
 
     ALL_SHIPS.kml.ref
     ALL_SHIPS.txt.ref
+    ALL_SHIPS-v.txt.ref
 
 
 ### xxx niveaux de difficulté à définir if time permits
@@ -100,11 +102,34 @@ Prendre le `main` et choisir quels fichiers on veut écrire
 
 Lorsque le programme est complet, on le lance comme ceci&nbsp;:
 
-    $ python ships.py json/*
+    $ python merger.py json/*
+    Opening ALL_SHIPS.txt for listing all named ships
+    Opening ALL_SHIPS.kml for ship ALL_SHIPS
+    Comparing ALL_SHIPS.txt and ALL_SHIPS.txt.ref -> OK
+    Comparing ALL_SHIPS.kml and ALL_SHIPS.kml.ref -> OK
 
-qui produit
+qui comme on le voit produit
 
  * `ALL_SHIPS.txt` qui résume, par ordre alphabétique les bateaux qu'on a
 trouvés et le nombre de positions pour chacun, et
  * `ALL_SHIPS.kml` qui est le fichier au format `KML` qui contient toutes les
 trajectoires.
+
+##### Comment est structurée l'application
+
+Le point d'entrée s'appelle, donc, `merger.py`
+
+Il utilise trois autres modules annexes, qui sont
+
+ * `shipdict.py`, qui implémente les classes
+   * `Position` qui contient une latitude, une longitude, et un timestamp,
+   * `Ship` qui modélise un bateau `partir de son `id` et optionnellement un
+`name` et `country`
+   * `ShipDict`, qui maintient un index des bateaux (essentiellement un
+dictionnaire
+ * `compare.py` qui implémente
+   * la classe `Compare` qui se charge de comparer les fichiers résultat avec
+leur version de référence,
+ * `kml.py` qui implémente
+   * la classe `KML` dans laquelle sont concentrées les fonctions liées à la
+génération de KML.
