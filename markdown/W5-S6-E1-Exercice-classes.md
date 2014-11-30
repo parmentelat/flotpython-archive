@@ -268,8 +268,6 @@ de ce que vous devez écrire.
      |
      |  __repr__(self)
      |
-     |  ----------------------------------------------------------------------
-
 
 **Notes**
  * certaines autres classes comme `KML` sont également suscpetibles d'accéder
@@ -302,8 +300,6 @@ la sortie en mode bavard.
      |
      |  sort_positions(self)
      |      sort list of positions by chronological order
-     |
-     |  ----------------------------------------------------------------------
 
 
 ### Classe `Shipdict`
@@ -325,6 +321,10 @@ la sortie en mode bavard.
      |      constructor
      |
      |  __repr__(self)
+     |
+     |  is_abbreviated(self, chunk)
+     |      depending on the size of the incoming data chunk,
+     |      guess if it is an abbreviated or extended data
      |
      |  add_abbreviated(self, chunk)
      |      adds an abbreviated data chunk to the repository
@@ -354,12 +354,5 @@ attached
      |
      |  sort(self)
      |      makes sure all the ships have their positions in chronological order
-     |
-     |  ----------------------------------------------------------------------
-     |  Static methods defined here:
-     |
-     |  is_abbreviated(chunk)
-     |      depending on the size of the incoming data chunk,
-     |      guess if it is an abbreviated or extended data
      |
 
