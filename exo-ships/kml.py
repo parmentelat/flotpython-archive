@@ -7,7 +7,7 @@ import random
 
 from string import Template
 
-class KmlOutput():
+class Kml():
 
     random_inited = False
     

@@ -5,9 +5,9 @@ from __future__ import print_function
 
 from marine import Position, Ship, ShipDict
 
-from kml import KmlOutput
+from kml import Kml
 
-from compare import FileComparator
+from compare import Compare
 
 ########################################
 import gzip
@@ -63,16 +63,16 @@ class Merger(object):
             summary_filename = "ALL_SHIPS.txt"
             self.list_ships(ships, summary_filename)
 
-            kml_output = KmlOutput()
-            kml_contents = kml_output.contents(ship_name, "some description", ships)
+            kml = Kml()
+            contents = kml.contents(ship_name, "some description", ships)
             suffix = "kmz" if self.args.gzip else "kml"
             kml_filename = self.args.output_filename or "{}.{}".format(ship_name, suffix)
             print ("Opening {kml_filename} for ship {ship_name}".format(**locals()))
             with gzip.open(kml_filename, 'w') if self.args.gzip else open(kml_filename, 'w') as out:
-                out.write(kml_contents)
+                out.write(contents)
             
-            ok_summary = FileComparator(summary_filename).compare()
-            ok_kml     = FileComparator(kml_filename).compare()
+            ok_summary = Compare(summary_filename).compare_and_print()
+            ok_kml     = Compare(kml_filename).compare_and_print()
             ok         = ok_summary and ok_kml
             return 0 if ok else 1
         except Exception as e:

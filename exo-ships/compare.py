@@ -3,12 +3,12 @@
 
 from __future__ import print_function
 
-class FileComparator(object):
+class Compare(object):
     def __init__(self, out_name, ref_name=None):
         self.out_name = out_name
         self.ref_name = ref_name or "{}.ref".format(self.out_name)
         
-    def _compare(self):
+    def bool_compare(self):
         """return True if files match"""
         outputs = [None, None]
         for i, name in enumerate( [self.out_name, self.ref_name] ):
@@ -24,8 +24,8 @@ class FileComparator(object):
         else:
             return False
 
-    def compare(self):
-        bool_result = self._compare()
+    def compare_and_print(self):
+        bool_result = self.bool_compare()
         status = "OK" if bool_result else "KO"
         message = "Comparison between {self.out_name} and {self.ref_name} -> {status}".\
                   format(**locals())
