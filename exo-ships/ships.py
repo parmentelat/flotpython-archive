@@ -271,15 +271,14 @@ class Merger(object):
                     self.ships.add_chunk(chunk)
         self.ships.clean_unnamed()
 
-    def list_ships(self, ships):
-        filename = "ALL_SHIPS.txt"
+    def list_ships(self, ships, filename):
         print ("Opening {filename} for listing all named ships".format(**locals()))
         with open(filename, 'w') as ships_list:
             ships_list.write ("Found {} ships\n".format(len(ships)))
             dict_by_name = { ship.name : ship for ship in ships }
             for name in sorted(dict_by_name):
                 ships_list.write ("{} ({} positions)\n".format(name, len(dict_by_name[name].positions)))
-        return FileComparator(filename).compare()
+        return filename
 
     def main(self):
         try:
@@ -290,16 +289,22 @@ class Merger(object):
             else:
                 ship_name = self.args.ship_name
                 ships = self.ships.ships_by_name(ship_name)
-            overall = self.list_ships(ships)
+
+            summary_filename = "ALL_SHIPS.txt"
+            self.list_ships(ships, summary_filename)
+
             kml_output = KmlOutput()
-            kml_text = kml_output.contents(ship_name, "some description", ships)
+            kml_contents = kml_output.contents(ship_name, "some description", ships)
             suffix = "kmz" if self.args.gzip else "kml"
-            out_name = self.args.output_filename or "{}.{}".format(ship_name, suffix)
-            print ("Opening {out_name} for ship {ship_name}".format(**locals()))
-            with gzip.open(out_name, 'w') if self.args.gzip else open(out_name, 'w') as out:
-                out.write(kml_text)
-            overall = overall & FileComparator(out_name).compare()
-            return 0 if overall else 1
+            kml_filename = self.args.output_filename or "{}.{}".format(ship_name, suffix)
+            print ("Opening {kml_filename} for ship {ship_name}".format(**locals()))
+            with gzip.open(kml_filename, 'w') if self.args.gzip else open(kml_filename, 'w') as out:
+                out.write(kml_contents)
+            
+            ok_summary = FileComparator(summary_filename).compare()
+            ok_kml     = FileComparator(kml_filename).compare()
+            ok         = ok_summary and ok_kml
+            return 0 if ok else 1
         except Exception as e:
             print ('Something went wrong',e)
             import traceback
