@@ -110,6 +110,9 @@ Vous pouvez à présent aller chercher les 3 modules suivants&nbsp;:
 
 et les sauver dans le même répertoire.
 
+Vous remarquerez que le code est cette fois entièrement rédigé en anglais, ce
+que nous vous conseillons de faire aussi souvent que possible.
+
 Votre but dans cet exercice est d'écrire le module manquant `shipdict.py` qui
 permettra à l'application de fonctionner comme attendu.
 
@@ -155,14 +158,14 @@ trouvés et le nombre de positions pour chacun, et
  * `ALL_SHIPS.kml` qui est le fichier au format `KML` qui contient toutes les
 trajectoires.
 
-##### Mode bavard
+##### Mode bavard (verbose)
 
 On peut également lancer l'application avec l'option `--verbose` ou simplement
 `-v` sur la ligne de commande, ce qui donne un résultat plus détaillé. Le code
 KML généré reste inchangé, mais la sortie sur le terminal et le fichier de
 résumé sont plus étoffés&nbsp;:
 
-    $ python merger.py -v json/*.json
+    $ python merger.py --verbose json/*.json
     Opening json/2013-10-01-00-00--t=10--ext.json for parsing JSON
     Opening json/2013-10-01-00-10--t=10.json for parsing JSON
     ...
@@ -178,8 +181,23 @@ au format texte, ce qui le rend beaucoup plus bavard comme vous pouvez le voir
 en inspectant la taille des deux fichiers de référence&nbsp;:
 
     $ ls -l ALL_SHIPS.txt.ref ALL_SHIPS-v.txt.ref
-    -rw-r--r--  1 parmentelat  staff  1335127 Nov 30 17:02 ALL_SHIPS-v.txt.ref
+    -rw-r--r--  1 parmentelat  staff  1363434 Dec  1 16:55 ALL_SHIPS-v.txt.ref
     -rw-r--r--  1 parmentelat  staff    15273 Nov 30 08:55 ALL_SHIPS.txt.ref
+
+##### `merger.py --help`
+
+    $ merger.py --help
+    usage: merger.py [-h] [-v] [-s SHIP_NAME] [-z] [inputs [inputs ...]]
+
+    positional arguments:
+      inputs
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -v, --verbose         Verbose mode
+      -s SHIP_NAME, --ship SHIP_NAME
+                            Restrict to ships by that name
+      -z, --gzip            Store kml output in gzip (KMZ) format
 
 ##### Un mot sur les données
 
@@ -196,8 +214,7 @@ u'', u'']
 
 c'est-à-dire
 
-    [ *id*, *latitude*, *longitude*, _, _, *timestamp*, *name*, _, _, _,
-*country*, ...]
+    [ id, latitude, longitude, _, _, timestamp, name, _, _, _, country, ...]
 
 et en ce qui concerne les données abrégées
 
@@ -206,7 +223,7 @@ et en ce qui concerne les données abrégées
 
 c'est-à-dire
 
-    [ *id*, *latitude*, *longitude*, _, _, _, *timestamp*]
+    [ id, latitude, longitude, _, _, _, timestamp]
 
 Il y a unicité des `id` bien entendu (deux relevés qui portent le même `id`
 concernent le même bateau).
@@ -268,6 +285,7 @@ de ce que vous devez écrire.
      |      constructor
      |
      |  __repr__(self)
+     |      only used when merger.py is run in verbose mode
      |
 
 **Notes**
@@ -323,19 +341,15 @@ la sortie en mode bavard.
      |
      |  __repr__(self)
      |
-     |  is_abbreviated(self, chunk)
-     |      depending on the size of the incoming data chunk,
-     |      guess if it is an abbreviated or extended data
-     |
      |  add_abbreviated(self, chunk)
      |      adds an abbreviated data chunk to the repository
      |
      |  add_chunk(self, chunk)
-     |      chunk is a plain list coming from the JSON data and can be either
-     |      extended or abbreviated
+     |      chunk is a plain list coming from the JSON data
+     |      and be either extended or abbreviated
      |
-     |      based on the result of is_abbreviated(), that chunk gets dealt with
-     |      using add_extended or add_abbreviated
+     |      based on the result of is_abbreviated(),
+     |      gets sent to add_extended or add_abbreviated
      |
      |  add_extended(self, chunk)
      |      adds an extended data chunk to the repository
@@ -344,16 +358,20 @@ la sortie en mode bavard.
      |      returns a list of all ships known to us
      |
      |  clean_unnamed(self)
-     |      Because we enter abbreviated and extended data in no particular
-order,
-     |      and for any time period, we might have ship instances with no name
-attached
+     |      Because we enter abbreviated and extended data
+     |      in no particular order, and for any time period,
+     |      we might have ship instances with no name attached
      |      This method removes such entries from the dict
+     |
+     |  is_abbreviated(self, chunk)
+     |      depending on the size of the incoming data chunk,
+     |      guess if it is an abbreviated or extended data
      |
      |  ships_by_name(self, name)
      |      returns a list of all known ships with name <name>
      |
      |  sort(self)
-     |      makes sure all the ships have their positions in chronological order
+     |      makes sure all the ships have their positions
+     |      sorted in chronological order
      |
 
