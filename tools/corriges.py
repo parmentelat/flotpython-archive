@@ -108,7 +108,7 @@ class Source (object):
                         week, sequence, name = end_of_line.split(' ')
                         function = Function (week, sequence, name)
                     except:
-                        print ("ERROR - ignored {} in {}".format(line,filename))
+                        print ("ERROR - ignored {} in {}".format(line,self.filename))
                 elif '@END@' in line:
                     functions.append(function)
                     function = None
