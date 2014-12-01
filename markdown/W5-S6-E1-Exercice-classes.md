@@ -33,7 +33,7 @@ fournissons, une fois ouvert sous google earth&nbsp;:
 ##### Choix d'implémentation
 
 En particulier, dans cet exercice nous allons voir comment on peut gérer des
-données sous forme d'instances de classes plutôt que de types de base. Ce qui
+données sous forme d'instances de classes plutôt que de types de base. Cela
 résonne avec la discussion commencée en Semaine 3, Séquence "Les dictionnaires",
 dans le complément "record-et-dictionnaire".
 
@@ -44,17 +44,18 @@ cette semaine nous allons faire le choix inverse et utiliser plus souvent des
 
 ##### Principe de l'exercice
 
-On a écrit une application complète, constituée de 4 modules; on vous donne le
-code de 3 de ces modules et vous devez écrire le module manquant.
+On a écrit une application complète, constituée de 4 modules&nbsp;; on vous
+donne le code de 3 de ces modules et vous devez écrire le module manquant.
 
 ##### Correction
 
-Tout d'abord nous fournissons un jeu de données d'entrées. De plus l'application
-vient avec son propre système de vérification, qui est très rustique et qui
-consiste à comparer, une fois les sorties produites, leur contenu avec les
-sorties de référence, qui ont été obtenues avec notre version de l'application.
+Tout d'abord nous fournissons un jeu de données d'entrées. De plus,
+l'application vient avec son propre système de vérification, qui est très
+rustique. Il consiste à comparer, une fois les sorties produites, leur contenu
+avec les sorties de référence, qui ont été obtenues avec notre version de
+l'application.
 
-Du coup le fait de disposer de google earth sur votre ordinateur n'est pas
+Du coup, le fait de disposer de google earth sur votre ordinateur n'est pas
 strictement nécessaire, on ne s'en sert pas à proprement parler pour l'exercice.
 
 ***
@@ -63,7 +64,7 @@ strictement nécessaire, on ne s'en sert pas à proprement parler pour l'exercic
 
 ##### Partez d'un directory vierge
 
-Pour commencer créez-vous un répertoire pour travailler à cet exercice
+Pour commencer, créez-vous un répertoire pour travailler à cet exercice
 
 ##### Les données
 
@@ -80,10 +81,10 @@ Une fois installées, ces données doivent se trouver dans un sous-répertoire
     ...
     json/2013-10-01-23-50--t=10.json
 
-Comme vous pouvez le deviner il s'agit de données sur le mouvement des bateaux
-dans la zone en date du 10 Octobre 2013; et comme vous le voyez également on a
-quelques exemplaires de données étendues, mais dans la plupart des cas il s'agit
-de données abrégées.
+Comme vous pouvez le deviner, il s'agit de données sur le mouvement des bateaux
+dans la zone en date du 10 Octobre 2013&nbsp;; et comme vous le voyez également,
+on a quelques exemplaires de données étendues, mais dans la plupart des cas il
+s'agit de données abrégées.
 
 ##### Les résultats de référence
 
@@ -124,17 +125,17 @@ Il utilise donc trois autres modules annexes, qui sont
 
  * `shipdict.py`, qui implémente les classes
    * `Position` qui contient une latitude, une longitude, et un timestamp,
-   * `Ship` qui modélise un bateau `partir de son `id` et optionnellement un
+   * `Ship` qui modélise un bateau à partir de son `id` et optionnellement
 `name` et `country`
    * `ShipDict`, qui maintient un index des bateaux (essentiellement un
-dictionnaire
+dictionnaire)
  * `compare.py` qui implémente
    * la classe `Compare` qui se charge de comparer les fichiers résultat avec
 leur version de référence,
  * `kml.py` qui implémente
    * la classe `KML` dans laquelle sont concentrées les fonctions liées à la
-génération de KML; c'est notamment en fonction de nos objectifs pédagogiques que
-ce choix a été fait.
+génération de KML&nbsp;; c'est notamment en fonction de nos objectifs
+pédagogiques que ce choix a été fait.
 
 ##### Lancement
 
@@ -208,11 +209,11 @@ c'est-à-dire
     [ *id*, *latitude*, *longitude*, _, _, _, *timestamp*]
 
 Il y a unicité des `id` bien entendu (deux relevés qui portent le même `id`
-concernent le même bateau.
+concernent le même bateau).
 
-Par ailleurs les données sont tout à fait authentiques et n'ont subi aucun
+Par ailleurs, les données sont tout à fait authentiques et n'ont subi aucun
 filtrage.
-Pour cette raison il serait sans doute hasardeux de supposer l'unicité des noms
+Pour cette raison, il serait sans doute hasardeux de supposer l'unicité des noms
 de bateaux - en clair deux bateaux différents peuvent porter le même nom.
 
 ***
@@ -229,8 +230,8 @@ l'utilisation de [la classe
 `string.Template`](https://docs.python.org/2/library/string.html#template-
 strings) qui peut être utile dans d'autres contextes également.
 
-En **mode avancé** l'énoncé pourrait s'arrêter là; vous lisez le code qui est
-fourni et vous en déduisez ce qui manque pour faire fonctionner le tout.
+En **niveau avancé**, l'énoncé pourrait s'arrêter là&nbsp;; vous lisez le code
+qui est fourni et vous en déduisez ce qui manque pour faire fonctionner le tout.
 
 Vous pouvez considérer que vous avez achevé l'exercice lorsque les deux appels
 suivants affichent les deux dernièrs lignes avec OK
@@ -250,7 +251,7 @@ suivants affichent les deux dernièrs lignes avec OK
 
 ***
 
-En **mode intermédiaire** nous vous donnons ci-dessous un extrait de ce que
+En **niveau intermédiaire**, nous vous donnons ci-dessous un extrait de ce que
 donne `help` sur les classes manquantes de manière à vous donner une indication
 de ce que vous devez écrire.
 
@@ -302,7 +303,7 @@ la sortie en mode bavard.
      |      sort list of positions by chronological order
 
 
-### Classe `Shipdict`
+##### Classe `Shipdict`
 
     Help on class ShipDict in module shipdict:
 
