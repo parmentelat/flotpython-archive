@@ -10,35 +10,37 @@
 ##################################################
 def comptage(in_filename, out_filename):
     """
-retranscrit le fichier in_filename dans le fichier out_filename
-en ajoutant des annotations sur les nombres de lignes, de mots
-et de caractÃ¨res
+    retranscrit le fichier in_filename dans le fichier out_filename
+    en ajoutant des annotations sur les nombres de lignes, de mots
+    et de caractères
     """
-    # on ouvre le fichier d'entrÃ©e en lecture
+    # on ouvre le fichier d'entrée en lecture
     # on aurait pu mettre open (in_filename, 'r')
     with open(in_filename) as input:
-        # on ouvre la sortie en Ã©criture
+        # on ouvre la sortie en écriture
         with open(out_filename, "w") as output:
             # initialisations
             lineno = 0
             total_words = 0
             total_chars = 0
-            # pour toutes les lignes du fichier d'entrÃ©e
+            # pour toutes les lignes du fichier d'entrée
             for line in input:
                 # on maintient le nombre de lignes
                 # qui est aussi la ligne courante
                 lineno += 1
-                # autant de mots que d'Ã©lÃ©ments dans split()
+                # autant de mots que d'éléments dans split()
                 nb_words = len(line.split())
                 total_words += nb_words
-                # autant de caractÃ¨res que d'Ã©lÃ©ments dans la ligne
+                # autant de caractères que d'éléments dans la ligne
                 nb_chars = len(line)
                 total_chars += nb_chars
-                # on Ã©crit la ligne de sortie
+                # on écrit la ligne de sortie; pas besoin
+                # de newline (\n) car line en a déjà un
                 output.write("{}:{}:{}:{}".\
                              format(lineno, nb_words, nb_chars, line))
-            # on Ã©crit la ligne de synthÃ¨se
-            output.write("{}:{}:{}\n".format(lineno, total_words, total_chars))
+            # on écrit la ligne de synthèse
+            output.write("{}:{}:{}\n".\
+                         format(lineno, total_words, total_chars))
 
 
 ##################################################
@@ -46,7 +48,8 @@ et de caractÃ¨res
 ##################################################
 def pgcd(a, b):
     "le pgcd de a et b par l'algorithme d'Euclide"
-    # on suppose que a >= b, si ce n'est pas le cas
+    # l'algorithme suppose que a >= b
+    # donc si ce n'est pas le cas 
     # il faut inverser les deux entrées
     if b > a : 
         a, b = b, a
@@ -68,12 +71,12 @@ from operator import mul
 
 def numbers(liste):
     """
-retourne un tuple contenant
- la somme
- le produit
- le minimum
- le maximum
-des elements de la liste
+    retourne un tuple contenant
+    (*) la somme
+    (*) le produit
+    (*) le minimum
+    (*) le maximum
+    des éléments de la liste
     """
     
     return ( 
@@ -92,8 +95,8 @@ des elements de la liste
 ##################################################
 def validation(f, g, entrees):
     """
-retourne une liste de booleens, un par entree dans entrees
-qui indique si f(entree) == g(entree)
+    retourne une liste de booléens, un par entree dans entrees
+    qui indique si f(entree) == g(entree)
     """
     # on vérifie pour chaque entrée si f et g retournent
     # des résultats égaux avec ==
@@ -122,22 +125,37 @@ def alternat(l1, l2):
 
 
 ##################################################
+# alternat - Semaine 4 Séquence 4
+##################################################
+def alternat2(l1, l2):
+    "une deuxième version de alternat"
+    # la même idée mais directement, sans utiliser aplatir
+    return [element for conteneur in zip(l1, l2) for element in conteneur]
+
+
+##################################################
 # intersect - Semaine 4 Séquence 4
 ##################################################
 def intersect(A, B):
     """
-avec en entrée deux listes de tuples de la forme
-(entier, valeur)
-renvoie la liste des valeurs associées dans A ou B
-aux entiers présents dans A et B
+    prend en entrée deux listes de tuples de la forme
+    (entier, valeur)
+    renvoie la liste des valeurs associées dans A ou B
+    aux entiers présents dans A et B
     """
+    # pour montrer un exemple de fonction locale:
     # une fonction qui renvoie l'ensemble des entiers
-    # présent dans une des deux listes d'entrée
+    # présents dans une des deux listes d'entrée
     def values(S):
         return {i for i, val in S}
     # on l'applique à A et B
     val_A = values(A)
     val_B = values(B)
+    #
+    # bien sûr on aurait pu écrire directement
+    # val_A = {i for i, val in A}
+    # val_B = {i for i, val in B}
+    # 
     # les entiers présents dans A et B 
     # avec une intersection d'ensembles
     common_keys = val_A & val_B
@@ -166,8 +184,8 @@ def distance(*args):
 ##################################################
 def doubler_premier(f, first, *args):
     """
-renvoie le résultat de la fonction f appliquée sur
-f(2 * first, *args)
+    renvoie le résultat de la fonction f appliquée sur
+    f(2 * first, *args)
     """
     # une fois qu'on a écrit la signature on a presque fini le travail
     # en effet on a isolé la fonction, son premier argument, et le reste
@@ -181,7 +199,8 @@ f(2 * first, *args)
 ##################################################
 def doubler_premier2(f, first, *args, **keywords):
     """
-comme doubler_premier mais on peut aussi passer des arguments nommés
+    équivalent à doubler_premier 
+    mais on peut aussi passer des arguments nommés
     """
     # c'est exactement la même chose
     return f(2*first, *args, **keywords)
@@ -189,8 +208,9 @@ comme doubler_premier mais on peut aussi passer des arguments nommés
 # Complément - niveau avancé
 # ----
 # Il y a un cas qui ne fonctionne pas avec cette implémentation, 
-# c'est si le premier argument de f a une valeur par défaut 
-# *et* on veut pouvoir appeler doubler_premier en nommant ce premier argument 
+# quand le premier argument de f a une valeur par défaut 
+# *et* on veut pouvoir appeler doubler_premier
+# en nommant ce premier argument 
 #
 # par exemple - avec f=muln telle que définie dans l'énoncé 
 #def muln(x=1, y=1): return x*y
@@ -209,8 +229,8 @@ comme doubler_premier mais on peut aussi passer des arguments nommés
 ##################################################
 def validation2(f, g, argument_tuples):
     """
-retourne une liste de booleens, un par entree dans entrees
-qui indique si f(*tuple) == g(*tuple)
+    retourne une liste de booléens, un par entree dans entrees
+    qui indique si f(*tuple) == g(*tuple)
     """
     # c'est presque exactement comme validation, sauf qu'on s'attend 
     # à recevoir une liste de tuples d'arguments, qu'on applique

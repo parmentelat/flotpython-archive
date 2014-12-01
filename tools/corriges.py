@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-15 -*-
 
+from __future__ import print_function
+
 from argparse import ArgumentParser
 
 ############################################################
@@ -69,9 +71,29 @@ label=%(name)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence}
 
 ############################################################
 class Source (object):
+
+    # these files are known to be unicode
+    exceptions = [ "w4_files" ]
     
     def __init__ (self, filename):
         self.filename = filename
+        # exceptions are in UTF8 but the latex source is declared as isolatin
+        # so we recode into a isolatin copy and use that instead
+        for exception in self.exceptions:
+            if self.filename.find(exception) >= 0:
+                self.create_isolatin_from_unicode()
+
+    def create_isolatin_from_unicode(self):
+        """
+        create a isolatin copy from a unicode source and use this instead
+        """
+        print ("WARNING: for file {self.filename}, creating ISOLATIN version instead".format(**locals()))
+        uni = self.filename
+        iso = "{}.iso".format(uni)
+        import os
+        command = "cp {uni} {iso}; recode UTF-8..ISO-8859-15 {iso}".format(**locals())
+        os.system(command)
+        self.filename = iso
 
     def parse (self):
         "return a list of Function objects"
@@ -86,7 +108,7 @@ class Source (object):
                         week, sequence, name = end_of_line.split(' ')
                         function = Function (week, sequence, name)
                     except:
-                        print "ERROR - ignored {} in {}".format(line,filename)
+                        print ("ERROR - ignored {} in {}".format(line,filename))
                 elif '@END@' in line:
                     functions.append(function)
                     function = None
@@ -135,7 +157,7 @@ class Latex (object):
             for function in functions:
                 output.write (function.latex())
             output.write (Latex.footer)
-        print "{} (over)written".format(self.filename)
+        print ("{} (over)written".format(self.filename))
 
     @staticmethod
     def escape (str):
@@ -162,7 +184,7 @@ class Text (object):
             output.write (self.header%dict(title=title))
             for function in functions:
                 output.write (function.text())
-        print "{} (over)written".format(self.filename)
+        print ("{} (over)written".format(self.filename))
 
 def main ():
     parser = ArgumentParser ()
