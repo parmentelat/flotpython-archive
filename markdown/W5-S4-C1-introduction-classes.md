@@ -40,7 +40,7 @@ jouet.
             self.a22 = a22
             
         def determinant(self):
-            return self.a11 * self.a22 - self.a12 * self.a12
+            return self.a11 * self.a22 - self.a12 * self.a21
 
 ### La première version de `Matrix2`
 
