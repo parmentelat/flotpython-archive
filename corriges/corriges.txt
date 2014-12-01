@@ -689,7 +689,6 @@ class RPCProxy(object):
 ##################################################
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 from __future__ import print_function
 
 class Position(object):
@@ -716,7 +715,7 @@ class Position(object):
     def lon_str(self):  return self._lon_str(self.longitude)
 
     def __repr__(self):
-        return "<{} {} @ {}".format(self.lat_str(),
+        return "<{} {} @ {}>".format(self.lat_str(),
                                     self.lon_str(), self.timestamp)
 
 
