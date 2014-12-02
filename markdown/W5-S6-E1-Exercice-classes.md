@@ -266,6 +266,8 @@ suivants affichent les deux dernièrs lignes avec OK
     Comparing ALL_SHIPS.kml and ALL_SHIPS.kml.ref -> OK
 
 
+Le cas où on lance `merger.py` avec l'option bavarde est facultatif.
+
 ***
 
 En **niveau intermédiaire**, nous vous donnons ci-dessous un extrait de ce que
@@ -374,4 +376,23 @@ la sortie en mode bavard.
      |      makes sure all the ships have their positions
      |      sorted in chronological order
      |
+
+
+##### Un dernier indice
+
+Pour éviter de la confusion, voici le code que nous utilisons pour transformer
+un flottant en coordonnées lisibles dans le résumé généré en mode bavard. Aussi
+dans la version 1.2 ce fichier de sortie est purement ASCII et ne contient plus
+de caractère exotique comme le degré (°).
+
+    def d_m_s(f):
+        """
+        make a float readable; e.g. transform 2.5 into 2.30'00''
+        we avoid using ° to keep things simple
+        input is assumed positive
+        """
+        d = int (f)
+        m = int((f-d)*60)
+        s = int( (f-d)*3600 - 60*m)
+        return "{:02d}.{:02d}'{:02d}''".format(d,m,s)
 
