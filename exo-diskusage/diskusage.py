@@ -9,6 +9,12 @@ except: raw_input = input
 import os, os.path
 from argparse import ArgumentParser
 
+### xxx TODOS
+# (*) add a cleanup method on DiskWalker
+# that can remove the .du files
+# and link it with a global option
+# (*) propagate the --verbose option 
+
 
 ########################################
 """
@@ -51,6 +57,7 @@ class HumanReadableSize(int):
                     return "{:3d} {}".format(self/unit,label)
                 else:
                     return "{:3.02f} {}".format(float(self)/unit,label)
+        return "xxx {} xxx".format(int.__repr__(self)) # remove me
         return "???"
 
     # we have seen that __repr__ is used when __str__ is not defined
@@ -60,14 +67,71 @@ class HumanReadableSize(int):
     __str__ = __repr__
 
 
+class Cache(dict):
+    """
+    a dictionary {path: size_in_bytes}
+    this is also linked to the file system and the .du files
+
+    at the beginning it is empty, and we fill it as we go
+    if the size is not known from the cache we look in <dir>/.du
+    if it's still not known we return 0
+    """
+
+    special_name = ".du"
+
+    def __init__(self, verbose=False):
+        dict.__init__(self)
+        self.verbose = verbose
+
+    def __getitem__(self, path):
+        """
+        Look in memory cache first, then in the .du file
+        """        
+        if path in self: 
+            return dict.__getitem__(self,path)
+        else: 
+            try:     
+                with open(os.path.join(path,self.special_name)) as f:
+                    return int(f.read())
+            except IOError as e:
+                # xxx should we do pass1 then ?
+                import traceback
+                traceback.print_exc()
+                return 0
+
+    def __setitem__(self, path, size):
+        """
+        remembers path cache in dictionary
+        and stores in special file as  far as possible
+
+        ignores if not possible for any reason 
+        like Permission Denied or the like
+        """
+        dict.__setitem__(self, path, size)
+        # store result in <dir>/.du for second/interactive pass
+        special_filename = os.path.join(path, self.special_name)
+        try:
+            with open(special_filename, 'w') as store:
+                store.write("{}\n".format(size))
+            if self.verbose:
+                print("Saved size {} in {}".format(size, special_filename))
+        except IOError as e:
+            if self.verbose:
+                print ("Warning, could not save special file {}".\
+                       format(special_filename))
+            # write error - permission denied - don't cache it then
+            # xxx log this in verbose mode
+            pass
+
 class DiskWalker(object):
     """
     pass1 object
     could as well have been a simple function 
     """
 
-    def __init__(self, path):
+    def __init__(self, path, verbose=False):
         self.path = path
+        self.verbose = verbose
 
     def pass1(self):
         """
@@ -75,7 +139,8 @@ class DiskWalker(object):
         a dictionary { path : size }
         that can be used as a cache if pass2 runs in the same process
         """        
-        cumulated_size_by_dir = {}
+        cumulated_size_cache = Cache(verbose=self.verbose)
+        print ('pass1')
         for root, dirs, files in os.walk (self.path, topdown=False):
             # first deal with files
             filepaths = [os.path.join(root,file) for file in files]
@@ -85,44 +150,22 @@ class DiskWalker(object):
             # count the directory itself
             local_size += os.path.getsize(root)
             # because we do the traversal bottom up, we already have the size for our immediate sons
-            # in cumulated_size_by_dir; however the disk is alive during this time so it might be
+            # in cumulated_size_cache; however the disk is alive during this time so it might be
             # that a new son is showing up that we do not know about
             def subdir_size (subdir):
                 subpath = os.path.join(root, subdir)
                 # in which case we return 0 and not some exception
-                return cumulated_size_by_dir.get(subpath, 0) 
+                return cumulated_size_cache.get(subpath, 0) 
             # total on the immediate sons
             cumulated_size = sum ([ subdir_size (subdir) for subdir in dirs ])
             # add the local weight (files + this_dir)
             cumulated_size += local_size
             # store in dictionary for dealing with the upper directory
-            cumulated_size_by_dir [root] = cumulated_size
-            # store result in <dir>/.du for second/interactive pass
-            try:
-                with open(os.path.join(root, ".du"), 'w') as store:
-                    store.write("{}\n".format(cumulated_size))
-            except IOError as e:
-                # write error - permission denied - don't cache it then
-                # xxx log this in verbose mode
-                pass
+            cumulated_size_cache [root] = cumulated_size
+
             # log this in verbose mode
 #            print("{:-8s} {}".format(HumanReadableSize(cumulated_size),root))
-        return cumulated_size_by_dir
-
-###
-# we have a global cache object, that is a dict { dirname -> size }
-# at the beginning it is empty, and we fill it as we go
-# if the size is not known from the cache we look in <dir>/.du
-# if it's still not known we return 0
-def get_size (path, cache):
-    if path in cache: 
-        return cache[path]
-    else: 
-        try: 
-            with open(os.path.join(path,".du")) as f:
-                return int(f.read())
-        except: 
-            return 0
+        return cumulated_size_cache
 
 def help():
     print("""number\tgo to listed directory
@@ -134,10 +177,13 @@ xxx to be completed...""")
 
         # during pass2, when inspecting a directory we show the immediate subdirs (with numbers for selection) 
 # they are sorted so that the bigger one comes last (and can thus be selected using 'l')
-def navigate_path (path,cache):
-    print(8*'-', "Path {} has a total size of {}".format(path, HumanReadableSize(get_size(path,cache))))
-    subdirs=[ (d,os.path.join(path,d)) for d in os.listdir(path) if os.path.isdir(os.path.join(path,d)) ]
-    sized_subdirs = [ (name, subdir, get_size(subdir,cache)) for (name,subdir) in subdirs ]
+def navigate_path(path, cache):
+    print(8*'-', "Path {} has a total size of {}".\
+          format(path, HumanReadableSize(cache[path])))
+    subdirs=[ (d,os.path.join(path,d))
+                     for d in os.listdir(path)
+                         if os.path.isdir(os.path.join(path,d)) ]
+    sized_subdirs = [ (name, subdir, cache[subdir]) for (name,subdir) in subdirs ]
     # show biggest last
     def sort_sized_subdirs (t1,t2):
         (_,_,s1)=t1; (_,_,s2)=t2; return s1-s2
@@ -210,7 +256,8 @@ def main():
 
     try:
         # initialize cache, either from pass1, or from scratch
-        cache = DiskWalker(args.dir).pass1() if run_pass1 else {}
+        disk_walker = DiskWalker (args.dir, verbose=args.verbose)
+        cache = disk_walker.pass1() if run_pass1 else Cache(verbose=args.verbose)
         run_pass2 and pass2(args.dir, cache)
         return 0
     except Exception as e:
