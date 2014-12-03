@@ -188,29 +188,24 @@ class Crawler(object):
         """
         get an HTMLpage object as argument, retreive all urls from
         this object and update the dict sites_to_be_crawled_dict and
-        the set sites_to_be_crawled
+        the set sites_to_be_crawled. Do not updates URLs from a page
+        that is not in the list of accepted domains.
         """
-        for url in page.urls:
-            # if there is no domain in the filter, always pass the
-            # filter (that is, there is no filter)
-            if self.domain_filter:
-                pass_filter = False
-            else:
+        # check the domain of the page from which we got URLs
+        pass_filter = False
+        extracted_domain =  extract_domains_from_url(page.url)[1]
+        for domain in self.domain_filter:
+            if domain in extracted_domain:
                 pass_filter = True
 
-            # search if the URL domain match the domain_filter only if
-            # pass_filter is False (that is, there are domains to
-            # filter)
-            if not pass_filter:
-                extracted_domain = extract_domains_from_url(url)[1]
-                for domain in self.domain_filter:
-                    if domain in extracted_domain:
-                        pass_filter = True
-
-            # if there is no domain to filter, or the URL is part of
-            # the domain to crawl, update the list of sites to be
-            # crawled with this URL
-            if pass_filter:
+        logging.debug('*'*80 + '\n')
+        logging.debug('site crawled providing the URLs : {}\n'.format(page.url))
+        logging.debug('pass filter state: {}\n'.format(pass_filter))
+        if pass_filter:
+            logging.debug('passes the filter \n')
+            logging.debug('list of urls to be added: {}'.format(page.urls))
+            # update the list of sites to be crawled with the URLs
+            for url in page.urls:
                 # update the dict even if url already crawled (to get
                 # comprehensif information)
                 if url in self.sites_to_be_crawled_dict:
