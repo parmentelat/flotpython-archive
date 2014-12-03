@@ -249,43 +249,58 @@ class Crawler(object):
         raise StopIteration
 
 
-# let's start the crawler
-seed_url = 'http://www-sop.inria.fr/members/Arnaud.Legout/'
-s = raw_input('Enter a seed URL (default to {})'.format(seed_url))
-
-if not s:
-    s = seed_url
-
 # Let's answer funny questions in a few lines of code
 
 ####################################################
-# 1) what are the less responsive sites in my domain and the dead URLs
+# 1) what are the dead URLs 
+def get_dead_pages(url, domain):
+    crawl = Crawler(url, domain_filter=domain)
+    dead_urls = []
+    for page in crawl:
+        # just to see progress on the terminal
+        print crawl
+        print page.http_code, page.url
 
-# start the crawler restricted to a given domain
-crawl = Crawler(seed_url, domain_filter=['inria'])
-pages_responsivness = []
-dead_urls = []
-for page in crawl:
-    # just to see progress on the terminal
-    print crawl
-    print page.http_code, page.url
+        if page.http_code != 200:
+            dead_urls.append((page.http_code, page.url))        
 
-    pages_responsivness.append((crawl.last_crawl_duration, page.url))
+    with open('dead_pages.txt', 'w') as dump_file:
+        dump_file.write('number of dead URLs (non 202) : {}\n'
+                        .format(len(dead_urls)))
+        dump_file.write('-'*80 + '\n')
+        for url in dead_urls:
+            dump_file.write('Dead URL ({}): {}\n'.format(url[0],url[1]))
+            dump_file.write('Sites referencing this URL:\n')
+            for site in crawl.sites_to_be_crawled_dict[url[1]]:
+                dump_file.write('     {}\n'.format(site))
+            dump_file.write('\n')
 
-    if page.http_code != 200:
-        dead_urls.append((page.http_code, page.url))
+# 2) what are the less responsive sites
+def get_slow_pages(url, domain):
+    crawl = Crawler(url, domain_filter=domain)
+    pages_responsivness = []
+    for page in crawl:
+        # just to see progress on the terminal
+        print crawl
+        print page.http_code, page.url
+        pages_responsivness.append((crawl.last_crawl_duration, page.url))
 
-pages_responsivness.sort(key=itemgetter(0))
+    pages_responsivness.sort(key=itemgetter(0), reverse=True)
 
-# now display the result
-for line in pages_responsivness:
-    print line
+    with open('slow_pages.txt', 'w') as dump_file:
+        dump_file.write('Pages ordered from the slowest to the fastest\n')
+        dump_file.write('-'*80 + '\n')
+        for line in pages_responsivness:
+            dump_file.write('{:.2f} seconds: {}\n'.format(line[0], line[1]))
 
-for url in dead_urls:
-    print url
-    if url[0] == 404:
-        for site in crawl.sites_to_be_crawled_dict[url[1]]:
-            print site 
-        print '-'*60
+if __name__ == '__main__':
+    seed_url = 'http://www-sop.inria.fr/members/Arnaud.Legout/'
+    s = raw_input('Enter a seed URL (default to {})'.format(seed_url))
+    if not s:
+        s = seed_url
 
-logging.shutdown()
+    domain = ['inria.fr']
+    get_dead_pages(s, domain)
+    get_slow_pages(s, domain)
+
+    logging.shutdown()
