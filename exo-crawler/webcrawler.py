@@ -1,11 +1,10 @@
 import logging
+import time
+import urllib2
+from operator import itemgetter
 
 logging.basicConfig(filename='diagnose.log', filemode='w',
-                    level=logging.WARNING)
-# logging.basicConfig(level=logging.DEBUG)
-import urllib2
-import time
-from operator import itemgetter
+                    level=logging.DEBUG)
 
 # helper function
 def extract_domains_from_url(url):
@@ -30,6 +29,7 @@ def extract_domains_from_url(url):
         return ''
     domain = url[:url.find('/')]
     return (protocol + domain, domain)
+
 
 class HTMLPage(object):
     """
@@ -89,12 +89,13 @@ class HTMLPage(object):
                 if "href=" in line.lower():
                     # extract everything between href=" and "> probably
                     # not bullet proof, but should work most of the
-                    # time
+                    # time. Alternatively we can use regexp.
                     url_separator = line[line.lower().find('href=') + 5]
                     line = line[line.lower().find('href=') + 6:]
                     line = line[:line.lower().find(url_separator)]
+
                     list_urls.append(line)
-                elif "http://" in line:
+                elif "http://" in line or "https://" in line:
                     logging.debug('this URL was not extracted: ' + line)
             else:
                 if '<body>' in line:
@@ -121,9 +122,9 @@ class HTMLPage(object):
 
 class Crawler(object):
     """
-    This object that will manage the crawl of the pages. To get URLs
-    this objet must be used as an iterator. Each step will return a
-    new page to be crawled.
+    This object that will manage the crawl of the pages. The crawler
+    is iterable and the iterator will return at each step a new
+    HTMLPage objet.
 
     The constructor accept a 
     -seed_url: the URL from which the crawl is starting
@@ -135,50 +136,65 @@ class Crawler(object):
 
     def __init__(self, seed_url, max_crawled_sites=10 ** 100,
                  domain_filter=None):
+        """
+        constructor of the crawler
+
+        seed_url         : URL from which the crawler will start
+        max_crawled_sites: number of sites after which the crawler 
+                           will stop
+        domain_filter    : list of domains to which the crawler will 
+                           stay (that is all URLs not in domain_filter 
+                           will be excluded from the crawl
+
+        """
         if domain_filter is None:
             domain_filter = []
+        self.domain_filter = domain_filter
         self.seed_url = seed_url
-        # Each key is a URL, and the value for url1 is the list of
-        # sites that referenced url1
+        self.max_crawled_sites = max_crawled_sites
+
+        # Each key is a URL, and the value for the key url is the list
+        # of sites that referenced this url. This dict is used to find
+        # sites that references given URLs in order to diagnose
+        # buggy Web pages.
         self.sites_to_be_crawled_dict = {}
 
         # set of the sites still to be crawled
         self.sites_to_be_crawled = set([])
-        self.domains_to_be_crawled = set([])
 
-        # set of the sites already crawled
+        # set of the sites/domains already crawled
         self.sites_crawled = set([])
         self.domains_crawled = set([])
-
-        self.domain_filter = domain_filter
-        # crawling time contains the list of the crawl time for each
-        # page
-        # crawling_time = []
-
-        self.max_crawled_sites = max_crawled_sites
-
-        #duration of the last crawl
+        
+        # duration of the last crawl
         self.last_crawl_duration = 0
 
     def update_sites_to_be_crawled(self, page):
         """
         get an HTMLpage object as argument, retreive all urls from
         this object and update the dict sites_to_be_crawled_dict and
-        the sets sites_to_be_crawled and domains_to_be_crawled
+        the set sites_to_be_crawled
         """
         for url in page.urls:
             # if there is no domain in the filter, always pass the
-            # filter
+            # filter (that is, there is no filter)
             if self.domain_filter:
                 pass_filter = False
             else:
                 pass_filter = True
 
-            extracted_domain = extract_domains_from_url(url)[1]
-            for domain in self.domain_filter:
-                if domain in extracted_domain:
-                    pass_filter = True
+            # search if the URL domain match the domain_filter only if
+            # pass_filter is False (that is, there are domains to
+            # filter)
+            if not pass_filter:
+                extracted_domain = extract_domains_from_url(url)[1]
+                for domain in self.domain_filter:
+                    if domain in extracted_domain:
+                        pass_filter = True
 
+            # if there is no domain to filter, or the URL is part of
+            # the domain to crawl, update the list of sites to be
+            # crawled with this URL
             if pass_filter:
                 # update the dict even if url already crawled (to get
                 # comprehensif information)
@@ -191,37 +207,23 @@ class Crawler(object):
                 if url not in self.sites_crawled:
                     self.sites_to_be_crawled.add(url)
 
-                self.domains_to_be_crawled.add(extracted_domain)
 
     def __repr__(self):
         output = ('#' * 60 + '\nInitial URL: {}'.format(self.seed_url)
                    + '\nSites/domains already crawled {}/{}'.format(
                  len(self.sites_crawled),
                  len(self.domains_crawled))
-                   + '\nSites/domains to be crawled {}/{}'.format(
-                 len(self.sites_to_be_crawled),
-                 len(self.domains_to_be_crawled))
+                   + '\nSites to be crawled {}'.format(
+                 len(self.sites_to_be_crawled))
                    + '\n crawl duration {}'.format(
                  self.last_crawl_duration)
                   )
         return output
 
-    def crawl_stats(self):
-        """
-        returns a tuple T containing current statistics on the crawl
-        
-        T[0]: crawled sites
-        T[1]: crawled domains
-        T[2]: sites to be crawled
-        T[3]: domains to be crawled
-        """
-        return (self.sites_crawled, self.domains_crawled,
-                self.sites_to_be_crawled, self.domains_to_be_crawled)
-
     def __iter__(self):
         """
-        iterator that returns at each step a new web page that has
-        been crawled
+        iterator that returns at each step a new HTMLpage object that
+        has been crawled
         """
 
         # case of the first page
@@ -247,7 +249,6 @@ class Crawler(object):
         raise StopIteration
 
 
-
 # let's start the crawler
 seed_url = 'http://www-sop.inria.fr/members/Arnaud.Legout/'
 s = raw_input('Enter a seed URL (default to {})'.format(seed_url))
@@ -268,7 +269,6 @@ for page in crawl:
     # just to see progress on the terminal
     print crawl
     print page.http_code, page.url
-
 
     pages_responsivness.append((crawl.last_crawl_duration, page.url))
 
