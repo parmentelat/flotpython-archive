@@ -50,6 +50,8 @@ class HTMLPage(object):
         self.url = url
         self._html_it = self.page_fetcher(self.url)
         self.urls = self.extract_urls_from_page()
+        logging.debug('+'*80 + '\npage {}\n'.format(self.url))
+        logging.debug('extracted URLs {}\n'.format(self.urls) + '+'*80 + '\n')
 
     def page_fetcher(self, url):
         """
@@ -101,19 +103,32 @@ class HTMLPage(object):
                 if '<body>' in line:
                     is_body = True
 
+                    
+        logging.debug('in extract_urls_from_page\n' + '-'*80 + '\n')
+        logging.debug('All extracted URLs:\n')
+        logging.debug('{}\n'.format(list_urls))
         # keep only http and https
         filtered_list_urls = [x for x in list_urls
                               if x.lower().startswith('http')
                               or x.lower().startswith('https')]
+
+        logging.debug('filtered URLs (http, https):\n')
+        logging.debug('{}\n'.format(filtered_list_urls))
         # and reconstruct relative links ./
         filtered_list_urls.extend([self.url[:self.url.rfind('/')] + x[1:]
                                    for x in list_urls
                                    if x.startswith('./')])
+        logging.debug('filtered URLs (relatives ./):\n')
+        logging.debug('{}\n'.format(filtered_list_urls))
 
         # and reconstruct relative links /
         filtered_list_urls.extend([extract_domains_from_url(self.url)[0] 
-                                   + x[1:] for x in list_urls
-                                   if x.startswith('./')])
+                                   + x for x in list_urls
+                                   if x.startswith('/')]) 
+
+        logging.debug('filtered URLs (relatives /):\n')
+        logging.debug('{}\n'.format(filtered_list_urls))
+
         # debug
         # print [x for x in list_urls if x.startswith('./')]
 
@@ -229,22 +244,22 @@ class Crawler(object):
         # case of the first page
         start_time = time.time()
         page = HTMLPage(self.seed_url)
+        self.last_crawl_duration = time.time() - start_time
         self.sites_crawled.add(seed_url)
         self.domains_crawled.add(extract_domains_from_url(seed_url)[1])
         self.update_sites_to_be_crawled(page)
-        self.last_crawl_duration = time.time() - start_time
         yield page 
         
         # all the other pages
         while (self.sites_to_be_crawled and
                        len(self.sites_crawled) < self.max_crawled_sites):
-            start_time = time.time()
             url = self.sites_to_be_crawled.pop()
+            start_time = time.time()
             page = HTMLPage(url)
+            self.last_crawl_duration = time.time() - start_time
             self.sites_crawled.add(url)
             self.domains_crawled.add(extract_domains_from_url(url)[1])
             self.update_sites_to_be_crawled(page)
-            self.last_crawl_duration = time.time() - start_time
             yield page
         raise StopIteration
 
@@ -299,8 +314,8 @@ if __name__ == '__main__':
     if not s:
         s = seed_url
 
-    domain = ['inria.fr']
-    get_dead_pages(s, domain)
+    domain = ['www-sop.inria.fr']
+    #get_dead_pages(s, domain)
     get_slow_pages(s, domain)
 
     logging.shutdown()
