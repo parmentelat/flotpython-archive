@@ -38,7 +38,7 @@ class HTMLPage(object):
 
     The object has 3 attributes:
         -url: the URL that corresponds to the Web page
-        -html_it: an iterator that interates on the raw HTML code of 
+        -_html_it: an iterator that interates on the raw HTML code of 
           the page, one line at a time
         -urls: the list of all URLs contained in the HTML page
         -http_code: the code return by HTTP while accessing the page, 
@@ -48,7 +48,7 @@ class HTMLPage(object):
     def __init__(self, url):
         self.http_code = 0
         self.url = url
-        self.html_it = self.page_fetcher(self.url)
+        self._html_it = self.page_fetcher(self.url)
         self.urls = self.extract_urls_from_page()
 
     def page_fetcher(self, url):
@@ -83,7 +83,7 @@ class HTMLPage(object):
         # body of the document
         list_urls = []
         is_body = False
-        for line in self.html_it:
+        for line in self._html_it:
             # line = line.lower()
             if is_body:
                 if "href=" in line.lower():
