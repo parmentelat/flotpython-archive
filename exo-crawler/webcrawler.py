@@ -100,7 +100,9 @@ class HTMLPage(object):
                 elif "http://" in line or "https://" in line:
                     logging.debug('this URL was not extracted: ' + line)
             else:
-                if '<body>' in line:
+                # do not end with > in order to deal with arguments
+                # without complexe parsing
+                if '<body' in line:
                     is_body = True
 
                     
@@ -310,7 +312,7 @@ if __name__ == '__main__':
         s = seed_url
 
     domain = ['www-sop.inria.fr']
-    #get_dead_pages(s, domain)
-    get_slow_pages(s, domain)
+    get_dead_pages(s, domain)
+    #get_slow_pages(s, domain)
 
     logging.shutdown()
