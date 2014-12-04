@@ -10,7 +10,7 @@ import os, os.path
 from argparse import ArgumentParser
 
 ### xxx TODOS
-# (*) add a cleanup method on DiskWalker
+# (*) add a cleanup method on ToplevelDir
 # that can remove the .du files
 # and link it with a global option
 # (*) propagate the --verbose option 
@@ -70,11 +70,13 @@ class HumanReadableSize(int):
 class Cache(dict):
     """
     a dictionary {path: size_in_bytes}
-    this is also linked to the file system and the .du files
 
-    at the beginning it is empty, and we fill it as we go
-    if the size is not known from the cache we look in <dir>/.du
-    if it's still not known we return 0
+    this is also linked to the file system and the .du files
+    meaning that 
+    (*) cache[path] looks in path/.du if not yet in memory
+        if nothing else works (not in memory and not in .du) we return 0
+    (*) cache[path] = size also writes path/.du if permission is granted
+
     """
 
     special_name = ".du"
@@ -86,6 +88,7 @@ class Cache(dict):
     def __getitem__(self, path):
         """
         Look in memory cache first, then in the .du file
+        returns 0 if nothing works
         """        
         if path in self: 
             return dict.__getitem__(self,path)
@@ -94,9 +97,8 @@ class Cache(dict):
                 with open(os.path.join(path,self.special_name)) as f:
                     return int(f.read())
             except IOError as e:
-                # xxx should we do pass1 then ?
-                import traceback
-                traceback.print_exc()
+                if self.verbose:
+                    print ("Warning - unable to find size for {}".format(path))
                 return 0
 
     def __setitem__(self, path, size):
@@ -123,15 +125,19 @@ class Cache(dict):
             # xxx log this in verbose mode
             pass
 
-class DiskWalker(object):
+####################
+class ToplevelDir(object):
     """
-    pass1 object
-    could as well have been a simple function 
+    toplevel object for the arg directory
+    can run pass1
+    has the cache object for all subdirs relating to that pass
+    can run pass2 
     """
 
     def __init__(self, path, verbose=False):
         self.path = path
         self.verbose = verbose
+        self.cache = Cache(verbose=verbose)
 
     def pass1(self):
         """
@@ -139,7 +145,6 @@ class DiskWalker(object):
         a dictionary { path : size }
         that can be used as a cache if pass2 runs in the same process
         """        
-        cumulated_size_cache = Cache(verbose=self.verbose)
         print ('pass1')
         for root, dirs, files in os.walk (self.path, topdown=False):
             # first deal with files
@@ -155,80 +160,80 @@ class DiskWalker(object):
             def subdir_size (subdir):
                 subpath = os.path.join(root, subdir)
                 # in which case we return 0 and not some exception
-                return cumulated_size_cache.get(subpath, 0) 
+                return self.cache.get(subpath, 0) 
             # total on the immediate sons
             cumulated_size = sum ([ subdir_size (subdir) for subdir in dirs ])
             # add the local weight (files + this_dir)
             cumulated_size += local_size
             # store in dictionary for dealing with the upper directory
-            cumulated_size_cache [root] = cumulated_size
+            self.cache [root] = cumulated_size
 
             # log this in verbose mode
 #            print("{:-8s} {}".format(HumanReadableSize(cumulated_size),root))
-        return cumulated_size_cache
 
-def help():
-    print("""number\tgo to listed directory
+    help_message = """number\tgo to listed directory
 +\tgo to last (and thus biggest) directory - this is the default 
 u\tgo one step up - can be also '0' or '..'
 q\tquit
 h\tthis help
-xxx to be completed...""")
+xxx to be completed..."""
 
-        # during pass2, when inspecting a directory we show the immediate subdirs (with numbers for selection) 
-# they are sorted so that the bigger one comes last (and can thus be selected using 'l')
-def navigate_path(path, cache):
-    print(8*'-', "Path {} has a total size of {}".\
-          format(path, HumanReadableSize(cache[path])))
-    subdirs=[ (d,os.path.join(path,d))
-                     for d in os.listdir(path)
-                         if os.path.isdir(os.path.join(path,d)) ]
-    sized_subdirs = [ (name, subdir, cache[subdir]) for (name,subdir) in subdirs ]
-    # show biggest last
-    def sort_sized_subdirs (t1,t2):
-        (_,_,s1)=t1; (_,_,s2)=t2; return s1-s2
-    sized_subdirs.sort(key=lambda t: t[2])
-    counter=1
-    for name,path,size in sized_subdirs:
-        print("{} {} {}".format(counter,name,HumanReadableSize(size)))
-        counter +=1
-    # the interactive mainloop for selecting the next dir
-    while True:
-        # '+' is the default
-        answer = raw_input("Enter number (h for help) ") or '+'
-        answer = answer.strip().lower()
+    def move_to_subdir(self, subpath):
+        """
+        during pass2, when inspecting a directory
+        we show the immediate subdirs (with numbers for selection) 
+        also they get sorted so that the biggest one comes last
+        and can thus be selected using '+'
+        """
+        print(8*'-', "Path {} has a total size of {}".\
+              format(subpath, HumanReadableSize(self.cache[subpath])))
+        # we build a list of tuples
+        # (lastname, full-path-from-toppath, size)
+        sized_subdirs=[ (d,os.path.join(subpath,d), self.cache[os.path.join(subpath,d)])
+                      for d in os.listdir(subpath)
+                          if os.path.isdir(os.path.join(subpath,d)) ]
+        # show biggest last
+        sized_subdirs.sort(key=lambda t: t[2])
+        for i,(name,_,size) in enumerate(sized_subdirs):
+            print("{} {} {}".format(i+1,name,HumanReadableSize(size)))
+        # the interactive mainloop for selecting the next dir
+        while True:
+            # '+' is the default
+            answer = raw_input("Enter number (h for help) ") or '+'
+            # case does not matter, let's do lowercase
+            answer = answer.strip().lower()
+    
+            ### does this look like a number
+            index = None
+            if answer in ['+']:
+                index = -1
+            else:
+                try:    index = int(answer)-1
+                except: pass
+    
+            ### if so
+            if index is not None:
+                try:
+                    _, path, _ = sized_subdirs[index]
+                    return path
+                except:
+                    print ("No such index {}".format(answer))
+            ### otherwise
+            elif answer in ['..','0','u']:
+                return os.path.dirname(path)
+            # xxx would make sense to accept answers as well here...
+            elif answer in ['q']:
+                exit(0)
+            elif answer in ['h']:
+                print(self.help_message)
+            else:
+                print("command not understood")
 
-        ### does this look like a number
-        index = None
-        if answer in ['+']:
-            index = -1
-        else:
-            try:    index = int(answer)-1
-            except: pass
-
-        ### if so
-        if index:
-            try:
-                _, path, _ = sized_subdirs[index]
-                return path
-            except:
-                print ("No such index {}".format(answer))
-        ### otherwise
-        elif answer in ['..','0','u']:
-            return os.path.dirname(path)
-        # xxx would make sense to accept answers as well here...
-        elif answer in ['q']:
-            exit(0)
-        elif answer in ['h']:
-            help()
-        else:
-            print("command not understood")
-
-# well, that's it mostly
-def pass2 (path, cache):
-    print ("Welcome to inspection of path {}".format(path))
-    while True:
-        path = navigate_path (path, cache)
+    def pass2 (self):
+        subpath = self.path
+        print ("Welcome to inspection of path {}".format(subpath))
+        while True:
+            subpath = self.move_to_subdir (subpath)
 
 def main():
     parser = ArgumentParser()
@@ -236,7 +241,7 @@ def main():
     parser.add_argument("-1", "--pass1", dest='pass1', default=False,
                         action='store_true',
                         help="Run pass1, that computes .du in all subdirs")
-    parser.add_argument("-a", "--all-passes", dest='all_passes', default=False,
+    parser.add_argument("-b", "--both-passes", dest='all_passes', default=False,
                         action='store_true',
                         help="""Run pass1, that computes .du in all subdirs,
                                 and then pass2 that is interactive""")
@@ -254,11 +259,14 @@ def main():
     else:
         run_pass1 = False; run_pass2 = True
 
+    toplevel_dir = ToplevelDir (args.dir, verbose=args.verbose)
     try:
-        # initialize cache, either from pass1, or from scratch
-        disk_walker = DiskWalker (args.dir, verbose=args.verbose)
-        cache = disk_walker.pass1() if run_pass1 else Cache(verbose=args.verbose)
-        run_pass2 and pass2(args.dir, cache)
+        run_pass1 and toplevel_dir.pass1()
+        run_pass2 and toplevel_dir.pass2()
+        return 0
+    # user typed End-of-File
+    except EOFError as e:
+        print()
         return 0
     except Exception as e:
         print('Something went wrong', e)
