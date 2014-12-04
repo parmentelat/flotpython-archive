@@ -10,17 +10,18 @@ pratiquer quelques modules de la librairie standard, mais nous ne chercherons
 pas la performance parce que ça augmenterait très rapidement la complexité du
 code et la difficulté du sujet. Cependant, vous constaterez que même si ce
 crawler n'est pas adapté à crawler des millions de pages, il est parfaitement
-capable de crawler des dizaines de milliers de pages et de vous rendre des
-services (comme identifier les liens morts sur un site Web).
+capable de crawler des milliers de pages et de vous rendre des services (comme
+identifier les liens morts sur votre site Web).
 
 ## Réalisation du crawler Web
 
-Ce projet est découpé en trois niveaux de difficulté. Nous allons commencer par
+Ce projet est découpé en deux niveaux de difficultés. Nous allons commencer par
 le niveau avancé qui va vous demander d'écrire vous même tout le code en
-fonction de nos spécifications. Pour le niveau intermédiaire, nous vous
-fournirons une partie du code, et pour le niveau facile, nous vous fournirons
-tout le code, votre travail se limitant à l'utilisation du crawler. À vous de
-choisir où vous voulez commencer.
+fonction de nos spécifications de haut niveau. Pour le niveau intermédiaire,
+nous vous fournirons une description plus précise de notre implémentation. À
+vous de choisir où vous voulez commencer, mais si vous voulez uniquement faire
+le niveau intermédiaire, vous devrez quand même lire le niveau avancé parce
+qu'il contient des informations importantes sur le fonctionnement du crawler.
 
 Il est très important de comprendre que le code que l'on vous propose d'écrire
 n'est ni totalement fiable, ni validé par des tests. Est-ce que cela est un
@@ -32,62 +33,258 @@ ajoutant, par exemple, des tests unitaires et des tests fonctionnels). Cela a
 multiplier par 2 ou 3 le nombre de lignes de code) et de temps de développement
 (il va falloir imaginer tous les cas à tester).
 
-Le but de notre crawler est, à partir de l'URL d'une page Web initiale,
-d'extraire tous les liens hypertexte des pages parcourues, et d'utiliser ces
-liens pour parcourir de nouvelles pages et extraire de nouveaux liens.
+Je vous rappelle qu'une page Web est écrite dans un langage déclaratif qui
+s'appelle [HTML](http://fr.wikipedia.org/wiki/Hypertext_Markup_Language) et que
+l'on accède à ces pages au travers d'un protocole qui s'appelle
+[HTTP](http://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol). Nous
+utiliserons dans ce mini projet la librairie standard `urllib2` qui permet
+d'utiliser le protocole HTTP de manière très simple. Par contre, pour
+l'interprétation du code HTML, nous ferons tout le traitement à la main. Il
+existe des librairies pour vous faciliter la tache (nous en parlerons tout à la
+fin), mais elles supposent une bonne compréhension des concepts derrières
+l'HTML. Évidement, vous pouvez les explorer et les essayer dans ce mini projet
+si vous le souhaitez.
 
-##### Niveau avancé
+### Niveau avancé
 
-Tout notre programme peut-être écrit dans un même module. Nous avons dans ce
-module deux classes.
+Le but de notre crawler est le suivant. Nous supposons que nous avons un
+ensemble (set) de sites Web à crawler, c'est-à-dire, un ensemble de sites Web
+pour lesquels on va télécharger le code HTML. On commence avec un seul site que
+l'on appelle la page initiale. Dans la suite cette page sera `http://www-
+sop.inria.fr/members/Arnaud.Legout/`. On suppose égalemet que l'on restreint le
+crawl à un certain domaine, dans la suite ça sera `www-
+sop.inria.fr/members/Arnaud.Legout`. Ensuite notre crawler va&nbsp;:
+ * prendre un lien (sans ordre particulier) dans l'ensemble des sites Web à
+crawler
+ * se connecter au site correspondant à ce lien puis
+   * enregistrer le [code
+HTTP](http://fr.wikipedia.org/wiki/Liste_des_codes_HTTP) associé à ce site (par
+exemple, 202 lorsque la requête a été traitée correctement et 404 lorsque le
+lien est mort). On considérera aussi un code -1 lorsque le site Web ne répond
+pas.
+   * recupérer le code HTML de la page
+   * si le site est dans le domaine (typiquement si `domain in site`) extraire
+toutes les URLs dans le corps de la page Web (c'est-à-dire, après la balise
+`<body>`) et ajouter à l'ensemble des sites Web à crawler toutes les URLs
+commençant par http ou https et toutes les URLs relatives reconstruites
+commençant par `./` ou `/`
+      * par exemple, pour `./ma_page.html` et le site `http://mon_site.fr/rep1/`
+on ajoute l'url `http://mon_site.fr/rep1/ma_page.html`
+      * par exemple, pour `/ma_page.html` et le site `http://mon_site.fr/rep1/`
+on ajoute l'url `http://mon_site.fr/ma_page.html` (sans `rep1`)
+ * on recommence au premier point jusqu'à ce que l'ensemble des site Web à
+crawler soit vide.
 
- * La classe `HTMLPage` représente une page HTML. En particulier, une instance
-de cette classe a&nbsp;:
-  * un attribut `url` qui est une chaîne de caractères représentant l'URL
-correspondant à la page Web,
-  * un attribut `urls` qui est une liste de toutes les URLs trouvées dans cette
-page,
-  * un attribut `http_code` qui est le code HTTP retourné par la requête sur
-`url`.
-
- Cette classe a trois méthodes.
-  * Le constructeur prend comme argument une URL (sous forme d'une chaîne de
-caractères).
-  * La méthode `page_fetcher` prend comme argument une URL et retourne un
-itérateur sur la page HTML ou une liste vide en cas d'erreur. On utilisera la
-méthode `urlopen` dans librairie standard `urllib2`.
-  * une méthode `extract_urls_from_page` qui va parcourir l'itérateur retourné
-par la méthode `page_fetcher` et extraire toutes les URLs dans la page pour
-créer une liste de toutes les URLs dans la page, liste qui sera référencée par
-l'attribut `urls` de l'instance. Pour extraire une URL, on cherchera dans le
-`body` de la page Web toutes les chaîne de caractères qui sont des valeurs de
-l'attribut `href` et qui commencent par `http` ou `https` (notons que c'est loin
-d'être parfait).
-
- * La classe `Crawler` permet de créer une instance d'un objet itérable qui à
-chaque itération retournera un nouvel objet HTMLPage qui a été crawlé.
-L'instance du crawler va avoir comme attributs
-   * l'ensemble des sites à crawler
-   * l'ensemble des sites déjà crawlés
-   * un dictionnaire qui à chaque URL fait correspondre la liste de tous les
-sites qui ont référencés cette URL lors du crawl.
-
- Cette classe a trois méthodes.
-   * Le constructeur prend comme argument l'URL à partir de laquelle on commence
-le crawl comme chaîne de caractères, le nombre maximum de sites à crawler et une
-liste de domaines sur lesquels on veut restreindre le crawl.
-   * la méthode update_sites_to_be_crawler qui prend comme argument un objet
-HTMLpage et qui met à jour l'ensemble des sites à crawler en fonction des URLs
-contenues dans la page passée en argument et des domaines sur lesquels on veut
-restreindre le crawl.
-   * une méthode `__iter__` qui retourne un itérateur qui à chaque appel à
-next() retourne un nouvel objet HTMLpage qui fait partie du crawl
+Pour simplifier, on va manipular le crawler comme un itérable, à chaque appel de
+`next()` on fait avancer le crawler d'un site (dans l'ensemble des sites à
+crawler) et on obtient un objet qui contient le code HTTP pour le site, l'URL du
+site, et la liste de toutes les URLs contenues dans le site (extraites comme
+expliqué ci-dessus).
 
 
-Ensuite, nous allons simplement créer un objet crawler et itérer dessus pour
-extraire toutes les pages mortes (avec un code 404) que l'on trouve et tous les
-sites qui référencent ces pages mortes.
+Le but de ce mini projet est d'utiliser le crawler pour identifier tous les
+liens défectueux (c'est-à-dire ceux pour lesquels HTTP ne retourne pas un code
+202) pour le site `http://www-sop.inria.fr/members/Arnaud.Legout/`.
 
+Voici le résultat de l'exécution du crawler avec comme page initiale `http
+://www-sop.inria.fr/members/Arnaud.Legout/` et comme domaine `www-
+sop.inria.fr/members/Arnaud.Legout`. Donc le crawler va  uniquement tester les
+liens qui sont dans le site `http://www-sop.inria.fr/members/Arnaud.Legout/`
+
+                Page contenant des liens defecteux : 
+http://www-sop.inria.fr/members/Arnaud.Legout/Projects/p2p_cd.html
+--------------------------------------------------------------------------------
+CODE HTTP 404
+        http://dx.doi.org/10.1016/j.comnet.2010.09.014
+        http://www.cs.ucla.edu/~nikitas/
+================================================================================
+
+Page contenant des liens defecteux : 
+http://www-sop.inria.fr/members/Arnaud.Legout/publications.html
+--------------------------------------------------------------------------------
+CODE HTTP 404
+        http://dx.doi.org/10.1016/j.comnet.2010.09.014
+================================================================================
+
+Page contenant des liens defecteux : 
+http://www-sop.inria.fr/members/Arnaud.Legout/Projects/bluebear.html
+--------------------------------------------------------------------------------
+CODE HTTP 303
+        http://bits.blogs.nytimes.com/2011/11/29/skype-can-expose-your-location-researchers-say/
+CODE HTTP 403
+        https://threatpost.com/en_us/blogs/attacking-and-defending-tor-network-032911
+        http://www.pcinpact.com/actu/news/66544-skype-bittorrent-etude-scientifiques-faille.htm
+CODE HTTP 404
+        http://www.zataz.com/news/21651/faille--vulnerability-skype.html
+================================================================================
+
+Page contenant des liens defecteux : 
+http://www-sop.inria.fr/members/Arnaud.Legout/
+--------------------------------------------------------------------------------
+CODE HTTP -1
+        http://www.castify.net
+================================================================================
+
+Page contenant des liens defecteux : 
+http://www-sop.inria.fr/members/Arnaud.Legout/index.html
+--------------------------------------------------------------------------------
+CODE HTTP -1
+        http://www.castify.net
+================================================================================
+
+
+                
+### Niveau intermédiaire
+
+Tout notre programme peut-être écrit dans un même module `webcrawler`. Nous
+avons dans ce module deux classes. Voici l'aide correspondant à ces deux classes
+
+##### Classe `HTMLPage`
+
+                Help on class HTMLPage in module webcrawler:
+
+class HTMLPage(__builtin__.object)
+ |  represente une page HTML.
+ |
+ |  L'objet a 4 attributs:
+ |      -url: l'URL qui correspond a la page Web
+ |      -_html_it: un iterateur qui parcours le code HTML, une ligne
+ |                 a la fois
+ |      -urls: la liste de toutes les URLs contenues dans la page
+ |      -http_code: le code retourne par le protocol HTTP lors de
+ |                  l'acces a la page
+ |                  *http_code=0 signifie une erreur dans l'URL,
+ |                  *http_code=-1 signifie que le site de repond pas
+ |                  *http_code=-2 signifie une exception en accedant
+ |                  a l'URL
+ |
+ |  Methods defined here:
+ |
+ |  __init__(self, url)
+ |      Constructeur de la classe. Le constructeur prend comme
+ |      argument une URL et constuit un objet HTMLPage en definissant
+ |      les 4 attributs url, _html_it, urls, http_code
+ |
+ |  extract_urls_from_page(self)
+ |      Construit la liste de toutes les URLs contenu dans le corps de
+ |      la page HTML en parcourant l'iterateur retourne par
+ |      page_fetcher()
+ |
+ |      On identifie une URL parce qu'elle est precedee de href= et
+ |      dans le corps (body) de la page. Le parsing que l'on implement
+ |      est imparfait, mais un vrai parsing intelligent demanderait
+ |      une analyse syntaxique trop complexe pour nos besoins.
+ |
+ |      Plus en details, notre parsing consiste a chercher dans le
+ |      corps de la page (body):
+ |
+ |      -les urls contenues dans le champs href (essentiellement on
+ |       cherche le tag 'href=' et on extrait ce qui est entre
+ |       guillemets ou apostrophes
+ |
+ |      -on ne garde ensuite que les urls qui commencent par http ou
+ |       https et
+ |
+ |           * les urls qui commencent par ./ auxquelles on ajoute
+ |        devant (a la place du point) l'Url de la page d'origine
+ |        (self.url) exemple : pour './ma_page.html' et self.url =
+ |        http://mon_site.fr/rep1/ on obtient l'url
+ |        http://mon_site.fr/rep1/ma_page.html
+ |
+ |          * les urls qui commencent par /ma_page.html auxquelles on
+ |         ajoute devant uniquement le hostname de la page d'origine
+ |         (self.url) exemple : pour '/ma_page.html' et self.url =
+ |         http://mon_site.fr/rep1/ on obtient l'url
+ |         http://mon_site.fr/ma_page.html
+ |
+ |      Cette methode retourne la liste des URLs contenue dans la
+ |      page.
+ |
+ |  page_fetcher(self, url)
+ |      accede a l'URL et retourne un objet qui permet de parcourir le
+ |      code HTML (voir la documentation de urllib2.urlopen) ou une
+ |      liste vide en cas d'erreur.
+ |
+                
+##### Classe `Crawler`
+
+                Help on class Crawler in module webcrawler:
+
+class Crawler(__builtin__.object)
+ |  Cette classe permet de creer l'objet qui va gerer le crawl. Cet
+ |  objet est iterable et l'iterateur va, a chaque tour, retourner un
+ |  nouvel objet HTMLPage.
+ |
+ |  L'instance du crawler va avoir comme principaux attributs
+ |    * l'ensemble des sites a crawler sites_to_be_crawled
+ |    * l'ensemble des sites deja crawles sites_crawled
+ |    * un dictionnaire qui a chaque URL fait correspondre la liste de
+ |    tous les sites qui ont references cette URL lors du crawl
+ |    sites_to_be_crawled_dict
+ |
+ |  Methods defined here:
+ |
+ |  __init__(self, seed_url, max_crawled_sites=10000000000L, domain_filter=None)
+ |      Constructeur du crawler
+ |
+ |      Le constructeur prend comme arguments
+ |      -seed_url: l'URL de la page a partir de laquelle on demarre le crawl
+ |      -max_crawled_sites: le nombre maximum de sites que l'on va crawler
+ |      (10**10 par defaut)
+ |      -domain_filter: la liste des domaines sur lesquels le crawler
+ |      doit rester (pas de filtre par defaut)
+ |
+ |  __iter__(self)
+ |      Cette methode est implemente comme une fonction generatrice. A
+ |      chaque appel de next() sur l'iterateur, on obtient un nouvel
+ |      objet HTMLPage qui correspond a une URL qui etait dans
+ |      l'ensemble des URLs a crawler.
+ |
+ |      On ne donne aucune garantie sur l'ordre de parcours des URLs
+ |
+ |  __repr__(self)
+ |      permet d'afficher simplement des informations sur l'etat
+ |      courant du crawl.
+ |
+ |      retourne une chaine de caracteres donnant:
+ |      -le nombre sites et domaines deja crawle
+ |      -le nombre de site encore a crawler
+ |      -la duree du dernier crawl
+ |
+ |  update_sites_to_be_crawled(self, page)
+ |      Prend un objet HTMLpage comme argument et trouve toutes les
+ |      URLs presente dans la page HTML correspondante. Cette methode
+ |      met a jour le dictionnaire sites_to_be_crawled_dict et
+ |      l'ensemble sites_to_be_crawled. On ne met pas a jour le
+ |      dictionnaire et le set si l'URL correspondant a l'objet
+ |      HTMLpage n'est pas dans la liste de domaines acceptes dans
+ |      self.domain_filter.
+ |
+                
+##### Fonctions utilitaires
+
+On a égalements deux fonctions, qui sont utilisées par les classes, dont voici
+l'aide.
+
+                Help on function extract_domains_from_url in module webcrawler:
+
+extract_domains_from_url(url)
+    Extrait un domaine d'une URL
+
+    Retourne le tuple T qui contient
+    T[0]: domaine avec le bon protocol (http://domain or https://domain)
+    T[1]: domaine sans le protocol (sans http:// or https://)
+                
+                Help on function is_html_page in module webcrawler:
+
+is_html_page(url)
+    simple heuristique pour tester si une page est ecrite en
+    HTML. Il y a des cas mal identifies par cette heuristique,
+    mais elle est suffisante pour nos besoins. Par exemple:
+    http://inria.fr sera identifie comme non html de meme que
+    toutes les pages qui utilisent des points dans le nom d'un
+    repertoire.
+                
 ##### Le mot de la fin
 
 Nous avons à de nombreuses reprises évoqué la puissance de la librairie
