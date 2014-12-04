@@ -4,7 +4,7 @@ import urllib2
 from operator import itemgetter
 
 logging.basicConfig(filename='diagnose.log', filemode='w',
-                    level=logging.DEBUG)
+                    level=logging.ERROR)
 
 # helper function
 def extract_domains_from_url(url):
