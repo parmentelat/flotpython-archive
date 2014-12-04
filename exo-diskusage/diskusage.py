@@ -145,7 +145,8 @@ class ToplevelDir(object):
         a dictionary { path : size }
         that can be used as a cache if pass2 runs in the same process
         """        
-        print ('pass1')
+        if self.verbose:
+            print ("diskusage: running pass1 on {}".format(self.path))
         for root, dirs, files in os.walk (self.path, topdown=False):
             # first deal with files
             filepaths = [os.path.join(root,file) for file in files]
@@ -174,28 +175,40 @@ class ToplevelDir(object):
     help_message = """number\tgo to listed directory
 +\tgo to last (and thus biggest) directory - this is the default 
 u\tgo one step up - can be also '0' or '..'
+.\tcome again (stay in place)
+l\tlist files in the current directory
+!\tre-run pass1
+v\ttoggle verbose on and off
 q\tquit
-h\tthis help
-xxx to be completed..."""
+h\tthis help"""
 
     def move_to_subdir(self, subpath):
         """
-        during pass2, when inspecting a directory
-        we show the immediate subdirs (with numbers for selection) 
-        also they get sorted so that the biggest one comes last
+        this is the active part of pass2
+        it is the place where we prompt for the user's answer 
+        and implement the mainloop
+
+        this method returns the path for the next
+        subtree to visit (can also be one step up)
+
+        we show the immediate subdirs sorted (biggest comes last)
         and can thus be selected using '+'
+
+        subdirs are listed with a number that 
+        can be selected for moving down the tree
+        
         """
         print(8*'-', "Path {} has a total size of {}".\
               format(subpath, HumanReadableSize(self.cache[subpath])))
         # we build a list of tuples
         # (lastname, full-path-from-toppath, size)
-        sized_subdirs=[ (d,os.path.join(subpath,d), self.cache[os.path.join(subpath,d)])
+        sized_subdirs=[ (d, os.path.join(subpath, d), self.cache[os.path.join(subpath, d)])
                       for d in os.listdir(subpath)
-                          if os.path.isdir(os.path.join(subpath,d)) ]
+                          if os.path.isdir(os.path.join(subpath, d)) ]
         # show biggest last
         sized_subdirs.sort(key=lambda t: t[2])
         for i,(name,_,size) in enumerate(sized_subdirs):
-            print("{} {} {}".format(i+1,name,HumanReadableSize(size)))
+            print("{} {}   {}".format(i+1, str(HumanReadableSize(size)).rjust(12), name))
         # the interactive mainloop for selecting the next dir
         while True:
             # '+' is the default
@@ -210,8 +223,7 @@ xxx to be completed..."""
             else:
                 try:    index = int(answer)-1
                 except: pass
-    
-            ### if so
+            ### if is indeed is an index
             if index is not None:
                 try:
                     _, path, _ = sized_subdirs[index]
@@ -220,8 +232,18 @@ xxx to be completed..."""
                     print ("No such index {}".format(answer))
             ### otherwise
             elif answer in ['..','0','u']:
-                return os.path.dirname(path)
-            # xxx would make sense to accept answers as well here...
+                return os.path.dirname(subpath)
+            elif answer in [ 'l']:
+                self.list_files(subpath)
+            elif answer in [ '.']:
+                return subpath
+            elif answer in [ '!']:
+                print ("running pass1")
+                self.pass1()
+            elif answer in [ 'v']:
+                self.verbose = not self.verbose
+                self.cache.verbose = self.verbose
+                if self.verbose: print ("verbose")
             elif answer in ['q']:
                 exit(0)
             elif answer in ['h']:
@@ -230,10 +252,33 @@ xxx to be completed..."""
                 print("command not understood")
 
     def pass2 (self):
+        """
+        entry point for pass2
+        """
         subpath = self.path
         print ("Welcome to inspection of path {}".format(subpath))
         while True:
             subpath = self.move_to_subdir (subpath)
+
+    def list_files(self, subpath):
+        """
+        passive list of plain files in a given dir
+        the ones in *that* directory, not the subtree
+        just list with biggest file last
+
+        it's easier to re-read the file size here
+        as there is no recursion
+        would need to be optimized for directories with a large number of plain files
+        """
+        sized_files = [ (f, os.path.getsize(os.path.join(subpath, f)))
+                            for f in os.listdir(subpath)
+                                 if os.path.isfile(os.path.join(subpath, f)) ]
+        # show biggest last
+        sized_files.sort(key=lambda t: t[1])
+        print (4*'-', "Plain files in {}".format(subpath))
+        for i,(name,size) in enumerate(sized_files):
+            print("F {}   {}".format(str(HumanReadableSize(size)).rjust(12), name))
+
 
 def main():
     parser = ArgumentParser()
@@ -268,6 +313,9 @@ def main():
     except EOFError as e:
         print()
         return 0
+    except KeyboardInterrupt:
+        print("Bye")
+        return 1
     except Exception as e:
         print('Something went wrong', e)
         import traceback
