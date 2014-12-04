@@ -156,7 +156,7 @@ class ToplevelDir(object):
             # count the directory itself
             local_size += os.path.getsize(root)
             # because we do the traversal bottom up, we already have the size for our immediate sons
-            # in cumulated_size_cache; however the disk is alive during this time so it might be
+            # in the cache; however the disk is alive during this time so it might be
             # that a new son is showing up that we do not know about
             def subdir_size (subdir):
                 subpath = os.path.join(root, subdir)

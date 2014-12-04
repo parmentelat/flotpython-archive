@@ -161,11 +161,77 @@ des répertoires)
 
     Enter number (h for help) h
     num go to listed directory
-    +   go to last (and thus biggest) directory - this is the default
+    +   (default) go to last (and thus biggest) directory
     u   go one step up - can be also '0' or '..'
-    .   come again (stay in place)
     l   list files in the current directory
+    .   come again (stay in place)
     !   re-run pass1
     v   toggle verbose on and off
     q   quit
     h   this help
+
+### Que faut-il faire au juste ?
+
+Tout ce qui précède vous est donné à titre purement indicatif, pour vous décrire
+ce que fait l'implémentation qui sera donnée comme corrigé de cet exercice.
+
+Gardez bien présent à l'esprit toutefois qu'il ne s'agit pas d'une évaluation,
+aussi vous pouvez librement vous inspirer de cette implémentation. Dans l'état
+que je viens de décrire, l'outil est passif (il ne permet pas de détruire des
+fichiers), mais relativement exhaustif (vous pouvez voir toutes les tailles de
+tous les répertoires et de tous les fichiers). À vous de choisir l'étendue de ce
+que vous voulez faire.
+
+Une variante **plus simple** consisterait à se contenter de ne montrer que les
+répertoires, puisqu'en général une fois qu'on a isolé le répertoire on peut
+utiliser un navigateur de fichiers plus classique.
+
+Une variante **plus compliquée** consisterait à permettre des destructions de
+fichiers ou de répertoires nativement dans l'outil. Dans ce cas il serait bon de
+mettre à jour les tailles enregistrées dans les `.du`.
+
+De même ma version incorpore un mode bavard (*verbose*); lorsqu'il est activé on
+peut montrer plus de détails sur le fonctionnement interne de l'outil, par
+exemple en imprimant une ligne à chaque fois qu'on calcule vraiment la taille
+d'un répertoire - pour mieux comprendre ce qui se passe. Bien entendu pour
+commencer vous ne prévoyez pas de mode bavard.
+
+De même vous voyez dans l'aide en ligne quelques utilitaires supplémentaires,
+comme notamment `!` pour recalculer les tailles à partir de l'état du disque. En
+principe, ajouter ce genre de features ne prend que quelques lignes de code,
+mais là encore c'est à vous de voir.
+
+Enfin, le code étant extrêmement basique en termes d'utilisation de librairies,
+je vous propose si vous avez le temps d'essayer de faire fonctionner votre code
+aussi en python3 - c'est-à-dire, une fois que votre code fonctionne en python2,
+d'essayer de le modifier à la marge pour obtenir un code unique qui fonctionne
+avec les deux versions. Pour cela attendez tout de même d'avoir lu le complément
+que nous consacrons à ce sujet en Semaine 7.
+
+### Quelques indices
+
+Une des difficultés de cet exercice est de gérer le fait que le système est
+'vivant' pendant la sesssion; aussi les données cachées dans les `.du` peuvent
+être anciennes. Ces deux facteurs font qu'il se peut que certains répertoires
+ont un `.du` et pas d'autres. Ici j'ai adopté une stratégie simple qui est de
+retourner une taille nulle (pour pouvoir tout de même afficher le résultat de la
+somme) et de faire en sorte que l'impression d'une taille nulle attire l'oeil
+(voir le tout premier exemple ci-dessus).
+
+Notez aussi, pour ceux qui n'y sont pas habitués, qu'**un répertoire a une
+taille propre**. Du point de vue de l'utilisateur un répertoire ne contient
+'rien' mais il faut de la place pour ranger les noms des fichiers. C'est en
+général négligeable, mais avec un grand nombre de petits fichiers c'est mieux
+d'en tenir compte.
+
+Si vous voulez aborder l'exercice dans une optique 'niveau avancé', vous pouvez
+vous arrêter là, et essayer d'implémenter l'outil sans plus d'indications.
+
+##### Librairies
+
+En termes de librairies tierces, c'est difficile de faire plus simple; mon
+implémentation utilise uniquement&nbsp;:
+ * `os` et spécifiquement `os.walk`, `os.listdir`,
+ * `os.path` et dans ce module `join`, `getsize`, `exists`, `isdir`, `isfile`,
+`dirname`,
+ * et donc `argparse.ArgumentParser`.
