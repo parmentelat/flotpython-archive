@@ -48,8 +48,10 @@ class HumanReadableSize(int):
     # compute 2**(10.n)
     UNIT_LABELS = [ (2**(10*n), s) for (n, s) in LABELS ]
 
-    # could use some more precision (like 2 digits or so)
     def __repr__ (self):
+        """
+        Display size in bytes 
+        """
         for ( unit, label ) in self.UNIT_LABELS:
             if self >= unit:
                 # small values usually show an int
@@ -74,8 +76,10 @@ class Cache(dict):
     this is also linked to the file system and the .du files
     meaning that 
     (*) cache[path] looks in path/.du if not yet in memory
-        if nothing else works (not in memory and not in .du) we return 0
-    (*) cache[path] = size also writes path/.du if permission is granted
+        if nothing else works (not in memory and not in .du)
+        we return 0
+    (*) cache[path] = size also writes path/.du
+        if permission is granted
 
     """
 
@@ -128,10 +132,13 @@ class Cache(dict):
 ####################
 class ToplevelDir(object):
     """
-    toplevel object for the arg directory
-    can run pass1
-    has the cache object for all subdirs relating to that pass
-    can run pass2 
+    toplevel object - only one is created
+    for the directory that diskusage.py is run on
+
+    it can run pass1()
+    it has one instance of Cache for keeping track
+       of the sizes of all subdirs
+    it can also run pass2 
     """
 
     def __init__(self, path, verbose=False):
@@ -141,9 +148,12 @@ class ToplevelDir(object):
 
     def pass1(self):
         """
-        scans a whole tree, and returns 
-        a dictionary { path : size }
-        that can be used as a cache if pass2 runs in the same process
+        scans a whole tree, and writes
+        individual (total) size in .du
+
+        this is done through a Cache object so
+        that if we run both passes in the same process
+        pass2 will not even need to read .du files
         """        
         if self.verbose:
             print ("diskusage: running pass1 on {}".format(self.path))
@@ -156,7 +166,7 @@ class ToplevelDir(object):
             # count the directory itself
             local_size += os.path.getsize(root)
             # because we do the traversal bottom up, we already have the size for our immediate sons
-            # in cumulated_size_cache; however the disk is alive during this time so it might be
+            # in the cache; however the disk is alive during this time so it might be
             # that a new son is showing up that we do not know about
             def subdir_size (subdir):
                 subpath = os.path.join(root, subdir)
@@ -185,13 +195,15 @@ h\tthis help"""
     def move_to_subdir(self, subpath):
         """
         this is the active part of pass2
-        it is the place where we prompt for the user's answer 
-        and implement the mainloop
+        it is the place where we prompt 
+        for the user's answer and 
+        where we implement the mainloop
 
         this method returns the path for the next
         subtree to visit (can also be one step up)
 
-        we show the immediate subdirs sorted (biggest comes last)
+        we show the immediate subdirs sorted 
+        (biggest comes last)
         and can thus be selected using '+'
 
         subdirs are listed with a number that 
@@ -268,7 +280,8 @@ h\tthis help"""
 
         it's easier to re-read the file size here
         as there is no recursion
-        would need to be optimized for directories with a large number of plain files
+        would need to be optimized for directories
+        with a large number of plain files
         """
         sized_files = [ (f, os.path.getsize(os.path.join(subpath, f)))
                             for f in os.listdir(subpath)
@@ -281,6 +294,19 @@ h\tthis help"""
 
 
 def main():
+    """
+    The entry point for diskusage.py
+    
+    This function parse the command line arguments 
+    using an instance of ArgumentParser
+
+    it returns an int suitable to be returned to the OS
+    that is to say 0 when everything is fine and 1 otherwise
+
+    it essentially creates an instance of ToplevelDir 
+    and sends it the pass1() and/or pass2 methods
+
+    """
     parser = ArgumentParser()
     # by default we only run a pass2
     parser.add_argument("-1", "--pass1", dest='pass1', default=False,

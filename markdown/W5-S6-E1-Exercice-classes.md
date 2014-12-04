@@ -23,7 +23,14 @@ l'application dont il est question ici fait principalement ceci&nbsp;:
    * un fichier texte qui liste par ordre alphabétique les bateaux concernés, et
 le nombre de positions trouvées pour chacun,
    * et un fichier KML, pour exposer les trajectoires trouvées à google earth,
-maps ou autre outil similaire.
+maps ou autre outil similaire; dans la version 2.0 de l'exercice, les données
+générées dans ce fichier KML sont également dans l'ordre alphabétique des noms
+de bateau.
+
+Plus précisément, pour les deux sorties on tries les bateaux selon le critère
+suivant&nbsp;:
+ * ordre alphabétique,
+ * et ordre sur les `id` en cas d'ex-aequo.
 
 Voici à quoi ressemble le fichier KML obtenu avec les données que nous
 fournissons, une fois ouvert sous google earth&nbsp;:
@@ -180,9 +187,10 @@ résumé sont plus étoffés&nbsp;:
 au format texte, ce qui le rend beaucoup plus bavard comme vous pouvez le voir
 en inspectant la taille des deux fichiers de référence&nbsp;:
 
-    $ ls -l ALL_SHIPS.txt.ref ALL_SHIPS-v.txt.ref
-    -rw-r--r--  1 parmentelat  staff  1363434 Dec  1 16:55 ALL_SHIPS-v.txt.ref
-    -rw-r--r--  1 parmentelat  staff    15273 Nov 30 08:55 ALL_SHIPS.txt.ref
+    $ ls -l ALL_SHIPS*txt.ref v2.0
+    -rw-r--r--  1 parmentelat  staff  1438681 Dec  4 16:20 ALL_SHIPS-v.txt.ref
+    -rw-r--r--  1 parmentelat  staff    15331 Dec  4 16:20 ALL_SHIPS.txt.ref
+    -rw-r--r--  1 parmentelat  staff        0 Dec  4 16:21 v2.0
 
 ##### `merger.py --help`
 
@@ -232,6 +240,29 @@ Par ailleurs, les données sont tout à fait authentiques et n'ont subi aucun
 filtrage.
 Pour cette raison, il serait sans doute hasardeux de supposer l'unicité des noms
 de bateaux - en clair deux bateaux différents peuvent porter le même nom.
+
+***
+
+### Notes pour la version 2.0
+
+La première version de l'exercice était erronée, les bateaux dans le fichier KML
+n'étaient pas triés et il ne vous était donc pas possible de retrouver un
+résultat exactement identique.
+
+Ceci est corrigé dans la version 2.0. Si vous avez commencé à travailler avec la
+version 1.x voici ce qu'il vous faut savoir&nbsp;:
+
+ * les fichiers de référence ont été modifiés; téléchargez les à nouveau, une
+fois déballés vous devez trouver dans votre répertoire un fichier qui s'appelle
+`v2.0` pour confirmer que vous avez la bonne version
+ * le fichier `merger.py` a été mis à jour; téléchargez-le à nouveau et vérifiez
+que vous avez bien une ligne avec `# Version : 2.0`
+ * la classe `ShipDict` doit à présent implémenter la méthode
+`sort_ships_by_name` qui est appelée par `merger.py` avant de générer les
+fichiers de sortie. Comme indiqué dans le préambule, on trie les bateaux selon
+le critère suivant&nbsp;:
+   * ordre alphabétique,
+   * et ordre sur les `id` en cas d'ex-aequo.
 
 ***
 
@@ -375,6 +406,15 @@ la sortie en mode bavard.
      |  sort(self)
      |      makes sure all the ships have their positions
      |      sorted in chronological order
+     |
+     |  sort_ships_by_name(self, ships)
+     |      New in version 2.0
+     |
+     |      given a list of ships, returns a sorted version
+     |      this uses sorted() so a shallow copy is returned
+     |
+     |      sorting criteria is first on names, and then with
+     |      identical ship names use ship id instead
      |
 
 

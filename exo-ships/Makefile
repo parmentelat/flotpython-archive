@@ -1,7 +1,7 @@
 all:
 	merger.py json/*
 
-REF-FILES =  ALL_SHIPS.kml.ref	ALL_SHIPS.txt.ref ALL_SHIPS-v.txt.ref
+REF-FILES =  ALL_SHIPS.kml.ref	ALL_SHIPS.txt.ref ALL_SHIPS-v.txt.ref v2.0
 
 
 ref-tar:
