@@ -30,13 +30,37 @@ def extract_domains_from_url(url):
     domain = url[:url.find('/')]
     return (protocol + domain, domain)
 
+# helper function
+def is_html_page(url):
+    """
+    simple heuristique pour tester si une page est ecrite en
+    HTML. Il y a des cas mal identifies par cette heuristique,
+    mais elle est suffisante pour nos besoins. Par exemple:
+    http://inria.fr sera identifie comme non html de meme que
+    toutes les pages qui utilisent des points dans le nom d'un
+    repertoire.
+    """
+    #if there is no extension, it is a directory, so it
+    #defaults to an index.html page
+    if url.endswith('/'):
+        return True
+    else:
+        url_tokens = url.split('/')
+        #if there is no extension, it is a directory, so it
+        #defaults to an index.html page
+        if '.' not in url_tokens[-1]:
+            return True
+        elif ('html' in url_tokens[-1].lower() or   
+              'htm' in url_tokens[-1].lower()):
+            return True
+        else:
+            return False
 
 class HTMLPage(object):
     """
-    represente une page HTML. Le constructeur prend comme argument une
-    URL et constuit un objet HTMLPage
+    represente une page HTML. 
 
-    L'objet a 3 attributs:
+    L'objet a 4 attributs:
         -url: l'URL qui correspond a la page Web
         -_html_it: un iterateur qui parcours le code HTML, une ligne 
                    a la fois
@@ -44,12 +68,17 @@ class HTMLPage(object):
         -http_code: le code retourne par le protocol HTTP lors de 
                     l'acces a la page
                     *http_code=0 signifie une erreur dans l'URL, 
-                    *http_code < 0 signifie une exception en accedant 
+                    *http_code=-1 signifie que le site de repond pas
+                    *http_code=-2 signifie une exception en accedant 
                     a l'URL
-
     """
 
     def __init__(self, url):
+        """
+        Constructeur de la classe. Le constructeur prend comme
+        argument une URL et constuit un objet HTMLPage en definissant
+        les 4 attributs url, _html_it, urls, http_code
+        """
         self.http_code = 0
         self.url = url
         self._html_it = self.page_fetcher(self.url)
@@ -59,8 +88,9 @@ class HTMLPage(object):
 
     def page_fetcher(self, url):
         """
-        accede a l'URL et retourne un objet qui permet de parcourir 
-        le code HTML (voir la documentation de urllib2.urlopen)
+        accede a l'URL et retourne un objet qui permet de parcourir le
+        code HTML (voir la documentation de urllib2.urlopen) ou une
+        liste vide en cas d'erreur.
         """
         
         # surcharge la classe Request pour faire des requetes HEAD qui
@@ -72,31 +102,6 @@ class HTMLPage(object):
             def get_method(self):
                 return "HEAD"
         
-        def is_html_page(url):
-            """
-            simple heuristique pour tester si une page est ecrite en
-            HTML. Il y a des cas mal identifies par cette heuristique,
-            mais elle est suffisante pour nos besoins. Par exemple:
-            http://inria.fr sera identifie comme non html de meme que
-            toutes les pages qui utilisent des points dans le nom d'un
-            repertoire.
-            """
-            #if there is no extension, it is a directory, so it
-            #defaults to an index.html page
-            if url.endswith('/'):
-                return True
-            else:
-                url_tokens = url.split('/')
-                #if there is no extension, it is a directory, so it
-                #defaults to an index.html page
-                if '.' not in url_tokens[-1]:
-                    return True
-                elif ('html' in url_tokens[-1].lower() or   
-                      'htm' in url_tokens[-1].lower()):
-                    return True
-                else:
-                    return False
-                
         try:
             if is_html_page(url):
                 page = urllib2.urlopen(url)
@@ -124,12 +129,39 @@ class HTMLPage(object):
     def extract_urls_from_page(self):
         """
         Construit la liste de toutes les URLs contenu dans le corps de
-        la page HTML
+        la page HTML en parcourant l'iterateur retourne par
+        page_fetcher()
 
-        On identifie une URL parce qu'elle est precedee de href=. Le
-        parsing que l'on implement est imparfait, mais un vrai parsing
-        intelligent demanderait une analyse syntaxique trop complexe
-        pour nos besoins.
+        On identifie une URL parce qu'elle est precedee de href= et
+        dans le corps (body) de la page. Le parsing que l'on implement
+        est imparfait, mais un vrai parsing intelligent demanderait
+        une analyse syntaxique trop complexe pour nos besoins.
+        
+        Plus en details, notre parsing consiste a chercher dans le
+        corps de la page (body): 
+
+        -les urls contenues dans le champs href (essentiellement on
+         cherche le tag 'href=' et on extrait ce qui est entre
+         guillemets ou apostrophes
+         
+        -on ne garde ensuite que les urls qui commencent par http ou
+         https et
+             
+             * les urls qui commencent par ./ auxquelles on ajoute
+          devant (a la place du point) l'Url de la page d'origine
+          (self.url) exemple : pour './ma_page.html' et self.url =
+          http://mon_site.fr/rep1/ on obtient l'url
+          http://mon_site.fr/rep1/ma_page.html
+          
+            * les urls qui commencent par /ma_page.html auxquelles on
+           ajoute devant uniquement le hostname de la page d'origine
+           (self.url) exemple : pour '/ma_page.html' et self.url =
+           http://mon_site.fr/rep1/ on obtient l'url
+           http://mon_site.fr/ma_page.html
+
+        Cette methode retourne la liste des URLs contenue dans la
+        page.
+
         """
 
         # parse the page to extract all URLs in href field and in the
@@ -190,26 +222,27 @@ class HTMLPage(object):
 
 class Crawler(object):
     """
-    Cette classe permet de creer l'objet qui va gerer le crawl. Cette
+    Cette classe permet de creer l'objet qui va gerer le crawl. Cet
     objet est iterable et l'iterateur va, a chaque tour, retourner un
     nouvel objet HTMLPage.
 
-    Le constructeur prend comme arguments
-    -seed_url: l'URL de la page a partir de laquelle on demarre le crawl
-    -max_crawled_sites: le nombre maximum de sites que l'on va crawler
-     (10**100 par defaut)
-    -domain_filter: la liste des domaines sur lesquels le crawler 
-    doit rester (pas de filtre par defaut)
+    L'instance du crawler va avoir comme principaux attributs 
+      * l'ensemble des sites a crawler sites_to_be_crawled
+      * l'ensemble des sites deja crawles sites_crawled
+      * un dictionnaire qui a chaque URL fait correspondre la liste de 
+      tous les sites qui ont references cette URL lors du crawl 
+      sites_to_be_crawled_dict
     """
 
-    def __init__(self, seed_url, max_crawled_sites=10 ** 100,
+    def __init__(self, seed_url, max_crawled_sites=10 ** 10,
                  domain_filter=None):
         """
         Constructeur du crawler
 
+        Le constructeur prend comme arguments
         -seed_url: l'URL de la page a partir de laquelle on demarre le crawl
         -max_crawled_sites: le nombre maximum de sites que l'on va crawler
-        (10**100 par defaut)
+        (10**10 par defaut)
         -domain_filter: la liste des domaines sur lesquels le crawler 
         doit rester (pas de filtre par defaut)
         """
@@ -242,13 +275,13 @@ class Crawler(object):
         met a jour le dictionnaire sites_to_be_crawled_dict et
         l'ensemble sites_to_be_crawled. On ne met pas a jour le
         dictionnaire et le set si l'URL correspondant a l'objet
-        HTMLpage n'est pas dans la liste de domaines acceptes.
+        HTMLpage n'est pas dans la liste de domaines acceptes dans
+        self.domain_filter.
         """
         # check the domain of the page from which we got URLs
         pass_filter = False
-        #extracted_domain =  extract_domains_from_url(page.url)[1]
         for domain in self.domain_filter:
-            if domain in page.url: #extracted_domain:
+            if domain in page.url:
                 pass_filter = True
 
         logging.debug('*'*80 + '\n')
@@ -325,8 +358,6 @@ class Crawler(object):
         raise StopIteration
 
 
-# Let's answer funny questions in a few lines of code
-
 ####################################################
 # 1) what are the dead URLs 
 def get_dead_pages(url, domain):
@@ -336,20 +367,33 @@ def get_dead_pages(url, domain):
         # just to see progress on the terminal
         print crawl
         print page.http_code, page.url
-
+        
         if page.http_code != 200:
             dead_urls.append((page.http_code, page.url))        
+            
+        source_sites = {}    
+        for url in dead_urls:
+            for site in crawl.sites_to_be_crawled_dict[url[1]]:
+                if site in source_sites:
+                    if url[0] in source_sites[site]:
+                        source_sites[site][url[0]].append(url[1])
+                    else:
+                        source_sites[site][url[0]] = [url[1]]
+                else:
+                    source_sites[site] = {url[0]: [url[1]]}
 
     with open('dead_pages.txt', 'w') as dump_file:
-        dump_file.write('number of dead URLs (non 202) : {}\n'
-                        .format(len(dead_urls)))
-        dump_file.write('-'*80 + '\n')
-        for url in dead_urls:
-            dump_file.write('Dead URL ({}): {}\n'.format(url[0],url[1]))
-            dump_file.write('Sites referencing this URL:\n')
-            for site in crawl.sites_to_be_crawled_dict[url[1]]:
-                dump_file.write('     {}\n'.format(site))
-            dump_file.write('\n')
+        for site in source_sites:
+            dump_file.write('Page contenant des liens defecteux : \n{}\n'
+                        .format(site))
+            dump_file.write('-'*80 + '\n')
+            http_code = source_sites[site].keys()
+            http_code.sort()
+            for code in http_code:
+                dump_file.write('CODE HTTP {}\n'.format(code))
+                for url in source_sites[site][code]:
+                    dump_file.write('        {}\n'.format(url))
+            dump_file.write('='*80 + '\n\n')
 
 # 2) what are the less responsive sites
 def get_slow_pages(url, domain):
@@ -372,7 +416,7 @@ def get_slow_pages(url, domain):
 if __name__ == '__main__':
     seed_url = 'http://www-sop.inria.fr/members/Arnaud.Legout/'
     domain = ['www-sop.inria.fr/members/Arnaud.Legout']
-    get_dead_pages(s, domain)
-    get_slow_pages(s, domain)
+    get_dead_pages(seed_url, domain)
+    #get_slow_pages(seed_url, domain)
 
     logging.shutdown()
