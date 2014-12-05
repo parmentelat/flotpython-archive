@@ -45,8 +45,7 @@ $ 0°C = 273.15°K $
 Pour être plus explicite encore, voici un pretty-print d'un objet correspondant
 à une ville (Cayenne en Guyanne), en ne montrant que la première mesure&nbsp;:
 
-                Sample city
-{u'city': {u'coord': {u'lat': 49.558578, u'lon': 1.62803},
+                {u'city': {u'coord': {u'lat': 49.558578, u'lon': 1.62803},
            u'country': u'FR',
            u'id': 3028097,
            u'name': u'Cayenne'},
@@ -110,24 +109,6 @@ fichier.
 
 ##### 
 
+Plot 2D
 
-    # le module json
-    import json
-    
-    # chargement des données au format json
-    with open('data/meteo_france.json') as feed:
-        raw_data = all_cities = json.load(feed)
-
-
-    city=raw_data[0]
-    import pprint
-    pprint.pprint(city)
-
-
-    print city.keys()
-
-
-    city['time']
-
-                
-                
+http://matplotlib.org/api/pyplot_api.html?highlight=scatter

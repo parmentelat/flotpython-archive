@@ -18,15 +18,17 @@ temps pour vous de vous essayer à écrire une petite application complète.
 ### Les sujets
 
 Pour vous donner des idées dans ce sens, nous vous proposons de choisir un (ou
-plusieurs, naturellement) sujets parmi ces trois-ci&nbsp;:
+plusieurs, naturellement) sujets parmi ces trois.
 
  * `diskusage.py` est un outil orienté *Command-Line*, qui peut être utile dans
 la vie de tous les jours lorsqu'il s'agit de faire le ménage dans un disque trop
 plein. Ce sujet vous permettra de voir de plus près un exemple de `script`,
-comparable en gros à ce qu'on pourrait faire en shell;
+comparable en gros à ce qu'on pourrait faire en shell.
 
  * `webcrawler.py` est un prototype de robot qui aspire les pages web à partir
-d'une URL qui sert de point d'entrée;
+d'une URL qui sert de point d'entrée. Son objectif et d'avoir un moyen simple
+d'inspecter un site Web pour, par exemple, indentifier automatiquement les liens
+morts.
 
  * `meteodata.py` est un exemple de code qui extrait des données météo fournies
 par un service Internet, qui servent ensuite de prétexte pour faire un peu de
@@ -47,9 +49,9 @@ En guise de corrigés, nous publierons vers la fin du MOOC nos codes source pour
 chacun des trois sujets.
 
 Il nous faut souligner que le code de ces corrigés n'est ni totalement fiable,
-ni validé par des tests; et ce pour plusieurs raisons&nbsp;:
+ni validé par des tests&nbsp;; et ce pour plusieurs raisons&nbsp;:
  * d'une part un code durci a tendance à être plus bavard et plus lourd à lire,
-et donc à être plus difficile d'accès;
+et donc à être plus difficile d'accès&nbsp;;
  * d'autre part naturellement cela prend plus de temps à écrire.
 
 Est-ce que cela est un problème pour ce projet ? Non, mais il est important dans

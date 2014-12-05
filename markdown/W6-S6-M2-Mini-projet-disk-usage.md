@@ -5,19 +5,19 @@
 
 ### Introduction
 
-De temps en temps vous vous rendez compte que votre disque dur est plein ou que
+De temps en temps, vous vous rendez compte que votre disque dur est plein ou que
 vous avez rempli votre quota.
-En application de la loi de Murphy, en général c'est à un mauvais moment; il est
-vrai qu'on a toujours mieux à faire que de nettoyer un disque.
+En application de la loi de Murphy, en général c'est à un mauvais moment&nbsp;;
+il est vrai qu'on a toujours mieux à faire que de nettoyer un disque.
 
 ### Objectifs
 
-Dans ce mini-projet nous allons écrire un utilitaire permettant de nous aider
+Dans ce mini-projet, nous allons écrire un utilitaire permettant de nous aider
 dans ce genre de situations. Les objectifs que l'on pourrait avoir sont&nbsp;:
  * de trouver rapidement les gros répertoires, en partant d'une racine ou d'un
-répertoire utilisateur;
+répertoire utilisateur&nbsp;;
  * de stocker les données de taille de façon à ne pas avoir à attendre plusieurs
-minutes à recalculer sans cesse les tailles des différents morceaux;
+minutes à recalculer sans cesse les tailles des différents morceaux&nbsp;;
  * et notamment de pouvoir lancer toutes les nuits un scan silencieux, de façon
 à avoir immédiatement, dans la journée, accès à des informations - même
 approchées - de nature à identifier le ou les répertoires qui pose problème ou
@@ -190,13 +190,13 @@ Une variante **plus compliquée** consisterait à permettre des destructions de
 fichiers ou de répertoires nativement dans l'outil. Dans ce cas il serait bon de
 mettre à jour les tailles enregistrées dans les `.du`.
 
-De même ma version incorpore un mode bavard (*verbose*); lorsqu'il est activé on
-peut montrer plus de détails sur le fonctionnement interne de l'outil, par
-exemple en imprimant une ligne à chaque fois qu'on calcule vraiment la taille
-d'un répertoire - pour mieux comprendre ce qui se passe. Bien entendu pour
-commencer vous ne prévoyez pas de mode bavard.
+De même, ma version incorpore un mode bavard (*verbose*)&nbsp;; lorsqu'il est
+activé on peut montrer plus de détails sur le fonctionnement interne de l'outil,
+par exemple en imprimant une ligne à chaque fois qu'on calcule vraiment la
+taille d'un répertoire - pour mieux comprendre ce qui se passe. Bien entendu,
+pour commencer, vous n'avez pas besoin de prévoir un mode bavard.
 
-De même vous voyez dans l'aide en ligne quelques utilitaires supplémentaires,
+De même, vous voyez dans l'aide en ligne quelques utilitaires supplémentaires,
 comme notamment `!` pour recalculer les tailles à partir de l'état du disque. En
 principe, ajouter ce genre de features ne prend que quelques lignes de code,
 mais là encore c'est à vous de voir.
@@ -211,12 +211,12 @@ que nous consacrons à ce sujet en Semaine 7.
 ##### Quelques indices
 
 Une des difficultés de cet exercice est de gérer le fait que le système est
-'vivant' pendant la sesssion; aussi les données cachées dans les `.du` peuvent
-être anciennes. Ces deux facteurs font qu'il se peut que certains répertoires
-ont un `.du` et pas d'autres. Ici j'ai adopté une stratégie simple qui est de
-retourner une taille nulle (pour pouvoir tout de même afficher le résultat de la
-somme) et de faire en sorte que l'impression d'une taille nulle attire l'oeil
-(voir le tout premier exemple ci-dessus).
+'vivant' pendant la sesssion&nbsp;; aussi les données cachées dans les `.du`
+peuvent être anciennes. Ces deux facteurs font qu'il se peut que certains
+répertoires ont un `.du` et pas d'autres. Ici j'ai adopté une stratégie simple
+qui est de retourner une taille nulle (pour pouvoir tout de même afficher le
+résultat de la somme) et de faire en sorte que l'impression d'une taille nulle
+attire l'oeil (voir le tout premier exemple ci-dessus).
 
 Notez aussi, pour ceux qui n'y sont pas habitués, qu'**un répertoire a une
 taille propre**. Du point de vue de l'utilisateur un répertoire ne contient
@@ -229,8 +229,8 @@ vous arrêter là, et essayer d'implémenter l'outil sans plus d'indications.
 
 ##### Librairies
 
-En termes de librairies tierces, c'est difficile de faire plus simple; notre
-implémentation utilise uniquement&nbsp;:
+En termes de librairies tierces, c'est difficile de faire plus simple&nbsp;;
+notre implémentation utilise uniquement&nbsp;:
  * le module `os` et spécifiquement
    * `os.walk`, `os.listdir`,
  * `os.path` et dans ce module
@@ -248,16 +248,16 @@ tailles sous la forme que vous avez vue dans les exemples comme `139.73 KiB` ou
  * `Cache` est la classe qui mémorise la taille (totale) des différents
 répertoires
  * et `ToplevelDir` est la classe qui implémente la logique de traitement du
-répertoire d'entrée;
+répertoire d'entrée.
 
 Enfin la fonction `main` est le point d'entrée dans le programme.
 
 Notons à titre de curiosité, avant de lister les différentes méthodes, que
- * `HumanReadableSize` hérite de `int`; on a redéfini `__repr__` pour
-implémenter le format dans lequel on veut afficher les tailles en octets;
- * `Cache` hérite de `dict`; on a redéfini `__getitem__` et `__setitem__` de
-façon à utiliser `cache[path]` et `cache[path]=size` pour mémoriser le résultat
-à la fois en mémoire pour le processus courant, et sur disque dans les
+ * `HumanReadableSize` hérite de `int`&nbsp;; on a redéfini `__repr__` pour
+implémenter le format dans lequel on veut afficher les tailles en octets&nbsp;;
+ * `Cache` hérite de `dict`&nbsp;; on a redéfini `__getitem__` et `__setitem__`
+de façon à utiliser `cache[path]` et `cache[path]=size` pour mémoriser le
+résultat à la fois en mémoire pour le processus courant, et sur disque dans les
 différents fichiers `.du`
 
 ***
@@ -402,9 +402,9 @@ Classe `ToplevelDir`
 
 Fonction `main`
 
-Help on function main in module diskusage:
+    Help on function main in module diskusage:
 
-main()
+    main()
     The entry point for diskusage.py
 
     This function parse the command line arguments
