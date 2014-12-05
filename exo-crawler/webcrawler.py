@@ -6,6 +6,15 @@ from operator import itemgetter
 logging.basicConfig(filename='diagnose.log', filemode='w',
                     level=logging.ERROR)
 
+# A propos du module de la librairie standard logging.
+# J'utilise ici le module logging qui permet de definir differents 
+# niveaux de log pour debugger un programme et pour faire des fichiers
+# de trace d'execution. J'ai laisse dans ce fichier tous les logs que 
+# j'ai utilise pour debugger ce programme. Pour voir tous les logs
+# il faut mettre ci-dessus le parametre level a logging.DEBUG (mais
+# attention ca va faire beaucoup de donnees).
+
+
 # helper function
 def extract_domains_from_url(url):
     """
@@ -62,7 +71,7 @@ class HTMLPage(object):
 
     L'objet a 4 attributs:
         -url: l'URL qui correspond a la page Web
-        -_html_it: un iterateur qui parcours le code HTML, une ligne 
+        -_html_it: un iterateur qui parcourt le code HTML, une ligne 
                    a la fois
         -urls: la liste de toutes les URLs contenues dans la page
         -http_code: le code retourne par le protocol HTTP lors de 
@@ -76,7 +85,7 @@ class HTMLPage(object):
     def __init__(self, url):
         """
         Constructeur de la classe. Le constructeur prend comme
-        argument une URL et constuit un objet HTMLPage en definissant
+        argument une URL et construit un objet HTMLPage en definissant
         les 4 attributs url, _html_it, urls, http_code
         """
         self.http_code = 0
@@ -128,7 +137,7 @@ class HTMLPage(object):
 
     def extract_urls_from_page(self):
         """
-        Construit la liste de toutes les URLs contenu dans le corps de
+        Construit la liste de toutes les URLs contenues dans le corps de
         la page HTML en parcourant l'iterateur retourne par
         page_fetcher()
 
@@ -140,9 +149,9 @@ class HTMLPage(object):
         Plus en details, notre parsing consiste a chercher dans le
         corps de la page (body): 
 
-        -les urls contenues dans le champs href (essentiellement on
+        -les urls contenues dans le champ href (essentiellement on
          cherche le tag 'href=' et on extrait ce qui est entre
-         guillemets ou apostrophes
+         guillemets ou apostrophes)
          
         -on ne garde ensuite que les urls qui commencent par http ou
          https et
@@ -159,7 +168,7 @@ class HTMLPage(object):
            http://mon_site.fr/rep1/ on obtient l'url
            http://mon_site.fr/ma_page.html
 
-        Cette methode retourne la liste des URLs contenue dans la
+        Cette methode retourne la liste des URLs contenues dans la
         page.
 
         """
@@ -227,81 +236,83 @@ class Crawler(object):
     nouvel objet HTMLPage.
 
     L'instance du crawler va avoir comme principaux attributs 
-      * l'ensemble des sites a crawler sites_to_be_crawled
-      * l'ensemble des sites deja crawles sites_crawled
+      * l'ensemble des pages a crawler pages_to_be_crawled
+      * l'ensemble des pages deja crawles pages_crawled
       * un dictionnaire qui a chaque URL fait correspondre la liste de 
-      tous les sites qui ont references cette URL lors du crawl 
-      sites_to_be_crawled_dict
+      toutes les pages qui ont reference cette URL lors du crawl 
+      pages_to_be_crawled_dict
     """
 
-    def __init__(self, seed_url, max_crawled_sites=10 ** 10,
-                 domain_filter=None):
+    def __init__(self, seed_url, max_crawled_pages=10 ** 10,
+                 page_filter=None):
         """
         Constructeur du crawler
 
         Le constructeur prend comme arguments
         -seed_url: l'URL de la page a partir de laquelle on demarre le crawl
-        -max_crawled_sites: le nombre maximum de sites que l'on va crawler
+        -max_crawled_pages: le nombre maximum de pages que l'on va crawler
         (10**10 par defaut)
-        -domain_filter: la liste des domaines sur lesquels le crawler 
-        doit rester (pas de filtre par defaut)
+        -page_filter: la liste des pages sur lesquels le crawler 
+        doit rester (pas de filtre par defaut). Typiquement, une URL 
+        passe le filtre si n'importe lequel des elements de page_filter
+        est contenu dans l'URL
         """
-        if domain_filter is None:
-            domain_filter = []
-        self.domain_filter = domain_filter
+        if page_filter is None:
+            page_filter = []
+        self.page_filter = page_filter
         self.seed_url = seed_url
-        self.max_crawled_sites = max_crawled_sites
+        self.max_crawled_pages = max_crawled_pages
 
         # Each key is a URL, and the value for the key url is the list
-        # of sites that referenced this url. This dict is used to find
-        # sites that references given URLs in order to diagnose
+        # of pages that referenced this url. This dict is used to find
+        # pages that references given URLs in order to diagnose
         # buggy Web pages.
-        self.sites_to_be_crawled_dict = {}
+        self.pages_to_be_crawled_dict = {}
 
-        # set of the sites still to be crawled
-        self.sites_to_be_crawled = set([])
+        # set of the pages still to be crawled
+        self.pages_to_be_crawled = set([])
 
-        # set of the sites/domains already crawled
-        self.sites_crawled = set([])
+        # set of the pages/domains already crawled
+        self.pages_crawled = set([])
         self.domains_crawled = set([])
         
         # duration of the last crawl
         self.last_crawl_duration = 0
 
-    def update_sites_to_be_crawled(self, page):
+    def update_pages_to_be_crawled(self, page):
         """
         Prend un objet HTMLpage comme argument et trouve toutes les
         URLs presente dans la page HTML correspondante. Cette methode
-        met a jour le dictionnaire sites_to_be_crawled_dict et
-        l'ensemble sites_to_be_crawled. On ne met pas a jour le
+        met a jour le dictionnaire pages_to_be_crawled_dict et
+        l'ensemble pages_to_be_crawled. On ne met pas a jour le
         dictionnaire et le set si l'URL correspondant a l'objet
-        HTMLpage n'est pas dans la liste de domaines acceptes dans
-        self.domain_filter.
+        HTMLpage n'est pas dans la liste de pages acceptees dans
+        self.page_filter.
         """
-        # check the domain of the page from which we got URLs
+        # check if the page from which we got URLs pass the page_filter
         pass_filter = False
-        for domain in self.domain_filter:
-            if domain in page.url:
+        for p in self.page_filter:
+            if p in page.url:
                 pass_filter = True
 
         logging.debug('*'*80 + '\n')
-        logging.debug('site crawled providing the URLs : {}\n'.format(page.url))
+        logging.debug('page crawled providing the URLs : {}\n'.format(page.url))
         logging.debug('pass filter state: {}\n'.format(pass_filter))
         if pass_filter:
             logging.debug('passes the filter \n')
             logging.debug('list of urls to be added: {}'.format(page.urls))
-            # update the list of sites to be crawled with the URLs
+            # update the list of pages to be crawled with the URLs
             for url in page.urls:
                 # update the dict even if url already crawled (to get
                 # comprehensif information)
-                if url in self.sites_to_be_crawled_dict:
-                    self.sites_to_be_crawled_dict[url].append(page.url)
+                if url in self.pages_to_be_crawled_dict:
+                    self.pages_to_be_crawled_dict[url].append(page.url)
                 else:
-                    self.sites_to_be_crawled_dict[url] = [page.url]
+                    self.pages_to_be_crawled_dict[url] = [page.url]
 
                 # update the set if url not already crawled
-                if url not in self.sites_crawled:
-                    self.sites_to_be_crawled.add(url)
+                if url not in self.pages_crawled:
+                    self.pages_to_be_crawled.add(url)
 
 
     def __repr__(self):
@@ -310,16 +321,16 @@ class Crawler(object):
         courant du crawl.
 
         retourne une chaine de caracteres donnant:
-        -le nombre sites et domaines deja crawle
-        -le nombre de site encore a crawler
+        -le nombre de pages et domaines deja crawle
+        -le nombre de pages encore a crawler
         -la duree du dernier crawl
         """
         output = ('#' * 60 + '\nInitial URL: {}'.format(self.seed_url)
-                   + '\nSites/domains already crawled {}/{}'.format(
-                 len(self.sites_crawled),
+                   + '\nPages/domains already crawled {}/{}'.format(
+                 len(self.pages_crawled),
                  len(self.domains_crawled))
-                   + '\nSites to be crawled {}'.format(
-                 len(self.sites_to_be_crawled))
+                   + '\nPages to be crawled {}'.format(
+                 len(self.pages_to_be_crawled))
                    + '\n crawl duration {}'.format(
                  self.last_crawl_duration)
                   )
@@ -327,7 +338,7 @@ class Crawler(object):
 
     def __iter__(self):
         """
-        Cette methode est implemente comme une fonction generatrice. A
+        Cette methode est implementee comme une fonction generatrice. A
         chaque appel de next() sur l'iterateur, on obtient un nouvel
         objet HTMLPage qui correspond a une URL qui etait dans
         l'ensemble des URLs a crawler. 
@@ -339,65 +350,66 @@ class Crawler(object):
         start_time = time.time()
         page = HTMLPage(self.seed_url)
         self.last_crawl_duration = time.time() - start_time
-        self.sites_crawled.add(seed_url)
+        self.pages_crawled.add(seed_url)
         self.domains_crawled.add(extract_domains_from_url(seed_url)[1])
-        self.update_sites_to_be_crawled(page)
+        self.update_pages_to_be_crawled(page)
         yield page 
         
         # all the other pages
-        while (self.sites_to_be_crawled and
-                       len(self.sites_crawled) < self.max_crawled_sites):
-            url = self.sites_to_be_crawled.pop()
+        while (self.pages_to_be_crawled and
+                       len(self.pages_crawled) < self.max_crawled_pages):
+            url = self.pages_to_be_crawled.pop()
             start_time = time.time()
             page = HTMLPage(url)
             self.last_crawl_duration = time.time() - start_time
-            self.sites_crawled.add(url)
+            self.pages_crawled.add(url)
             self.domains_crawled.add(extract_domains_from_url(url)[1])
-            self.update_sites_to_be_crawled(page)
+            self.update_pages_to_be_crawled(page)
             yield page
         raise StopIteration
 
 
 ####################################################
 # 1) what are the dead URLs 
-def get_dead_pages(url, domain):
-    crawl = Crawler(url, domain_filter=domain)
+def get_dead_pages(url, page_filter):
+    crawl = Crawler(url, page_filter=page_filter)
     dead_urls = []
     for page in crawl:
         # just to see progress on the terminal
         print crawl
         print page.http_code, page.url
         
-        if page.http_code != 200:
+        # 2xx HTTP codes are for successful requests
+        if page.http_code not in range(200,300):
             dead_urls.append((page.http_code, page.url))        
             
-        source_sites = {}    
+        source_pages = {}    
         for url in dead_urls:
-            for site in crawl.sites_to_be_crawled_dict[url[1]]:
-                if site in source_sites:
-                    if url[0] in source_sites[site]:
-                        source_sites[site][url[0]].append(url[1])
+            for source_page in crawl.pages_to_be_crawled_dict[url[1]]:
+                if source_page in source_pages:
+                    if url[0] in source_pages[source_page]:
+                        source_pages[source_page][url[0]].append(url[1])
                     else:
-                        source_sites[site][url[0]] = [url[1]]
+                        source_pages[source_page][url[0]] = [url[1]]
                 else:
-                    source_sites[site] = {url[0]: [url[1]]}
+                    source_pages[source_page] = {url[0]: [url[1]]}
 
     with open('dead_pages.txt', 'w') as dump_file:
-        for site in source_sites:
+        for source_page in source_pages:
             dump_file.write('Page contenant des liens defecteux : \n{}\n'
-                        .format(site))
-            dump_file.write('-'*80 + '\n')
-            http_code = source_sites[site].keys()
+                        .format(source_page))
+            dump_file.write('-'*70 + '\n')
+            http_code = source_pages[source_page].keys()
             http_code.sort()
             for code in http_code:
                 dump_file.write('CODE HTTP {}\n'.format(code))
-                for url in source_sites[site][code]:
+                for url in source_pages[source_page][code]:
                     dump_file.write('        {}\n'.format(url))
-            dump_file.write('='*80 + '\n\n')
+            dump_file.write('='*70 + '\n\n')
 
-# 2) what are the less responsive sites
-def get_slow_pages(url, domain):
-    crawl = Crawler(url, domain_filter=domain)
+# 2) what are the less responsive pages
+def get_slow_pages(url, page_filter):
+    crawl = Crawler(url, page_filter=page_filter)
     pages_responsivness = []
     for page in crawl:
         # just to see progress on the terminal
@@ -409,14 +421,14 @@ def get_slow_pages(url, domain):
 
     with open('slow_pages.txt', 'w') as dump_file:
         dump_file.write('Pages ordered from the slowest to the fastest\n')
-        dump_file.write('-'*80 + '\n')
+        dump_file.write('-'*70 + '\n')
         for line in pages_responsivness:
             dump_file.write('{:.2f} seconds: {}\n'.format(line[0], line[1]))
 
 if __name__ == '__main__':
     seed_url = 'http://www-sop.inria.fr/members/Arnaud.Legout/'
-    domain = ['www-sop.inria.fr/members/Arnaud.Legout']
-    get_dead_pages(seed_url, domain)
-    #get_slow_pages(seed_url, domain)
+    page_filter = ['www-sop.inria.fr/members/Arnaud.Legout']
+    get_dead_pages(seed_url, page_filter)
+    #get_slow_pages(seed_url, page_filter)
 
     logging.shutdown()
