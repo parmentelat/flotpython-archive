@@ -91,8 +91,8 @@ Un itérateur sur les permutations est disponible au travers du module standard
 `itertools`. Cependant il nous a semblé intéressant de vous montrer comment on
 pourrait écrire nous-mêmes cette fonctionnalité, de manière relativement simple.
 
-Pour illustrer le concept, à quoi ressemblent les 6 permutations d'un ensemble à
-trois éléments&nbsp;:
+Pour illustrer le concept, voici à quoi ressemblent les 6 permutations d'un
+ensemble à trois éléments&nbsp;:
 
 
     from itertools import permutations
@@ -207,14 +207,18 @@ n appels,
  * ...
 
 On voit donc le caractère cyclique d'ordre *n* qui est matérialisé par
-`counter`, que l'on incrémente à chaque boucle mais modulo *n*.
+`counter`, que l'on incrémente à chaque boucle mais modulo *n* - notez
+d'ailleurs que pour ce genre de comportement on dispose aussi de
+`itertools.cycle` comme on le verra dans une deuxième version, mais pour
+l'instant j'ai préféré ne pas l'utiliser pour ne pas tout embrouiller ;)
 
 La terminaison se gère très simplement, car une fois que l'on a traité toutes
 les séquences d'ordre *n-1* eh bien on a fini, on n'a même pas besoin de lever
 StopIteration explicitement, sauf bien sûr dans le cas *n=1*.
 
-Le point un peu délicat, si on veut avoir les permutations dans le "bon" ordre,
-consiste à commencer à insérer `n-1` par la droite (la fin de la sous-séquence).
+Le seul point un peu délicat, si on veut avoir les permutations dans le "bon"
+ordre, consiste à commencer à insérer `n-1` par la droite (la fin de la sous-
+séquence).
 
 ##### Discussion
 
@@ -232,15 +236,14 @@ On peut le voir sur un code qui n'utiliserait que les 20 premières valeurs de
 l'itérateur, vous constatez que ce code est immédiat&nbsp;:
 
 
-    def show_first_items(iterable, nb_items=None):
+    def show_first_items(iterable, nb_items):
         """
         montre les <nb_items> premiers items de iterable
-        ou bien tous si nb_items n'est pas spécifié
         """
         print "Il y a {} items dans l'iterable".format(len(iterable))
         for i,item in enumerate(iterable):
             print item
-            if nb_items and i >= nb_items:
+            if i >= nb_items:
                 print '....'
                 break
 

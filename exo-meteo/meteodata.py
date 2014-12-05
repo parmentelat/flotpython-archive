@@ -12,45 +12,89 @@ import itertools
 # downloading data
 import urllib2
 # uncompress data
-import zlib
+import gzip
 # unmarshalling JSON data
 import json
+# for showing a sample
+import copy
+import pprint
 
 date_format="%Y-%m-%d:%H-%M"
 
-KELVIN=273.15
-
-filenames = { 'all': "meteo_all.json",
-              'europe' : "meteo_europe.json",
-              'france':  "meteo_france.json",
-          }
-regions = { 'france': ( 50, 8, 42, -5),
-            'europe': ( 60, 26, 34, -12), }
-
-# chercher par exemple entry['city']['id'] a partir d'un chemin genre ('city','id')
-# i.e. xpath ( {'city':{'id':12,'name':'Montreal'}}, ['city','id']) => 12
 def xpath (entry, path):
+    """
+    helper function to extract a piece from a complex data 
+    using a succession of keys or indices
+    e.g.
+    if dict = {'city': {'coord': {'lat': 49.55, 'lon': 1.62}}}
+    then
+    xpath (dict, ('city', 'coord', 'lon')) returns 1.62
+    """
     result=entry
     for key in path: result=result[key]
     return result
 
-# on a des megas...
-def megas(bytes):
-    megas=float(bytes)/1024**2
-    megas=float(int(megas*10))/10
-    return "%s Mo"%megas
-
 
 # like in css we do: top right bottom left
+class RectangleArea(object):
+    def __init__(self, top, right, bottom, left):
+        """
+        constructor
+        """
+        self.corners = (top, right, bottom, left)
 
-# determiner si une position est dans un rectangle donne
-def in_area ( lat_lon_rec, css_4uple):
-    (top, right, bottom, left)=css_4uple
-    lon=lat_lon_rec['lon']
-    lat=lat_lon_rec['lat']
-    return lon>=left and lon<=right and lat>=bottom and lat<=top
+    def covers_lat_lon(self, lat_lon_rec):
+        """
+        tells if a point, represented as a dict with the
+        'lat' and 'lon' keys as in the native JSON format,
+        belongs in this area
+        
+        return a bool
+        """
+        (top, right, bottom, left) = self.corners
+        lon = lat_lon_rec['lon']
+        lat = lat_lon_rec['lat']
+        return lon >= left and lon <= right and\
+               lat >= bottom and lat <= top
 
-def fetch_data ():
+    def covers_city(self, city):
+        return self.covers_lat_lon(xpath (city, ('city', 'coord')))
+
+def load_cities (filename):
+    """
+    This function loads a JSON file
+    which may be gzipped
+
+    returns a list of city-records
+    or None if if was not possible to open that file
+    """
+    if not os.path.isfile(filename):
+        return None
+    # try to decode a plain file
+    try:
+        with open(filename) as input:
+            return [ json.loads(line) for line in input if line ]
+    except:
+        pass
+    # try to decode a gzipped file
+    try:
+        with gzip.open(filename) as input:
+            return [ json.loads(line) for line in input if line ]
+    except:
+        pass
+    return None
+    
+def show_sample_city (city_record):
+    """
+    pretty print a city record
+    """
+    sample = copy.deepcopy(city_record)
+    data = xpath(sample, ('data',) )
+    data[1:] = [ '... other similar dicts ...']
+    print ("Sample city")
+    pprint.pprint (sample)
+
+def foo():
 
     print (40*'=')
     url = "http://78.46.48.103/sample/daily_14.json.gz"
@@ -95,9 +139,7 @@ def find_data (areaname):
 
 def inspect_data (cities):
     city = cities [0]
-    import pprint
 
-    print ("Sample city")
     pprint.pprint (city)
 
     def nb_mesures (city): return len(city['data'])
@@ -111,10 +153,14 @@ def inspect_data (cities):
 from argparse import ArgumentParser
 def main():
     parser = ArgumentParser()
-    parser.add_argument("areaname",help="pick among 'all', 'europe', 'france'")
+    parser.add_argument("filename",help="input JSON file - might be gzipped")
     args = parser.parse_args()
-    meteo_data = find_data(args.areaname)
-    print (40*'=', 'meteo_data ready')
-    inspect_data(meteo_data)
+    cities = load_cities(args.filename)
+    if not cities:
+        print ("Cannot open input {}".format(args.filename))
+        return 1
+    print (40*'=', 'cities ready')
+    show_sample_city(cities[0])
 
-main()
+if __name__ == '__main__':
+    main()

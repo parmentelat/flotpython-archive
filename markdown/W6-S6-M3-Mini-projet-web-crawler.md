@@ -42,73 +42,75 @@ projet si vous le souhaitez.
 ### Niveau avancé
 
 Le but de notre crawler est le suivant. Nous supposons que nous avons un
-ensemble (set) de sites Web à crawler, c'est-à-dire, un ensemble de sites Web
-pour lesquels on va télécharger le code HTML. On commence avec un seul site que
-l'on appelle la page initiale. Dans la suite cette page sera
+ensemble (set) de pages Web à crawler, c'est-à-dire, un ensemble de pages Web
+pour lesquelles on va télécharger le code HTML. On commence avec une seule page
+que l'on appelle la page initiale. Dans la suite cette page sera
 
 http://www-sop.inria.fr/members/Arnaud.Legout/
 
-On suppose également que l'on restreint le crawl à un certain domaine, dans la
-suite ça sera
+On suppose également que l'on restreint le crawl à un sous ensemble de pages
+Web. Pour cela on définit une liste de pages filtres (page_filter) tel que si
+n'importe quel élément de page_filter est contenu dans l'URL de la page que l'on
+crawl, alors la page passe le filter. Dans la suite, on aura
 
-www-sop.inria.fr/members/Arnaud.Legout
+`page_filter = www-sop.inria.fr/members/Arnaud.Legout`
 
 Ensuite notre crawler va&nbsp;:
- * prendre un lien (sans ordre particulier) dans l'ensemble des sites Web à
+ * prendre un lien (sans ordre particulier) dans l'ensemble des pages Web à
 crawler
- * se connecter au site correspondant à ce lien, puis
+ * se connecter à la page correspondant à ce lien, puis
    * enregistrer le [code
-HTTP](http://fr.wikipedia.org/wiki/Liste_des_codes_HTTP) associé à ce site (par
-exemple, 202 lorsque la requête a été traitée correctement et 404 lorsque le
-lien est mort). On considérera aussi un code -1 lorsque le site Web ne répond
+HTTP](http://fr.wikipedia.org/wiki/Liste_des_codes_HTTP) associé à cette page
+(par exemple, 202 lorsque la requête a été traitée correctement et 404 lorsque
+le lien est mort). On considérera aussi un code -1 lorsque le site Web ne répond
 pas.
    * recupérer le code HTML de la page
-   * si le site est dans le domaine (typiquement si `domain in site`) extraire
-toutes les URLs dans le corps de la page Web (c'est-à-dire, après la balise
-`<body>`) et ajouter à l'ensemble des sites Web à crawler toutes les URLs
-commençant par http ou https et toutes les URLs relatives reconstruites
-commençant par `./` ou `/`
+   * si la page passe page_filter (typiquement si `filter in page` pour
+n'importe quel filter dans page_filter) extraire toutes les URLs dans le corps
+de la page Web (c'est-à-dire, après la balise `<body>`) et ajouter à l'ensemble
+des pages Web à crawler toutes les URLs commençant par http ou https et toutes
+les URLs relatives reconstruites commençant par `./` ou `/`
       * par exemple, pour `./ma_page.html` et le site `http://mon_site.fr/rep1/`
 on ajoute l'url `http://mon_site.fr/rep1/ma_page.html`
       * par exemple, pour `/ma_page.html` et le site `http://mon_site.fr/rep1/`
 on ajoute l'url `http://mon_site.fr/ma_page.html` (sans `rep1`)
- * on recommence au premier point jusqu'à ce que l'ensemble des sites Web à
+ * on recommence au premier point jusqu'à ce que l'ensemble des pages Web à
 crawler soit vide.
 
 Pour simplifier, on va manipuler le crawler comme un itérable, à chaque appel de
-`next()` on fait avancer le crawler d'un site (dans l'ensemble des sites à
-crawler) et on obtient un objet qui contient le code HTTP pour le site, l'URL du
-site, et la liste de toutes les URLs contenues dans le site (extraites comme
+`next()` on fait avancer le crawler d'une page (dans l'ensemble des pages à
+crawler) et on obtient un objet qui contient le code HTTP pour la page, l'URL de
+la page, et la liste de toutes les URLs contenues dans la page (extraites comme
 expliqué ci-dessus).
 
 
 Le but de ce mini projet est d'utiliser le crawler pour identifier tous les
 liens défectueux (c'est-à-dire ceux pour lesquels HTTP ne retourne pas un code
-202) pour le site `http://www-sop.inria.fr/members/Arnaud.Legout/`.
+entre 200 et 299) pour le site `http://www-sop.inria.fr/members/Arnaud.Legout/`.
 
 Voici le résultat de l'exécution du crawler avec comme page initiale `http
-://www-sop.inria.fr/members/Arnaud.Legout/` et comme domaine `www-
-sop.inria.fr/members/Arnaud.Legout`. Donc le crawler va  uniquement tester les
+://www-sop.inria.fr/members/Arnaud.Legout/` et comme `page_filter` `[www-
+sop.inria.fr/members/Arnaud.Legout]`. Donc le crawler va  uniquement tester les
 liens qui sont dans le site `http://www-sop.inria.fr/members/Arnaud.Legout/`
 
                 Page contenant des liens defecteux : 
 http://www-sop.inria.fr/members/Arnaud.Legout/Projects/p2p_cd.html
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 CODE HTTP 404
         http://dx.doi.org/10.1016/j.comnet.2010.09.014
         http://www.cs.ucla.edu/~nikitas/
-================================================================================
+==============================================================================
 
 Page contenant des liens defecteux : 
 http://www-sop.inria.fr/members/Arnaud.Legout/publications.html
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 CODE HTTP 404
         http://dx.doi.org/10.1016/j.comnet.2010.09.014
-================================================================================
+==============================================================================
 
 Page contenant des liens defecteux : 
 http://www-sop.inria.fr/members/Arnaud.Legout/Projects/bluebear.html
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 CODE HTTP 303
         http://bits.blogs.nytimes.com/2011/11/29/skype-can-expose-your-location-researchers-say/
 CODE HTTP 403
@@ -116,21 +118,21 @@ CODE HTTP 403
         http://www.pcinpact.com/actu/news/66544-skype-bittorrent-etude-scientifiques-faille.htm
 CODE HTTP 404
         http://www.zataz.com/news/21651/faille--vulnerability-skype.html
-================================================================================
+==============================================================================
 
 Page contenant des liens defecteux : 
 http://www-sop.inria.fr/members/Arnaud.Legout/
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 CODE HTTP -1
         http://www.castify.net
-================================================================================
+==============================================================================
 
 Page contenant des liens defecteux : 
 http://www-sop.inria.fr/members/Arnaud.Legout/index.html
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 CODE HTTP -1
         http://www.castify.net
-================================================================================
+==============================================================================
 
 
                 
@@ -216,23 +218,25 @@ class Crawler(__builtin__.object)
  |  nouvel objet HTMLPage.
  |
  |  L'instance du crawler va avoir comme principaux attributs
- |    * l'ensemble des sites a crawler sites_to_be_crawled
- |    * l'ensemble des sites deja crawles sites_crawled
+ |    * l'ensemble des pages a crawler pages_to_be_crawled
+ |    * l'ensemble des pages deja crawles pages_crawled
  |    * un dictionnaire qui a chaque URL fait correspondre la liste de
- |    tous les sites qui ont reference cette URL lors du crawl
- |    sites_to_be_crawled_dict
+ |    toutes les pages qui ont reference cette URL lors du crawl
+ |    pages_to_be_crawled_dict
  |
  |  Methods defined here:
  |
- |  __init__(self, seed_url, max_crawled_sites=10000000000L, domain_filter=None)
+ |  __init__(self, seed_url, max_crawled_pages=10000000000L, page_filter=None)
  |      Constructeur du crawler
  |
  |      Le constructeur prend comme arguments
  |      -seed_url: l'URL de la page a partir de laquelle on demarre le crawl
- |      -max_crawled_sites: le nombre maximum de sites que l'on va crawler
+ |      -max_crawled_pages: le nombre maximum de pages que l'on va crawler
  |      (10**10 par defaut)
- |      -domain_filter: la liste des domaines sur lesquels le crawler
- |      doit rester (pas de filtre par defaut)
+ |      -page_filter: la liste des pages sur lesquels le crawler
+ |      doit rester (pas de filtre par defaut). Typiquement, une URL
+ |      passe le filtre si n'importe lequel des elements de page_filter
+ |      est contenu dans l'URL
  |
  |  __iter__(self)
  |      Cette methode est implementee comme une fonction generatrice. A
@@ -247,18 +251,18 @@ class Crawler(__builtin__.object)
  |      courant du crawl.
  |
  |      retourne une chaine de caracteres donnant:
- |      -le nombre de sites et domaines deja crawle
- |      -le nombre de sites encore a crawler
+ |      -le nombre de pages et domaines deja crawle
+ |      -le nombre de pages encore a crawler
  |      -la duree du dernier crawl
  |
- |  update_sites_to_be_crawled(self, page)
+ |  update_pages_to_be_crawled(self, page)
  |      Prend un objet HTMLpage comme argument et trouve toutes les
  |      URLs presente dans la page HTML correspondante. Cette methode
- |      met a jour le dictionnaire sites_to_be_crawled_dict et
- |      l'ensemble sites_to_be_crawled. On ne met pas a jour le
+ |      met a jour le dictionnaire pages_to_be_crawled_dict et
+ |      l'ensemble pages_to_be_crawled. On ne met pas a jour le
  |      dictionnaire et le set si l'URL correspondant a l'objet
- |      HTMLpage n'est pas dans la liste de domaines acceptes dans
- |      self.domain_filter.
+ |      HTMLpage n'est pas dans la liste de pages acceptees dans
+ |      self.page_filter.
  |
                 
 ##### Fonctions utilitaires
