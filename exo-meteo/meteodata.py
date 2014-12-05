@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: cp1252 -*-
+# -*- coding: utf-8 -*-
 
 import sys
 import types
@@ -62,14 +62,14 @@ def fetch_compressed_data (url,cache):
         print "%s: on utilise le cache %s"%(url,cache)
         with open(cache) as f: 
             return f.read()
-    print "Téléchargement de %s ..."%url,
+    print "TÃ©lÃ©chargement de %s ..."%url,
     sys.stdout.flush()
     network_file=urllib2.urlopen(url)
     compressed_json=network_file.read()
     print " OK - %s octets"%len(compressed_json)
     # http://stackoverflow.com/questions/3122145/zlib-error-error-3-while-decompressing-incorrect-header-check
     uncompressed_json=zlib.decompress(compressed_json, zlib.MAX_WBITS | 16)
-    print "décompression terminée"
+    print "dÃ©compression terminÃ©e"
     with open(cache,'w') as f:
         print "%s: on sauve dans le cache %s"%(url,cache)
         f.write(uncompressed_json)
@@ -87,17 +87,17 @@ def in_area ( lat_lon_rec, upper_left_lat_lon, lower_right_lat_lon):
 def main ():
     raw_daily14 = fetch_compressed_data (daily14_url, daily14_cache)
 
-    print "Décodage json ...", 
+    print "DÃ©codage json ...", 
     sys.stdout.flush()
     # nous avons a ce stade une entree json par ligne
     all_entries = [ json.loads(line) for line in raw_daily14.split("\n") if line ]
-    print "OK, nous avons %s entrées de ville"%len(all_entries)
+    print "OK, nous avons %s entrÃ©es de ville"%len(all_entries)
     
     # on filtre les entrees qui correspondent a notre aire d'interet
     entries_in_area = [ entry for entry in all_entries 
                         if in_area ( xpath (entry, ('city','coord')), 
                                      upper_left_lat_lon, lower_right_lat_lon) ]
-    print "nous avons %s entrées dans la zone"%len(entries_in_area)
+    print "nous avons %s entrÃ©es dans la zone"%len(entries_in_area)
 
     # ajouter la date sous un format lisible par un humain
     for entry in all_entries:
@@ -106,9 +106,9 @@ def main ():
 
     # creer une table de hash sur le nom de la ville
     hash_by_city_name = hash_by_path (entries_in_area, ('city','name'))
-    print "nous avons %s noms de villes différents"%len(hash_by_city_name)
+    print "nous avons %s noms de villes diffÃ©rents"%len(hash_by_city_name)
 
-    # on cherche l'entrée correspondant à Paris
+    # on cherche l'entrÃ©e correspondant Ã  Paris
     if 'Paris' in hash_by_city_name:
         entry=hash_by_city_name['Paris'][0]
         print "Il y a %s entrees pour Paris"%len(entry['data'])
@@ -138,7 +138,7 @@ def main ():
     sizes = [ 30 if 'selected' in entry else 1 for entry in all_entries ]
     plt.scatter(LON_s, LAT_s, c=colors, s=sizes)
 
-    # génération d'un fichier csv et visualisation
+    # gÃ©nÃ©ration d'un fichier csv et visualisation
     # pour faire simple on va visualiser la pression observee dans la zone le premier jour
     # xxx on admet que tous les tableaux de 'data' sont synchrones
     fig = plt.figure()
@@ -156,12 +156,12 @@ def main ():
             csv.write("nom;longitude;latitude;date;temperature;pression;\n")
             for (name,x,y,date,temp,p) in itertools.izip(names,X,Y,dates,T,P):
                 csv.write("%s;%s;%s;%s;%s;%s;\n"%(name,x,y,date,temp,p))
-        print "Données générées dans %s"%filename
+        print "DonnÃ©es gÃ©nÃ©rÃ©es dans %s"%filename
 
         # on visualise la pression -- seulement pour le premier jour
         if day==0:
             date = dates[0]
-            print "Visualisation de la pression observée le ",date
+            print "Visualisation de la pression observÃ©e le ",date
             ax.plot_trisurf(X,Y,P, cmap=cm.jet, linewidth=0.2, label="Pression le %s"%date)
     plt.show()
 
