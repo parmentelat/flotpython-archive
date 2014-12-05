@@ -1,6 +1,10 @@
 
 # Crawler Web 
 
+## Mini-Projet
+
+### Objectifs
+
 Dans ce projet, nous allons implémenter un simple [crawler
 Web](http://fr.wikipedia.org/wiki/Robot_d%27indexation), c'est-à-dire un outil
 capable de parcourir des pages Web en suivant les URLs. C'est typiquement ce que
@@ -13,7 +17,7 @@ crawler n'est pas adapté à crawler des millions de pages, il est parfaitement
 capable de crawler des milliers de pages et de vous rendre des services (comme
 identifier les liens morts sur votre site Web).
 
-## Réalisation du crawler Web
+### Réalisation du crawler Web
 
 Ce projet est découpé en deux niveaux de difficulté. Nous allons commencer par
 le niveau avancé qui va vous demander d'écrire vous même tout le code en
