@@ -1,27 +1,28 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# for flushing stdout
 import sys
-import types
-import time
-# izip plutot que zip
-import itertools
-# une librairie pour les noms de fichier
+# dealing with filenames
 import os.path
-# une librairie pour decharger des donnees au dessus de http
+# for formatting timestamps
+import time
+# using izip rather than zip
+import itertools
+# downloading data
 import urllib2
-# une librairie pour decompresser le format .gz
+# uncompress data
 import zlib
-# une librairie pour decortiquer le format json
+# unmarshalling JSON data
 import json
 
-# pour la visualisation
+# visualization
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 import matplotlib.pyplot as plt
-import numpy as np
 
-daily14_url = "http://78.46.48.103/sample/daily_14.json.gz"
+daily14_gz_url = "http://78.46.48.103/sample/daily_14.json.gz"
+daily14_gz_cache = "daily_14.json.gz.cache"
 daily14_cache = "daily_14.json.cache"
 
 upper_left_lat_lon = ( 50, -5)
@@ -66,6 +67,10 @@ def fetch_compressed_data (url,cache):
     sys.stdout.flush()
     network_file=urllib2.urlopen(url)
     compressed_json=network_file.read()
+    with open(daily14_gz_cache, 'w') as gzip_cache:
+        print "Saving gzip cache", daily14_gz_cache
+        gzip_cache.write(compressed_json)
+        
     print " OK - %s octets"%len(compressed_json)
     # http://stackoverflow.com/questions/3122145/zlib-error-error-3-while-decompressing-incorrect-header-check
     uncompressed_json=zlib.decompress(compressed_json, zlib.MAX_WBITS | 16)
@@ -85,7 +90,7 @@ def in_area ( lat_lon_rec, upper_left_lat_lon, lower_right_lat_lon):
 
 # enchainer le tout
 def main ():
-    raw_daily14 = fetch_compressed_data (daily14_url, daily14_cache)
+    raw_daily14 = fetch_compressed_data (daily14_gz_url, daily14_cache)
 
     print "Décodage json ...", 
     sys.stdout.flush()
