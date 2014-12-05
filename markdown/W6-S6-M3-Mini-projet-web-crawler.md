@@ -15,23 +15,13 @@ identifier les liens morts sur votre site Web).
 
 ## Réalisation du crawler Web
 
-Ce projet est découpé en deux niveaux de difficultés. Nous allons commencer par
+Ce projet est découpé en deux niveaux de difficulté. Nous allons commencer par
 le niveau avancé qui va vous demander d'écrire vous même tout le code en
 fonction de nos spécifications de haut niveau. Pour le niveau intermédiaire,
 nous vous fournirons une description plus précise de notre implémentation. À
-vous de choisir où vous voulez commencer, mais si vous voulez uniquement faire
-le niveau intermédiaire, vous devrez quand même lire le niveau avancé parce
-qu'il contient des informations importantes sur le fonctionnement du crawler.
-
-Il est très important de comprendre que le code que l'on vous propose d'écrire
-n'est ni totalement fiable, ni validé par des tests. Est-ce que cela est un
-problème pour ce projet ? Non, mais il est important dans du vrai code de
-production de le fiabiliser au maximum (en capturant les exceptions avec des
-reactions appropriés et en testant toutes les entrées) et de le tester (en
-ajoutant, par exemple, des tests unitaires et des tests fonctionnels). Cela a
-évidement un coût très élévé en terme d'augmentation du code (on peut facilement
-multiplier par 2 ou 3 le nombre de lignes de code) et de temps de développement
-(il va falloir imaginer tous les cas à tester).
+vous de choisir où vous voulez commencer, mais notez que si vous voulez faire le
+niveau intermédiaire, vous devrez quand même lire le niveau avancé, parce qu'il
+contient des informations importantes sur le fonctionnement du crawler.
 
 Je vous rappelle qu'une page Web est écrite dans un langage déclaratif qui
 s'appelle [HTML](http://fr.wikipedia.org/wiki/Hypertext_Markup_Language) et que
@@ -41,22 +31,28 @@ utiliserons dans ce mini projet la librairie standard `urllib2` qui permet
 d'utiliser le protocole HTTP de manière très simple. Par contre, pour
 l'interprétation du code HTML, nous ferons tout le traitement à la main. Il
 existe des librairies pour vous faciliter la tache (nous en parlerons tout à la
-fin), mais elles supposent une bonne compréhension des concepts derrières
-l'HTML. Évidement, vous pouvez les explorer et les essayer dans ce mini projet
-si vous le souhaitez.
+fin), mais elles supposent une bonne compréhension des concepts sous-jacents à
+HTML et XML. Naturellement, vous pouvez les explorer et les essayer dans ce mini
+projet si vous le souhaitez.
 
 ### Niveau avancé
 
 Le but de notre crawler est le suivant. Nous supposons que nous avons un
 ensemble (set) de sites Web à crawler, c'est-à-dire, un ensemble de sites Web
 pour lesquels on va télécharger le code HTML. On commence avec un seul site que
-l'on appelle la page initiale. Dans la suite cette page sera `http://www-
-sop.inria.fr/members/Arnaud.Legout/`. On suppose égalemet que l'on restreint le
-crawl à un certain domaine, dans la suite ça sera `www-
-sop.inria.fr/members/Arnaud.Legout`. Ensuite notre crawler va&nbsp;:
+l'on appelle la page initiale. Dans la suite cette page sera
+
+http://www-sop.inria.fr/members/Arnaud.Legout/
+
+On suppose également que l'on restreint le crawl à un certain domaine, dans la
+suite ça sera
+
+www-sop.inria.fr/members/Arnaud.Legout
+
+Ensuite notre crawler va&nbsp;:
  * prendre un lien (sans ordre particulier) dans l'ensemble des sites Web à
 crawler
- * se connecter au site correspondant à ce lien puis
+ * se connecter au site correspondant à ce lien, puis
    * enregistrer le [code
 HTTP](http://fr.wikipedia.org/wiki/Liste_des_codes_HTTP) associé à ce site (par
 exemple, 202 lorsque la requête a été traitée correctement et 404 lorsque le
@@ -72,10 +68,10 @@ commençant par `./` ou `/`
 on ajoute l'url `http://mon_site.fr/rep1/ma_page.html`
       * par exemple, pour `/ma_page.html` et le site `http://mon_site.fr/rep1/`
 on ajoute l'url `http://mon_site.fr/ma_page.html` (sans `rep1`)
- * on recommence au premier point jusqu'à ce que l'ensemble des site Web à
+ * on recommence au premier point jusqu'à ce que l'ensemble des sites Web à
 crawler soit vide.
 
-Pour simplifier, on va manipular le crawler comme un itérable, à chaque appel de
+Pour simplifier, on va manipuler le crawler comme un itérable, à chaque appel de
 `next()` on fait avancer le crawler d'un site (dans l'ensemble des sites à
 crawler) et on obtient un objet qui contient le code HTTP pour le site, l'URL du
 site, et la liste de toutes les URLs contenues dans le site (extraites comme
@@ -148,7 +144,7 @@ class HTMLPage(__builtin__.object)
  |
  |  L'objet a 4 attributs:
  |      -url: l'URL qui correspond a la page Web
- |      -_html_it: un iterateur qui parcours le code HTML, une ligne
+ |      -_html_it: un iterateur qui parcourt le code HTML, une ligne
  |                 a la fois
  |      -urls: la liste de toutes les URLs contenues dans la page
  |      -http_code: le code retourne par le protocol HTTP lors de
@@ -162,11 +158,11 @@ class HTMLPage(__builtin__.object)
  |
  |  __init__(self, url)
  |      Constructeur de la classe. Le constructeur prend comme
- |      argument une URL et constuit un objet HTMLPage en definissant
+ |      argument une URL et construit un objet HTMLPage en definissant
  |      les 4 attributs url, _html_it, urls, http_code
  |
  |  extract_urls_from_page(self)
- |      Construit la liste de toutes les URLs contenu dans le corps de
+ |      Construit la liste de toutes les URLs contenues dans le corps de
  |      la page HTML en parcourant l'iterateur retourne par
  |      page_fetcher()
  |
@@ -178,9 +174,9 @@ class HTMLPage(__builtin__.object)
  |      Plus en details, notre parsing consiste a chercher dans le
  |      corps de la page (body):
  |
- |      -les urls contenues dans le champs href (essentiellement on
+ |      -les urls contenues dans le champ href (essentiellement on
  |       cherche le tag 'href=' et on extrait ce qui est entre
- |       guillemets ou apostrophes
+ |       guillemets ou apostrophes)
  |
  |      -on ne garde ensuite que les urls qui commencent par http ou
  |       https et
@@ -197,7 +193,7 @@ class HTMLPage(__builtin__.object)
  |         http://mon_site.fr/rep1/ on obtient l'url
  |         http://mon_site.fr/ma_page.html
  |
- |      Cette methode retourne la liste des URLs contenue dans la
+ |      Cette methode retourne la liste des URLs contenues dans la
  |      page.
  |
  |  page_fetcher(self, url)
@@ -219,7 +215,7 @@ class Crawler(__builtin__.object)
  |    * l'ensemble des sites a crawler sites_to_be_crawled
  |    * l'ensemble des sites deja crawles sites_crawled
  |    * un dictionnaire qui a chaque URL fait correspondre la liste de
- |    tous les sites qui ont references cette URL lors du crawl
+ |    tous les sites qui ont reference cette URL lors du crawl
  |    sites_to_be_crawled_dict
  |
  |  Methods defined here:
@@ -235,7 +231,7 @@ class Crawler(__builtin__.object)
  |      doit rester (pas de filtre par defaut)
  |
  |  __iter__(self)
- |      Cette methode est implemente comme une fonction generatrice. A
+ |      Cette methode est implementee comme une fonction generatrice. A
  |      chaque appel de next() sur l'iterateur, on obtient un nouvel
  |      objet HTMLPage qui correspond a une URL qui etait dans
  |      l'ensemble des URLs a crawler.
@@ -247,8 +243,8 @@ class Crawler(__builtin__.object)
  |      courant du crawl.
  |
  |      retourne une chaine de caracteres donnant:
- |      -le nombre sites et domaines deja crawle
- |      -le nombre de site encore a crawler
+ |      -le nombre de sites et domaines deja crawle
+ |      -le nombre de sites encore a crawler
  |      -la duree du dernier crawl
  |
  |  update_sites_to_be_crawled(self, page)
@@ -296,7 +292,7 @@ faire.
 Il existe une librairie Python très puissante qui permet justement de faire des
 crawlers&nbsp;: il s'agit de [Scrapy](http://scrapy.org/). Maintenant que vous
 avez compris les bases d'un crawler Web, vous pourrez tirer pleinement bénéfice
-des Scrapy.
+de Scrapy.
 
 Il existe également un librairie pour parser du code HTML, c'est
 [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/).
