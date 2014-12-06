@@ -297,14 +297,14 @@ def main():
     """
     The entry point for diskusage.py
     
-    This function parse the command line arguments 
+    This function parses the command line arguments 
     using an instance of ArgumentParser
 
-    it returns an int suitable to be returned to the OS
-    that is to say 0 when everything is fine and 1 otherwise
+    It essentially creates an instance of ToplevelDir 
+    and sends it the pass1() and/or pass2() methods
 
-    it essentially creates an instance of ToplevelDir 
-    and sends it the pass1() and/or pass2 methods
+    It returns an int suitable to be returned to the OS
+    that is to say 0 when everything is fine and 1 otherwise
 
     """
     parser = ArgumentParser()
