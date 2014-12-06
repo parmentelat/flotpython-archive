@@ -25,8 +25,12 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 import matplotlib.pyplot as plot
 
-#date_format="%Y-%m-%d:%H-%M"
+#datetime_format="%Y-%m-%d:%H-%M"
+#def datetime_repr(timestamp):
+#    return time.strftime(datetime_format,time.gmtime(timestamp))
 date_format="%Y-%m-%d"
+def date_repr(timestamp):
+    return time.strftime(date_format,time.gmtime(timestamp))
 
 KELVIN=273.15
 
@@ -123,6 +127,41 @@ def show_sample_city (city_record):
     data[1:] = [ '... other similar dicts ...']
     pprint.pprint (sample)
 
+def plot_1d (cities):
+    """
+    visualize temperature in the first city
+    for all available dates
+    """
+    # find the first selected city
+    city = None
+    for c in cities:
+        if 'selected' in c:
+            city = c
+    if not city:
+        print('No city selected for plot_1d')
+        return
+
+    points_per_day = ('morn', 'day', 'eve', 'night')
+    nb_per_day = len(points_per_day)
+    
+    T = [ measure['temp'][key] - KELVIN
+              for measure in city['data']
+                  for key in points_per_day ]
+    X = range(1,len(T)+1)
+    
+    bar_plot = plot.bar (X, T, 0.1)
+
+    plot.ylabel('hPa')
+    plot.title('Temperatures in {}'.format(xpath(city, 'city/name')))
+
+    D = [ date_repr(measure['dt']) for measure in city['data'] ]
+    Dx = [ 4*n+2 for n in range(len(city['data']))]
+    plot.xticks(Dx, D, rotation='vertical')
+    #plot.yticks(np.arange(0,81,10))
+    #plot.legend( (p1[0], p2[0]), ('Men', 'Women') )
+
+    plot.show()
+
 def plot_2d (cities):
     """
     visualize the positions of all cities on a 2D map
@@ -132,7 +171,7 @@ def plot_2d (cities):
     # emphasize selected cities with a specific size and color
     # 'r' stands for red, 'b' is black
     colors = [ 'r' if  'selected' in city else 'b' for city in cities ]
-    sizes = [ 30 if 'selected' in city else 1 for city in cities ]
+    sizes = [ 50 if 'selected' in city else 1 for city in cities ]
     plot.scatter(LON_s, LAT_s, c=colors, s=sizes)
 
     # to exit the drawing, close related window
@@ -140,34 +179,33 @@ def plot_2d (cities):
 
 
 def plot_3d (cities):
-    """
-    visualize in 3D 
-    position as (x, y) and temperature as z
+    """visualize pressure in 3D
+    position as (x, y) and pressure as z
     
-    to keep it simple we take the temperature from
-    . the first measure available in each city
-    . the 'day' field in the 'temp' section, that is
-      to say the average that day
-    . also we translate into Celsius degrees
+    to keep it simple we take the pressure from the first measure
+    available in each city - which may be a little inaccurate
+    as not all 1st measure points are guaranteed 
+    to be for the exact same date
 
-    likewise date is extracted from the first city 
-    as a rough approximation
+    likewise the date that gets displayed is extracted 
+    from the *first* city as a rough approximation
     """
 
     # base all measures on first day present in each city
     day = 0
     # date time for the label
     dt = xpath(cities[0], ('data',day,'dt'))
-    date=time.strftime(date_format,time.gmtime(dt))
+    date=date_repr(dt)
     
     fig = plot.figure()
     ax = fig.gca(projection='3d')
-    X = [ xpath (city, ('city','coord','lon')) for city in cities ]
-    Y = [ xpath (city, ('city','coord','lat')) for city in cities ]
-    T_celsius = [ xpath (city, ('data',day,'temp','day')) - KELVIN for city in cities ]
-    ax.plot_trisurf(X,Y,T_celsius, cmap=cm.jet, linewidth=0.2,
-                    label="Average temperature on %s"%date)
-    ax.set_title ("Temperature on %s"%date)
+    X = [ xpath(city, ('city','coord','lon')) for city in cities ]
+    Y = [ xpath(city, ('city','coord','lat')) for city in cities ]
+    P = [ xpath (city, ('data',day,'pressure'))
+                  for city in cities ]
+    ax.plot_trisurf(X, Y, P, cmap=cm.jet, linewidth=0.2,
+                    label="Pressure on %s"%date)
+    ax.set_title ("Pressure on %s"%date)
     plot.show()
 
     
@@ -178,12 +216,19 @@ def main():
                         regions are rectangular areas and can be specified 
                         as a comma-separated list of 4 numbers for
                         north, east, south, west""")
-    parser.add_argument("-n", "--name", dest='names', default=[],
+    parser.add_argument("-n", "--name", dest='select_names', default=[],
                         action='append',
                         help="cumulative - select cities by this name(s)")
+    parser.add_argument("-a", "--all", dest='select_all', default=False,
+                        action='store_true',
+                        help="select all cities")
     parser.add_argument("-l", "--list", dest="list_cities", default=False,
                         action='store_true',
                         help="If set, selected city names get listed")
+    parser.add_argument("-1", "--1d", dest="plot_1d", default=False,
+                        action='store_true',
+                        help="""Display a bar chart for the pressure
+                        in the first selected city""")
     parser.add_argument("-2", "--2d", dest="plot_2d", default=False,
                         action='store_true',
                         help="""Display a 2D diagram of the 
@@ -191,7 +236,7 @@ def main():
     parser.add_argument("-3", "--3d", dest="plot_3d", default=False,
                         action='store_true',
                         help="""Display a 3D diagram of the 
-                        pressure of selected cities""")
+                        pressure in all cities""")
 
     parser.add_argument("filename",help="input JSON file - might be gzipped")
     args = parser.parse_args()
@@ -212,16 +257,24 @@ def main():
                format(crop_area, len(cities)))
 
     # mark the ones selected by their name if specified with --name
-    if args.names:
+    if args.select_all:
+        for city in cities:
+            city['selected'] = True
+    elif args.select_names:
         # lowercase all
-        args.names = [ name.lower() for name in args.names ]
+        args.names = [ name.lower() for name in args.select_names ]
         selected = 0
         for city in cities:
-            if xpath(city, 'city/name').lower() in args.names:
+            if xpath(city, 'city/name').lower() in args.select_names:
                 city['selected'] = True
                 selected += 1
-        print (10*'-', "Selected {} cities with name(s)\n\t{}".\
-               format(selected, args.names))
+    selected = [ xpath(city, 'city/name')
+                     for city in cities if 'selected' in city]
+    if selected:
+        print (10*'-', "Selected {} cities\n\t{}".\
+               format(len(selected), selected))
+    else:
+        print (10*'-', "No city selected")
 
     # display selected cities by name and # of measures with --list
     if args.list_cities:
@@ -231,10 +284,12 @@ def main():
                                             len(xpath(city, 'data'))))
 
     # show plots as requested
+    if args.plot_1d:
+        plot_1d(cities)
+
     if args.plot_2d:
         plot_2d(cities)
 
-    # show plots as requested
     if args.plot_3d:
         plot_3d(cities)
 

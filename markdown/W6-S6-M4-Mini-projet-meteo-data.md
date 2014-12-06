@@ -17,8 +17,10 @@ disponible à cette URL
 
     http://78.46.48.103/sample/daily_14.json.gz
 
-L'échantillon couvre le monde entier et expose des données météo sur une période
-d'environ deux semaines en Mars 2014.
+Comme nous le verrons plus bas, il n'est pas nécessaire pour vous d'aller
+chercher ces données chez OpenWeatherMap, nous les republions à plusieurs
+échelles. L'échantillon complet couvre le monde entier et expose des données
+météo sur une période d'environ deux semaines en Mars 2014.
 
 ### Les données
 
@@ -68,6 +70,16 @@ Pour être plus explicite encore, voici un pretty-print d'un objet correspondant
            '... other similar dicts ...'],
  u'time': 1394865585}
                 
+##### Format concret
+
+L'échantillon complet décompressé contient autant de lignes que de villes (22631
+lignes donc), et chaque ligne est un encodage JSON de la structure que nous
+venons de voir.
+Vous pouvez donc charger un fichier en quelques lignes de code qui combinent
+ * un fichier d'entrée considéré comme un itérable,
+ * et les fonctions du module `json`; vous remarquerez à cet égard la différence
+entre `load` et `loads`
+
 ##### Rappel sur les dates
 
 S'agissant des dates, on retrouve ici notre nombre de secondes depuis le
@@ -105,10 +117,37 @@ plus petites&nbsp;:
    * [cities_idf.json](data/cities_idf.json) (900 kb)
 
 Sachant que pour mette au point il est très conseillé de commencer avec un petit
-fichier.
+fichier car le chargement du fichier complet peut prendre dans les 10 secondes.
 
-##### 
+***
+
+***
+
+
+    import numpy as np
+    
+    import matplotlib.pyplot as plot
+
+
+    np.linspace(0, 10, 21)
+
+
+    x = np.linspace (0, 2*np.pi, 101 )
+    
+    plot.plot (x, np.sin(x))
 
 Plot 2D
 
 http://matplotlib.org/api/pyplot_api.html?highlight=scatter
+
+http://matplotlib.org/api/pyplot_api.html
+
+
+    import xkcd
+
+
+    from inspect import getsource
+
+
+    for line in getsource(xkcd).split("\n"): 
+        print line
