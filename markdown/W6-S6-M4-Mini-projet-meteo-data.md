@@ -22,14 +22,143 @@ chercher ces données chez OpenWeatherMap, nous les republions à plusieurs
 échelles. L'échantillon complet couvre le monde entier et expose des données
 météo sur une période d'environ deux semaines en Mars 2014.
 
+***
+
+### `matplotlib` 
+
 Par manque de temps nous n'avons pas pu introduire `matplotlib` dans une vidéo
-ou un complément. Vous trouverez à la fin de ce notebook quelques mots (très
-rapides) sur cet outil, si vous n'avez aucune idée de comment l'utiliser.
+ou un complément. Nous allons en dire quelques mots (très rapides), si vous
+n'avez aucune idée de comment l'utiliser.
+
+Que vous choisissiez ce sujet ou non, le point important ici est qu'une fois que
+vous avez obtenu des données avec votre programme python - et pourvu que vous
+ayez installé `matplotlib`qui ne fait pas partie de la librairie standard -,
+vous avez à votre disposition un outil très puissant et vraiment très simple
+pour visualiser très rapidement ces données sous des formes diverses. Ne faites
+pas par exemple l'erreur de générer des fichiers pour gnuplot.
+
+Pour toute la suite je vous recommande d'avoir sous la main
+ * [le tutoriel matplotlib](http://matplotlib.org/users/pyplot_tutorial.html)
+ * [la documentation `matplotlib`](http://matplotlib.org/api/pyplot_api.html)
+ * [le tutorial pour les visualisation
+3D](http://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html)
+
+Toutes les fonctions de visualisation attendent en argument des listes de
+valeurs pour X, pour Y, et le cas échéant pour Z. La plupart du temps vous
+pouvez obtenir une visualisation simplement en choissisant la fonction (par
+exemple `plot` affiche les données avec une courbe standard, `bar` affiche les
+données en barres ..) et en passant X et Y; voyons cela&nbsp;:
+
+
+    import matplotlib.pyplot as plot
+    
+    import math
+
+
+    # on découpe à la main l'intervalle [0, 6.3] en pas de 0.1
+    X = [ 0.1 * x for x in range (64)]
+    # les valeurs de sin() correspondantes
+    Y = [ math.sin(x) for x in X]
+    
+    # une courbe qui représente sin(x) entre 0 et 2.pi
+    plot.plot(X, Y)
+
+Vous voyez que `matplotlib` s'occupe de montrer les échelles, etc... Vous avez
+la possiblité de modifier ce rendu par défaut mais dans la plupart des cas, vous
+obtenez de cette façon quelque chose de raisonnablement bien présenté.
+
+##### `show()`
+
+Dans le contexte des notebooks cela n'est pas nécessaire mais dans votre
+application n'oubliez pas d'invoquer la méthode `matplotlib.pyplot.show()` pour
+que votre illustration s'affiche.
+
+### `numpy`
+
+Comme vous le voyez il n'est pas nécessaire d'utiliser `numpy` pour visualiser
+des données.
+
+Nous n'utilisons pas du tout `numpy` dans cet exercice, mais sachez tout de
+même, si par ailleurs vous utilisez déjà `numpy`, que le mécanisme de passage de
+données est très commode avec `numpy`, qui manipule déjà nativement les données
+sous cette forme.
+
+
+    import numpy
+
+
+    # avec la méthode `numpy.linspace` 
+    # on peut facilement découper 
+    # un intervalle en morceaux
+    numpy.linspace(0, 10, 21)
+
+
+    # aussi pour afficher une fonction
+    # sur un intervalle c'est extrêmement simple
+    
+    X = numpy.linspace (0, 2*numpy.pi, 101 )
+    
+    # d'autant que les fonctions numpy 
+    # font implicitement l'équivalent de `map`
+    # sur la liste d'entrée
+    
+    plot.plot (X, numpy.sin(X))
+
+### En 3D
+
+On peut tout aussi simplement visualiser des données en 3D, voici un exemple de
+visualisation en 3D d'une gaussienne
+
+$ z = e^{-(x^2+y^2)}$
+
+
+
+    import math
+    import itertools
+    
+    # la grille de départ en X et en Y
+    xscale = range ( -10, 11 )
+    yscale = range ( -10, 11 )
+    
+    # tous les points X,Y
+    XY = itertools.product ( xscale, yscale)
+    
+    # on calcule les tableaux d'entrée pour matplotlib
+    X = []
+    Y = []
+    Z = []
+    
+    # une gaussienne 
+    for x,y in XY:
+        X.append(x)
+        Y.append(y)
+        Z.append(math.exp(-(x**2+y**2)/30.))
+    
+    from mpl_toolkits.mplot3d import Axes3D
+    from matplotlib import cm
+    import matplotlib.pyplot as plot
+    
+    figure = plot.figure()
+    axes = figure.gca(projection='3d')
+    
+    # on fixe cmap pour des couleurs plus gaies
+    axes.plot_trisurf(X, Y, Z, cmap=cm.jet, linewidth=0.2)
+    
+    plot.show()
+
+
+Ici encore, il y a une différence de comportement entre le rendu dans un
+notebook qui est statique, et ce que vous obtenez sur votre ordinateur; dans ce
+dernier cas vous pouvez "faire tourner" la figure en 3D pour la voir sous
+l'angle que vous voulez.
+
+***
 
 ### Les données
 
-Une fois décompressé et décodé, l'échantillon contient, pour un grand nombre de
-villes (22631 exactement), des données de type&nbsp;:
+Pour revenir à l'échantillon de OpenWeatherMap, une fois décompressé et décodé,
+il contient, pour un grand nombre de villes (22631 exactement), des données de
+type&nbsp;:
  * champ `city` : position géographique, nom, etc..
  * champ `time` : date (vous pouvez ignorer ce champ pour l'exercice)
  * champ `data` : une liste de mesures disponibles concernant ce point, sous la
@@ -196,12 +325,6 @@ Les 3 autres options (-1, -2 et -3) correspondent à trois modes de
 visualisation. Comme vous allez le voir ce sont des choix très arbitraires,
 n'hésitez pas à broder et à changer les spécifications.
 
-Je vous recommande d'avoir sous la main
- * [le tutoriel matplotlib](http://matplotlib.org/users/pyplot_tutorial.html)
- * [la documentation `matplotlib`](http://matplotlib.org/api/pyplot_api.html)
- * [le tutorial pour les visualisation
-3D](http://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html)
-
 ##### Visualiser les températeures dans une ville donnée (option -1)
 
 Avec l'option -1, le programme affiche sous forme de diagramme à barres, les
@@ -251,7 +374,7 @@ affiche ceci
 <img src="media/meteodata-2-2.png">
 
 où vous pouvez voir que la densité de couverture n'est pas uniforme dans tous
-les pays européens.
+les pays européens - ni sur tout le territoire français d'ailleurs.
 
 Pour l'implémentation de l'option -2 nous avons utilisé [matplotlib.pyplot.scatt
 er](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter)
@@ -290,75 +413,15 @@ Pour l'implémentation de l'option -3 nous avons utilisé
 
 ***
 
-### Si vous n'avez aucune idée
+### Épilogue : le visuel du MOOC
 
-Si vous n'avez aucune idée de comment utiliser `matplotlib`, voici un tout petit
-exemple qui je l'espère vous aiguillera.
+Le visuel du MOOC a été réalisé entièrement en `matplotlib`. Si cela vous
+intéresse vous pouvez voir le code ci-dessous.
 
-Toutes les fonctions de visualisation attendent en argument des listes de
-valeurs pour X, pour Y, et le cas échéant pour Z. La plupart du temps vous
-pouvez obtenir une visualisation simplement en choissisant la fonction (par
-exemple `plot` affiche les données avec une courbe standard, `bar` affiche les
-données en barres ..) et en passant X et Y; voyons cela&nbsp;:
-
-
-    import matplotlib.pyplot as plot
-    
-    import math
-
-
-    # on découpe à la main l'intervalle [0, 3.2] en pas de 0.1
-    
-    X = [ 0.1 * x for x in range (33)]
-    
-    Y = [ math.sin(x) for x in X]
-    
-    plot.plot(X, Y)
-
-Vous voyez que `matplotlib` s'occupe de montrer les échelles, etc... Vous avez
-la possiblité de modifier ce rendu par défaut mais dans la plupart des cas ce
-n'est pas nécessaire.
-
-
-### `numpy` 
-
-Comme vous le voyez il n'est pas nécessaire d'utiliser `numpy` pour visualiser
-des données, mais si par ailleurs vous utilisez déjà `numpy`, le mécanisme de
-passage de données est très simple en `numpy`, qui manipule déjà nativement les
-données sous cette forme.
-
-
-    import numpy as np
-
-
-    # avec la méthode `numpy.linspace` 
-    # on peut facilement découper 
-    # un intervalle en morceaux
-    np.linspace(0, 10, 21)
-
-
-    # aussi pour afficher une fonction
-    # sur un intervalle c'est extrêmement simple
-    
-    X = np.linspace (0, 2*np.pi, 101 )
-    
-    # d'autant que les fonctions numpy 
-    # font implicitement l'équivalent de `map`
-    # sur la liste d'entrée
-    
-    plot.plot (X, np.sin(X))
-
-***
-
-
-    
-
-
-Plot 2D
-
-http://matplotlib.org/api/pyplot_api.html?highlight=scatter
-
-http://matplotlib.org/api/pyplot_api.html
+Remarquez notamment [le style
+`xkcd`](http://matplotlib.org/xkcd/examples/showcase/xkcd.html) qui donne le
+petit coté amusant. Pour que cela rende correctement toutefois, il faut avoir
+installé les bonnes fontes sur son ordinateur.
 
 
     import xkcd
@@ -368,3 +431,5 @@ http://matplotlib.org/api/pyplot_api.html
     
     for line in getsource(xkcd).split("\n"): 
         print line
+
+***
