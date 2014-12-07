@@ -151,8 +151,8 @@ def plot_1d (cities):
     
     bar_plot = plot.bar (X, T, 0.1)
 
-    plot.ylabel('hPa')
-    plot.title('Temperatures in {}'.format(xpath(city, 'city/name')))
+    plot.ylabel(u'ªC')
+    plot.title(u'Temperatures in {}'.format(xpath(city, 'city/name')))
 
     D = [ date_repr(measure['dt']) for measure in city['data'] ]
     Dx = [ 4*n+2 for n in range(len(city['data']))]
@@ -171,7 +171,7 @@ def plot_2d (cities):
     # emphasize selected cities with a specific size and color
     # 'r' stands for red, 'b' is black
     colors = [ 'r' if  'selected' in city else 'b' for city in cities ]
-    sizes = [ 50 if 'selected' in city else 1 for city in cities ]
+    sizes = [ 100 if 'selected' in city else .1 for city in cities ]
     plot.scatter(LON_s, LAT_s, c=colors, s=sizes)
 
     # to exit the drawing, close related window
@@ -280,8 +280,10 @@ def main():
     if args.list_cities:
         cities.sort(key=lambda city: xpath(city, 'city/name'))
         for city in cities:
-            print ("{} ({} measures)".format(xpath(city, 'city/name'),
-                                            len(xpath(city, 'data'))))
+            message = " SELECTED" if 'selected' in city else ""
+            print ("{} ({} measures) {}".format(xpath(city, 'city/name'),
+                                                len(xpath(city, 'data')),
+                                                message))
 
     # show plots as requested
     if args.plot_1d:

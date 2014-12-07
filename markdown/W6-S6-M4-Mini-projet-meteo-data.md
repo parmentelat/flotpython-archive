@@ -22,6 +22,10 @@ chercher ces données chez OpenWeatherMap, nous les republions à plusieurs
 échelles. L'échantillon complet couvre le monde entier et expose des données
 météo sur une période d'environ deux semaines en Mars 2014.
 
+Par manque de temps nous n'avons pas pu introduire `matplotlib` dans une vidéo
+ou un complément. Vous trouverez à la fin de ce notebook quelques mots (très
+rapides) sur cet outil, si vous n'avez aucune idée de comment l'utiliser.
+
 ### Les données
 
 Une fois décompressé et décodé, l'échantillon contient, pour un grand nombre de
@@ -121,20 +125,234 @@ fichier car le chargement du fichier complet peut prendre dans les 10 secondes.
 
 ***
 
+### Le sujet
+
+Le programme que nous avons écrit s'utilise de la manière suivante&nbsp;:
+
+$ ./meteodata.py --help
+usage: meteodata.py [-h] [-c CROP] [-n SELECT_NAMES] [-a] [-l] \
+                         [-1] [-2] [-3] filename
+
+positional arguments:
+  filename              input JSON file - might be gzipped
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CROP, --crop CROP  specify a region for cropping regions are rectangular
+                        areas and can be specified as a comma-separated list
+                        of 4 numbers for north, east, south, west
+  -n SELECT_NAMES, --name SELECT_NAMES
+                        cumulative - select cities by this name(s)
+  -a, --all             select all cities
+  -l, --list            If set, selected city names get listed
+
+  -1, --1d              Display a bar chart for the pressure in the first
+                        selected city
+  -2, --2d              Display a 2D diagram of the positions of selected
+                        cities
+  -3, --3d              Display a 3D diagram of the pressure in all cities
+
+### Entrées
+
+ * il faut donner au programme un des fichiers d'entrée (le paramètre
+obligatoire `filename`)
+ * on peut aussi avec l'option `-c` restreindre à un rectangle, ici par exemple
+les USA (on y reviendra); lorsqu'on utilise cette option les villes qui ne sont
+pas dans la zone sont **complètement ignorées**&nbsp;:
+
+     $ ./meteodata.py -c 50,-70,25,-125 data/cities_world.json
+    ---------- From data/cities_world.json
+        dealing with 22631 cities
+    ---------- After cropping with Top 50.0 Right -70.0 Bottom 25.0 Left -125.0
+        dealing with 3146 cities
+    ---------- No city selected
+
+ * avec l'option -n (que vous pouvez répéter) vous pouvez **sélectionner** des
+villes par leur nom; vous pouvez répéter l'option pour en sélectionner
+plusieurs;
+
+Les deux mécanismes sont indépendants; on considère toutes les villes qui sont
+dans la région, et parmi elles celles qui sont sélectionnées seront mises en
+évidence&nbsp;:
+
+    $ ./meteodata.py -c 50,-70,25,-125 -n 'new york' -n dallas
+data/cities_world.json
+    ---------- From data/cities_world.json
+        dealing with 22631 cities
+    ---------- After cropping with Top 50.0 Right -70.0 Bottom 25.0 Left -125.0
+        dealing with 3146 cities
+    ---------- Selected 3 cities
+        [u'New York', u'New York', u'Dallas']
+Dans cet exemple on va travailler sur un total de 3146 villes, dont trois sont
+sélectionnées (deux s'appellent 'New York' et une s'appelle 'Dallas')
+
+Les options `-a` et `-l` sont très accessoires vous n'êtes pas obligés de vous
+en occuper.
+
+
+### Visualisations
+
+Les 3 autres options (-1, -2 et -3) correspondent à trois modes de
+visualisation. Comme vous allez le voir ce sont des choix très arbitraires,
+n'hésitez pas à broder et à changer les spécifications.
+
+Je vous recommande d'avoir sous la main
+ * [le tutoriel matplotlib](http://matplotlib.org/users/pyplot_tutorial.html)
+ * [la documentation `matplotlib`](http://matplotlib.org/api/pyplot_api.html)
+ * [le tutorial pour les visualisation
+3D](http://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html)
+
+##### Visualiser les températeures dans une ville donnée (option -1)
+
+Avec l'option -1, le programme affiche sous forme de diagramme à barres, les
+températures de la première ville sélectionnée, et ce sur l'ensemble de la
+période.
+
+Pour chaque date on affiche, dans l'ordre, les champs suivants de `temp` dans
+`data`
+
+    'morn', 'day', 'eve', 'night'
+
+Ainsi par exemple
+
+    ./meteodata.py -1 -n brest data/cities_france.json
+
+affiche le diagramme
+
+<img src='media/meteodata-1.png'>
+
+
+Pour l'implémentation de l'option -1 nous avons utilisé [matplotlib.pyplot.bar](
+http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.bar)
+
 ***
+
+##### Visualiser les villes par leur position en 2 dimensions 
+
+Avec l'option -2, le programme affiche l'ensemble des villes par leur position,
+en mettant en évidence les villes sélectionnées avec une taille plus importante
+et une couleur différente.
+
+Ainsi par exemple
+
+    ./meteodata.py -2 -n nice -n toulouse -n bordeaux -n brest -n 'le havre'  -n
+strasbourg data/cities_france.json
+
+montre ceci
+
+<img src="media/meteodata-2-1.png">
+
+alors que
+
+    ./meteodata.py -2 -n paris -n berlin -n roma  data/cities_europe.json
+
+affiche ceci
+
+<img src="media/meteodata-2-2.png">
+
+où vous pouvez voir que la densité de couverture n'est pas uniforme dans tous
+les pays européens.
+
+Pour l'implémentation de l'option -2 nous avons utilisé [matplotlib.pyplot.scatt
+er](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter)
+
+***
+
+##### Visualiser la pression en 3D
+
+Enfin avec l'option -3 notre programme affiche la pression mesurée sur la zone
+en 3D. Il n'y a dans ces données aucune garantie que toutes les villes ont des
+mesures pour exactement les mêmes dates. Cependant pour faire simple et comme
+notre but ici est uniquement d'expérimenter avec la visualisaion&nbsp;:
+ * on a pris pour chaque ville la pression dans la première mesure listée,
+ * et on a calculé la date sur la base de la première mesure de la première
+ville listée.
+
+Par exemple si on lance
+
+    ./meteodata.py -3 data/cities_europe.json
+
+on obtient une visu en 3D qui selon le point de vue ressemble à ceci
+
+<img src="media/meteodata-3-1.png">
+
+ceci
+
+<img src="media/meteodata-3-2.png">
+
+où vous devinez les contours de l'Europe avec, à nouveau, un peu d'imagination
+et de bonne volonté, sachant que la zone en bleu correspond aux Alpes, où la
+pression est plus faible très vraisemblablement à cause de l'altitude.
+
+
+Pour l'implémentation de l'option -3 nous avons utilisé
+[plot_trisurf](http://matplotlib.org/mpl_toolkits/mplot3d/api.html)
+
+***
+
+### Si vous n'avez aucune idée
+
+Si vous n'avez aucune idée de comment utiliser `matplotlib`, voici un tout petit
+exemple qui je l'espère vous aiguillera.
+
+Toutes les fonctions de visualisation attendent en argument des listes de
+valeurs pour X, pour Y, et le cas échéant pour Z. La plupart du temps vous
+pouvez obtenir une visualisation simplement en choissisant la fonction (par
+exemple `plot` affiche les données avec une courbe standard, `bar` affiche les
+données en barres ..) et en passant X et Y; voyons cela&nbsp;:
+
+
+    import matplotlib.pyplot as plot
+    
+    import math
+
+
+    # on découpe à la main l'intervalle [0, 3.2] en pas de 0.1
+    
+    X = [ 0.1 * x for x in range (33)]
+    
+    Y = [ math.sin(x) for x in X]
+    
+    plot.plot(X, Y)
+
+Vous voyez que `matplotlib` s'occupe de montrer les échelles, etc... Vous avez
+la possiblité de modifier ce rendu par défaut mais dans la plupart des cas ce
+n'est pas nécessaire.
+
+
+### `numpy` 
+
+Comme vous le voyez il n'est pas nécessaire d'utiliser `numpy` pour visualiser
+des données, mais si par ailleurs vous utilisez déjà `numpy`, le mécanisme de
+passage de données est très simple en `numpy`, qui manipule déjà nativement les
+données sous cette forme.
 
 
     import numpy as np
-    
-    import matplotlib.pyplot as plot
 
 
+    # avec la méthode `numpy.linspace` 
+    # on peut facilement découper 
+    # un intervalle en morceaux
     np.linspace(0, 10, 21)
 
 
-    x = np.linspace (0, 2*np.pi, 101 )
+    # aussi pour afficher une fonction
+    # sur un intervalle c'est extrêmement simple
     
-    plot.plot (x, np.sin(x))
+    X = np.linspace (0, 2*np.pi, 101 )
+    
+    # d'autant que les fonctions numpy 
+    # font implicitement l'équivalent de `map`
+    # sur la liste d'entrée
+    
+    plot.plot (X, np.sin(X))
+
+***
+
+
+    
+
 
 Plot 2D
 
@@ -147,7 +365,6 @@ http://matplotlib.org/api/pyplot_api.html
 
 
     from inspect import getsource
-
-
+    
     for line in getsource(xkcd).split("\n"): 
         print line
