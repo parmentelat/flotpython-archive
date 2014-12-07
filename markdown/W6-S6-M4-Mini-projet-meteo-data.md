@@ -421,7 +421,8 @@ intéresse vous pouvez voir le code ci-dessous.
 Remarquez notamment [le style
 `xkcd`](http://matplotlib.org/xkcd/examples/showcase/xkcd.html) qui donne le
 petit coté amusant. Pour que cela rende correctement toutefois, il faut avoir
-installé les bonnes fontes sur son ordinateur.
+installé les bonnes fontes sur son ordinateur - ce qui n'est pas le cas de la
+plateforme qui héberge les notebooks malheureusement :)
 
 
     import xkcd
