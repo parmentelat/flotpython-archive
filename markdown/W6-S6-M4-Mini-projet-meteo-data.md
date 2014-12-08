@@ -124,7 +124,7 @@ $ z = e^{-(x^2+y^2)/36}$
     # tous les points X,Y (soit 21 x 21 = 441 au total )
     # il faut recréer un itérateur pour chaque boucle
     def XY():
-        return itertools.product(xscale, yscale)
+        return product(xscale, yscale)
     
     # on calcule les tableaux d'entrée pour matplotlib
     X = [ x for x, y in XY() ]
