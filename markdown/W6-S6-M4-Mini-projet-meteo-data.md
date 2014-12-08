@@ -107,33 +107,38 @@ sous cette forme.
 ### En 3D
 
 On peut tout aussi simplement visualiser des données en 3D, voici un exemple de
-visualisation en 3D d'une gaussienne
+visualisation en 3D d'une gaussienne, que nous montrons ici à un échelle 6 pour
+simplifier le code
 
-$ z = e^{-(x^2+y^2)}$
+$ z = e^{-(x^2+y^2)/36}$
 
 
 
     import math
-    import itertools
+    from itertools import product
     
     # la grille de départ en X et en Y
     xscale = range ( -10, 11 )
     yscale = range ( -10, 11 )
     
-    # tous les points X,Y
-    XY = itertools.product ( xscale, yscale)
+    # tous les points X,Y (soit 21 x 21 = 441 au total )
+    # il faut recréer un itérateur pour chaque boucle
+    def XY():
+        return itertools.product(xscale, yscale)
     
     # on calcule les tableaux d'entrée pour matplotlib
-    X = []
-    Y = []
-    Z = []
-    
-    # une gaussienne 
-    for x,y in XY:
-        X.append(x)
-        Y.append(y)
-        Z.append(math.exp(-(x**2+y**2)/30.))
-    
+    X = [ x for x, y in XY() ]
+    Y = [ y for x, y in XY() ]
+    Z = [ math.exp(-(x**2+y**2)/36.) for x, y in XY() ]
+
+
+Ici encore, il y a une différence de comportement entre le rendu dans un
+notebook qui est statique, et ce que vous obtenez sur votre ordinateur; dans ce
+dernier cas vous pouvez "faire tourner" la figure en 3D pour la voir sous
+l'angle que vous voulez.
+
+
+    ### la visu 
     from mpl_toolkits.mplot3d import Axes3D
     from matplotlib import cm
     import matplotlib.pyplot as plot
@@ -145,12 +150,6 @@ $ z = e^{-(x^2+y^2)}$
     axes.plot_trisurf(X, Y, Z, cmap=cm.jet, linewidth=0.2)
     
     plot.show()
-
-
-Ici encore, il y a une différence de comportement entre le rendu dans un
-notebook qui est statique, et ce que vous obtenez sur votre ordinateur; dans ce
-dernier cas vous pouvez "faire tourner" la figure en 3D pour la voir sous
-l'angle que vous voulez.
 
 ***
 
