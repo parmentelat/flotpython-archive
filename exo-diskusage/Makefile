@@ -11,7 +11,7 @@ spam-tgz: clean
 	tar czf ../data/$(NAME).tgz spam/
 
 spam-zip: clean
-	zip ../data/$(NAME).zip $(find spam)
+	zip ../data/$(NAME).zip $(shell find spam)
 
 clean:
 	find spam -name .du | xargs rm
