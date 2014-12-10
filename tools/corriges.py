@@ -191,6 +191,8 @@ def main ():
     parser.add_argument ("-o","--output", default=None)
     parser.add_argument ("-t","--title", default="Donnez un titre avec --title")
     parser.add_argument ("-c","--contents", action='store_true', default=False)
+    parser.add_argument ("-L","--latex", action='store_true', default=False)
+    parser.add_argument ("-T","--text", action='store_true', default=False)
     parser.add_argument ("files", nargs='+')
     args = parser.parse_args()
 
@@ -198,14 +200,20 @@ def main ():
     for filename in args.files:
         functions += Source(filename).parse()
 
-# see above
-#    functions.sort(key=Function.key)
+    if args.latex:
+        do_latex = True; do_text = False
+    elif args.text:
+        do_latex = False; do_text = True
+    else:
+        do_latex = True; do_text = True
 
     output = args.output if args.output else "corriges"
     texoutput = "{}.tex".format(output)
     txtoutput = "{}.txt".format(output)
-    Latex(texoutput).write (functions, title=args.title, contents=args.contents)
-    Text (txtoutput).write (functions, title=args.title)
+    if do_latex:
+        Latex(texoutput).write (functions, title=args.title, contents=args.contents)
+    if do_text:
+        Text (txtoutput).write (functions, title=args.title)
 
 if __name__ == '__main__':
     main ()
