@@ -32,10 +32,10 @@ n'avez aucune idée de comment l'utiliser.
 
 Que vous choisissiez ce sujet ou non, le point important ici est qu'une fois que
 vous avez obtenu des données avec votre programme python - et pourvu que vous
-ayez installé `matplotlib`qui ne fait pas partie de la librairie standard -,
+ayez installé `matplotlib` qui ne fait pas partie de la librairie standard -,
 vous avez à votre disposition un outil très puissant et vraiment très simple
-pour visualiser très rapidement ces données sous des formes diverses. Ne faites
-pas par exemple l'erreur de générer des fichiers pour gnuplot.
+pour visualiser très rapidement ces données sous des formes diverses.
+
 
 Pour toute la suite je vous recommande d'avoir sous la main
  * [le tutoriel matplotlib](http://matplotlib.org/users/pyplot_tutorial.html)
@@ -150,6 +150,19 @@ l'angle que vous voulez.
     axes.plot_trisurf(X, Y, Z, cmap=cm.jet, linewidth=0.2)
     
     plot.show()
+
+***
+
+### `matplotlib` *vs* `gnuplot`
+
+En guise de digression, signalons que `gnuplot` est un outil de visualisation
+assez ancien et qui a fait ses preuves. Si vous connaissez et maîtrisez bien cet
+outil, vous pouvez parfaitement faire le miniprojet en utilisant `gnuplot`
+plutôt que `matplotlib`. je vous invite à regarder [`Gnuplot.py`](http
+://gnuplot-py.sourceforge.net), vous éviterez ainsi l'erreur qui consiste à
+générer directement des fichiers pour `gnuplot`. Par ailleurs `gnuplot` est un
+programme indépendant de python, qu'il faut naturellement donc avoir installé
+séparément.
 
 ***
 
