@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# @BEG@ 5 6 shipdict 
 from __future__ import print_function
 
 # helpers - used for the verbose mode only
@@ -25,9 +24,7 @@ def lat_d_m_s(f):
 def lon_d_m_s(f):
     if f>=0:        return "{} E".format(d_m_s(f))
     else:           return "{} W".format(d_m_s(-f))
-# @END@
 
-# @BEG@ 5 6 shipdict-suite
 class Position(object):
     "a position atom with timestamp attached"
     
@@ -47,9 +44,7 @@ class Position(object):
         """
         return "<{} {} @ {}>".format(self.lat_str(),
                                     self.lon_str(), self.timestamp)
-# @END@
 
-# @BEG@ 5 6 shipdict-suite
 class Ship(object):
     """
     a ship object, that requires a ship id, 
@@ -79,9 +74,7 @@ class Ship(object):
         sort list of positions by chronological order
         """
         self.positions.sort(key=lambda position: position.timestamp)
-# @END@
 
-# @BEG@ 5 6 shipdict-suite
 class ShipDict(dict):
     """
     a repository for storing all ships that we know about
@@ -125,9 +118,7 @@ class ShipDict(dict):
             ship.name = name
             ship.country = country
         self[id].add_position (Position (latitude, longitude, timestamp))
-# @END@
 
-# @BEG@ 5 6 shipdict-suite
     def add_chunk(self, chunk):
         """
         chunk is a plain list coming from the JSON data
@@ -164,9 +155,7 @@ class ShipDict(dict):
         # and remove them next
         for id in unnamed_ids:
             del self[id]
-# @END@
 
-# @BEG@ 5 6 shipdict-suite
     def ships_by_name(self, name):
         """
         returns a list of all known ships with name <name>
@@ -200,4 +189,3 @@ class ShipDict(dict):
                      else s1.id - s2.id
         return sorted (ships, cmp = ship_compare)
         
-# @END@

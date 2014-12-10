@@ -52,13 +52,15 @@ $(foreach week, $(WEEKS), $(eval $(call week_values,$(week))))
 
 define code_target
 corriges-w$(3)-$(2): $(1)
-	rsync -a $(1) corriges-w$(3)-$(2)
+	egrep -v '@BEG|@END' $(1) > corriges-w$(3)-$(2)
 
 code:: corriges-w$(3)-$(2)
 
-clean::
+code-clean::
 	rm corriges-w$(3)-$(2)
 endef
+
+clean:: code-clean
 
 define week_target
 corriges-w$(1).tex: $(call week_latex_sources,$(1)) $(TOOL)
@@ -80,7 +82,7 @@ endef
 
 $(foreach week, $(WEEKS), $(eval $(call week_target,$(week))))
 
-.PHONY: all code clean pdf
+.PHONY: all code clean code-clean pdf
 
 foo:
 	@echo 6  text $(W6_text) latex $(W6_latex) code X$(W6_code)X
