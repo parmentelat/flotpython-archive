@@ -131,13 +131,13 @@ Mais alors, comment peut-on faire marcher ce code ? On pourrait utiliser
 
     class Mixed:
         increment = 10
-        liste = list(a + C.increment for a in range(10))
+        liste = list(a + Mixed.increment for a in range(10))
 
 Ça ne fonctionne toujours pas avec une erreur étrange... Le nom global `Mixed`
-n'existe pas lorsque l'on fait `Mixed.var`. En y réfléchissant, c'est tout à
-fait normal. L'objet classe `Mixed` ne sera créé qu'à la fin de l'évaluation de
-son bloc de code, or lorsque l'on appel C.var, on est toujours en cours
-d'évaluation du bloc de code de la classe.
+n'existe pas lorsque l'on fait `Mixed.increment`. En y réfléchissant, c'est tout
+à fait normal. L'objet classe `Mixed` ne sera créé qu'à la fin de l'évaluation
+de son bloc de code, or lorsque l'on appel `Mixed.increment`, on est toujours en
+cours d'évaluation du bloc de code de la classe.
 
 Comment s'en sortir alors ? Il y a de nombreuses possibilités. Par exemple, on
 peut utiliser la construction avec une compréhension de liste qui, comme on l'a
