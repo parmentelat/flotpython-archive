@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
 from __future__ import print_function
 
@@ -31,21 +31,21 @@ a function name, plus the code as a string
 
 ########################################
     # utiliser les {} comme un marqueur dans du latex ne semble pas
-    # être l'idée du siècle -> je prends pour une fois %()s et l'opérateur %
+    # Ãªtre l'idÃ©e du siÃ¨cle -> je prends pour une fois %()s et l'opÃ©rateur %
     latex_format=r"""
 \addcontentsline{toc}{section}{
-\texttt{%(name)s} -- {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s}
+\texttt{%(name)s} -- {\small \footnotesize{Semaine} %(week)s \footnotesize{SÃ©quence} %(sequence)s}
 %%%(name)s
 }
 \begin{Verbatim}[frame=single,fontsize=\%(size)s, samepage=true, numbers=left,
 framesep=3mm, framerule=3px,
 rulecolor=\color{Gray},
 %%fillcolor=\color{Plum},
-label=%(name)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s}]
+label=%(name)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{SÃ©quence} %(sequence)s}]
 %(code)s\end{Verbatim}
 \vspace{1cm}
 """
-    # on peut tricher un peu si un problème ne rentre pas bien dans les clous
+    # on peut tricher un peu si un problÃ¨me ne rentre pas bien dans les clous
     # \tiny, \scriptsize, \footnotesize, \small, \normalsize
     exceptions_size = { 'diff': 'footnotesize',
 #                        'decode_zen' : 'small',
@@ -62,7 +62,7 @@ label=%(name)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence}
 ########################################
     text_format = r"""
 ##################################################
-# %(name)s - Semaine %(week)s Séquence %(sequence)s
+# %(name)s - Semaine %(week)s SÃ©quence %(sequence)s
 ##################################################
 %(code)s
 """
@@ -70,30 +70,11 @@ label=%(name)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence}
         return self.text_format %self.__dict__
 
 ############################################################
+# as of dec. 11 2014 all files are UTF-8 and that's it
 class Source (object):
 
-    # these files are known to be unicode
-    exceptions = [ "w4_files" ]
-    
     def __init__ (self, filename):
         self.filename = filename
-        # exceptions are in UTF8 but the latex source is declared as isolatin
-        # so we recode into a isolatin copy and use that instead
-        for exception in self.exceptions:
-            if self.filename.find(exception) >= 0:
-                self.create_isolatin_from_unicode()
-
-    def create_isolatin_from_unicode(self):
-        """
-        create a isolatin copy from a unicode source and use this instead
-        """
-        print ("WARNING: for file {self.filename}, creating ISOLATIN version instead".format(**locals()))
-        uni = self.filename
-        iso = "{}.iso".format(uni)
-        import os
-        command = "cp {uni} {iso}; recode UTF-8..ISO-8859-15 {iso}".format(**locals())
-        os.system(command)
-        self.filename = iso
 
     def parse (self):
         "return a list of Function objects"
@@ -120,7 +101,7 @@ class Source (object):
 class Latex (object):
 
     header=r"""\documentclass [12pt]{article}
-\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[francais]{babel}
 %% for Verbatim
 \usepackage{fancyvrb}

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 all: 
 
 WEEKS=$(wildcard W?) 
@@ -89,7 +90,7 @@ endef
 
 MARKDOWNS = $(foreach notebook,$(NOTEBOOKS),$(call mymarkdown,$(notebook)))
 
-# on applique cette règle à tous ces notebooks
+# on applique cette rÃ¨gle Ã  tous ces notebooks
 define notebook_rule
 $(call mymarkdown,$(1)): $(1)
 	ipython nbconvert --to markdown $(1) --stdout > $(call mymarkdown,$(1))

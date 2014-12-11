@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 TOOL = ../tools/corriges.py
 
 W2 = w2_slicing.py w2_if.py w2_for.py w2_strings.py
@@ -35,7 +36,7 @@ SOURCES = $(foreach week,$(WEEKS),$(call week_latex_sources,$(week)))
 all: $(foreach week, $(WEEKS), corriges-w$(week).tex corriges-w$(week).txt) corriges.tex corriges.txt code
 
 corriges.tex corriges.txt: $(SOURCES) $(TOOL)
-	$(TOOL) -o corriges -t "Tous les corrigés" -c $(SOURCES)
+	$(TOOL) -o corriges -t "Tous les corrigÃ©s" -c $(SOURCES)
 corriges.pdf: corriges.tex
 	pdflatex corriges.tex
 clean::
@@ -57,20 +58,20 @@ corriges-w$(3)-$(2): $(1)
 code:: corriges-w$(3)-$(2)
 
 code-clean::
-	rm corriges-w$(3)-$(2)
+	rm -f corriges-w$(3)-$(2)
 endef
 
 clean:: code-clean
 
 define week_target
 corriges-w$(1).tex: $(call week_latex_sources,$(1)) $(TOOL)
-	$(TOOL) -L -o corriges-w$(1) -t "Corrigés de la semaine $(1)" $(call week_latex_sources,$(1))
+	$(TOOL) -L -o corriges-w$(1) -t "CorrigÃ©s de la semaine $(1)" $(call week_latex_sources,$(1))
 
 corriges-w$(1).pdf: corriges-w$(1).tex
 	pdflatex corriges-w$(1).tex
 
 corriges-w$(1).txt: $(call week_text_sources,$(1)) $(TOOL)
-	$(TOOL) -T -o corriges-w$(1) -t "Corrigés de la semaine $(1)" $(call week_text_sources,$(1))
+	$(TOOL) -T -o corriges-w$(1) -t "CorrigÃ©s de la semaine $(1)" $(call week_text_sources,$(1))
 
 clean::
 	rm -f corriges-w$(1).*

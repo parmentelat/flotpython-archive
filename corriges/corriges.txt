@@ -1,12 +1,12 @@
 # -*- coding: iso-8859-15 -*-
 ############################################################ 
 #
-# Tous les corrigés
+# Tous les corrigÃ©s
 #
 ############################################################
 
 ##################################################
-# composite - Semaine 2 Séquence 3
+# composite - Semaine 2 SÃ©quence 3
 ##################################################
 # Pour calculer inconnue, on extrait une sous-chaine de composite
 # qui commence a l'index len(connue)
@@ -19,7 +19,7 @@ inconnue = composite [ len(connue) : -len(connue) ]
 
 
 ##################################################
-# divisible - Semaine 2 Séquence 7
+# divisible - Semaine 2 SÃ©quence 7
 ##################################################
 def divisible(a, b): 
     "renvoie True si un des deux arguments divise l'autre"
@@ -30,179 +30,179 @@ def divisible(a, b):
 
 
 ##################################################
-# spam - Semaine 2 Séquence 7
+# spam - Semaine 2 SÃ©quence 7
 ##################################################
 def spam(l):
     """
-Prend en argument une liste, et retourne la liste modifiée:
- * taille paire: on intervertit les deux premiers éléments
- * taille impaire, on retire le dernier élément
+Prend en argument une liste, et retourne la liste modifiÃ©e:
+ * taille paire: on intervertit les deux premiers Ã©lÃ©ments
+ * taille impaire, on retire le dernier Ã©lÃ©ment
 """
-    # si la liste est vide il n'y a rien à faire
+    # si la liste est vide il n'y a rien Ã  faire
     if not l:
         pass
     # si la liste est de taille paire
     elif len(l)%2 == 0:
-        # on intervertit les deux premiers éléments
+        # on intervertit les deux premiers Ã©lÃ©ments
         l[0], l[1] = l[1], l[0]
     # si elle est de taille impaire
     else:
-        # on retire le dernier élément
+        # on retire le dernier Ã©lÃ©ment
         l.pop()
     # et on n'oublie pas de retourner la liste dans tous les cas
     return l
 
 
 ##################################################
-# multi_tri - Semaine 2 Séquence 7
+# multi_tri - Semaine 2 SÃ©quence 7
 ##################################################
 def multi_tri(listes):
     "trie toutes les sous-listes, et retourne listes"
     for liste in listes:
         # sort fait un effet de bord 
         liste.sort()
-    # et on retourne la liste de départ
+    # et on retourne la liste de dÃ©part
     return listes
 
 
 ##################################################
-# multi_tri_reverse - Semaine 2 Séquence 7
+# multi_tri_reverse - Semaine 2 SÃ©quence 7
 ##################################################
 def multi_tri_reverse(listes, reverses):
     """trie toutes les sous listes, dans une direction
-    précisée par le second argument"""
-    # zip() permet de faire correspondre les éléments 
+    prÃ©cisÃ©e par le second argument"""
+    # zip() permet de faire correspondre les Ã©lÃ©ments 
     # de listes avec ceux de reverses
     for liste, reverse in zip(listes, reverses):
-        # on appelle sort en précisant reverse=
+        # on appelle sort en prÃ©cisant reverse=
         liste.sort(reverse=reverse)
-    # on retourne la liste de départ
+    # on retourne la liste de dÃ©part
     return listes
 
 
 ##################################################
-# liste_racines - Semaine 2 Séquence 7
+# liste_racines - Semaine 2 SÃ©quence 7
 ##################################################
 from math import e, pi
 
 def liste_racines(p):
-    "retourne la liste des racines p-ièmes de l'unité"
-    # une simple compréhension fait l'affaire
+    "retourne la liste des racines p-iÃšmes de l'unitÃ©"
+    # une simple comprÃ©hension fait l'affaire
     # souvenez vous que 1j c'est notre 'i' complexe
     return [e**((2*pi*1j*n)/p) for n in range(p)]
 
-# Il est tout à fait possible aussi de construire les racines pas à pas
-# C'est un peu moins élégant mais ça fonctionne très bien aussi
+# Il est tout Ã  fait possible aussi de construire les racines pas Ã  pas
+# C'est un peu moins Ã©lÃ©gant mais Ã§a fonctionne trÃšs bien aussi
 def liste_racines_bis(p):
-    "retourne la liste des racines p-ièmes de l'unité"
-    # on va construire le résultat petit à petit
+    "retourne la liste des racines p-iÃšmes de l'unitÃ©"
+    # on va construire le rÃ©sultat petit Ã  petit
     # en partant d'une liste vide
     resultat = []
     # pour chaque n dans {0 .. p-1}
     for n in range(p):
-        # on ajoute dans le résultat la racine d'ordre n
+        # on ajoute dans le rÃ©sultat la racine d'ordre n
         resultat.append(e**((2*pi*1j*n)/p))
-    # et on retourne le résultat
+    # et on retourne le rÃ©sultat
     return resultat
 
 
 ##################################################
-# produit_scalaire - Semaine 2 Séquence 7
+# produit_scalaire - Semaine 2 SÃ©quence 7
 ##################################################
 def produit_scalaire(X,Y):
-    # initialisation du resultat
+    # initialisation du rÃ©sultat
     scalaire = 0
     # ici encore avec zip() on peut faire correspondre 
     # les X avec les Y
     for x,y in zip(X,Y):
         scalaire += x*y
-    # on retourne le résultat
+    # on retourne le rÃ©sultat
     return scalaire
 
 # Il y a plein d'autres solutions qui marchent aussi
 # en voici notamment une qui utilise la fonction builtin sum
 # (que nous n'avons pas encore vue, nous la verrons en semaine 4)
-# en voici toutefois un avant-goût: la fonction sum est très pratique
+# en voici toutefois un avant-goÃ»t: la fonction sum est trÃšs pratique
 # pour faire la somme de toute une liste de valeurs
 def produit_scalaire_bis(X,Y):
-    """retourne le produit scalaire de deux listes de même taille"""
+    """retourne le produit scalaire de deux listes de mÃªme taille"""
     return sum([x*y for x, y in zip(X, Y)])
 
 
 ##################################################
-# affichage - Semaine 2 Séquence 8
+# affichage - Semaine 2 SÃ©quence 8
 ##################################################
-# un élève a remarqué très justement que ce code ne fait pas
-# exactement ce qui est demandé, en ce sens qu'avec
-# l'entrée correspondant à Ted Mosby on obtient A:><
-# je préfère toutefois publier le code qui est en
+# un Ã©lÃšve a remarquÃ© trÃšs justement que ce code ne fait pas
+# exactement ce qui est demandÃ©, en ce sens qu'avec
+# l'entrÃ©e correspondant Ã  Ted Mosby on obtient A:><
+# je prÃ©fÃšre toutefois publier le code qui est en
 # service pour la correction en ligne, et vous laisse
-# le soin de l'améliorer si vous le souhaitez
+# le soin de l'amÃ©liorer si vous le souhaitez
 def affichage(s):
     # pour ignorer les espaces et les tabulations 
     # le plus simple est de les enlever
     s=s.replace(' ', '').replace('\t','')
-    # la liste des mots séparés par une virgule 
-    # nous est donnée par un simple appel à split
+    # la liste des mots sÃ©parÃ©s par une virgule 
+    # nous est donnÃ©e par un simple appel Ã  split
     mots = s.split(',')
-    # si on n'a même pas deux mots, on retourne None
+    # si on n'a mÃªme pas deux mots, on retourne None
     if len(mots) < 2:
         return None
     # maintenant qu'on sait qu'on a deux mots
-    # on peut extraire le prénom et le nom
+    # on peut extraire le prÃ©nom et le nom
     prenom = mots.pop(0)
     nom = mots.pop(0)
-    # on veut afficher "??" si l'âge est inconnu
+    # on veut afficher "??" si l'Ã¢ge est inconnu
     age = "??"
-    # mais si l'âge est précisé dans la ligne
+    # mais si l'Ã¢ge est prÃ©cisÃ© dans la ligne
     if len(mots) >= 2:
         # alors on le prend
         age = mots.pop(1)
-    # il ne reste plus qu'à formater
+    # il ne reste plus qu'Ã  formater
     return "N:>{}< P:>{}< A:>{}<".format(nom, prenom, age)
 
 
 ##################################################
-# carre - Semaine 2 Séquence 8
+# carre - Semaine 2 SÃ©quence 8
 ##################################################
 def carre(s):
-    # on enlève les espaces et les tabulations
+    # on enlÃšve les espaces et les tabulations
     s = s.replace(' ', '').replace('\t','')
     # la ligne suivante fait le plus gros du travail
-    # d'abord on appelle split() pour découper selon les ';'
-    # dans le cas où on a des ';' en trop, on obtient dans le 
-    #    résultat du split un 'token' vide, que l'on ignore 
+    # d'abord on appelle split() pour dÃ©couper selon les ';'
+    # dans le cas oÃ¹ on a des ';' en trop, on obtient dans le 
+    #    rÃ©sultat du split un 'token' vide, que l'on ignore 
     #    ici avec le clause 'if token'
     # enfin on convertit tous les tokens restants en entiers avec int()
     entiers = [int(token) for token in s.split(";") if token]
-    # il n'y a plus qu'à mettre au carré, retraduire en strings,
-    # et à recoudre le tout avec join et ':'
+    # il n'y a plus qu'Ã  mettre au carrÃ©, retraduire en strings,
+    # et Ã  recoudre le tout avec join et ':'
     return ":".join([str(entier**2) for entier in entiers])
 
 
 ##################################################
-# index - Semaine 3 Séquence 2
+# index - Semaine 3 SÃ©quence 2
 ##################################################
 def index(bateaux):
     """
-    Calcule sous la forme d'un dictionnaire indexé par les ids
-    un index de tous les bateaux présents dans la liste en argument
-    Comme les données étendues et abrégées ont toutes leur id 
-    en première position on peut en fait utiliser ce code
-    avec les deux types de données
+    Calcule sous la forme d'un dictionnaire indexÃ© par les ids
+    un index de tous les bateaux prÃ©sents dans la liste en argument
+    Comme les donnÃ©es Ã©tendues et abrÃ©gÃ©es ont toutes leur id 
+    en premiÃšre position on peut en fait utiliser ce code
+    avec les deux types de donnÃ©es
     """
-    # c'est une simple compréhension de dictionnaire
+    # c'est une simple comprÃ©hension de dictionnaire
     return {bateau[0]:bateau for bateau in bateaux}
 
 
 ##################################################
-# index - Semaine 3 Séquence 2
+# index - Semaine 3 SÃ©quence 2
 ##################################################
 def index2(bateaux):
     """
-    La même chose mais de manière itérative
+    La mÃªme chose mais de maniÃšre itÃ©rative
     """
-    # si on veut décortiquer
+    # si on veut dÃ©cortiquer
     resultat = {}
     for bateau in bateaux:
         resultat [bateau[0]] = bateau
@@ -210,92 +210,92 @@ def index2(bateaux):
 
 
 ##################################################
-# merge - Semaine 3 Séquence 2
+# merge - Semaine 3 SÃ©quence 2
 ##################################################
 def merge(extended, abbreviated):
     """
-    Consolide des données étendues et des données abrégées
-    comme décrit dans l'énoncé
-    Le coût de cette fonction est linéaire dans la taille 
-    des données (longueur des listes)
+    Consolide des donnÃ©es Ã©tendues et des donnÃ©es abrÃ©gÃ©es
+    comme dÃ©crit dans l'Ã©noncÃ©
+    Le coÃ»t de cette fonction est linÃ©aire dans la taille 
+    des donnÃ©es (longueur des listes)
     """
-    # on initialise le résultat avec un dictionnaire vide
+    # on initialise le rÃ©sultat avec un dictionnaire vide
     result = {}
-    # pour les données étendues
+    # pour les donnÃ©es Ã©tendues
     for ship in extended:
         # on affecte les 6 premiers champs
-        # et on ignore les champs de rang 6 et au delà
+        # et on ignore les champs de rang 6 et au delÃ 
         id, latitude, longitude, timestamp, name, country = ship[:6]
-        # on crée une entrée dans le résultat, 
-        # avec la mesure correspondant aux données étendues
+        # on crÃ©e une entrÃ©e dans le rÃ©sultat, 
+        # avec la mesure correspondant aux donnÃ©es Ã©tendues
         result[id] = [name, country, (latitude, longitude, timestamp)]
-    # maintenant on peut compléter le résultat avec les données abrégées
+    # maintenant on peut complÃ©ter le rÃ©sultat avec les donnÃ©es abrÃ©gÃ©es
     for id, latitude, longitude, timestamp in abbreviated:
-        # et avec les hypothèses on sait que le bateau a déjà été 
-        # inscrit dans le résultat, donc result[id] doit déjà exister
-        # et on peut se contenter d'ajouter ls mesure abrégée
-        # dans l'entrée correspondant dans result
+        # et avec les hypothÃšses on sait que le bateau a dÃ©jÃ  Ã©tÃ© 
+        # inscrit dans le rÃ©sultat, donc result[id] doit dÃ©jÃ  exister
+        # et on peut se contenter d'ajouter ls mesure abrÃ©gÃ©e
+        # dans l'entrÃ©e correspondant dans result
         result[id].append((latitude, longitude, timestamp))
-    # et retourner le résultat
+    # et retourner le rÃ©sultat
     return result
 
 
 ##################################################
-# merge - Semaine 3 Séquence 2
+# merge - Semaine 3 SÃ©quence 2
 ##################################################
 def merge2(extended, abbreviated):
     """
-    Une deuxième version, linéaire également
+    Une deuxiÃšme version, linÃ©aire Ã©galement
     """
-    # on initialise le résultat avec un dictionnaire vide
+    # on initialise le rÃ©sultat avec un dictionnaire vide
     result = {}
-    # on remplit d'abord à partir des données étendues
+    # on remplit d'abord Ã  partir des donnÃ©es Ã©tendues
     for ship in extended:
         id = ship[0]
-        # on crée la liste avec le nom et le pays
+        # on crÃ©e la liste avec le nom et le pays
         result[id] = ship[4:6]
-        # on ajoute un tuple correspondant à la position
+        # on ajoute un tuple correspondant Ã  la position
         result[id].append(tuple(ship[1:4]))
-    # pareil que pour la première solution,
-    # on sait d'après les hypothèses
-    # que les id trouvées dans abbreviated
-    # sont déja présentes dans le resultat
+    # pareil que pour la premiÃšre solution,
+    # on sait d'aprÃšs les hypothÃšses
+    # que les id trouvÃ©es dans abbreviated
+    # sont dÃ©ja prÃ©sentes dans le resultat
     for ship in abbreviated:
         id = ship[0]
-        # on ajoute un tuple correspondant à la position
+        # on ajoute un tuple correspondant Ã  la position
         result[id].append(tuple(ship[1:4]))
     return result
 
 
 ##################################################
-# merge - Semaine 3 Séquence 2
+# merge - Semaine 3 SÃ©quence 2
 ##################################################
 def merge3(extended, abbreviated):
     """
-    Une troisième solution
-    à cause du tri que l'on fait au départ, cette 
-    solution n'est plus linéaire mais en O(n.log(n))
+    Une troisiÃšme solution
+    Ã  cause du tri que l'on fait au dÃ©part, cette 
+    solution n'est plus linÃ©aire mais en O(n.log(n))
     """
     # ici on va tirer profit du fait que les id sont
-    # en première position dans les deux tableaux
+    # en premiÃšre position dans les deux tableaux
     # si bien que si on les trie,
     # on va mettre les deux tableaux 'en phase'
     #
-    # c'est une technique qui marche dans ce cas précis
-    # parce qu'on sait que les deux tableaux contiennent des données
-    # pour exactement le même ensemble de bateaux
+    # c'est une technique qui marche dans ce cas prÃ©cis
+    # parce qu'on sait que les deux tableaux contiennent des donnÃ©es
+    # pour exactement le mÃªme ensemble de bateaux
     # 
     # on a deux choix, selon qu'on peut se permettre ou non de
-    # modifier les données en entrée. Supposons que oui:
+    # modifier les donnÃ©es en entrÃ©e. Supposons que oui:
     extended.sort()
     abbreviated.sort()
-    # si ça n'avait pas été le cas on aurait fait plutôt
+    # si Ã§a n'avait pas Ã©tÃ© le cas on aurait fait plutÃŽt
     # extended = extended.sorted() et idem pour l'autre
     #
-    # il ne reste plus qu'à assembler le résultat
-    # en découpant des tranches
+    # il ne reste plus qu'Ã  assembler le rÃ©sultat
+    # en dÃ©coupant des tranches
     # et en les transformant en tuples pour les positions
-    # puisque c'est ce qui est demandé
+    # puisque c'est ce qui est demandÃ©
     return {
         e[0] : e[4:6] + [ tuple(e[1:4]), tuple(a[1:4]) ]
         for (e,a) in zip (extended, abbreviated)
@@ -303,17 +303,17 @@ def merge3(extended, abbreviated):
 
 
 ##################################################
-# diff - Semaine 3 Séquence 3
+# diff - Semaine 3 SÃ©quence 3
 ##################################################
 def diff(extended, abbreviated):
-    """Calcule comme demandé dans l'exercice, et sous formes d'ensembles
+    """Calcule comme demandÃ© dans l'exercice, et sous formes d'ensembles
 (*) les noms des bateaux seulement dans extended
-(*) les noms des bateaux présents dans les deux listes
+(*) les noms des bateaux prÃ©sents dans les deux listes
 (*) les ids des bateaux seulement dans abbreviated
     """
     ### on n'utilise que des ensembles dans tous l'exercice
     # les ids de tous les bateaux dans extended
-    # une compréhension d'ensemble
+    # une comprÃ©hension d'ensemble
     extended_ids = {ship[0] for ship in extended}
     # les ids de tous les bateaux dans abbreviated
     # idem
@@ -327,9 +327,9 @@ def diff(extended, abbreviated):
     # les ids des bateaux seulement dans extended 
     # ditto
     extended_only_ids = extended_ids - abbreviated_ids
-    # pour les deux catégories où c'est possible
+    # pour les deux catÃ©gories oÃ¹ c'est possible
     # on recalcule les noms des bateaux
-    # par une compréhension d'ensemble
+    # par une comprÃ©hension d'ensemble
     both_names = \
           {ship[4] for ship in extended if ship[0] in both_ids}
     extended_only_names = \
@@ -339,42 +339,42 @@ def diff(extended, abbreviated):
 
 
 ##################################################
-# decode_zen - Semaine 3 Séquence 5
+# decode_zen - Semaine 3 SÃ©quence 5
 ##################################################
-# le module this est implémenté comme une petite énigme 
+# le module this est implÃ©mentÃ© comme une petite Ã©nigme 
 # comme le laissent entrevoir les indices, on y trouve
-# (*) dans l'attribut 's' une version encodée du manifeste
-# (*) dans l'attribut 'd' le code à utiliser pour décoder
+# (*) dans l'attribut 's' une version encodÃ©e du manifeste
+# (*) dans l'attribut 'd' le code Ã  utiliser pour dÃ©coder
 # 
-# ce qui veut dire qu'en première approximation on pourrait 
-# obtenir une liste des caractères du manifeste en faisant
+# ce qui veut dire qu'en premiÃšre approximation on pourrait 
+# obtenir une liste des caractÃšres du manifeste en faisant
 # 
 # [ this.d [c] for c in this.s ]
 # 
 # mais ce serait le cas seulement si le code agissait sur 
-# tous les caractères; comme ce n'est pas le cas il faut
-# laisser intacts les caractères dans this.s qui ne sont pas
+# tous les caractÃšres; comme ce n'est pas le cas il faut
+# laisser intacts les caractÃšres dans this.s qui ne sont pas
 # dans this.d (dans le sens "c in this.d")
 #
-# je fais exprès de ne pas appeler l'argument this pour
+# je fais exprÃšs de ne pas appeler l'argument this pour
 # illustrer le fait qu'un module est un objet comme un autre
 #
 
 def decode_zen(this_module):
-    "décode le zen de python à partir du module this"
-    # la version encodée du manifeste
+    "dÃ©code le zen de python Ã  partir du module this"
+    # la version encodÃ©e du manifeste
     encoded = this_module.s
     # le 'code' 
     code = this_module.d
-    # si un caractère est dans le code, on applique le code
-    # sinon on garde le caractère tel quel
-    # aussi, on appelle 'join' pour refaire une chaîne à partir
-    # de la liste des caractères décodés
+    # si un caractÃšre est dans le code, on applique le code
+    # sinon on garde le caractÃšre tel quel
+    # aussi, on appelle 'join' pour refaire une chaÃ®ne Ã  partir
+    # de la liste des caractÃšres dÃ©codÃ©s
     return ''.join([code[c] if c in code else c for c in encoded])
 
 
 ##################################################
-# decode_zen - Semaine 3 Séquence 5
+# decode_zen - Semaine 3 SÃ©quence 5
 ##################################################
 # une autre version qui marche aussi, en utilisant 
 # dict.get(key, default)
@@ -383,10 +383,10 @@ def decode_zen2(this):
 
 
 ##################################################
-# dispatch1 - Semaine 3 Séquence 7
+# dispatch1 - Semaine 3 SÃ©quence 7
 ##################################################
 def dispatch1(a, b):
-    """dispatch1 comme spécifié"""
+    """dispatch1 comme spÃ©cifiÃ©"""
     # si les deux arguments sont pairs
     if a%2 == 0 and b%2 == 0:
         return a*a + b*b
@@ -402,10 +402,10 @@ def dispatch1(a, b):
 
 
 ##################################################
-# dispatch2 - Semaine 3 Séquence 7
+# dispatch2 - Semaine 3 SÃ©quence 7
 ##################################################
 def dispatch2(a, b, A, B):
-    """dispatch2 comme spécifié"""
+    """dispatch2 comme spÃ©cifiÃ©"""
     # les deux cas de la diagonale \ 
     if (a in A and b in B) or (a not in A and b not in B):
         return a*a + b*b
@@ -413,73 +413,73 @@ def dispatch2(a, b, A, B):
     # ce qui alors implique que a est dans A
     elif b not in B: 
         return a*(b-1)
-    # le dernier cas, on sait forcément que
+    # le dernier cas, on sait forcÃ©ment que
     # b est dans B et a n'est pas dans A
     else:
         return (a-1)*b
 
 
 ##################################################
-# comptage - Semaine 4 Séquence 1
+# comptage - Semaine 4 SÃ©quence 1
 ##################################################
 def comptage(in_filename, out_filename):
     """
     retranscrit le fichier in_filename dans le fichier out_filename
     en ajoutant des annotations sur les nombres de lignes, de mots
-    et de caractères
+    et de caractÃšres
     """
-    # on ouvre le fichier d'entrée en lecture
+    # on ouvre le fichier d'entrÃ©e en lecture
     # on aurait pu mettre open (in_filename, 'r')
     with open(in_filename) as input:
-        # on ouvre la sortie en écriture
+        # on ouvre la sortie en Ã©criture
         with open(out_filename, "w") as output:
             # initialisations
             lineno = 0
             total_words = 0
             total_chars = 0
-            # pour toutes les lignes du fichier d'entrée
+            # pour toutes les lignes du fichier d'entrÃ©e
             for line in input:
                 # on maintient le nombre de lignes
                 # qui est aussi la ligne courante
                 lineno += 1
-                # autant de mots que d'éléments dans split()
+                # autant de mots que d'Ã©lÃ©ments dans split()
                 nb_words = len(line.split())
                 total_words += nb_words
-                # autant de caractères que d'éléments dans la ligne
+                # autant de caractÃšres que d'Ã©lÃ©ments dans la ligne
                 nb_chars = len(line)
                 total_chars += nb_chars
-                # on écrit la ligne de sortie; pas besoin
-                # de newline (\n) car line en a déjà un
+                # on Ã©crit la ligne de sortie; pas besoin
+                # de newline (\n) car line en a dÃ©jÃ  un
                 output.write("{}:{}:{}:{}".\
                              format(lineno, nb_words, nb_chars, line))
-            # on écrit la ligne de synthèse
+            # on Ã©crit la ligne de synthÃšse
             output.write("{}:{}:{}\n".\
                          format(lineno, total_words, total_chars))
 
 
 ##################################################
-# pgcd - Semaine 4 Séquence 2
+# pgcd - Semaine 4 SÃ©quence 2
 ##################################################
 def pgcd(a, b):
     "le pgcd de a et b par l'algorithme d'Euclide"
     # l'algorithme suppose que a >= b
     # donc si ce n'est pas le cas 
-    # il faut inverser les deux entrées
+    # il faut inverser les deux entrÃ©es
     if b > a : 
         a, b = b, a
     # boucle sans fin
     while True:
         # on calcule le reste 
         r = a % b
-        # si le reste est nul, on a terminé
+        # si le reste est nul, on a terminÃ©
         if r == 0:
             return b
-        # sinon on passe à l'itération suivante
+        # sinon on passe Ã  l'itÃ©ration suivante
         a, b = b, r
 
 
 ##################################################
-# numbers - Semaine 4 Séquence 3
+# numbers - Semaine 4 SÃ©quence 3
 ##################################################
 from operator import mul
 
@@ -490,13 +490,13 @@ def numbers(liste):
     (*) le produit
     (*) le minimum
     (*) le maximum
-    des éléments de la liste
+    des Ã©lÃ©ments de la liste
     """
     
     return ( 
         # la builtin 'sum' renvoie la somme
         sum(liste),
-        # pour la multiplication, reduce est nécessaire
+        # pour la multiplication, reduce est nÃ©cessaire
         reduce(mul, liste, 1),
         # les builtin 'min' et 'max' font ce qu'on veut aussi
         min(liste),
@@ -505,128 +505,128 @@ def numbers(liste):
 
 
 ##################################################
-# validation - Semaine 4 Séquence 3
+# validation - Semaine 4 SÃ©quence 3
 ##################################################
 def validation(f, g, entrees):
     """
-    retourne une liste de booléens, un par entree dans entrees
+    retourne une liste de boolÃ©ens, un par entree dans entrees
     qui indique si f(entree) == g(entree)
     """
-    # on vérifie pour chaque entrée si f et g retournent
-    # des résultats égaux avec ==
+    # on vÃ©rifie pour chaque entrÃ©e si f et g retournent
+    # des rÃ©sultats Ã©gaux avec ==
     # et on assemble le tout avec une comprehension de liste 
     return [f(entree) == g(entree) for entree in entrees]
 
 
 ##################################################
-# aplatir - Semaine 4 Séquence 4
+# aplatir - Semaine 4 SÃ©quence 4
 ##################################################
 def aplatir(conteneurs):
-    "retourne une liste des éléments des éléments de conteneurs"
-    # on peut concaténer les éléments de deuxième niveau 
-    # par une simple imbrication de deux compréhensions de liste
+    "retourne une liste des Ã©lÃ©ments des Ã©lÃ©ments de conteneurs"
+    # on peut concatÃ©ner les Ã©lÃ©ments de deuxiÃšme niveau 
+    # par une simple imbrication de deux comprÃ©hensions de liste
     return [element for conteneur in conteneurs for element in conteneur]
 
 
 ##################################################
-# alternat - Semaine 4 Séquence 4
+# alternat - Semaine 4 SÃ©quence 4
 ##################################################
 def alternat(l1, l2):
-    "renvoie une liste des éléments pris un sur deux dans l1 et dans l2"
-    # pour réaliser l'alternance on peut combiner zip avec aplatir
-    # telle qu'on vient de la réaliser
+    "renvoie une liste des Ã©lÃ©ments pris un sur deux dans l1 et dans l2"
+    # pour rÃ©aliser l'alternance on peut combiner zip avec aplatir
+    # telle qu'on vient de la rÃ©aliser
     return aplatir(zip(l1, l2))
 
 
 ##################################################
-# alternat - Semaine 4 Séquence 4
+# alternat - Semaine 4 SÃ©quence 4
 ##################################################
 def alternat2(l1, l2):
-    "une deuxième version de alternat"
-    # la même idée mais directement, sans utiliser aplatir
+    "une deuxiÃšme version de alternat"
+    # la mÃªme idÃ©e mais directement, sans utiliser aplatir
     return [element for conteneur in zip(l1, l2) for element in conteneur]
 
 
 ##################################################
-# intersect - Semaine 4 Séquence 4
+# intersect - Semaine 4 SÃ©quence 4
 ##################################################
 def intersect(A, B):
     """
-    prend en entrée deux listes de tuples de la forme
+    prend en entrÃ©e deux listes de tuples de la forme
     (entier, valeur)
-    renvoie la liste des valeurs associées dans A ou B
-    aux entiers présents dans A et B
+    renvoie la liste des valeurs associÃ©es dans A ou B
+    aux entiers prÃ©sents dans A et B
     """
     # pour montrer un exemple de fonction locale:
     # une fonction qui renvoie l'ensemble des entiers
-    # présents dans une des deux listes d'entrée
+    # prÃ©sents dans une des deux listes d'entrÃ©e
     def values(S):
         return {i for i, val in S}
-    # on l'applique à A et B
+    # on l'applique Ã  A et B
     val_A = values(A)
     val_B = values(B)
     #
-    # bien sûr on aurait pu écrire directement
+    # bien sÃ»r on aurait pu Ã©crire directement
     # val_A = {i for i, val in A}
     # val_B = {i for i, val in B}
     # 
-    # les entiers présents dans A et B 
+    # les entiers prÃ©sents dans A et B 
     # avec une intersection d'ensembles
     common_keys = val_A & val_B
     # et pour conclure on fait une union sur deux
-    # compréhensions d'ensembles
+    # comprÃ©hensions d'ensembles
     return {vala for a, vala in A if a in common_keys} \
          | {valb for b, valb in B if b in common_keys} 
 
 
 ##################################################
-# distance - Semaine 4 Séquence 8
+# distance - Semaine 4 SÃ©quence 8
 ##################################################
 import math
 
 def distance(*args):
-    "la racine de la somme des carrés des arguments"
-    # avec une compréhension on calcule la liste des carrés des arguments
+    "la racine de la somme des carrÃ©s des arguments"
+    # avec une comprÃ©hension on calcule la liste des carrÃ©s des arguments
     # on applique ensuite sum pour en faire la somme
-    # vous pourrez d'ailleurs vérifier que sum ([]) = 0
+    # vous pourrez d'ailleurs vÃ©rifier que sum ([]) = 0
     # enfin on extrait la racine avec math.sqrt
     return math.sqrt(sum([x**2 for x in args]))
 
 
 ##################################################
-# doubler_premier - Semaine 4 Séquence 8
+# doubler_premier - Semaine 4 SÃ©quence 8
 ##################################################
 def doubler_premier(f, first, *args):
     """
-    renvoie le résultat de la fonction f appliquée sur
+    renvoie le rÃ©sultat de la fonction f appliquÃ©e sur
     f(2 * first, *args)
     """
-    # une fois qu'on a écrit la signature on a presque fini le travail
-    # en effet on a isolé la fonction, son premier argument, et le reste
+    # une fois qu'on a Ã©crit la signature on a presque fini le travail
+    # en effet on a isolÃ© la fonction, son premier argument, et le reste
     # des arguments
-    # il ne reste qu'à appeler f, après avoir doublé first
+    # il ne reste qu'Ã  appeler f, aprÃšs avoir doublÃ© first
     return f(2*first, *args)
 
 
 ##################################################
-# doubler_premier2 - Semaine 4 Séquence 8
+# doubler_premier2 - Semaine 4 SÃ©quence 8
 ##################################################
 def doubler_premier2(f, first, *args, **keywords):
     """
-    équivalent à doubler_premier 
-    mais on peut aussi passer des arguments nommés
+    Ã©quivalent Ã  doubler_premier 
+    mais on peut aussi passer des arguments nommÃ©s
     """
-    # c'est exactement la même chose
+    # c'est exactement la mÃªme chose
     return f(2*first, *args, **keywords)
 
-# Complément - niveau avancé
+# ComplÃ©ment - niveau avancÃ©
 # ----
-# Il y a un cas qui ne fonctionne pas avec cette implémentation, 
-# quand le premier argument de f a une valeur par défaut 
+# Il y a un cas qui ne fonctionne pas avec cette implÃ©mentation, 
+# quand le premier argument de f a une valeur par dÃ©faut 
 # *et* on veut pouvoir appeler doubler_premier
 # en nommant ce premier argument 
 #
-# par exemple - avec f=muln telle que définie dans l'énoncé 
+# par exemple - avec f=muln telle que dÃ©finie dans l'Ã©noncÃ© 
 #def muln(x=1, y=1): return x*y
 
 # alors ceci
@@ -634,39 +634,39 @@ def doubler_premier2(f, first, *args, **keywords):
 # ne marche pas car on n'a pas les deux arguments requis
 # par doubler_premier2
 # 
-# et pour écrire, disons doubler_permier3, qui marcherait aussi comme cela
-# il faudrait faire une hypothèse sur le nom du premier argument...
+# et pour Ã©crire, disons doubler_permier3, qui marcherait aussi comme cela
+# il faudrait faire une hypothÃšse sur le nom du premier argument...
 
 
 ##################################################
-# validation2 - Semaine 4 Séquence 8
+# validation2 - Semaine 4 SÃ©quence 8
 ##################################################
 def validation2(f, g, argument_tuples):
     """
-    retourne une liste de booléens, un par entree dans entrees
+    retourne une liste de boolÃ©ens, un par entree dans entrees
     qui indique si f(*tuple) == g(*tuple)
     """
     # c'est presque exactement comme validation, sauf qu'on s'attend 
-    # à recevoir une liste de tuples d'arguments, qu'on applique
+    # Ã  recevoir une liste de tuples d'arguments, qu'on applique
     # aux deux fonctions avec la forme * au lieu de les passer directement
     return [f(*tuple) == g(*tuple) for tuple in argument_tuples]
 
 
 ##################################################
-# RPCProxy - Semaine 5 Séquence 6
+# RPCProxy - Semaine 5 SÃ©quence 6
 ##################################################
-# une troisième implémentation de RPCProxy
+# une troisiÃšme implÃ©mentation de RPCProxy
 
 class Forwarder(object):
     """
     Une instance de la classe Forwarder est un callable
-    qui peut être utilisée comme une méthode sur l
+    qui peut Ãªtre utilisÃ©e comme une mÃ©thode sur l
     class RPCProxy
     """
     def __init__(self, rpc_proxy, methodname):
         """
-        le constructeur  mémorise l'instance de RPCProxy
-        et le nom de la méthode qui a été appelée
+        le constructeur  mÃ©morise l'instance de RPCProxy
+        et le nom de la mÃ©thode qui a Ã©tÃ© appelÃ©e
         """
         self.methodname = methodname
         self.rpc_proxy = rpc_proxy
@@ -674,17 +674,17 @@ class Forwarder(object):
     def __call__(self, *args):
         """
         en rendant cet objet callable, on peut l'utiliser
-        comme une méthode de RPCProxy
+        comme une mÃ©thode de RPCProxy
         """
-        print "Envoi à {}\nde la fonction {} -- args= {}".\
+        print "Envoi Ã  {}\nde la fonction {} -- args= {}".\
             format(self.rpc_proxy.url, self.methodname, args)
         return "retour de la fonction " + self.methodname
 
 class RPCProxy(object):
     """
-    Une troisième implémentation de RPCProxy qui sous-traite
-    à une classe annexe `Forwarder` qui se comporte comme
-    une *factory* de méthodes
+    Une troisiÃšme implÃ©mentation de RPCProxy qui sous-traite
+    Ã  une classe annexe `Forwarder` qui se comporte comme
+    une *factory* de mÃ©thodes
     """
     def __init__(self, url, login, password):
         self.url = url
@@ -693,14 +693,14 @@ class RPCProxy(object):
         
     def __getattr__ (self, methodname):
         """
-        Crée à la volée une instance de Forwarder
-        correspondant à 'methodname'
+        CrÃ©e Ã  la volÃ©e une instance de Forwarder
+        correspondant Ã  'methodname'
         """
         return Forwarder(self, methodname)
 
 
 ##################################################
-# shipdict - Semaine 5 Séquence 6
+# shipdict - Semaine 5 SÃ©quence 6
 ##################################################
 from __future__ import print_function
 
@@ -710,7 +710,7 @@ from __future__ import print_function
 def d_m_s(f):
     """
     make a float readable; e.g. transform 2.5 into 2.30'00'' 
-    we avoid using Â° to keep things simple
+    we avoid using the degree sign to keep things simple
     input is assumed positive
     """
     d = int (f)
@@ -728,7 +728,7 @@ def lon_d_m_s(f):
 
 
 ##################################################
-# shipdict-suite - Semaine 5 Séquence 6
+# shipdict-suite - Semaine 5 SÃ©quence 6
 ##################################################
 class Position(object):
     "a position atom with timestamp attached"
@@ -752,7 +752,7 @@ class Position(object):
 
 
 ##################################################
-# shipdict-suite - Semaine 5 Séquence 6
+# shipdict-suite - Semaine 5 SÃ©quence 6
 ##################################################
 class Ship(object):
     """
@@ -786,7 +786,7 @@ class Ship(object):
 
 
 ##################################################
-# shipdict-suite - Semaine 5 Séquence 6
+# shipdict-suite - Semaine 5 SÃ©quence 6
 ##################################################
 class ShipDict(dict):
     """
@@ -834,7 +834,7 @@ class ShipDict(dict):
 
 
 ##################################################
-# shipdict-suite - Semaine 5 Séquence 6
+# shipdict-suite - Semaine 5 SÃ©quence 6
 ##################################################
     def add_chunk(self, chunk):
         """
@@ -875,7 +875,7 @@ class ShipDict(dict):
 
 
 ##################################################
-# shipdict-suite - Semaine 5 Séquence 6
+# shipdict-suite - Semaine 5 SÃ©quence 6
 ##################################################
     def ships_by_name(self, name):
         """
@@ -913,62 +913,62 @@ class ShipDict(dict):
 
 
 ##################################################
-# regexp_pythonid - Semaine 6 Séquence 6
+# regexp_pythonid - Semaine 6 SÃ©quence 6
 ##################################################
 # un identificateur commence par une lettre ou un underscore
-# et peut être suivi par n'importe quel nombre de
-# lettre, chiffre ou underscore, ce qui se trouve être \w
+# et peut Ãªtre suivi par n'importe quel nombre de
+# lettre, chiffre ou underscore, ce qui se trouve Ãªtre \w
 # si on ne se met pas en mode unicode
 regexp_pythonid = "[a-zA-Z_]\w*"
 
 
 ##################################################
-# regexp_pythonid - Semaine 6 Séquence 6
+# regexp_pythonid - Semaine 6 SÃ©quence 6
 ##################################################
-# on peut aussi bien sûr l'écrire en clair
+# on peut aussi bien sÃ»r l'Ã©crire en clair
 regexp_pythonid2 = "[a-zA-Z_][a-zA-Z0-9_]*"
 
 
 ##################################################
-# regexp_specials - Semaine 6 Séquence 6
+# regexp_specials - Semaine 6 SÃ©quence 6
 ##################################################
 # il faut commencer par exactement 2 underscores
-# donc le caractère suivant doit être une lettre
-# ensuite on peut mettre ce qu'on veut comme alphanumérique,
+# donc le caractÃšre suivant doit Ãªtre une lettre
+# ensuite on peut mettre ce qu'on veut comme alphanumÃ©rique,
 # mais avant les deux derniers underscores on ne peut pas avoir
 # un underscore
-# enfin pour traiter le cas où la partie centrale est réduite
-# à un seul caractère, on met une option - avec ()? 
+# enfin pour traiter le cas oÃ¹ la partie centrale est rÃ©duite
+# Ã  un seul caractÃšre, on met une option - avec ()? 
 regexp_specials = "__[a-zA-Z](\w*[a-zA-Z0-9])?__"
 
 
 ##################################################
-# regexp_url - Semaine 6 Séquence 6
+# regexp_url - Semaine 6 SÃ©quence 6
 ##################################################
 # en ignorant la casse on pourra ne mentionner les noms de protocoles
 # qu'en minuscules
 i_flag = "(?i)"
 
-# pour élaborer la chaine (proto1|proto2|...)
+# pour Ã©laborer la chaine (proto1|proto2|...)
 protos_list = ['http', 'https', 'ftp', 'ssh', ] 
 protos      = "(?P<proto>" + "|".join(protos_list) + ")"
 
-# à l'intérieur de la zone 'user/password', la partie
+# Ã  l'intÃ©rieur de la zone 'user/password', la partie
 # password est optionnelle - mais on ne veut pas le ':' dans
 # le groupe 'password' - il nous faut deux groupes
 password    = r"(:(?P<password>[^:]+))?"
 
-# la partie user-password elle-même est optionnelle
+# la partie user-password elle-mÃªme est optionnelle
 user        = r"((?P<user>\w+){password}@)?".format(**locals())
 
 # pour le hostname on accepte des lettres, chiffres, underscore et '.'
-# attention à backslaher . car sinon ceci va matcher tout y compris /
+# attention Ã  backslaher . car sinon ceci va matcher tout y compris /
 hostname    = r"(?P<hostname>[\w\.]+)"
 
 # le port est optionnel
 port        = r"(:(?P<port>\d+))?"
 
-# après le premier slash
+# aprÃšs le premier slash
 path        = r"(?P<path>.*)"
 
 # on assemble le tout
