@@ -1,0 +1,29 @@
+/*
+Placeholder for custom user CSS
+
+mainly to be overridden in profile/static/custom/custom.css
+
+This will always be an empty file in IPython
+*/
+
+/* 
+  the segments in a markdown 
+  that are 4 spaces away from the margin 
+  we want them to stick out with some background 
+*/
+div.rendered_html>pre>code {
+    background-color: #f7f7f7;
+    border: 1px solid;
+    border-color: #dde;
+    border-radius: 4px;
+    padding: .4em;
+}
+
+/* 
+  this would be for `backquoted inline code`
+*/
+.rendered_html code {
+    background-color: #f0f0ff;
+    padding: 3px;
+    border-radius: 4px;
+}
