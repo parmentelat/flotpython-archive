@@ -71,9 +71,11 @@ quiz:
 	cat */*.quiz > 00-all.quiz
 	recode ISO-8859-15..UTF-8 00-all.quiz
 
-######################################## the markdowns
+######################################## the markdowns and PDFs
 # list of notebooks
 NOTEBOOKS = $(wildcard W*/S[0-9]*.ipynb)
+
+GITPRINT_URL_ROOT = https://gitprint.com/parmentelat/flotpython/blob/master/
 
 define week
 $(subst /,,$(dir $(1)))
@@ -88,12 +90,29 @@ define mymarkdown
 $(call markdown_location,$(call week,$(1)),$(call mybasename,$(1)))
 endef
 
-MARKDOWNS = $(foreach notebook,$(NOTEBOOKS),$(call mymarkdown,$(notebook)))
+define pdf_location
+markdown/$(1)-$(2).pdf
+endef
+define mypdf
+$(call pdf_location,$(call week,$(1)),$(call mybasename,$(1)))
+endef
+define gitprint_url
+$(GITPRINT_URL_ROOT)/markdown/$(1)-$(2).md?download
+endef
+define my_url
+$(call gitprint_url,$(call week,$(1)),$(call mybasename,$(1)))
+endef
 
-# on applique cette règle à tous ces notebooks
+MARKDOWNS = $(foreach notebook,$(NOTEBOOKS),$(call mymarkdown,$(notebook)))
+PDFS = $(foreach notebook,$(NOTEBOOKS),$(call mypdf,$(notebook)))
+
+# apply this rule to all notebooks
 define notebook_rule
 $(call mymarkdown,$(1)): $(1)
 	ipython nbconvert --to markdown $(1) --stdout > $(call mymarkdown,$(1))
+
+$(call mypdf,$(1)): $(1)
+	curl -o $(call mypdf,$(1)) $(call my_url,$(1))
 endef
 
 $(foreach notebook,$(NOTEBOOKS),$(eval $(call notebook_rule,$(notebook))))
@@ -101,7 +120,12 @@ $(foreach notebook,$(NOTEBOOKS),$(eval $(call notebook_rule,$(notebook))))
 all: md
 md: $(MARKDOWNS)
 
+# these need to be done AFTER the markdown have been pushed up to github 
+pdf: $(PDFS)
+
 #################### corriges
 all: corr
 corr:
 	$(MAKE) -C corriges
+
+.PHONY: all md pdf corr
