@@ -43,7 +43,7 @@ Sachez aussi, si vous utilisez déjà MacPorts (https://www.macports.org), que
 vous pouvez également utiliser cet outil pour installer python 2.7 avec la
 commande
 
-    % sudo port install python27
+    $ sudo port install python27
 
 ### Vous utilisez Linux
 
@@ -56,28 +56,28 @@ terminal.
 Voici par exemple ce qu'on obtient depuis un terminal sur une machine installée
 en Fedora-20
 
-    % python
+    $ python
     Python 2.7.5 (default, Feb 19 2014, 13:47:28)
     [GCC 4.8.2 20131212 (Red Hat 4.8.2-7)] on linux2
     Type "help", "copyright", "credits" or "license" for more information.
     >>> exit()
-    %
+
 
 **Vérifiez bien le numéro de version** qui doit être en 2.7. Si vous obtenez un
 message du style `python: command not found` utilisez `yum` pour installer le
 rpm `python` comme ceci
 
-    % sudo yum install python
+    $ sudo yum install python
 
 S'agissant de `idle`, l'éditeur que nous utilisons dans le cours (optionnel si
 vous êtes familier avec un éditeur de texte), vérifiez sa présence comme ceci
 
-    % type idle
+    $ type idle
     idle is hashed (/usr/bin/idle)
 
 Ici encore, si la commande n'est pas disponible vous pouvez l'installer avec
 
-    % sudo yum install python-tools
+    $ sudo yum install python-tools
 
 ##### Debian / Ubuntu
 
@@ -85,20 +85,19 @@ Ici encore, python-2.7 est sans doute déja disponible. Procédez comme ci-dessu
 voici un exemple recueilli dans un terminal sur une machine installée en
 Ubuntu-14.04/trusty
 
-    % python
+    $ python
     Python 2.7.6 (default, Mar 22 2014, 22:59:56)
     [GCC 4.8.2] on linux2
     Type "help", "copyright", "credits" or "license" for more information.
     >>> exit()
-    %
 
 Pour installer python
 
-    % sudo apt-get install python
+    $ sudo apt-get install python
 
 Pour installer idle
 
-    % sudo apt-get install idle
+    $ sudo apt-get install idle
 
 # Installation de librairies complémentaires
 

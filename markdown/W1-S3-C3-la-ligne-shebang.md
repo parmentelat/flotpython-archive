@@ -10,14 +10,14 @@ Ce complément est uniquement valable pour MacOS et linux
 Nous avons vu dans la vidéo que pour lancer un programme python on fait
 essentiellement depuis le terminal
 
-    % python mon_module.py
+    $ python mon_module.py
 
 Lorsqu'il s'agit d'un programme qu'on utilise fréquemment, on n'est pas
 forcément dans le même répertoire que là où se trouve le programme python, aussi
 dans ce cas on peut utiliser un chemin "absolu", c'est-à-dire à partir de la
 racine des noms de fichiers, comme par exemple
 
-    % python /le/chemin/jusqu/a/mon_module.py
+    $ python /le/chemin/jusqu/a/mon_module.py
 
 Sauf que si effectivement on utilise cela souvent, c'est très malcommode de
 devoir s'y prendre de cette façon
@@ -50,23 +50,25 @@ fichier python en première **ou deuxième** position dans le fichier.
 Ensuite on rajoute au fichier, depuis le terminal, le caractère exécutable comme
 ceci:
 
-    % pwd
+    $ pwd
     /le/chemin/jusqu/a/
-    % chmod +x fibonacci.py
+
+    $ chmod +x fibonacci.py
 
 À partir de là vous pouvez utiliser le fichier `fibonacci.py` comme une
 commande, sans avoir à mentionner `python`, qui sera invoqué au travers du
 shebang.
 
-    % /le/chemin/jusqu/a/fibonacci.py 20
+    $ /le/chemin/jusqu/a/fibonacci.py 20
     fibonacci(20) = 10946
 
 Et donc vous pouvez aussi le déplacer dans un répertoire qui est dans votre
 variable `PATH`, et le rendre ainsi accessible depuis n'importe quel répertoire
 en faisant simplement
 
-    % cd /tmp
-    % fibonacci.py 20
+    $ cd /tmp
+
+    $ fibonacci.py 20
     fibonacci(20) = 10946
 
 **Remarque** tout ceci fonctionne très bien tant que votre point d'entrée - ici
