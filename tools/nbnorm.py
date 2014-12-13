@@ -6,6 +6,8 @@ import sys
 import os
 import tempfile
 import shutil
+from types import StringTypes, ListType
+
 
 # compute signature
 from IPython.nbformat.sign import NotebookNotary as Notary
@@ -126,6 +128,34 @@ class Notebook:
         if nb_empty:
             print ("found and removed {} empty cells".format(nb_empty))
 
+    def translate_rawnbconvert (self, verbose):
+        """
+        all cells lf type rawnbconvert are translated into a markdown cell
+        with 4 spaces indentation
+        """
+        nb_raw_cells = 0
+        for worksheet in self.notebook.worksheets:
+            for cell in worksheet.cells:
+                if cell['cell_type'] == 'raw':
+                    source = cell['source']
+                    if verbose:
+                        print("Got a raw cell with source of type {}".format(type(source)))
+                        print(">>>{}<<<".format(source))
+                        print("split:XXX{}XXX".format(source.split("\n")))
+                    if isinstance (cell['source'], StringTypes):
+                        cell['cell_type'] = 'markdown'
+                        cell['source'] = "    "+ "\n    ".join(source.split("\n"))
+                        nb_raw_cells += 1
+                    elif isinstance (cell['source'], ListType):
+                        cell['cell_type'] = 'markdown'
+                        cell['source'] =  [ '    ' + line for line in cell['source']]
+                        nb_raw_cells += 1
+                    else:
+                        print ("WARNING: dont know how to deal with a raw cell (type {})".format(type(cell['source'])))
+        if nb_raw_cells:
+            print ("found and rewrote {} raw cells".format(nb_raw_cells))
+        
+
     def sign (self):
         notary = Notary ()
         signature=notary.compute_signature (self.notebook)
@@ -152,6 +182,7 @@ class Notebook:
             self.set_version(version, force=True)
         self.clear_all_outputs ()
         self.remove_empty_cells ()
+        self.translate_rawnbconvert(verbose)
         if sign:
             self.sign()
         self.save()
