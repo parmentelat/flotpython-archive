@@ -75,7 +75,8 @@ quiz:
 # list of notebooks
 NOTEBOOKS = $(wildcard W*/S[0-9]*.ipynb)
 
-GITPRINT_URL_ROOT = https://gitprint.com/parmentelat/flotpython/blob/master/
+BRANCH=master
+GITPRINT_URL_ROOT = https://gitprint.com/parmentelat/flotpython/blob/$(BRANCH)/
 
 define week
 $(subst /,,$(dir $(1)))
