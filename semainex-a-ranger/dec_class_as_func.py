@@ -1,6 +1,6 @@
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 
-# exemple de decorateur de classe, simple (sans argument) et implementé comme une fonction
+# exemple de decorateur de classe, simple (sans argument) et implementÃ© comme une fonction
 
 # la classe Foo ne definit que le champ 'x'
 # apres decoration elle a les champs 'id' et 'x' 

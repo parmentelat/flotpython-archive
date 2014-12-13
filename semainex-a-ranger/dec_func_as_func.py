@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 # exemple de decorator de fonction implemente comme une fonction
 
 # on se donne une fonction volontairement stupide
@@ -64,7 +64,7 @@ print
 
 #################### troisieme version : amelioration du decorateur
 
-# on voit qu'avec cette technique on a oublié de mettre à jour
+# on voit qu'avec cette technique on a oubliÃ© de mettre Ã  jour
 # __name__ et __doc__ sur la fonction decoree
 
 # il existe un utilitaire pour faire cela...

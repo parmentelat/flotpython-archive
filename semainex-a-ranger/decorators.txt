@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 
-* decorator : similaire a des macros, c'est a dire à de la generation de code au moment du chargement
+* decorator : similaire a des macros, c'est a dire Ã  de la generation de code au moment du chargement
 
-* attention - decorator != Decorator tel que défini dans le livre 'Design Patterns' 
+* attention - decorator != Decorator tel que dÃ©fini dans le livre 'Design Patterns' 
 
 * a quoi ca sert : instrumenter des fonctions
 
@@ -12,7 +13,7 @@ voir l'exemple dans dec_func_as_func.py
  
 a retenir:
 
-un decorateur (implemente comme une fonction) est une fonction (time_it_1) qui prend en argument une fonction (iterate_cube_2) et retourne une version modifiée (décorée) de la fonction d'entrée.
+un decorateur (implemente comme une fonction) est une fonction (time_it_1) qui prend en argument une fonction (iterate_cube_2) et retourne une version modifiÃ©e (dÃ©corÃ©e) de la fonction d'entrÃ©e.
 
 ====================
 
