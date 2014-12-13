@@ -28,9 +28,9 @@ sachez toutefois que:
 d'une variable** (ou d'un identificateur au sens large), cela n'est tout
 simplement pas autorisé par le langage
 
-                # ceci est interdit par le langage :
-nb_élèves = 1
-                
+    # ceci est interdit par le langage :
+    nb_élèves = 1
+
  * Le seul endroit du programme - hors commentaires - où vous pouvez mettre des
 accents est dans les chaînes de caractères. Cela dit, les données manipulées par
 un programme proviennent pour l'essentiel de sources externes, comme une base de
@@ -38,13 +38,13 @@ données ou un formulaire web, mais pas directement du code source. Les chaînes
 de caractères présentes dans du vrai code sont bien souvent limitées à des
 messages de logging, et le plus souvent d'ailleurs en anglais, donc sans accent.
 
-                message = "on peut mettre un caractère accentué dans une chaîne"
-                
+    message = "on peut mettre un caractère accentué dans une chaîne"
+
   * Enfin on peut aussi envisager de mettre des caractères accentués dans les
 commentaires, si on choisit malgré tout d'écrire le code en français
 
-                # on peut mettre un caractère accentué dans un commentaire
-                
+    # on peut mettre un caractère accentué dans un commentaire
+
 ### Précautions à prendre
 
 Si votre ordinateur est configuré pour le français, il y a une chance pour que
@@ -59,23 +59,23 @@ comme ceci
 
 Ainsi il est sans doute raisonnable d'utiliser ceci&nbsp;:
 
-                # -*- coding: utf-8 -*-
-                
+    # -*- coding: utf-8 -*-
+
 Le nom **`utf-8`** fait référence à **Unicode** (ou pour être précis, à
 l'encodage le plus répandu parmi ceux qui sont définis dans la norme Unicode,
 comme nous le verrons plus bas). Sur certains systèmes plus anciens vous pourrez
 être amenés à utiliser un autre encodage. Pour déterminer la valeur à utiliser
 dans votre cas précis vous pouvez faire dans l'interpréteur interactif&nbsp;:
 
-                # ceci doit être exécuté sur votre machine
-import sys
-print sys.getdefaultencoding()
-                
+    # ceci doit être exécuté sur votre machine
+    import sys
+    print sys.getdefaultencoding()
+
 Par exemple avec d'anciennes versions de Windows vous pouvez être amenés à
 écrire&nbsp;:
 
-                # -*- coding: cp1252 -*-
-                
+    # -*- coding: cp1252 -*-
+
 La syntaxe de la ligne `coding` est précisée dans [cette
 documentation](https://docs.python.org/2/reference/lexical_analysis.html
 #encoding-declarations
