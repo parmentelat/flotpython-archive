@@ -87,12 +87,12 @@ avec la réserve, toutefois que les noms doivent apparaître après les argument
 liés par position; les raisons pour ceci vous apparaîtront clairement dans
 quelque temps; aussi la forme suivante n'est pas acceptée
 
-                "{1}, {0}, {age}ans".format(age=age, nom, prenom)
-
-File "<ipython-input-46-9a8e8e541bf2>", line 1
     "{1}, {0}, {age}ans".format(age=age, nom, prenom)
-SyntaxError: non-keyword arg after keyword arg
-                
+
+    File "<ipython-input-46-9a8e8e541bf2>", line 1
+        "{1}, {0}, {age}ans".format(age=age, nom, prenom)
+    SyntaxError: non-keyword arg after keyword arg
+
 Enfin, il arrive qu'on ait besoin de spécifier plus finement la façon dont une
 valeur doit être affichée; c'est typiquement le cas avec les valeurs flottantes,
 pour lesquelles la précision avec laquelle on les montre vient au détriment de

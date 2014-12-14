@@ -17,17 +17,17 @@ par exemple C/C++.
 En C on écrira, par exemple, une version simpliste de la fonction factoriel
 comme ceci
 
-                #include <stdio.h>
+    #include <stdio.h>
 
-int factoriel (int n) {
-  int result = 1;
-  int loop;
-  for (loop = 1; loop <= n; loop ++) {
-    result *= loop;
-  }
-  return result;
-}
-                
+    int factoriel (int n) {
+      int result = 1;
+      int loop;
+      for (loop = 1; loop <= n; loop ++) {
+        result *= loop;
+      }
+      return result;
+    }
+
 Comme vous pouvez le voir - ou le deviner - toutes les variables utilisées ici
 (comme par exemple `n`, `result` et `loop`) sont typées.
  * On doit appeler `factoriel` avec un argument `n` qui doit être un entier
@@ -49,16 +49,16 @@ données.
 *a priori* de la validité du programme; par exemple si à un autre endroit dans
 le code on trouve
 
-                int main (int argc, char *argv[]) {
-  /* le premier argument de la ligne de commande est argv[1] */
-  char *input = argv[1];
-  /* calculer son factoriel et afficher le resultat */
-  printf ("Factoriel (%s) = %d\n",input,factoriel(input));
-  /*                                               ^^^                */
-  /* ici on appelle factoriel avec une entree 'chaine de caractere'   */
-  return 0;
-}
-                
+    int main (int argc, char *argv[]) {
+      /* le premier argument de la ligne de commande est argv[1] */
+      char *input = argv[1];
+      /* calculer son factoriel et afficher le resultat */
+      printf ("Factoriel (%s) = %d\n",input,factoriel(input));
+      /*                                               ^^^                */
+      /* ici on appelle factoriel avec une entree 'chaine de caractere'   */
+      return 0;
+    }
+
 alors le compilateur va remarquer qu'on essaie d'appeler `factoriel` avec comme
 argument `input` qui, pour faire simple, est une chaîne de caractères; et comme
 `factoriel` s'attend à recevoir un entier ce programme n'a aucune chance de

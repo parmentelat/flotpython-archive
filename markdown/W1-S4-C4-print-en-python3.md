@@ -24,38 +24,40 @@ python3 est certainement avec `print`:
 
 En python2 `print` est une **instruction**
 
-                >>> import sys
->>> sys.version
-'2.7.8 (default, Jul 13 2014, 17:11:32) \n[GCC 4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)]'
->>> print "Hello", "World"
-Hello World
-                
+    >>> import sys
+    >>> sys.version
+    '2.7.8 (default, Jul 13 2014, 17:11:32) \n[GCC 4.2.1 Compatible Apple LLVM
+5.1 (clang-503.0.40)]'
+    >>> print "Hello", "World"
+    Hello World
+
 et comme c'est une instruction on ne peut pas comparer son résultat avec autre
 chose - ici 0
 
-                >>> 0 == print "Hello", "World"
-  File "<stdin>", line 1
-    0 == print "Hello", "World"
-             ^
-SyntaxError: invalid syntax
-                
+    >>> 0 == print "Hello", "World"
+      File "<stdin>", line 1
+        0 == print "Hello", "World"
+                 ^
+    SyntaxError: invalid syntax
+
 ##### python3
 
 Alors qu'en python3 `print` est une **fonction** (et donc une **expression**)
 
-                >>> import sys
->>> sys.version
-'3.4.1 (default, Sep 20 2014, 19:44:17) \n[GCC 4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)]'
->>> print("Hello","World")
-Hello World
-                
+    >>> import sys
+    >>> sys.version
+    '3.4.1 (default, Sep 20 2014, 19:44:17) \n[GCC 4.2.1 Compatible Apple LLVM
+5.1 (clang-503.0.40)]'
+    >>> print("Hello","World")
+    Hello World
+
 et comme toute expression elle retourne une valeur qu'on peut comparer - ici
 encore avec 0
 
-                >>> 0 == print("Hello","World")
-Hello World
-False
-                
+    >>> 0 == print("Hello","World")
+    Hello World
+    False
+
 ### Compatibilité avec `__future__`
 
 Il existe en python2 une couche de compatibilité, le module `__future__`, dont
@@ -63,31 +65,33 @@ le but est de gommer les différences entre les deux versions. Ainsi si vous le
 souhaitez vous pouvez écrire du code python2 qui "voit" `print` comme une
 fonction en important ceci
 
-                from __future__ import print_function
-                
+    from __future__ import print_function
+
 Après quoi vous pouver utilisez `print` comme si vous écriviez du python3
 
-                >>> import sys
->>> sys.version
-'2.7.8 (default, Jul 13 2014, 17:11:32) \n[GCC 4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)]'
->>>
->>> from __future__ import print_function
->>>
->>> print("Hello","World")
-Hello World
-                
+    >>> import sys
+    >>> sys.version
+    '2.7.8 (default, Jul 13 2014, 17:11:32) \n[GCC 4.2.1 Compatible Apple LLVM
+5.1 (clang-503.0.40)]'
+    >>>
+    >>> from __future__ import print_function
+    >>>
+    >>> print("Hello","World")
+    Hello World
+
 ### Remarque
 
 Si vous utilisez python2 et que **vous ne mentionnez pas cet import**, vous
 pouvez avoir l'**impression** qu'il est inutile:
 
-                >>> import sys
->>> sys.version
-'2.7.8 (default, Jul 13 2014, 17:11:32) \n[GCC 4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)]'
->>>
->>> print("Hello")
-Hello
-                
+    >>> import sys
+    >>> sys.version
+    '2.7.8 (default, Jul 13 2014, 17:11:32) \n[GCC 4.2.1 Compatible Apple LLVM
+5.1 (clang-503.0.40)]'
+    >>>
+    >>> print("Hello")
+    Hello
+
 En fait ce qui se passe ici, c'est que les parenthèses sont considérées dans
 leur rôle habituel de groupement dans les expressions; cela rejoint la
 discussion que l'on aura sur les tuples; en fait les parenthèses ne jouent aucun

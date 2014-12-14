@@ -77,8 +77,7 @@ Par exemple avec d'anciennes versions de Windows vous pouvez être amenés à
     # -*- coding: cp1252 -*-
 
 La syntaxe de la ligne `coding` est précisée dans [cette
-documentation](https://docs.python.org/2/reference/lexical_analysis.html
-#encoding-declarations
+documentation](https://docs.python.org/2/reference/lexical_analysis.html#encoding-declarations
 ).
 
 ### Qu'est-ce qu'un encodage ?

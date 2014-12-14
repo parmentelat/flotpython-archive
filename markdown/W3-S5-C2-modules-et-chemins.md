@@ -8,9 +8,9 @@ vous voulez uniquement charger vos propres modules ou packages, il suffit de les
 placer dans le répertoire où vous lancez la commande python. Si vous n'êtes pas
 sûr de cet emplacement vous pouvez le savoir en faisant:
 
-                import os
-print 'directory courant', os.getcwd()
-                
+    import os
+    print 'directory courant', os.getcwd()
+
 ## Complément - niveau intermédiaire
 
 Dans ce complément nous allons voir, de manière générale, comment sont localisés
@@ -65,31 +65,31 @@ l'utilisateur ait à s'en soucier.
 
 Imaginons donc ces trois fichiers installés sur machine de l'utilisateur dans
 
-                /usr/share/utilitaire/
-                      main.py
-                      spam.py
-                      eggs.py
-                
+    /usr/share/utilitaire/
+                          main.py
+                          spam.py
+                          eggs.py
+
 Si vous ne faites rien de particulier, c'est à dire que `main.py` contient juste
 
-                import spam, eggs
-                
+    import spam, eggs
+
 Alors le programme fonctionnera **que s'il est lancé depuis
 `/usr/share/utilitaire`**, ce qui n'est pas du tout pratique.
 
 Pour contourner cela on peut écrire dans `main.py` quelque chose comme
 
-                # on calcule le directory où est installé le point d'entrée
-import os.path
-directory_installation = os.path.dirname(__file__)
+    # on calcule le directory où est installé le point d'entrée
+    import os.path
+    directory_installation = os.path.dirname(__file__)
 
-# et on l'ajoute au chemin de recherche des modules
-import sys
-sys.path.append(directory_installation)
+    # et on l'ajoute au chemin de recherche des modules
+    import sys
+    sys.path.append(directory_installation)
 
-# maintenant on peut importer spam et eggs de n'importe où
-import spam, eggs
-                
+    # maintenant on peut importer spam et eggs de n'importe où
+    import spam, eggs
+
 ### Distribuer sa propre librairie avec `distutils`
 
 Notez bien que l'exemple précédent est **uniquement donné à titre

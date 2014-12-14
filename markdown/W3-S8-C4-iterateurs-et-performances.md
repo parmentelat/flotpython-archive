@@ -165,31 +165,31 @@ Ainsi en python-3, `range(10)` retourne un objet itérateur. Et il n'y a pas de
 fonction `xrange`, sachant qu'on peut toujours construire une liste liste en
 appelant explicitement la fonction `list` comme ceci&nbsp;:
 
-                ~ $ python3
-Python 3.4.1 (default, Sep 20 2014, 19:44:17)
-[GCC 4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)] on darwin
-Type "help", "copyright", "credits" or "license" for more information.
->>>
->>> range(10)
-range(0, 10)
->>>
->>> xrange(10)
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-NameError: name 'xrange' is not defined
->>>
->>> list(range(10))
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
->>>
-                
+    ~ $ python3
+    Python 3.4.1 (default, Sep 20 2014, 19:44:17)
+    [GCC 4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)] on darwin
+    Type "help", "copyright", "credits" or "license" for more information.
+    >>>
+    >>> range(10)
+    range(0, 10)
+    >>>
+    >>> xrange(10)
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    NameError: name 'xrange' is not defined
+    >>>
+    >>> list(range(10))
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    >>>
+
 ## Complément - niveau avancé
 
 Pour finir, et pour revenir sur les mesures de performances, voici une astuce
 qui permet de lancer  de petits benchmarkes dans un terminal&nbsp;:
 
-                $ python -m timeit 'liste=range(10**6)' 'for x in liste: x+1'
-10 loops, best of 3: 50.5 msec per loop
-                
+    $ python -m timeit 'liste=range(10**6)' 'for x in liste: x+1'
+    10 loops, best of 3: 50.5 msec per loop
+
 Ceci met en jeu un certain nombre de choses nouvelles:
  * python avec l'option -m permet d'importer un module, en l'occurrence ici [le
 module `timeit`](https://docs.python.org/2/library/timeit.html);

@@ -122,8 +122,8 @@ souhaitez à vos notebooks sans affecter les autres étudiants.
 
 Vous pouvez toujours revenir à la version "du cours" grâce au menu
 
-                File -> Reset from Origin
-                
+    File -> Reset from Origin
+
 Attention, avec cette fonction vous restaurez **tout le notebook** et donc
 **vous perdez vos modifications précédentes**.
 
@@ -132,8 +132,8 @@ Attention, avec cette fonction vous restaurez **tout le notebook** et donc
 Vous pouvez télécharger un notebook au format python sur votre ordinateur grâce
 au menu
 
-                File -> Download as -> python
-                
+    File -> Download as -> python
+
 Les cellules de texte sont préservées dans le résultat sous forme de
 commentaires python
 
@@ -142,8 +142,8 @@ commentaires python
 
 Enfin avec le menu
 
-                File -> Share static version
-                
+    File -> Share static version
+
 vous pouvez publier une version en lecture seule de votre notebook; vous obtenez
 une URL que vous pouvez publier par exemple pour demander de l'aide sur le
 forum; ainsi, les autres étudiants peuvent accéder en lecture seule à votre

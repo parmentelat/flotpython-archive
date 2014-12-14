@@ -192,29 +192,29 @@ $ 0°C = 273.15°K $
 Pour être plus explicite encore, voici un pretty-print d'un objet correspondant
 à une ville (Cayenne en Guyanne), en ne montrant que la première mesure&nbsp;:
 
-                {u'city': {u'coord': {u'lat': 49.558578, u'lon': 1.62803},
-           u'country': u'FR',
-           u'id': 3028097,
-           u'name': u'Cayenne'},
- u'data': [{u'clouds': 80,
-            u'deg': 330,
-            u'dt': 1394884800,
-            u'humidity': 85,
-            u'pressure': 1028.47,
-            u'speed': 5.41,
-            u'temp': {u'day': 282.3,
-                      u'eve': 282.86,
-                      u'max': 283.22,
-                      u'min': 279.7,
-                      u'morn': 279.7,
-                      u'night': 281.96},
-            u'weather': [{u'description': u'broken clouds',
-                          u'icon': u'04d',
-                          u'id': 803,
-                          u'main': u'Clouds'}]},
-           '... other similar dicts ...'],
- u'time': 1394865585}
-                
+    {u'city': {u'coord': {u'lat': 49.558578, u'lon': 1.62803},
+               u'country': u'FR',
+               u'id': 3028097,
+               u'name': u'Cayenne'},
+     u'data': [{u'clouds': 80,
+                u'deg': 330,
+                u'dt': 1394884800,
+                u'humidity': 85,
+                u'pressure': 1028.47,
+                u'speed': 5.41,
+                u'temp': {u'day': 282.3,
+                          u'eve': 282.86,
+                          u'max': 283.22,
+                          u'min': 279.7,
+                          u'morn': 279.7,
+                          u'night': 281.96},
+                u'weather': [{u'description': u'broken clouds',
+                              u'icon': u'04d',
+                              u'id': 803,
+                              u'main': u'Clouds'}]},
+               '... other similar dicts ...'],
+     u'time': 1394865585}
+
 ##### Format concret
 
 L'échantillon complet décompressé contient autant de lignes que de villes (22631

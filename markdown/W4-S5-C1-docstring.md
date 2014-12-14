@@ -65,19 +65,20 @@ pas `help` de nous afficher cette information.
 Le [PEP 257](http://legacy.python.org/dev/peps/pep-0257/) qui donne les
 conventions autour du *docstring* précise bien ceci:
 
-                The one-line docstring should NOT be a "signature" reiterating the function/method parameters (which can be obtained by introspection). Don't do:
+    The one-line docstring should NOT be a "signature" reiterating the
+function/method parameters (which can be obtained by introspection). Don't do:
 
-def function(a, b):
-    """function(a, b) -> list"""
- 
-<...>
+    def function(a, b):
+        """function(a, b) -> list"""
 
-The preferred form for such a docstring would be something like:
+    <...>
 
-def function(a, b):
-    """Do X and return a list."""
-(Of course "Do X" should be replaced by a useful description!)
-                
+    The preferred form for such a docstring would be something like:
+
+    def function(a, b):
+        """Do X and return a list."""
+    (Of course "Do X" should be replaced by a useful description!)
+
 ### Pour en savoir plus
 
 Vous trouverez tous les détails sur *docstring* dans le [PEP

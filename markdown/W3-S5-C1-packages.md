@@ -117,9 +117,9 @@ C'est pourquoi [(et c'est également expliqué
 ici)](https://docs.python.org/2/tutorial/modules.html#executing-modules-as-
 scripts) les scripts python se terminent généralement par une phrase du genre de
 
-                if __name__ == "__main__":
-    <faire vraiment quelque chose>
-                
+    if __name__ == "__main__":
+        <faire vraiment quelque chose>
+
 ##### `__file__` 
 
 

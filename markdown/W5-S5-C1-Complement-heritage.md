@@ -221,20 +221,20 @@ l'héritage.
 
 Le module propose une hiérarchie de classes comme ceci:
 
-                +------------+
-| BaseServer |
-+------------+
-      |
-      v
-+-----------+        +------------------+
-| TCPServer |------->| UnixStreamServer |
-+-----------+        +------------------+
-      |
-      v
-+-----------+        +--------------------+
-| UDPServer |------->| UnixDatagramServer |
-+-----------+        +--------------------+
-                
+    +------------+
+    | BaseServer |
+    +------------+
+          |
+          v
+    +-----------+        +------------------+
+    | TCPServer |------->| UnixStreamServer |
+    +-----------+        +------------------+
+          |
+          v
+    +-----------+        +--------------------+
+    | UDPServer |------->| UnixDatagramServer |
+    +-----------+        +--------------------+
+
 Ici encore notre propos n'est pas d'entrer dans les détails, mais d'observer le
 fait que les différents *niveaux d'intelligence* sont ajoutés les uns aux les
 autres au fur et à mesure que l'on descend le graphe d'héritage.

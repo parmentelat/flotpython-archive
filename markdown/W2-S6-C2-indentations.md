@@ -90,26 +90,26 @@ qu'il voit comme ceci
 Sauf qu'en fait, il a mis un mélange de tabulations et d'espaces, et en fait le
 fichier contient (avec ^I pour tabulation)
 
-                if 'a' in entree:
-^Iif 'b' in entree:
-^I^Icas11 = True
-    ^Iprint 'a et b'
-^Ielse:
-^I^Icas12 = True
-    ^Iprint 'a mais pas b'
-                
+    if 'a' in entree:
+    ^Iif 'b' in entree:
+    ^I^Icas11 = True
+        ^Iprint 'a et b'
+    ^Ielse:
+    ^I^Icas12 = True
+        ^Iprint 'a mais pas b'
+
 Bernard envoie son code à Alice qui utilise `emacs`. Dans son environnement,
 `emacs` affiche une tabulation comme 8 caractères. Du coup Alice "voit" le code
 suivant
 
-                if 'a' in entree:
-        if 'b' in entree:
-                cas11 = True
-            print 'a et b'
-    else:
-        cas12 = True
-            print 'a mais pas b'
-                
+    if 'a' in entree:
+            if 'b' in entree:
+                    cas11 = True
+                print 'a et b'
+        else:
+            cas12 = True
+                print 'a mais pas b'
+
 Bref, c'est la confusion la plus totale. Aussi répétons-le, **n'utilisez jamais
 de tabulations dans votre code python**
 

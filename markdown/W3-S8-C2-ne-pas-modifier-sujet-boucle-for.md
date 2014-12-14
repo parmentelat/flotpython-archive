@@ -99,12 +99,12 @@ comprendre.
 Voyons maintenant un exemple de code qui ne respecte pas la règle, et qui
 modifie le sujet de la boucle en lui ajoutant des valeurs
 
-                # cette boucle ne termine pas
-liste = [1, 2, 3]
-for c in liste:
-    if c == 3:
-        liste.append(c)
-                
+    # cette boucle ne termine pas
+    liste = [1, 2, 3]
+    for c in liste:
+        if c == 3:
+            liste.append(c)
+
 Nous avons volontairement mis ce code **dans une cellule de texte** et non de
 code: vous **ne pouvez pas l'exécuter** dans le notebook. Si vous essayez de
 l'exécuter sur votre ordinateur vous constaterez qu'elle ne termine pas, en fait

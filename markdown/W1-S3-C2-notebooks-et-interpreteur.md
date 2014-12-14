@@ -33,26 +33,26 @@ les deux, en ce sens que seul le **dernier résultat** de la cellule est imprim�
 
 Le programme choisi est très simple, c'est le suivant
 
-                10 * 10
-20 * 20
-30 * 30
-                
+    10 * 10
+    20 * 20
+    30 * 30
+
 Voici comment se comporte l'interpréteur interactif quand on lui soumet ces
 instructions
 
-                ~ $ python
-Python 2.7.7 (default, Jun  2 2014, 01:41:14)
-[GCC 4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)] on darwin
-Type "help", "copyright", "credits" or "license" for more information.
->>> 10 * 10
-100
->>> 20 * 20
-400
->>> 30 * 30
-900
->>> exit()
-~ $
-                
+    ~ $ python
+    Python 2.7.7 (default, Jun  2 2014, 01:41:14)
+    [GCC 4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)] on darwin
+    Type "help", "copyright", "credits" or "license" for more information.
+    >>> 10 * 10
+    100
+    >>> 20 * 20
+    400
+    >>> 30 * 30
+    900
+    >>> exit()
+    ~ $
+
 Noter que pour terminer la session, il nous faut "sortir" de l'interpréteur en
 tapant `exit()`
 
@@ -68,17 +68,17 @@ complet. Pour cela il nous faut tout d'abord fabriquer un fichier, que la
 tradition veut avec un suffixe en `.py`, en utilisant par exemple un éditeur de
 fichier. Le résultat doit ressembler à ceci:
 
-                ~ $ cat foo.py
-10 * 10
-20 * 20
-30 * 30
-~ $ 
-                
+    ~ $ cat foo.py
+    10 * 10
+    20 * 20
+    30 * 30
+    ~ $
+
 Exécutons à présent ce programme:
 
-                ~ $ python foo.py
-~ $
-                
+    ~ $ python foo.py
+    ~ $
+
 On constate donc que ce programme ne fait rien. En tous cas selon toute
 apparence.
 

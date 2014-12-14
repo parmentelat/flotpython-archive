@@ -168,14 +168,14 @@ On peut également redéfinir les opérateurs arithmétiques et logiques. Dans
 l'exemple qui suit nous allons l'illustrer sur l'addition de matrices. On
 rappelle pour mémoire que&nbsp;:
 
-$ \left( \begin{array}{cc} a_{11} & a_{12} \\
+$\left( \begin{array}{cc} a_{11} & a_{12} \\
 a_{21} & a_{22}\end{array} \right)
 +
 \left( \begin{array}{cc} b_{11} & b_{12} \\
 b_{21} & b_{22}\end{array} \right)
 =
 \left( \begin{array}{cc} a_{11}+b_{11} & a_{12}+b_{12} \\
-a_{21}+b_{21} & a_{22}+b_{22}\end{array} \right) $
+a_{21}+b_{21} & a_{22}+b_{22}\end{array} \right)$
 
 ### Une nouvelle version de la classe `Matrix2`
 

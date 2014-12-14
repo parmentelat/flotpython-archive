@@ -84,26 +84,26 @@ l'avons vue dans un complément récemment, il serait de beaucoup préférable d
 fournir une méthode `anniversaire` pour cela, de façon à pouvoir faire quelque
 chose comme
 
-                # attention cette cellule n'est pas évaluable
-pierre.anniversaire()
-                
+    # attention cette cellule n'est pas évaluable
+    pierre.anniversaire()
+
 Dans la pratique on définit presque toujours toutes les méthodes en même temps
 que la classe. Ce qui veut dire que l'on ajouterait tout simplement la méthode
 `anniversaire` dans le code qui définit la classe ci-dessus.
 
-                # Cette cellule *n'est pas* évaluable
-# elle donne seulement un aperçu de comment
-# on aurait pu écrire la classe Personne
-# pour lui ajouter une méthode 'anniversaire'
-class Personne:
-    """Une personne possède un nom, un âge et une adresse e-mail"""
-    
-    def __init__(self, nom, age, email):
-        ...
+    # Cette cellule *n'est pas* évaluable
+    # elle donne seulement un aperçu de comment
+    # on aurait pu écrire la classe Personne
+    # pour lui ajouter une méthode 'anniversaire'
+    class Personne:
+        """Une personne possède un nom, un âge et une adresse e-mail"""
 
-    def anniversaire(self):
-        self.age += 1
-                
+        def __init__(self, nom, age, email):
+            ...
+
+        def anniversaire(self):
+            self.age += 1
+
 ## Complément - niveau intermédiaire
 
 Nous allons toutefois profiter de cet exemple pour montrer comment il est

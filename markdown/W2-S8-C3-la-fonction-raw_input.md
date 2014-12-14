@@ -41,12 +41,12 @@ est très facile de l'oublier et de passer cette chaîne directement à une
 fonction qui s'attend à recevoir, par exemple, un nombre entier, auquel cas les
 choses se passent mal:
 
-                >>> range(raw_input("nombre de lignes: "))
-nombre de lignes: 4
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: range() integer end argument expected, got str.
-                
+    >>> range(raw_input("nombre de lignes: "))
+    nombre de lignes: 4
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    TypeError: range() integer end argument expected, got str.
+
 Dans ce cas il faut appeler la fonction `int` pour convertir le résultat en un
 entier:
 

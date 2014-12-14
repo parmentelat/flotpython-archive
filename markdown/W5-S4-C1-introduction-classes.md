@@ -11,8 +11,8 @@ de l'application. Il faut donc voir une classe au même niveau qu'un type
 
 Par exemple, imaginons qu'on a besoin de manipuler des matrices $2\times 2$
 
-$ A = \left( \begin{array}{cc} a_{11} & a_{12} \\
-a_{21} & a_{22}\end{array} \right) $
+$A = \left( \begin{array}{cc} a_{11} & a_{12} \\
+a_{21} & a_{22}\end{array} \right)$
 
 Et en guise d'illustration, nous allons utiliser le déterminant; c'est juste un
 prétexte pour implémenter une méthode sur cette classe, ne vous inquiétez pas si

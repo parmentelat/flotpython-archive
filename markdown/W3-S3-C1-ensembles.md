@@ -30,20 +30,20 @@ On a vu précédemment que les clés dans un dictionnaire doivent être globalem
 immuables. Pour exactement les mêmes raisons, les éléments d'un ensemble doivent
 aussi être globalement immuables.
 
-                # on ne peut pas insérer un tuple qui contient une liste
->>> ensemble = {(1, 2, [3, 4])}
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: unhashable type: 'list'
-                
+    # on ne peut pas insérer un tuple qui contient une liste
+    >>> ensemble = {(1, 2, [3, 4])}
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    TypeError: unhashable type: 'list'
+
 Le type `set` étant lui-même mutable, on ne peut pas créer un ensemble
 d'ensembles
 
-                >>> ensemble = {{1, 2}}
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: unhashable type: 'set'
-                
+    >>> ensemble = {{1, 2}}
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+    TypeError: unhashable type: 'set'
+
 Et c'est une des raisons d'être du type `frozenset`.
 
 ### Création - la fonction `frozenset`
@@ -165,7 +165,7 @@ ordonnés**.
 
 ##### Différence symétrique
 
-On rappelle que $ A \Delta B = (A - B) \cup (B - A) $
+On rappelle que $A \Delta B = (A - B) \cup (B - A)$
 
 
     A2 ^ A3

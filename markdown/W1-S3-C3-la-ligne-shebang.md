@@ -1,5 +1,7 @@
 
-# #!/usr/bin/env python
+# La ligne *shebang*
+
+    #!/usr/bin/env python
 
 ## Complément - niveau avancé
 

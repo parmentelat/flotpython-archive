@@ -86,9 +86,9 @@ les attributs de *o*.
 
 Les deux règles ci-dessus s'écrivent alors comme ceci&nbsp;:
 
- * $ \forall A,B \in \cal{S}$,  A hérite de B $\Rightarrow$ A est avant B dans
+ * $\forall A,B \in \cal{S}$,  A hérite de B $\Rightarrow$ A est avant B dans
 $\cal{MRO}$
- * $ \forall B,C,D \in \cal{S}$, B hérite de C puis de D $\Rightarrow$ B est
+ * $\forall B,C,D \in \cal{S}$, B hérite de C puis de D $\Rightarrow$ B est
 avant C qui est avant D dans $\cal{MRO}$
 
 La formule "B hérite de C puis de D" est à prendre ici au sens large; B peut
@@ -196,29 +196,29 @@ section, "Pour en savoir plus").
 
 Cette hiérarchie nous donne, en partant de A, l'ordre suivant
 
-                                           6
-                          ---
-Level 3                  | O |
-                       /  ---  \
-                      /    |    \
-                     /     |     \
-                    /      |      \
-                  ---     ---    ---
-Level 2        2 | E | 4 | D |  | F | 5
-                  ---     ---    ---
-                   \      / \     /
-                    \    /   \   /
-                     \  /     \ /
-                      ---     ---
-Level 1            1 | B |   | C | 3
-                      ---     ---
-                       \       /
-                        \     /
-                          ---
-Level 0                0 | A |
-                          ---
+                               6
+                              ---
+    Level 3                  | O |
+                           /  ---  \
+                          /    |    \
+                         /     |     \
+                        /      |      \
+                      ---     ---    ---
+    Level 2        2 | E | 4 | D |  | F | 5
+                      ---     ---    ---
+                       \      / \     /
+                        \    /   \   /
+                         \  /     \ /
+                          ---     ---
+    Level 1            1 | B |   | C | 3
+                          ---     ---
+                           \       /
+                            \     /
+                              ---
+    Level 0                0 | A |
+                              ---
 
-                
+
 Que l'on peut calculer, sous l'interpréteur python, avec la méthode `mro` sur la
 classe de départ&nbsp;:
 

@@ -10,9 +10,9 @@ Nous avons vu qu'en python les blocs de code sont définis par leur indentation.
 Cette convention a une limitation lorsqu'on essaie de définir un bloc vide.
 Voyons par exemple comment on définirait en C une fonction qui ne fait rien
 
-                /* une fonction C qui ne fait rien */
-void foo () {}
-                
+    /* une fonction C qui ne fait rien */
+    void foo () {}
+
 Comme en python on n'a pas d'accolade pour délimiter les blocs de code, il
 existe en python une instruction `pass`, qui ne fait rien. À l'aide de cette
 instruction on peut à présent définir une fonction vide comme ceci

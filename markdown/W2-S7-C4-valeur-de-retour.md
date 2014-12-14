@@ -23,8 +23,8 @@ Mais en fait, il serait dans notre cas beaucoup plus commode de définir une
 fonction qui retourne le carré d'un nombre, afin de pouvoir écrire quelque chose
 comme
 
-                carre15 = carre(15)
-                
+    carre15 = carre(15)
+
 quitte à imprimer cette valeur ensuite si nécessaire - même si jusqu'ici nous
 avons fait beaucoup appel à `print`, dans la pratique, imprimer n'est pas un but
 en soi, au contraire bien souvent.

@@ -33,9 +33,9 @@ est vrai ou non"*.
 En python donc, `if ` n'est pas une expression, donc on ne peut pas l'utiliser
 pour écrire quelque chose comme :
 
-                # ceci n'est pas du python
-y = ( if x : 12 ; else 35 )
-                
+    # ceci n'est pas du python
+    y = ( if x : 12 ; else 35 )
+
 Avec les notions introduites jusqu'ici, il nous faudrait écrire ceci:
 
 

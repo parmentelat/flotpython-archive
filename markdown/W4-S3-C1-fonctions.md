@@ -33,7 +33,7 @@ La fonction `reduce` permet d'appliquer une opération associative à une liste
 d'entrées. Pour faire simple, étant donné un opérateur binaire $\otimes$ on veut
 pouvoir calculer
 
- $ x_1 \otimes x_2 ... \otimes x_n $
+ $x_1 \otimes x_2 ... \otimes x_n$
 
 De manière un peu moins abstraite, on suppose qu'on dispose d'une **fonction
 binaire** `f` qui implémente l'opérateur $\otimes$, et alors

@@ -239,20 +239,20 @@ littéralement, qui peut être appelé.
 L'idée est très simple, on cherche à donner un sens à un fragment de code du
 genre de&nbsp;:
 
-                # on crée une instance
-objet = Classe(arguments)
+    # on crée une instance
+    objet = Classe(arguments)
 
-# et c'est l'objet (et pas la classe) qu'on utilise comme une fonction
-objet(arg1, arg2)
-                
+    # et c'est l'objet (et pas la classe) qu'on utilise comme une fonction
+    objet(arg1, arg2)
+
 Le protocole ici est très simple; cette dernière ligne a un sens en python dès
 lors que&nbsp;:
  * `objet` possède une méthode `__call__`,
  * et que celle-ci peut être envoyée à `objet` avec les arguments `arg1, arg2`,
 pour nous donner le résultat qui sera retourné par `objet(arg1, arg2)`.
 
-                objet(arg1, arg2)   ===>   objet.__call__(arg1, arg2)
-                
+    objet(arg1, arg2)   ===>   objet.__call__(arg1, arg2)
+
 Voyons cela sur un exemple&nbsp;:
 
 

@@ -93,49 +93,52 @@ Voici le résultat de l'exécution du crawler avec comme page initiale `http
 sop.inria.fr/members/Arnaud.Legout]`. Donc le crawler va  uniquement tester les
 liens qui sont dans le site `http://www-sop.inria.fr/members/Arnaud.Legout/`
 
-                Page contenant des liens defecteux : 
-http://www-sop.inria.fr/members/Arnaud.Legout/Projects/p2p_cd.html
+    Page contenant des liens defecteux :
+    http://www-sop.inria.fr/members/Arnaud.Legout/Projects/p2p_cd.html
 ------------------------------------------------------------------------------
-CODE HTTP 404
-        http://dx.doi.org/10.1016/j.comnet.2010.09.014
-        http://www.cs.ucla.edu/~nikitas/
+    CODE HTTP 404
+            http://dx.doi.org/10.1016/j.comnet.2010.09.014
+            http://www.cs.ucla.edu/~nikitas/
 ==============================================================================
 
-Page contenant des liens defecteux : 
-http://www-sop.inria.fr/members/Arnaud.Legout/publications.html
+    Page contenant des liens defecteux :
+    http://www-sop.inria.fr/members/Arnaud.Legout/publications.html
 ------------------------------------------------------------------------------
-CODE HTTP 404
-        http://dx.doi.org/10.1016/j.comnet.2010.09.014
+    CODE HTTP 404
+            http://dx.doi.org/10.1016/j.comnet.2010.09.014
 ==============================================================================
 
-Page contenant des liens defecteux : 
-http://www-sop.inria.fr/members/Arnaud.Legout/Projects/bluebear.html
+    Page contenant des liens defecteux :
+    http://www-sop.inria.fr/members/Arnaud.Legout/Projects/bluebear.html
 ------------------------------------------------------------------------------
-CODE HTTP 303
-        http://bits.blogs.nytimes.com/2011/11/29/skype-can-expose-your-location-researchers-say/
-CODE HTTP 403
-        https://threatpost.com/en_us/blogs/attacking-and-defending-tor-network-032911
-        http://www.pcinpact.com/actu/news/66544-skype-bittorrent-etude-scientifiques-faille.htm
-CODE HTTP 404
-        http://www.zataz.com/news/21651/faille--vulnerability-skype.html
+    CODE HTTP 303
+            http://bits.blogs.nytimes.com/2011/11/29/skype-can-expose-your-
+location-researchers-say/
+    CODE HTTP 403
+            https://threatpost.com/en_us/blogs/attacking-and-defending-tor-
+network-032911
+            http://www.pcinpact.com/actu/news/66544-skype-bittorrent-etude-
+scientifiques-faille.htm
+    CODE HTTP 404
+            http://www.zataz.com/news/21651/faille--vulnerability-skype.html
 ==============================================================================
 
-Page contenant des liens defecteux : 
-http://www-sop.inria.fr/members/Arnaud.Legout/
+    Page contenant des liens defecteux :
+    http://www-sop.inria.fr/members/Arnaud.Legout/
 ------------------------------------------------------------------------------
-CODE HTTP -1
-        http://www.castify.net
+    CODE HTTP -1
+            http://www.castify.net
 ==============================================================================
 
-Page contenant des liens defecteux : 
-http://www-sop.inria.fr/members/Arnaud.Legout/index.html
+    Page contenant des liens defecteux :
+    http://www-sop.inria.fr/members/Arnaud.Legout/index.html
 ------------------------------------------------------------------------------
-CODE HTTP -1
-        http://www.castify.net
+    CODE HTTP -1
+            http://www.castify.net
 ==============================================================================
 
 
-                
+
 ### Niveau intermédiaire
 
 Tout notre programme peut-être écrit dans un même module `webcrawler`. Nous
@@ -143,152 +146,153 @@ avons dans ce module deux classes. Voici l'aide correspondant à ces deux classe
 
 ##### Classe `HTMLPage`
 
-                Help on class HTMLPage in module webcrawler:
+    Help on class HTMLPage in module webcrawler:
 
-class HTMLPage(__builtin__.object)
- |  represente une page HTML.
- |
- |  L'objet a 4 attributs:
- |      -url: l'URL qui correspond a la page Web
- |      -_html_it: un iterateur qui parcourt le code HTML, une ligne
- |                 a la fois
- |      -urls: la liste de toutes les URLs contenues dans la page
- |      -http_code: le code retourne par le protocol HTTP lors de
- |                  l'acces a la page
- |                  *http_code=0 signifie une erreur dans l'URL,
- |                  *http_code=-1 signifie que le site de repond pas
- |                  *http_code=-2 signifie une exception en accedant
- |                  a l'URL
- |
- |  Methods defined here:
- |
- |  __init__(self, url)
- |      Constructeur de la classe. Le constructeur prend comme
- |      argument une URL et construit un objet HTMLPage en definissant
- |      les 4 attributs url, _html_it, urls, http_code
- |
- |  extract_urls_from_page(self)
- |      Construit la liste de toutes les URLs contenues dans le corps de
- |      la page HTML en parcourant l'iterateur retourne par
- |      page_fetcher()
- |
- |      On identifie une URL parce qu'elle est precedee de href= et
- |      dans le corps (body) de la page. Le parsing que l'on implement
- |      est imparfait, mais un vrai parsing intelligent demanderait
- |      une analyse syntaxique trop complexe pour nos besoins.
- |
- |      Plus en details, notre parsing consiste a chercher dans le
- |      corps de la page (body):
- |
- |      -les urls contenues dans le champ href (essentiellement on
- |       cherche le tag 'href=' et on extrait ce qui est entre
- |       guillemets ou apostrophes)
- |
- |      -on ne garde ensuite que les urls qui commencent par http ou
- |       https et
- |
- |           * les urls qui commencent par ./ auxquelles on ajoute
- |        devant (a la place du point) l'Url de la page d'origine
- |        (self.url) exemple : pour './ma_page.html' et self.url =
- |        http://mon_site.fr/rep1/ on obtient l'url
- |        http://mon_site.fr/rep1/ma_page.html
- |
- |          * les urls qui commencent par /ma_page.html auxquelles on
- |         ajoute devant uniquement le hostname de la page d'origine
- |         (self.url) exemple : pour '/ma_page.html' et self.url =
- |         http://mon_site.fr/rep1/ on obtient l'url
- |         http://mon_site.fr/ma_page.html
- |
- |      Cette methode retourne la liste des URLs contenues dans la
- |      page.
- |
- |  page_fetcher(self, url)
- |      accede a l'URL et retourne un objet qui permet de parcourir le
- |      code HTML (voir la documentation de urllib2.urlopen) ou une
- |      liste vide en cas d'erreur.
- |
-                
+    class HTMLPage(__builtin__.object)
+     |  represente une page HTML.
+     |
+     |  L'objet a 4 attributs:
+     |      -url: l'URL qui correspond a la page Web
+     |      -_html_it: un iterateur qui parcourt le code HTML, une ligne
+     |                 a la fois
+     |      -urls: la liste de toutes les URLs contenues dans la page
+     |      -http_code: le code retourne par le protocol HTTP lors de
+     |                  l'acces a la page
+     |                  *http_code=0 signifie une erreur dans l'URL,
+     |                  *http_code=-1 signifie que le site de repond pas
+     |                  *http_code=-2 signifie une exception en accedant
+     |                  a l'URL
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, url)
+     |      Constructeur de la classe. Le constructeur prend comme
+     |      argument une URL et construit un objet HTMLPage en definissant
+     |      les 4 attributs url, _html_it, urls, http_code
+     |
+     |  extract_urls_from_page(self)
+     |      Construit la liste de toutes les URLs contenues dans le corps de
+     |      la page HTML en parcourant l'iterateur retourne par
+     |      page_fetcher()
+     |
+     |      On identifie une URL parce qu'elle est precedee de href= et
+     |      dans le corps (body) de la page. Le parsing que l'on implement
+     |      est imparfait, mais un vrai parsing intelligent demanderait
+     |      une analyse syntaxique trop complexe pour nos besoins.
+     |
+     |      Plus en details, notre parsing consiste a chercher dans le
+     |      corps de la page (body):
+     |
+     |      -les urls contenues dans le champ href (essentiellement on
+     |       cherche le tag 'href=' et on extrait ce qui est entre
+     |       guillemets ou apostrophes)
+     |
+     |      -on ne garde ensuite que les urls qui commencent par http ou
+     |       https et
+     |
+     |           * les urls qui commencent par ./ auxquelles on ajoute
+     |        devant (a la place du point) l'Url de la page d'origine
+     |        (self.url) exemple : pour './ma_page.html' et self.url =
+     |        http://mon_site.fr/rep1/ on obtient l'url
+     |        http://mon_site.fr/rep1/ma_page.html
+     |
+     |          * les urls qui commencent par /ma_page.html auxquelles on
+     |         ajoute devant uniquement le hostname de la page d'origine
+     |         (self.url) exemple : pour '/ma_page.html' et self.url =
+     |         http://mon_site.fr/rep1/ on obtient l'url
+     |         http://mon_site.fr/ma_page.html
+     |
+     |      Cette methode retourne la liste des URLs contenues dans la
+     |      page.
+     |
+     |  page_fetcher(self, url)
+     |      accede a l'URL et retourne un objet qui permet de parcourir le
+     |      code HTML (voir la documentation de urllib2.urlopen) ou une
+     |      liste vide en cas d'erreur.
+     |
+
 ##### Classe `Crawler`
 
-                Help on class Crawler in module webcrawler:
+    Help on class Crawler in module webcrawler:
 
-class Crawler(__builtin__.object)
- |  Cette classe permet de creer l'objet qui va gerer le crawl. Cet
- |  objet est iterable et l'iterateur va, a chaque tour, retourner un
- |  nouvel objet HTMLPage.
- |
- |  L'instance du crawler va avoir comme principaux attributs
- |    * l'ensemble des pages a crawler pages_to_be_crawled
- |    * l'ensemble des pages deja crawles pages_crawled
- |    * un dictionnaire qui a chaque URL fait correspondre la liste de
- |    toutes les pages qui ont reference cette URL lors du crawl
- |    pages_to_be_crawled_dict
- |
- |  Methods defined here:
- |
- |  __init__(self, seed_url, max_crawled_pages=10000000000L, page_filter=None)
- |      Constructeur du crawler
- |
- |      Le constructeur prend comme arguments
- |      -seed_url: l'URL de la page a partir de laquelle on demarre le crawl
- |      -max_crawled_pages: le nombre maximum de pages que l'on va crawler
- |      (10**10 par defaut)
- |      -page_filter: la liste des pages sur lesquels le crawler
- |      doit rester (pas de filtre par defaut). Typiquement, une URL
- |      passe le filtre si n'importe lequel des elements de page_filter
- |      est contenu dans l'URL
- |
- |  __iter__(self)
- |      Cette methode est implementee comme une fonction generatrice. A
- |      chaque appel de next() sur l'iterateur, on obtient un nouvel
- |      objet HTMLPage qui correspond a une URL qui etait dans
- |      l'ensemble des URLs a crawler.
- |
- |      On ne donne aucune garantie sur l'ordre de parcours des URLs
- |
- |  __repr__(self)
- |      permet d'afficher simplement des informations sur l'etat
- |      courant du crawl.
- |
- |      retourne une chaine de caracteres donnant:
- |      -le nombre de pages et domaines deja crawle
- |      -le nombre de pages encore a crawler
- |      -la duree du dernier crawl
- |
- |  update_pages_to_be_crawled(self, page)
- |      Prend un objet HTMLpage comme argument et trouve toutes les
- |      URLs presente dans la page HTML correspondante. Cette methode
- |      met a jour le dictionnaire pages_to_be_crawled_dict et
- |      l'ensemble pages_to_be_crawled. On ne met pas a jour le
- |      dictionnaire et le set si l'URL correspondant a l'objet
- |      HTMLpage n'est pas dans la liste de pages acceptees dans
- |      self.page_filter.
- |
-                
+    class Crawler(__builtin__.object)
+     |  Cette classe permet de creer l'objet qui va gerer le crawl. Cet
+     |  objet est iterable et l'iterateur va, a chaque tour, retourner un
+     |  nouvel objet HTMLPage.
+     |
+     |  L'instance du crawler va avoir comme principaux attributs
+     |    * l'ensemble des pages a crawler pages_to_be_crawled
+     |    * l'ensemble des pages deja crawles pages_crawled
+     |    * un dictionnaire qui a chaque URL fait correspondre la liste de
+     |    toutes les pages qui ont reference cette URL lors du crawl
+     |    pages_to_be_crawled_dict
+     |
+     |  Methods defined here:
+     |
+     |  __init__(self, seed_url, max_crawled_pages=10000000000L,
+page_filter=None)
+     |      Constructeur du crawler
+     |
+     |      Le constructeur prend comme arguments
+     |      -seed_url: l'URL de la page a partir de laquelle on demarre le crawl
+     |      -max_crawled_pages: le nombre maximum de pages que l'on va crawler
+     |      (10**10 par defaut)
+     |      -page_filter: la liste des pages sur lesquels le crawler
+     |      doit rester (pas de filtre par defaut). Typiquement, une URL
+     |      passe le filtre si n'importe lequel des elements de page_filter
+     |      est contenu dans l'URL
+     |
+     |  __iter__(self)
+     |      Cette methode est implementee comme une fonction generatrice. A
+     |      chaque appel de next() sur l'iterateur, on obtient un nouvel
+     |      objet HTMLPage qui correspond a une URL qui etait dans
+     |      l'ensemble des URLs a crawler.
+     |
+     |      On ne donne aucune garantie sur l'ordre de parcours des URLs
+     |
+     |  __repr__(self)
+     |      permet d'afficher simplement des informations sur l'etat
+     |      courant du crawl.
+     |
+     |      retourne une chaine de caracteres donnant:
+     |      -le nombre de pages et domaines deja crawle
+     |      -le nombre de pages encore a crawler
+     |      -la duree du dernier crawl
+     |
+     |  update_pages_to_be_crawled(self, page)
+     |      Prend un objet HTMLpage comme argument et trouve toutes les
+     |      URLs presente dans la page HTML correspondante. Cette methode
+     |      met a jour le dictionnaire pages_to_be_crawled_dict et
+     |      l'ensemble pages_to_be_crawled. On ne met pas a jour le
+     |      dictionnaire et le set si l'URL correspondant a l'objet
+     |      HTMLpage n'est pas dans la liste de pages acceptees dans
+     |      self.page_filter.
+     |
+
 ##### Fonctions utilitaires
 
 On a égalements deux fonctions, qui sont utilisées par les classes, dont voici
 l'aide.
 
-                Help on function extract_domains_from_url in module webcrawler:
+    Help on function extract_domains_from_url in module webcrawler:
 
-extract_domains_from_url(url)
-    Extrait un domaine d'une URL
+    extract_domains_from_url(url)
+        Extrait un domaine d'une URL
 
-    Retourne le tuple T qui contient
-    T[0]: domaine avec le bon protocol (http://domain or https://domain)
-    T[1]: domaine sans le protocol (sans http:// or https://)
-                
-                Help on function is_html_page in module webcrawler:
+        Retourne le tuple T qui contient
+        T[0]: domaine avec le bon protocol (http://domain or https://domain)
+        T[1]: domaine sans le protocol (sans http:// or https://)
 
-is_html_page(url)
-    simple heuristique pour tester si une page est ecrite en
-    HTML. Il y a des cas mal identifies par cette heuristique,
-    mais elle est suffisante pour nos besoins. Par exemple:
-    http://inria.fr sera identifie comme non html de meme que
-    toutes les pages qui utilisent des points dans le nom d'un
-    repertoire.
-                
+    Help on function is_html_page in module webcrawler:
+
+    is_html_page(url)
+        simple heuristique pour tester si une page est ecrite en
+        HTML. Il y a des cas mal identifies par cette heuristique,
+        mais elle est suffisante pour nos besoins. Par exemple:
+        http://inria.fr sera identifie comme non html de meme que
+        toutes les pages qui utilisent des points dans le nom d'un
+        repertoire.
+
 ##### Le mot de la fin
 
 Nous avons à de nombreuses reprises évoqué la puissance de la librairie

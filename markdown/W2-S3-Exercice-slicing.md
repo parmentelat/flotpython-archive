@@ -61,8 +61,8 @@ Par exemple pour obtenir "def":
 On vous donne une chaîne `composite`, dont on sait qu'elle a été calculée à
 partir de deux chaînes `inconnue` et `connue` comme ceci:
 
-                composite = connue + inconnue + connue
-                
+    composite = connue + inconnue + connue
+
 L'exercice consiste à retrouver la valeur de `inconnue` à partir de celles de
 `composite` et `connue`.
 

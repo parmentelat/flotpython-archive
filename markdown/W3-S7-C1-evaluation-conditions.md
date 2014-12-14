@@ -117,8 +117,8 @@ Voyons un exemple très voisin de ce qui précède
 
 On voit ici que pour évaluer l'expression
 
-                liste.pop(0) <= 0 or liste.pop(0) <= 1 or liste.pop(0) <= 2
-                
+    liste.pop(0) <= 0 or liste.pop(0) <= 1 or liste.pop(0) <= 2
+
 on a commencé par évaluer le premier terme, qui s'est avéré vrai, il n'était pas
 nécessaire d'évaluer les autres termes, on ne l'a donc pas fait du tout, c'est
 pourquoi la liste en sortie n'a été raccourcie que d'un élément.
