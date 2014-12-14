@@ -86,6 +86,9 @@ endef
 define mybasename
 $(basename $(notdir $(1)))
 endef
+define myweekbasename
+$(call week,$(1))-$(call mybasename,$(1))
+endef
 
 define markdown_location
 markdown/$(1)-$(2).md
@@ -126,10 +129,10 @@ $(call mymarkdown,$(1)): $(1)
 $(call mygitprint,$(1)): $(call mymarkdown,$(1))
 	curl -o $(call mygitprint,$(1)) $(call my_url,$(1))
 
+# xxx we might be better off creating a symlink in pdf-latex to the source ipynb
 $(call mypdflatex,$(1)): $(1)
-	(cd pdf-latex; ipython nbconvert --to latex --post pdf ../$(1); \
-	mv $(call mybasename,$(1)).tex $(subst .pdf,.tex,../$(call mypdflatex,$(1))); \
-	mv $(call mybasename,$(1)).pdf ../$(call mypdflatex,$(1)))
+	(cd pdf-latex; ln -f -s ../$(1) $(call myweekbasename,$(1)).ipynb ;\
+	ipython nbconvert --to latex --post pdf $(call myweekbasename,$(1)))
 endef
 
 $(foreach notebook,$(NOTEBOOKS),$(eval $(call notebook_rule,$(notebook))))
@@ -142,6 +145,9 @@ gitprint: $(GITPRINTS)
 
 # the cool thing with this process is we do not need to commit to github first
 pdflatex: $(PDFLATEXS)
+
+pdflatex-clean:
+	rm -f pdf-latex/*.{aux,out,log,ipynb,tex}
 
 # not sure this really is helpful but well
 pdf: pdflatex gitprint
