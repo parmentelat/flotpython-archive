@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+
+# all files in this repo are expected to be utf-8
+# for transcoding, use e.g. 
+#     recode ISO-8859-15..UTF-8 <filename>
+
 all: 
 
 WEEKS=$(wildcard W?) 
@@ -63,13 +68,10 @@ toclean: force
 clean:: force
 	find . $(CLEAN_FIND) -name '*~' -o -name '.#*' -print0 | xargs -0 rm -f
 
-
-# xxx we need to have the quiz files encoded in UTF-8 right at the beginning
-# I don't maintain all.quiz anymore
-#all: quiz
-quiz: 
-	cat */*.quiz > 00-all.quiz
-	recode ISO-8859-15..UTF-8 00-all.quiz
+#################### corriges
+all: corr
+corr corriges:
+	$(MAKE) -C corriges
 
 ######################################## the markdowns and PDFs
 # list of notebooks
@@ -84,6 +86,7 @@ endef
 define mybasename
 $(basename $(notdir $(1)))
 endef
+
 define markdown_location
 markdown/$(1)-$(2).md
 endef
@@ -91,11 +94,11 @@ define mymarkdown
 $(call markdown_location,$(call week,$(1)),$(call mybasename,$(1)))
 endef
 
-define pdf_location
-markdown/$(1)-$(2).pdf
+define gitprint_location
+pdf-gitprint/$(1)-$(2).pdf
 endef
-define mypdf
-$(call pdf_location,$(call week,$(1)),$(call mybasename,$(1)))
+define mygitprint
+$(call gitprint_location,$(call week,$(1)),$(call mybasename,$(1)))
 endef
 define gitprint_url
 $(GITPRINT_URL_ROOT)/markdown/$(1)-$(2).md?download
@@ -104,29 +107,43 @@ define my_url
 $(call gitprint_url,$(call week,$(1)),$(call mybasename,$(1)))
 endef
 
+define pdflatex_location
+pdf-latex/$(1)-$(2).pdf
+endef
+define mypdflatex
+$(call pdflatex_location,$(call week,$(1)),$(call mybasename,$(1)))
+endef
+
 MARKDOWNS = $(foreach notebook,$(NOTEBOOKS),$(call mymarkdown,$(notebook)))
-PDFS = $(foreach notebook,$(NOTEBOOKS),$(call mypdf,$(notebook)))
+GITPRINTS = $(foreach notebook,$(NOTEBOOKS),$(call mygitprint,$(notebook)))
+PDFLATEXS = $(foreach notebook,$(NOTEBOOKS),$(call mypdflatex,$(notebook)))
 
 # apply this rule to all notebooks
 define notebook_rule
 $(call mymarkdown,$(1)): $(1)
 	ipython nbconvert --to markdown $(1) --stdout > $(call mymarkdown,$(1))
 
-$(call mypdf,$(1)): $(1)
-	curl -o $(call mypdf,$(1)) $(call my_url,$(1))
+$(call mygitprint,$(1)): $(call mymarkdown,$(1))
+	curl -o $(call mygitprint,$(1)) $(call my_url,$(1))
+
+$(call mypdflatex,$(1)): $(1)
+	(cd pdf-latex; ipython nbconvert --to latex --post pdf ../$(1); \
+	mv $(call mybasename,$(1)).tex $(subst .pdf,.tex,../$(call mypdflatex,$(1))); \
+	mv $(call mybasename,$(1)).pdf ../$(call mypdflatex,$(1)))
 endef
 
 $(foreach notebook,$(NOTEBOOKS),$(eval $(call notebook_rule,$(notebook))))
 
 all: md
-md: $(MARKDOWNS)
+md markdown: $(MARKDOWNS)
 
 # these need to be done AFTER the markdown have been pushed up to github 
-pdf: $(PDFS)
+gitprint: $(GITPRINTS)
 
-#################### corriges
-all: corr
-corr:
-	$(MAKE) -C corriges
+# the cool thing with this process is we do not need to commit to github first
+pdflatex: $(PDFLATEXS)
 
-.PHONY: all md pdf corr
+# not sure this really is helpful but well
+pdf: pdflatex gitprint
+
+.PHONY: all md markdown gitprint corr corriges pdflatex pdf
