@@ -54,6 +54,7 @@ $(foreach week, $(WEEKS), $(eval $(call week_values,$(week))))
 define code_target
 corriges-w$(3)-$(2): $(1)
 	egrep -v '@BEG|@END' $(1) > corriges-w$(3)-$(2)
+	chmod +x corriges-w$(3)-$(2)
 
 code:: corriges-w$(3)-$(2)
 
@@ -86,4 +87,4 @@ $(foreach week, $(WEEKS), $(eval $(call week_target,$(week))))
 .PHONY: all code clean superclean code-clean pdf
 
 clean:
-	rm -f *.{aux,log,tex,toc}
+	rm -f *.{aux,log,tex,toc,py}

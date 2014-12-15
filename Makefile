@@ -20,14 +20,14 @@ INDEX_POST= sed -e 's,\(\#\# Vid\),========== \1,'
 index: force
 	export LC_ALL=en_US.ISO8859-15;\
 	for s in $(WEEKS); do echo ==================== $$s; \
-	    ls $$s/C012AL*SUMMARY.txt | xargs egrep '(^C[0O]12AL.*txt|^NIVEAU|^\#\# Vid|^OK|^TODO|^ONGO|^NICE|^DROP)' | $(INDEX_POST) ; \
+	    ls $$s/*SUMMARY.txt | xargs egrep '(^C[0O]12AL.*txt|^NIVEAU|^\#\# Vid|^OK|^TODO|^ONGO|^NICE|^DROP)' | $(INDEX_POST) ; \
 	    echo ""; \
 	    echo ""; \
 	    echo ""; \
 	done > index.long
 .PHONY: index
 
-all: index
+# all: index
 
 #
 # builds a html index of the ipynb files expected to be reachable on connect.inria.fr
@@ -75,11 +75,17 @@ clean:: force
 	find . $(CLEAN_FIND) -name '*~' -o -name '.#*' -print0 | xargs -0 rm -f
 
 #################### corriges
-all: corr
-corr corriges:
+all: corriges
+corriges:
 	$(MAKE) -C corriges
 
-.PHONY: corr corriges
+corriges-pdf:
+	$(MAKE) -C corriges pdf
+
+corriges-clean:
+	$(MAKE) -C corriges clean
+
+.PHONY: corriges corriges-pdf corriges-clean 
 
 ######################################## the markdowns and PDFs
 # list of notebooks
@@ -185,21 +191,37 @@ out-clean: html-clean markdown-clean pdflatex-clean gitprint-clean
 .PHONY: out out-clean
 
 ##############################
-NOTEBOOKS-HTML = $(foreach notebook,$(NOTEBOOKS),notebooks/$(call sbn,$(notebook)).html)
+TARS =
 
-notebooks-html.tar: html/custom.css $(NOTEBOOKS)
+TARS += notebooks-html.tar
+NOTEBOOKS-HTML = $(foreach notebook,$(NOTEBOOKS),notebooks/$(call sbn,$(notebook)).html)
+notebooks-html.tar: force
 	ln -f -s html notebooks
 	tar -chf $@ notebooks/custom.css $(NOTEBOOKS-HTML)
 
+TARS += notebooks-ipynb.tar
 NOTEBOOKS-IPYNB = $(foreach notebook,$(NOTEBOOKS),notebooks/$(call sbn,$(notebook)).ipynb)
-
-notebooks-ipynb.tar: $(NOTEBOOKS)
+notebooks-ipynb.tar: force
 	ln -f -s html notebooks
 	tar -chf $@ $(NOTEBOOKS-IPYNB)
 
-tars: notebooks-html.tar notebooks-ipynb.tar
+TARS += corriges.tar
+corriges.tar: force
+	tar -cf $@ corriges/*.{pdf,txt,py}
+
+
+TARS += pdf-gitprint.tar
+pdf-gitprint.tar: force
+	tar -cf $@ pdf-gitprint/W*pdf
+
+TARS += pdf-latex.tar
+pdf-latex.tar: force
+	tar -cf $@ pdf-latex/W*pdf
+
+##########
+tars: $(TARS)
 
 tars-clean:
-	rm -f notebooks-html.tar notebooks-ipynb.tar
+	rm -f $(TARS)
 
 .PHONY: tars tars-clean
