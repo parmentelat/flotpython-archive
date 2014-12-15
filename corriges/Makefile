@@ -39,7 +39,7 @@ corriges.tex corriges.txt: $(SOURCES) $(TOOL)
 	$(TOOL) -o corriges -t "Tous les corrigés" -c $(SOURCES)
 corriges.pdf: corriges.tex
 	pdflatex corriges.tex
-clean::
+superclean::
 	rm -f corriges.*
 pdf:: corriges.pdf
 
@@ -61,7 +61,7 @@ code-clean::
 	rm -f corriges-w$(3)-$(2)
 endef
 
-clean:: code-clean
+superclean:: code-clean
 
 define week_target
 corriges-w$(1).tex: $(call week_latex_sources,$(1)) $(TOOL)
@@ -73,7 +73,7 @@ corriges-w$(1).pdf: corriges-w$(1).tex
 corriges-w$(1).txt: $(call week_text_sources,$(1)) $(TOOL)
 	$(TOOL) -T -o corriges-w$(1) -t "Corrigés de la semaine $(1)" $(call week_text_sources,$(1))
 
-clean::
+superclean::
 	rm -f corriges-w$(1).*
 
 pdf:: corriges-w$(1).pdf
@@ -83,11 +83,7 @@ endef
 
 $(foreach week, $(WEEKS), $(eval $(call week_target,$(week))))
 
-.PHONY: all code clean code-clean pdf
+.PHONY: all code clean superclean code-clean pdf
 
-foo:
-	@echo 6  text $(W6_text) latex $(W6_latex) code X$(W6_code)X
-	@ls -l $(W6_code)
-	echo $(foreach code,$(W6_code),corriges-w$(week)-$(notdir $(code)))
-
-
+clean:
+	rm -f *.{aux,log,tex,toc}
