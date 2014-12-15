@@ -13,34 +13,6 @@ WEEKS=$(wildcard W?)
 force:
 
 #
-# rough index based on the *SUMMARY.txt
-# I need to set LC_ALL otherwise grep misreads line with accents and gives truncated results
-INDEX_POST= sed -e 's,\(\#\# Vid\),========== \1,'
-
-index: force
-	export LC_ALL=en_US.ISO8859-15;\
-	for s in $(WEEKS); do echo ==================== $$s; \
-	    ls $$s/*SUMMARY.txt | xargs egrep '(^C[0O]12AL.*txt|^NIVEAU|^\#\# Vid|^OK|^TODO|^ONGO|^NICE|^DROP)' | $(INDEX_POST) ; \
-	    echo ""; \
-	    echo ""; \
-	    echo ""; \
-	done > index.long
-.PHONY: index
-
-# all: index
-
-#
-# builds a html index of the ipynb files expected to be reachable on connect.inria.fr
-# pthierry is built-in 
-connect: connect.html
-.PHONY: connect
-
-connect.html: force
-	tools/nbindex.py
-
-all: connect
-
-#
 tags: force
 	git ls-files | xargs etags
 .PHONY: tags
@@ -148,13 +120,13 @@ endef
 
 $(foreach notebook,$(NOTEBOOKS),$(eval $(call notebook_rule,$(notebook))))
 
-all: md
 md markdown: $(MARKDOWNS)
 
 md-clean markdown-clean:
 	rm -f markdown/*.md
 
 .PHONY: md markdown md-clean markdown-clean
+all: md
 
 
 html: $(HTMLS)
@@ -163,6 +135,7 @@ html-clean:
 	rm -f html/*.{html,ipynb}
 
 .PHONY: html html-clean
+all: html
 
 
 # the cool thing with this process is we do not need to commit to github first
@@ -225,3 +198,59 @@ tars-clean:
 	rm -f $(TARS)
 
 .PHONY: tars tars-clean
+
+
+##########
+GITCOUNT = xargs git ls-files | wc -l
+COUNT    = wc -l
+
+check: check-nonw check-w check-html check-ipynb-in-html check-pdf-latex check-pdf-gitprint
+
+check-nonw: force
+	echo "allow for one more (W2/exo-sample.ipynb)"
+	ls W*/*nb | grep -v '/W' | $(GITCOUNT)
+
+check-w: force
+	ls W*/W*nb | $(GITCOUNT)
+
+check-html: force
+	ls html/W*.html | $(GITCOUNT)
+
+check-ipynb-in-html: force
+	ls html/W*.html | $(COUNT)
+
+check-pdf-latex: force
+	ls pdf-latex/W*.pdf | $(GITCOUNT)
+
+check-pdf-gitprint: force
+	ls pdf-gitprint/W*.pdf | $(GITCOUNT)
+
+############################## old stuff - not used anymore
+#
+# rough index based on the *SUMMARY.txt
+# I need to set LC_ALL otherwise grep misreads line with accents and gives truncated results
+INDEX_POST= sed -e 's,\(\#\# Vid\),========== \1,'
+
+index: force
+	export LC_ALL=en_US.ISO8859-15;\
+	for s in $(WEEKS); do echo ==================== $$s; \
+	    ls $$s/*SUMMARY.txt | xargs egrep '(^C[0O]12AL.*txt|^NIVEAU|^\#\# Vid|^OK|^TODO|^ONGO|^NICE|^DROP)' | $(INDEX_POST) ; \
+	    echo ""; \
+	    echo ""; \
+	    echo ""; \
+	done > index.long
+.PHONY: index
+
+# all: index
+
+#
+# builds a html index of the ipynb files expected to be reachable on connect.inria.fr
+# pthierry is built-in 
+connect: connect.html
+.PHONY: connect
+
+connect.html: force
+	tools/nbindex.py
+
+#all: connect
+

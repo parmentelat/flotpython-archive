@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>W6-S2-C1-Complement-iterateurs</title>
+<title>W6-S1-C1-expressions-generatrices</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1681,7 +1681,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="It&#233;rateurs">It&#233;rateurs<a class="anchor-link" href="#It&#233;rateurs">&#182;</a></h1>
+<h1 id="Expressions-g&#233;n&#233;ratrices">Expressions g&#233;n&#233;ratrices<a class="anchor-link" href="#Expressions-g&#233;n&#233;ratrices">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -1691,7 +1691,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Compl&#233;ment---niveau-interm&#233;daire">Compl&#233;ment - niveau interm&#233;daire<a class="anchor-link" href="#Compl&#233;ment---niveau-interm&#233;daire">&#182;</a></h2>
+<h2 id="Compl&#233;ment---niveau-basique">Compl&#233;ment - niveau basique<a class="anchor-link" href="#Compl&#233;ment---niveau-basique">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -1701,20 +1701,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Dans ce complément nous allons&nbsp;:</p>
-<ul>
-<li>tout d&#39;abord dire quelques mots du module <code>itertools</code> qui fournit sous forme d&#39;itérateurs des utilitaires communs qui peuvent être très utiles&nbsp;;</li>
-<li>puis dans la partie avancée du complément nous allons voir, comme un autre exemple d&#39;itérateurs, comment implémenter notre propre itérateur des permutations d&#39;un ensemble fini.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Le-module-itertools">Le module <code>itertools</code><a class="anchor-link" href="#Le-module-itertools">&#182;</a></h3>
+<h3 id="comment-transformer-une-compr-hension-de-liste-en-it-rateur-nbsp-">Comment transformer une compréhension de liste en itérateur&nbsp;?</h3>
 </div>
 </div>
 </div>
@@ -1724,7 +1711,9 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>À ce stade, j&#39;espère que vous savez trouver <a href="https://docs.python.org/2/library/itertools.html">la documentation du module</a> que je vous invite à avoir sous la main.</p>
+<p>Nous venons de voir les fonctions génératrices qui sont un puissant outil pour créer facilement des itérateurs. Nous verrons prochainement comment utiliser ces fonctions génératrices pour tranformer en quelques lignes de code vos propres objets en itérateurs. </p>
+<p>Vous savez maintenant qu&#39;en python on favorise la notion d&#39;itérateurs puisqu&#39;ils se manipulent comme des objets itérables et qu&#39;ils sont en général beaucoup plus compacts en mémoire que l&#39;itérable correspondant. </p>
+<p>Comme les compréhensions de listes sont fréquemment utilisées en python, mais qu&#39;elles sont des itérables potentiellement gourmands en ressources mémoire, on souhaiterait pouvoir créer un itérateur directement à partir d&#39;une compréhension de liste. C&#39;est possible et très facile en python. Il suffit de remplacer les crochets par des parenthèses, regardons cela.</p>
 </div>
 </div>
 </div>
@@ -1735,7 +1724,26 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">itertools</span>
+<div class="highlight"><pre><span class="c"># c&#39;est une compréhension de liste</span>
+<span class="n">comprehension</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="k">17</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> 
+<span class="k">print</span> <span class="n">comprehension</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># c&#39;est une expression génératrice</span>
+<span class="n">generator</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="k">17</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> 
+<span class="k">print</span> <span class="n">generator</span>
 </pre></div>
 
 </div>
@@ -1748,33 +1756,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Comme vous le voyez dans la doc, les fonctionnalités de <code>itertools</code> tombent dans 3 catégories&nbsp;:</p>
-<ul>
-<li>des itérateurs infinis, comme par exemple <code>cycle</code>,</li>
-<li>des itérateurs pour énumérer les combinatoires usuelles en mathématiques, comme les permutations, les combinaisons, le produit cartésien, etc.,</li>
-<li>et enfin des itérateurs correspondants à des traits que nous avons déjà rencontrés, mais implémentés sous forme d&#39;itérateurs.</li>
-</ul>
-<p>À nouveau, toutes ces fonctionnalités sont offertes <strong>sous la forme d&#39;itérateurs</strong>.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour détailler un tout petit peu cette dernière famille, signalons&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>chain</code> qui permet de <strong>concaténer</strong> plusieurs itérables sous la forme d&#39;un <strong>itérateur</strong>&nbsp;:</li>
-</ul>
+<p>Ensuite pour utiliser une expression génératrice, c&#39;est très simple, on l&#39;utilise comme n&#39;importe quel itérateur.</p>
 </div>
 </div>
 </div>
@@ -1785,8 +1767,24 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
-    <span class="k">print</span> <span class="n">x</span>
+<div class="highlight"><pre><span class="n">generator</span> <span class="ow">is</span> <span class="nb">iter</span><span class="p">(</span><span class="n">generator</span><span class="p">)</span> <span class="c"># generator est bien un itérateur</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># affiche les 6 premiers carrés des multiples de 17</span>
+<span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="n">carre</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">generator</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&#39;Contenu de generator après {} itérations : {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">carre</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1799,9 +1797,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>izip</code> qui comme son nom l&#39;indique fait comme <code>zip</code> mais sous la forme d&#39;un itérateur&nbsp;:</li>
-</ul>
+<p>Avec une expression génératrice on n&#39;est plus limité comme avec les compréhensions par le nombre d&#39;éléments&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -1812,63 +1808,24 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">izip</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
-    <span class="k">print</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
+<div class="highlight"><pre><span class="c"># trop grand pour une compréhension,</span>
+<span class="c"># mais on peut créer le générateur sans souci</span>
+<span class="n">generator</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">18</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="k">17</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> 
+
+<span class="c"># et utiliser le début, on ne paie que ce qu&#39;on utilise</span>
+<span class="n">mon_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([])</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">generator</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">10</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span> <span class="o">==</span> <span class="s">&#39;1316&#39;</span><span class="p">:</span>
+        <span class="n">mon_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">mon_set</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>islice</code> qui est une généralisation de <code>xrange</code>. Vous vous souvenez que <code>xrange</code> est similaire à <code>range</code> mais renvoie déjà un itérateur. <code>islice</code> permet de travailler sur une séquence qui n&#39;est pas les premiers entiers&nbsp;:</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">string</span>
-<span class="n">support</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span>
-<span class="k">print</span> <span class="s">&#39;rappel string.ascii_lowercase=&#39;</span><span class="p">,</span> <span class="n">support</span>
-
-<span class="c"># range</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-    <span class="k">print</span> <span class="n">x</span>
-<span class="c"># islice</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-    <span class="k">print</span> <span class="n">x</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><p><code>imap</code> et <code>ifilter</code> qui sont les équivalents de <code>filter</code> et <code>map</code>. Ces deux-là sont donc à mettre en rapport avec les fonctions génératrices que l&#39;on a vues dans la séquence précédente, dans le sens que nous allons expliciter.</p>
-<p>Vous vous souvenez que <code>map</code> et <code>filter</code> sont devenus obsolètes avec les compréhensions de liste. Sauf que, les compréhensions retournent, eh bien justement, une liste. Alors qu&#39;en fait, une fois qu&#39;on s&#39;est habitués à penser en termes d&#39;itérateurs, on réalise que c&#39;est souvent dommage que les compréhensions ne retournent pas plutôt un itérateur aussi.</p>
-<p>Dans tous les cas, vous voyez que <code>imap</code> et <code>ifilter</code> sont un peu aux expressions génératrices   ce que <code>map</code> et <code>filter</code> sont aux compréhensions de liste.</p>
-</li>
-</ul>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -1885,45 +1842,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Impl&#233;menter-un-it&#233;rateur-de-permutations">Impl&#233;menter un it&#233;rateur de permutations<a class="anchor-link" href="#Impl&#233;menter-un-it&#233;rateur-de-permutations">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="C'est-quoi-d&#233;j&#224;-les-permutations-?">C'est quoi d&#233;j&#224; les permutations ?<a class="anchor-link" href="#C'est-quoi-d&#233;j&#224;-les-permutations-?">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>En guise de rappel, l&#39;ensemble des permutations d&#39;un ensemble fini correspond à toutes les façons d&#39;ordonner ses éléments&nbsp;; si l&#39;ensemble est de cardinal $n$, il possède $n!$ permutations&nbsp;: on a $n$ façons de choisir le premier élément, $n-1$ façons de choisir le second, etc.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Un itérateur sur les permutations est disponible au travers du module standard <code>itertools</code>. Cependant il nous a semblé intéressant de vous montrer comment on pourrait écrire nous-mêmes cette fonctionnalité, de manière relativement simple.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour illustrer le concept, voici à quoi ressemblent les 6 permutations d&#39;un ensemble à trois éléments&nbsp;:</p>
+<p>Il est important de comprendre que l&#39;objet expression génératrice se comporte comme une fonction, notamment vis-à-vis des espaces de nommage et de la portée des variables. C&#39;est donc un objet très différent des compréhensions. Regardons un exemple.</p>
 </div>
 </div>
 </div>
@@ -1934,7 +1853,59 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">permutations</span>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Comprehension</span><span class="p">:</span>
+    <span class="n">increment</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">liste</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="o">+</span> <span class="n">increment</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Il n&#39;y a pas de difficultés particulières ici, on peut regarder l&#39;attribut liste de l&#39;objet classe <code>Comprehension</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">print</span> <span class="n">Comprehension</span><span class="o">.</span><span class="n">liste</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Remplaçons maintenant la compréhension par une expression génératrice.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Generator</span><span class="p">:</span>
+    <span class="n">increment</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">liste</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">increment</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -1949,10 +1920,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="nb">set</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
-
-<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">set</span><span class="p">):</span>
-    <span class="k">print</span> <span class="n">p</span>
+<div class="highlight"><pre><span class="k">print</span> <span class="n">Generator</span><span class="o">.</span><span class="n">liste</span>
 </pre></div>
 
 </div>
@@ -1965,17 +1933,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Une-impl&#233;mentation">Une impl&#233;mentation<a class="anchor-link" href="#Une-impl&#233;mentation">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Voici une implémentation possible pour un itérateur de permutations&nbsp;:</p>
+<p>Cela fonctionne toujours. Que se passe-t-il si l&#39;on transforme maintenant immédiatement notre expression génétratrice en liste (notons que lorsque l&#39;expression génératrice est passée à une fonction, on peut omettre les parenthèses autour de l&#39;expression). </p>
 </div>
 </div>
 </div>
@@ -1986,77 +1944,9 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Permutations</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Un itérateur qui énumère les permutations de n</span>
-<span class="sd">    sous la forme d&#39;une liste d&#39;indices commençant à 0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="c"># le constructeur bien sûr ne fait (presque) rien</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
-        <span class="c"># au fur et à mesure des itérations</span>
-        <span class="c"># le compteur va aller de 0 à n-1</span>
-        <span class="c"># puis retour à 0 et comme ça en boucle sans fin</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="c"># on se contente d&#39;allouer un iterateur de rang n-1</span>
-        <span class="c"># si bien qu&#39;une fois qu&#39;on a fini de construire</span>
-        <span class="c"># l&#39;objet d&#39;ordre n on a n objets Permutations en tout</span>
-        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">subiterator</span> <span class="o">=</span> <span class="n">Permutations</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="c"># pour satisfaire le protocole de l&#39;itérable</span>
-    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="c"># c&#39;est ici bien sûr que se fait tout le travail</span>
-    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="c"># pour n == 1</span>
-        <span class="c"># le travail est très simple</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="c"># on doit renvoyer une fois la liste [0]</span>
-            <span class="c"># car les indices commencent à 0</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
-                <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="c"># et ensuite c&#39;est terminé</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">StopIteration</span>
-
-        <span class="c"># pour n &gt;= 2</span>
-        <span class="c"># lorsque counter est nul,</span>
-        <span class="c"># on traite la permutation d&#39;ordre n-1 suivante</span>
-        <span class="c"># si next() lève StopIteration on n&#39;a qu&#39;à laisser passer</span>
-        <span class="c"># car en effet c&#39;est qu&#39;on a terminé</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">subsequence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subiterator</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
-        <span class="c">#</span>
-        <span class="c"># on insère alors n-1 (car les indices commencent à 0)</span>
-        <span class="c"># successivement dans la sous-sequence</span>
-        <span class="c">#</span>
-        <span class="c"># naivement on écrirait</span>
-        <span class="c"># result = self.subsequence[0:self.counter] \</span>
-        <span class="c">#    + [self.n - 1] \</span>
-        <span class="c">#    + self.subsequence[self.counter:self.n-1]</span>
-        <span class="c"># mais c&#39;est mettre le nombre le plus élevé en premier</span>
-        <span class="c"># et donc à itérer les permutations dans le mauvais ordre,</span>
-        <span class="c"># en commençant par la fin</span>
-        <span class="c">#</span>
-        <span class="c"># donc on fait plutôt une symétrie</span>
-        <span class="c"># pour insérer en commençant par la fin</span>
-        <span class="n">cutter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsequence</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">cutter</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> \
-                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsequence</span><span class="p">[</span><span class="n">cutter</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="c"># </span>
-        <span class="c"># on n&#39;oublie pas de maintenir le compteur et de</span>
-        <span class="c"># le remettre à zéro tous les n tours</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
-        <span class="k">return</span> <span class="n">result</span>
-
-    <span class="c"># la longeur de cet itérateur est connue</span>
-    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">math</span>
-        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Mixed</span><span class="p">:</span>
+    <span class="n">increment</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">liste</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">increment</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -2069,63 +1959,10 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ce qu&#39;on a essayé d&#39;expliquer dans les commentaires, c&#39;est qu&#39;on procède en fin de compte par récurrence. Un objet <code>Permutations</code> de rang <code>n</code> possède un sous-itérateur de rang <code>n-1</code> qu&#39;on crée dans le constructeur. Ensuite l&#39;objet de rang <code>n</code> va faire successivement (c&#39;est-à-dire à chaque appel de <code>next()</code>)&nbsp;:</p>
-<ul>
-<li>appel <em>0</em> : <ul>
-<li>demander à son sous-itérateur une permutation de rang <code>n-1</code> (en lui envoyant <code>next</code>),</li>
-<li>la stocker dans l&#39;objet de rang <code>n</code>, ce sera utilisé par les <em>n</em> premier appels,</li>
-<li>et construire une liste de taille <code>n</code> en insérant <code>n-1</code> à la fin de la séquence de taille <code>n-1</code>,</li>
-</ul>
-</li>
-<li>appel <em>1</em> : <ul>
-<li>insérer <code>n-1</code> dans la même séquence de rang <code>n-1</code> mais cette fois 1 cran avant la fin,</li>
-</ul>
-</li>
-<li>...</li>
-<li>appel <em>n-1</em> :<ul>
-<li>insérer <code>n-1</code> au début de la séquence de rang <code>n-1</code>,</li>
-</ul>
-</li>
-<li>appel <em>n</em> :<ul>
-<li>refaire <code>next()</code> sur le sous-itérateur pour traiter une nouvelle sous-séquence,</li>
-<li>la stocker dans l&#39;objet de rang <code>n</code>, comme à l&#39;appel <em>0</em>, pour ce bloc de n appels,</li>
-<li>et construire la permutation en insérant <em>n-1</em> à la fin, comme à l&#39;appel 0,</li>
-</ul>
-</li>
-<li>...</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>On voit donc le caractère cyclique d&#39;ordre <em>n</em> qui est matérialisé par <code>counter</code>, que l&#39;on incrémente à chaque boucle mais modulo <em>n</em> - notez d&#39;ailleurs que pour ce genre de comportement on dispose aussi de <code>itertools.cycle</code> comme on le verra dans une deuxième version, mais pour l&#39;instant j&#39;ai préféré ne pas l&#39;utiliser pour ne pas tout embrouiller ;) </p>
-<p>La terminaison se gère très simplement, car une fois que l&#39;on a traité toutes les séquences d&#39;ordre <em>n-1</em> eh bien on a fini, on n&#39;a même pas besoin de lever StopIteration explicitement, sauf bien sûr dans le cas <em>n=1</em>.</p>
-<p>Le seul point un peu délicat, si on veut avoir les permutations dans le &quot;bon&quot; ordre, consiste à commencer à insérer <code>n-1</code> par la droite (la fin de la sous-séquence).</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Discussion">Discussion<a class="anchor-link" href="#Discussion">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Il existe certainement des tas d&#39;autres façons de faire bien entendu. Le point important ici, et qui donne toute sa puissance à la notion d&#39;itérateur, c&#39;est <strong>qu&#39;à aucun moment on ne construit</strong> une liste ou une séquence quelconque de<strong> $n!$ termes</strong>. </p>
-<p>C&#39;est une erreur fréquente chez les débutants que de calculer une telle liste dans le constructeur, mais procéder de cette façon c&#39;est aller exactement à l&#39;opposé de ce pourquoi les itérateurs ont été conçus&nbsp;; au contraire, on veut éviter à tout prix le coût d&#39;une telle construction.</p>
-<p>On peut le voir sur un code qui n&#39;utiliserait que les 20 premières valeurs de l&#39;itérateur, vous constatez que ce code est immédiat&nbsp;:</p>
+<p>On obtient ici une exception qui nous dit que la variable globale <code>increment</code> n&#39;est pas définie. Quelles sont les différences entre les classes <code>Comprehension</code>, <code>Generator</code> et <code>Mixed</code> ?
+Je vous rappelle que les objets classe et fonction sont créés au moment du chargement du module (ici, au moment de l&#39;évaluation de la cellule), mais que le corps de la fonction (donc aussi des expressions génératrices) n&#39;est évalué qu&#39;au moment de l&#39;appel.</p>
+<p>Dans le cas de la classe <code>Comprehension</code>, la compréhension de liste est évaluée au moment de la création de l&#39;objet classe <code>Comprehension</code>, lorsque l&#39;on arrive sur la compréhension, la variable <code>increment</code> est définie et vaut 10. </p>
+<p>Dans le cas de la classe <code>Generator</code>, on a remplacé la compréhension par une expression génératrice. Cela a deux impacts&nbsp;: l&#39;expression génératrice ne sera évaluée qu&#39;à son premier appel, l&#39;expression génératrice étant une fonction, elle ne peut pas accéder à l&#39;espace de nommage de la classe. Donc, l&#39;objet classe <code>Generator</code> a bien été créé, mais l&#39;appel de la fonction génétratrice devrait échouer parqu&#39;elle ne peut pas avoir accès à l&#39;attribut <code>increment</code> de la classe. Vérifions cela</p>
 </div>
 </div>
 </div>
@@ -2136,31 +1973,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">show_first_items</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">nb_items</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    montre les &lt;nb_items&gt; premiers items de iterable</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">print</span> <span class="s">&quot;Il y a {} items dans l&#39;iterable&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">iterable</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
-        <span class="k">print</span> <span class="n">item</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">nb_items</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&#39;....&#39;</span>
-            <span class="k">break</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">show_first_items</span><span class="p">(</span><span class="n">Permutations</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span> <span class="mi">20</span><span class="p">)</span>
+<div class="highlight"><pre><span class="n">Generator</span><span class="o">.</span><span class="n">liste</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -2173,39 +1986,8 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ce tableau vous montre par ailleurs sous un autre angle comment fonctionne l&#39;algorithme, si vous observez le <code>11</code> qui balaie en diagonale les 12 premières lignes, puis les 12 suivantes, etc..</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Ultimes-am&#233;liorations">Ultimes am&#233;liorations<a class="anchor-link" href="#Ultimes-am&#233;liorations">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Dernières remarques, sur des améliorations possibles - mais tout à fait optionnelles&nbsp;:</p>
-<ul>
-<li>le lecteur attentif aura remarqué qu&#39;au lieu d&#39;un entier <code>counter</code> on aurait pu profitablement utiliser une instance de <code>itertools.cycle</code>, ce qui aurait eu l&#39;avantage d&#39;être plus clair sur le propos de ce compteur;</li>
-<li>aussi dans le même mouvement, au lieu de se livrer à la gymnastique qui calcule <code>cutter</code> à partir de <code>counter</code>, on pourrait dès le départ créer dans le cycle les bonnes valeurs en commençant à <code>n-1</code>.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>C&#39;est ce qu&#39;on a fait dans cette deuxième version; après avoir enlevé la loghorrée de commentaires ça redevient presque lisible ;)</p>
+<p>Effectivement, on obtient bien une exception. Dans le cas de <code>Mixed</code>, on a immédiatement une exception parce que dans la classe on transforme immédiatement la compréhension en liste avec le contructeur <code>list</code>. C&#39;est donc un appel à l&#39;expression génératrice qui force l&#39;évaluation de son code au moment de la création de la classe. </p>
+<p>Mais alors, comment peut-on faire marcher ce code ? On pourrait utiliser <code>Mixed.val</code> dans l&#39;expression, regardons cela.</p>
 </div>
 </div>
 </div>
@@ -2216,49 +1998,9 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">itertools</span>
-
-<span class="k">class</span> <span class="nc">Permutations2</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Un itérateur qui énumère les permutations de n</span>
-<span class="sd">    sous la forme d&#39;une liste d&#39;indices commençant à 0</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
-        <span class="c"># on commence à insérer à la fin </span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cycle</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">subiterator</span> <span class="o">=</span> <span class="n">Permutations</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="c"># pour savoir quand terminer le cas n==1</span>
-        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="bp">False</span>
-
-    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span>
-
-    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">cutter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cycle</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
-
-        <span class="c"># quand n==1 on a toujours la même valeur 0</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">done</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="bp">True</span>
-                <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">StopIteration</span>
-
-        <span class="c"># au début de chaque séquence de n appels</span>
-        <span class="c"># il faut appeler une nouvelle sous-séquence</span>
-        <span class="k">if</span> <span class="n">cutter</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">subsequence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subiterator</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
-        <span class="c"># dans laquelle on insére n-1</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsequence</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">cutter</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> \
-                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsequence</span><span class="p">[</span><span class="n">cutter</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-    <span class="c"># la longeur de cet itérateur est connue</span>
-    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">import</span> <span class="nn">math</span>
-        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Mixed</span><span class="p">:</span>
+    <span class="n">increment</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">liste</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">Mixed</span><span class="o">.</span><span class="n">increment</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -2266,20 +2008,34 @@ In&nbsp;[]:
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
+<div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
-In&nbsp;[]:
 </div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">show_first_items</span><span class="p">(</span><span class="n">Permutations2</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">20</span><span class="p">)</span>
-</pre></div>
-
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ça ne fonctionne toujours pas avec une erreur étrange... Le nom global <code>Mixed</code> n&#39;existe pas lorsque l&#39;on fait <code>Mixed.increment</code>. En y réfléchissant, c&#39;est tout à fait normal. L&#39;objet classe <code>Mixed</code> ne sera créé qu&#39;à la fin de l&#39;évaluation de son bloc de code, or lorsque l&#39;on appel <code>Mixed.increment</code>, on est toujours en cours d&#39;évaluation du bloc de code de la classe. </p>
+<p>Comment s&#39;en sortir alors ? Il y a de nombreuses possibilités. Par exemple, on peut utiliser la construction avec une compréhension de liste qui, comme on l&#39;a vu avec la classe <code>Comprehension</code>, fonctionne bien. On peut aussi mettre notre expression génératrice à l&#39;intérieur d&#39;une fonction que l&#39;on appelera plus tard après la création de l&#39;objet classe. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Pour-aller-plus-loin">Pour aller plus loin<a class="anchor-link" href="#Pour-aller-plus-loin">&#182;</a></h3>
 </div>
 </div>
 </div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vous pouvez regarder <a href="http://python-history.blogspot.fr/2010/06/from-list-comprehensions-to-generator.html">cette intéressante discussion de Guido van Rossum</a> sur les compréhensions et les expressions génératrices.</p>
+</div>
+</div>
 </div>
     </div>
   </div>

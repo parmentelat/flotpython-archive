@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>W6-S1-C1-Complement-expressions-generatrices</title>
+<title>W5-S6-C2-surcharge-operateurs-2</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1681,152 +1681,11 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Expressions-g&#233;n&#233;ratrices">Expressions g&#233;n&#233;ratrices<a class="anchor-link" href="#Expressions-g&#233;n&#233;ratrices">&#182;</a></h1>
+<h1 id="Surcharge-op&#233;rateurs-(2)">Surcharge op&#233;rateurs (2)<a class="anchor-link" href="#Surcharge-op&#233;rateurs-(2)">&#182;</a></h1>
 </div>
 </div>
 </div>
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Compl&#233;ment---niveau-basique">Compl&#233;ment - niveau basique<a class="anchor-link" href="#Compl&#233;ment---niveau-basique">&#182;</a></h2>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="comment-transformer-une-compr-hension-de-liste-en-it-rateur-nbsp-">Comment transformer une compréhension de liste en itérateur&nbsp;?</h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Nous venons de voir les fonctions génératrices qui sont un puissant outil pour créer facilement des itérateurs. Nous verrons prochainement comment utiliser ces fonctions génératrices pour tranformer en quelques lignes de code vos propres objets en itérateurs. </p>
-<p>Vous savez maintenant qu&#39;en python on favorise la notion d&#39;itérateurs puisqu&#39;ils se manipulent comme des objets itérables et qu&#39;ils sont en général beaucoup plus compacts en mémoire que l&#39;itérable correspondant. </p>
-<p>Comme les compréhensions de listes sont fréquemment utilisées en python, mais qu&#39;elles sont des itérables potentiellement gourmands en ressources mémoire, on souhaiterait pouvoir créer un itérateur directement à partir d&#39;une compréhension de liste. C&#39;est possible et très facile en python. Il suffit de remplacer les crochets par des parenthèses, regardons cela.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># c&#39;est une compréhension de liste</span>
-<span class="n">comprehension</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="k">17</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> 
-<span class="k">print</span> <span class="n">comprehension</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># c&#39;est une expression génératrice</span>
-<span class="n">generator</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="k">17</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> 
-<span class="k">print</span> <span class="n">generator</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Ensuite pour utiliser une expression génératrice, c&#39;est très simple, on l&#39;utilise comme n&#39;importe quel itérateur.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">generator</span> <span class="ow">is</span> <span class="nb">iter</span><span class="p">(</span><span class="n">generator</span><span class="p">)</span> <span class="c"># generator est bien un itérateur</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># affiche les 6 premiers carrés des multiples de 17</span>
-<span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="n">carre</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">generator</span><span class="p">):</span>
-    <span class="k">print</span> <span class="s">&#39;Contenu de generator après {} itérations : {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">carre</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Avec une expression génératrice on n&#39;est plus limité comme avec les compréhensions par le nombre d&#39;éléments&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># trop grand pour une compréhension,</span>
-<span class="c"># mais on peut créer le générateur sans souci</span>
-<span class="n">generator</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">18</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">%</span><span class="k">17</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> 
-
-<span class="c"># et utiliser le début, on ne paie que ce qu&#39;on utilise</span>
-<span class="n">mon_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([])</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">generator</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">**</span><span class="mi">10</span><span class="p">:</span>
-        <span class="k">break</span>
-    <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span> <span class="o">==</span> <span class="s">&#39;1316&#39;</span><span class="p">:</span>
-        <span class="n">mon_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">mon_set</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1842,7 +1701,66 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Il est important de comprendre que l&#39;objet expression génératrice se comporte comme une fonction, notamment vis-à-vis des espaces de nommage et de la portée des variables. C&#39;est donc un objet très différent des compréhensions. Regardons un exemple.</p>
+<p>Nous poursuivons dans ce complément la sélection de méthodes spéciales entreprise en première partie.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="__contains__,-__len__,-__getitem__-et-apparent&#233;s"><code>__contains__</code>, <code>__len__</code>, <code>__getitem__</code> et apparent&#233;s<a class="anchor-link" href="#__contains__,-__len__,-__getitem__-et-apparent&#233;s">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>La méthode <code>__contains__</code> permet de donner un sens à&nbsp;:</p>
+<pre><code>item in objet
+</code></pre><p>Sans grande surprise, elle prend en argument un objet et un item, et doit renvoyer un booléen. Nous l&#39;illustrons ci-dessous avec la classe <code>DualQueue</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>La méthode <code>__len__</code> est utilisée par la fonction <em>builtin</em> <code>len</code> pour retourner la longueur d&#39;un objet. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="La-classe-DualQueue">La classe <code>DualQueue</code><a class="anchor-link" href="#La-classe-DualQueue">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nous allons illustrer ceci avec un exemple de classe, un peu artificiel, qui implémente une queue de type FIFO. Les objets sont d&#39;abord admis dans la file d&#39;entrée (<code>add_input</code>), puis déplacés dans la file de sortie (<code>move_input_to_output</code>), et enfin sortis (<code>emit_output</code>).</p>
+<p>Clairement, cet exemple est à but uniquement pédagogique; on veut montrer comment une implémentation qui repose sur deux listes séparées peut donner l&#39;illusion d&#39;une continuité, et se présenter comme un container unique. De plus cette implémentation ne fait aucun contrôle pour ne pas obscurcir le code. </p>
 </div>
 </div>
 </div>
@@ -1853,9 +1771,61 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Comprehension</span><span class="p">:</span>
-    <span class="n">increment</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="n">liste</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="o">+</span> <span class="n">increment</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">DualQueue</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Une double file d&#39;attente FIFO&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;constructeur, sans argument&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;affichage&quot;</span>
+        <span class="k">return</span> <span class="s">&quot;&lt;DualQueue, inputs={inputs}, outputs={outputs}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="c"># la partie qui nous intéresse ici</span>
+    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="s">&quot;appartenance d&#39;un objet à la queue&quot;</span>
+        <span class="k">return</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span> <span class="ow">or</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;longueur de la queue&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">)</span>        
+
+    <span class="c"># l&#39;interface publique de la classe</span>
+    <span class="c"># le plus simple possible et sans aucun contrôle</span>
+    <span class="k">def</span> <span class="nf">add_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="s">&quot;faire entrer un objet dans la queue d&#39;entrée&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">move_input_to_output</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;l&#39;objet le plus ancien de la queue d&#39;entrée est promu dans la queue de sortie&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+    <span class="k">def</span> <span class="nf">emit_output</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;l&#39;objet le plus ancien de la queue de sortie est émis&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>    
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># on construit une instance pour nos essais</span>
+<span class="n">queue</span> <span class="o">=</span> <span class="n">DualQueue</span> <span class="p">()</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">add_input</span> <span class="p">(</span><span class="s">&#39;zero&#39;</span><span class="p">)</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">add_input</span> <span class="p">(</span><span class="s">&#39;un&#39;</span><span class="p">)</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">move_input_to_output</span><span class="p">()</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">move_input_to_output</span><span class="p">()</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">add_input</span> <span class="p">(</span><span class="s">&#39;deux&#39;</span><span class="p">)</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">add_input</span> <span class="p">(</span><span class="s">&#39;trois&#39;</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">queue</span>
 </pre></div>
 
 </div>
@@ -1868,7 +1838,17 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Il n&#39;y a pas de difficultés particulières ici, on peut regarder l&#39;attribut liste de l&#39;objet classe <code>Comprehension</code>.</p>
+<h5 id="Longueur-et-appartenance">Longueur et appartenance<a class="anchor-link" href="#Longueur-et-appartenance">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Avec cette première version de la classe <code>DualQueue</code> on peut utiliser <code>len</code> et le test d&#39;appartenance&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -1879,7 +1859,10 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">print</span> <span class="n">Comprehension</span><span class="o">.</span><span class="n">liste</span>
+<div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;len()&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&quot;deux appartient-il ?&quot;</span><span class="p">,</span> <span class="s">&#39;deux&#39;</span> <span class="ow">in</span> <span class="n">queue</span>
+<span class="k">print</span> <span class="s">&quot;(1,) appartient-il ?&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span> <span class="ow">in</span> <span class="n">queue</span>
 </pre></div>
 
 </div>
@@ -1892,7 +1875,19 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Remplaçons maintenant la compréhension par une expression génératrice.</p>
+<h5 id="Acc&#232;s-s&#233;quentiel-(acc&#232;s-par-un-index-entier)">Acc&#232;s s&#233;quentiel (acc&#232;s par un index entier)<a class="anchor-link" href="#Acc&#232;s-s&#233;quentiel-(acc&#232;s-par-un-index-entier)">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lorsqu&#39;on a la notion de longueur de l&#39;objet avec  <code>__len__</code>, il peut être opportun -  quoique cela n&#39;est pas imposé par le langage, comme on vient de le voir - de proposer également un accès indexé par un entier pour pouvoir faire&nbsp;:</p>
+<pre><code>queue[1]
+</code></pre><p><strong>Pour ne pas répéter tout le code de la classe</strong>, nous allons étendre <code>DualQueue</code>; pour cela nous définissons une fonction, que nous affectons ensuite à <code>DualQueue.__getitem__</code>, comme nous avons déjà eu l&#39;occasion de le faire&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -1903,9 +1898,385 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Generator</span><span class="p">:</span>
-    <span class="n">increment</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="n">liste</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">increment</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<div class="highlight"><pre><span class="c"># une première version de DualQueue.__getitem__</span>
+<span class="c"># pour uniquement l&#39;accès par index</span>
+
+<span class="c"># on définit une fonction</span>
+<span class="k">def</span> <span class="nf">dual_queue_getitem</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="s">&quot;redéfinit l&#39;accès [] séquentiel&quot;</span>
+
+    <span class="c"># on vérifie que l&#39;index a un sens</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s">&quot;Mauvais indice {} pour DualQueue&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
+    <span class="c"># on décide que l&#39;index 0 correspond à l&#39;élément le plus ancien</span>
+    <span class="c"># ce qui oblige à une petite gymnastique</span>
+    <span class="n">li</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="n">lo</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">lo</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">lo</span><span class="o">-</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="n">li</span><span class="o">-</span><span class="p">(</span><span class="n">index</span><span class="o">-</span><span class="n">lo</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c"># et on affecte cette fonction à l&#39;intérieur de la classe</span>
+<span class="n">DualQueue</span><span class="o">.</span><span class="n">__getitem__</span> <span class="o">=</span> <span class="n">dual_queue_getitem</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>À présent, on peut <strong>accéder</strong> aux objets de la queue <strong>séquentiellement</strong>&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">print</span> <span class="n">queue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>ce qui lève la même exception qu&#39;avec une vraie liste si on utilise un mauvais index&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">try</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">queue</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&#39;ERREUR&#39;</span><span class="p">,</span><span class="n">e</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Am&#233;lioration-:-acc&#232;s-par-slice">Am&#233;lioration : acc&#232;s par slice<a class="anchor-link" href="#Am&#233;lioration-:-acc&#232;s-par-slice">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Si on veut aussi supporter l&#39;accès par slice comme ceci&nbsp;:</p>
+<pre><code>queue[1:3]
+</code></pre><p>il nous faut modifier la méthode <code>__getitem__</code>. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Le second argument de <code>__getitem__</code> correspond naturellement au contenu des crochets <code>[]</code>, on utilise donc <code>isinstance</code> pour écrire un code qui s&#39;adapte au type d&#39;indexation, comme ceci&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># une deuxième version de DualQueue.__getitem__</span>
+<span class="c"># pour l&#39;accès par index ou par slice</span>
+
+<span class="k">def</span> <span class="nf">dual_queue_getitem</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="s">&quot;redéfinit l&#39;accès par [] pour entiers, slices, et autres&quot;</span>
+
+    <span class="c"># l&#39;accès par slice queue[1:3] </span>
+    <span class="c"># nous donne pour key un objet de type slice</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+        <span class="c"># key.indices donne les indices qui vont bien</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="o">*</span><span class="n">key</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)))]</span>
+
+    <span class="c"># queue[3] nous donne pour key un entier</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="c"># on vérifie que l&#39;index a un sens</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s">&quot;Mauvais indice {} pour DualQueue&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
+        <span class="c"># on décide que l&#39;index 0 correspond à l&#39;élément le plus ancien</span>
+        <span class="c"># ce qui oblige à une petite gymnastique</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">lo</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">lo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">lo</span><span class="o">-</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="n">li</span><span class="o">-</span><span class="p">(</span><span class="n">index</span><span class="o">-</span><span class="n">lo</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c"># queue [&#39;foo&#39;] n&#39;a pas de sens pour nous</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;[] avec type non reconnu {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">)))</span>
+
+<span class="c"># et on affecte cette fonction à l&#39;intérieur de la classe</span>
+<span class="n">DualQueue</span><span class="o">.</span><span class="n">__getitem__</span> <span class="o">=</span> <span class="n">dual_queue_getitem</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Maintenant on peut accéder par slice</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">queue</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Et on reçoit bien une exception si on essaie d&#39;accéder par clé&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">try</span><span class="p">:</span>
+    <span class="n">queue</span><span class="p">[</span><span class="s">&#39;key&#39;</span><span class="p">]</span>
+<span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;On ne peut pas accéder par clé&quot;</span><span class="p">,</span><span class="n">e</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="L'objet-est-it&#233;rable-(m&#234;me-sans-avoir-__iter__)">L'objet est it&#233;rable (m&#234;me sans avoir <code>__iter__</code>)<a class="anchor-link" href="#L'objet-est-it&#233;rable-(m&#234;me-sans-avoir-__iter__)">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Avec seulement <code>__getitem__</code>, on peut <strong>faire une boucle</strong> sur l&#39;objet queue. On l&#39;a mentionné rapidement dans la séquence sur les itérateurs, mais la <strong>méthode <code>__iter__</code> n&#39;est pas la seule façon</strong> de rendre un objet itérable&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">queue</span><span class="p">:</span>
+   <span class="k">print</span> <span class="n">item</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="On-peut-faire-un-test-sur-l'objet">On peut faire un test sur l'objet<a class="anchor-link" href="#On-peut-faire-un-test-sur-l'objet">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>De manière similaire, même sans la méthode <code>__nonzero__</code>, cette classe sait <strong>faire des tests de manière correcte</strong> grâce uniquement à la méthode <code>__len__</code>&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># un test fait directement sur la queue</span>
+<span class="k">if</span> <span class="n">queue</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;La queue {} est considérée comme True&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
+
+<span class="c"># on vide la queue pour tester sur une queue vide</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">move_input_to_output</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">queue</span><span class="o">.</span><span class="n">emit_output</span><span class="p">()</span>
+
+<span class="c"># maintenant le test est négatif (notez bien le *not* ici)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">queue</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;La queue {} est considérée comme False&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="__call__-et-les-callables"><code>__call__</code> et les <em>callables</em><a class="anchor-link" href="#__call__-et-les-callables">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Le langage introduit de manière similaire la notion de <strong><em>callable</em></strong> - littéralement, qui peut être appelé.
+L&#39;idée est très simple, on cherche à donner un sens à un fragment de code du genre de&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<pre><code># on crée une instance
+objet = Classe(arguments)
+
+# et c&#39;est l&#39;objet (et pas la classe) qu&#39;on utilise comme une fonction
+objet(arg1, arg2)
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Le protocole ici est très simple; cette dernière ligne a un sens en python dès lors que&nbsp;:</p>
+<ul>
+<li><code>objet</code> possède une méthode <code>__call__</code>,</li>
+<li>et que celle-ci peut être envoyée à <code>objet</code> avec les arguments <code>arg1, arg2</code>, pour nous donner le résultat qui sera retourné par <code>objet(arg1, arg2)</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<pre><code>objet(arg1, arg2)   ===&gt;   objet.__call__(arg1, arg2)
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Voyons cela sur un exemple&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">PlusClosure</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Une classe callable qui permet de faire un peu comme la </span>
+<span class="sd">    fonction built-in sum mais avec en ajoutant une valeur initiale&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial</span> <span class="o">=</span> <span class="n">initial</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    
+<span class="c"># on crée une instance avec une valeur initiale 2 pour la somme</span>
+<span class="n">plus2</span> <span class="o">=</span> <span class="n">PlusClosure</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1920,7 +2291,14 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">print</span> <span class="n">Generator</span><span class="o">.</span><span class="n">liste</span>
+<div class="highlight"><pre><span class="c"># on peut maintenant utiliser cet objet </span>
+<span class="c"># comme une fonction qui fait sum(*arg)+2</span>
+
+<span class="k">print</span> <span class="s">&#39;[] -&gt;&#39;</span><span class="p">,</span> <span class="n">plus2</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="s">&#39;1 -&gt;&#39;</span><span class="p">,</span> <span class="n">plus2</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&#39;1,2 -&gt;&#39;</span><span class="p">,</span> <span class="n">plus2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1933,7 +2311,128 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Cela fonctionne toujours. Que se passe-t-il si l&#39;on transforme maintenant immédiatement notre expression génétratrice en liste (notons que lorsque l&#39;expression génératrice est passée à une fonction, on peut omettre les parenthèses autour de l&#39;expression). </p>
+<p>Pour ceux qui connaissent, nous avons choisi à dessein un exemple qui s&#39;apparente à <a href="http://en.wikipedia.org/wiki/Closure_%28computer_programming%29">une clôture</a>. Nous reviendrons sur cette notion de <em>callable</em> lorsque nous verrons les décorateurs en semaine 7. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="__getattr__-et-apparent&#233;s"><code>__getattr__</code> et apparent&#233;s<a class="anchor-link" href="#__getattr__-et-apparent&#233;s">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Dans cette dernière partie nous allons voir comment avec la méthode <code>__getattr__</code>, on peut redéfinir la façon que le langage a d&#39;évaluer</p>
+<pre><code>objet.attribut
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Avertissement:</strong> on a vu dans la séquence consacrée à l&#39;héritage que, pour l&#39;essentiel, le mécanisme d&#39;héritage repose <strong>précisément</strong> sur la façon d&#39;évaluer les attributs d&#39;un objet, aussi nous vous recommandons d&#39;utiliser ce trait avec précaution, car il vous donne la possibilité de &quot;faire muter le langage&quot; comme on dit.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Un-exemple-:-la-classe-RPCProxy">Un exemple : la classe <code>RPCProxy</code><a class="anchor-link" href="#Un-exemple-:-la-classe-RPCProxy">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour illustrer <code>__getattr__</code>, nous allons considérer le problème suivant. Une application utilise un service distant, avec laquelle elle interagit au travers d&#39;une API.</p>
+<p>C&#39;est une situation très fréquente: lorsqu&#39;on utilise un service météo, ou de géolocalisation, ou de réservation, le prestataire vous propose une <strong>API</strong> (Application Programming Interface) qui se présente bien souvent comme une <strong>liste de fonctions</strong>, que votre fonction peut appeler à distance au travers d&#39;un mécanisme de <strong>RPC</strong> (Remote Procedure Call).</p>
+<p>Imaginez pour fixer les idées que vous utilisez un service de réservation de ressources dans un Cloud, qui vous permet d&#39;appeler les fonctions suivantes&nbsp;:</p>
+<ul>
+<li><code>GetNodes</code>(...) pour obtenir des informations sur les noeuds disponibles,</li>
+<li><code>BookNode</code>(...) pour réserver un noeud,</li>
+<li><code>ReleaseNode</code>(...) pour abandonner un noeud.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Naturellement ceci est une API extrêmement simplifiée. Le point que nous voulons illustrer ici est que le dialogue avec le service distant&nbsp;:</p>
+<ul>
+<li>requiert ses propres données - comme l&#39;URL où on peut joindre le service, et les identifiants à utiliser pour s&#39;authentifier,</li>
+<li>et possède sa propre logique - dans le cas d&#39;une authentification par session par exemple, il faut s&#39;authentifier une première fois avec un login/password, pour obtenir une session qu&#39;on peut utiliser dans les appels suivants.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour ces raisons il est naturel de concevoir une classe <code>RPCProxy</code> dans laquelle on va rassembler à la fois ces données et cette logique, pour soulager toute l&#39;application de ces détails, comme on l&#39;a illustré ci-dessous&nbsp;:</p>
+<p><img src="media/rpcproxy.png"></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour implémenter la plomberie liée à RPC, à l&#39;encodage et décodage des données, et qui sera interne à la classe <code>RPCProxy</code>, on pourra en vraie grandeur utiliser des outils comme&nbsp;:</p>
+<ul>
+<li><a href="https://docs.python.org/2/library/xmlrpclib.html"><code>xmlrpclib</code></a> qui fait partie de la librairie standard, </li>
+<li>ou pour JSON, une des nombreuses implémentations qu&#39;un moteur de recherche vous exposera si vous cherchez <code>python rpc json</code>, comme par exemple <a href="https://pypi.python.org/pypi/json-rpc/"><code>json-rpc</code></a></li>
+</ul>
+<p>Cela n&#39;est toutefois pas notre sujet ici, et nous nous contenterons, dans notre code simplifié, d&#39;imprimer un message.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Une-approche-na&#239;ve">Une approche na&#239;ve<a class="anchor-link" href="#Une-approche-na&#239;ve">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Se pose donc la question de savoir quelle interface la classe <code>RPCProxy</code> doit offrir au reste du monde. Dans une première version naïve on pourrait écrire quelque chose comme&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -1944,9 +2443,31 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Mixed</span><span class="p">:</span>
-    <span class="n">increment</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="n">liste</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">increment</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<div class="highlight"><pre><span class="c"># la version naïve de la classe RPCProxy</span>
+
+<span class="k">class</span> <span class="nc">RPCProxy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login</span> <span class="o">=</span> <span class="n">login</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+        
+    <span class="k">def</span> <span class="nf">_forward_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        helper method that marshalls and forwards </span>
+<span class="sd">        the function and arguments to the remote end</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">print</span> <span class="s">&quot;Envoi à {}</span><span class="se">\n</span><span class="s">de la fonction {} -- args= {}&quot;</span><span class="o">.</span>\
+            <span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&quot;retour de la fonction &quot;</span> <span class="o">+</span> <span class="n">function</span>
+    
+    <span class="k">def</span> <span class="nf">GetNodes</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_call</span> <span class="p">(</span><span class="s">&#39;GetNodes&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">BookNode</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_call</span> <span class="p">(</span><span class="s">&#39;BookNode&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">ReleaseNode</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_call</span> <span class="p">(</span><span class="s">&#39;ReleaseNode&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        
 </pre></div>
 
 </div>
@@ -1959,10 +2480,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>On obtient ici une exception qui nous dit que la variable globale <code>increment</code> n&#39;est pas définie. Quelles sont les différences entre les classes <code>Comprehension</code>, <code>Generator</code> et <code>Mixed</code> ?
-Je vous rappelle que les objets classe et fonction sont créés au moment du chargement du module (ici, au moment de l&#39;évaluation de la cellule), mais que le corps de la fonction (donc aussi des expressions génératrices) n&#39;est évalué qu&#39;au moment de l&#39;appel.</p>
-<p>Dans le cas de la classe <code>Comprehension</code>, la compréhension de liste est évaluée au moment de la création de l&#39;objet classe <code>Comprehension</code>, lorsque l&#39;on arrive sur la compréhension, la variable <code>increment</code> est définie et vaut 10. </p>
-<p>Dans le cas de la classe <code>Generator</code>, on a remplacé la compréhension par une expression génératrice. Cela a deux impacts&nbsp;: l&#39;expression génératrice ne sera évaluée qu&#39;à son premier appel, l&#39;expression génératrice étant une fonction, elle ne peut pas accéder à l&#39;espace de nommage de la classe. Donc, l&#39;objet classe <code>Generator</code> a bien été créé, mais l&#39;appel de la fonction génétratrice devrait échouer parqu&#39;elle ne peut pas avoir accès à l&#39;attribut <code>increment</code> de la classe. Vérifions cela</p>
+<p>Ainsi l&#39;application utilise la classe de cette façon&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -1973,7 +2491,22 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">Generator</span><span class="o">.</span><span class="n">liste</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+<div class="highlight"><pre><span class="c"># création d&#39;une instance de RPCProxy</span>
+
+<span class="n">rpc_proxy</span> <span class="o">=</span> <span class="n">RPCProxy</span> <span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s">&#39;http://cloud.provider.com/JSONAPI&#39;</span><span class="p">,</span> 
+                      <span class="n">login</span><span class="o">=</span><span class="s">&#39;dupont&#39;</span><span class="p">,</span>
+                      <span class="n">password</span><span class="o">=</span><span class="s">&#39;***&#39;</span><span class="p">)</span>
+
+<span class="c"># cette partie du code, en tant qu&#39;utilisateur de l&#39;API, </span>
+<span class="c"># est supposée connaître les détails</span>
+<span class="c"># des arguments à passer </span>
+<span class="c"># et de comment utiliser les valeurs de retour</span>
+<span class="n">nodes_list</span> <span class="o">=</span> <span class="n">rpc_proxy</span><span class="o">.</span><span class="n">GetNodes</span> <span class="p">(</span> 
+    <span class="p">[</span> <span class="p">(</span><span class="s">&#39;phy_mem&#39;</span><span class="p">,</span> <span class="s">&#39;&gt;=&#39;</span><span class="p">,</span> <span class="s">&#39;32G&#39;</span><span class="p">)</span> <span class="p">]</span> <span class="p">)</span>
+
+<span class="c"># reserver un noeud</span>
+<span class="n">node_lease</span> <span class="o">=</span> <span class="n">rpc_proxy</span><span class="o">.</span><span class="n">BookNode</span> <span class="p">(</span>
+    <span class="p">{</span> <span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="mi">1002</span><span class="p">,</span> <span class="s">&#39;phy_mem&#39;</span> <span class="p">:</span> <span class="s">&#39;32G&#39;</span> <span class="p">}</span> <span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1986,8 +2519,44 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Effectivement, on obtient bien une exception. Dans le cas de <code>Mixed</code>, on a immédiatement une exception parce que dans la classe on transforme immédiatement la compréhension en liste avec le contructeur <code>list</code>. C&#39;est donc un appel à l&#39;expression génératrice qui force l&#39;évaluation de son code au moment de la création de la classe. </p>
-<p>Mais alors, comment peut-on faire marcher ce code ? On pourrait utiliser <code>Mixed.val</code> dans l&#39;expression, regardons cela.</p>
+<h5 id="Discussion">Discussion<a class="anchor-link" href="#Discussion">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Quelques commentaires en vrac au sujet de cette approche&nbsp;:</p>
+<ul>
+<li>l&#39;interface est correcte; l&#39;objet <code>rcp_proxy</code> se comporte bien comme un proxy, on a donné au programmeur l&#39;illusion complète qu&#39;il utilise une classe locale (sauf pour les performances bien entendu...);</li>
+<li>la séparation des rôles est raisonnable également, la classe RPCProxy n&#39;a pas à connaître le détail de la signature de chaque méthode, charge à l&#39;appelant d&#39;utiliser l&#39;API correctement;</li>
+<li><p>par contre ce qui cloche, c&#39;est que l&#39;implémentation de la classe RPCProxy dépend de la liste des fonctions exposées par l&#39;API; imaginez une API avec 100 ou 200 méthodes, cela donne une dépendance assez forte et surtout inutile;</p>
+</li>
+<li><p>enfin, nous avons escamoté la nécessité de faire de RPCProxy un <a href="http://en.wikipedia.org/wiki/Singleton_pattern">singleton</a>, mais c&#39;est une toute autre histoire.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Une-approche-plus-subtile">Une approche plus subtile<a class="anchor-link" href="#Une-approche-plus-subtile">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour obtenir une implémentation qui conserve toutes les qualités de la version naïve, mais sans la nécessité de définir une à une toutes les fonctions de l&#39;API, on peut tirer profit de <code>__getattr__</code>, comme dans cette deuxième version&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -1998,9 +2567,25 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Mixed</span><span class="p">:</span>
-    <span class="n">increment</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="n">liste</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">Mixed</span><span class="o">.</span><span class="n">increment</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<div class="highlight"><pre><span class="c"># une deuxième implémentation de RPCProxy</span>
+
+<span class="k">class</span> <span class="nc">RPCProxy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login</span> <span class="o">=</span> <span class="n">login</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+        
+    <span class="k">def</span> <span class="nf">__getattr__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Crée à la volée une méthode sur RPCProxy qui correspond</span>
+<span class="sd">        à la fonction distante &#39;function&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">forwarder</span> <span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">print</span> <span class="s">&quot;Envoi à {}</span><span class="se">\n</span><span class="s">de la fonction {} -- args= {}&quot;</span><span class="o">.</span>\
+                <span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s">&quot;retour de la fonction &quot;</span> <span class="o">+</span> <span class="n">function</span>
+        <span class="k">return</span> <span class="n">forwarder</span>
 </pre></div>
 
 </div>
@@ -2013,17 +2598,46 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ça ne fonctionne toujours pas avec une erreur étrange... Le nom global <code>Mixed</code> n&#39;existe pas lorsque l&#39;on fait <code>Mixed.increment</code>. En y réfléchissant, c&#39;est tout à fait normal. L&#39;objet classe <code>Mixed</code> ne sera créé qu&#39;à la fin de l&#39;évaluation de son bloc de code, or lorsque l&#39;on appel <code>Mixed.increment</code>, on est toujours en cours d&#39;évaluation du bloc de code de la classe. </p>
-<p>Comment s&#39;en sortir alors ? Il y a de nombreuses possibilités. Par exemple, on peut utiliser la construction avec une compréhension de liste qui, comme on l&#39;a vu avec la classe <code>Comprehension</code>, fonctionne bien. On peut aussi mettre notre expression génératrice à l&#39;intérieur d&#39;une fonction que l&#39;on appelera plus tard après la création de l&#39;objet classe. </p>
+<p>Qui est cette fois <strong>totalement découplée</strong> des détails de l&#39;API, et qu&#39;on peut utiliser exactement comme tout à l&#39;heure&nbsp;:</p>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># création d&#39;une instance de RPCProxy</span>
+
+<span class="n">rpc_proxy</span> <span class="o">=</span> <span class="n">RPCProxy</span> <span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s">&#39;http://cloud.provider.com/JSONAPI&#39;</span><span class="p">,</span> 
+                      <span class="n">login</span><span class="o">=</span><span class="s">&#39;dupont&#39;</span><span class="p">,</span>
+                      <span class="n">password</span><span class="o">=</span><span class="s">&#39;***&#39;</span><span class="p">)</span>
+
+<span class="c"># cette partie du code, en tant qu&#39;utilisateur de l&#39;API, </span>
+<span class="c"># est supposée connaître les détails</span>
+<span class="c"># des arguments à passer </span>
+<span class="c"># et de comment utiliser les valeurs de retour</span>
+<span class="n">nodes_list</span> <span class="o">=</span> <span class="n">rpc_proxy</span><span class="o">.</span><span class="n">GetNodes</span> <span class="p">(</span> 
+    <span class="p">[</span> <span class="p">(</span><span class="s">&#39;phy_mem&#39;</span><span class="p">,</span> <span class="s">&#39;&gt;=&#39;</span><span class="p">,</span> <span class="s">&#39;32G&#39;</span><span class="p">)</span> <span class="p">]</span> <span class="p">)</span>
+
+<span class="c"># reserver un noeud</span>
+<span class="n">node_lease</span> <span class="o">=</span> <span class="n">rpc_proxy</span><span class="o">.</span><span class="n">BookNode</span> <span class="p">(</span>
+    <span class="p">{</span> <span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="mi">1002</span><span class="p">,</span> <span class="s">&#39;phy_mem&#39;</span> <span class="p">:</span> <span class="s">&#39;32G&#39;</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pour-aller-plus-loin">Pour aller plus loin<a class="anchor-link" href="#Pour-aller-plus-loin">&#182;</a></h3>
+<h5 id="Exercice">Exercice<a class="anchor-link" href="#Exercice">&#182;</a></h5>
 </div>
 </div>
 </div>
@@ -2033,9 +2647,76 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Vous pouvez regarder <a href="http://python-history.blogspot.fr/2010/06/from-list-comprehensions-to-generator.html">cette intéressante discussion de Guido van Rossum</a> sur les compréhensions et les expressions génératrices.</p>
+<p>Les étudiants courageux et/ou inspirés peuvent s&#39;amuser à reprendre cette dernière version de <code>RPCProxy</code>, mais en utilisant une classe de <strong>callables</strong> comme une <em>factory</em> pour générer les attributs.</p>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># une troisième implémentation de RPCProxy</span>
+
+<span class="k">class</span> <span class="nc">Callable</span><span class="p">:</span>
+    <span class="s">&quot;votre code&quot;</span>
+
+<span class="k">class</span> <span class="nc">RPCProxy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login</span> <span class="o">=</span> <span class="n">login</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+        
+    <span class="k">def</span> <span class="nf">__getattr__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
+        <span class="s">&quot;votre code&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nous ne proposons pas de correction en ligne mais vous pouvez simplement évaluer le même code&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># création d&#39;une instance de RPCProxy</span>
+
+<span class="n">rpc_proxy</span> <span class="o">=</span> <span class="n">RPCProxy</span> <span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s">&#39;http://cloud.provider.com/JSONAPI&#39;</span><span class="p">,</span> 
+                      <span class="n">login</span><span class="o">=</span><span class="s">&#39;dupont&#39;</span><span class="p">,</span>
+                      <span class="n">password</span><span class="o">=</span><span class="s">&#39;***&#39;</span><span class="p">)</span>
+
+<span class="c"># cette partie du code, en tant qu&#39;utilisateur de l&#39;API, </span>
+<span class="c"># est supposée connaître les détails</span>
+<span class="c"># des arguments à passer </span>
+<span class="c"># et de comment utiliser les valeurs de retour</span>
+<span class="n">nodes_list</span> <span class="o">=</span> <span class="n">rpc_proxy</span><span class="o">.</span><span class="n">GetNodes</span> <span class="p">(</span> 
+    <span class="p">[</span> <span class="p">(</span><span class="s">&#39;phy_mem&#39;</span><span class="p">,</span> <span class="s">&#39;&gt;=&#39;</span><span class="p">,</span> <span class="s">&#39;32G&#39;</span><span class="p">)</span> <span class="p">]</span> <span class="p">)</span>
+
+<span class="c"># reserver un noeud</span>
+<span class="n">node_lease</span> <span class="o">=</span> <span class="n">rpc_proxy</span><span class="o">.</span><span class="n">BookNode</span> <span class="p">(</span>
+    <span class="p">{</span> <span class="s">&#39;id&#39;</span> <span class="p">:</span> <span class="mi">1002</span><span class="p">,</span> <span class="s">&#39;phy_mem&#39;</span> <span class="p">:</span> <span class="s">&#39;32G&#39;</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
     </div>
   </div>

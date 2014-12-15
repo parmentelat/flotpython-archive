@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>W5-S5-C3-Complement-heritage-multiple</title>
+<title>W5-S6-C1-surcharge-operateurs-1</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1681,7 +1681,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="H&#233;ritage-multiple">H&#233;ritage multiple<a class="anchor-link" href="#H&#233;ritage-multiple">&#182;</a></h1>
+<h1 id="Surcharge-d'op&#233;rateurs-(1)">Surcharge d'op&#233;rateurs (1)<a class="anchor-link" href="#Surcharge-d'op&#233;rateurs-(1)">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -1691,7 +1691,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Compl&#233;ment---niveau-avanc&#233;">Compl&#233;ment - niveau avanc&#233;<a class="anchor-link" href="#Compl&#233;ment---niveau-avanc&#233;">&#182;</a></h2>
+<h2 id="Compl&#233;ment---niveau-interm&#233;diaire">Compl&#233;ment - niveau interm&#233;diaire<a class="anchor-link" href="#Compl&#233;ment---niveau-interm&#233;diaire">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -1701,18 +1701,48 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Avertissement---toutes-les-classes-concern&#233;es-sont-new-style">Avertissement - toutes les classes concern&#233;es sont <em>new-style</em><a class="anchor-link" href="#Avertissement---toutes-les-classes-concern&#233;es-sont-new-style">&#182;</a></h3>
+<p>Ce complément vise à illustrer certaines des possibilités de surcharge d&#39;opérateurs, ou plus généralement les mécanismes disponibles pour étendre le langage et donner un sens à des fragments de code comme&nbsp;:</p>
+<ul>
+<li><code>objet1 + objet2</code></li>
+<li><code>item in objet</code></li>
+<li><code>objet[key]</code></li>
+<li><code>objet.key</code></li>
+<li><code>for i in objet:</code></li>
+<li><code>if objet:</code></li>
+<li><code>objet(arg1, arg2)</code>  (et non pas <code>classe(arg1,arg2)</code>)</li>
+<li>etc..</li>
+</ul>
+<p>que jusqu&#39;ici on n&#39;a expliqué que pour des objets de type prédéfini - sauf pour la boucle <code>for</code>, rappelez-vous de la méthode <code>__iter__()</code> que l&#39;on a vue à propos des itérables en fin de Semaine 3.</p>
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Toutes les classes considérées dans ce complément sont supposées <em>new-style</em>. Pour les classes classiques, le mécanisme d&#39;héritage multiple est plus rudimentaire, vous en trouverez le détail dans la référence au blog de Guido van Rossum (voir dernière section). </p>
-<p>Il est, à nouveau, très fortement <strong>conseillé d&#39;utiliser des classes <em>new-style</em></strong> si vous écrivez du nouveau code, car c&#39;est la seule sorte de classe qui reste disponible en python3.</p>
+<p>Le mécanisme général pour cela consiste à définir des <strong>méthodes spéciales</strong>, avec un nom en <code>__nom__</code>. Comme annoncé dans la vidéo, il existe un total de près de 80 méthodes dans ce système de surcharges, aussi il n&#39;est pas question ici d&#39;être exhaustif. Vous trouverez <a href="https://docs.python.org/2/reference/datamodel.html#specialnames">dans ce document une liste complète de ces possibilités</a>.</p>
+<p>Il nous faut également signaler que les mécanismes mis en jeu ici sont <strong>de difficultés assez variables</strong>. Dans le cas le plus simple il suffit de définir une méthode sur la classe pour obtenir le résultat (par exemple, définir <code>__call__</code> pour rendre un objet callable). Mais parfois on parle d&#39;un ensemble de méthodes qui doivent être cohérentes, voyez par exemple les <a href="https://docs.python.org/2/reference/datamodel.html#invoking-descriptors">descriptors</a> qui mettent en jeu les méthodes <code>__get__</code>, <code>__set__</code> et <code>__delete__</code>, et qui sont particulièrement cryptiques. </p>
+<p>Nous vous conseillons de commencer par des choses simples, et surtout de n&#39;utiliser ces techniques que lorsqu&#39;elles apportent vraiment quelque chose. Le constructeur et l&#39;affichage sont pratiquement toujours définis, mais pour tout le reste il convient d&#39;utiliser ces traits avec le plus grand discernement. Dans tous les cas écrivez votre code avec la documentation sous les yeux, c&#39;est plus prudent :)</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nous avons essayé de présenter cette sélection par difficulté croissante. 
+Par ailleurs, et pour alléger la présentation, cet exposé a été coupé en deux notebooks différents.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
 </div>
 </div>
 </div>
@@ -1731,138 +1761,10 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>L&#39;héritage en python consiste principalement en l&#39;algorithme de recherche d&#39;un attribut d&#39;une instance; celui-ci regarde :</p>
-<ol>
-<li>d&#39;abord dans l&#39;instance,</li>
-<li>ensuite dans la classe,</li>
-<li>ensuite dans les super-classes.</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Le-probl&#232;me">Le probl&#232;me<a class="anchor-link" href="#Le-probl&#232;me">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Les deux premiers points ne posent pas de problème de définition, puisque l&#39;objet lui-même et sa classe sont <strong>définis de manière unique</strong>. </p>
-<p>Par contre, lorsqu&#39;on utilise l&#39;héritage multiple, on peut imaginer trouver l&#39;attribut recherché dans <strong>plusieurs superclasses</strong>. Il est donc important de préciser, dans le cas où plusieurs superclasses possèdent l&#39;attribut recherché, quel est celui qui doit être retenu. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Ordre-sur-les-superclasses">Ordre sur les superclasses<a class="anchor-link" href="#Ordre-sur-les-superclasses">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Le problème revient donc à définir un <strong>ordre</strong> sur l&#39;ensemble des <strong>super-classes</strong>. On parle bien, naturellement, de <strong>toutes</strong> les super-classes, pas seulement celles dont on hérite directement - en termes savants on dirait qu&#39;on s&#39;intéresse à la fermeture transitive de la relation d&#39;héritage ou à l&#39;arbre de recouvrement du graphe d&#39;héritage.</p>
-<p>Après quelques errements (décrits dans la première référence de la dernière section, &quot;Pour en savoir plus&quot;), l&#39;algorithme qui a été choisi pour déterminer l&#39;ordre des superclasses, qui est en service depuis la version 2.3, est connu sous le nom de <strong>linéarisation C3</strong>. Cet algorithme n&#39;est pas propre à python, comme vous pourrez le lire dans les références citées dans la dernière section.</p>
-<p>Nous ne décrirons pas ici l&#39;algorithme lui-même dans le détail&nbsp;; par contre nous allons&nbsp;:</p>
+<p>Pour rappel, on a vu dans la vidéo&nbsp;:</p>
 <ul>
-<li>dans un premier temps résumer <strong>les raisons</strong> qui ont guidé ce choix, en décrivant les bonnes propriétés que l&#39;on attend, ainsi que les <strong>limitations</strong> qui en découlent;</li>
-<li>puis voir l&#39;ordre obtenu sur quelques exemples concrets de hiérarchies de classes.</li>
-</ul>
-<p>Vous trouverez dans les références (voir ci-dessous la dernière section, &quot;Pour en savoir plus&quot;) des liens vers des documents plus techniques si vous souhaitez creuser le sujet.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Les-bonnes-propri&#233;t&#233;s-attendues">Les bonnes propri&#233;t&#233;s attendues<a class="anchor-link" href="#Les-bonnes-propri&#233;t&#233;s-attendues">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Il y a un certain nombre de bonnes propriétés que l&#39;on attend de cet algorithme.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Priorit&#233;-au-sp&#233;cifique">Priorit&#233; au sp&#233;cifique<a class="anchor-link" href="#Priorit&#233;-au-sp&#233;cifique">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Lorsqu&#39;une classe A hérite d&#39;une classe B, on s&#39;attend à ce que les méthodes définies sur A, qui sont en principe plus spécifiques, soient utilisées de préférence à celles définies sur B.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Priorit&#233;-&#224;-gauche">Priorit&#233; &#224; gauche<a class="anchor-link" href="#Priorit&#233;-&#224;-gauche">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Lorsqu&#39;on utilise l&#39;héritage multiple, on mentionne les classes mères dans un certain ordre, qui n&#39;est pas anodin. Les classes mentionnées en premier sont bien entendu celles desquelles on veut hériter en priorité.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="De-mani&#232;re-un-peu-plus-formelle">De mani&#232;re un peu plus formelle<a class="anchor-link" href="#De-mani&#232;re-un-peu-plus-formelle">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour reformuler les deux points ci-dessus d&#39;une manière un peu plus formelle&nbsp;:</p>
-<ul>
-<li>on se donne un objet <em>o</em> de la classe <em>O</em></li>
-<li>on considère l&#39;ensemble $\cal{S}$ des superclasses de <em>O</em> (qui contient <em>O</em>), </li>
-<li>et on cherche à construire la MRO (Method Resolution Order), c&#39;est-à-dire la liste $\cal{MRO}$ ordonnée des éléments de $\cal{S}$ dans lesquelles chercher les attributs de <em>o</em>.</li>
+<li>la méthode <code>__init__</code> pour définir un <strong>constructeur</strong>, </li>
+<li>et la méthode <code>__str__</code> pour définir comment une instance s&#39;imprime avec <code>print</code>.</li>
 </ul>
 </div>
 </div>
@@ -1872,12 +1774,23 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Les deux règles ci-dessus s&#39;écrivent alors comme ceci&nbsp;:</p>
+<h3 id="Affichage-:-__repr__-et-__str__">Affichage : <code>__repr__</code> et <code>__str__</code><a class="anchor-link" href="#Affichage-:-__repr__-et-__str__">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nous commençons par signaler la méthode <code>__repr__</code> qui est assez voisine de <code>__str__</code>, et qui donc doit retourner un objet de type chaîne de caractères, sauf que&nbsp;:</p>
 <ul>
-<li>$\forall A,B \in \cal{S}$,  A hérite de B $\Rightarrow$ A est avant B dans $\cal{MRO}$</li>
-<li>$\forall B,C,D \in \cal{S}$, B hérite de C puis de D $\Rightarrow$ B est avant C qui est avant D dans $\cal{MRO}$</li>
+<li><code>__str__</code> est utilisée par <code>print</code> (affichage orienté utilisateur du programme; priorité au confort visuel),</li>
+<li>alors que <code>__repr__</code> est utilisée par la fonction <code>repr()</code> (affichage orienté programmeur, aussi peu ambigu que possible);</li>
+<li>il faut savoir que <code>__repr__</code> est utilisée <strong>aussi</strong> par <code>print</code> si <code>__str__</code> n&#39;est pas définie.</li>
 </ul>
-<p>La formule &quot;B hérite de C puis de D&quot; est à prendre ici au sens large; B peut hériter de plus de deux classes, tout ce qui est demandé est que C  apparaisse avant D dans la liste des classes mères.</p>
+<p>Pour cette seconde raison, on trouve dans la nature <code>__repr__</code> plutôt plus souvent que <code>__str__</code>; voyez <a href="https://docs.python.org/2/reference/datamodel.html#object.__repr__">ce lien</a> pour davantage de détails. </p>
 </div>
 </div>
 </div>
@@ -1886,7 +1799,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Limitations-:-toutes-les-hi&#233;rarchies-ne-peuvent-pas-&#234;tre-trait&#233;es">Limitations : toutes les hi&#233;rarchies ne peuvent pas &#234;tre trait&#233;es<a class="anchor-link" href="#Limitations-:-toutes-les-hi&#233;rarchies-ne-peuvent-pas-&#234;tre-trait&#233;es">&#182;</a></h5>
+<h5 id="Quand-est-utilis&#233;e-repr()">Quand est utilis&#233;e <code>repr()</code><a class="anchor-link" href="#Quand-est-utilis&#233;e-repr()">&#182;</a></h5>
 </div>
 </div>
 </div>
@@ -1896,26 +1809,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>L&#39;algorithme C3 permet de calculer un ordre sur $\cal{S}$ qui respecte toutes ces contraintes, lorsqu&#39;il en existe un. En effet, dans certains cas on ne peut pas trouver un tel ordre. Nous en verrons un exemple vers la fin de ce document&nbsp;; comme vous le verrez on peut exhiber de tels exemples qui restent relativement simples. Cependant, dans la pratique, il est relativement rare de tomber sur de tels cas pathologiques&nbsp;; et lorsque cela se produit c&#39;est en général le signe d&#39;erreurs de conception plus profondes.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Un-exemple-tr&#232;s-simple">Un exemple tr&#232;s simple<a class="anchor-link" href="#Un-exemple-tr&#232;s-simple">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>On se donne la hiérarchie suivante.</p>
+<p><code>repr()</code> est utilisée massivement dans les informations de debugging comme les traces de pile lorsqu&#39;une exception est levée. Elle est aussi utilisée lorsque vous affichez un objet sans passer par <code>print</code>, c&#39;est-à-dire par exemple&nbsp;: </p>
 </div>
 </div>
 </div>
@@ -1926,52 +1820,66 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">LeftTop</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">attribut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="k">return</span> <span class="s">&quot;attribut(LeftTop)&quot;</span>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span> <span class="k">pass</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+<span class="c"># lorsque vous affichez un objet comme ceci</span>
+<span class="n">foo</span>
+<span class="c"># en fait vous utilisez repr()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Deux-exemples">Deux exemples<a class="anchor-link" href="#Deux-exemples">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Voici deux exemples simples de classes; dans le premier on n&#39;a défini que <code>__repr__</code>, dans le second on a redéfini les deux méthodes&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># une classe qui ne définit que __repr__</span>
+<span class="k">class</span> <span class="nc">Point</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="s">&quot;première version de Point - on ne définit que __repr__&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;Point({x},{y})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
     
-<span class="k">class</span> <span class="nc">LeftMiddle</span><span class="p">(</span><span class="n">LeftTop</span><span class="p">):</span> 
-    <span class="k">pass</span>
+<span class="n">point</span> <span class="o">=</span> <span class="n">Point</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 
-<span class="k">class</span> <span class="nc">Left</span><span class="p">(</span><span class="n">LeftMiddle</span><span class="p">):</span> 
-    <span class="k">pass</span>
+<span class="k">print</span> <span class="s">&quot;avec print&quot;</span><span class="p">,</span> <span class="n">point</span>
 
-<span class="k">class</span> <span class="nc">Middle</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> 
-    <span class="k">pass</span>
-
-<span class="k">class</span> <span class="nc">Right</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">attribut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="k">return</span> <span class="s">&quot;attribut(Right)&quot;</span>
-
-<span class="k">class</span> <span class="nc">Class</span><span class="p">(</span><span class="n">Left</span><span class="p">,</span> <span class="n">Middle</span><span class="p">,</span> <span class="n">Right</span><span class="p">):</span> 
-    <span class="k">pass</span>
-
-<span class="n">instance</span> <span class="o">=</span> <span class="n">Class</span><span class="p">()</span>
+<span class="c"># si vous affichez un objet sans passer par print</span>
+<span class="c"># vous utilisez repr()</span>
+<span class="n">point</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>qui donne en version dessinée, avec les deux points représentant les deux définitions de la méthode <code>attribut</code>:</p>
-<p><img src="media/heritage-multiple01.png" height="40"></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Les deux règles, telles que nous les avons énoncées en premier lieu (priorité à gauche, priorité au spécifique) sont un peu contradictoires ici. En fait, c&#39;est la méthode de <code>LeftTop</code> qui est héritée dans <code>Class</code>, comme on le voit ici&nbsp;:</p>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -1980,55 +1888,27 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">print</span> <span class="n">instance</span><span class="o">.</span><span class="n">attribut</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;attribut(LeftTop)&quot;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Exercice</strong> Remarquez qu&#39;ici <code>Right</code> a elle-même un héritage très simple. À titre d&#39;exercice, modifiez le code ci-dessus pour remplacer dans l&#39;héritage de <code>Right</code> la classe <code>object</code> par <code>LeftMiddle</code>; de quelle classe d&#39;après vous est-ce que <code>Class</code> hérite <code>attribut</code> dans cette configuration ?</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Si-cela-ne-vous-convient-pas">Si cela ne vous convient pas<a class="anchor-link" href="#Si-cela-ne-vous-convient-pas">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>C&#39;est une évidence, mais cela va peut-être mieux en le rappelant&nbsp;: si la méthode que vous obtenez &quot;gratuitement&quot; avec l&#39;héritage n&#39;est pas celle qui vous convient, vous avez naturellement toujours la possibilité de la redéfinir, et ainsi d&#39;en <strong>choisir</strong> une autre. Ainsi dans notre exemple si on préfère la méthode implémentée dans <code>Right</code>, on définira plutôt la classe <code>Class</code> comme ceci&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Class</span><span class="p">(</span><span class="n">Left</span><span class="p">,</span> <span class="n">Middle</span><span class="p">,</span> <span class="n">Right</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">attribut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">Right</span><span class="o">.</span><span class="n">attribut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<div class="highlight"><pre><span class="c"># la même chose mais où on redéfinit __str__ et __repr__</span>
+<span class="k">class</span> <span class="nc">Point2</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="s">&quot;seconde version de Point - on définit __repr__ et __str__&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;Point2({x},{y})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;({x},{y})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
     
-<span class="n">instance2</span> <span class="o">=</span> <span class="n">Class</span><span class="p">()</span>
-<span class="n">instance2</span><span class="o">.</span><span class="n">attribut</span><span class="p">()</span>
+<span class="n">point2</span> <span class="o">=</span> <span class="n">Point2</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&quot;avec print&quot;</span><span class="p">,</span> <span class="n">point2</span>
+
+<span class="c"># format utilise aussi __str__</span>
+<span class="k">print</span> <span class="s">&quot;avec format {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">point2</span><span class="p">)</span>
+
+<span class="c"># si vous affichez un objet sans passer par print</span>
+<span class="c"># vous utilisez repr()</span>
+<span class="n">point2</span>
 </pre></div>
 
 </div>
@@ -2041,7 +1921,88 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ou encore bien entendu, si dans votre contexte vous devez appelez <strong>les deux</strong> méthodes dont vous pourriez hériter et les combiner, vous pouvez le faire aussi, par exemple comme ceci&nbsp;:</p>
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="__nonzero__"><code>__nonzero__</code><a class="anchor-link" href="#__nonzero__">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vous vous souvenez que la condition d&#39;un test dans un <code>if</code> peut ne pas retourner un booléen (nous avons vu cela en Semaine 2, Séquence &quot;Introduction aux tests if/else&quot;). Nous avions noté que pour les types prédéfinis, sont considérés comme <em>faux</em> <code>None</code>, la liste vide, un tuple vide, etc...</p>
+<p>Avec <code>__nonzero__</code> on peut redéfinir le comportement des objets d&#39;une classe vis-à-vis des conditions - ou si l&#39;on préfère, quel doit être le résultat de <code>bool(instance)</code>.</p>
+<p><strong>Attention</strong> pour éviter les comportements imprévus, comme on est en train de redéfinir le comportement des conditions, il <strong>faut</strong> renvoyer un <strong>booléen</strong> (ou à la rigueur 0 ou 1), on ne peut pas dans ce contexte retourner d&#39;autres types d&#39;objet.</p>
+<p>Nous allons <strong>illustrer</strong> cette méthode dans un petit moment avec une nouvelle implémentation de la classe <strong><code>Matrix2</code></strong>.</p>
+<p>Remarquez enfin qu&#39;en l&#39;absence de méthode <code>__nonzero__</code>, on cherche aussi la méthode <code>__len__</code> pour déterminer le résultat du test; une instance de longueur nulle est alors considéré comme <code>False</code>, en cohérence avec ce qui se passe avec les types <em>builtin</em> <code>list</code>, <code>dict</code>, <code>tuple</code>, etc.</p>
+<p>Ce genre de <em>protocole</em>, qui cherche d&#39;abord une méthode, puis une autre en cas d&#39;absence de la première, est relativement fréquent dans la mécanique de surcharge des opérateurs; c&#39;est entre autres pourquoi la documentation est indispensable lorsqu&#39;on surcharge les opérateurs.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="__add__-et-apparent&#233;s-(__mul__,-__sub__,-__div__,-__and__,-etc..)"><code>__add__</code> et apparent&#233;s (<code>__mul__</code>, <code>__sub__</code>, <code>__div__</code>, <code>__and__</code>, etc..)<a class="anchor-link" href="#__add__-et-apparent&#233;s-(__mul__,-__sub__,-__div__,-__and__,-etc..)">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On peut également redéfinir les opérateurs arithmétiques et logiques. Dans l&#39;exemple qui suit nous allons l&#39;illustrer sur l&#39;addition de matrices. On rappelle pour mémoire que&nbsp;:</p>
+<p>$\left( \begin{array}{cc} a_{11} &amp; a_{12} \\
+a_{21} &amp; a_{22}\end{array} \right) 
++
+\left( \begin{array}{cc} b_{11} &amp; b_{12} \\
+b_{21} &amp; b_{22}\end{array} \right) 
+= 
+\left( \begin{array}{cc} a_{11}+b_{11} &amp; a_{12}+b_{12} \\
+a_{21}+b_{21} &amp; a_{22}+b_{22}\end{array} \right)$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Une-nouvelle-version-de-la-classe-Matrix2">Une nouvelle version de la classe <code>Matrix2</code><a class="anchor-link" href="#Une-nouvelle-version-de-la-classe-Matrix2">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Voici (encore) une nouvelle implémentation de la classe de matrices 2x2, qui illustre cette fois&nbsp;:</p>
+<ul>
+<li>la possibilité d&#39;ajouter deux matrices;</li>
+<li>la possibilité de faire un test sur une matrice - le test sera faux si la matrice a tous ses coefficients nuls;</li>
+<li><p>et, bien que ce ne soit pas le sujet immédiat, cette implémentation illustre aussi la possibilité de construire la matrice à partir&nbsp;:</p>
+<ul>
+<li>soit des 4 coefficients, comme par exemple&nbsp;: <code>Matrix2(a, b, c, d)</code></li>
+<li>soit d&#39;une séquence , comme par exemple&nbsp;: <code>Matrix2(range(4))</code></li>
+</ul>
+<p>Cette dernière possibilité va nous permettre de simplifier le code de l&#39;addition, comme on va le voir.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -2052,12 +2013,45 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Class</span><span class="p">(</span><span class="n">Left</span><span class="p">,</span> <span class="n">Middle</span><span class="p">,</span> <span class="n">Right</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">attribut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">LeftTop</span><span class="o">.</span><span class="n">attribut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; ** &quot;</span> <span class="o">+</span> <span class="n">Right</span><span class="o">.</span><span class="n">attribut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span> 
-    
-<span class="n">instance3</span> <span class="o">=</span> <span class="n">Class</span><span class="p">()</span>
-<span class="n">instance3</span><span class="o">.</span><span class="n">attribut</span><span class="p">()</span>
+<div class="highlight"><pre><span class="c"># notre classe Matrix2 avec encore une autre implémentation</span>
+<span class="k">class</span> <span class="nc">Matrix2</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        le constructeur accepte </span>
+<span class="sd">        (*) soit les 4 coefficients individuellement</span>
+<span class="sd">        (*) soit une liste - ou + generalement une sequence - des memes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># on veut pouvoir créer l&#39;objet à partir des 4 coefficients</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="c"># ou bien d&#39;une séquence de 4 coefficients</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">&quot;l&#39;affichage&quot;</span>
+        <span class="k">return</span> <span class="s">&quot;[&quot;</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">])</span> <span class="o">+</span> <span class="s">&quot;]&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        l&#39;addition de deux matrices retourne un nouvel objet</span>
+<span class="sd">        la possibilite de creer une matrice a partir d&#39;une liste rend ce code </span>
+<span class="sd">        beaucoup plus facile a ecrire</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Matrix2</span> <span class="p">(</span> <span class="p">[</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">coefs</span><span class="p">)</span> <span class="p">]</span> <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__nonzero__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        on considère que la matrice est non nulle </span>
+<span class="sd">        si un au moins de ses coefficients est non nul</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># ATTENTION le retour doit être un booléen </span>
+        <span class="c"># ou à la rigueur 0 ou 1</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">c</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
 </pre></div>
 
 </div>
@@ -2070,17 +2064,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Un-exemple-un-peu-plus-compliqu&#233;">Un exemple un peu plus compliqu&#233;<a class="anchor-link" href="#Un-exemple-un-peu-plus-compliqu&#233;">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Voici un exemple tiré de la deuxième référence (voir ci-dessous la dernière section, &quot;Pour en savoir plus&quot;).</p>
+<p>On peut à présent créer deux objets, les ajouter, et vérifier que la matrice nulle se comporte bien comme attendu&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -2091,13 +2075,23 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">O</span> <span class="o">=</span> <span class="nb">object</span>
-<span class="k">class</span> <span class="nc">F</span><span class="p">(</span><span class="n">O</span><span class="p">):</span> <span class="k">pass</span>
-<span class="k">class</span> <span class="nc">E</span><span class="p">(</span><span class="n">O</span><span class="p">):</span> <span class="k">pass</span>
-<span class="k">class</span> <span class="nc">D</span><span class="p">(</span><span class="n">O</span><span class="p">):</span> <span class="k">pass</span>
-<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">F</span><span class="p">):</span> <span class="k">pass</span>
-<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span> <span class="k">pass</span>
-<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span> <span class="k">pass</span>
+<div class="highlight"><pre><span class="n">zero</span>     <span class="o">=</span> <span class="n">Matrix2</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">matrice1</span> <span class="o">=</span> <span class="n">Matrix2</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">matrice2</span> <span class="o">=</span> <span class="n">Matrix2</span> <span class="p">(</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&#39;avant matrice1&#39;</span><span class="p">,</span> <span class="n">matrice1</span>
+<span class="k">print</span> <span class="s">&#39;avant matrice2&#39;</span><span class="p">,</span> <span class="n">matrice2</span>
+
+<span class="k">print</span> <span class="s">&#39;somme&#39;</span><span class="p">,</span> <span class="n">matrice1</span> <span class="o">+</span> <span class="n">matrice2</span>
+
+<span class="k">print</span> <span class="s">&#39;après matrice1&#39;</span><span class="p">,</span> <span class="n">matrice1</span>
+<span class="k">print</span> <span class="s">&#39;après matrice2&#39;</span><span class="p">,</span> <span class="n">matrice2</span>
+
+<span class="k">if</span> <span class="n">matrice1</span><span class="p">:</span> 
+    <span class="k">print</span> <span class="n">matrice1</span><span class="p">,</span><span class="s">&quot;n&#39;est pas nulle&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">zero</span><span class="p">:</span> 
+    <span class="k">print</span> <span class="n">zero</span><span class="p">,</span><span class="s">&quot;est nulle&quot;</span>
 </pre></div>
 
 </div>
@@ -2110,7 +2104,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Cette hiérarchie nous donne, en partant de A, l&#39;ordre suivant</p>
+<p>Voici en vrac quelques commentaires sur cet exemple.</p>
 </div>
 </div>
 </div>
@@ -2119,28 +2113,17 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<pre><code>                           6
-                          ---
-Level 3                  | O |
-                       /  ---  \
-                      /    |    \
-                     /     |     \
-                    /      |      \
-                  ---     ---    ---
-Level 2        2 | E | 4 | D |  | F | 5
-                  ---     ---    ---
-                   \      / \     /
-                    \    /   \   /
-                     \  /     \ /
-                      ---     ---
-Level 1            1 | B |   | C | 3
-                      ---     ---
-                       \       /
-                        \     /
-                          ---
-Level 0                0 | A |
-                          ---
-</code></pre>
+<h5 id="Utiliser-un-tuple">Utiliser un tuple<a class="anchor-link" href="#Utiliser-un-tuple">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Avant de parler de la surcharge des opérateurs <em>per se</em>, vous remarquerez que l&#39;on range les coefficients dans un <strong>tuple</strong>, de façon à ce que notre objet <code>Matrix2</code> soit indépendant de l&#39;objet qu&#39;on a utilisé pour le créer (et qui peut être ensuite modifié par l&#39;appelant).</p>
 </div>
 </div>
 </div>
@@ -2149,7 +2132,38 @@ Level 0                0 | A |
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Que l&#39;on peut calculer, sous l&#39;interpréteur python, avec la méthode <code>mro</code> sur la classe de départ&nbsp;:</p>
+<h5 id="Cr&#233;er-un-nouvel-objet">Cr&#233;er un nouvel objet<a class="anchor-link" href="#Cr&#233;er-un-nouvel-objet">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vous remarquez que l&#39;addition <code>__add__</code> renvoie un <strong>nouvel objet</strong>, au lieu de modifier <code>self</code> en place. C&#39;est la bonne façon de procéder tout simplement parce que lorsqu&#39;on écrit </p>
+<pre><code>print &#39;somme&#39;, matrice1 + matrice2
+</code></pre><p> on ne s&#39;attend pas du tout à ce que <code>matrice1</code> soit modifié après cet appel. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Du-code-qui-ne-d&#233;pend-que-des-4-op&#233;rations">Du code qui ne d&#233;pend que des 4 op&#233;rations<a class="anchor-link" href="#Du-code-qui-ne-d&#233;pend-que-des-4-op&#233;rations">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Le fait d&#39;avoir défini l&#39;addition nous permet par exemple de bénéficier de la fonction <em>builtin</em> <code>sum</code>. En effet le code de <code>sum</code> fait lui-même des additions, il n&#39;y a donc aucune raison de ne pas pouvoir l&#39;exécuter avec en entrée un liste de matrices puisque maintenant on sait les additionner, (mais on a dû toutefois passer à <code>sum</code> comme élément neutre <code>zero</code>)&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -2160,7 +2174,14 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">A</span><span class="o">.</span><span class="n">mro</span><span class="p">()</span>
+<div class="highlight"><pre><span class="c"># il se trouve que dans l&#39;environnement de FUN </span>
+<span class="c"># le symbole sum correspond à celui de numpy</span>
+<span class="c"># je préfère vous montrer la fonction sum builtin,</span>
+<span class="c"># et donc je vais utiliser l&#39;astuce qu&#39;on a vue </span>
+<span class="c"># en semaine 4 sequence 6</span>
+<span class="kn">from</span> <span class="nn">__builtin__</span> <span class="kn">import</span> <span class="nb">sum</span>
+
+<span class="nb">sum</span> <span class="p">(</span> <span class="p">[</span><span class="n">matrice1</span><span class="p">,</span> <span class="n">matrice2</span><span class="p">,</span> <span class="n">matrice1</span><span class="p">]</span> <span class="p">,</span> <span class="n">zero</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2173,7 +2194,17 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Un-exemple-qui-ne-peut-pas-&#234;tre-trait&#233;">Un exemple qui ne peut pas &#234;tre trait&#233;<a class="anchor-link" href="#Un-exemple-qui-ne-peut-pas-&#234;tre-trait&#233;">&#182;</a></h3>
+<p>C&#39;est un effet de bord du typage dynamique. On ne vérifie pas <em>a priori</em> que tous les arguments passés à <code>sum</code> savent faire une addition; <em>a contrario</em>, si ils savent s&#39;additionner on peut exécuter le code de <code>sum</code>.</p>
+<p>De manière plus générale, si vous écrivez par exemple un morceau de code qui travaille sur les éléments d&#39;un anneau (au sens anneau des entiers $\mathbb{Z}$) - imaginez un code qui factorise des polynômes - vous pouvez espérer utiliser ce code avec n&#39;importe quel anneau, c&#39;est à dire avec une classe qui implémente les 4 opérations (pourvu bien sûr que cet ensemble soit effectivement un anneau).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="On-peut-aussi-red&#233;finir-un-ordre">On peut aussi red&#233;finir un ordre<a class="anchor-link" href="#On-peut-aussi-red&#233;finir-un-ordre">&#182;</a></h5>
 </div>
 </div>
 </div>
@@ -2183,8 +2214,52 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Voici enfin un exemple de hiérarchie pour laquelle on ne <strong>peut pas trouver d&#39;ordre</strong> qui respecte les bonnes propriétés que l&#39;on a vues tout à l&#39;heure, et qui pour cette raison sera <strong>rejetée par l&#39;interpréteur python</strong>. D&#39;abord en version dessinée</p>
-<p><img src="media/heritage-multiple02.png"></p>
+<p>La place nous manque pour illustrer la possibilité, avec les opérateurs <code>__eq__</code>, <code>__ne__</code>, <code>__lt__</code>, <code>__le__</code>, <code>__gt__</code>, et <code>__ge__</code>, de redéfinir un ordre sur les instances d&#39;une classe.</p>
+<p>Signalons à cet égard qu&#39;il existe un mécanisme &quot;intelligent&quot; qui permet de définir un ordre à partir d&#39;un sous-ensemble seulement de ces méthodes, l&#39;idée étant que si vous savez faire <code>&gt;</code>
+ et <code>=</code>, vous savez sûrement faire tout le reste. Ce mécanisme est <a href="https://docs.python.org/2/library/functools.html#functools.total_ordering">documenté ici</a>; il repose sur <strong>un décorateur</strong> (<code>@total_ordering</code>), un mécanisme que nous étudierons en semaine 7, mais que vous pouvez utiliser dès à présent.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>De manière analogue à <code>sum</code> qui fonctionne sur une liste de matrices, si on avait défini un ordre sur les matrices, on aurait pu alors utiliser les <em>builtin</em> <code>min</code> et <code>max</code> pour calculer une borne supérieure ou inférieure dans une séquence de matrices.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Compl&#233;ment---niveau-avanc&#233;">Compl&#233;ment - niveau avanc&#233;<a class="anchor-link" href="#Compl&#233;ment---niveau-avanc&#233;">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Le-produit-avec-un-scalaire">Le produit avec un scalaire<a class="anchor-link" href="#Le-produit-avec-un-scalaire">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On implémenterait la multiplication de deux matrices d&#39;une façon identique (quoique plus fastidieuse naturellement). </p>
+<p>La multiplication d&#39;une matrice par un scalaire (un réel ou complexe pour fixer les idées), comme ici&nbsp;:</p>
+<pre><code>matrice2 = reel * matrice1
+</code></pre><p>peut être également réalisée par surcharge de l&#39;opérateur <code>__rmul__</code>.</p>
+<p>Il s&#39;agit d&#39;une astuce, destinée précisément à ce genre de situations, où on veut étendre la classe de l&#39;opérande de <strong>droite</strong>, sachant que dans ce cas précis l&#39;opérande de gauche est un type de base, qu&#39;on ne peut pas étendre (les classes <em>builtin</em> sont non mutables, pour garantir la stabilité de l&#39;interpréteur).</p>
+<p>Voici donc comment on s&#39;y prendrait. Pour éviter de reproduire tout le code de la classe, on va l&#39;étendre à la volée.</p>
 </div>
 </div>
 </div>
@@ -2195,19 +2270,18 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># en version code</span>
-<span class="k">class</span> <span class="nc">X</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="k">pass</span>
-<span class="k">class</span> <span class="nc">Y</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="k">pass</span>
-<span class="k">class</span> <span class="nc">XY</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span> <span class="k">pass</span>
-<span class="k">class</span> <span class="nc">YX</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span> <span class="k">pass</span>
+<div class="highlight"><pre><span class="c"># remarquez que les opérandes sont apparemment inversés</span>
+<span class="c"># dans le sens où pour evaluer </span>
+<span class="c">#     reel * matrice</span>
+<span class="c"># on écrit une méthode qui prend en argument</span>
+<span class="c">#   la matrice, puis le réel</span>
+<span class="c"># mais n&#39;oubliez pas qu&#39;on est en fait en train</span>
+<span class="c"># d&#39;écrire une méthode sur la classe `Matrix2`</span>
+<span class="k">def</span> <span class="nf">multiplication_scalaire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Matrix2</span> <span class="p">([</span> <span class="n">alpha</span><span class="o">*</span><span class="n">coef</span> <span class="k">for</span> <span class="n">coef</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span> <span class="p">])</span>
 
-<span class="c"># on essaie de créer une sous-classe de XY et YX</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="k">class</span> <span class="nc">Class</span><span class="p">(</span><span class="n">XY</span><span class="p">,</span><span class="n">YX</span><span class="p">):</span> <span class="k">pass</span> 
-<span class="c"># mais ce n&#39;est pas possible</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="k">print</span> <span class="s">&quot;On ne peut pas créer Class&quot;</span>
-    <span class="k">print</span> <span class="n">e</span>
+<span class="c"># on ajoute la méthode spéciale __rmul__</span>
+<span class="n">Matrix2</span><span class="o">.</span><span class="n">__rmul__</span> <span class="o">=</span> <span class="n">multiplication_scalaire</span>
 </pre></div>
 
 </div>
@@ -2215,28 +2289,35 @@ In&nbsp;[]:
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
+In&nbsp;[]:
 </div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pour-en-savoir-plus">Pour en savoir plus<a class="anchor-link" href="#Pour-en-savoir-plus">&#182;</a></h3>
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">matrice1</span>
+</pre></div>
+
 </div>
 </div>
 </div>
 
-<div class="cell border-box-sizing text_cell rendered">
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">
+In&nbsp;[]:
 </div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li>Un <a href="http://python-history.blogspot.fr/2010/06/method-resolution-order.html">blog de Guido Van Rossum</a> qui retrace l&#39;historique des différents essais qui ont été faits avant de converger sur le modèle actuel.</li>
-<li>Un <a href="https://www.python.org/download/releases/2.3/mro/">article technique</a> qui décrit le fonctionnement de l&#39;algorithme de calcul de la MRO, et donne des exemples.</li>
-<li>L&#39;<a href="http://en.wikipedia.org/wiki/C3_linearization">article de wikipedia</a> sur l&#39;algorithme C3.</li>
-</ol>
+    <div class="input_area">
+<div class="highlight"><pre><span class="mi">12</span><span class="o">*</span><span class="n">matrice1</span>
+</pre></div>
+
 </div>
 </div>
+</div>
+
 </div>
     </div>
   </div>

@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>W6-S6-C1-Complement-expressions-regulieres</title>
+<title>W7-S2-C1-decorateurs</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1681,7 +1681,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Expressions-r&#233;guli&#232;res-et-le-module-re">Expressions r&#233;guli&#232;res et le module <code>re</code><a class="anchor-link" href="#Expressions-r&#233;guli&#232;res-et-le-module-re">&#182;</a></h1>
+<h1 id="D&#233;corateurs">D&#233;corateurs<a class="anchor-link" href="#D&#233;corateurs">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -1691,7 +1691,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Compl&#233;ment---niveau-interm&#233;diaire">Compl&#233;ment - niveau interm&#233;diaire<a class="anchor-link" href="#Compl&#233;ment---niveau-interm&#233;diaire">&#182;</a></h2>
+<h2 id="Compl&#233;ment---niveau-(tr&#232;s)-avanc&#233;">Compl&#233;ment - niveau (tr&#232;s) avanc&#233;<a class="anchor-link" href="#Compl&#233;ment---niveau-(tr&#232;s)-avanc&#233;">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -1701,13 +1701,28 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Une expression régulière est un objet mathématique permettant de décrire un ensemble de textes qui possèdent des propriétés communes&nbsp;; par exemple, s&#39;il vous arrive d&#39;utiliser un terminal, et que vous tapez&nbsp;:</p>
-<pre><code>$ dir *.txt
-</code></pre><p>l&#39;expression régulière <code>*.txt</code> <em>filtre</em> toutes les chaînes qui se terminent par <code>.txt</code></p>
-<p>Le langage <strong>Perl</strong> a été le premier à populariser l&#39;utilisation des expressions régulières en les supportant nativement dans le langage, et non au travers d&#39;une librairie.</p>
-<p>En python, les expressions régulières sont disponibles de manière plus traditionnelle, via le module <code>re</code> de la librairie standard, que nous allons voir maintenant.</p>
-<p>Dans la commande ci-dessus, <code>*.txt</code> est une expression régulière très simple. Le module <code>re</code> fournit le moyen de construire des expressions régulières très élaborées et plus puissantes que ce que supporte le shell. C&#39;est pourquoi la syntaxe des regexps de <code>re</code> est un peu différente&nbsp;; par exemple pour rechercher (on dit encore filtrer, de l&#39;anglais <em>pattern matching</em>) la même famille de chaînes que <code>*.txt</code> avec le module <code>re</code>, il nous faudra écrire l&#39;expression régulière sous une forme légèrement différente.</p>
-<p>Le propos de ce complément est de vous donner une première introduction au module <code>re</code>. </p>
+<p>Le mécanisme des décorateurs - qui rappelle un peu, pour ceux qui connaissent, les macros Lisp - est un mécanisme très puissant. Sa portée va bien au delà de simplement rajouter du code avant et après une fonction, comme dans le cas de <code>NbAppels</code> que nous avons vu dans la vidéo.  </p>
+<p>Par exemple, les notions de méthodes de classe (<code>@classmethod</code>) et de méthodes statiques (<code>@staticmethod</code>) sont implémentées comme des décorateurs. Pour une liste plus représentative de ce qu&#39;il est possible de faire avec les décorateurs, je vous invite à parcourir même rapidement ce <a href="https://wiki.python.org/moin/PythonDecoratorLibrary">recueil de décorateurs</a> qui propose du code (à titre indicatif car rien de ceci ne fait partie de la librairie standard) pour des thèmes qui sont propices à la décoration de code.</p>
+<p>Nous allons voir en détails quelques-uns de ces exemples, nos décorateurs <code>caching</code> et <code>singleton</code> ont la même fonctionnalité que les <code>memoize</code> et <code>singleton</code> du recueil de décorateurs, mais implémentés différemment.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Un-d&#233;corateur-impl&#233;ment&#233;-comme-une-fonction">Un d&#233;corateur impl&#233;ment&#233; comme une fonction<a class="anchor-link" href="#Un-d&#233;corateur-impl&#233;ment&#233;-comme-une-fonction">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Dans la vidéo on a vu <code>NbAppels</code> pour compter le nombre de fois qu&#39;on appelle une fonction. Pour mémoire on avait écrit&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -1718,7 +1733,16 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">re</span>
+<div class="highlight"><pre><span class="c"># un rappel du code montré dans la vidéo</span>
+<span class="k">class</span> <span class="nc">NbAppels</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">appels</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">appels</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span> <span class="s">&quot;{}: {} appels&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">appels</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        
 </pre></div>
 
 </div>
@@ -1726,64 +1750,6 @@ In&nbsp;[]:
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Je vous conseille d&#39;avoir sous la main la <a href="https://docs.python.org/2/library/re.html">documentation du module <code>re</code></a> pendant que vous lisez ce complément.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Avertissement">Avertissement<a class="anchor-link" href="#Avertissement">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Dans ce complément nous serons amenés à utiliser des traits qui dépendent du LOCALE, c&#39;est-à-dire, pour faire simple, de la configuration de l&#39;ordinateur vis-à-vis de la langue. </p>
-<p>Tant que vous exécutez ceci dans le notebook sur la plateforme, en principe tout le monde verra exactement la même chose. Par contre, si vous faites tourner le même code sur votre ordinateur, il se peut que vous obteniez des résultats différents.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Un-exemple-simple">Un exemple simple<a class="anchor-link" href="#Un-exemple-simple">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="findall"><code>findall</code><a class="anchor-link" href="#findall">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>On se donne deux exemples de chaînes&nbsp;:</p>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
@@ -1791,253 +1757,35 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Lacus a donec, + vitae gravida proin sociis.&#39;</span><span class="p">,</span> 
-             <span class="s">&#39;Neque ipsum! rhoncus cras quam.&#39;</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>On peut <strong>chercher tous</strong> les mots se terminant par a ou m dans une chaîne avec <code>findall</code>&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
-    <span class="k">print</span> <span class="mi">4</span><span class="o">*</span><span class="s">&#39;-&#39;</span><span class="p">,</span><span class="s">&#39;dans &gt;{}&lt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
-    <span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r&quot;\w*[am]\W&quot;</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Ce code permet de chercher toutes (<code>findall</code>) les occurrences de l&#39;expression régulière, qui ici est définie par le <em>raw-string</em>&nbsp;:</p>
-<pre><code>r&quot;\w*[am]\W&quot;
-</code></pre><p>Nous verrons tout à l&#39;heure comment fabriquer des expressions régulières plus en détail, mais pour démystifier au moins celle-ci, on a mis bout à bout les morceaux suivants&nbsp;:</p>
-<ul>
-<li><code>\w*</code> : il nous faut trouver une sous-chaîne qui commence par un nombre quelconque, y compris nul (<code>*</code>) de caractères alphanumériques (<code>\w</code>)&nbsp;; ceci est défini en fonction de votre LOCALE, on y reviendra&nbsp;;</li>
-<li><code>[am]</code> : immédiatement après, il nous faut trouver un caratère <code>a</code> ou <code>m</code>;</li>
-<li><code>\W</code> : et enfin, il nous faut un caractère qui ne soit pas alphanumérique. Ceci est important puisqu&#39;on cherche les mots qui <strong>se terminent</strong> par un <code>a</code> ou un <code>m</code>; si on ne le mettait pas on obtiendrait ceci&nbsp;:</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># le \W final est important</span>
-<span class="c"># voici ce qu&#39;on obtient si on l&#39;omet</span>
-<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
-    <span class="k">print</span> <span class="mi">4</span><span class="o">*</span><span class="s">&#39;-&#39;</span><span class="p">,</span><span class="s">&#39;dans &gt;{}&lt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
-    <span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">r&quot;\w*[am]&quot;</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="split"><code>split</code><a class="anchor-link" href="#split">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Une autre forme simple d&#39;utilisation des regexps est <code>re.split</code>, qui fournit une <strong>fonctionnalité voisine de <code>str.split</code></strong> qu&#39;on a vue en semaine 2, mais ou les séparateurs sont exprimés comme une expression régulière&nbsp;; ou encore on peut le voir un peu comme la négation de <code>findall</code>&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
-    <span class="k">print</span> <span class="mi">4</span><span class="o">*</span><span class="s">&#39;-&#39;</span><span class="p">,</span><span class="s">&#39;dans &gt;{}&lt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
-    <span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">r&quot;\W+&quot;</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Ici l&#39;expression régulière, qui donc décrit le séparateur, est simplement <code>\W+</code> c&#39;est-à-dire toute suite d&#39;au moins un caractère non alphanumérique. </p>
-<p>Nous avons donc là un moyen simple, et plus puissant que <code>str.split</code>, de couper un texte en mots.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="sub"><code>sub</code><a class="anchor-link" href="#sub">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Une troisième méthode utilitaire est <code>re.sub</code> qui permet de remplacer les occurrences d&#39;une <em>regexp</em>, comme par exemple&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
-    <span class="k">print</span> <span class="mi">4</span><span class="o">*</span><span class="s">&#39;-&#39;</span><span class="p">,</span><span class="s">&#39;dans &gt;{}&lt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
-    <span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r&quot;(\w+)&quot;</span><span class="p">,</span> <span class="s">r&quot;X\1X&quot;</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>    
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Ici, l&#39;expression régulière (le premier argument) contient un <strong>groupe</strong> : on a utilisé des parenthèses autour du <code>\w+</code>. Le second argument est la <strong>chaîne de remplacement</strong>, dans laquelle on a fait <strong>référence au groupe</strong> en écrivant <code>\1</code>, qui veut dire tout simplement &quot;le premier groupe&quot;.</p>
-<p>Donc au final l&#39;effet de cet appel est d&#39;entourer toutes les suites de caractères alphanumériques par une paire de <code>X</code>. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Pourquoi-un-raw-string-?">Pourquoi un <em>raw-string</em> ?<a class="anchor-link" href="#Pourquoi-un-raw-string-?">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>En guise de digression, il n&#39;y a aucune obligation à utiliser un <em>raw-string</em>&nbsp;; d&#39;ailleurs on rappelle qu&#39;il n&#39;y a pas de différence de nature entre un <em>raw-string</em> et une chaîne usuelle&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">raw</span> <span class="o">=</span> <span class="s">r&#39;abc&#39;</span>
-<span class="n">regular</span> <span class="o">=</span> <span class="s">&#39;abc&#39;</span>
-<span class="c"># comme on a pris une &#39;petite&#39; chaîne ce sont les mêmes objets</span>
-<span class="k">print</span> <span class="s">&#39;is&#39;</span><span class="p">,</span> <span class="n">raw</span> <span class="ow">is</span> <span class="n">regular</span>
-<span class="c"># et donc a fortiori</span>
-<span class="k">print</span> <span class="s">&#39;==&#39;</span><span class="p">,</span> <span class="n">raw</span> <span class="o">==</span> <span class="n">regular</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Il se trouve que, comme dans notre premier exemple, le <em>backslash</em> <code>\</code> à l&#39;intérieur des expressions régulières est d&#39;un usage assez courant. C&#39;est pourquoi on <strong>utilise fréquemment un <em>raw-string</em></strong> pour décrire une expression régulière, et en général à chaque fois qu&#39;elle comporte un <em>backslash</em>.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="(Digression-:-petits-outils-d'affichage)">(Digression : petits outils d'affichage)<a class="anchor-link" href="#(Digression-:-petits-outils-d'affichage)">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Avant de voir un deuxième exemple, nous allons digresser à nouveau, et pour améliorer la présentation, nous allons nous écrire deux petits outils de mise en page, qui n&#39;ont rien à voir avec les expressions régulières <em>per se</em>&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># mettre en colonnes les inputs et les regexps</span>
-<span class="k">def</span> <span class="nf">i_r</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">cols_in</span><span class="p">,</span> <span class="n">regexp</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cols_re</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">regexp</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s">&quot;IN={} - RE={} -&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="n">cols_in</span><span class="p">),</span>
-                                         <span class="n">regexp</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">cols_re</span><span class="p">))</span>
+<div class="highlight"><pre><span class="nd">@NbAppels</span>
+<span class="k">def</span> <span class="nf">fibo_aux</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="s">&quot;Fibonacci en log(n), credits Bernardi&quot;</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">fibo_aux</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">u</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">-</span> <span class="n">u</span><span class="p">),</span> <span class="n">u</span><span class="o">*</span><span class="n">u</span> <span class="o">+</span> <span class="n">v</span><span class="o">*</span><span class="n">v</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span> <span class="o">+</span> <span class="n">v</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s">&quot;IN={} -&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="n">cols_in</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span>
 
-<span class="c"># afficher &#39;Match&#39; ou &#39;None&#39; plutôt que l&#39;objet Match</span>
-<span class="k">def</span> <span class="nf">m</span><span class="p">(</span><span class="n">match</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s">&#39;MATCH&#39;</span> <span class="k">if</span> <span class="n">match</span> <span class="k">else</span> <span class="s">&#39;Nope&#39;</span>    
+<span class="k">def</span> <span class="nf">fibo_log</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">fibo_aux</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">fibo_log</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2050,7 +1798,79 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Nous utiliserons <code>i_r</code> avec des tailles de colonnes choisies à la main, ce qui donnera quelque chose comme&nbsp;:</p>
+<p>Ici nous allons implémenter <code>caching</code>, un décorateur qui permet de mémoriser les résultats d&#39;une fonction, et de les cacher pour ne pas avoir à les recalculer la fois suivante. </p>
+<p>Alors que <code>NbAppels</code> était <strong>implémenté comme une classe</strong>, pour varier un peu, nous allons implémenter cette fois <strong><code>caching</code> comme une vraie fonction</strong>, pour vous montrer les deux alternatives que l&#39;on a quand on veut implémenter un décorateur&nbsp;: une vraie fonction ou une classe de callables.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Le-code-du-d&#233;corateur">Le code du d&#233;corateur<a class="anchor-link" href="#Le-code-du-d&#233;corateur">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># une première implémentation de caching</span>
+
+<span class="c"># un decorateur de fonction</span>
+<span class="c"># implémenté comme une fonction</span>
+<span class="k">def</span> <span class="nf">caching</span><span class="p">(</span><span class="n">a_decorer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Un décorateur pour conserver les résultats</span>
+<span class="sd">    précédents et éviter de les recalculer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">decoree</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="c"># si on a déjà calculé le résultat</span>
+        <span class="c"># on le renvoie</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
+        <span class="c"># si les arguments ne sont pas hashables, </span>
+        <span class="c"># par exemple une liste, on ne peut pas cacher </span>
+        <span class="c"># et on reçoit TypeError</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">a_decorer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="c"># les arguments sont hashables mais on</span>
+        <span class="c"># n&#39;a pas encore calculé cette valeur</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">a_decorer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+            <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+            <span class="k">return</span> <span class="n">result</span>
+    <span class="c"># on initialise l&#39;attribut &#39;cache&#39;</span>
+    <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">return</span> <span class="n">decoree</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Comment-l'utiliser">Comment l'utiliser<a class="anchor-link" href="#Comment-l'utiliser">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Avant de rentrer dans le détail du code, voyons comment cela s&#39;utiliserait; il n&#39;y a pas de changement de ce point de vue par rapport à l&#39;option développée dans la vidéo&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -2061,9 +1881,14 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="nb">input</span> <span class="o">=</span> <span class="s">&#39;aaabbb&#39;</span>
-<span class="n">regexp</span> <span class="o">=</span> <span class="s">&#39;a*b+&#39;</span>
-<span class="k">print</span> <span class="n">i_r</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">regexp</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">m</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">regexp</span><span class="p">,</span> <span class="nb">input</span><span class="p">))</span>
+<div class="highlight"><pre><span class="c"># créer une fonction décorée</span>
+<span class="nd">@caching</span>
+<span class="k">def</span> <span class="nf">fibo_cache</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Un fibonacci hyper-lent (exponentiel) se transforme</span>
+<span class="sd">    en temps linéaire une fois que les résultats sont cachés</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">fibo_cache</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo_cache</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2076,36 +1901,9 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ici 6 et 4 représentent la largeur des colonnes pour afficher <code>aaabbb</code> et <code>a*b+</code> respectivement. Nous allons voir plus bas pourquoi cette expressions régulière filtre effectivement cette entrée.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Un-deuxi&#232;me-exemple">Un deuxi&#232;me exemple<a class="anchor-link" href="#Un-deuxi&#232;me-exemple">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Reprenons, nous allons maintenant voir comment on peut d&#39;abord vérifier si une chaîne est conforme au critère défini par l&#39;expression régulière, mais aussi <em>extraire</em> les morceaux de la chaîne qui correspondent aux différentes parties de l&#39;expression. </p>
-<p>Pour cela, supposons qu&#39;on s&#39;intéresse aux chaînes qui comportent 5 parties, une suite de chiffres, une suite de lettres, des chiffres à nouveau, des lettres, et enfin de nouveau des chiffres.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour cela on considère ces trois chaines en entrée&nbsp;:</p>
+<p>Bien que l&#39;implémentation utilise un algorithme épouvantablement lent, le fait de lui rajouter du caching redonne à l&#39;ensemble un caractère linéaire. </p>
+<p>En effet, si vous y réfléchissez une minute, vous verrez qu&#39;avec le cache, lorsqu&#39;on calcule <code>fibo_cache(n)</code>, on calcule d&#39;abord <code>fibo_cache(n-1)</code>, puis lorsqu&#39;on évalue <code>fibo_cache(n-2)</code> le résultat <strong>est déjà dans le cache</strong> si bien qu&#39;on peut considérer ce deuxième calcul comme, sinon instantané, du moins du même ordre de grandeur qu&#39;une addition. </p>
+<p>On peut calculer par exemple&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -2116,10 +1914,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;890hj000nnm890&#39;</span><span class="p">,</span>    <span class="c"># cette entrée convient</span>
-          <span class="s">&#39;123abc456def789&#39;</span><span class="p">,</span>   <span class="c"># celle-ci aussi</span>
-          <span class="s">&#39;8090abababab879&#39;</span><span class="p">,</span>   <span class="c"># celle-ci non</span>
-          <span class="p">]</span>
+<div class="highlight"><pre><span class="n">fibo_cache</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2132,17 +1927,8 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="match"><code>match</code><a class="anchor-link" href="#match">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour commencer, voyons que l&#39;on peut facilement <strong>vérifier si une chaîne vérifie</strong> ou non le critère&nbsp;:</p>
+<p>qu&#39;il serait hors de question de calculer sans le caching.</p>
+<p>On peut naturellement inspecter le cache, qui est rangé dans l&#39;attribut <code>cache</code> de l&#39;objet fonction lui-même&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -2153,7 +1939,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">regexp1</span> <span class="o">=</span> <span class="s">&quot;[0-9]+[A-Za-z]+[0-9]+[A-Za-z]+[0-9]+&quot;</span>
+<div class="highlight"><pre><span class="nb">len</span><span class="p">(</span><span class="n">fibo_cache</span><span class="o">.</span><span class="n">cache</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2166,1005 +1952,54 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ce qui nous donne, en utilisant les helpers <code>i_r</code> et <code>m</code> pour la mise en page&nbsp;:</p>
+<p>et voir que, comme on aurait pu le prédire, on a calculé et mémorisé les 301 premiers résultats, pour n allant de 0 à 300.</p>
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">i_r</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">m</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">regexp1</span><span class="p">,</span> <span class="nb">input</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ici plutôt que d&#39;utiliser les raccourcis comme <code>\w</code> j&#39;ai préféré écrire explicitement les ensembles de caractères en jeu&nbsp;; de cette façon, on rend son code indépendant du LOCALE si c&#39;est ce qu&#39;on veut faire. Il y a deux morceaux qui interviennent tour à tour&nbsp;:</p>
+<h5 id="Comment-&#231;a-marche-?">Comment &#231;a marche ?<a class="anchor-link" href="#Comment-&#231;a-marche-?">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On l&#39;a vu dans la vidéo avec <code>NbAppels</code>, tout se passe exactement comme si on avait écrit&nbsp;:</p>
+<pre><code>def fibo_cache(n):
+    &lt;le code&gt;
+
+fibo_cache = caching(fibo_cache)
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Donc <code>caching</code> est une fonction qui prend en argument une fonction <code>a_decorer</code> qui ici vaut <code>fibo_cache</code>, et retourne une autre fonction, <code>decoree</code>; on s&#39;arrange naturellement pour que <code>decoree</code> retourne le même résultat que <code>a_decorer</code>, avec seulement des choses supplémentaires.</p>
+<p>Les points clés de l&#39;implémentation sont les suivants.</p>
 <ul>
-<li><code>[0-9]+</code> signifie une suite de au moins un caractère dans l&#39;intervalle <code>[0-9]</code>,</li>
-<li><code>[A-Za-z]+</code> pour une suite d&#39;au moins un caractère dans l&#39;intervalle <code>[A-Z]</code> ou dans l&#39;intervalle <code>[a-z]</code>. </li>
-</ul>
-<p>Et comme tout à l&#39;heure on a simplement juxtaposé les morceaux dans le bon ordre pour construire l&#39;expression régulière complète.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Nommer-un-morceau-(un-groupe)">Nommer un morceau (un groupe)<a class="anchor-link" href="#Nommer-un-morceau-(un-groupe)">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># on se concentre sur une entrée correcte</span>
-<span class="n">haystack</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">haystack</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Maintenant, on va même pouvoir <strong>donner un nom</strong> à un morceau de la regexp, ici <code>needle</code>&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># la même regexp, mais on donne un nom au groupe de chiffre central</span>
-<span class="n">regexp2</span> <span class="o">=</span> <span class="s">&quot;[0-9]+[A-Za-z]+(?P&lt;needle&gt;[0-9]+)[A-Za-z]+[0-9]+&quot;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Et une fois que c&#39;est fait, on peut demander à l&#39;outil de nous <strong>retrouver la partie correspondante</strong> dans la chaine initiale&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">print</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">regexp2</span><span class="p">,</span> <span class="n">haystack</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;needle&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Dans cette expression on a utilisé un <strong>groupe nommé</strong> <code>(?P&lt;needle&gt;[0-9]+)</code>, dans lequel&nbsp;:</p>
-<ul>
-<li>les parenthèses définissent un groupe,</li>
-<li><code>?P&lt;needle&gt;</code> spécifie que ce groupe pourra être référencé sous le nom <code>needle</code>. J&#39;aimerais pouvoir vous donner une explication plus convaincante au sujet de cette syntaxe, mais je n&#39;en connais pas.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Un-troisi&#232;me-exemple">Un troisi&#232;me exemple<a class="anchor-link" href="#Un-troisi&#232;me-exemple">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Enfin, et c&#39;est un trait qui n&#39;est pas présent dans tous les langages, on peut restreindre un morceau de chaîne à être identique à un groupe déjà vu plus tôt dans la chaîne&nbsp;; dans l&#39;exemple ci-dessus on pourrait ajouter comme contrainte que le premier et le dernier groupes de chiffres soient identiques, comme ceci&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">regexp3</span> <span class="o">=</span> <span class="s">&quot;(?P&lt;id&gt;[0-9]+)[A-Za-z]+(?P&lt;needle&gt;[0-9]+)[A-Za-z]+(?P=id)&quot;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Si bien que maintenant, avec les mêmes entrées que tout à l&#39;heure&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">i_r</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span> <span class="n">m</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">regexp3</span><span class="p">,</span> <span class="nb">input</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Comme précédemment on a défini le groupe nommé <code>id</code> comme étant la première suite de chiffres. 
-La nouveauté ici est la <strong>contrainte</strong> qu&#39;on a imposée sur le dernier groupe avec <code>(?P=id)</code>. Comme vous le voyez, on n&#39;obtient un <em>match</em> qu&#39;avec les entrées dans lesquelles le dernier groupe de chiffres est identique au premier.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Comment-utiliser-la-librairie">Comment utiliser la librairie<a class="anchor-link" href="#Comment-utiliser-la-librairie">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Avant d&#39;apprendre à écrire une expression régulière, disons quelques mots du mode d&#39;emploi de la librairie.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Fonctions-de-commodit&#233;-et-workflow">Fonctions de commodit&#233; et <em>workflow</em><a class="anchor-link" href="#Fonctions-de-commodit&#233;-et-workflow">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Comme vous le savez peut-être, une expression régulière décrite sous forme de chaîne, comme par exemple <code>&quot;\w*[am]\W&quot;</code>, peut être traduite dans un <strong>automate fini</strong> qui permet de faire le filtrage avec une chaîne. C&#39;est ce qui explique le <em>workflow</em> que nous avons résumé dans cette figure&nbsp;:</p>
-<p><img src="media/re-workflow.png"></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>La méthode recommandée pour utiliser la librairie, lorsque vous avez le même <em>pattern</em> à appliquer à un grand nombre de chaînes, est de&nbsp;:</p>
-<ul>
-<li>compiler <strong>une seule fois</strong> votre chaîne en un automate, qui est matérialisé par un objet de la classe <code>re.RegexObject</code>, en utilisant <code>re.compile</code>, </li>
-<li>puis d&#39;<strong>utiliser directement cet objet</strong> autant de fois que vous avez de chaînes.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Nous avons utilisé dans les exemples plus haut (et nous continuerons plus bas pour une meilleure lisibilité) des <strong>fonctions de commodité</strong> du module, qui sont pratiques, par exemple, pour mettre au  point une expression régulière en mode interactif, mais qui ne <strong>sont pas forcément</strong> adaptées dans tous les cas. </p>
-<p>Ces fonctions de commodité fonctionnent toutes sur le même principe&nbsp;:</p>
-<p><code>re.match(regexp, input)</code>  $\Longleftrightarrow$ <code>re.compile(regexp).match(input)</code></p>
-<p>Donc à chaque fois qu&#39;on utilise une fonction de commodité, on recompile la chaîne en automate, ce qui, dès qu&#39;on a plus d&#39;une chaîne à traiter, représente un surcoût.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>C&#39;est ainsi qu&#39;au lieu de faire comme plus haut&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># imaginez 10**4 chaînes dans inputs</span>
-<span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">i_r</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span> <span class="n">m</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">regexp3</span><span class="p">,</span> <span class="nb">input</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>dans du vrai code on fera plutôt&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># on compile la chaîne en automate une seule fois</span>
-<span class="n">re_obj3</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">regexp3</span><span class="p">)</span>
-
-<span class="c"># ensuite on part directement de l&#39;automate</span>
-<span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">i_r</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span> <span class="n">m</span><span class="p">(</span><span class="n">re_obj3</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="nb">input</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>qui ne compile qu&#39;une fois la chaîne en automate, et donc est plus efficace.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Les-m&#233;thodes-sur-la-classe-RegexObject">Les m&#233;thodes sur la classe <code>RegexObject</code><a class="anchor-link" href="#Les-m&#233;thodes-sur-la-classe-RegexObject">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Les objets de la classe <code>RegexObject</code> représentent donc l&#39;automate à état fini qui est le résultat de la compilation de l&#39;expression régulière. 
-Pour résumer ce qu&#39;on a déjà vu, les méthodes les plus utiles sur un objet <code>RegexObject</code> sont&nbsp;:</p>
-<ul>
-<li><code>match</code> et <code>search</code>, qui cherchent un <em>match</em> soit uniquement au début (<code>match</code>) ou n&#39;importe où dans la chaîne (<code>search</code>);</li>
-<li><code>findall</code> et <code>split</code> pour chercher toutes les occurences (<code>findall</code>) ou leur négatif (<code>split</code>);</li>
-<li><code>sub</code> (qui aurait pu sans doute s&#39;appeler <code>replace</code>, mais c&#39;est comme ça) pour remplacer les occurrences de pattern.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Exploiter-le-r&#233;sultat">Exploiter le r&#233;sultat<a class="anchor-link" href="#Exploiter-le-r&#233;sultat">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Les <strong>méthodes</strong> disponibles sur la classe <strong><code>re.MatchObject</code></strong> sont <a href="https://docs.python.org/2/library/re.html#match-objects">documentées en détail ici</a>. On en a déjà rencontré quelques-unes, en voici à nouveau un aperçu rapide sur cet exemple très simple&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># exemple</span>
-<span class="nb">input</span> <span class="o">=</span> <span class="s">&quot;    Isaac Newton, physicist&quot;</span>
-<span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">r&quot;(\w+) (?P&lt;name&gt;\w+)&quot;</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>re</code> et <code>string</code> pour retrouver les données d&#39;entrée du match&nbsp;:</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">match</span><span class="o">.</span><span class="n">string</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">match</span><span class="o">.</span><span class="n">re</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>group</code>, <code>groups</code>, <code>groupdict</code> pour retrouver les morceaux de la chaîne d&#39;entrée qui correspondent aux <strong>groupes</strong> de la regexp; on peut y accéder par rang, ou par nom (comme on l&#39;a vu plus haut avec <code>needle</code>);</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">match</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p> Comme on le voit pour l&#39;accès par rang <strong>les indices commencent à 1</strong> pour des raisons historiques (on peut déjà référencer <code>\1</code> en sed depuis la fin des années 70). </p>
-<p> On peut aussi accéder au <strong>groupe 0</strong> comme étant la partie de la chaîne de départ qui a effectivement été filtrée par l&#39;expression régulière, et qui peut tout à fait être au beau milieu de la chaîne de départ, comme dans notre exemple&nbsp;: </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>expand</code> permet de faire une espèce de <code>str.format</code> avec les valeurs des groupes;</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">match</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="s">r&quot;last_name \g&lt;name&gt; first_name \1&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>span</code> pour connaître les index dans la chaîne d&#39;entrée pour un groupe donné&nbsp;:</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">begin</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">span</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">)</span>
-<span class="nb">input</span><span class="p">[</span><span class="n">begin</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Les-diff&#233;rents-modes-(flags)">Les diff&#233;rents modes (<em>flags</em>)<a class="anchor-link" href="#Les-diff&#233;rents-modes-(flags)">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Enfin il faut noter qu&#39;on peut passer à <code>re.compile</code> un certain nombre de <em>flags</em> qui modifient globalement l&#39;interprétation de la chaîne, et qui peuvent rendre service. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Vous trouverez <a href="https://docs.python.org/2/library/re.html#module-contents">une liste exhaustive de ces <em>flags</em> ici</a>&nbsp;; ils ont en général un nom long et parlant, et un alias court sur un seul caractère. Les plus utiles sont sans doute&nbsp;:</p>
-<ul>
-<li><code>IGNORECASE</code> (<em>alias</em> <code>I</code>): pour, eh bien, ne pas faire la différence entre minuscules et majuscules,</li>
-<li><code>UNICODE</code> (<em>alias</em> <code>U</code>): pour rendre les séquences <code>\w</code> et autres basées sur les propriétés des caractères dans la norme Unicode,</li>
-<li><code>LOCALE</code> (<em>alias</em> <code>L</code>): cette fois <code>\w</code> dépend du <code>locale</code> courant.</li>
-<li><code>MULTILINE</code> (<em>alias</em> <code>M</code>), et</li>
-<li><code>DOTALL</code> (<em>alias</em> S): pour ces deux flags voir la discussion à la fin du complément.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Comme c&#39;est souvent le cas, on doit passer à <code>re.compile</code> un <strong>ou logique</strong> (caractère <code>|</code>) des différents flags que l&#39;on veut utiliser, c&#39;est-à-dire qu&#39;on fera par exemple&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">re_obj</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;a*b+&quot;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">print</span> <span class="n">m</span><span class="p">(</span><span class="n">re_obj</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&quot;AabB&quot;</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Comment-construire-une-expression-r&#233;guli&#232;re">Comment construire une expression r&#233;guli&#232;re<a class="anchor-link" href="#Comment-construire-une-expression-r&#233;guli&#232;re">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Nous pouvons à présent passer en revue les constructions qui permettent d&#39;élaborer une expression régulière, en tentant de rester synthétique puisque la <a href="https://docs.python.org/2/library/re.html">documentation du module <code>re</code></a> en donne une version exhaustive.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="La-brique-de-base-:-le-caract&#232;re">La brique de base : le caract&#232;re<a class="anchor-link" href="#La-brique-de-base-:-le-caract&#232;re">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Au commencement il faut spécifier des caractères&nbsp;:</p>
-<ul>
-<li><strong>un seul</strong> caractère&nbsp;: <ul>
-<li>vous le citez tel quel, en le précédent d&#39;un backslash <code>\</code> s&#39;il a par ailleurs un sens spécial dans le micro-langage de regexps (comme <code>+</code>, <code>*</code>, <code>[</code>, etc.)&nbsp;;</li>
-</ul>
+<li>On attache à l&#39;objet fonction <code>decoree</code> un dictionnaire <code>cache</code> qui va nous permettre de retrouver les valeurs déjà calculées, à partir d&#39;un hash des arguments.</li>
+<li>On ne peut pas cacher le résultat d&#39;un objet qui ne serait pas globalement immuable; or si on essaie on reçoit l&#39;exception <code>TypeError</code>, et dans ce cas on recalcule toujours le résultat. C&#39;est de toute façons plus sûr.</li>
+<li><p>Si on ne trouve pas les arguments dans le cache, on reçoit l&#39;exception <code>KeyError</code>, dans ce cas on calcule le résultat, et on le retourne après l&#39;avoir rangé dans le cache.</p>
 </li>
-<li>le <strong>wildcard</strong>&nbsp;:<ul>
-<li>un point <code>.</code> signifie &quot;n&#39;importe quel caractère&quot;&nbsp;;</li>
-</ul>
-</li>
-<li><strong>un ensemble</strong> de caractères avec la notation <code>[...]</code> qui permet de décrire par exemple&nbsp;:<ul>
-<li><code>[a1=]</code> un ensemble in extenso, ici un caractère parmi <code>a</code>, <code>1</code>, ou <code>=</code>,</li>
-<li><code>[a-z]</code> un intervalle de caractères, ici de <code>a</code> à <code>z</code>,</li>
-<li><code>[15e-g]</code> un mélange des deux, ici un ensemble qui contiendrait <code>1</code>, <code>5</code>, <code>e</code>, <code>f</code> et <code>g</code>,</li>
-<li><code>[^15e-g]</code> une <strong>négation</strong>, qui a <code>^</code> comme premier caractère dans les <code>[]</code>, ici tout sauf l&#39;ensemble précédent&nbsp;;</li>
-</ul>
-</li>
-<li>un <strong>ensemble prédéfini</strong> de caractères, qui peuvent alors dépendre de l&#39;environnement (UNICODE et LOCALE) avec entre autres les notations&nbsp;:<ul>
-<li><code>\w</code> les caractères alphanumériques, et <code>\W</code> (les autres),</li>
-<li><code>\s</code> les caractères &quot;blancs&quot; - espace, tabulation, saut de ligne, etc., et <code>\S</code> (les autres),</li>
-<li><code>\d</code> pour les chiffres, et <code>\D</code> (les autres).</li>
-</ul>
+<li><p>Vous remarquerez aussi qu&#39;on initialise l&#39;attribut <code>cache</code> dans l&#39;objet <code>decoree</code> à l&#39;appel du décorateur (une seule fois, juste après avoir défini la fonction), et non pas dans le code de <code>decoree</code> qui lui est évalué à chaque appel.</p>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="nb">input</span> <span class="o">=</span> <span class="s">&quot;abcd&quot;</span>
-
-<span class="k">for</span> <span class="n">regexp</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;abcd&#39;</span><span class="p">,</span> <span class="s">&#39;ab[cd][cd]&#39;</span><span class="p">,</span> <span class="s">r&#39;abc.&#39;</span><span class="p">,</span> <span class="s">r&#39;abc\.&#39;</span><span class="p">]:</span>
-    <span class="k">print</span> <span class="n">i_r</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">regexp</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">m</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">regexp</span><span class="p">,</span> <span class="nb">input</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour ce dernier exemple, comme on a backslashé le <code>.</code> il faut que la chaîne en entrée contienne vraiment un <code>.</code>&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">print</span> <span class="n">m</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span> <span class="p">(</span><span class="s">r&quot;abc\.&quot;</span><span class="p">,</span> <span class="s">&quot;abc.&quot;</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="En-s&#233;rie-ou-en-parall&#232;le">En s&#233;rie ou en parall&#232;le<a class="anchor-link" href="#En-s&#233;rie-ou-en-parall&#232;le">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Si je fais une analogie avec les montages électriques, jusqu&#39;ici on a vu le montage en série&nbsp;: on met des expressions régulières bout à bout, qui filtrent (<code>match</code>) la chaine en entrée séquentiellement du début à la fin. On a <em>un peu</em> de marge pour spécifier des alternatives, lorsqu&#39;on fait par exemple</p>
-<pre><code>&quot;ab[cd]ef&quot;
-</code></pre><p>mais c&#39;est limité à <strong>un seul</strong> caractère. Si on veut reconnaitre deux mots qui n&#39;ont pas grand-chose à voir comme <code>abc</code> <strong>ou</strong> <code>def</code>, il faut en quelque sorte mettre deux regexps en parallèle, et c&#39;est ce que permet l&#39;opérateur <code>|</code></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">regexp</span> <span class="o">=</span> <span class="s">&quot;abc|def&quot;</span>
-
-<span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;abc&#39;</span><span class="p">,</span> <span class="s">&#39;def&#39;</span><span class="p">,</span> <span class="s">&#39;aef&#39;</span><span class="p">]:</span>
-    <span class="k">print</span> <span class="n">i_r</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">regexp</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="n">m</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">regexp</span><span class="p">,</span> <span class="nb">input</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Fin(s)-de-cha&#238;ne">Fin(s) de cha&#238;ne<a class="anchor-link" href="#Fin(s)-de-cha&#238;ne">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Selon que vous utilisez <code>match</code> ou <code>search</code>, vous précisez si vous vous intéressez uniquement à un match en début (<code>match</code>) ou n&#39;importe où (<code>search</code>) dans la chaîne.</p>
-<p>Mais indépendamment de cela, il peut être intéressant de &quot;coller&quot; l&#39;expression en début ou en fin de ligne, et pour ça il existe des caractères spéciaux&nbsp;:</p>
+<p>Cette implémentation, sans être parfaite, est tout à fait utilisable dans un environnement réel, modulo les remarques de bon sens suivantes&nbsp;:</p>
 <ul>
-<li><code>^</code> lorsqu&#39;il est utilisé comme un caractère (c&#39;est à dire pas en début de <code>[]</code>) signifie un début de chaîne&nbsp;;</li>
-<li><code>\A</code> a le même sens (sauf en mode MULTILINE), et je le recommande de préférence à <code>^</code> qui est déjà pas mal surchargé&nbsp;;</li>
-<li><code>$</code> matche une fin de ligne&nbsp;;</li>
-<li><code>\Z</code> est voisin mais pas tout à fait identique.</li>
-</ul>
-<p>Reportez-vous à la documentation pour le détails des différences. Attention aussi à entrer le <code>^</code> correctement, il vous faut le caractère ASCII et non un voisin dans la ménagerie Unicode.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="nb">input</span> <span class="o">=</span> <span class="s">&#39;abcd&#39;</span>
-
-<span class="k">for</span> <span class="n">regexp</span> <span class="ow">in</span> <span class="p">[</span> <span class="s">&#39;bc&#39;</span><span class="p">,</span> <span class="s">r&#39;\Aabc&#39;</span><span class="p">,</span> <span class="s">&#39;^abc&#39;</span><span class="p">,</span> <span class="s">r&#39;\Abc&#39;</span><span class="p">,</span> <span class="s">&#39;^bc&#39;</span><span class="p">,</span> <span class="s">r&#39;bcd\Z&#39;</span><span class="p">,</span> <span class="s">&#39;bcd$&#39;</span><span class="p">,</span> <span class="s">r&#39;bc\Z&#39;</span><span class="p">,</span> <span class="s">&#39;bc$&#39;</span> <span class="p">]:</span>
-    <span class="k">print</span> <span class="n">i_r</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">regexp</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">m</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">regexp</span><span class="p">,</span><span class="nb">input</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>On a en effet bien le pattern <code>bc</code> dans la chaine en entrée, mais il n&#39;est ni au début ni à la fin.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Parenth&#233;ser---(grouper)">Parenth&#233;ser - (grouper)<a class="anchor-link" href="#Parenth&#233;ser---(grouper)">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour pouvoir faire des montages élaborés, il faut pouvoir parenthéser&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># une parenthése dans une RE pour mettre en ligne</span>
-<span class="c"># un début &#39;a&#39;, deux possibilités pour le milieu &#39;bc&#39; ou &#39;de&#39; </span>
-<span class="c"># et une fin &#39;f&#39;</span>
-<span class="n">regexp</span> <span class="o">=</span> <span class="s">&quot;a(bc|de)f&quot;</span>
-
-<span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;abcf&#39;</span><span class="p">,</span> <span class="s">&#39;adef&#39;</span><span class="p">,</span> <span class="s">&#39;abf&#39;</span><span class="p">]:</span>
-    <span class="k">print</span> <span class="n">i_r</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">regexp</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">m</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">regexp</span><span class="p">,</span> <span class="nb">input</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Les parenthèses jouent un rôle additionel de <strong>groupe</strong>, ce qui signifie qu&#39;on <strong>peut retrouver</strong> le texte correspondant à l&#39;expression régulière comprise dans les <code>()</code>. Par exemple, pour le premier match&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="nb">input</span> <span class="o">=</span> <span class="s">&#39;abcf&#39;</span>
-<span class="k">print</span> <span class="n">i_r</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">regexp</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">regexp</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>dans cet exemple, on n&#39;a utilisé qu&#39;un seul groupe <code>()</code>, et le morceau de chaîne qui correspond à ce groupe se trouve donc être le seul groupe retourné par <code>MatchObject.group</code>.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Compter-les-r&#233;p&#233;titions">Compter les r&#233;p&#233;titions<a class="anchor-link" href="#Compter-les-r&#233;p&#233;titions">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Vous disposez des opérateurs suivants&nbsp;:</p>
-<ul>
-<li><code>*</code> l&#39;étoile qui signifie n&#39;importe quel nombre, même nul, d&#39;occurrences  - par exemple, <code>(ab)*</code> pour indiquer <code>&#39;&#39;</code> ou <code>&#39;ab&#39;</code> ou <code>&#39;abab&#39;</code> ou etc.,</li>
-<li><code>+</code> le plus qui signifie au moins une occurrence - e.g. <code>(ab)+</code> pour <code>ab</code> ou <code>abab</code> ou <code>ababab</code> ou etc.</li>
-<li><code>?</code> qui indique une option, c&#39;est-à-dire 0 ou 1 occurence - e.g. <code>(ab)?</code> pour <code>&#39;&#39;</code> ou <code>ab</code>, </li>
-<li><code>{n}</code> pour exactement n occurrences de <code>(ab)</code> - e.g. <code>(ab){3}</code> qui serait exactement équivalent à <code>ababab</code>;</li>
-<li><code>{m,n}</code> entre m et n fois inclusivement, c&#39;est-à-dire que <code>*&lt;re&gt;*?</code> est exactement équivalent à <code>*&lt;re&gt;*{0,1}</code>.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="s">&#39;ab&#39;</span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span> <span class="o">+</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">]</span>
-
-<span class="k">for</span> <span class="n">regexp</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;(ab)*&#39;</span><span class="p">,</span> <span class="s">&#39;(ab)+&#39;</span><span class="p">,</span> <span class="s">&#39;(ab){3}&#39;</span><span class="p">,</span> <span class="s">&#39;(ab){3,4}&#39;</span><span class="p">]:</span>
-    <span class="c"># on ajoute \A \Z pour matcher toute la chaine</span>
-    <span class="n">line_regexp</span> <span class="o">=</span> <span class="s">r&quot;\A{}\Z&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">regexp</span><span class="p">)</span>
-    <span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">i_r</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">line_regexp</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="n">m</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line_regexp</span><span class="p">,</span> <span class="nb">input</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Groupes-et-contraintes">Groupes et contraintes<a class="anchor-link" href="#Groupes-et-contraintes">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Nous avons déjà vu un exemple de groupe nommé (voir <code>needle</code> plus haut)&nbsp;; les opérateurs que l&#39;on peut citer dans cette catégorie sont&nbsp;:</p>
-<ul>
-<li><code>(...)</code> les parenthèses définissent un groupe anonyme,</li>
-<li><code>(?P&lt;name&gt;...)</code> définit un groupe nommé,</li>
-<li><code>(?:...)</code> permet de mettre des parenthèses mais sans créer un groupe, pour optimiser l&#39;exécution puisqu&#39;on n&#39;a pas besoin de  conserver les liens vers la chaîne d&#39;entrée,</li>
-<li><code>(?P=name)</code> qui ne matche que si l&#39;on retrouve à cet endroit de l&#39;entrée la même sous-chaîne que celle trouvée pour le groupe <code>name</code> en amont,</li>
-<li>enfin <code>(?=...)</code>, <code>(?!...)</code>et <code>(?&lt;=...)</code> permettent des contraintes encore plus élaborées, nous vous laissons le soin d&#39;expérimenter avec elles si vous êtes intéressés&nbsp;; sachez toutefois que l&#39;utilisation de telles constructions peut en théorie rendre l&#39;interprétation de votre expression régulière beaucoup moins efficace.</li>
+<li>évidemment l&#39;approche ne fonctionne que pour des fonctions déterministes; s&#39;il y a de l&#39;aléatoire dans la logique de la fonction, il ne faut pas utiliser ce décorateur&nbsp;;</li>
+<li>tout aussi évidemment, la consommation mémoire peut être importante si on applique le caching sans discrimination&nbsp;;</li>
+<li>enfin en l&#39;état la fonction decoree ne peut pas être appelée avec des arguments nommés; en effet on utilise le tuple <code>args</code> comme clé pour retrouver dans le cache la valeur associée aux arguments.</li>
 </ul>
 </div>
 </div>
@@ -3174,7 +2009,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Greedy-vs-non-greedy">Greedy <em>vs</em> non-greedy<a class="anchor-link" href="#Greedy-vs-non-greedy">&#182;</a></h5>
+<h3 id="D&#233;corateurs,-docstring-et-help">D&#233;corateurs, <em>docstring</em> et <code>help</code><a class="anchor-link" href="#D&#233;corateurs,-docstring-et-help">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -3184,7 +2019,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Lorsqu&#39;on stipule une répétition un nombre indéfini de fois, il se peut qu&#39;il existe <strong>plusieurs</strong> façons de filtrer l&#39;entrée avec l&#39;expression régulière. Que ce soit avec <code>*</code>, ou <code>+</code>, ou <code>?</code>, l&#39;algorithme va toujours essayer de trouver la <strong>séquence la plus longue</strong>, c&#39;est pourquoi on qualifie l&#39;approche de <em>greedy</em> - quelque chose comme glouton en français&nbsp;:</p>
+<p>En fait, avec cette implémentation, il reste aussi un petit souci&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -3195,18 +2030,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># un fragment d&#39;HTML </span>
-<span class="n">line</span><span class="o">=</span><span class="s">&#39;&lt;h1&gt;Title&lt;/h1&gt;&#39;</span>
-
-<span class="c"># si on cherche un texte quelconque entre crochets</span>
-<span class="c"># c&#39;est-à-dire l&#39;expression régulière &quot;&lt;.*&gt;&quot;</span>
-<span class="n">re_greedy</span> <span class="o">=</span> <span class="s">&#39;&lt;.*&gt;&#39;</span>
-
-<span class="c"># on obtient ceci</span>
-<span class="c"># on rappelle que group(0) montre la partie du fragment</span>
-<span class="c"># HTML qui matche l&#39;expression régulière</span>
-<span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">re_greedy</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
-<span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight"><pre><span class="n">help</span><span class="p">(</span><span class="n">fibo_cache</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -3219,15 +2043,374 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ça n&#39;est pas forcément ce qu&#39;on voulait faire&nbsp;; aussi on peut spécifier l&#39;approche inverse, c&#39;est-à-dire de trouver la <strong>plus-petite</strong> chaîne qui matche, dans une approche dite <em>non-greedy</em>, avec les opérateurs suivants&nbsp;:</p>
+<p>Ce n&#39;est pas exactement ce qu&#39;on veut; ce qui se passe ici c&#39;est que <code>help</code> utilise les attributs <code>__doc__</code> et <code>__name__</code> de l&#39;objet qu&#39;on lui passe. Et dans notre cas <code>fibo_cache</code> est une fonction qui a été créée par l&#39;instruction</p>
+<pre><code>def decoree(*args):
+    # etc.
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour arranger ça et faire en sorte que <code>help</code> nous affiche ce qu&#39;on veut, il faut s&#39;occuper de ces deux attributs. Et plutôt que de faire ça à la main, il existe un utilitaire dans le module <code>functools</code>, qui fait tout le travail nécessaire. Ce qui nous donne une deuxième version de ce décorateur, avec deux lignes supplémentaires signalées par des <code>+++</code>
+;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># une deuxième implémentation de caching, avec la doc </span>
+
+<span class="kn">import</span> <span class="nn">functools</span>                                 <span class="c"># +++</span>
+
+<span class="c"># un decorateur de fonction</span>
+<span class="c"># implémenté comme une fonction</span>
+<span class="k">def</span> <span class="nf">caching</span><span class="p">(</span><span class="n">a_decorer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Un décorateur pour conserver les résultats</span>
+<span class="sd">    précédents et éviter de les recalculer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># on décore la fonction pour qu&#39;elle ait les</span>
+    <span class="c"># propriétés de a_decorer : __doc__ et __name__</span>
+    <span class="nd">@functools.wraps</span><span class="p">(</span><span class="n">a_decorer</span><span class="p">)</span>                  <span class="c"># +++</span>
+    <span class="k">def</span> <span class="nf">decoree</span> <span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="c"># si on a déjà calculé le résultat</span>
+        <span class="c"># on le renvoie</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
+        <span class="c"># si les arguments ne sont pas hashables, </span>
+        <span class="c"># par exemple une liste, on ne peut pas cacher </span>
+        <span class="c"># et on reçoit TypeError</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">a_decorer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="c"># les arguments sont hashables mais on</span>
+        <span class="c"># n&#39;a pas encore calculé cette valeur</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">a_decorer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+            <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+            <span class="k">return</span> <span class="n">result</span>
+    <span class="c"># on initialise l&#39;attribut &#39;cache&#39;</span>
+    <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">return</span> <span class="n">decoree</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># créer une fonction décorée</span>
+<span class="nd">@caching</span>
+<span class="k">def</span> <span class="nf">fibo_cache2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Un fibonacci hyper-lent (exponentiel) se transforme</span>
+<span class="sd">    en temps linéaire une fois que les résultats sont cachés</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">fibo_cache2</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo_cache2</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Et on obtient à présent une aide en ligne cohérente&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">help</span><span class="p">(</span><span class="n">fibo_cache2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="On-peut-d&#233;corer-les-classes-aussi">On peut d&#233;corer les classes aussi<a class="anchor-link" href="#On-peut-d&#233;corer-les-classes-aussi">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>De la même façon qu&#39;on peut décorer une fonction, on peut décorer une classe. </p>
+<p>Voyons comment tirer profit des décorateurs pour implémenter le pattern de <code>singleton</code>&nbsp;; une classe implémentée comme <a href="http://en.wikipedia.org/wiki/Singleton_pattern">un singleton</a> est une classe qui n&#39;existe qu&#39;en un seul exemplaire (une seule instance); tous les appels au constructeur retournent une référence vers le même objet.</p>
+<p>Le décorateur <code>singleton</code> va nous permettre de transformer une classe en un singleton.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># le décorateur qui transforme une classe en singleton</span>
+
+<span class="c"># le code gère correctement *args et **kwds, même si généralement</span>
+<span class="c"># dans le cas d&#39;un singleton on n&#39;a pas d&#39;argument à passer</span>
+<span class="c"># au constructeur</span>
+
+<span class="c"># vous pouvez réactivier les lignes de print si vous voulez </span>
+<span class="c"># mieux voir ce qui se passe</span>
+
+<span class="k">class</span> <span class="nc">singleton</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;make the class a singleton&#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classe</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;construit l&#39;instance de la classe décorée&quot;&quot;&quot;</span>
+
+        <span class="c"># on garde une référence vers la classe à décorer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classe</span> <span class="o">=</span> <span class="n">classe</span>
+        <span class="c"># l&#39;instance </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instance</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="c"># on met de cote la methode __new__</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new_original</span> <span class="o">=</span> <span class="n">classe</span><span class="o">.</span><span class="n">__new__</span>
+        <span class="c"># on redéfinit la méthode __new__</span>
+        <span class="nd">@staticmethod</span>
+        <span class="k">def</span> <span class="nf">singleton_new</span><span class="p">(</span><span class="n">classe</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
+            <span class="c"># on retourne l&#39;instance si elle existe</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance</span>
+            <span class="c"># sinon on la cree en utilisant le __new__ original</span>
+<span class="c">#            print &#39;in singleton_new&#39;,&#39;classe&#39;, classe, &#39;args&#39;, args, &#39;kwds&#39;, kwds</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_original</span><span class="p">(</span><span class="n">classe</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+            <span class="c"># on l&#39;initialise</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+            <span class="c"># on la retourne</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance</span>
+        <span class="c"># on &#39;installe&#39; singleton_new comme le __new__ de la nouvelle classe</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classe</span><span class="o">.</span><span class="n">__new__</span> <span class="o">=</span> <span class="n">singleton_new</span>
+        <span class="c"># pour la doc, quoi que ce soit apparemment insuffisant pour help()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="n">classe</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">classe</span><span class="o">.</span><span class="n">__doc__</span>
+
+    <span class="c"># l&#39;objet doit être un callable, et si on l&#39;appelle</span>
+    <span class="c"># il faut construire un objet de la classe a decorer</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
+<span class="c">#        print &#39;in __call__&#39;,&#39;self&#39;, self, &#39;args&#39;, args, &#39;kwds&#39;, kwds</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">classe</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Le-d&#233;corateur-en-action">Le d&#233;corateur en action<a class="anchor-link" href="#Le-d&#233;corateur-en-action">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># avec une classe &#39;normale&#39;</span>
+<span class="k">class</span> <span class="nc">Eggs</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> 
+    <span class="s">&quot;La classe Eggs n&#39;est pas un singleton&quot;</span>
+
+<span class="c"># si on crée deux objets ils sont différents</span>
+<span class="n">obj1</span> <span class="o">=</span> <span class="n">Eggs</span><span class="p">()</span>
+<span class="n">obj2</span> <span class="o">=</span> <span class="n">Eggs</span><span class="p">()</span>
+<span class="n">obj1</span> <span class="ow">is</span> <span class="n">obj2</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># avec une classe décorée</span>
+<span class="nd">@singleton</span>
+<span class="k">class</span> <span class="nc">Spam</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> 
+    <span class="s">&quot;La classe Spam est un singleton&quot;</span>
+
+<span class="c"># deux instances créés successivement sont identiques</span>
+<span class="n">obj1</span> <span class="o">=</span> <span class="n">Spam</span><span class="p">()</span>
+<span class="n">obj2</span> <span class="o">=</span> <span class="n">Spam</span><span class="p">()</span>
+<span class="n">obj1</span> <span class="ow">is</span> <span class="n">obj2</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Comment-&#231;a-marche">Comment &#231;a marche<a class="anchor-link" href="#Comment-&#231;a-marche">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>La subtilité ici réside dans le fait que </p>
+<p>La méthode <code>__new__</code> fait partie de la même famille que <code>__init__</code> et autres <code>__repr__</code> dont on a parlé dans la Semaine 5, Séquence &#39;surcharge des opérateurs&#39;.
+C&#39;est une méthode spéciale également, et comme <code>__init__</code> elle est mise en jeu au moment de la création d&#39;un objet. </p>
+<p>Par contre, elle est vraiment particulière dans la ménagerie des méthodes spéciales, car c&#39;est la seule qui soit une <strong>méthode statique</strong>, et ça se comprend quand on sait qu&#39;elle est appelée <strong>pour</strong> créer l&#39;objet instance&nbsp;; on ne peut donc pas lui passer en paramètre l&#39;instance en cours de création, puisqu&#39;elle n&#39;est pas encore là.</p>
+<p>Rappelez-vous que lorsqu&#39;on définit <code>Spam</code> décorée avec singleton, on fait essentiellement</p>
+<pre><code>Spam = singleton(Spam)
+</code></pre><p>C&#39;est donc que l&#39;instance de la classe singleton est considéré comme une classe&nbsp;; cette instance doit être un callable, qui est utilisé lorsqu&#39;on crée une instance de <code>Spam</code> en faisant</p>
+<pre><code>obj1 = Spam()
+</code></pre><p>Notre décorateur, pour l&#39;essentiel, fait les opérations suivantes.</p>
 <ul>
-<li><code>*?</code> : <code>*</code> mais <em>non-greedy</em>,</li>
-<li><code>+?</code> : <code>+</code> mais <em>non-greedy</em>,</li>
-<li><code>??</code> : <code>?</code> mais <em>non-greedy</em>,</li>
+<li>Dans le constructeur <code>__init__</code> de la classe <code>singleton</code>, l&#39;objet décoré mémorise la classe à décorer (ici <code>Spam</code>) dans son attribut <code>classe</code>.</li>
+<li>On crée l&#39;attribut <code>instance</code> qui contiendra une référence vers l&#39;unique objet créé pour cette classe.</li>
+<li>On mémorise également la méthode <code>__new__</code> de la classe à décorer dont on aura besoin à l&#39;intérieur de notre propre version de <code>__new__</code>. </li>
+<li>On définit une méthode statique (parce que <code>__new__</code>doit être statique) <code>singleton_new</code> qui est destinée à remplacer la méthode <code>__new__</code> dans la classe décorée.</li>
+<li>Cette nouvelle méthode <code>__new__</code><ul>
+<li>renvoie l&#39;attribut <code>instance</code> sur la classe décorée lorsqu&#39;il existe (c&#39;est qu&#39;on déjà créé  l&#39;unique objet de la classe à décorer); </li>
+<li>et sinon utilise les méthode <code>__new__</code> et <code>__init__</code> originales pour instancier un objet, le mémoriser, et le renvoyer.</li>
+</ul>
+</li>
+<li><code>singleton_new</code> est <em>installée</em> dans la classe décorée, dans l&#39;attribut de nom <code>__new__</code>.</li>
+<li>On met à jour <code>__name__</code> et <code>__doc__</code> dans la classe décorée à partir de la classe originale.</li>
 </ul>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Toutes-les-combinaisons-(fonction,-classe)-x-(fonction,-classe)">Toutes les combinaisons (fonction, classe) x (fonction, classe)<a class="anchor-link" href="#Toutes-les-combinaisons-(fonction,-classe)-x-(fonction,-classe)">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nous avons choisi d&#39;implémenter <code>singleton</code> comme une classe&nbsp;; vous <a href="https://wiki.python.org/moin/PythonDecoratorLibrary#Singleton">trouverez ici une version implémentée comme une fonction</a>.</p>
+<p>Si bien qu&#39;avec ces 4 exemples</p>
+<ul>
+<li><code>NbAppels</code> de la vidéo, </li>
+<li>notre version de  <code>caching</code>, </li>
+<li>notre version de <code>singleton</code>,</li>
+<li>et le <code>singleton</code> de <a href="https://wiki.python.org/moin/PythonDecoratorLibrary#Singleton">la référence ci-dessus</a>,</li>
+</ul>
+<p>vous avez toutes les combinaisons de décorateurs, de classes ou de fonctions, implémentés comme une classe ou comme une fonction.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Un-d&#233;corateur-peut-lui-m&#234;me-avoir-des-arguments">Un d&#233;corateur peut lui-m&#234;me avoir des arguments<a class="anchor-link" href="#Un-d&#233;corateur-peut-lui-m&#234;me-avoir-des-arguments">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Reprenons l&#39;exemple de <code>caching</code>, mais imaginons qu&#39;on veuille ajouter un trait de &quot;durée de validité du cache&quot;. Le code du décorateur a besoin de connaître la durée pendant laquelle on doit garder les résultats dans le cache. </p>
+<p>On veut pouvoir préciser ce paramètre, appelons le <code>cache_timeout</code>,  pour chaque fonction&nbsp;; par exemple on voudrait écrire quelque chose comme</p>
+<pre><code>@caching_expire(600)
+def resolve_host(hostname):
+    ...
+
+@caching_expire(3600*24)
+def network_neighbours(hostname):
+    ...
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ceci est possible également avec les décorateurs, avec cette syntaxe précisément. Le modèle qu&#39;il faut avoir à l&#39;esprit pour bien comprendre le code qui suit est le suivant et se base sur deux objets :</p>
+<ul>
+<li>le premier objet, <code>caching_expire</code>, est ce qu&#39;on appelle une <em>factory</em> à décorateurs, c&#39;est-à-dire que l&#39;interpréteur va d&#39;abord appeler <code>caching_expire(600)</code> qui doit retourner un décorateur&nbsp;;</li>
+<li>le deuxième objet est ce décorateur retourné par <code>caching_expire(600)</code> qui lui même doit se comporter commes les décorateurs sans argument que l&#39;on a vus jusqu&#39;ici.</li>
+</ul>
+<p>Pour faire court, cela signifie que l&#39;interpréteur fera</p>
+<pre><code>resolve_host = (caching_expire(600))(resolve_host)
+</code></pre><p>Ou encore si vous préférez</p>
+<pre><code>caching = caching_expire(600)
+resolve_host = caching(resolve_host)
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ce qui nous mène au code suivant&nbsp;:</p>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
@@ -3235,13 +2418,96 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># ici on va remplacer * par *? pour rendre l&#39;opérateur * non-greedy</span>
-<span class="n">re_non_greedy</span> <span class="o">=</span> <span class="n">re_greedy</span> <span class="o">=</span> <span class="s">&#39;&lt;.*?&gt;&#39;</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">time</span>
 
-<span class="c"># mais on continue à cherche un texte entre &lt;&gt; naturellement</span>
-<span class="c"># si bien que cette fois, on obtient</span>
-<span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">re_non_greedy</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
-<span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c"># comme pour caching, on est limité ici et on ne peut pas</span>
+<span class="c"># supporter les appels à la **kwds, voir plus haut </span>
+<span class="c"># la discussion sur l&#39;implémentation de caching</span>
+
+<span class="c"># caching_expire est une factory à décorateur</span>
+<span class="k">def</span> <span class="nf">caching_expire</span><span class="p">(</span><span class="n">timeout</span><span class="p">):</span>
+
+    <span class="c"># caching_expire va retourner un decorateur sans argument</span>
+    <span class="c"># c&#39;est à dire un objet qui se comporte</span>
+    <span class="c"># comme notre tout premier `caching`</span>
+    <span class="k">def</span> <span class="nf">caching</span><span class="p">(</span><span class="n">a_decorer</span><span class="p">):</span>
+        <span class="c"># à partir d&#39;ici on fait un peu comme dans</span>
+        <span class="c"># la premiere version de caching</span>
+        <span class="k">def</span> <span class="nf">decoree</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c"># sauf que disons qu&#39;on met dans le cache un tuple</span>
+                <span class="c"># (valeur, timestamp)</span>
+                <span class="n">valeur</span><span class="p">,</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
+                <span class="c"># et la on peut acceder a timeout</span>
+                <span class="c"># parce que la liaison en python est lexicale </span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">timestamp</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">timeout</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">valeur</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c"># on fait comme si on ne connaissait pas,</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span>
+            <span class="c"># si les arguments ne sont pas hashables, </span>
+            <span class="c"># par exemple une liste, on ne peut pas cacher </span>
+            <span class="c"># et on reçoit TypeError</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">a_decorer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+            <span class="c"># les arguments sont hashables mais on</span>
+            <span class="c"># n&#39;a pas encore calculé cette valeur</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">a_decorer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+                <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+                <span class="k">return</span> <span class="n">result</span>
+
+        <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">return</span> <span class="n">decoree</span>
+    <span class="c"># le retour de caching_expire, c&#39;est caching</span>
+    <span class="k">return</span> <span class="n">caching</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="nd">@caching_expire</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fibo_cache_expire</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span><span class="o">&lt;=</span><span class="mi">1</span> <span class="k">else</span> <span class="n">fibo_cache_expire</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">fibo_cache_expire</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">fibo_cache_expire</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">fibo_cache_expire</span><span class="o">.</span><span class="n">cache</span><span class="p">[(</span><span class="mi">200</span><span class="p">,)]</span>
 </pre></div>
 
 </div>
@@ -3254,7 +2520,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="S'agissant-du-traitement-des-fins-de-ligne">S'agissant du traitement des fins de ligne<a class="anchor-link" href="#S'agissant-du-traitement-des-fins-de-ligne">&#182;</a></h5>
+<h5 id="Remarquez-la-cl&#244;ture">Remarquez la cl&#244;ture<a class="anchor-link" href="#Remarquez-la-cl&#244;ture">&#182;</a></h5>
 </div>
 </div>
 </div>
@@ -3264,144 +2530,18 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Il peut être utile, pour conclure cette présentation, de préciser un peu le comportement de la librairie vis-à-vis des fins de ligne.</p>
-<p>Historiquement, les expressions régulières telles qu&#39;on les trouve dans les librairies C, donc dans <code>sed</code>, <code>grep</code> et autre utilitaires Unix, sont associées au modèle mental où on filtre les entrées ligne par ligne.</p>
-<p>Le module <code>re</code> en garde des traces, puisque&nbsp;:</p>
+<p>Pour conclure sur cet exemple, vous remarquez que dans le code de <code>decoree</code> on accède à la variable <code>timeout</code>. Ça peut paraître un peu étonnant, si vous pensez que <code>decoree</code> est appelée <strong>bien après</strong> que la fonction <code>caching_expire</code> ait fini son travail. En effet, <code>caching_expire</code> est évaluée <strong>une fois</strong> juste après <strong>la définition</strong> de <code>fibo_cache</code>. Et donc on pourrait penser que la valeur de <code>timeout</code> ne serait plus disponible dans le contexte de <code>decoree</code>.</p>
+<p>Pour comprendre ce qui se passe, il faut se souvenir que python est un langage à liaison lexicale. Cela signifie que la <em>résolution</em> de la variable <code>timeout</code> se fait au moment de la compilation (de la production du byte-code), et non au moment où est appelé <code>decoree</code>. </p>
+<p>Ce type de construction s&#39;appelle <a href="http://fr.wikipedia.org/wiki/Fermeture_%28informatique%29">une <strong>clotûre</strong></a>, en référence au lambda calcul&nbsp;: on parle de terme clos lorsqu&#39;il n&#39;y a plus de référence non résolue dans une expression. C&#39;est une technique de programmation très répandue notamment dans les applications réactives, où on programme beaucoup avec des <em>callbacks</em>&nbsp;; par exemple il est presque impossible de programmer en JavaScript sans écrire une clôture. </p>
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># un exemple de traitement des &#39;newline&#39; </span>
-<span class="nb">input</span> <span class="o">=</span> <span class="s">u&quot;&quot;&quot;une entrée</span>
-<span class="s">sur</span>
-<span class="s">plusieurs</span>
-<span class="s">lignes</span>
-<span class="s">&quot;&quot;&quot;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;(.*)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-<span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Vous voyez donc que l&#39;attrape-tout <code>&#39;.&#39;</code> en fait n&#39;attrape pas le caractère de fin de ligne <code>\n</code>, puisque si c&#39;était le cas et  compte tenu du coté <em>greedy</em> de l&#39;algorithme on devrait voir ici tout le contenu de <code>input</code>. Il existe un <em>flag</em> <code>re.DOTALL</code> qui permet de faire de <code>.</code> un vrai attrape-tout qui capture aussi les <em>newline</em>&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;(.*)&quot;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-<span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Cela dit, le caractère <em>newline</em> est par ailleurs considéré comme un caractère comme un autre, on peut le mentionner <strong>dans une regexp</strong> comme les autres&nbsp;; voici quelques exemples pour illustrer tout ceci&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># sans mettre le flag unicode \w ne matche que l&#39;ASCII</span>
-<span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;([\w ]*)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-<span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># sans mettre le flag unicode \w ne matche que l&#39;ASCII</span>
-<span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;([\w ]*)&quot;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">U</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-<span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># si on ajoute \n à la liste des caractères attendus </span>
-<span class="c"># on obtient bien tout le contenu initial</span>
-
-<span class="c"># attention ici il ne FAUT PAS utiliser un raw string,</span>
-<span class="c"># car on veut vraiment écrire un newline dans la regexp</span>
-
-<span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;([\w </span><span class="se">\n</span><span class="s">]*)&quot;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
-<span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h3>
+<h3 id="On-peut-cha&#238;ner-les-d&#233;corateurs">On peut cha&#238;ner les d&#233;corateurs<a class="anchor-link" href="#On-peut-cha&#238;ner-les-d&#233;corateurs">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -3411,7 +2551,12 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>La mise au point d&#39;expressions régulières est certes un peu exigeante, et demande pas mal de pratique, mais permet d&#39;écrire en quelques lignes des fonctionnalités très puissantes, c&#39;est un investissement très rentable :)</p>
+<p>Pour revenir à notre sujet, signalons enfin que l&#39;on peut aussi &quot;chaîner les décorateurs&quot;&nbsp;; imaginons par exemple qu&#39;on dispose d&#39;un décorateur <code>add_field</code> qui ajoute dans une classe un <em>getter</em> et un <em>setter</em> basés sur un nom d&#39;attribut.</p>
+<p>C&#39;est-à-dire que</p>
+<pre><code>@add_field(&#39;name&#39;)
+class Foo:
+    pass
+</code></pre><p>donnerait pour <code>Foo</code> une classe qui dispose des méthodes <code>get_name</code> et <code>set_name</code> (exercice pour les courageux: écrire <code>add_field</code>).</p>
 </div>
 </div>
 </div>
@@ -3420,7 +2565,79 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Je vous signale enfin l&#39;existence de <strong>sites web</strong> qui évaluent une expression régulière <strong>de manière interactive</strong> et qui peuvent rendre la mise au point moins fastidieuse. Pour être honnête je n&#39;ai pas d&#39;expérience préalable avec ces sites, mais en préparant le cours j&#39;ai essayé rapidement <a href="http://regex101.com/#python">regex101.com</a> qui semble à première vue très bien fait; prenez garde toutefois à bien choisir le mode python dans la bannière de gauche car chaque langage de regexps a ses petites différences (ce ne serait pas drôle sinon:).</p>
+<p>Alors la syntaxe des décorateurs vous permet de faire quelque chose comme&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<pre><code>@add_field(&#39;name&#39;)
+@add_field(&#39;address&#39;)
+class Foo:
+    pass
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ce qui revient à faire&nbsp;:</p>
+<pre><code>class Foo: pass
+Foo = (add_field(&#39;address&#39;))(Foo)
+Foo = (add_field(&#39;name&#39;))(Foo)
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Discussion">Discussion<a class="anchor-link" href="#Discussion">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Dans la pratique, écrire un décorateur est un exercice assez délicat. Le vrai problème est bien souvent la création d&#39;objets supplémentaires&nbsp;: on n&#39;appelle plus la fonction de départ mais un wrapper autour de la fonction de départ. </p>
+<p>Ceci a tout un tas de conséquences, et le lecteur attentif aura par exemple remarqué&nbsp;:</p>
+<ul>
+<li>que dans l&#39;état du code de <code>singleton</code>, bien que l&#39;on ait correctement mis à jour <code>__doc__</code> et <code>__name__</code> sur la classe décorée, <code>help(Spam)</code> ne renvoie pas le texte attendu, il semble que <code>help</code> sur une instance de classe ne se comporte pas exactement comme attendu&nbsp;;</li>
+<li>que si on essaie de combiner les décorateurs <code>NbAppels</code> et <code>caching</code> sur une - encore nouvelle - version de fibonacci, le code obtenu ne converge pas&nbsp;; en fait les technique que nous avons utilisées dans les deux cas ne sont pas compatibles entre elles.</li>
+</ul>
+<p>De manière plus générale, il y a des gens pour trouver des défauts à ce système de décorateurs&nbsp;; je vous renvoie notamment à <a href="http://blog.dscpl.com.au/2014/01/how-you-implemented-your-python.html">ce blog</a> qui, pour résumer, insiste sur le fait que les objets décorés n&#39;ont <strong>pas exactement</strong> les mêmes propriétés que les objets originaux. L&#39;auteur y explique que lorsqu&#39;on fait de l&#39;introspection profonde - c&#39;est-à-dire lorsqu&#39;on écrit du code qui &quot;fouille&quot; dans les objets qui représentent le code lui-même - les objets décorés ont parfois du mal à se <em>faire passer</em> pour les objets qu&#39;ils remplacent.</p>
+<p>À chacun de voir les avantages et les inconvénients de cette technique. C&#39;est là encore beaucoup une question de goût. Dans certains cas simples, comme par exemple pour <code>NbAppels</code>, la décoration revient à simplement ajouter du code avant et après l&#39;appel à la fonction à décorer. Et dans ce cas, vous remarquerez qu&#39;on peut aussi faire le même genre de choses avec un <em>context manager</em> (je laisse ça en exercice aux étudiants intéressés).</p>
+<p>Ce qui est clair toutefois est que la technique des décorateurs est quelque chose qui peut être très  utile, mais dont il ne faut pas abuser. En particulier de notre point de vue, la possibilité de combiner les décorateurs, si elle existe bien dans le langage d&#39;un point de vue syntaxique, est dans la pratique à utiliser avec la plus extrême prudence. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Pour-en-savoir-plus">Pour en savoir plus<a class="anchor-link" href="#Pour-en-savoir-plus">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Maintenant que vous savez presque tout sur les décorateurs, vous pouvez retourner lire ce <a href="https://wiki.python.org/moin/PythonDecoratorLibrary">recueil de décorateurs</a> mais plus en détails.</p>
 </div>
 </div>
 </div>

@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>W7-S2-C1-Complement-decorateurs</title>
+<title>W5-S5-C1-heritage</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1681,7 +1681,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="D&#233;corateurs">D&#233;corateurs<a class="anchor-link" href="#D&#233;corateurs">&#182;</a></h1>
+<h1 id="H&#233;ritage">H&#233;ritage<a class="anchor-link" href="#H&#233;ritage">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -1691,7 +1691,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Compl&#233;ment---niveau-(tr&#232;s)-avanc&#233;">Compl&#233;ment - niveau (tr&#232;s) avanc&#233;<a class="anchor-link" href="#Compl&#233;ment---niveau-(tr&#232;s)-avanc&#233;">&#182;</a></h2>
+<h2 id="Compl&#233;ment---niveau-basique">Compl&#233;ment - niveau basique<a class="anchor-link" href="#Compl&#233;ment---niveau-basique">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -1701,9 +1701,13 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Le mécanisme des décorateurs - qui rappelle un peu, pour ceux qui connaissent, les macros Lisp - est un mécanisme très puissant. Sa portée va bien au delà de simplement rajouter du code avant et après une fonction, comme dans le cas de <code>NbAppels</code> que nous avons vu dans la vidéo.  </p>
-<p>Par exemple, les notions de méthodes de classe (<code>@classmethod</code>) et de méthodes statiques (<code>@staticmethod</code>) sont implémentées comme des décorateurs. Pour une liste plus représentative de ce qu&#39;il est possible de faire avec les décorateurs, je vous invite à parcourir même rapidement ce <a href="https://wiki.python.org/moin/PythonDecoratorLibrary">recueil de décorateurs</a> qui propose du code (à titre indicatif car rien de ceci ne fait partie de la librairie standard) pour des thèmes qui sont propices à la décoration de code.</p>
-<p>Nous allons voir en détails quelques-uns de ces exemples, nos décorateurs <code>caching</code> et <code>singleton</code> ont la même fonctionnalité que les <code>memoize</code> et <code>singleton</code> du recueil de décorateurs, mais implémentés différemment.</p>
+<p>La notion d&#39;héritage, qui fait partie intégrante de la Programmation Orientée Objet, permet principalement de maximiser la <strong>réutilisabilité</strong>. </p>
+<p>Nous avons vu dans la vidéo les mécanismes d&#39;héritage <em>in abstracto</em>. Pour résumer très brièvement, on recherche un attribut (souvent une méthode) à partir d&#39;une instance en cherchant :</p>
+<ul>
+<li>d&#39;abord dans l&#39;instance elle-même,</li>
+<li>puis dans la classe de l&#39;instance,</li>
+<li>puis dans les super-classes de la classe.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1712,7 +1716,20 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Un-d&#233;corateur-impl&#233;ment&#233;-comme-une-fonction">Un d&#233;corateur impl&#233;ment&#233; comme une fonction<a class="anchor-link" href="#Un-d&#233;corateur-impl&#233;ment&#233;-comme-une-fonction">&#182;</a></h3>
+<p>L&#39;objet de ce complément est de vous donner, d&#39;un point de vue plus appliqué, des idées de ce qu&#39;on peut faire ou non avec ce mécanisme. Le sujet étant assez rabâché par ailleurs, nous nous concentrerons sur deux points&nbsp;:</p>
+<ul>
+<li>les pratiques de base utilisées pour la conception de classes, et notamment pour bien distinguer <strong>héritage</strong> et <strong>composition</strong>;</li>
+<li>nous verrons ensuite, sur des <strong>exemples extraits de code réel</strong>, comment ces mécanismes permettent en effet de contribuer à la réutilisabilité du code.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Plusieurs-formes-d'h&#233;ritage">Plusieurs formes d'h&#233;ritage<a class="anchor-link" href="#Plusieurs-formes-d'h&#233;ritage">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1722,7 +1739,21 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Dans la vidéo on a vu <code>NbAppels</code> pour compter le nombre de fois qu&#39;on appelle une fonction. Pour mémoire on avait écrit&nbsp;:</p>
+<p>Une méthode héritée peut être rangée dans une de ces trois catégories&nbsp;:</p>
+<ul>
+<li><em>implicite</em> : si la classe fille ne définit pas du tout la méthode,</li>
+<li><em>redéfinie</em> : si on récrit la méthode entièrement,</li>
+<li><em>modifiée</em> : si on récrit la méthode dans la classe fille, mais en utilisant le code de la classe mère.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Commençons par illustrer tout ceci sur un petit exemple&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -1733,16 +1764,235 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># un rappel du code montré dans la vidéo</span>
-<span class="k">class</span> <span class="nc">NbAppels</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">f</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">appels</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">appels</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">print</span> <span class="s">&quot;{}: {} appels&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">appels</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<div class="highlight"><pre><span class="c"># Une classe mère</span>
+<span class="k">class</span> <span class="nc">Fleur</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">implicite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;Fleur.implicite&#39;</span>
+    <span class="k">def</span> <span class="nf">redefinie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;Fleur.redefinie&#39;</span>
+    <span class="k">def</span> <span class="nf">modifiee</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;Fleur.modifiee&#39;</span>
+
+<span class="c"># Une classe fille</span>
+<span class="k">class</span> <span class="nc">Rose</span><span class="p">(</span><span class="n">Fleur</span><span class="p">):</span>
+    <span class="c"># on ne definit pas implicite</span>
+    <span class="c"># on redefinit complement redefinie</span>
+    <span class="k">def</span> <span class="nf">redefinie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;Rose.redefinie&#39;</span>
+    <span class="k">def</span> <span class="nf">modifiee</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">Fleur</span><span class="o">.</span><span class="n">modifiee</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&#39;Rose.modifiee apres Fleur&#39;</span>    
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nous avons fait hériter la classe <code>Fleur</code> de la classe <code>object</code>, qui est la pratique recommandée; cela fait de toutes nos classes des <em>classes new-style</em>, un concept que nous allons étudier dans un tout prochain complément.</p>
+<p>On peut à présent créer une instance de Rose et appeler sur cette instance les trois méthodes.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># fille est une instance de Rose</span>
+<span class="n">fille</span> <span class="o">=</span> <span class="n">Rose</span><span class="p">()</span>
+
+<span class="n">fille</span><span class="o">.</span><span class="n">implicite</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">fille</span><span class="o">.</span><span class="n">redefinie</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>S&#39;agissant des deux premières méthodes, le comportement qu&#39;on observe est simplement la conséquence de l&#39;algorithme de recherche d&#39;attributs&nbsp;: <code>implicite</code> est trouvée dans la classe Fleur et <code>redefinie</code> est trouvée dans la classe Rose.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">fille</span><span class="o">.</span><span class="n">modifiee</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour la troisième méthode, attardons nous un peu car on voit ici comment <em>combiner</em> facilement le code de la classe mère avec du code spécifique à la classe fille, en appelant explicitement la méthode de la classe mère lorsqu&#39;on fait&nbsp;:</p>
+<pre><code>Fleur.modifiee(self)
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="La-fonction-builtin-super()">La fonction <em>builtin</em> <code>super()</code><a class="anchor-link" href="#La-fonction-builtin-super()">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Signalons à ce sujet, pour être exhaustif, l&#39;existence de la <a href="https://docs.python.org/2/library/functions.html#super">fonction <em>builtin</em> <code>super()</code></a> qui permettrait de réaliser la même chose sans nommer explicitement la classe mère, comme on le fait ici&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># Une version allégée de la classe fille, qui utilise super()</span>
+<span class="k">class</span> <span class="nc">Rose</span><span class="p">(</span><span class="n">Fleur</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">modifiee</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Rose</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">modifiee</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&#39;Rose.modifiee apres Fleur&#39;</span>    
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">fille</span> <span class="o">=</span> <span class="n">Rose</span><span class="p">()</span>
+
+<span class="n">fille</span><span class="o">.</span><span class="n">modifiee</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On peut envisager d&#39;utiliser <code>super()</code> dans du code très abstrait où on ne sait pas déterminer statiquement le nom de la classe dont il est question. Mais, c&#39;est une question de goût évidemment, je recommande personnellement la première forme, où on qualifie la méthode avec le nom de la classe mère qu&#39;on souhaite utiliser. En effet dans la grande majorité des cas&nbsp;:</p>
+<ul>
+<li>on sait déterminer le nom de la classe dont il est question, </li>
+<li>ou alors on veut mélanger plusieurs méthodes héritées (via l&#39;héritage multiple, dont on va parler dans un prochain complément) et dans ce cas <code>super()</code> ne peut rien pour nous.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="H&#233;ritage-vs-Composition">H&#233;ritage <em>vs</em> Composition<a class="anchor-link" href="#H&#233;ritage-vs-Composition">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Dans le domaine de la conception orientée objet, on fait la différence entre deux constructions, l&#39;héritage et la composition, qui à une analyse superficielle peuvent paraître procurer des résultats similaires, mais qu&#39;il est important de bien distinguer. </p>
+<p>Voyons d&#39;abord en quoi consiste la composition et pourquoi le résultat est voisin&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># Une classe avec qui on n&#39;aura pas de relation d&#39;héritage</span>
+<span class="k">class</span> <span class="nc">Tige</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">implicite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;Tige.implicite&#39;</span>
+    <span class="k">def</span> <span class="nf">redefinie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;Tige.redefinie&#39;</span>
+    <span class="k">def</span> <span class="nf">modifiee</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;Tige.modifiee&#39;</span>
+
+<span class="c"># on n&#39;hérite pas</span>
+<span class="c"># mais on fait ce qu&#39;on appelle un composition</span>
+<span class="c"># avec la classe Tige</span>
+<span class="k">class</span> <span class="nc">Rose</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c"># mais pour chaque objet de la classe Rose</span>
+    <span class="c"># on va créer un objet de la classe Tige</span>
+    <span class="c"># et le conserver dans un champ</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">externe</span> <span class="o">=</span> <span class="n">Tige</span><span class="p">()</span>
+
+    <span class="c"># le reste est presque comme tout à l&#39;heure</span>
+    <span class="c"># sauf qu&#39;il faut definir implicite</span>
+    <span class="k">def</span> <span class="nf">implicite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">externe</span><span class="o">.</span><span class="n">implicite</span><span class="p">()</span>
         
+    <span class="c"># on redefinit complement redefinie</span>
+    <span class="k">def</span> <span class="nf">redefinie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;Rose.redefinie&#39;</span>
+        
+    <span class="k">def</span> <span class="nf">modifiee</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">externe</span><span class="o">.</span><span class="n">modifiee</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&#39;Rose.modifiee apres Tige&#39;</span>        
 </pre></div>
 
 </div>
@@ -1757,35 +2007,12 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="nd">@NbAppels</span>
-<span class="k">def</span> <span class="nf">fibo_aux</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="s">&quot;Fibonacci en log(n), credits Bernardi&quot;</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> 
-        <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">fibo_aux</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">u</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">-</span> <span class="n">u</span><span class="p">),</span> <span class="n">u</span><span class="o">*</span><span class="n">u</span> <span class="o">+</span> <span class="n">v</span><span class="o">*</span><span class="n">v</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span> <span class="o">+</span> <span class="n">v</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span>
+<div class="highlight"><pre><span class="c"># on obtient ici exactement le même comportement pour les trois sortes de méthodes</span>
+<span class="n">fille</span> <span class="o">=</span> <span class="n">Rose</span><span class="p">()</span>
 
-<span class="k">def</span> <span class="nf">fibo_log</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">fibo_aux</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">fibo_log</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">fille</span><span class="o">.</span><span class="n">implicite</span><span class="p">()</span>
+<span class="n">fille</span><span class="o">.</span><span class="n">redefinie</span><span class="p">()</span>
+<span class="n">fille</span><span class="o">.</span><span class="n">modifiee</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1798,69 +2025,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ici nous allons implémenter <code>caching</code>, un décorateur qui permet de mémoriser les résultats d&#39;une fonction, et de les cacher pour ne pas avoir à les recalculer la fois suivante. </p>
-<p>Alors que <code>NbAppels</code> était <strong>implémenté comme une classe</strong>, pour varier un peu, nous allons implémenter cette fois <strong><code>caching</code> comme une vraie fonction</strong>, pour vous montrer les deux alternatives que l&#39;on a quand on veut implémenter un décorateur&nbsp;: une vraie fonction ou une classe de callables.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Le-code-du-d&#233;corateur">Le code du d&#233;corateur<a class="anchor-link" href="#Le-code-du-d&#233;corateur">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># une première implémentation de caching</span>
-
-<span class="c"># un decorateur de fonction</span>
-<span class="c"># implémenté comme une fonction</span>
-<span class="k">def</span> <span class="nf">caching</span><span class="p">(</span><span class="n">a_decorer</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Un décorateur pour conserver les résultats</span>
-<span class="sd">    précédents et éviter de les recalculer</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">decoree</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="c"># si on a déjà calculé le résultat</span>
-        <span class="c"># on le renvoie</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
-        <span class="c"># si les arguments ne sont pas hashables, </span>
-        <span class="c"># par exemple une liste, on ne peut pas cacher </span>
-        <span class="c"># et on reçoit TypeError</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">a_decorer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-        <span class="c"># les arguments sont hashables mais on</span>
-        <span class="c"># n&#39;a pas encore calculé cette valeur</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">a_decorer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-            <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
-            <span class="k">return</span> <span class="n">result</span>
-    <span class="c"># on initialise l&#39;attribut &#39;cache&#39;</span>
-    <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">return</span> <span class="n">decoree</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Comment-l'utiliser">Comment l'utiliser<a class="anchor-link" href="#Comment-l'utiliser">&#182;</a></h5>
+<h5 id="Comment-choisir-?">Comment choisir ?<a class="anchor-link" href="#Comment-choisir-?">&#182;</a></h5>
 </div>
 </div>
 </div>
@@ -1870,89 +2035,12 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Avant de rentrer dans le détail du code, voyons comment cela s&#39;utiliserait; il n&#39;y a pas de changement de ce point de vue par rapport à l&#39;option développée dans la vidéo&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># créer une fonction décorée</span>
-<span class="nd">@caching</span>
-<span class="k">def</span> <span class="nf">fibo_cache</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Un fibonacci hyper-lent (exponentiel) se transforme</span>
-<span class="sd">    en temps linéaire une fois que les résultats sont cachés</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">fibo_cache</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo_cache</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Bien que l&#39;implémentation utilise un algorithme épouvantablement lent, le fait de lui rajouter du caching redonne à l&#39;ensemble un caractère linéaire. </p>
-<p>En effet, si vous y réfléchissez une minute, vous verrez qu&#39;avec le cache, lorsqu&#39;on calcule <code>fibo_cache(n)</code>, on calcule d&#39;abord <code>fibo_cache(n-1)</code>, puis lorsqu&#39;on évalue <code>fibo_cache(n-2)</code> le résultat <strong>est déjà dans le cache</strong> si bien qu&#39;on peut considérer ce deuxième calcul comme, sinon instantané, du moins du même ordre de grandeur qu&#39;une addition. </p>
-<p>On peut calculer par exemple&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">fibo_cache</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>qu&#39;il serait hors de question de calculer sans le caching.</p>
-<p>On peut naturellement inspecter le cache, qui est rangé dans l&#39;attribut <code>cache</code> de l&#39;objet fonction lui-même&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="nb">len</span><span class="p">(</span><span class="n">fibo_cache</span><span class="o">.</span><span class="n">cache</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>et voir que, comme on aurait pu le prédire, on a calculé et mémorisé les 301 premiers résultats, pour n allant de 0 à 300.</p>
+<p>Alors, quand faut-il utiliser l&#39;héritage et quand faut-il utiliser la composition ?
+On arrive ici à la limite de notre cours, il s&#39;agit plus de conception que de codage à proprement parler, mais pour donner une réponse très courte à cette question&nbsp;:</p>
+<ul>
+<li>on utilise l&#39;héritage lorsqu&#39;un objet de la sous-classe <strong>est aussi un</strong> objet de la super-classe (une rose est aussi une fleur), et</li>
+<li>on utilise la composition lorsqu&#39;un objet de la sous-classe <strong>a une relation avec</strong> un objet de la super-classe (une rose possède une tige, mais c&#39;est un autre objet).</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1961,7 +2049,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Comment-&#231;a-marche-?">Comment &#231;a marche ?<a class="anchor-link" href="#Comment-&#231;a-marche-?">&#182;</a></h5>
+<h2 id="Compl&#233;ment---niveau-interm&#233;diaire">Compl&#233;ment - niveau interm&#233;diaire<a class="anchor-link" href="#Compl&#233;ment---niveau-interm&#233;diaire">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -1971,11 +2059,85 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>On l&#39;a vu dans la vidéo avec <code>NbAppels</code>, tout se passe exactement comme si on avait écrit&nbsp;:</p>
-<pre><code>def fibo_cache(n):
-    &lt;le code&gt;
+<h3 id="Des-exemples-de-code">Des exemples de code<a class="anchor-link" href="#Des-exemples-de-code">&#182;</a></h3>
+</div>
+</div>
+</div>
 
-fibo_cache = caching(fibo_cache)
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Sans transition, dans cette section un peu plus prospective, nous vous avons signalé quelques morceaux de code de la librairie standard qui utilisent l&#39;héritage. Sans aller nécessairement jusqu&#39;à la lecture de ces codes, il nous a semblé intéressant de commenter spécifiquement l&#39;usage qui est fait de l&#39;héritage dans ces bibliothèques.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Le-module-calendar">Le module <code>calendar</code><a class="anchor-link" href="#Le-module-calendar">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On trouve dans la librairie standard <a href="https://docs.python.org/2/library/calendar.html">le module <code>calendar</code></a>. 
+Ce module expose deux classes <code>TextCalendar</code> et <code>HTMLCalendar</code>. Sans entrer du tout dans le détail, ces deux classes permettent d&#39;imprimer dans des formats différents le même type d&#39;informations du type rendez-vous.</p>
+<p>Le point ici est que les concepteurs ont choisi un graphe d&#39;héritage comme ceci&nbsp;:</p>
+<pre><code>Calendar
+|-- TextCalendar
+|-- HTMLCalendar
+</code></pre><p>qui permet de grouper le code concernant la logique dans la classe <code>Calendar</code>, puis dans les deux sous-classes d&#39;implémenter le type de sortie qui va bien. </p>
+<p>De cette manière, le maximum de code est partagé entre les deux classes; et de plus si vous avez besoin d&#39;une sortie au format, disons PDF, vous pouvez envisager d&#39;hériter de <code>Calendar</code> et n&#39;implémenter que la partie spécifique au format PDF.</p>
+<p>C&#39;est un peu le niveau élémentaire de l&#39;héritage. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Le-module-SocketServer">Le module <code>SocketServer</code><a class="anchor-link" href="#Le-module-SocketServer">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Toujours dans la librairie standard, le <a href="https://docs.python.org/2/library/socketserver.html">module <code>SocketServer</code></a> - qui, incidemment est écrit en C - fait un usage beaucoup plus sophistiqué de l&#39;héritage.</p>
+<p>Le module propose une hiérarchie de classes comme ceci:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<pre><code>+------------+
+| BaseServer |
++------------+
+      |
+      v
++-----------+        +------------------+
+| TCPServer |-------&gt;| UnixStreamServer |
++-----------+        +------------------+
+      |
+      v
++-----------+        +--------------------+
+| UDPServer |-------&gt;| UnixDatagramServer |
++-----------+        +--------------------+
 </code></pre>
 </div>
 </div>
@@ -1985,659 +2147,9 @@ fibo_cache = caching(fibo_cache)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Donc <code>caching</code> est une fonction qui prend en argument une fonction <code>a_decorer</code> qui ici vaut <code>fibo_cache</code>, et retourne une autre fonction, <code>decoree</code>; on s&#39;arrange naturellement pour que <code>decoree</code> retourne le même résultat que <code>a_decorer</code>, avec seulement des choses supplémentaires.</p>
-<p>Les points clés de l&#39;implémentation sont les suivants.</p>
-<ul>
-<li>On attache à l&#39;objet fonction <code>decoree</code> un dictionnaire <code>cache</code> qui va nous permettre de retrouver les valeurs déjà calculées, à partir d&#39;un hash des arguments.</li>
-<li>On ne peut pas cacher le résultat d&#39;un objet qui ne serait pas globalement immuable; or si on essaie on reçoit l&#39;exception <code>TypeError</code>, et dans ce cas on recalcule toujours le résultat. C&#39;est de toute façons plus sûr.</li>
-<li><p>Si on ne trouve pas les arguments dans le cache, on reçoit l&#39;exception <code>KeyError</code>, dans ce cas on calcule le résultat, et on le retourne après l&#39;avoir rangé dans le cache.</p>
-</li>
-<li><p>Vous remarquerez aussi qu&#39;on initialise l&#39;attribut <code>cache</code> dans l&#39;objet <code>decoree</code> à l&#39;appel du décorateur (une seule fois, juste après avoir défini la fonction), et non pas dans le code de <code>decoree</code> qui lui est évalué à chaque appel.</p>
-</li>
-</ul>
-<p>Cette implémentation, sans être parfaite, est tout à fait utilisable dans un environnement réel, modulo les remarques de bon sens suivantes&nbsp;:</p>
-<ul>
-<li>évidemment l&#39;approche ne fonctionne que pour des fonctions déterministes; s&#39;il y a de l&#39;aléatoire dans la logique de la fonction, il ne faut pas utiliser ce décorateur&nbsp;;</li>
-<li>tout aussi évidemment, la consommation mémoire peut être importante si on applique le caching sans discrimination&nbsp;;</li>
-<li>enfin en l&#39;état la fonction decoree ne peut pas être appelée avec des arguments nommés; en effet on utilise le tuple <code>args</code> comme clé pour retrouver dans le cache la valeur associée aux arguments.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="D&#233;corateurs,-docstring-et-help">D&#233;corateurs, <em>docstring</em> et <code>help</code><a class="anchor-link" href="#D&#233;corateurs,-docstring-et-help">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>En fait, avec cette implémentation, il reste aussi un petit souci&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">help</span><span class="p">(</span><span class="n">fibo_cache</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Ce n&#39;est pas exactement ce qu&#39;on veut; ce qui se passe ici c&#39;est que <code>help</code> utilise les attributs <code>__doc__</code> et <code>__name__</code> de l&#39;objet qu&#39;on lui passe. Et dans notre cas <code>fibo_cache</code> est une fonction qui a été créée par l&#39;instruction</p>
-<pre><code>def decoree(*args):
-    # etc.
-</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour arranger ça et faire en sorte que <code>help</code> nous affiche ce qu&#39;on veut, il faut s&#39;occuper de ces deux attributs. Et plutôt que de faire ça à la main, il existe un utilitaire dans le module <code>functools</code>, qui fait tout le travail nécessaire. Ce qui nous donne une deuxième version de ce décorateur, avec deux lignes supplémentaires signalées par des <code>+++</code>
-;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># une deuxième implémentation de caching, avec la doc </span>
-
-<span class="kn">import</span> <span class="nn">functools</span>                                 <span class="c"># +++</span>
-
-<span class="c"># un decorateur de fonction</span>
-<span class="c"># implémenté comme une fonction</span>
-<span class="k">def</span> <span class="nf">caching</span><span class="p">(</span><span class="n">a_decorer</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Un décorateur pour conserver les résultats</span>
-<span class="sd">    précédents et éviter de les recalculer</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># on décore la fonction pour qu&#39;elle ait les</span>
-    <span class="c"># propriétés de a_decorer : __doc__ et __name__</span>
-    <span class="nd">@functools.wraps</span><span class="p">(</span><span class="n">a_decorer</span><span class="p">)</span>                  <span class="c"># +++</span>
-    <span class="k">def</span> <span class="nf">decoree</span> <span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="c"># si on a déjà calculé le résultat</span>
-        <span class="c"># on le renvoie</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
-        <span class="c"># si les arguments ne sont pas hashables, </span>
-        <span class="c"># par exemple une liste, on ne peut pas cacher </span>
-        <span class="c"># et on reçoit TypeError</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">a_decorer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-        <span class="c"># les arguments sont hashables mais on</span>
-        <span class="c"># n&#39;a pas encore calculé cette valeur</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">a_decorer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-            <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
-            <span class="k">return</span> <span class="n">result</span>
-    <span class="c"># on initialise l&#39;attribut &#39;cache&#39;</span>
-    <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">return</span> <span class="n">decoree</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># créer une fonction décorée</span>
-<span class="nd">@caching</span>
-<span class="k">def</span> <span class="nf">fibo_cache2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Un fibonacci hyper-lent (exponentiel) se transforme</span>
-<span class="sd">    en temps linéaire une fois que les résultats sont cachés</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">fibo_cache2</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibo_cache2</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Et on obtient à présent une aide en ligne cohérente&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">help</span><span class="p">(</span><span class="n">fibo_cache2</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="On-peut-d&#233;corer-les-classes-aussi">On peut d&#233;corer les classes aussi<a class="anchor-link" href="#On-peut-d&#233;corer-les-classes-aussi">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>De la même façon qu&#39;on peut décorer une fonction, on peut décorer une classe. </p>
-<p>Voyons comment tirer profit des décorateurs pour implémenter le pattern de <code>singleton</code>&nbsp;; une classe implémentée comme <a href="http://en.wikipedia.org/wiki/Singleton_pattern">un singleton</a> est une classe qui n&#39;existe qu&#39;en un seul exemplaire (une seule instance); tous les appels au constructeur retournent une référence vers le même objet.</p>
-<p>Le décorateur <code>singleton</code> va nous permettre de transformer une classe en un singleton.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># le décorateur qui transforme une classe en singleton</span>
-
-<span class="c"># le code gère correctement *args et **kwds, même si généralement</span>
-<span class="c"># dans le cas d&#39;un singleton on n&#39;a pas d&#39;argument à passer</span>
-<span class="c"># au constructeur</span>
-
-<span class="c"># vous pouvez réactivier les lignes de print si vous voulez </span>
-<span class="c"># mieux voir ce qui se passe</span>
-
-<span class="k">class</span> <span class="nc">singleton</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;make the class a singleton&#39;&#39;&#39;</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classe</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;construit l&#39;instance de la classe décorée&quot;&quot;&quot;</span>
-
-        <span class="c"># on garde une référence vers la classe à décorer</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">classe</span> <span class="o">=</span> <span class="n">classe</span>
-        <span class="c"># l&#39;instance </span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">instance</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="c"># on met de cote la methode __new__</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">new_original</span> <span class="o">=</span> <span class="n">classe</span><span class="o">.</span><span class="n">__new__</span>
-        <span class="c"># on redéfinit la méthode __new__</span>
-        <span class="nd">@staticmethod</span>
-        <span class="k">def</span> <span class="nf">singleton_new</span><span class="p">(</span><span class="n">classe</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
-            <span class="c"># on retourne l&#39;instance si elle existe</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance</span>
-            <span class="c"># sinon on la cree en utilisant le __new__ original</span>
-<span class="c">#            print &#39;in singleton_new&#39;,&#39;classe&#39;, classe, &#39;args&#39;, args, &#39;kwds&#39;, kwds</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_original</span><span class="p">(</span><span class="n">classe</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-            <span class="c"># on l&#39;initialise</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-            <span class="c"># on la retourne</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance</span>
-        <span class="c"># on &#39;installe&#39; singleton_new comme le __new__ de la nouvelle classe</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">classe</span><span class="o">.</span><span class="n">__new__</span> <span class="o">=</span> <span class="n">singleton_new</span>
-        <span class="c"># pour la doc, quoi que ce soit apparemment insuffisant pour help()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="n">classe</span><span class="o">.</span><span class="n">__name__</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">classe</span><span class="o">.</span><span class="n">__doc__</span>
-
-    <span class="c"># l&#39;objet doit être un callable, et si on l&#39;appelle</span>
-    <span class="c"># il faut construire un objet de la classe a decorer</span>
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
-<span class="c">#        print &#39;in __call__&#39;,&#39;self&#39;, self, &#39;args&#39;, args, &#39;kwds&#39;, kwds</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">classe</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Le-d&#233;corateur-en-action">Le d&#233;corateur en action<a class="anchor-link" href="#Le-d&#233;corateur-en-action">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># avec une classe &#39;normale&#39;</span>
-<span class="k">class</span> <span class="nc">Eggs</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> 
-    <span class="s">&quot;La classe Eggs n&#39;est pas un singleton&quot;</span>
-
-<span class="c"># si on crée deux objets ils sont différents</span>
-<span class="n">obj1</span> <span class="o">=</span> <span class="n">Eggs</span><span class="p">()</span>
-<span class="n">obj2</span> <span class="o">=</span> <span class="n">Eggs</span><span class="p">()</span>
-<span class="n">obj1</span> <span class="ow">is</span> <span class="n">obj2</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># avec une classe décorée</span>
-<span class="nd">@singleton</span>
-<span class="k">class</span> <span class="nc">Spam</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> 
-    <span class="s">&quot;La classe Spam est un singleton&quot;</span>
-
-<span class="c"># deux instances créés successivement sont identiques</span>
-<span class="n">obj1</span> <span class="o">=</span> <span class="n">Spam</span><span class="p">()</span>
-<span class="n">obj2</span> <span class="o">=</span> <span class="n">Spam</span><span class="p">()</span>
-<span class="n">obj1</span> <span class="ow">is</span> <span class="n">obj2</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Comment-&#231;a-marche">Comment &#231;a marche<a class="anchor-link" href="#Comment-&#231;a-marche">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>La subtilité ici réside dans le fait que </p>
-<p>La méthode <code>__new__</code> fait partie de la même famille que <code>__init__</code> et autres <code>__repr__</code> dont on a parlé dans la Semaine 5, Séquence &#39;surcharge des opérateurs&#39;.
-C&#39;est une méthode spéciale également, et comme <code>__init__</code> elle est mise en jeu au moment de la création d&#39;un objet. </p>
-<p>Par contre, elle est vraiment particulière dans la ménagerie des méthodes spéciales, car c&#39;est la seule qui soit une <strong>méthode statique</strong>, et ça se comprend quand on sait qu&#39;elle est appelée <strong>pour</strong> créer l&#39;objet instance&nbsp;; on ne peut donc pas lui passer en paramètre l&#39;instance en cours de création, puisqu&#39;elle n&#39;est pas encore là.</p>
-<p>Rappelez-vous que lorsqu&#39;on définit <code>Spam</code> décorée avec singleton, on fait essentiellement</p>
-<pre><code>Spam = singleton(Spam)
-</code></pre><p>C&#39;est donc que l&#39;instance de la classe singleton est considéré comme une classe&nbsp;; cette instance doit être un callable, qui est utilisé lorsqu&#39;on crée une instance de <code>Spam</code> en faisant</p>
-<pre><code>obj1 = Spam()
-</code></pre><p>Notre décorateur, pour l&#39;essentiel, fait les opérations suivantes.</p>
-<ul>
-<li>Dans le constructeur <code>__init__</code> de la classe <code>singleton</code>, l&#39;objet décoré mémorise la classe à décorer (ici <code>Spam</code>) dans son attribut <code>classe</code>.</li>
-<li>On crée l&#39;attribut <code>instance</code> qui contiendra une référence vers l&#39;unique objet créé pour cette classe.</li>
-<li>On mémorise également la méthode <code>__new__</code> de la classe à décorer dont on aura besoin à l&#39;intérieur de notre propre version de <code>__new__</code>. </li>
-<li>On définit une méthode statique (parce que <code>__new__</code>doit être statique) <code>singleton_new</code> qui est destinée à remplacer la méthode <code>__new__</code> dans la classe décorée.</li>
-<li>Cette nouvelle méthode <code>__new__</code><ul>
-<li>renvoie l&#39;attribut <code>instance</code> sur la classe décorée lorsqu&#39;il existe (c&#39;est qu&#39;on déjà créé  l&#39;unique objet de la classe à décorer); </li>
-<li>et sinon utilise les méthode <code>__new__</code> et <code>__init__</code> originales pour instancier un objet, le mémoriser, et le renvoyer.</li>
-</ul>
-</li>
-<li><code>singleton_new</code> est <em>installée</em> dans la classe décorée, dans l&#39;attribut de nom <code>__new__</code>.</li>
-<li>On met à jour <code>__name__</code> et <code>__doc__</code> dans la classe décorée à partir de la classe originale.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Toutes-les-combinaisons-(fonction,-classe)-x-(fonction,-classe)">Toutes les combinaisons (fonction, classe) x (fonction, classe)<a class="anchor-link" href="#Toutes-les-combinaisons-(fonction,-classe)-x-(fonction,-classe)">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Nous avons choisi d&#39;implémenter <code>singleton</code> comme une classe&nbsp;; vous <a href="https://wiki.python.org/moin/PythonDecoratorLibrary#Singleton">trouverez ici une version implémentée comme une fonction</a>.</p>
-<p>Si bien qu&#39;avec ces 4 exemples</p>
-<ul>
-<li><code>NbAppels</code> de la vidéo, </li>
-<li>notre version de  <code>caching</code>, </li>
-<li>notre version de <code>singleton</code>,</li>
-<li>et le <code>singleton</code> de <a href="https://wiki.python.org/moin/PythonDecoratorLibrary#Singleton">la référence ci-dessus</a>,</li>
-</ul>
-<p>vous avez toutes les combinaisons de décorateurs, de classes ou de fonctions, implémentés comme une classe ou comme une fonction.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Un-d&#233;corateur-peut-lui-m&#234;me-avoir-des-arguments">Un d&#233;corateur peut lui-m&#234;me avoir des arguments<a class="anchor-link" href="#Un-d&#233;corateur-peut-lui-m&#234;me-avoir-des-arguments">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Reprenons l&#39;exemple de <code>caching</code>, mais imaginons qu&#39;on veuille ajouter un trait de &quot;durée de validité du cache&quot;. Le code du décorateur a besoin de connaître la durée pendant laquelle on doit garder les résultats dans le cache. </p>
-<p>On veut pouvoir préciser ce paramètre, appelons le <code>cache_timeout</code>,  pour chaque fonction&nbsp;; par exemple on voudrait écrire quelque chose comme</p>
-<pre><code>@caching_expire(600)
-def resolve_host(hostname):
-    ...
-
-@caching_expire(3600*24)
-def network_neighbours(hostname):
-    ...
-</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Ceci est possible également avec les décorateurs, avec cette syntaxe précisément. Le modèle qu&#39;il faut avoir à l&#39;esprit pour bien comprendre le code qui suit est le suivant et se base sur deux objets :</p>
-<ul>
-<li>le premier objet, <code>caching_expire</code>, est ce qu&#39;on appelle une <em>factory</em> à décorateurs, c&#39;est-à-dire que l&#39;interpréteur va d&#39;abord appeler <code>caching_expire(600)</code> qui doit retourner un décorateur&nbsp;;</li>
-<li>le deuxième objet est ce décorateur retourné par <code>caching_expire(600)</code> qui lui même doit se comporter commes les décorateurs sans argument que l&#39;on a vus jusqu&#39;ici.</li>
-</ul>
-<p>Pour faire court, cela signifie que l&#39;interpréteur fera</p>
-<pre><code>resolve_host = (caching_expire(600))(resolve_host)
-</code></pre><p>Ou encore si vous préférez</p>
-<pre><code>caching = caching_expire(600)
-resolve_host = caching(resolve_host)
-</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Ce qui nous mène au code suivant&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">time</span>
-
-<span class="c"># comme pour caching, on est limité ici et on ne peut pas</span>
-<span class="c"># supporter les appels à la **kwds, voir plus haut </span>
-<span class="c"># la discussion sur l&#39;implémentation de caching</span>
-
-<span class="c"># caching_expire est une factory à décorateur</span>
-<span class="k">def</span> <span class="nf">caching_expire</span><span class="p">(</span><span class="n">timeout</span><span class="p">):</span>
-
-    <span class="c"># caching_expire va retourner un decorateur sans argument</span>
-    <span class="c"># c&#39;est à dire un objet qui se comporte</span>
-    <span class="c"># comme notre tout premier `caching`</span>
-    <span class="k">def</span> <span class="nf">caching</span><span class="p">(</span><span class="n">a_decorer</span><span class="p">):</span>
-        <span class="c"># à partir d&#39;ici on fait un peu comme dans</span>
-        <span class="c"># la premiere version de caching</span>
-        <span class="k">def</span> <span class="nf">decoree</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="c"># sauf que disons qu&#39;on met dans le cache un tuple</span>
-                <span class="c"># (valeur, timestamp)</span>
-                <span class="n">valeur</span><span class="p">,</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span>
-                <span class="c"># et la on peut acceder a timeout</span>
-                <span class="c"># parce que la liaison en python est lexicale </span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">timestamp</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">timeout</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">valeur</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="c"># on fait comme si on ne connaissait pas,</span>
-                    <span class="k">raise</span> <span class="ne">KeyError</span>
-            <span class="c"># si les arguments ne sont pas hashables, </span>
-            <span class="c"># par exemple une liste, on ne peut pas cacher </span>
-            <span class="c"># et on reçoit TypeError</span>
-            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">a_decorer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-            <span class="c"># les arguments sont hashables mais on</span>
-            <span class="c"># n&#39;a pas encore calculé cette valeur</span>
-            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="n">a_decorer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-                <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">args</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
-                <span class="k">return</span> <span class="n">result</span>
-
-        <span class="n">decoree</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">return</span> <span class="n">decoree</span>
-    <span class="c"># le retour de caching_expire, c&#39;est caching</span>
-    <span class="k">return</span> <span class="n">caching</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="nd">@caching_expire</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">fibo_cache_expire</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span><span class="o">&lt;=</span><span class="mi">1</span> <span class="k">else</span> <span class="n">fibo_cache_expire</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">fibo_cache_expire</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">fibo_cache_expire</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">fibo_cache_expire</span><span class="o">.</span><span class="n">cache</span><span class="p">[(</span><span class="mi">200</span><span class="p">,)]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Remarquez-la-cl&#244;ture">Remarquez la cl&#244;ture<a class="anchor-link" href="#Remarquez-la-cl&#244;ture">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour conclure sur cet exemple, vous remarquez que dans le code de <code>decoree</code> on accède à la variable <code>timeout</code>. Ça peut paraître un peu étonnant, si vous pensez que <code>decoree</code> est appelée <strong>bien après</strong> que la fonction <code>caching_expire</code> ait fini son travail. En effet, <code>caching_expire</code> est évaluée <strong>une fois</strong> juste après <strong>la définition</strong> de <code>fibo_cache</code>. Et donc on pourrait penser que la valeur de <code>timeout</code> ne serait plus disponible dans le contexte de <code>decoree</code>.</p>
-<p>Pour comprendre ce qui se passe, il faut se souvenir que python est un langage à liaison lexicale. Cela signifie que la <em>résolution</em> de la variable <code>timeout</code> se fait au moment de la compilation (de la production du byte-code), et non au moment où est appelé <code>decoree</code>. </p>
-<p>Ce type de construction s&#39;appelle <a href="http://fr.wikipedia.org/wiki/Fermeture_%28informatique%29">une <strong>clotûre</strong></a>, en référence au lambda calcul&nbsp;: on parle de terme clos lorsqu&#39;il n&#39;y a plus de référence non résolue dans une expression. C&#39;est une technique de programmation très répandue notamment dans les applications réactives, où on programme beaucoup avec des <em>callbacks</em>&nbsp;; par exemple il est presque impossible de programmer en JavaScript sans écrire une clôture. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="On-peut-cha&#238;ner-les-d&#233;corateurs">On peut cha&#238;ner les d&#233;corateurs<a class="anchor-link" href="#On-peut-cha&#238;ner-les-d&#233;corateurs">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour revenir à notre sujet, signalons enfin que l&#39;on peut aussi &quot;chaîner les décorateurs&quot;&nbsp;; imaginons par exemple qu&#39;on dispose d&#39;un décorateur <code>add_field</code> qui ajoute dans une classe un <em>getter</em> et un <em>setter</em> basés sur un nom d&#39;attribut.</p>
-<p>C&#39;est-à-dire que</p>
-<pre><code>@add_field(&#39;name&#39;)
-class Foo:
-    pass
-</code></pre><p>donnerait pour <code>Foo</code> une classe qui dispose des méthodes <code>get_name</code> et <code>set_name</code> (exercice pour les courageux: écrire <code>add_field</code>).</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Alors la syntaxe des décorateurs vous permet de faire quelque chose comme&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<pre><code>@add_field(&#39;name&#39;)
-@add_field(&#39;address&#39;)
-class Foo:
-    pass
-</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Ce qui revient à faire&nbsp;:</p>
-<pre><code>class Foo: pass
-Foo = (add_field(&#39;address&#39;))(Foo)
-Foo = (add_field(&#39;name&#39;))(Foo)
-</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Discussion">Discussion<a class="anchor-link" href="#Discussion">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Dans la pratique, écrire un décorateur est un exercice assez délicat. Le vrai problème est bien souvent la création d&#39;objets supplémentaires&nbsp;: on n&#39;appelle plus la fonction de départ mais un wrapper autour de la fonction de départ. </p>
-<p>Ceci a tout un tas de conséquences, et le lecteur attentif aura par exemple remarqué&nbsp;:</p>
-<ul>
-<li>que dans l&#39;état du code de <code>singleton</code>, bien que l&#39;on ait correctement mis à jour <code>__doc__</code> et <code>__name__</code> sur la classe décorée, <code>help(Spam)</code> ne renvoie pas le texte attendu, il semble que <code>help</code> sur une instance de classe ne se comporte pas exactement comme attendu&nbsp;;</li>
-<li>que si on essaie de combiner les décorateurs <code>NbAppels</code> et <code>caching</code> sur une - encore nouvelle - version de fibonacci, le code obtenu ne converge pas&nbsp;; en fait les technique que nous avons utilisées dans les deux cas ne sont pas compatibles entre elles.</li>
-</ul>
-<p>De manière plus générale, il y a des gens pour trouver des défauts à ce système de décorateurs&nbsp;; je vous renvoie notamment à <a href="http://blog.dscpl.com.au/2014/01/how-you-implemented-your-python.html">ce blog</a> qui, pour résumer, insiste sur le fait que les objets décorés n&#39;ont <strong>pas exactement</strong> les mêmes propriétés que les objets originaux. L&#39;auteur y explique que lorsqu&#39;on fait de l&#39;introspection profonde - c&#39;est-à-dire lorsqu&#39;on écrit du code qui &quot;fouille&quot; dans les objets qui représentent le code lui-même - les objets décorés ont parfois du mal à se <em>faire passer</em> pour les objets qu&#39;ils remplacent.</p>
-<p>À chacun de voir les avantages et les inconvénients de cette technique. C&#39;est là encore beaucoup une question de goût. Dans certains cas simples, comme par exemple pour <code>NbAppels</code>, la décoration revient à simplement ajouter du code avant et après l&#39;appel à la fonction à décorer. Et dans ce cas, vous remarquerez qu&#39;on peut aussi faire le même genre de choses avec un <em>context manager</em> (je laisse ça en exercice aux étudiants intéressés).</p>
-<p>Ce qui est clair toutefois est que la technique des décorateurs est quelque chose qui peut être très  utile, mais dont il ne faut pas abuser. En particulier de notre point de vue, la possibilité de combiner les décorateurs, si elle existe bien dans le langage d&#39;un point de vue syntaxique, est dans la pratique à utiliser avec la plus extrême prudence. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pour-en-savoir-plus">Pour en savoir plus<a class="anchor-link" href="#Pour-en-savoir-plus">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Maintenant que vous savez presque tout sur les décorateurs, vous pouvez retourner lire ce <a href="https://wiki.python.org/moin/PythonDecoratorLibrary">recueil de décorateurs</a> mais plus en détails.</p>
+<p>Ici encore notre propos n&#39;est pas d&#39;entrer dans les détails, mais d&#39;observer le fait que les différents <em>niveaux d&#39;intelligence</em> sont ajoutés les uns aux les autres au fur et à mesure que l&#39;on descend le graphe d&#39;héritage.</p>
+<p>Cette hiérarchie est par ailleurs étendue par le <a href="https://docs.python.org/2/library/basehttpserver.html">module <code>BaseHTTPServer</code></a> et notamment au travers de la classe <a href="https://docs.python.org/2/library/basehttpserver.html#BaseHTTPServer.HTTPServer"><code>HTTPServer</code></a> qui hérite de <code>TCPServer</code>.</p>
+<p>Pour revenir au module <code>SocketServer</code>, j&#39;attire votre attention dans <a href="https://docs.python.org/2/library/socketserver.html#examples">la page d&#39;exemples</a> sur <a href="https://docs.python.org/2/library/socketserver.html#asynchronous-mixins">cet exemple en particuler</a>, où on crée une classe de serveurs multi-threads (la classe <code>ThreadedTCPServer</code>) par simple héritage multiple entre <code>Threading Mixin</code> et <code>TCPServer</code>. La notion de <code>Mixin</code> est <a href="http://en.wikipedia.org/wiki/Mixin">décrite dans cette page wikipédia</a> dans laquelle vous pouvez accéder directement <a href="http://en.wikipedia.org/wiki/Mixin#In_Python">à la section consacrée à python</a>.</p>
 </div>
 </div>
 </div>

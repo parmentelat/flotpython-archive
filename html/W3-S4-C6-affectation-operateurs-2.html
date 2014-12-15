@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>W5-S5-C4-Complement-heritage-typage</title>
+<title>W3-S4-C6-affectation-operateurs-2</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1681,7 +1681,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="H&#233;ritage,-typage">H&#233;ritage, typage<a class="anchor-link" href="#H&#233;ritage,-typage">&#182;</a></h1>
+<h1 id="Les-instructions-+=-et-autres-revisit&#233;es">Les instructions += et autres revisit&#233;es<a class="anchor-link" href="#Les-instructions-+=-et-autres-revisit&#233;es">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -1691,7 +1691,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Compl&#233;ment---niveau-avanc&#233;">Compl&#233;ment - niveau avanc&#233;<a class="anchor-link" href="#Compl&#233;ment---niveau-avanc&#233;">&#182;</a></h2>
+<h2 id="Compl&#233;ment---niveau-interm&#233;diaire">Compl&#233;ment - niveau interm&#233;diaire<a class="anchor-link" href="#Compl&#233;ment---niveau-interm&#233;diaire">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -1701,7 +1701,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Dans ce complément, nous allons introduire la notion de <em>duck typing</em>, et attirer votre attention sur cette différence assez essentielle entre python et les langages statiquement typés.</p>
+<p>Nous avons vu en deuxième semaine (Séquence &quot;Les types numériques&quot;) une première introduction aux instructions <code>+=</code> et ses dérivées comme <code>*=</code>, <code>**=</code>, etc.</p>
 </div>
 </div>
 </div>
@@ -1710,7 +1710,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Type-concret-et-type-abstrait">Type concret et type abstrait<a class="anchor-link" href="#Type-concret-et-type-abstrait">&#182;</a></h3>
+<h3 id="Ces-constructions-ont-une-d&#233;finition-&#224;-g&#233;om&#233;trie-variable">Ces constructions ont une d&#233;finition &#224; g&#233;om&#233;trie variable<a class="anchor-link" href="#Ces-constructions-ont-une-d&#233;finition-&#224;-g&#233;om&#233;trie-variable">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1720,11 +1720,101 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Revenons sur la notion de type et remarquons que les types peuvent jouer plusieurs rôles, comme on l&#39;a évoqué rapidement en première semaine&nbsp;; et pour reprendre des notions standard en langages de programmation nous allons distinguer deux types.</p>
-<ol>
-<li><strong>type concret&nbsp;:</strong> d&#39;une part, la notion de type a bien entendu à voir avec l&#39;implémentation&nbsp;; par exemple, un compilateur C a besoin de savoir très précisément quel espace allouer à une variable, et l&#39;interpréteur python sous-traite à la classe le soin d&#39;initialiser un objet&nbsp;;</li>
-<li><strong>type abstrait&nbsp;:</strong> d&#39;autre part, les types sont cruciaux dans les systèmes de vérification statique, au sens large, dont le but est de trouver un maximum de défauts à la seule lecture du code (par opposition aux techniques qui nécessitent de le faire tourner).</li>
-</ol>
+<p>En C quand on utilise <code>+=</code> (ou encore <code>++</code>) on modifie la mémoire en place - historiquement, cet opérateur permettait au programmeur d&#39;aider à l&#39;optimisation du code pour utiliser les instructions assembleur idoines.</p>
+<p>Ces constructions en python s&#39;inspirent clairement de C, aussi dans l&#39;esprit ces constructions devraient fonctionner en <strong>modifiant</strong> l&#39;objet référencé par la variable. </p>
+<p>Mais les types numériques en python ne sont <strong>pas mutables</strong>, alors que les listes le sont. Du coup le comportement de <code>+=</code> est différent selon qu&#39;on l&#39;utilise sur un nombre ou sur une liste. Voyons cela sur des exemples très simples.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># Premier exemple avec un entier</span>
+
+<span class="c"># on commence avec une référence partagée</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">a</span> <span class="ow">is</span> <span class="n">b</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># on utilise += sur une des deux variables</span>
+<span class="n">a</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c"># ceci n&#39;a pas modifié b</span>
+<span class="c"># c&#39;est normal, l&#39;entier n&#39;est pas mutable</span>
+
+<span class="k">print</span> <span class="n">a</span>
+<span class="k">print</span> <span class="n">b</span>
+<span class="k">print</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># Deuxième exemple, cette fois avec une liste</span>
+
+<span class="c"># la même référence partagée</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># pareil, on fait += sur une des variables</span>
+<span class="n">a</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c"># cette fois on a modifié a *et* b</span>
+<span class="c"># car += a pu modifier la liste en place</span>
+<span class="k">print</span> <span class="n">a</span>
+<span class="k">print</span> <span class="n">b</span>
+<span class="k">print</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vous voyez donc que la sémantique de <code>+=</code> (c&#39;est bien entendu le cas pour toutes les autres formes d&#39;instructions qui combinent l&#39;affectation avec un opérateur) <strong>est différente</strong> suivant que l&#39;objet référencé par le terme de gauche est <strong>mutable ou immuable</strong>.</p>
 </div>
 </div>
 </div>
@@ -1733,7 +1823,16 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Duck-typing"><em>Duck typing</em><a class="anchor-link" href="#Duck-typing">&#182;</a></h3>
+<p>Pour cette raison, c&#39;est là une opinion personnelle, cette famille d&#39;instructions n&#39;est pas le trait le plus réussi dans le langage, et je ne recommande pas de l&#39;utiliser.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Pr&#233;cision-sur-la-d&#233;finition-de-+=">Pr&#233;cision sur la d&#233;finition de <code>+=</code><a class="anchor-link" href="#Pr&#233;cision-sur-la-d&#233;finition-de-+=">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1743,17 +1842,10 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>En python, ces deux aspects du typage sont relativement décorrélés.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour la deuxième dimension du typage, le système de types abstraits de python est connu sous le nom de <a href="http://en.wikipedia.org/wiki/Duck_typing"><em>duck typing</em></a>, une appellation qui fait référence à cette phrase</p>
-<pre><code>When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.
+<p>Nous avions dit en première semaine, et en première approximation, que </p>
+<pre><code>x += y
+</code></pre><p>était équivalent à </p>
+<pre><code>x = x + y
 </code></pre>
 </div>
 </div>
@@ -1763,48 +1855,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="L'exemple-des-it&#233;rables">L'exemple des it&#233;rables<a class="anchor-link" href="#L'exemple-des-it&#233;rables">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour prendre l&#39;exemple sans doute le plus représentatif, la notion d&#39;<em>itérable</em> est un type abstrait, en ce sens que pour que le fragment&nbsp;:</p>
-<pre><code>for item in container:
-    do_something(item)
-</code></pre><p>ait un sens, il faut et il suffit que <code>container</code> soit un itérable.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>On a vu qu&#39;une chaîne est un itérable, de même qu&#39;une liste, ou un tuple.
-Ces trois types conctrets, <code>str</code>, <code>list</code> et <code>tuple</code>, font donc tous partie du type abstrait <em>itérable</em>. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Dans un langage typé statiquement, pour pouvoir donner un type à cette construction, on serait <strong>obligé</strong> de définir un type - qu&#39;on appellerait logiquement une classe abstraite - dont ces trois types seraient des descendants.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>En python, et c&#39;est le point que nous voulons souligner dans ce complément, il n&#39;existe pas dans le système python d&#39;objet de type <code>type</code> qui matérialise ce type <code>iterable</code>. Si on regarde les superclasses de nos trois types concrets, on voit que leur seul ancêtre commun est la classe  <code>object</code>&nbsp;:</p>
+<p>Au vu de ce qui précède, on voit que ce n&#39;est <strong>pas tout à fait exact</strong>, puisque&nbsp;:</p>
 </div>
 </div>
 </div>
@@ -1815,7 +1866,14 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="nb">str</span><span class="o">.</span><span class="n">__bases__</span>
+<div class="highlight"><pre><span class="c"># si on fait x += y sur une liste </span>
+<span class="c"># on fait un effet de bord sur la liste</span>
+<span class="c"># comme on vient de le voir</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">print</span> <span class="s">&quot;avant&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">print</span> <span class="s">&quot;après&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1830,37 +1888,13 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="nb">str</span><span class="o">.</span><span class="n">__bases__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">__bases__</span>
-</pre></div>
+<div class="highlight"><pre><span class="c"># alors que si on fait x = x + y sur une liste</span>
+<span class="c"># on crée un nouvel objet liste</span>
 
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="nb">list</span><span class="o">.</span><span class="n">__bases__</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="nb">tuple</span><span class="o">.</span><span class="n">__bases__</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">print</span> <span class="s">&quot;avant&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">print</span> <span class="s">&quot;après&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1873,232 +1907,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Qu&#39;on peut résumer comme ceci&nbsp;:</p>
-<p><img src="media/iterables.png"></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Un-autre-exemple">Un autre exemple<a class="anchor-link" href="#Un-autre-exemple">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour prendre un exemple plus simple, pour que cette expression&nbsp;:</p>
-<pre><code>graphic.draw()
-</code></pre><p>ait un sens, il faut que l&#39;objet <code>graphic</code> ait une méthode <code>draw</code>.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>À nouveau, dans un langage typé statiquement, on serait amené à définir une classe abstraite <code>Graphic</code>. En python ce n&#39;est <strong>pas requis</strong>&nbsp;; vous pouvez utiliser ce code tel quel avec deux classes <code>Rectangle</code> et <code>Texte</code> qui n&#39;ont pas de rapport entre elles - autres que, à nouveau, d&#39;avoir <code>object</code> comme ancêtre commun, pourvu qu&#39;elles aient toutes les deux une méthode <code>draw</code>.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="H&#233;ritage-et-type-abstrait">H&#233;ritage et type abstrait<a class="anchor-link" href="#H&#233;ritage-et-type-abstrait">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour résumer, en python comme dans les langages typés statiquement, on a bien entendu la bonne propriété que si, par exemple, la classe <code>Spam</code> est itérable, alors la classe <code>Eggs</code> qui hérite de <code>Spam</code> est itérable. </p>
-<p>Mais dans l&#39;autre sens, si <code>Foo</code> et <code>Bar</code> sont itérables, il n&#39;y a pas forcément une superclasse commune qui représente l&#39;ensemble des objets itérables. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="isinstance-sur-st&#233;ro&#239;des"><code>isinstance</code> sur st&#233;ro&#239;des<a class="anchor-link" href="#isinstance-sur-st&#233;ro&#239;des">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>D&#39;un autre côté, c&#39;est très utile d&#39;exposer au programmeur un moyen de vérifier si un objet a un <em>type</em> donné - dans un sens volontairement vague ici.</p>
-<p>On a déjà parlé - en Semaine 4, séquence &quot;les fonctions&quot; - de l&#39;intérêt qu&#39;il peut y avoir à tester le type d&#39;un argument avec <code>isinstance</code> dans une fonction, pour parvenir à faire l&#39;équivalent de la surcharge en C++ (la surcharge en C++ c&#39;est quand vous définissez plusieurs fonctions qui ont le même nom mais des types d&#39;arguments différents). </p>
-<p>C&#39;est pourquoi, quand on a cherché à exposer au programmeur des propriétés comme &quot;cet objet est-il iterable ?&quot;, on a choisi d&#39;étendre <em>isinstance</em> au travers de <a href="http://legacy.python.org/dev/peps/pep-3119/">cette initiative</a>. C&#39;est ainsi qu&#39;on peut faire par exemple&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Iterable</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="nb">isinstance</span><span class="p">(</span><span class="s">&#39;ab&#39;</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="nb">isinstance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">Iterable</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># comme on l&#39;a vu un objet qui a une methode  __iter__()</span>
-<span class="c"># et une next() est considere comme un iterable</span>
-<span class="k">class</span> <span class="nc">Foo</span><span class="p">():</span>
-    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span>
-    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c"># ceci naturellement est bidon</span>
-        <span class="k">return</span> 
-        
-<span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
-<span class="nb">isinstance</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>L&#39;implémentation du module <code>abc</code> donne l&#39;<strong>illusion</strong> que <code>Iterable</code> est un objet dans la hiérarchie de classes, et que tous ces <em>types</em> <code>str</code>, <code>list</code>, et <code>Foo</code> lui sont asujettis, mais ce n&#39;est pas le cas en réalité&nbsp;; comme on l&#39;a vu plus tôt, ces trois types ne sont pas comparables dans la hiérarchie de classes, ils n&#39;ont pas de plus petit (ou plus grand) élément. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Je signale pour finir, à propos de <code>isinstance</code> et du module <code>collections</code>, que la définition du symbole <code>Hashable</code> est à mon avis beaucoup moins convaincante que <code>Iterable</code>&nbsp;; si vous vous souvenez qu&#39;en Semaine 3, Séquence &quot;les dictionnaires&quot;, on avait vu que les clés doivent être globalement immuables. C&#39;est une caractéristique qui est assez difficile à écrire, et en tous cas ceci de mon point de vue ne remplit pas la fonction&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Hashable</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># un tuple qui contient une liste ne convient </span>
-<span class="c"># pas comme clé dans un dictionnaire</span>
-<span class="c"># et pourtant</span>
-<span class="nb">isinstance</span> <span class="p">(([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">Hashable</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="python-et-les-classes-abstraites">python et les classes abstraites<a class="anchor-link" href="#python-et-les-classes-abstraites">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Les points à retenir de ce complément un peu digressif sont&nbsp;:</p>
-<ul>
-<li>en python, on hérite des <strong>implémentations</strong> et pas des <strong>spécifications</strong>&nbsp;; </li>
-<li>et le langage n&#39;est pas taillé pour tirer profit de <strong>classes abstraites</strong> - même si rien ne vous interdit d&#39;écrire, pour des raisons documentaires, une classe qui résume l&#39;interface qui est attendue par tel ou tel système de plugin.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Venant de C++ ou de Java, cela peut prendre du temps d&#39;arriver à se débarrasser de l&#39;espèce de réflexe qui fait qu&#39;on pense d&#39;abord classe abstraite, puis implémentations. </p>
+<p>Vous voyez donc que vis-à-vis des références partagées, ces deux façons de faire mènent à un résultat différent. </p>
 </div>
 </div>
 </div>

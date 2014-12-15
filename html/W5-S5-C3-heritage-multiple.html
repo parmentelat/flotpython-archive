@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>W5-S5-C2-Complement-classes-new-style</title>
+<title>W5-S5-C3-heritage-multiple</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1681,183 +1681,11 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Classes-&quot;new-style&quot;">Classes "new style"<a class="anchor-link" href="#Classes-&quot;new-style&quot;">&#182;</a></h1>
+<h1 id="H&#233;ritage-multiple">H&#233;ritage multiple<a class="anchor-link" href="#H&#233;ritage-multiple">&#182;</a></h1>
 </div>
 </div>
 </div>
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Compl&#233;ment---niveau-interm&#233;diaire">Compl&#233;ment - niveau interm&#233;diaire<a class="anchor-link" href="#Compl&#233;ment---niveau-interm&#233;diaire">&#182;</a></h2>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="La-classe-object">La classe <code>object</code><a class="anchor-link" href="#La-classe-object">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Vous pouvez trouver du code dans lequel les classes héritent de la classe <code>object</code>, comme dans cet exemple tiré du module standard <code>zipfile</code> :</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">modtools</span> <span class="kn">import</span> <span class="n">show_module</span>
-<span class="kn">import</span> <span class="nn">zipfile</span>
-<span class="n">show_module</span><span class="p">(</span><span class="n">zipfile</span><span class="p">,</span> <span class="n">beg</span><span class="o">=</span><span class="s">&#39;class ZipFile(&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&quot;file:&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Ceci nous donne l&#39;occasion de citer le module <code>zipfile</code>, qui permet de lire ou écrire, de manière transparente, des fichiers compressés au format <code>zip</code>. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Les-classes-new-style">Les classes <em>new-style</em><a class="anchor-link" href="#Les-classes-new-style">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Mais le sujet de ce complément est d&#39;expliquer pourquoi la classe <code>ZipFile</code> hérite de la classe <code>object</code>. Voici ce qu&#39;il faut en retenir en version courte.</p>
-<p>Aux alentours de la version 2.2 - 2.3 de python, le langage a été amélioré pour régler quelques problèmes qui existaient dans le système de types. En substance, et pour rester synthétique :</p>
-<ul>
-<li><p>Il n&#39;était pas possible dans les anciennes versions de spécialiser un type prédéfini. Par exemple, si vous vous souvenez de la classe <code>collections.OrderedDict</code>, il s&#39;agit d&#39;une spécialisation du type <em>builtin</em> <code>dict</code>. Il n&#39;aurait pas été possible d&#39;implémenter cette classe avec les anciennes versions du langage.</p>
-</li>
-<li><p>Dans l&#39;ancien modèle mental, les classes et les types jouent un rôle différent. Or dans la logique d&#39;un langage orienté objet, le type d&#39;une instance, c&#39;est sa classe. Nous allons y revenir avec des exemples.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour améliorer le langage, la notion de classe <em>new-style</em> a alors été introduite, et pour
-<strong>ne pas casser la compatibilité ascendante</strong>, il a été convenu que pour qu&#39;une classe soit <strong><em>new-style</em></strong>, il faut qu&#39;elle <strong>hérite</strong> - directement ou indirectement - de la classe <em>builtin</em> <code>object</code>. Les classes qui n&#39;héritent pas d&#39;<code>object</code> sont appelées les <em>classes classiques</em>. </p>
-<p>Nous reviendrons largement sur ces notions de types, de <em>classes classiques</em> et de classes <em>new-style</em> en semaine 7. Il faut retenir pour le moment qu&#39;il y a en python 2 deux types différents de classes, les classes <em>new-style</em> et les <em>classes classiques</em> qui sont incompatibles. Cependant, pour la majorité des usages, le comportement de ces deux types de classes est le même. Les classes <em>new-style</em> sont utiles pour des usages avancés, comme l&#39;héritage multiple sur lequel nous allons revenir dans un prochain complément, et nécessaires pour, par exemple, l&#39;extension des types de bases. </p>
-<p>Vous pouvez alors vous demander quand utiliser les classes <em>new-style</em> et les <em>classe classiques</em>. La réponse est simple&nbsp;: les classes <em>new-style</em> sont supérieures aux <em>classes classiques</em>, les classes <em>new-style</em> doivent donc être utilisées pour tous vos nouveaux programmes. D&#39;ailleurs, en python 3, toutes les classes sont maintenant <em>new-style</em> par défaut (on n&#39;a donc plus besoin d&#39;hériter explicitement d&#39;<code>object</code>) et les <em>classes classiques</em> n&#39;existent plus. Attention cependant si vous travaillez avec du code python 2 existant qui utilise des <em>classes classiques</em>, il est recommandé dans ce cas de continuer à utiliser les classes classiques. En effet, même si pour la majorité des usages, les classes classiques et <em>new-style</em> ont le même comportement, dans certains cas avancés, elles ont un comportement incompatible. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Toutes les classes de la librairie standard python sont des classes <em>new-style</em>, c&#39;est pourquoi la classe <code>ZipFile</code> hérite de <code>object</code>.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Illustration">Illustration<a class="anchor-link" href="#Illustration">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Une instance d&#39;une <em>classe classique</em> a pour type le type <code>instance</code> :</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># une classe classique</span>
-<span class="k">class</span> <span class="nc">OldStyle</span><span class="p">:</span> 
-    <span class="k">pass</span>
-<span class="c"># une instance</span>
-<span class="n">old_style</span> <span class="o">=</span> <span class="n">OldStyle</span><span class="p">()</span>
-<span class="c"># son type est juste &#39;instance&#39;</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">old_style</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Par contre, une instance d&#39;une classe <em>new-style</em> a pour type la classe qu&#39;on a utilisée pour créer l&#39;objet :</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># une classe new-style : elle hérite de &#39;object&#39;</span>
-<span class="k">class</span> <span class="nc">NewStyle</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> 
-    <span class="k">pass</span>
-<span class="c"># une instance</span>
-<span class="n">new_style</span> <span class="o">=</span> <span class="n">NewStyle</span><span class="p">()</span>
-<span class="c"># le type de l&#39;instance est bien la classe</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">new_style</span><span class="p">)</span> <span class="ow">is</span> <span class="n">NewStyle</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1873,6 +1701,525 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Avertissement---toutes-les-classes-concern&#233;es-sont-new-style">Avertissement - toutes les classes concern&#233;es sont <em>new-style</em><a class="anchor-link" href="#Avertissement---toutes-les-classes-concern&#233;es-sont-new-style">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Toutes les classes considérées dans ce complément sont supposées <em>new-style</em>. Pour les classes classiques, le mécanisme d&#39;héritage multiple est plus rudimentaire, vous en trouverez le détail dans la référence au blog de Guido van Rossum (voir dernière section). </p>
+<p>Il est, à nouveau, très fortement <strong>conseillé d&#39;utiliser des classes <em>new-style</em></strong> si vous écrivez du nouveau code, car c&#39;est la seule sorte de classe qui reste disponible en python3.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Rappels">Rappels<a class="anchor-link" href="#Rappels">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>L&#39;héritage en python consiste principalement en l&#39;algorithme de recherche d&#39;un attribut d&#39;une instance; celui-ci regarde :</p>
+<ol>
+<li>d&#39;abord dans l&#39;instance,</li>
+<li>ensuite dans la classe,</li>
+<li>ensuite dans les super-classes.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Le-probl&#232;me">Le probl&#232;me<a class="anchor-link" href="#Le-probl&#232;me">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Les deux premiers points ne posent pas de problème de définition, puisque l&#39;objet lui-même et sa classe sont <strong>définis de manière unique</strong>. </p>
+<p>Par contre, lorsqu&#39;on utilise l&#39;héritage multiple, on peut imaginer trouver l&#39;attribut recherché dans <strong>plusieurs superclasses</strong>. Il est donc important de préciser, dans le cas où plusieurs superclasses possèdent l&#39;attribut recherché, quel est celui qui doit être retenu. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Ordre-sur-les-superclasses">Ordre sur les superclasses<a class="anchor-link" href="#Ordre-sur-les-superclasses">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Le problème revient donc à définir un <strong>ordre</strong> sur l&#39;ensemble des <strong>super-classes</strong>. On parle bien, naturellement, de <strong>toutes</strong> les super-classes, pas seulement celles dont on hérite directement - en termes savants on dirait qu&#39;on s&#39;intéresse à la fermeture transitive de la relation d&#39;héritage ou à l&#39;arbre de recouvrement du graphe d&#39;héritage.</p>
+<p>Après quelques errements (décrits dans la première référence de la dernière section, &quot;Pour en savoir plus&quot;), l&#39;algorithme qui a été choisi pour déterminer l&#39;ordre des superclasses, qui est en service depuis la version 2.3, est connu sous le nom de <strong>linéarisation C3</strong>. Cet algorithme n&#39;est pas propre à python, comme vous pourrez le lire dans les références citées dans la dernière section.</p>
+<p>Nous ne décrirons pas ici l&#39;algorithme lui-même dans le détail&nbsp;; par contre nous allons&nbsp;:</p>
+<ul>
+<li>dans un premier temps résumer <strong>les raisons</strong> qui ont guidé ce choix, en décrivant les bonnes propriétés que l&#39;on attend, ainsi que les <strong>limitations</strong> qui en découlent;</li>
+<li>puis voir l&#39;ordre obtenu sur quelques exemples concrets de hiérarchies de classes.</li>
+</ul>
+<p>Vous trouverez dans les références (voir ci-dessous la dernière section, &quot;Pour en savoir plus&quot;) des liens vers des documents plus techniques si vous souhaitez creuser le sujet.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Les-bonnes-propri&#233;t&#233;s-attendues">Les bonnes propri&#233;t&#233;s attendues<a class="anchor-link" href="#Les-bonnes-propri&#233;t&#233;s-attendues">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Il y a un certain nombre de bonnes propriétés que l&#39;on attend de cet algorithme.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Priorit&#233;-au-sp&#233;cifique">Priorit&#233; au sp&#233;cifique<a class="anchor-link" href="#Priorit&#233;-au-sp&#233;cifique">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lorsqu&#39;une classe A hérite d&#39;une classe B, on s&#39;attend à ce que les méthodes définies sur A, qui sont en principe plus spécifiques, soient utilisées de préférence à celles définies sur B.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Priorit&#233;-&#224;-gauche">Priorit&#233; &#224; gauche<a class="anchor-link" href="#Priorit&#233;-&#224;-gauche">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lorsqu&#39;on utilise l&#39;héritage multiple, on mentionne les classes mères dans un certain ordre, qui n&#39;est pas anodin. Les classes mentionnées en premier sont bien entendu celles desquelles on veut hériter en priorité.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="De-mani&#232;re-un-peu-plus-formelle">De mani&#232;re un peu plus formelle<a class="anchor-link" href="#De-mani&#232;re-un-peu-plus-formelle">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour reformuler les deux points ci-dessus d&#39;une manière un peu plus formelle&nbsp;:</p>
+<ul>
+<li>on se donne un objet <em>o</em> de la classe <em>O</em></li>
+<li>on considère l&#39;ensemble $\cal{S}$ des superclasses de <em>O</em> (qui contient <em>O</em>), </li>
+<li>et on cherche à construire la MRO (Method Resolution Order), c&#39;est-à-dire la liste $\cal{MRO}$ ordonnée des éléments de $\cal{S}$ dans lesquelles chercher les attributs de <em>o</em>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Les deux règles ci-dessus s&#39;écrivent alors comme ceci&nbsp;:</p>
+<ul>
+<li>$\forall A,B \in \cal{S}$,  A hérite de B $\Rightarrow$ A est avant B dans $\cal{MRO}$</li>
+<li>$\forall B,C,D \in \cal{S}$, B hérite de C puis de D $\Rightarrow$ B est avant C qui est avant D dans $\cal{MRO}$</li>
+</ul>
+<p>La formule &quot;B hérite de C puis de D&quot; est à prendre ici au sens large; B peut hériter de plus de deux classes, tout ce qui est demandé est que C  apparaisse avant D dans la liste des classes mères.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Limitations-:-toutes-les-hi&#233;rarchies-ne-peuvent-pas-&#234;tre-trait&#233;es">Limitations : toutes les hi&#233;rarchies ne peuvent pas &#234;tre trait&#233;es<a class="anchor-link" href="#Limitations-:-toutes-les-hi&#233;rarchies-ne-peuvent-pas-&#234;tre-trait&#233;es">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>L&#39;algorithme C3 permet de calculer un ordre sur $\cal{S}$ qui respecte toutes ces contraintes, lorsqu&#39;il en existe un. En effet, dans certains cas on ne peut pas trouver un tel ordre. Nous en verrons un exemple vers la fin de ce document&nbsp;; comme vous le verrez on peut exhiber de tels exemples qui restent relativement simples. Cependant, dans la pratique, il est relativement rare de tomber sur de tels cas pathologiques&nbsp;; et lorsque cela se produit c&#39;est en général le signe d&#39;erreurs de conception plus profondes.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Un-exemple-tr&#232;s-simple">Un exemple tr&#232;s simple<a class="anchor-link" href="#Un-exemple-tr&#232;s-simple">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On se donne la hiérarchie suivante.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">LeftTop</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">attribut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="s">&quot;attribut(LeftTop)&quot;</span>
+    
+<span class="k">class</span> <span class="nc">LeftMiddle</span><span class="p">(</span><span class="n">LeftTop</span><span class="p">):</span> 
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Left</span><span class="p">(</span><span class="n">LeftMiddle</span><span class="p">):</span> 
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Middle</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> 
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Right</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">attribut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="s">&quot;attribut(Right)&quot;</span>
+
+<span class="k">class</span> <span class="nc">Class</span><span class="p">(</span><span class="n">Left</span><span class="p">,</span> <span class="n">Middle</span><span class="p">,</span> <span class="n">Right</span><span class="p">):</span> 
+    <span class="k">pass</span>
+
+<span class="n">instance</span> <span class="o">=</span> <span class="n">Class</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>qui donne en version dessinée, avec les deux points représentant les deux définitions de la méthode <code>attribut</code>:</p>
+<p><img src="media/heritage-multiple01.png" height="40"></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Les deux règles, telles que nous les avons énoncées en premier lieu (priorité à gauche, priorité au spécifique) sont un peu contradictoires ici. En fait, c&#39;est la méthode de <code>LeftTop</code> qui est héritée dans <code>Class</code>, comme on le voit ici&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">print</span> <span class="n">instance</span><span class="o">.</span><span class="n">attribut</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;attribut(LeftTop)&quot;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Exercice</strong> Remarquez qu&#39;ici <code>Right</code> a elle-même un héritage très simple. À titre d&#39;exercice, modifiez le code ci-dessus pour remplacer dans l&#39;héritage de <code>Right</code> la classe <code>object</code> par <code>LeftMiddle</code>; de quelle classe d&#39;après vous est-ce que <code>Class</code> hérite <code>attribut</code> dans cette configuration ?</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Si-cela-ne-vous-convient-pas">Si cela ne vous convient pas<a class="anchor-link" href="#Si-cela-ne-vous-convient-pas">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>C&#39;est une évidence, mais cela va peut-être mieux en le rappelant&nbsp;: si la méthode que vous obtenez &quot;gratuitement&quot; avec l&#39;héritage n&#39;est pas celle qui vous convient, vous avez naturellement toujours la possibilité de la redéfinir, et ainsi d&#39;en <strong>choisir</strong> une autre. Ainsi dans notre exemple si on préfère la méthode implémentée dans <code>Right</code>, on définira plutôt la classe <code>Class</code> comme ceci&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Class</span><span class="p">(</span><span class="n">Left</span><span class="p">,</span> <span class="n">Middle</span><span class="p">,</span> <span class="n">Right</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">attribut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Right</span><span class="o">.</span><span class="n">attribut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+    
+<span class="n">instance2</span> <span class="o">=</span> <span class="n">Class</span><span class="p">()</span>
+<span class="n">instance2</span><span class="o">.</span><span class="n">attribut</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ou encore bien entendu, si dans votre contexte vous devez appelez <strong>les deux</strong> méthodes dont vous pourriez hériter et les combiner, vous pouvez le faire aussi, par exemple comme ceci&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Class</span><span class="p">(</span><span class="n">Left</span><span class="p">,</span> <span class="n">Middle</span><span class="p">,</span> <span class="n">Right</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">attribut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">LeftTop</span><span class="o">.</span><span class="n">attribut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; ** &quot;</span> <span class="o">+</span> <span class="n">Right</span><span class="o">.</span><span class="n">attribut</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span> 
+    
+<span class="n">instance3</span> <span class="o">=</span> <span class="n">Class</span><span class="p">()</span>
+<span class="n">instance3</span><span class="o">.</span><span class="n">attribut</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Un-exemple-un-peu-plus-compliqu&#233;">Un exemple un peu plus compliqu&#233;<a class="anchor-link" href="#Un-exemple-un-peu-plus-compliqu&#233;">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Voici un exemple tiré de la deuxième référence (voir ci-dessous la dernière section, &quot;Pour en savoir plus&quot;).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">O</span> <span class="o">=</span> <span class="nb">object</span>
+<span class="k">class</span> <span class="nc">F</span><span class="p">(</span><span class="n">O</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">E</span><span class="p">(</span><span class="n">O</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">D</span><span class="p">(</span><span class="n">O</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">F</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span> <span class="k">pass</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Cette hiérarchie nous donne, en partant de A, l&#39;ordre suivant</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<pre><code>                           6
+                          ---
+Level 3                  | O |
+                       /  ---  \
+                      /    |    \
+                     /     |     \
+                    /      |      \
+                  ---     ---    ---
+Level 2        2 | E | 4 | D |  | F | 5
+                  ---     ---    ---
+                   \      / \     /
+                    \    /   \   /
+                     \  /     \ /
+                      ---     ---
+Level 1            1 | B |   | C | 3
+                      ---     ---
+                       \       /
+                        \     /
+                          ---
+Level 0                0 | A |
+                          ---
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Que l&#39;on peut calculer, sous l&#39;interpréteur python, avec la méthode <code>mro</code> sur la classe de départ&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">A</span><span class="o">.</span><span class="n">mro</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Un-exemple-qui-ne-peut-pas-&#234;tre-trait&#233;">Un exemple qui ne peut pas &#234;tre trait&#233;<a class="anchor-link" href="#Un-exemple-qui-ne-peut-pas-&#234;tre-trait&#233;">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Voici enfin un exemple de hiérarchie pour laquelle on ne <strong>peut pas trouver d&#39;ordre</strong> qui respecte les bonnes propriétés que l&#39;on a vues tout à l&#39;heure, et qui pour cette raison sera <strong>rejetée par l&#39;interpréteur python</strong>. D&#39;abord en version dessinée</p>
+<p><img src="media/heritage-multiple02.png"></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># en version code</span>
+<span class="k">class</span> <span class="nc">X</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">Y</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">XY</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">YX</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span> <span class="k">pass</span>
+
+<span class="c"># on essaie de créer une sous-classe de XY et YX</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">class</span> <span class="nc">Class</span><span class="p">(</span><span class="n">XY</span><span class="p">,</span><span class="n">YX</span><span class="p">):</span> <span class="k">pass</span> 
+<span class="c"># mais ce n&#39;est pas possible</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;On ne peut pas créer Class&quot;</span>
+    <span class="k">print</span> <span class="n">e</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Pour-en-savoir-plus">Pour en savoir plus<a class="anchor-link" href="#Pour-en-savoir-plus">&#182;</a></h3>
 </div>
 </div>
@@ -1883,8 +2230,11 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Si ce sujet vous intéresse, vous pouvez commencer par <a href="https://www.python.org/download/releases/2.2.3/descrintro">l&#39;article initial de Guido Van Rossum</a> au sujet de la nouvelle implémentation. </p>
-<p>D&#39;autres liens pertinents sont aussi donnés <a href="https://www.python.org/doc/newstyle/">ici dans la documentation python</a>.</p>
+<ol>
+<li>Un <a href="http://python-history.blogspot.fr/2010/06/method-resolution-order.html">blog de Guido Van Rossum</a> qui retrace l&#39;historique des différents essais qui ont été faits avant de converger sur le modèle actuel.</li>
+<li>Un <a href="https://www.python.org/download/releases/2.3/mro/">article technique</a> qui décrit le fonctionnement de l&#39;algorithme de calcul de la MRO, et donne des exemples.</li>
+<li>L&#39;<a href="http://en.wikipedia.org/wiki/C3_linearization">article de wikipedia</a> sur l&#39;algorithme C3.</li>
+</ol>
 </div>
 </div>
 </div>

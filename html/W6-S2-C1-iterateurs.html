@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>W7-S6-C1-Complement-python3-vs-python2</title>
+<title>W6-S2-C1-iterateurs</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1681,7 +1681,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="python3-vs-python2">python3 vs python2<a class="anchor-link" href="#python3-vs-python2">&#182;</a></h1>
+<h1 id="It&#233;rateurs">It&#233;rateurs<a class="anchor-link" href="#It&#233;rateurs">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -1691,7 +1691,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Compl&#233;ment---niveau-interm&#233;diaire">Compl&#233;ment - niveau interm&#233;diaire<a class="anchor-link" href="#Compl&#233;ment---niveau-interm&#233;diaire">&#182;</a></h2>
+<h2 id="Compl&#233;ment---niveau-interm&#233;daire">Compl&#233;ment - niveau interm&#233;daire<a class="anchor-link" href="#Compl&#233;ment---niveau-interm&#233;daire">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -1701,10 +1701,10 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Comme promis en Semaine 1, et maintenant que vous avez une vision d&#39;ensemble de python2, voici un complément consacré à python3. Nous aborderons cette question selon deux angles&nbsp;:</p>
+<p>Dans ce complément nous allons&nbsp;:</p>
 <ul>
-<li>pour commencer nous ferons un résumé des différences entre les deux langages, </li>
-<li>et nous tenterons de faire le point sur la migration entre les deux versions. </li>
+<li>tout d&#39;abord dire quelques mots du module <code>itertools</code> qui fournit sous forme d&#39;itérateurs des utilitaires communs qui peuvent être très utiles&nbsp;;</li>
+<li>puis dans la partie avancée du complément nous allons voir, comme un autre exemple d&#39;itérateurs, comment implémenter notre propre itérateur des permutations d&#39;un ensemble fini.</li>
 </ul>
 </div>
 </div>
@@ -1714,17 +1714,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Dans l&#39;introduction de la Semaine 1, nous avons indiqué avoir choisi de concentrer le cours sur python2 car c&#39;est encore aujourd&#39;hui la version dominante du langage. Vous <a href="https://wiki.python.org/moin/2.x-vs-3.x-survey?action=AttachFile&amp;do=view&amp;target=2013-2014+Python+2.x-3.x+survey.pdf">pourrez lire ici</a>
- les résultats d&#39;<a href="https://wiki.python.org/moin/2.x-vs-3.x-survey">un sondage fait fin 2013/début 2014</a> qui le démontre assez nettement, même si les choses semblent bouger comme on le verra plus bas.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Les-diff&#233;rences">Les diff&#233;rences<a class="anchor-link" href="#Les-diff&#233;rences">&#182;</a></h3>
+<h3 id="Le-module-itertools">Le module <code>itertools</code><a class="anchor-link" href="#Le-module-itertools">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1734,152 +1724,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Pendant toute la maturation de python, au moins depuis l&#39;introduction de python2 en 2000, toutes les évolutions ont été faites avec compatibilité ascendante, et vous pouvez en théorie faire tourner du code 2.1 dans un interprèteur 2.7. Avec cette approche, il n&#39;est naturellement pas possible d&#39;enlever ou de changer les traits du langage qui ont été ratés :)</p>
-<p>La décision de créer python3 a été prise dans le but de corriger ce genre de défauts, avec en contrepartie la nécessité de migrer tout la base de code. Commençons par faire un survol des changements, avant de voir dans la deuxième partie comment se passe cette migration.</p>
-<p>Les différences sont résumées dans <a href="https://docs.python.org/3/whatsnew/3.0.html">cette liste exhaustive</a>, en voici une version abrégée.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="print"><code>print</code><a class="anchor-link" href="#print">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>On a déjà eu l&#39;occasion de l&#39;évoquer, la différence la plus visible entre les deux versions du langage est que</p>
-<ul>
-<li>dans python2 <code>print</code> est une <strong>instruction</strong> et ne prend pas de parenthèse,</li>
-<li>alors qu&#39;en python3 c&#39;est une <strong>fonction</strong> et donc requiert des parenthèses.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Comme on l&#39;avait signalé en Semaine 1 (Séquence &quot;Pourquoi python ?&quot;), vous avez la possibilité d&#39;écrire du code python2 qui utilise <code>print</code> avec la syntaxe de python3 en mentionnant</p>
-<pre><code>from __future__ import print_function
-</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Cela dit, <code>print</code> est une construction très visible pendant la période d&#39;apprentissage, mais dans du vrai code son usage est <strong>beaucoup moins répandu</strong> qu&#39;on ne pourrait le penser, on utilise la plupart du temps des modules de <code>logging</code> ou autres fonctions d&#39;écriture sur fichier, aussi l&#39;évolution de <code>print</code> est en réalité, entre python2 et python3, beaucoup moins cruciale qu&#39;il n&#39;y paraît.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="types-str-et-unicode">types <code>str</code> et <code>unicode</code><a class="anchor-link" href="#types-str-et-unicode">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Le changement le plus radical, dans le sens le changement auquel il est le plus délicat de s&#39;adapter, est sans doute celui qui concerne la représentation des caractères. </p>
-<p>Comme <a href="https://docs.python.org/3/whatsnew/3.0.html#text-vs-data-instead-of-unicode-vs-8-bit">il est expliqué ici</a> Python3 distingue entre les concepts de <em>text</em> et de <em>(binary) data</em>, là où python2 distinguait entre les types <code>str</code> et <code>unicode</code>. La phrase d&#39;introduction vous donne une idée de l&#39;étendue des changements qui ont été faits dans ce domaine&nbsp;:</p>
-<pre style="font-size:small;background-color:'#ccc';">
-Everything you thought you knew about binary data and Unicode has changed.
-</pre>
-
-<p>C&#39;est d&#39;ailleurs une des raisons pour lesquelles dans ce MOOC nous avons choisi de soigneusement laisser de coté le type <code>unicode</code>. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Dans le compléments sur les accents en Semaine 1 (Séquence &quot;Les outils de la distribution standard python&quot;), nous avions expliqué que le modèle mental, selon lequel un caractère est équivalent à un octet est, avec les encodages modernes Unicode, devenu obsolète. C&#39;est en fait ce modèle mental qui était véhiculé par le type <code>str</code> de python2.</p>
-<p>En python3, le type <code>unicode</code> n&#39;existe plus (enfin il serait plus précis de dire que le type <code>str</code> n&#39;existe plus et que le type <code>unicode</code> de python2 s&#39;appelle <code>str</code> en python3); et on a introduit le nouveau type <code>bytes</code> qui permet de manipuler de la donnée binaire pure. Nous vous renvoyons à l&#39;article cité ci-dessus pour davantage de détails sur cet aspect de la migration.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="types-int-et-long">types <code>int</code> et <code>long</code><a class="anchor-link" href="#types-int-et-long">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Le type <code>long</code> a disparu (enfin, un peu comme avec les chaînes, <code>long</code> a remplacé <code>int</code> et on a supprimé le nom <code>long</code>). Cette différence a généralement assez peu d&#39;impact dans un portage.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="classes-new-style">classes <em>new-style</em><a class="anchor-link" href="#classes-new-style">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>On l&#39;a déjà mentionné dans le cours, toutes les classes en python3 sont des <strong>classes <em>new-style</em></strong>, qu&#39;elles héritent ou non de <code>object</code>; on n&#39;a donc plus besoin d&#39;hériter d&#39;object, mais on peut le faire si on récupère du vieux code.</p>
-<p>Là encore l&#39;impact de ce changement lors d&#39;un portage est généralament faible ou nul.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Utilisation-massive-des-it&#233;rateurs">Utilisation massive des it&#233;rateurs<a class="anchor-link" href="#Utilisation-massive-des-it&#233;rateurs">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Un grand nombre de fonctions et méthodes - qu&#39;elles soient <em>builtin</em> ou qu&#39;elle viennent d&#39;une librairie - retournent en python2 des listes. C&#39;est le cas, on l&#39;a vu, pour </p>
-<ul>
-<li><code>range()</code>,</li>
-<li><code>dict.items()</code> ou ses voisines <code>values()</code> et <code>keys()</code>,
-et un très grand nombre d&#39;autres. </li>
-</ul>
-<p>En python3, dans tous les cas où c&#39;était possible, on a préféré <strong>retourner des itérateurs</strong> en lieu et place des listes.</p>
-<p>Ce qui a du même coup permis de supprimer les fonctions et méthodes python2 qui avaient été rajoutées après coup, pour proposer ce mode de fonctionnement sans casser la compatibilité. Pour prendre des exemples, en python2 vous aviez le choix entre </p>
+<p>À ce stade, j&#39;espère que vous savez trouver <a href="https://docs.python.org/2/library/itertools.html">la documentation du module</a> que je vous invite à avoir sous la main.</p>
 </div>
 </div>
 </div>
@@ -1890,7 +1735,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">itertools</span>
 </pre></div>
 
 </div>
@@ -1903,7 +1748,33 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>et</p>
+<p>Comme vous le voyez dans la doc, les fonctionnalités de <code>itertools</code> tombent dans 3 catégories&nbsp;:</p>
+<ul>
+<li>des itérateurs infinis, comme par exemple <code>cycle</code>,</li>
+<li>des itérateurs pour énumérer les combinatoires usuelles en mathématiques, comme les permutations, les combinaisons, le produit cartésien, etc.,</li>
+<li>et enfin des itérateurs correspondants à des traits que nous avons déjà rencontrés, mais implémentés sous forme d&#39;itérateurs.</li>
+</ul>
+<p>À nouveau, toutes ces fonctionnalités sont offertes <strong>sous la forme d&#39;itérateurs</strong>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour détailler un tout petit peu cette dernière famille, signalons&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>chain</code> qui permet de <strong>concaténer</strong> plusieurs itérables sous la forme d&#39;un <strong>itérateur</strong>&nbsp;:</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1914,7 +1785,8 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight"><pre><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
+    <span class="k">print</span> <span class="n">x</span>
 </pre></div>
 
 </div>
@@ -1927,123 +1799,73 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>parce que <code>xrange</code> avait été introduit <strong>après</strong> les itérateurs. En python3, il n&#39;y a plus que <code>range</code>, qui renvoie un itérateur; il n&#39;y a plus non plus, par exemple, <code>dict.itervalues</code> mais seulement <code>dict.values</code> qui renvoie un itérateur. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Variables-locales-&#224;-une-compr&#233;hension">Variables locales &#224; une compr&#233;hension<a class="anchor-link" href="#Variables-locales-&#224;-une-compr&#233;hension">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour des raisons principalement historiques, les variables de boucle <code>fuitent</code> (<em>leak</em> en anglais), c&#39;est-à-dire restaient définies à la sortie d&#39;une boucle, comme on l&#39;a vu en Semaine 3 (séquence &quot;Les boucles <code>for</code> et les itérateurs&quot;);</p>
-<p>Ceci est modifié en python3 pour les compréhensions, comme on le voit sur cet exemple&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<table>
-<tr><th>python2</th><th>python3</th></tr>
-<tr><td>
-<pre style='font-size:small'>
-&gt;&gt;&gt; x = &#39;avant&#39;
-&gt;&gt;&gt;
-&gt;&gt;&gt; [x<em>2 for x in [0]]
-[0]
-&gt;&gt;&gt;
-&gt;&gt;&gt; x
-0
-</pre>
-</td><td>
-<pre style='font-size:small'>
-&gt;&gt;&gt; x = &#39;avant&#39;
-&gt;&gt;&gt;
-&gt;&gt;&gt; [x</em>2 for x in [0]]
-[0]
-&gt;&gt;&gt;
-&gt;&gt;&gt; x
-&#39;avant&#39;
-</pre>
-</td></tr>
-</table>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>On observe bien entendu le même comportement avec les compréhensions de dictionnaires ou d&#39;ensembles. Par contre, on aurait pu penser que le même comportement serait adopté pour les boucles <code>for</code> à part entière, ce n&#39;est <strong>pas le cas malheureusement</strong>&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<table>
-<tr><th>python2</th><th>python3</th></tr>
-<tr><td>
-<pre style='font-size:small'>
-&gt;&gt;&gt; x = &#39;avant&#39;
-&gt;&gt;&gt;
-&gt;&gt;&gt; for x in [0]: pass
-...
-&gt;&gt;&gt; x
-0
-</pre>
-</td><td>
-<pre style='font-size:small'>
-&gt;&gt;&gt; x = &#39;avant&#39;
-&gt;&gt;&gt;
-&gt;&gt;&gt; for x in [0]: pass
-...
-&gt;&gt;&gt; x
-0
-</pre>
-</td></tr>
-</table>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Autres-changements">Autres changements<a class="anchor-link" href="#Autres-changements">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Citons également, en vrac&nbsp;:</p>
 <ul>
-<li>les orthographes ont été homogénéisées, comme le fait qu&#39;un itérateur doit maintenant définir <code>__next__()</code> et non <code>next()</code>; </li>
-<li>on peut utiliser des caractères Unicode dans les noms de variables, donc des accents, des cédilles, on peut appeler une fonction Σ - non pas que cela semble forcément une très bonne idée à première vue mais bon;</li>
-<li>en python3, on a la possibilité d&#39;annoter, au niveau syntaxique les arguments et valeur de retour des fonctions (<a href="http://www.python.org/dev/peps/pep-3107">voir PEP3107</a>); dans l&#39;état actuel il s&#39;agit d&#39;annotations à vocation <strong>surtout documentaire</strong> et il ne semble pas que le langage se dirige vers un contrôle de type plus strict dans ce domaine;</li>
-<li>une nouvelle notation a été introduire pour spécifier la métaclasse;</li>
-<li>et tout un tas d&#39;autres améliorations moins significatives dont vous trouverez <a href="https://docs.python.org/3/whatsnew/3.0.html">une liste plus exhaustive ici</a> (c&#39;est la même référence que celle donnée ci-dessus dans le chapeau sur &quot;Les différences&quot;.</li>
+<li><code>izip</code> qui comme son nom l&#39;indique fait comme <code>zip</code> mais sous la forme d&#39;un itérateur&nbsp;:</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">izip</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
+    <span class="k">print</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>islice</code> qui est une généralisation de <code>xrange</code>. Vous vous souvenez que <code>xrange</code> est similaire à <code>range</code> mais renvoie déjà un itérateur. <code>islice</code> permet de travailler sur une séquence qui n&#39;est pas les premiers entiers&nbsp;:</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">string</span>
+<span class="n">support</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span>
+<span class="k">print</span> <span class="s">&#39;rappel string.ascii_lowercase=&#39;</span><span class="p">,</span> <span class="n">support</span>
+
+<span class="c"># range</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">x</span>
+<span class="c"># islice</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">support</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">x</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p><code>imap</code> et <code>ifilter</code> qui sont les équivalents de <code>filter</code> et <code>map</code>. Ces deux-là sont donc à mettre en rapport avec les fonctions génératrices que l&#39;on a vues dans la séquence précédente, dans le sens que nous allons expliciter.</p>
+<p>Vous vous souvenez que <code>map</code> et <code>filter</code> sont devenus obsolètes avec les compréhensions de liste. Sauf que, les compréhensions retournent, eh bien justement, une liste. Alors qu&#39;en fait, une fois qu&#39;on s&#39;est habitués à penser en termes d&#39;itérateurs, on réalise que c&#39;est souvent dommage que les compréhensions ne retournent pas plutôt un itérateur aussi.</p>
+<p>Dans tous les cas, vous voyez que <code>imap</code> et <code>ifilter</code> sont un peu aux expressions génératrices   ce que <code>map</code> et <code>filter</code> sont aux compréhensions de liste.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -2053,7 +1875,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h5>
+<h2 id="Compl&#233;ment---niveau-avanc&#233;">Compl&#233;ment - niveau avanc&#233;<a class="anchor-link" href="#Compl&#233;ment---niveau-avanc&#233;">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -2063,16 +1885,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Comme vous le voyez, ce que vous avez appris dans ce MOOC est pratiquement utilisable tel quel dans un environnement python3. Si vous devez coder en python3 à partir des connaissances acquises dans ce cours, il vous reste principalement à maîtriser les deux types <code>str</code> et <code>bytes</code>, et les notions d&#39;encodage qui y sont rattachées.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Un-point-sur-la-migration">Un point sur la migration<a class="anchor-link" href="#Un-point-sur-la-migration">&#182;</a></h3>
+<h3 id="Impl&#233;menter-un-it&#233;rateur-de-permutations">Impl&#233;menter un it&#233;rateur de permutations<a class="anchor-link" href="#Impl&#233;menter-un-it&#233;rateur-de-permutations">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -2082,7 +1895,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Les-gros-joueurs">Les gros joueurs<a class="anchor-link" href="#Les-gros-joueurs">&#182;</a></h5>
+<h5 id="C'est-quoi-d&#233;j&#224;-les-permutations-?">C'est quoi d&#233;j&#224; les permutations ?<a class="anchor-link" href="#C'est-quoi-d&#233;j&#224;-les-permutations-?">&#182;</a></h5>
 </div>
 </div>
 </div>
@@ -2092,8 +1905,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Jusqu&#39;à récemment, quand on commençait un nouveau projet, on tombait rapidement sur une librairie majeure dont on avait besoin et qui n&#39;était pas disponible en python3; du coup, même des projets relativement récents ont choisi de cibler python2.</p>
-<p>Il me semble que la situation est en train de changer un peu; en tous cas, les deux gros joueurs que sont <a href="https://www.djangoproject.com"><code>django</code>, <em>the web framework for perfectionists with deadlines</em></a>, et <a href="http://www.numpy.org"><code>NumPy</code> - <em>fundamental package for scientific computing with Python </em></a>, sont à présent disponibles en python3&nbsp;:</p>
+<p>En guise de rappel, l&#39;ensemble des permutations d&#39;un ensemble fini correspond à toutes les façons d&#39;ordonner ses éléments&nbsp;; si l&#39;ensemble est de cardinal $n$, il possède $n!$ permutations&nbsp;: on a $n$ façons de choisir le premier élément, $n-1$ façons de choisir le second, etc.</p>
 </div>
 </div>
 </div>
@@ -2102,9 +1914,185 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Un itérateur sur les permutations est disponible au travers du module standard <code>itertools</code>. Cependant il nous a semblé intéressant de vous montrer comment on pourrait écrire nous-mêmes cette fonctionnalité, de manière relativement simple.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour illustrer le concept, voici à quoi ressemblent les 6 permutations d&#39;un ensemble à trois éléments&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">permutations</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="nb">set</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">set</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">p</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Une-impl&#233;mentation">Une impl&#233;mentation<a class="anchor-link" href="#Une-impl&#233;mentation">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Voici une implémentation possible pour un itérateur de permutations&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Permutations</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Un itérateur qui énumère les permutations de n</span>
+<span class="sd">    sous la forme d&#39;une liste d&#39;indices commençant à 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="c"># le constructeur bien sûr ne fait (presque) rien</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="c"># au fur et à mesure des itérations</span>
+        <span class="c"># le compteur va aller de 0 à n-1</span>
+        <span class="c"># puis retour à 0 et comme ça en boucle sans fin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c"># on se contente d&#39;allouer un iterateur de rang n-1</span>
+        <span class="c"># si bien qu&#39;une fois qu&#39;on a fini de construire</span>
+        <span class="c"># l&#39;objet d&#39;ordre n on a n objets Permutations en tout</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subiterator</span> <span class="o">=</span> <span class="n">Permutations</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c"># pour satisfaire le protocole de l&#39;itérable</span>
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="c"># c&#39;est ici bien sûr que se fait tout le travail</span>
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="c"># pour n == 1</span>
+        <span class="c"># le travail est très simple</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c"># on doit renvoyer une fois la liste [0]</span>
+            <span class="c"># car les indices commencent à 0</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c"># et ensuite c&#39;est terminé</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+        <span class="c"># pour n &gt;= 2</span>
+        <span class="c"># lorsque counter est nul,</span>
+        <span class="c"># on traite la permutation d&#39;ordre n-1 suivante</span>
+        <span class="c"># si next() lève StopIteration on n&#39;a qu&#39;à laisser passer</span>
+        <span class="c"># car en effet c&#39;est qu&#39;on a terminé</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subsequence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subiterator</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="c">#</span>
+        <span class="c"># on insère alors n-1 (car les indices commencent à 0)</span>
+        <span class="c"># successivement dans la sous-sequence</span>
+        <span class="c">#</span>
+        <span class="c"># naivement on écrirait</span>
+        <span class="c"># result = self.subsequence[0:self.counter] \</span>
+        <span class="c">#    + [self.n - 1] \</span>
+        <span class="c">#    + self.subsequence[self.counter:self.n-1]</span>
+        <span class="c"># mais c&#39;est mettre le nombre le plus élevé en premier</span>
+        <span class="c"># et donc à itérer les permutations dans le mauvais ordre,</span>
+        <span class="c"># en commençant par la fin</span>
+        <span class="c">#</span>
+        <span class="c"># donc on fait plutôt une symétrie</span>
+        <span class="c"># pour insérer en commençant par la fin</span>
+        <span class="n">cutter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsequence</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">cutter</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> \
+                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsequence</span><span class="p">[</span><span class="n">cutter</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c"># </span>
+        <span class="c"># on n&#39;oublie pas de maintenir le compteur et de</span>
+        <span class="c"># le remettre à zéro tous les n tours</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="c"># la longeur de cet itérateur est connue</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">math</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ce qu&#39;on a essayé d&#39;expliquer dans les commentaires, c&#39;est qu&#39;on procède en fin de compte par récurrence. Un objet <code>Permutations</code> de rang <code>n</code> possède un sous-itérateur de rang <code>n-1</code> qu&#39;on crée dans le constructeur. Ensuite l&#39;objet de rang <code>n</code> va faire successivement (c&#39;est-à-dire à chaque appel de <code>next()</code>)&nbsp;:</p>
 <ul>
-<li><code>django</code> depuis la version 1.5</li>
-<li><code>numpy</code> depuis 1.5.0 et scipy depuis 0.9.0</li>
+<li>appel <em>0</em> : <ul>
+<li>demander à son sous-itérateur une permutation de rang <code>n-1</code> (en lui envoyant <code>next</code>),</li>
+<li>la stocker dans l&#39;objet de rang <code>n</code>, ce sera utilisé par les <em>n</em> premier appels,</li>
+<li>et construire une liste de taille <code>n</code> en insérant <code>n-1</code> à la fin de la séquence de taille <code>n-1</code>,</li>
+</ul>
+</li>
+<li>appel <em>1</em> : <ul>
+<li>insérer <code>n-1</code> dans la même séquence de rang <code>n-1</code> mais cette fois 1 cran avant la fin,</li>
+</ul>
+</li>
+<li>...</li>
+<li>appel <em>n-1</em> :<ul>
+<li>insérer <code>n-1</code> au début de la séquence de rang <code>n-1</code>,</li>
+</ul>
+</li>
+<li>appel <em>n</em> :<ul>
+<li>refaire <code>next()</code> sur le sous-itérateur pour traiter une nouvelle sous-séquence,</li>
+<li>la stocker dans l&#39;objet de rang <code>n</code>, comme à l&#39;appel <em>0</em>, pour ce bloc de n appels,</li>
+<li>et construire la permutation en insérant <em>n-1</em> à la fin, comme à l&#39;appel 0,</li>
+</ul>
+</li>
+<li>...</li>
 </ul>
 </div>
 </div>
@@ -2114,7 +2102,9 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Cela dit, la date de <em>End-Of-Life</em> pour python2.7 qui représente la date de fin de maintenance qui avait été initialement fixée à 2015 lors de la sortie de python3, a été dans un <a href="https://hg.python.org/peps/rev/76d43e52d978">update du PEP373 en date d&#39;Avril 2014</a> retardée de cinq ans  pour courir jusqu&#39;en 2020. </p>
+<p>On voit donc le caractère cyclique d&#39;ordre <em>n</em> qui est matérialisé par <code>counter</code>, que l&#39;on incrémente à chaque boucle mais modulo <em>n</em> - notez d&#39;ailleurs que pour ce genre de comportement on dispose aussi de <code>itertools.cycle</code> comme on le verra dans une deuxième version, mais pour l&#39;instant j&#39;ai préféré ne pas l&#39;utiliser pour ne pas tout embrouiller ;) </p>
+<p>La terminaison se gère très simplement, car une fois que l&#39;on a traité toutes les séquences d&#39;ordre <em>n-1</em> eh bien on a fini, on n&#39;a même pas besoin de lever StopIteration explicitement, sauf bien sûr dans le cas <em>n=1</em>.</p>
+<p>Le seul point un peu délicat, si on veut avoir les permutations dans le &quot;bon&quot; ordre, consiste à commencer à insérer <code>n-1</code> par la droite (la fin de la sous-séquence).</p>
 </div>
 </div>
 </div>
@@ -2123,7 +2113,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Outils-et-strat&#233;gies">Outils et strat&#233;gies<a class="anchor-link" href="#Outils-et-strat&#233;gies">&#182;</a></h5>
+<h5 id="Discussion">Discussion<a class="anchor-link" href="#Discussion">&#182;</a></h5>
 </div>
 </div>
 </div>
@@ -2133,9 +2123,57 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Au départ, l&#39;idée étant de nettoyer le langage, on a incité les gens à <strong>basculer</strong> d&#39;une version à l&#39;autre; il existe pour cela un outil qui s&#39;appelle <strong><code>2to3</code></strong> - qui fait partie de la distribution standard - et qui permet de <strong>traduire</strong> un code python2 en python3 en le <strong>modifiant</strong>. <code>2to3</code> ne sait pas forcément résoudre tous les problèmes mais permet d&#39;en évacuer la plus grosse partie.</p>
-<p>Le souci toutefois avec cette approche est qu&#39;une fois qu&#39;on a fait la traduction, on se retrouve avec <strong>deux codes</strong>. Pour tous les projets qui sont <strong>réutilisables</strong> - qui offrent des librairies, soit parce que c&#39;est l&#39;objectif principal du projet, soit comme <em>by-product</em> - cette approche signifie de <strong>maintenir</strong> ces deux codes, ce qui est le plus souvent inacceptable.</p>
-<p>Aussi, ces derniers temps, il semble qu&#39;on se dirige plus vers une approche de <strong>code unique</strong>, au travers de librairies comme <a href="https://pypi.python.org/pypi/six"><code>six</code></a> - disponible via <code>pypi</code>. </p>
+<p>Il existe certainement des tas d&#39;autres façons de faire bien entendu. Le point important ici, et qui donne toute sa puissance à la notion d&#39;itérateur, c&#39;est <strong>qu&#39;à aucun moment on ne construit</strong> une liste ou une séquence quelconque de<strong> $n!$ termes</strong>. </p>
+<p>C&#39;est une erreur fréquente chez les débutants que de calculer une telle liste dans le constructeur, mais procéder de cette façon c&#39;est aller exactement à l&#39;opposé de ce pourquoi les itérateurs ont été conçus&nbsp;; au contraire, on veut éviter à tout prix le coût d&#39;une telle construction.</p>
+<p>On peut le voir sur un code qui n&#39;utiliserait que les 20 premières valeurs de l&#39;itérateur, vous constatez que ce code est immédiat&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">show_first_items</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">nb_items</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    montre les &lt;nb_items&gt; premiers items de iterable</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">print</span> <span class="s">&quot;Il y a {} items dans l&#39;iterable&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">iterable</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+        <span class="k">print</span> <span class="n">item</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">nb_items</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&#39;....&#39;</span>
+            <span class="k">break</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">show_first_items</span><span class="p">(</span><span class="n">Permutations</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ce tableau vous montre par ailleurs sous un autre angle comment fonctionne l&#39;algorithme, si vous observez le <code>11</code> qui balaie en diagonale les 12 premières lignes, puis les 12 suivantes, etc..</p>
 </div>
 </div>
 </div>
@@ -2144,7 +2182,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pour-en-savoir-plus">Pour en savoir plus<a class="anchor-link" href="#Pour-en-savoir-plus">&#182;</a></h3>
+<h5 id="Ultimes-am&#233;liorations">Ultimes am&#233;liorations<a class="anchor-link" href="#Ultimes-am&#233;liorations">&#182;</a></h5>
 </div>
 </div>
 </div>
@@ -2154,14 +2192,94 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Vous pouvez consulter également&nbsp;:</p>
+<p>Dernières remarques, sur des améliorations possibles - mais tout à fait optionnelles&nbsp;:</p>
 <ul>
-<li><a href="https://wiki.python.org/moin/Python2orPython3">Should I use Python 2 or Python 3 for my development activity?</a> dans le wiki python&nbsp;;</li>
-<li>Le <a href="https://www.youtube.com/watch?v=EBRMq2Ioxsc">sentiment du BDFL Guido Van Rossum</a> dans son talk à PyCon 2014, aux environs de 09:00&nbsp;;</li>
-<li>Un <a href="https://docs.python.org/3/howto/pyporting.html">guide de portage de python2 à python3</a>.</li>
+<li>le lecteur attentif aura remarqué qu&#39;au lieu d&#39;un entier <code>counter</code> on aurait pu profitablement utiliser une instance de <code>itertools.cycle</code>, ce qui aurait eu l&#39;avantage d&#39;être plus clair sur le propos de ce compteur;</li>
+<li>aussi dans le même mouvement, au lieu de se livrer à la gymnastique qui calcule <code>cutter</code> à partir de <code>counter</code>, on pourrait dès le départ créer dans le cycle les bonnes valeurs en commençant à <code>n-1</code>.</li>
 </ul>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>C&#39;est ce qu&#39;on a fait dans cette deuxième version; après avoir enlevé la loghorrée de commentaires ça redevient presque lisible ;)</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="k">class</span> <span class="nc">Permutations2</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Un itérateur qui énumère les permutations de n</span>
+<span class="sd">    sous la forme d&#39;une liste d&#39;indices commençant à 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="c"># on commence à insérer à la fin </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cycle</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subiterator</span> <span class="o">=</span> <span class="n">Permutations</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c"># pour savoir quand terminer le cas n==1</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cutter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cycle</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+        <span class="c"># quand n==1 on a toujours la même valeur 0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">done</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+        <span class="c"># au début de chaque séquence de n appels</span>
+        <span class="c"># il faut appeler une nouvelle sous-séquence</span>
+        <span class="k">if</span> <span class="n">cutter</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subsequence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subiterator</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="c"># dans laquelle on insére n-1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsequence</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">cutter</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> \
+                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsequence</span><span class="p">[</span><span class="n">cutter</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c"># la longeur de cet itérateur est connue</span>
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">math</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">show_first_items</span><span class="p">(</span><span class="n">Permutations2</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
     </div>
   </div>

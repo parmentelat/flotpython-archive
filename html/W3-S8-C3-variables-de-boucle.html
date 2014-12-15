@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>W5-S6-C1-Complement-surcharge-operateurs-1</title>
+<title>W3-S8-C3-variables-de-boucle</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1681,7 +1681,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Surcharge-d'op&#233;rateurs-(1)">Surcharge d'op&#233;rateurs (1)<a class="anchor-link" href="#Surcharge-d'op&#233;rateurs-(1)">&#182;</a></h1>
+<h1 id="Visibilit&#233;-des-variables-de-boucle">Visibilit&#233; des variables de boucle<a class="anchor-link" href="#Visibilit&#233;-des-variables-de-boucle">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -1691,7 +1691,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Compl&#233;ment---niveau-interm&#233;diaire">Compl&#233;ment - niveau interm&#233;diaire<a class="anchor-link" href="#Compl&#233;ment---niveau-interm&#233;diaire">&#182;</a></h2>
+<h2 id="Compl&#233;ment---niveau-basique">Compl&#233;ment - niveau basique<a class="anchor-link" href="#Compl&#233;ment---niveau-basique">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -1701,623 +1701,416 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ce complément vise à illustrer certaines des possibilités de surcharge d&#39;opérateurs, ou plus généralement les mécanismes disponibles pour étendre le langage et donner un sens à des fragments de code comme&nbsp;:</p>
+<h3 id="Une-astuce">Une astuce<a class="anchor-link" href="#Une-astuce">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Dans ce complément, nous allons beaucoup jouer avec le fait qu&#39;une variable soit définie ou non. Pour nous simplifier la vie, et surtout rendre les cellules plus indépendantes les unes des autres si vous devez les rejouer, nous allons utiliser la formule un peu magique suivante&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># on détruit la variable i si elle existe</span>
+<span class="k">if</span> <span class="s">&#39;i&#39;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">():</span> 
+    <span class="k">del</span> <span class="n">i</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>qui repose d&#39;une part sur l&#39;instruction <code>del</code> que nous avons vue un peu plus tôt cette semaine, et sur la fonction <em>builtin</em> <code>locals</code> que nous verrons plus tard; cette formule a l&#39;avantage qu&#39;on peut l&#39;exécuter dans n&#39;importe quel contexte, que <code>i</code> soit définie ou non.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Une-variable-de-boucle-reste-d&#233;finie-au-del&#224;-de-la-boucle">Une variable de boucle reste d&#233;finie au-del&#224; de la boucle<a class="anchor-link" href="#Une-variable-de-boucle-reste-d&#233;finie-au-del&#224;-de-la-boucle">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Cela peut paraître évident, mais explicitons-le tout de même&nbsp;: une variable de boucle est définie (assignée) dans la boucle et <strong>reste <em>visible</em></strong> une fois la boucle terminée. Le plus simple est de le voir sur un exemple&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># La variable &#39;i&#39; n&#39;est pas définie</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">i</span>
+<span class="k">except</span> <span class="ne">NameError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">e</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># on fait une boucle sur i</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+    <span class="k">pass</span>
+
+<span class="c"># maintenant i est définie</span>
+<span class="n">i</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On dit que la variable <em>fuite</em> (en anglais &quot;<em>leak</em>&quot;), dans ce sens qu&#39;elle pollue l&#39;environnement dans lequel est lancée la boucle.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On peut être tenté de tirer profit de ce trait, en lisant la valeur de la variable après la boucle;  l&#39;objet de ce complément est de vous inciter à la prudence, et d&#39;attirer votre attention sur certains points possiblement source d&#39;erreurs.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Attention-aux-boucles-vides">Attention aux boucles vides<a class="anchor-link" href="#Attention-aux-boucles-vides">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Tout d&#39;abord, il faut faire attention à ne pas écrire du code qui dépende de ce trait <strong>si la boucle peut être vide</strong>. En effet, si la boucle ne s&#39;exécute pas du tout, eh bien la variable n&#39;est pas affectée. Là aussi c&#39;est évident, mais ça peut l&#39;être moins quand on lit du code réel, comme par exemple&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># on détruit la variable i si elle existe</span>
+<span class="k">if</span> <span class="s">&#39;i&#39;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">():</span> 
+    <span class="k">del</span> <span class="n">i</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">length</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ça a l&#39;air correct, sauf que&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">length</span><span class="p">([])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ce résultat mérite une explication. Nous avons déjà vu dans un complément précédent en semaine 4 l&#39;exception <code>UnboundLocalError</code> qui se produit lorsque l&#39;on a dans une fonction une variable locale et une variable globale de même nom. Alors, pourquoi pour l&#39;appel <code>length([1, 2, 3])</code> il n&#39;y a pas d&#39;exception alors que pour l&#39;appel &#39;length([])&#39; il y a une exception. Cela est lié à la manière dont python détermine qu&#39;une variable est locale. </p>
+<p>Une variable est locale dans une fonction si elle est assignée dans la fonction explicitement (avec une opération d&#39;affectation) ou implicitement (par exemple avec une boucle for comme ici), nous reviendrons sur ce point dans la dernière vidéo de cette semaine. Mais pour les fonctions, pour une raison d&#39;efficacité, une variable est définie comme locale à la phase de pré-compilation, c&#39;est-à-dire avant l&#39;exécution du code. Par conséquent, le pré-compilateur ne peut pas savoir quel sera l&#39;argument passé à la fonction, il peut simplement savoir qu&#39;il y a une boucle <code>for</code> utilisant la variable <code>i</code>, donc, pour lui, <code>i</code> est locale pour toute la fonction. </p>
+<p>Lors du premier appel, on passe une liste à la fonction, liste qui est parcourue par la boucle <code>for</code>. En sortie de boucle, on a bien une variale locale <code>i</code> qui vaut 3. Lors du deuxième appel, on passe une liste vide à la fonction, la boucle <code>for</code> ne peut rien parcourir, donc elle retourne immédiatement. Lorsque l&#39;on arrive à la ligne <code>return i + 1</code> de la fonction, la variable <code>i</code> n&#39;a pas de valeur (on doit donc chercher <code>i</code> dans le module), mais <code>i</code> a été définie par le pré-compilateur comme étant locale, on a donc dans la même fonction une variable <code>i</code> locale et une référence à une variable <code>i</code> globale, on a donc l&#39;exception <code>UnboundLocalError</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Comment-faire-alors-?">Comment faire alors ?<a class="anchor-link" href="#Comment-faire-alors-?">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Utiliser-une-autre-variable">Utiliser une autre variable<a class="anchor-link" href="#Utiliser-une-autre-variable">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>La première voie consiste à déclarer une variable externe à la boucle et à l&#39;affecter à l&#39;intérieur de la boucle, c&#39;est-à-dire&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># plutôt que de faire ceci</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">item</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">break</span>
+<span class="k">print</span> <span class="s">&#39;trouvé solution&#39;</span><span class="p">,</span> <span class="n">item</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># il vaut mieux faire ceci</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">item</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">item</span> <span class="o">-</span> <span class="mi">3</span> <span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">solution</span> <span class="o">=</span> <span class="n">item</span>
+        <span class="k">break</span>
+
+<span class="k">print</span> <span class="s">&#39;trouvé solution&#39;</span><span class="p">,</span><span class="n">solution</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Au-minimum-initialiser-la-variable">Au minimum initialiser la variable<a class="anchor-link" href="#Au-minimum-initialiser-la-variable">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Au minimum, si vous utilisez la variable de boucle après la boucle, il est vivement conseillé de l&#39;<strong>initialiser</strong> explicitement <strong>avant</strong> la boucle, pour vous prémunir contre les boucles vides, comme ceci&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">length</span><span class="p">([])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Les-compr&#233;hensions">Les compr&#233;hensions<a class="anchor-link" href="#Les-compr&#233;hensions">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Un phénomène analogue se produit avec les compréhensions&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># on détruit la variable i si elle existe</span>
+<span class="k">if</span> <span class="s">&#39;i&#39;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">():</span> 
+    <span class="k">del</span> <span class="n">i</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># en python2 les variables de compréhension fuitent</span>
+<span class="c"># mais ce n&#39;est plus le cas en python3</span>
+<span class="p">[</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+
+<span class="n">i</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="python3">python3<a class="anchor-link" href="#python3">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour conclure, notez bien que ce comportement a été modifié en python3 de la façon suivante&nbsp;:</p>
 <ul>
-<li><code>objet1 + objet2</code></li>
-<li><code>item in objet</code></li>
-<li><code>objet[key]</code></li>
-<li><code>objet.key</code></li>
-<li><code>for i in objet:</code></li>
-<li><code>if objet:</code></li>
-<li><code>objet(arg1, arg2)</code>  (et non pas <code>classe(arg1,arg2)</code>)</li>
-<li>etc..</li>
+<li>les variables de <strong>compréhension</strong> ne <strong>fuitent plus</strong>, c&#39;est un changement de sémantique&nbsp;;</li>
+<li>mais les variables de boucle conservent la même sémantique.</li>
 </ul>
-<p>que jusqu&#39;ici on n&#39;a expliqué que pour des objets de type prédéfini - sauf pour la boucle <code>for</code>, rappelez-vous de la méthode <code>__iter__()</code> que l&#39;on a vue à propos des itérables en fin de Semaine 3.</p>
+<p>Sans doute une raison supplémentaire pour éviter autant que possible de rester indépendant de cette sémantique.</p>
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Le mécanisme général pour cela consiste à définir des <strong>méthodes spéciales</strong>, avec un nom en <code>__nom__</code>. Comme annoncé dans la vidéo, il existe un total de près de 80 méthodes dans ce système de surcharges, aussi il n&#39;est pas question ici d&#39;être exhaustif. Vous trouverez <a href="https://docs.python.org/2/reference/datamodel.html#specialnames">dans ce document une liste complète de ces possibilités</a>.</p>
-<p>Il nous faut également signaler que les mécanismes mis en jeu ici sont <strong>de difficultés assez variables</strong>. Dans le cas le plus simple il suffit de définir une méthode sur la classe pour obtenir le résultat (par exemple, définir <code>__call__</code> pour rendre un objet callable). Mais parfois on parle d&#39;un ensemble de méthodes qui doivent être cohérentes, voyez par exemple les <a href="https://docs.python.org/2/reference/datamodel.html#invoking-descriptors">descriptors</a> qui mettent en jeu les méthodes <code>__get__</code>, <code>__set__</code> et <code>__delete__</code>, et qui sont particulièrement cryptiques. </p>
-<p>Nous vous conseillons de commencer par des choses simples, et surtout de n&#39;utiliser ces techniques que lorsqu&#39;elles apportent vraiment quelque chose. Le constructeur et l&#39;affichage sont pratiquement toujours définis, mais pour tout le reste il convient d&#39;utiliser ces traits avec le plus grand discernement. Dans tous les cas écrivez votre code avec la documentation sous les yeux, c&#39;est plus prudent :)</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Nous avons essayé de présenter cette sélection par difficulté croissante. 
-Par ailleurs, et pour alléger la présentation, cet exposé a été coupé en deux notebooks différents.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Rappels">Rappels<a class="anchor-link" href="#Rappels">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour rappel, on a vu dans la vidéo&nbsp;:</p>
-<ul>
-<li>la méthode <code>__init__</code> pour définir un <strong>constructeur</strong>, </li>
-<li>et la méthode <code>__str__</code> pour définir comment une instance s&#39;imprime avec <code>print</code>.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Affichage-:-__repr__-et-__str__">Affichage : <code>__repr__</code> et <code>__str__</code><a class="anchor-link" href="#Affichage-:-__repr__-et-__str__">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Nous commençons par signaler la méthode <code>__repr__</code> qui est assez voisine de <code>__str__</code>, et qui donc doit retourner un objet de type chaîne de caractères, sauf que&nbsp;:</p>
-<ul>
-<li><code>__str__</code> est utilisée par <code>print</code> (affichage orienté utilisateur du programme; priorité au confort visuel),</li>
-<li>alors que <code>__repr__</code> est utilisée par la fonction <code>repr()</code> (affichage orienté programmeur, aussi peu ambigu que possible);</li>
-<li>il faut savoir que <code>__repr__</code> est utilisée <strong>aussi</strong> par <code>print</code> si <code>__str__</code> n&#39;est pas définie.</li>
-</ul>
-<p>Pour cette seconde raison, on trouve dans la nature <code>__repr__</code> plutôt plus souvent que <code>__str__</code>; voyez <a href="https://docs.python.org/2/reference/datamodel.html#object.__repr__">ce lien</a> pour davantage de détails. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Quand-est-utilis&#233;e-repr()">Quand est utilis&#233;e <code>repr()</code><a class="anchor-link" href="#Quand-est-utilis&#233;e-repr()">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><code>repr()</code> est utilisée massivement dans les informations de debugging comme les traces de pile lorsqu&#39;une exception est levée. Elle est aussi utilisée lorsque vous affichez un objet sans passer par <code>print</code>, c&#39;est-à-dire par exemple&nbsp;: </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span> <span class="k">pass</span>
-<span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
-<span class="c"># lorsque vous affichez un objet comme ceci</span>
-<span class="n">foo</span>
-<span class="c"># en fait vous utilisez repr()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Deux-exemples">Deux exemples<a class="anchor-link" href="#Deux-exemples">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Voici deux exemples simples de classes; dans le premier on n&#39;a défini que <code>__repr__</code>, dans le second on a redéfini les deux méthodes&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># une classe qui ne définit que __repr__</span>
-<span class="k">class</span> <span class="nc">Point</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="s">&quot;première version de Point - on ne définit que __repr__&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;Point({x},{y})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
-    
-<span class="n">point</span> <span class="o">=</span> <span class="n">Point</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="s">&quot;avec print&quot;</span><span class="p">,</span> <span class="n">point</span>
-
-<span class="c"># si vous affichez un objet sans passer par print</span>
-<span class="c"># vous utilisez repr()</span>
-<span class="n">point</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># la même chose mais où on redéfinit __str__ et __repr__</span>
-<span class="k">class</span> <span class="nc">Point2</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="s">&quot;seconde version de Point - on définit __repr__ et __str__&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;Point2({x},{y})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;({x},{y})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
-    
-<span class="n">point2</span> <span class="o">=</span> <span class="n">Point2</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="s">&quot;avec print&quot;</span><span class="p">,</span> <span class="n">point2</span>
-
-<span class="c"># format utilise aussi __str__</span>
-<span class="k">print</span> <span class="s">&quot;avec format {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">point2</span><span class="p">)</span>
-
-<span class="c"># si vous affichez un objet sans passer par print</span>
-<span class="c"># vous utilisez repr()</span>
-<span class="n">point2</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="__nonzero__"><code>__nonzero__</code><a class="anchor-link" href="#__nonzero__">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Vous vous souvenez que la condition d&#39;un test dans un <code>if</code> peut ne pas retourner un booléen (nous avons vu cela en Semaine 2, Séquence &quot;Introduction aux tests if/else&quot;). Nous avions noté que pour les types prédéfinis, sont considérés comme <em>faux</em> <code>None</code>, la liste vide, un tuple vide, etc...</p>
-<p>Avec <code>__nonzero__</code> on peut redéfinir le comportement des objets d&#39;une classe vis-à-vis des conditions - ou si l&#39;on préfère, quel doit être le résultat de <code>bool(instance)</code>.</p>
-<p><strong>Attention</strong> pour éviter les comportements imprévus, comme on est en train de redéfinir le comportement des conditions, il <strong>faut</strong> renvoyer un <strong>booléen</strong> (ou à la rigueur 0 ou 1), on ne peut pas dans ce contexte retourner d&#39;autres types d&#39;objet.</p>
-<p>Nous allons <strong>illustrer</strong> cette méthode dans un petit moment avec une nouvelle implémentation de la classe <strong><code>Matrix2</code></strong>.</p>
-<p>Remarquez enfin qu&#39;en l&#39;absence de méthode <code>__nonzero__</code>, on cherche aussi la méthode <code>__len__</code> pour déterminer le résultat du test; une instance de longueur nulle est alors considéré comme <code>False</code>, en cohérence avec ce qui se passe avec les types <em>builtin</em> <code>list</code>, <code>dict</code>, <code>tuple</code>, etc.</p>
-<p>Ce genre de <em>protocole</em>, qui cherche d&#39;abord une méthode, puis une autre en cas d&#39;absence de la première, est relativement fréquent dans la mécanique de surcharge des opérateurs; c&#39;est entre autres pourquoi la documentation est indispensable lorsqu&#39;on surcharge les opérateurs.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="__add__-et-apparent&#233;s-(__mul__,-__sub__,-__div__,-__and__,-etc..)"><code>__add__</code> et apparent&#233;s (<code>__mul__</code>, <code>__sub__</code>, <code>__div__</code>, <code>__and__</code>, etc..)<a class="anchor-link" href="#__add__-et-apparent&#233;s-(__mul__,-__sub__,-__div__,-__and__,-etc..)">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>On peut également redéfinir les opérateurs arithmétiques et logiques. Dans l&#39;exemple qui suit nous allons l&#39;illustrer sur l&#39;addition de matrices. On rappelle pour mémoire que&nbsp;:</p>
-<p>$\left( \begin{array}{cc} a_{11} &amp; a_{12} \\
-a_{21} &amp; a_{22}\end{array} \right) 
-+
-\left( \begin{array}{cc} b_{11} &amp; b_{12} \\
-b_{21} &amp; b_{22}\end{array} \right) 
-= 
-\left( \begin{array}{cc} a_{11}+b_{11} &amp; a_{12}+b_{12} \\
-a_{21}+b_{21} &amp; a_{22}+b_{22}\end{array} \right)$</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Une-nouvelle-version-de-la-classe-Matrix2">Une nouvelle version de la classe <code>Matrix2</code><a class="anchor-link" href="#Une-nouvelle-version-de-la-classe-Matrix2">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Voici (encore) une nouvelle implémentation de la classe de matrices 2x2, qui illustre cette fois&nbsp;:</p>
-<ul>
-<li>la possibilité d&#39;ajouter deux matrices;</li>
-<li>la possibilité de faire un test sur une matrice - le test sera faux si la matrice a tous ses coefficients nuls;</li>
-<li><p>et, bien que ce ne soit pas le sujet immédiat, cette implémentation illustre aussi la possibilité de construire la matrice à partir&nbsp;:</p>
-<ul>
-<li>soit des 4 coefficients, comme par exemple&nbsp;: <code>Matrix2(a, b, c, d)</code></li>
-<li>soit d&#39;une séquence , comme par exemple&nbsp;: <code>Matrix2(range(4))</code></li>
-</ul>
-<p>Cette dernière possibilité va nous permettre de simplifier le code de l&#39;addition, comme on va le voir.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># notre classe Matrix2 avec encore une autre implémentation</span>
-<span class="k">class</span> <span class="nc">Matrix2</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        le constructeur accepte </span>
-<span class="sd">        (*) soit les 4 coefficients individuellement</span>
-<span class="sd">        (*) soit une liste - ou + generalement une sequence - des memes</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># on veut pouvoir créer l&#39;objet à partir des 4 coefficients</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
-        <span class="c"># ou bien d&#39;une séquence de 4 coefficients</span>
-        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">&quot;l&#39;affichage&quot;</span>
-        <span class="k">return</span> <span class="s">&quot;[&quot;</span> <span class="o">+</span> <span class="s">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">])</span> <span class="o">+</span> <span class="s">&quot;]&quot;</span>
-
-    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        l&#39;addition de deux matrices retourne un nouvel objet</span>
-<span class="sd">        la possibilite de creer une matrice a partir d&#39;une liste rend ce code </span>
-<span class="sd">        beaucoup plus facile a ecrire</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Matrix2</span> <span class="p">(</span> <span class="p">[</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">coefs</span><span class="p">)</span> <span class="p">]</span> <span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__nonzero__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        on considère que la matrice est non nulle </span>
-<span class="sd">        si un au moins de ses coefficients est non nul</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># ATTENTION le retour doit être un booléen </span>
-        <span class="c"># ou à la rigueur 0 ou 1</span>
-        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">c</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">return</span> <span class="bp">False</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>On peut à présent créer deux objets, les ajouter, et vérifier que la matrice nulle se comporte bien comme attendu&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">zero</span>     <span class="o">=</span> <span class="n">Matrix2</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="n">matrice1</span> <span class="o">=</span> <span class="n">Matrix2</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">matrice2</span> <span class="o">=</span> <span class="n">Matrix2</span> <span class="p">(</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="p">)</span>
-
-<span class="k">print</span> <span class="s">&#39;avant matrice1&#39;</span><span class="p">,</span> <span class="n">matrice1</span>
-<span class="k">print</span> <span class="s">&#39;avant matrice2&#39;</span><span class="p">,</span> <span class="n">matrice2</span>
-
-<span class="k">print</span> <span class="s">&#39;somme&#39;</span><span class="p">,</span> <span class="n">matrice1</span> <span class="o">+</span> <span class="n">matrice2</span>
-
-<span class="k">print</span> <span class="s">&#39;après matrice1&#39;</span><span class="p">,</span> <span class="n">matrice1</span>
-<span class="k">print</span> <span class="s">&#39;après matrice2&#39;</span><span class="p">,</span> <span class="n">matrice2</span>
-
-<span class="k">if</span> <span class="n">matrice1</span><span class="p">:</span> 
-    <span class="k">print</span> <span class="n">matrice1</span><span class="p">,</span><span class="s">&quot;n&#39;est pas nulle&quot;</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">zero</span><span class="p">:</span> 
-    <span class="k">print</span> <span class="n">zero</span><span class="p">,</span><span class="s">&quot;est nulle&quot;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Voici en vrac quelques commentaires sur cet exemple.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Utiliser-un-tuple">Utiliser un tuple<a class="anchor-link" href="#Utiliser-un-tuple">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Avant de parler de la surcharge des opérateurs <em>per se</em>, vous remarquerez que l&#39;on range les coefficients dans un <strong>tuple</strong>, de façon à ce que notre objet <code>Matrix2</code> soit indépendant de l&#39;objet qu&#39;on a utilisé pour le créer (et qui peut être ensuite modifié par l&#39;appelant).</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Cr&#233;er-un-nouvel-objet">Cr&#233;er un nouvel objet<a class="anchor-link" href="#Cr&#233;er-un-nouvel-objet">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Vous remarquez que l&#39;addition <code>__add__</code> renvoie un <strong>nouvel objet</strong>, au lieu de modifier <code>self</code> en place. C&#39;est la bonne façon de procéder tout simplement parce que lorsqu&#39;on écrit </p>
-<pre><code>print &#39;somme&#39;, matrice1 + matrice2
-</code></pre><p> on ne s&#39;attend pas du tout à ce que <code>matrice1</code> soit modifié après cet appel. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Du-code-qui-ne-d&#233;pend-que-des-4-op&#233;rations">Du code qui ne d&#233;pend que des 4 op&#233;rations<a class="anchor-link" href="#Du-code-qui-ne-d&#233;pend-que-des-4-op&#233;rations">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Le fait d&#39;avoir défini l&#39;addition nous permet par exemple de bénéficier de la fonction <em>builtin</em> <code>sum</code>. En effet le code de <code>sum</code> fait lui-même des additions, il n&#39;y a donc aucune raison de ne pas pouvoir l&#39;exécuter avec en entrée un liste de matrices puisque maintenant on sait les additionner, (mais on a dû toutefois passer à <code>sum</code> comme élément neutre <code>zero</code>)&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># il se trouve que dans l&#39;environnement de FUN </span>
-<span class="c"># le symbole sum correspond à celui de numpy</span>
-<span class="c"># je préfère vous montrer la fonction sum builtin,</span>
-<span class="c"># et donc je vais utiliser l&#39;astuce qu&#39;on a vue </span>
-<span class="c"># en semaine 4 sequence 6</span>
-<span class="kn">from</span> <span class="nn">__builtin__</span> <span class="kn">import</span> <span class="nb">sum</span>
-
-<span class="nb">sum</span> <span class="p">(</span> <span class="p">[</span><span class="n">matrice1</span><span class="p">,</span> <span class="n">matrice2</span><span class="p">,</span> <span class="n">matrice1</span><span class="p">]</span> <span class="p">,</span> <span class="n">zero</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>C&#39;est un effet de bord du typage dynamique. On ne vérifie pas <em>a priori</em> que tous les arguments passés à <code>sum</code> savent faire une addition; <em>a contrario</em>, si ils savent s&#39;additionner on peut exécuter le code de <code>sum</code>.</p>
-<p>De manière plus générale, si vous écrivez par exemple un morceau de code qui travaille sur les éléments d&#39;un anneau (au sens anneau des entiers $\mathbb{Z}$) - imaginez un code qui factorise des polynômes - vous pouvez espérer utiliser ce code avec n&#39;importe quel anneau, c&#39;est à dire avec une classe qui implémente les 4 opérations (pourvu bien sûr que cet ensemble soit effectivement un anneau).</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="On-peut-aussi-red&#233;finir-un-ordre">On peut aussi red&#233;finir un ordre<a class="anchor-link" href="#On-peut-aussi-red&#233;finir-un-ordre">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>La place nous manque pour illustrer la possibilité, avec les opérateurs <code>__eq__</code>, <code>__ne__</code>, <code>__lt__</code>, <code>__le__</code>, <code>__gt__</code>, et <code>__ge__</code>, de redéfinir un ordre sur les instances d&#39;une classe.</p>
-<p>Signalons à cet égard qu&#39;il existe un mécanisme &quot;intelligent&quot; qui permet de définir un ordre à partir d&#39;un sous-ensemble seulement de ces méthodes, l&#39;idée étant que si vous savez faire <code>&gt;</code>
- et <code>=</code>, vous savez sûrement faire tout le reste. Ce mécanisme est <a href="https://docs.python.org/2/library/functools.html#functools.total_ordering">documenté ici</a>; il repose sur <strong>un décorateur</strong> (<code>@total_ordering</code>), un mécanisme que nous étudierons en semaine 7, mais que vous pouvez utiliser dès à présent.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>De manière analogue à <code>sum</code> qui fonctionne sur une liste de matrices, si on avait défini un ordre sur les matrices, on aurait pu alors utiliser les <em>builtin</em> <code>min</code> et <code>max</code> pour calculer une borne supérieure ou inférieure dans une séquence de matrices.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Compl&#233;ment---niveau-avanc&#233;">Compl&#233;ment - niveau avanc&#233;<a class="anchor-link" href="#Compl&#233;ment---niveau-avanc&#233;">&#182;</a></h2>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Le-produit-avec-un-scalaire">Le produit avec un scalaire<a class="anchor-link" href="#Le-produit-avec-un-scalaire">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>On implémenterait la multiplication de deux matrices d&#39;une façon identique (quoique plus fastidieuse naturellement). </p>
-<p>La multiplication d&#39;une matrice par un scalaire (un réel ou complexe pour fixer les idées), comme ici&nbsp;:</p>
-<pre><code>matrice2 = reel * matrice1
-</code></pre><p>peut être également réalisée par surcharge de l&#39;opérateur <code>__rmul__</code>.</p>
-<p>Il s&#39;agit d&#39;une astuce, destinée précisément à ce genre de situations, où on veut étendre la classe de l&#39;opérande de <strong>droite</strong>, sachant que dans ce cas précis l&#39;opérande de gauche est un type de base, qu&#39;on ne peut pas étendre (les classes <em>builtin</em> sont non mutables, pour garantir la stabilité de l&#39;interpréteur).</p>
-<p>Voici donc comment on s&#39;y prendrait. Pour éviter de reproduire tout le code de la classe, on va l&#39;étendre à la volée.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># remarquez que les opérandes sont apparemment inversés</span>
-<span class="c"># dans le sens où pour evaluer </span>
-<span class="c">#     reel * matrice</span>
-<span class="c"># on écrit une méthode qui prend en argument</span>
-<span class="c">#   la matrice, puis le réel</span>
-<span class="c"># mais n&#39;oubliez pas qu&#39;on est en fait en train</span>
-<span class="c"># d&#39;écrire une méthode sur la classe `Matrix2`</span>
-<span class="k">def</span> <span class="nf">multiplication_scalaire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">Matrix2</span> <span class="p">([</span> <span class="n">alpha</span><span class="o">*</span><span class="n">coef</span> <span class="k">for</span> <span class="n">coef</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">coefs</span> <span class="p">])</span>
-
-<span class="c"># on ajoute la méthode spéciale __rmul__</span>
-<span class="n">Matrix2</span><span class="o">.</span><span class="n">__rmul__</span> <span class="o">=</span> <span class="n">multiplication_scalaire</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">matrice1</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="mi">12</span><span class="o">*</span><span class="n">matrice1</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
     </div>
   </div>

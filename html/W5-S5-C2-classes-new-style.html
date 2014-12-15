@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>W5-S4-C2-Complement-module-datetime</title>
+<title>W5-S5-C2-classes-new-style</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1681,260 +1681,11 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Un-exemple-de-classes-de-la-librairie-standard">Un exemple de classes de la librairie standard<a class="anchor-link" href="#Un-exemple-de-classes-de-la-librairie-standard">&#182;</a></h1>
+<h1 id="Classes-&quot;new-style&quot;">Classes "new style"<a class="anchor-link" href="#Classes-&quot;new-style&quot;">&#182;</a></h1>
 </div>
 </div>
 </div>
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Compl&#233;ment---niveau-basique">Compl&#233;ment - niveau basique<a class="anchor-link" href="#Compl&#233;ment---niveau-basique">&#182;</a></h2>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Le-module-time">Le module <code>time</code><a class="anchor-link" href="#Le-module-time">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>En semaine 3, lorsque nous avons étudié la performance des itérateurs, nous avions introduit le module <code>time</code>. Il s&#39;agit d&#39;une interface de très bas niveau avec l&#39;OS, et en guise de rappel :</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">time</span>
-
-<span class="c"># on obtient l&#39;heure courante sous la forme d&#39;un flottant</span>
-<span class="n">t_now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="c"># et pour calculer l&#39;heure qu&#39;il sera dans trois heures on fait</span>
-<span class="n">t_later</span> <span class="o">=</span> <span class="n">t_now</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">3600</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Nous sommes donc ici clairement dans une approche non orientée objet; on manipule des types de base, ici le type flottant :</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;dans trois heures&#39;</span><span class="p">,</span> <span class="n">t_later</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Et comme on le voit, les calculs se font sous une forme pas très lisible. En effet, la méthode <code>time</code> retourne le nombre de secondes écoulées depuis le 1 janvier 1970 à l&#39;instant de l&#39;appel. Pour rendre ce nombre de secondes plus lisible, on utilise des conversions, pas vraiment explicites non plus; voici par exemple un appel à <code>gmtime</code> qui convertit le flottant obtenu par la méthode <code>time()</code> en heure UTC (<code>gm</code> est pour Greenwhich Meridian) :</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">struct_later</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">gmtime</span><span class="p">(</span><span class="n">t_later</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">struct_later</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Et on met en forme ce résultat en utilisant des méthodes comme, par exemple, <code>strftime()</code> pour afficher l&#39;heure UTC dans 3 heures :</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;heure UTC dans trois heures&#39;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s"> at %H:%M&quot;</span><span class="p">,</span> <span class="n">struct_later</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Le-module-datetime">Le module datetime<a class="anchor-link" href="#Le-module-datetime">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Voyons à présent, par comparaison, comment ce genre de calculs se présente lorsqu&#39;on utilise la programmation par objets.</p>
-<p>Le <a href="https://docs.python.org/2/library/datetime.html">module <code>datetime</code></a> expose un certain nombre de classes, que nous illustrons brièvement avec les classes <code>datetime</code> (qui modélise la date et l&#39;heure d&#39;un instant) et <code>timedelta</code> (qui modélise une durée).</p>
-<p>La première remarque qu&#39;on peut faire, c&#39;est qu&#39;avec le module <code>time</code> on manipulait un flottant pour représenter ces deux sortes d&#39;objets (instant et durée); avec deux classes différentes notre code va être plus clair quant à ce qui est réellement représenté.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Le code ci-dessus s&#39;écrirait alors, en utilisant le module <code>datetime</code></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
-
-<span class="n">dt_now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-<span class="n">dt_later</span> <span class="o">=</span> <span class="n">dt_now</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Vous remarquez que c&#39;est déjà un peu plus clair.</p>
-<p>Voyez aussi qu&#39;on n&#39;a déjà moins besoin de s&#39;escrimer pour en avoir un aperçu lisible</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;maintenant&#39;</span><span class="p">,</span> <span class="n">dt_now</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;dans trois heures&#39;</span><span class="p">,</span><span class="n">dt_later</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s"> at %H:%M&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Je vous renvoie au détail du module, et <a href="https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior">notamment  ici</a>, pour le détail des options de formatage disponibles au travers de <code>strftime</code>.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Une partie des inconvénients du module <code>time</code> vient certainement du parti-pris de l&#39;efficacité. De plus, c&#39;est un module très ancien, mais auquel on ne peut guère toucher pour des raisons de compatibilité ascendante.</p>
-<p>Par contre, le module <code>datetime</code>, tout en vous procurant un premier exemple de classes exposées par la librairie standard, vous montre, nous l&#39;espérons, certains des avantages de la programmation orientée objet en général, et des classes de python en particulier.</p>
-<p>Si vous devez manipuler des dates ou des heures, le module <code>datetime</code> constitue très certainement un bon candidat; voyez la <a href="https://docs.python.org/2/library/datetime.html">documentation complète du module</a> pour plus de précisions sur ses possibilités.</p>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1950,7 +1701,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Fuseaux-horaires-et-temps-local">Fuseaux horaires et temps local<a class="anchor-link" href="#Fuseaux-horaires-et-temps-local">&#182;</a></h3>
+<h3 id="La-classe-object">La classe <code>object</code><a class="anchor-link" href="#La-classe-object">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1960,11 +1711,152 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Le temps nous manque pour traiter ce sujet dans toute sa profondeur.</p>
-<p>En substance, c&#39;est un sujet assez voisin de celui des accents, en ce sens que lors d&#39;échanges d&#39;informations de type <em>timestamp</em> entre deux ordinateurs, il faut échanger d&#39;une part une valeur (l&#39;heure et la date), et d&#39;autre part le référentiel (s&#39;agit-il de temps UTC, ou bien de l&#39;heure dans un fuseau horaire, et si oui lequel).</p>
-<p>La complexité est tout de même moindre que dans le cas des accents; on s&#39;en sort en général en convenant d&#39;échanger systématiquement des heures UTC. Par contre, il existe une réelle diversité quant au format utilisé pour échanger ce type d&#39;information, et cela reste une source d&#39;erreurs assez fréquente.</p>
+<p>Vous pouvez trouver du code dans lequel les classes héritent de la classe <code>object</code>, comme dans cet exemple tiré du module standard <code>zipfile</code> :</p>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">modtools</span> <span class="kn">import</span> <span class="n">show_module</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="n">show_module</span><span class="p">(</span><span class="n">zipfile</span><span class="p">,</span> <span class="n">beg</span><span class="o">=</span><span class="s">&#39;class ZipFile(&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&quot;file:&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ceci nous donne l&#39;occasion de citer le module <code>zipfile</code>, qui permet de lire ou écrire, de manière transparente, des fichiers compressés au format <code>zip</code>. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Les-classes-new-style">Les classes <em>new-style</em><a class="anchor-link" href="#Les-classes-new-style">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Mais le sujet de ce complément est d&#39;expliquer pourquoi la classe <code>ZipFile</code> hérite de la classe <code>object</code>. Voici ce qu&#39;il faut en retenir en version courte.</p>
+<p>Aux alentours de la version 2.2 - 2.3 de python, le langage a été amélioré pour régler quelques problèmes qui existaient dans le système de types. En substance, et pour rester synthétique :</p>
+<ul>
+<li><p>Il n&#39;était pas possible dans les anciennes versions de spécialiser un type prédéfini. Par exemple, si vous vous souvenez de la classe <code>collections.OrderedDict</code>, il s&#39;agit d&#39;une spécialisation du type <em>builtin</em> <code>dict</code>. Il n&#39;aurait pas été possible d&#39;implémenter cette classe avec les anciennes versions du langage.</p>
+</li>
+<li><p>Dans l&#39;ancien modèle mental, les classes et les types jouent un rôle différent. Or dans la logique d&#39;un langage orienté objet, le type d&#39;une instance, c&#39;est sa classe. Nous allons y revenir avec des exemples.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour améliorer le langage, la notion de classe <em>new-style</em> a alors été introduite, et pour
+<strong>ne pas casser la compatibilité ascendante</strong>, il a été convenu que pour qu&#39;une classe soit <strong><em>new-style</em></strong>, il faut qu&#39;elle <strong>hérite</strong> - directement ou indirectement - de la classe <em>builtin</em> <code>object</code>. Les classes qui n&#39;héritent pas d&#39;<code>object</code> sont appelées les <em>classes classiques</em>. </p>
+<p>Nous reviendrons largement sur ces notions de types, de <em>classes classiques</em> et de classes <em>new-style</em> en semaine 7. Il faut retenir pour le moment qu&#39;il y a en python 2 deux types différents de classes, les classes <em>new-style</em> et les <em>classes classiques</em> qui sont incompatibles. Cependant, pour la majorité des usages, le comportement de ces deux types de classes est le même. Les classes <em>new-style</em> sont utiles pour des usages avancés, comme l&#39;héritage multiple sur lequel nous allons revenir dans un prochain complément, et nécessaires pour, par exemple, l&#39;extension des types de bases. </p>
+<p>Vous pouvez alors vous demander quand utiliser les classes <em>new-style</em> et les <em>classe classiques</em>. La réponse est simple&nbsp;: les classes <em>new-style</em> sont supérieures aux <em>classes classiques</em>, les classes <em>new-style</em> doivent donc être utilisées pour tous vos nouveaux programmes. D&#39;ailleurs, en python 3, toutes les classes sont maintenant <em>new-style</em> par défaut (on n&#39;a donc plus besoin d&#39;hériter explicitement d&#39;<code>object</code>) et les <em>classes classiques</em> n&#39;existent plus. Attention cependant si vous travaillez avec du code python 2 existant qui utilise des <em>classes classiques</em>, il est recommandé dans ce cas de continuer à utiliser les classes classiques. En effet, même si pour la majorité des usages, les classes classiques et <em>new-style</em> ont le même comportement, dans certains cas avancés, elles ont un comportement incompatible. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Toutes les classes de la librairie standard python sont des classes <em>new-style</em>, c&#39;est pourquoi la classe <code>ZipFile</code> hérite de <code>object</code>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Illustration">Illustration<a class="anchor-link" href="#Illustration">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Une instance d&#39;une <em>classe classique</em> a pour type le type <code>instance</code> :</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># une classe classique</span>
+<span class="k">class</span> <span class="nc">OldStyle</span><span class="p">:</span> 
+    <span class="k">pass</span>
+<span class="c"># une instance</span>
+<span class="n">old_style</span> <span class="o">=</span> <span class="n">OldStyle</span><span class="p">()</span>
+<span class="c"># son type est juste &#39;instance&#39;</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">old_style</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Par contre, une instance d&#39;une classe <em>new-style</em> a pour type la classe qu&#39;on a utilisée pour créer l&#39;objet :</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># une classe new-style : elle hérite de &#39;object&#39;</span>
+<span class="k">class</span> <span class="nc">NewStyle</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span> 
+    <span class="k">pass</span>
+<span class="c"># une instance</span>
+<span class="n">new_style</span> <span class="o">=</span> <span class="n">NewStyle</span><span class="p">()</span>
+<span class="c"># le type de l&#39;instance est bien la classe</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">new_style</span><span class="p">)</span> <span class="ow">is</span> <span class="n">NewStyle</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -1981,7 +1873,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Classes-et-marshalling">Classes et <em>marshalling</em><a class="anchor-link" href="#Classes-et-marshalling">&#182;</a></h3>
+<h3 id="Pour-en-savoir-plus">Pour en savoir plus<a class="anchor-link" href="#Pour-en-savoir-plus">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1991,143 +1883,8 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ceci nous procure une transition pour un sujet beaucoup plus général.</p>
-<p>Nous avons évoqué, en début de semaine 4, les formats comme JSON pour échanger les données entre applications, au travers de fichiers ou d&#39;un réseau.</p>
-<p>On a vu, par exemple, que JSON est un format &quot;proche des langages&quot; en ce sens qu&#39;il est capable d&#39;échanger des objets de base comme des listes ou des dictionnaires entre plusieurs langages comme, par exemple, JavaScript, python ou ruby. En XML, on a davantage de flexibilité puisqu&#39;on peut définir une syntaxe sur les données échangées.</p>
-<p>Mais il faut être bien lucide sur le fait que, aussi bien pour JSON que pour XML, il n&#39;est <strong>pas  possible</strong> d&#39;échanger entre applications des <strong>objets</strong> en tant que tel. Ce que nous voulons dire, c&#39;est que ces technologies de <em>marshalling</em> prennent bien en charge le <em>contenu</em> en termes de données, mais pas les informations de type, et <em>a fortiori</em> pas non plus le code qui appartient à la classe.</p>
-<p>Il est important d&#39;être conscient de cette limitation lorsqu&#39;on fait des choix de conception, notamment lorsqu&#39;on est amené à choisir entre classe et dictionnaire pour l&#39;implémentation de telle ou telle abstraction.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Voyons cela sur un exemple inspiré de notre fichier de données liées au trafic maritime. En version simplifiée, un bateau est décrit par trois valeurs, son identité (id), son nom et son pays d&#39;attachement. </p>
-<p>Nous allons voir comment on peut échanger ces informations entre, disons, deux programmes dont l&#39;un est en python, via un support réseau ou disque.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Si on choisit de se contenter de manipuler un dictionnaire standard, avec trois couples <em>(&quot;id&quot;, 1000), (&quot;name&quot;, &quot;Toccata&quot;), (&quot;country&quot;, &quot;FRA&quot;)</em>, on peut utiliser essentiellement tels quels les mécanismes d&#39;encodage et décodage de, disons, JSON. En effet c&#39;est exactement ce genre d&#39;informations que sait gérer la couche JSON (ou XMLRPC par exemple).</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Si au contraire on choisit de manipuler les données sous forme d&#39;une classe on pourrait avoir envie d&#39;écrire quelque chose comme ceci&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Bateau</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">country</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">country</span>
-        
-<span class="n">bateau</span> <span class="o">=</span> <span class="n">Bateau</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="s">&quot;Toccata&quot;</span><span class="p">,</span> <span class="s">&quot;FRA&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Maintenant, si vous avez besoin d&#39;échanger cet objet avec le reste du monde, en utilisant par exemple JSON, tout ce que vous allez pouvoir faire passer par ce médium, c&#39;est la valeur des trois champs, dans un dictionnaire. Vous pouvez facilement obtenir le dictionnaire en question pour le passer à la couche d&#39;encodage&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="nb">vars</span><span class="p">(</span><span class="n">bateau</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Mais à l&#39;autre bout de la communication il va vous falloir&nbsp;:</p>
-<ul>
-<li>déterminer d&#39;une manière ou d&#39;une autre que les données échangées sont en rapport avec la classe <code>Bateau</code>,</li>
-<li>et construire vous même un objet de cette classe, par exemple avec un code comme&nbsp;:</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">Bateau</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">country</span> <span class="o">=</span> <span class="n">args</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">country</span>
-            
-<span class="n">bateau1</span> <span class="o">=</span> <span class="n">Bateau</span><span class="p">({</span><span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Leon&#39;</span><span class="p">,</span> <span class="s">&#39;country&#39;</span><span class="p">:</span> <span class="s">&#39;France&#39;</span><span class="p">})</span>
-<span class="n">bateau2</span> <span class="o">=</span> <span class="n">Bateau</span><span class="p">(</span><span class="mi">1001</span><span class="p">,</span> <span class="s">&#39;Maluba&#39;</span><span class="p">,</span> <span class="s">&#39;SUI&#39;</span> <span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour reformuler ce dernier point, il n&#39;y a pas en python l&#39;équivalent de <a href="http://en.wikipedia.org/Java_metadata_interface">jmi (Java Metadata Interface)</a> intégré à la distribution standard. </p>
-<p>Et, là aussi, contrairement à Java, on peut écrire du code en dehors des classes. On n&#39;est pas forcément obligé d&#39;écrire une classe pour tout. Chaque situation doit être jugée dans son contexte naturellement, mais, de manière générale, la classe n&#39;est pas la solution universelle&nbsp;; il peut y avoir des mérites dans le fait de manipuler certaines données sous une forme allégée comme un type natif.</p>
+<p>Si ce sujet vous intéresse, vous pouvez commencer par <a href="https://www.python.org/download/releases/2.2.3/descrintro">l&#39;article initial de Guido Van Rossum</a> au sujet de la nouvelle implémentation. </p>
+<p>D&#39;autres liens pertinents sont aussi donnés <a href="https://www.python.org/doc/newstyle/">ici dans la documentation python</a>.</p>
 </div>
 </div>
 </div>

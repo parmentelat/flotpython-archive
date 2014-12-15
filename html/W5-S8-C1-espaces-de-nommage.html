@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>W3-S4-C6-Complement-affectation-operateurs-2</title>
+<title>W5-S8-C1-espaces-de-nommage</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1681,7 +1681,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Les-instructions-+=-et-autres-revisit&#233;es">Les instructions += et autres revisit&#233;es<a class="anchor-link" href="#Les-instructions-+=-et-autres-revisit&#233;es">&#182;</a></h1>
+<h1 id="Espaces-de-nommage">Espaces de nommage<a class="anchor-link" href="#Espaces-de-nommage">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -1691,7 +1691,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Compl&#233;ment---niveau-interm&#233;diaire">Compl&#233;ment - niveau interm&#233;diaire<a class="anchor-link" href="#Compl&#233;ment---niveau-interm&#233;diaire">&#182;</a></h2>
+<h2 id="Compl&#233;ment---niveau-basique">Compl&#233;ment - niveau basique<a class="anchor-link" href="#Compl&#233;ment---niveau-basique">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -1701,7 +1701,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Nous avons vu en deuxième semaine (Séquence &quot;Les types numériques&quot;) une première introduction aux instructions <code>+=</code> et ses dérivées comme <code>*=</code>, <code>**=</code>, etc.</p>
+<p>Nous venons de voir les règles pour l&#39;affectation (ou l&#39;assignation) et le référencement des variables et des attributs&nbsp;; en particulier, on doit faire une distinction entre les attributs et les variables. </p>
 </div>
 </div>
 </div>
@@ -1710,7 +1710,28 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Ces-constructions-ont-une-d&#233;finition-&#224;-g&#233;om&#233;trie-variable">Ces constructions ont une d&#233;finition &#224; g&#233;om&#233;trie variable<a class="anchor-link" href="#Ces-constructions-ont-une-d&#233;finition-&#224;-g&#233;om&#233;trie-variable">&#182;</a></h3>
+<ul>
+<li>Les attributs sont résolus de manière <strong>dynamique</strong>, c&#39;est-à-dire au moment de l&#39;exécution (à <em>run-time</em>),</li>
+<li>alors que la liaison des variables est par contre <strong>statique</strong> (à compile-time) et <strong>lexicale</strong>, en ce sens qu&#39;elle se base uniquement sur les imbrications de code.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vous voyez donc que la différence entre attributs et variables est fondamentale. Dans ce complément, nous allons reprendre et résumer les différentes règles qui régissent l&#39;affectation et le référencement des attributs et des variables.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Attributs">Attributs<a class="anchor-link" href="#Attributs">&#182;</a></h5>
 </div>
 </div>
 </div>
@@ -1720,9 +1741,8 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>En C quand on utilise <code>+=</code> (ou encore <code>++</code>) on modifie la mémoire en place - historiquement, cet opérateur permettait au programmeur d&#39;aider à l&#39;optimisation du code pour utiliser les instructions assembleur idoines.</p>
-<p>Ces constructions en python s&#39;inspirent clairement de C, aussi dans l&#39;esprit ces constructions devraient fonctionner en <strong>modifiant</strong> l&#39;objet référencé par la variable. </p>
-<p>Mais les types numériques en python ne sont <strong>pas mutables</strong>, alors que les listes le sont. Du coup le comportement de <code>+=</code> est différent selon qu&#39;on l&#39;utilise sur un nombre ou sur une liste. Voyons cela sur des exemples très simples.</p>
+<p>Un attribut est un symbole <code>x</code> utilisé dans la notation <code>obj.x</code> où <code>obj</code> est l&#39;objet qui définit l&#39;espace de nommage sur lequel <code>x</code> existe. </p>
+<p>L&#39;<strong>affectation</strong> (explicite ou implicite) d&#39;un attribut <code>x</code> sur un objet <code>obj</code> va créer un symbole <code>x</code> dans l&#39;espace de nommage de <code>obj</code>, symbole qui va référencer l&#39;objet affecté, par exemple, l&#39;objet à droite du signe <code>=</code> lors d&#39;une affectation explicite. </p>
 </div>
 </div>
 </div>
@@ -1733,75 +1753,11 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># Premier exemple avec un entier</span>
-
-<span class="c"># on commence avec une référence partagée</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">a</span> <span class="ow">is</span> <span class="n">b</span> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># on utilise += sur une des deux variables</span>
-<span class="n">a</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="c"># ceci n&#39;a pas modifié b</span>
-<span class="c"># c&#39;est normal, l&#39;entier n&#39;est pas mutable</span>
-
-<span class="k">print</span> <span class="n">a</span>
-<span class="k">print</span> <span class="n">b</span>
-<span class="k">print</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># Deuxième exemple, cette fois avec une liste</span>
-
-<span class="c"># la même référence partagée</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># pareil, on fait += sur une des variables</span>
-<span class="n">a</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="c"># cette fois on a modifié a *et* b</span>
-<span class="c"># car += a pu modifier la liste en place</span>
-<span class="k">print</span> <span class="n">a</span>
-<span class="k">print</span> <span class="n">b</span>
-<span class="k">print</span> <span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">MaClasse</span><span class="p">:</span>
+    <span class="k">pass</span>
+<span class="n">MaClasse</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span> <span class="c"># affectation explicite</span>
+<span class="c">#le symbole x est défini dans l&#39;espace de nommage de MaClasse</span>
+<span class="k">print</span> <span class="n">MaClasse</span><span class="o">.</span><span class="n">__dict__</span>
 </pre></div>
 
 </div>
@@ -1814,7 +1770,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Vous voyez donc que la sémantique de <code>+=</code> (c&#39;est bien entendu le cas pour toutes les autres formes d&#39;instructions qui combinent l&#39;affectation avec un opérateur) <strong>est différente</strong> suivant que l&#39;objet référencé par le terme de gauche est <strong>mutable ou immuable</strong>.</p>
+<p>Le <strong>référencement</strong> d&#39;un attribut va chercher cet attribut de long de l&#39;arbre d&#39;héritage en commençant par l&#39;instance, puis la classe qui a créé l&#39;instance, puis les super classes et suivant la MRO (voir le complément sur l&#39;héritage multiple). </p>
 </div>
 </div>
 </div>
@@ -1823,16 +1779,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour cette raison, c&#39;est là une opinion personnelle, cette famille d&#39;instructions n&#39;est pas le trait le plus réussi dans le langage, et je ne recommande pas de l&#39;utiliser.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pr&#233;cision-sur-la-d&#233;finition-de-+=">Pr&#233;cision sur la d&#233;finition de <code>+=</code><a class="anchor-link" href="#Pr&#233;cision-sur-la-d&#233;finition-de-+=">&#182;</a></h3>
+<h5 id="Variables">Variables<a class="anchor-link" href="#Variables">&#182;</a></h5>
 </div>
 </div>
 </div>
@@ -1842,20 +1789,25 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Nous avions dit en première semaine, et en première approximation, que </p>
-<pre><code>x += y
-</code></pre><p>était équivalent à </p>
-<pre><code>x = x + y
-</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Au vu de ce qui précède, on voit que ce n&#39;est <strong>pas tout à fait exact</strong>, puisque&nbsp;:</p>
+<p>Une variable est un symbole qui n&#39;est pas précédé de la notation <code>obj.</code> et l&#39;affectation d&#39;une variable rend cette variable locale au bloc de code dans lequel elle est définie, un bloc de code pouvant être&nbsp;:</p>
+<ul>
+<li>une fonction, dans ce cas la variable est locale à la fonction&nbsp;;</li>
+<li>une classe, dans ce cas la variable est locale à la classe&nbsp;;</li>
+<li>un module, dans ce cas la variable est locale au module, on dit également que la variable est globale.</li>
+</ul>
+<p>Une variable référencée est toujours cherchée suivant la règle LEG&nbsp;:</p>
+<ul>
+<li>localement au bloc de code dans lequel elle est référencée&nbsp;;</li>
+<li>puis dans les blocs de code des <strong>fonctions ou méthodes</strong> englobantes, s&#39;il y en a, de la plus proche à la plus eloignée&nbsp;;</li>
+<li>puis dans le bloc de code du module.</li>
+</ul>
+<p>Si la variable n&#39;est toujours pas trouvée, elle est cherchée dans le module <code>__builtin__</code> et si elle n&#39;est toujours pas trouvée, il y a une exception. </p>
+<p>Dans la vidéo, pour bien montrer les différents cas, on a défini trois règles : la règle G pour les modules, la règles LEG pour les fonctions et la règles LG pour les classes. Mais il s&#39;agit en fait toujours d&#39;une dérivation de la règle LEG. En effet, </p>
+<ul>
+<li>la règle G pour les modules correspond en fait à la règle LEG sauf que dans ce cas, le seul bloc de code pertinent est celui du module&nbsp;;</li>
+<li>la règle LG pour les classes correspond aussi à la règle LEG sauf que dans l&#39;exemple de la vidéo on n&#39;a que des classes englobantes, pas de fonctions englobantes. </li>
+</ul>
+<p>Évidement, même pour les classes, si on a des fonctions (ou méthodes) englobantes, la règle LEG s&#39;applique. Par exemple</p>
 </div>
 </div>
 </div>
@@ -1866,35 +1818,15 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># si on fait x += y sur une liste </span>
-<span class="c"># on fait un effet de bord sur la liste</span>
-<span class="c"># comme on vient de le voir</span>
-
-<span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">print</span> <span class="s">&quot;avant&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="n">a</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="k">print</span> <span class="s">&quot;après&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># alors que si on fait x = x + y sur une liste</span>
-<span class="c"># on crée un nouvel objet liste</span>
-
-<span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">print</span> <span class="s">&quot;avant&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="k">print</span> <span class="s">&quot;après&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<div class="highlight"><pre><span class="n">var</span> <span class="o">=</span> <span class="s">&#39;dans le module&#39;</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="n">var</span> <span class="o">=</span> <span class="s">&#39;dans la classe A&#39;</span>
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="s">&#39;dans la fonction f&#39;</span>
+        <span class="k">class</span> <span class="nc">B</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">var</span>
+        <span class="n">B</span><span class="p">()</span>
+<span class="n">A</span><span class="p">()</span><span class="o">.</span><span class="n">f</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1907,7 +1839,284 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Vous voyez donc que vis-à-vis des références partagées, ces deux façons de faire mènent à un résultat différent. </p>
+<h5 id="En-r&#233;sum&#233;">En r&#233;sum&#233;<a class="anchor-link" href="#En-r&#233;sum&#233;">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Dans la vidéo et dans ce complément basique, on a couvert tous les cas standards, et même si python est un langage plutôt mieux fait, avec moins de cas particuliers, que d&#39;autres langages, il a également ses cas étranges entre raisons historiques et bugs qui ne seront jamais corrigés (parce que ça casserait plus de choses que ça n&#39;en réparerait). Pour éviter de tomber dans ces cas spéciaux, c&#39;est simple vous n&#39;avez qu&#39;à suivre deux règles&nbsp;:</p>
+<ul>
+<li>ne jamais affecter dans un bloc de code local une variable de même nom qu&#39;une variable globale&nbsp;;</li>
+<li>toujours mettre la directive <code>global</code> comme première instruction du bloc de code où elle s&#39;applique (mais nous vous rappelons qu&#39;il faut éviter d&#39;utiliser cette directive dans le code que vous écrivez).</li>
+</ul>
+<p>Si vous ne suivez pas ces règles, vous risquez de tomber dans un cas particulier que nous détaillons ci-dessous dans la partie avancée. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Compl&#233;ment---niveau-avanc&#233;">Compl&#233;ment - niveau avanc&#233;<a class="anchor-link" href="#Compl&#233;ment---niveau-avanc&#233;">&#182;</a></h2>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="UnboundLocalError">UnboundLocalError<a class="anchor-link" href="#UnboundLocalError">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nous avons déjà vu cette erreur en semaine 4, dans le deuxième complément de la vidéo 6. Cette erreur se produit justement lorsque vous ne respectez pas la première des règles ci-dessus. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+    <span class="k">print</span> <span class="n">x</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">x</span>
+<span class="n">f</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ce code n&#39;a que des défauts. Il est ambigu&nbsp;: on mélange x global et x local et il est impossible de savoir ce que ça doit faire, il ne respecte pas la première règle car x est une variable globale et on utilise le même nom pour une variable locale à la fonction. Comment faire alors ? Respecter la première règle. Oui, mais comment être sûr qu&#39;on n&#39;utilise pas localement un nom défini globalement ? Il faut utiliser des noms de variables qui ont un sens. Regardons un exemple </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">increment_par_defaut</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">def</span> <span class="nf">shift_10</span><span class="p">():</span>
+    <span class="c">#on print pour débugger ici</span>
+    <span class="k">print</span> <span class="n">increment_par_defaut</span>
+    
+    <span class="n">total_shift</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">increment_par_defaut</span>
+    <span class="k">return</span> <span class="n">total_shift</span>
+<span class="n">shift_10</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ma fonction n&#39;est sans doute toujours pas révolutionnaire, mais elle est parfaitement claire et suit la la première règle.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="La-documentation-officielle-est-fausse">La documentation officielle est fausse<a class="anchor-link" href="#La-documentation-officielle-est-fausse">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Oui, vous avez bien lu, la documentation officielle est fausse sur un point subtil. Regardons le <a href="https://docs.python.org/2.7/reference/executionmodel.html">modèle d&#39;exécution</a>, on trouve la phrase suivante &quot;If a name binding operation occurs anywhere within a code block, all uses of the name within the block are treated as references to the current block.&quot; qui est fausse, il faut lire &quot;If a name binding operation occurs anywhere within a code block <strong>of a function</strong>, all uses of the name within the block are treated as references to the current block.&quot; </p>
+<p>En effet, les classes se comportent différemment des fonctions</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="s">&quot;x du module&quot;</span>
+<span class="k">class</span> <span class="nc">A</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">&quot;dans classe A: &quot;</span> <span class="o">+</span> <span class="n">x</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;x dans A&quot;</span>
+    <span class="k">print</span> <span class="s">&quot;dans classe A: &quot;</span> <span class="o">+</span> <span class="n">x</span>
+    <span class="k">del</span> <span class="n">x</span>
+    <span class="k">print</span> <span class="s">&quot;dans classe A: &quot;</span> <span class="o">+</span> <span class="n">x</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Alors pourquoi si c&#39;est une mauvaise idée de mélanger variables globales et locales de même nom dans une fonction, c&#39;est possible dans une classe ?</p>
+<p>Cela vient de la manière dont sont implémentés les espaces de nommage. Normalement, un objet a pour espace de nommage un dictionnaire qui s&#39;appelle <code>__dict__</code>. D&#39;un côté un dictionnaire est un objet python qui offre beaucoup de flexibilité, mais d&#39;un autre côté, il induit un petit surcoût pour chaque recherche d&#39;éléments. Comme les fonctions sont des objets qui par définition peuvent être appelés très souvent, il a été décidé de mettre toutes les variables locales à la fonction dans un objet écrit en C qui n&#39;est pas dynamique (on ne peut pas ajouter des éléments à l&#39;exécution), mais qui est un peu plus rapide qu&#39;un dictionnaire lors de l&#39;accès aux variables. Mais pour faire cela, il faut déterminer la portée de la variable dans la phase de précompilation. Donc si le précompilateur trouve une affectation (explicite ou implicite) dans une fonction, il considère la variable comme locale pour tout le bloc de code. Donc si on référence une variable définie comme étant locale avant une affectation dans la fonction, on ne va pas la chercher globalement, on a une erreur <code>UnboundLocalError</code>.</p>
+<p>Cette optimisation n&#39;a pas été faite pour les classes, parce que dans l&#39;évaluation du compromis souplesse contre efficacité pour les classes, c&#39;est la souplesse, donc le dictionnaire qui a gagné. </p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Le-bug-532860">Le bug 532860<a class="anchor-link" href="#Le-bug-532860">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ce bug n&#39;apparait que si vous ne suivez pas la première règle. On ne détaillera pas plus ce bug ici, bug qui ne sera jamais corrigé, mais si vous êtes intéressés, vous pouvez lire le <a href="http://bugs.python.org/issue532860">bug report</a> et une <a href="http://stackoverflow.com/questions/20246523/how-references-to-variables-are-resolved-in-python">intéressante discussion liée à ce bug</a>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Directive-global-au-d&#233;but-du-bloc-de-code">Directive <code>global</code> au d&#233;but du bloc de code<a class="anchor-link" href="#Directive-global-au-d&#233;but-du-bloc-de-code">&#182;</a></h5>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>La deuxième règle est que la directive <code>global</code> doit toujours être au début du bloc de code. Regardons ce qu&#39;il se passe si ça n&#39;est pas le cas</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="s">&#39;x dans le module&#39;</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;x dans f, première affectation&#39;</span>
+    <span class="k">global</span> <span class="n">x</span>
+
+<span class="n">f</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">x</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Alors que <code>global</code> est après l&#39;affectation, on voit que la variable globale <code>x</code> a bien été modifiée. En fait, <code>global</code> n&#39;est pas une instruction, mais une directive au précompilateur. De même que le précompilateur détermine qu&#39;une variable affectée dans une fonction est locale, s&#39;il trouve la directive <code>global</code>, il déterminera que cette variable est globale pour tout le bloc de code. </p>
+<p>C&#39;est source de confusion et d&#39;erreurs, pour cette raison, dans les dernières versions de python 2, si une directive <code>global</code> arrive après une affectation locale de la variable, il y a une exception <code>SyntaxWarning</code>. </p>
+<p>Pour finir, rappelons que l&#39;utilisation de la directive <code>global</code> est fortement déconseillée puisqu&#39;elle rend implicite les communications entre espaces de nommage. Il faut à la place toujours favoriser les passages d&#39;arguments et les retours de fonctions. Souvenons-nous du Zen de python...</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">this</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Et en particulier</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">zens</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">this</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">this</span><span class="o">.</span><span class="n">s</span><span class="p">]))</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">zens</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="k">print</span> <span class="n">zens</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Et pour ceux qui se demandent pourquoi il faut une expression compliquée pour sortir deux phrases du Zen de python, c&#39;est parce que le zen de python se mérite :)</p>
 </div>
 </div>
 </div>

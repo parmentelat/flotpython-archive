@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>W5-S5-C1-Complement-heritage</title>
+<title>W5-S4-C2-module-datetime</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1681,7 +1681,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="H&#233;ritage">H&#233;ritage<a class="anchor-link" href="#H&#233;ritage">&#182;</a></h1>
+<h1 id="Un-exemple-de-classes-de-la-librairie-standard">Un exemple de classes de la librairie standard<a class="anchor-link" href="#Un-exemple-de-classes-de-la-librairie-standard">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -1701,35 +1701,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>La notion d&#39;héritage, qui fait partie intégrante de la Programmation Orientée Objet, permet principalement de maximiser la <strong>réutilisabilité</strong>. </p>
-<p>Nous avons vu dans la vidéo les mécanismes d&#39;héritage <em>in abstracto</em>. Pour résumer très brièvement, on recherche un attribut (souvent une méthode) à partir d&#39;une instance en cherchant :</p>
-<ul>
-<li>d&#39;abord dans l&#39;instance elle-même,</li>
-<li>puis dans la classe de l&#39;instance,</li>
-<li>puis dans les super-classes de la classe.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>L&#39;objet de ce complément est de vous donner, d&#39;un point de vue plus appliqué, des idées de ce qu&#39;on peut faire ou non avec ce mécanisme. Le sujet étant assez rabâché par ailleurs, nous nous concentrerons sur deux points&nbsp;:</p>
-<ul>
-<li>les pratiques de base utilisées pour la conception de classes, et notamment pour bien distinguer <strong>héritage</strong> et <strong>composition</strong>;</li>
-<li>nous verrons ensuite, sur des <strong>exemples extraits de code réel</strong>, comment ces mécanismes permettent en effet de contribuer à la réutilisabilité du code.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Plusieurs-formes-d'h&#233;ritage">Plusieurs formes d'h&#233;ritage<a class="anchor-link" href="#Plusieurs-formes-d'h&#233;ritage">&#182;</a></h3>
+<h3 id="Le-module-time">Le module <code>time</code><a class="anchor-link" href="#Le-module-time">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -1739,21 +1711,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Une méthode héritée peut être rangée dans une de ces trois catégories&nbsp;:</p>
-<ul>
-<li><em>implicite</em> : si la classe fille ne définit pas du tout la méthode,</li>
-<li><em>redéfinie</em> : si on récrit la méthode entièrement,</li>
-<li><em>modifiée</em> : si on récrit la méthode dans la classe fille, mais en utilisant le code de la classe mère.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Commençons par illustrer tout ceci sur un petit exemple&nbsp;:</p>
+<p>En semaine 3, lorsque nous avons étudié la performance des itérateurs, nous avions introduit le module <code>time</code>. Il s&#39;agit d&#39;une interface de très bas niveau avec l&#39;OS, et en guise de rappel :</p>
 </div>
 </div>
 </div>
@@ -1764,24 +1722,12 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># Une classe mère</span>
-<span class="k">class</span> <span class="nc">Fleur</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">implicite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&#39;Fleur.implicite&#39;</span>
-    <span class="k">def</span> <span class="nf">redefinie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&#39;Fleur.redefinie&#39;</span>
-    <span class="k">def</span> <span class="nf">modifiee</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&#39;Fleur.modifiee&#39;</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">time</span>
 
-<span class="c"># Une classe fille</span>
-<span class="k">class</span> <span class="nc">Rose</span><span class="p">(</span><span class="n">Fleur</span><span class="p">):</span>
-    <span class="c"># on ne definit pas implicite</span>
-    <span class="c"># on redefinit complement redefinie</span>
-    <span class="k">def</span> <span class="nf">redefinie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&#39;Rose.redefinie&#39;</span>
-    <span class="k">def</span> <span class="nf">modifiee</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">Fleur</span><span class="o">.</span><span class="n">modifiee</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">print</span> <span class="s">&#39;Rose.modifiee apres Fleur&#39;</span>    
+<span class="c"># on obtient l&#39;heure courante sous la forme d&#39;un flottant</span>
+<span class="n">t_now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="c"># et pour calculer l&#39;heure qu&#39;il sera dans trois heures on fait</span>
+<span class="n">t_later</span> <span class="o">=</span> <span class="n">t_now</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">3600</span>
 </pre></div>
 
 </div>
@@ -1794,8 +1740,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Nous avons fait hériter la classe <code>Fleur</code> de la classe <code>object</code>, qui est la pratique recommandée; cela fait de toutes nos classes des <em>classes new-style</em>, un concept que nous allons étudier dans un tout prochain complément.</p>
-<p>On peut à présent créer une instance de Rose et appeler sur cette instance les trois méthodes.</p>
+<p>Nous sommes donc ici clairement dans une approche non orientée objet; on manipule des types de base, ici le type flottant :</p>
 </div>
 </div>
 </div>
@@ -1806,25 +1751,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># fille est une instance de Rose</span>
-<span class="n">fille</span> <span class="o">=</span> <span class="n">Rose</span><span class="p">()</span>
-
-<span class="n">fille</span><span class="o">.</span><span class="n">implicite</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">fille</span><span class="o">.</span><span class="n">redefinie</span><span class="p">()</span>
+<div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;dans trois heures&#39;</span><span class="p">,</span> <span class="n">t_later</span>
 </pre></div>
 
 </div>
@@ -1837,7 +1764,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>S&#39;agissant des deux premières méthodes, le comportement qu&#39;on observe est simplement la conséquence de l&#39;algorithme de recherche d&#39;attributs&nbsp;: <code>implicite</code> est trouvée dans la classe Fleur et <code>redefinie</code> est trouvée dans la classe Rose.</p>
+<p>Et comme on le voit, les calculs se font sous une forme pas très lisible. En effet, la méthode <code>time</code> retourne le nombre de secondes écoulées depuis le 1 janvier 1970 à l&#39;instant de l&#39;appel. Pour rendre ce nombre de secondes plus lisible, on utilise des conversions, pas vraiment explicites non plus; voici par exemple un appel à <code>gmtime</code> qui convertit le flottant obtenu par la méthode <code>time()</code> en heure UTC (<code>gm</code> est pour Greenwhich Meridian) :</p>
 </div>
 </div>
 </div>
@@ -1848,7 +1775,8 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">fille</span><span class="o">.</span><span class="n">modifiee</span><span class="p">()</span>
+<div class="highlight"><pre><span class="n">struct_later</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">gmtime</span><span class="p">(</span><span class="n">t_later</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">struct_later</span>
 </pre></div>
 
 </div>
@@ -1861,28 +1789,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour la troisième méthode, attardons nous un peu car on voit ici comment <em>combiner</em> facilement le code de la classe mère avec du code spécifique à la classe fille, en appelant explicitement la méthode de la classe mère lorsqu&#39;on fait&nbsp;:</p>
-<pre><code>Fleur.modifiee(self)
-</code></pre>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="La-fonction-builtin-super()">La fonction <em>builtin</em> <code>super()</code><a class="anchor-link" href="#La-fonction-builtin-super()">&#182;</a></h5>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Signalons à ce sujet, pour être exhaustif, l&#39;existence de la <a href="https://docs.python.org/2/library/functions.html#super">fonction <em>builtin</em> <code>super()</code></a> qui permettrait de réaliser la même chose sans nommer explicitement la classe mère, comme on le fait ici&nbsp;:</p>
+<p>Et on met en forme ce résultat en utilisant des méthodes comme, par exemple, <code>strftime()</code> pour afficher l&#39;heure UTC dans 3 heures :</p>
 </div>
 </div>
 </div>
@@ -1893,11 +1800,89 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># Une version allégée de la classe fille, qui utilise super()</span>
-<span class="k">class</span> <span class="nc">Rose</span><span class="p">(</span><span class="n">Fleur</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">modifiee</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Rose</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">modifiee</span><span class="p">()</span>
-        <span class="k">print</span> <span class="s">&#39;Rose.modifiee apres Fleur&#39;</span>    
+<div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;heure UTC dans trois heures&#39;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s"> at %H:%M&quot;</span><span class="p">,</span> <span class="n">struct_later</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Le-module-datetime">Le module datetime<a class="anchor-link" href="#Le-module-datetime">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Voyons à présent, par comparaison, comment ce genre de calculs se présente lorsqu&#39;on utilise la programmation par objets.</p>
+<p>Le <a href="https://docs.python.org/2/library/datetime.html">module <code>datetime</code></a> expose un certain nombre de classes, que nous illustrons brièvement avec les classes <code>datetime</code> (qui modélise la date et l&#39;heure d&#39;un instant) et <code>timedelta</code> (qui modélise une durée).</p>
+<p>La première remarque qu&#39;on peut faire, c&#39;est qu&#39;avec le module <code>time</code> on manipulait un flottant pour représenter ces deux sortes d&#39;objets (instant et durée); avec deux classes différentes notre code va être plus clair quant à ce qui est réellement représenté.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Le code ci-dessus s&#39;écrirait alors, en utilisant le module <code>datetime</code></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="n">dt_now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">dt_later</span> <span class="o">=</span> <span class="n">dt_now</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vous remarquez que c&#39;est déjà un peu plus clair.</p>
+<p>Voyez aussi qu&#39;on n&#39;a déjà moins besoin de s&#39;escrimer pour en avoir un aperçu lisible</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;maintenant&#39;</span><span class="p">,</span> <span class="n">dt_now</span>
 </pre></div>
 
 </div>
@@ -1912,9 +1897,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">fille</span> <span class="o">=</span> <span class="n">Rose</span><span class="p">()</span>
-
-<span class="n">fille</span><span class="o">.</span><span class="n">modifiee</span><span class="p">()</span>
+<div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;dans trois heures&#39;</span><span class="p">,</span><span class="n">dt_later</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s"> at %H:%M&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1927,11 +1910,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>On peut envisager d&#39;utiliser <code>super()</code> dans du code très abstrait où on ne sait pas déterminer statiquement le nom de la classe dont il est question. Mais, c&#39;est une question de goût évidemment, je recommande personnellement la première forme, où on qualifie la méthode avec le nom de la classe mère qu&#39;on souhaite utiliser. En effet dans la grande majorité des cas&nbsp;:</p>
-<ul>
-<li>on sait déterminer le nom de la classe dont il est question, </li>
-<li>ou alors on veut mélanger plusieurs méthodes héritées (via l&#39;héritage multiple, dont on va parler dans un prochain complément) et dans ce cas <code>super()</code> ne peut rien pour nous.</li>
-</ul>
+<p>Je vous renvoie au détail du module, et <a href="https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior">notamment  ici</a>, pour le détail des options de formatage disponibles au travers de <code>strftime</code>.</p>
 </div>
 </div>
 </div>
@@ -1940,92 +1919,7 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="H&#233;ritage-vs-Composition">H&#233;ritage <em>vs</em> Composition<a class="anchor-link" href="#H&#233;ritage-vs-Composition">&#182;</a></h3>
-</div>
-</div>
-</div>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Dans le domaine de la conception orientée objet, on fait la différence entre deux constructions, l&#39;héritage et la composition, qui à une analyse superficielle peuvent paraître procurer des résultats similaires, mais qu&#39;il est important de bien distinguer. </p>
-<p>Voyons d&#39;abord en quoi consiste la composition et pourquoi le résultat est voisin&nbsp;:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># Une classe avec qui on n&#39;aura pas de relation d&#39;héritage</span>
-<span class="k">class</span> <span class="nc">Tige</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">implicite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&#39;Tige.implicite&#39;</span>
-    <span class="k">def</span> <span class="nf">redefinie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&#39;Tige.redefinie&#39;</span>
-    <span class="k">def</span> <span class="nf">modifiee</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&#39;Tige.modifiee&#39;</span>
-
-<span class="c"># on n&#39;hérite pas</span>
-<span class="c"># mais on fait ce qu&#39;on appelle un composition</span>
-<span class="c"># avec la classe Tige</span>
-<span class="k">class</span> <span class="nc">Rose</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="c"># mais pour chaque objet de la classe Rose</span>
-    <span class="c"># on va créer un objet de la classe Tige</span>
-    <span class="c"># et le conserver dans un champ</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">externe</span> <span class="o">=</span> <span class="n">Tige</span><span class="p">()</span>
-
-    <span class="c"># le reste est presque comme tout à l&#39;heure</span>
-    <span class="c"># sauf qu&#39;il faut definir implicite</span>
-    <span class="k">def</span> <span class="nf">implicite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">externe</span><span class="o">.</span><span class="n">implicite</span><span class="p">()</span>
-        
-    <span class="c"># on redefinit complement redefinie</span>
-    <span class="k">def</span> <span class="nf">redefinie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&#39;Rose.redefinie&#39;</span>
-        
-    <span class="k">def</span> <span class="nf">modifiee</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">externe</span><span class="o">.</span><span class="n">modifiee</span><span class="p">()</span>
-        <span class="k">print</span> <span class="s">&#39;Rose.modifiee apres Tige&#39;</span>        
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># on obtient ici exactement le même comportement pour les trois sortes de méthodes</span>
-<span class="n">fille</span> <span class="o">=</span> <span class="n">Rose</span><span class="p">()</span>
-
-<span class="n">fille</span><span class="o">.</span><span class="n">implicite</span><span class="p">()</span>
-<span class="n">fille</span><span class="o">.</span><span class="n">redefinie</span><span class="p">()</span>
-<span class="n">fille</span><span class="o">.</span><span class="n">modifiee</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Comment-choisir-?">Comment choisir ?<a class="anchor-link" href="#Comment-choisir-?">&#182;</a></h5>
+<h3 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -2035,12 +1929,9 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Alors, quand faut-il utiliser l&#39;héritage et quand faut-il utiliser la composition ?
-On arrive ici à la limite de notre cours, il s&#39;agit plus de conception que de codage à proprement parler, mais pour donner une réponse très courte à cette question&nbsp;:</p>
-<ul>
-<li>on utilise l&#39;héritage lorsqu&#39;un objet de la sous-classe <strong>est aussi un</strong> objet de la super-classe (une rose est aussi une fleur), et</li>
-<li>on utilise la composition lorsqu&#39;un objet de la sous-classe <strong>a une relation avec</strong> un objet de la super-classe (une rose possède une tige, mais c&#39;est un autre objet).</li>
-</ul>
+<p>Une partie des inconvénients du module <code>time</code> vient certainement du parti-pris de l&#39;efficacité. De plus, c&#39;est un module très ancien, mais auquel on ne peut guère toucher pour des raisons de compatibilité ascendante.</p>
+<p>Par contre, le module <code>datetime</code>, tout en vous procurant un premier exemple de classes exposées par la librairie standard, vous montre, nous l&#39;espérons, certains des avantages de la programmation orientée objet en général, et des classes de python en particulier.</p>
+<p>Si vous devez manipuler des dates ou des heures, le module <code>datetime</code> constitue très certainement un bon candidat; voyez la <a href="https://docs.python.org/2/library/datetime.html">documentation complète du module</a> pour plus de précisions sur ses possibilités.</p>
 </div>
 </div>
 </div>
@@ -2059,7 +1950,7 @@ On arrive ici à la limite de notre cours, il s&#39;agit plus de conception que 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Des-exemples-de-code">Des exemples de code<a class="anchor-link" href="#Des-exemples-de-code">&#182;</a></h3>
+<h3 id="Fuseaux-horaires-et-temps-local">Fuseaux horaires et temps local<a class="anchor-link" href="#Fuseaux-horaires-et-temps-local">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -2069,7 +1960,9 @@ On arrive ici à la limite de notre cours, il s&#39;agit plus de conception que 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Sans transition, dans cette section un peu plus prospective, nous vous avons signalé quelques morceaux de code de la librairie standard qui utilisent l&#39;héritage. Sans aller nécessairement jusqu&#39;à la lecture de ces codes, il nous a semblé intéressant de commenter spécifiquement l&#39;usage qui est fait de l&#39;héritage dans ces bibliothèques.</p>
+<p>Le temps nous manque pour traiter ce sujet dans toute sa profondeur.</p>
+<p>En substance, c&#39;est un sujet assez voisin de celui des accents, en ce sens que lors d&#39;échanges d&#39;informations de type <em>timestamp</em> entre deux ordinateurs, il faut échanger d&#39;une part une valeur (l&#39;heure et la date), et d&#39;autre part le référentiel (s&#39;agit-il de temps UTC, ou bien de l&#39;heure dans un fuseau horaire, et si oui lequel).</p>
+<p>La complexité est tout de même moindre que dans le cas des accents; on s&#39;en sort en général en convenant d&#39;échanger systématiquement des heures UTC. Par contre, il existe une réelle diversité quant au format utilisé pour échanger ce type d&#39;information, et cela reste une source d&#39;erreurs assez fréquente.</p>
 </div>
 </div>
 </div>
@@ -2078,7 +1971,7 @@ On arrive ici à la limite de notre cours, il s&#39;agit plus de conception que 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Le-module-calendar">Le module <code>calendar</code><a class="anchor-link" href="#Le-module-calendar">&#182;</a></h5>
+<h2 id="Compl&#233;ment---niveau-avanc&#233;">Compl&#233;ment - niveau avanc&#233;<a class="anchor-link" href="#Compl&#233;ment---niveau-avanc&#233;">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -2088,24 +1981,7 @@ On arrive ici à la limite de notre cours, il s&#39;agit plus de conception que 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>On trouve dans la librairie standard <a href="https://docs.python.org/2/library/calendar.html">le module <code>calendar</code></a>. 
-Ce module expose deux classes <code>TextCalendar</code> et <code>HTMLCalendar</code>. Sans entrer du tout dans le détail, ces deux classes permettent d&#39;imprimer dans des formats différents le même type d&#39;informations du type rendez-vous.</p>
-<p>Le point ici est que les concepteurs ont choisi un graphe d&#39;héritage comme ceci&nbsp;:</p>
-<pre><code>Calendar
-|-- TextCalendar
-|-- HTMLCalendar
-</code></pre><p>qui permet de grouper le code concernant la logique dans la classe <code>Calendar</code>, puis dans les deux sous-classes d&#39;implémenter le type de sortie qui va bien. </p>
-<p>De cette manière, le maximum de code est partagé entre les deux classes; et de plus si vous avez besoin d&#39;une sortie au format, disons PDF, vous pouvez envisager d&#39;hériter de <code>Calendar</code> et n&#39;implémenter que la partie spécifique au format PDF.</p>
-<p>C&#39;est un peu le niveau élémentaire de l&#39;héritage. </p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Le-module-SocketServer">Le module <code>SocketServer</code><a class="anchor-link" href="#Le-module-SocketServer">&#182;</a></h5>
+<h3 id="Classes-et-marshalling">Classes et <em>marshalling</em><a class="anchor-link" href="#Classes-et-marshalling">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -2115,8 +1991,11 @@ Ce module expose deux classes <code>TextCalendar</code> et <code>HTMLCalendar</c
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Toujours dans la librairie standard, le <a href="https://docs.python.org/2/library/socketserver.html">module <code>SocketServer</code></a> - qui, incidemment est écrit en C - fait un usage beaucoup plus sophistiqué de l&#39;héritage.</p>
-<p>Le module propose une hiérarchie de classes comme ceci:</p>
+<p>Ceci nous procure une transition pour un sujet beaucoup plus général.</p>
+<p>Nous avons évoqué, en début de semaine 4, les formats comme JSON pour échanger les données entre applications, au travers de fichiers ou d&#39;un réseau.</p>
+<p>On a vu, par exemple, que JSON est un format &quot;proche des langages&quot; en ce sens qu&#39;il est capable d&#39;échanger des objets de base comme des listes ou des dictionnaires entre plusieurs langages comme, par exemple, JavaScript, python ou ruby. En XML, on a davantage de flexibilité puisqu&#39;on peut définir une syntaxe sur les données échangées.</p>
+<p>Mais il faut être bien lucide sur le fait que, aussi bien pour JSON que pour XML, il n&#39;est <strong>pas  possible</strong> d&#39;échanger entre applications des <strong>objets</strong> en tant que tel. Ce que nous voulons dire, c&#39;est que ces technologies de <em>marshalling</em> prennent bien en charge le <em>contenu</em> en termes de données, mais pas les informations de type, et <em>a fortiori</em> pas non plus le code qui appartient à la classe.</p>
+<p>Il est important d&#39;être conscient de cette limitation lorsqu&#39;on fait des choix de conception, notamment lorsqu&#39;on est amené à choisir entre classe et dictionnaire pour l&#39;implémentation de telle ou telle abstraction.</p>
 </div>
 </div>
 </div>
@@ -2125,20 +2004,8 @@ Ce module expose deux classes <code>TextCalendar</code> et <code>HTMLCalendar</c
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<pre><code>+------------+
-| BaseServer |
-+------------+
-      |
-      v
-+-----------+        +------------------+
-| TCPServer |-------&gt;| UnixStreamServer |
-+-----------+        +------------------+
-      |
-      v
-+-----------+        +--------------------+
-| UDPServer |-------&gt;| UnixDatagramServer |
-+-----------+        +--------------------+
-</code></pre>
+<p>Voyons cela sur un exemple inspiré de notre fichier de données liées au trafic maritime. En version simplifiée, un bateau est décrit par trois valeurs, son identité (id), son nom et son pays d&#39;attachement. </p>
+<p>Nous allons voir comment on peut échanger ces informations entre, disons, deux programmes dont l&#39;un est en python, via un support réseau ou disque.</p>
 </div>
 </div>
 </div>
@@ -2147,9 +2014,120 @@ Ce module expose deux classes <code>TextCalendar</code> et <code>HTMLCalendar</c
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ici encore notre propos n&#39;est pas d&#39;entrer dans les détails, mais d&#39;observer le fait que les différents <em>niveaux d&#39;intelligence</em> sont ajoutés les uns aux les autres au fur et à mesure que l&#39;on descend le graphe d&#39;héritage.</p>
-<p>Cette hiérarchie est par ailleurs étendue par le <a href="https://docs.python.org/2/library/basehttpserver.html">module <code>BaseHTTPServer</code></a> et notamment au travers de la classe <a href="https://docs.python.org/2/library/basehttpserver.html#BaseHTTPServer.HTTPServer"><code>HTTPServer</code></a> qui hérite de <code>TCPServer</code>.</p>
-<p>Pour revenir au module <code>SocketServer</code>, j&#39;attire votre attention dans <a href="https://docs.python.org/2/library/socketserver.html#examples">la page d&#39;exemples</a> sur <a href="https://docs.python.org/2/library/socketserver.html#asynchronous-mixins">cet exemple en particuler</a>, où on crée une classe de serveurs multi-threads (la classe <code>ThreadedTCPServer</code>) par simple héritage multiple entre <code>Threading Mixin</code> et <code>TCPServer</code>. La notion de <code>Mixin</code> est <a href="http://en.wikipedia.org/wiki/Mixin">décrite dans cette page wikipédia</a> dans laquelle vous pouvez accéder directement <a href="http://en.wikipedia.org/wiki/Mixin#In_Python">à la section consacrée à python</a>.</p>
+<p>Si on choisit de se contenter de manipuler un dictionnaire standard, avec trois couples <em>(&quot;id&quot;, 1000), (&quot;name&quot;, &quot;Toccata&quot;), (&quot;country&quot;, &quot;FRA&quot;)</em>, on peut utiliser essentiellement tels quels les mécanismes d&#39;encodage et décodage de, disons, JSON. En effet c&#39;est exactement ce genre d&#39;informations que sait gérer la couche JSON (ou XMLRPC par exemple).</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Si au contraire on choisit de manipuler les données sous forme d&#39;une classe on pourrait avoir envie d&#39;écrire quelque chose comme ceci&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Bateau</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">country</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">country</span>
+        
+<span class="n">bateau</span> <span class="o">=</span> <span class="n">Bateau</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="s">&quot;Toccata&quot;</span><span class="p">,</span> <span class="s">&quot;FRA&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Maintenant, si vous avez besoin d&#39;échanger cet objet avec le reste du monde, en utilisant par exemple JSON, tout ce que vous allez pouvoir faire passer par ce médium, c&#39;est la valeur des trois champs, dans un dictionnaire. Vous pouvez facilement obtenir le dictionnaire en question pour le passer à la couche d&#39;encodage&nbsp;:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="nb">vars</span><span class="p">(</span><span class="n">bateau</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Mais à l&#39;autre bout de la communication il va vous falloir&nbsp;:</p>
+<ul>
+<li>déterminer d&#39;une manière ou d&#39;une autre que les données échangées sont en rapport avec la classe <code>Bateau</code>,</li>
+<li>et construire vous même un objet de cette classe, par exemple avec un code comme&nbsp;:</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="k">class</span> <span class="nc">Bateau</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">country</span> <span class="o">=</span> <span class="n">args</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">country</span>
+            
+<span class="n">bateau1</span> <span class="o">=</span> <span class="n">Bateau</span><span class="p">({</span><span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Leon&#39;</span><span class="p">,</span> <span class="s">&#39;country&#39;</span><span class="p">:</span> <span class="s">&#39;France&#39;</span><span class="p">})</span>
+<span class="n">bateau2</span> <span class="o">=</span> <span class="n">Bateau</span><span class="p">(</span><span class="mi">1001</span><span class="p">,</span> <span class="s">&#39;Maluba&#39;</span><span class="p">,</span> <span class="s">&#39;SUI&#39;</span> <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour reformuler ce dernier point, il n&#39;y a pas en python l&#39;équivalent de <a href="http://en.wikipedia.org/Java_metadata_interface">jmi (Java Metadata Interface)</a> intégré à la distribution standard. </p>
+<p>Et, là aussi, contrairement à Java, on peut écrire du code en dehors des classes. On n&#39;est pas forcément obligé d&#39;écrire une classe pour tout. Chaque situation doit être jugée dans son contexte naturellement, mais, de manière générale, la classe n&#39;est pas la solution universelle&nbsp;; il peut y avoir des mérites dans le fait de manipuler certaines données sous une forme allégée comme un type natif.</p>
 </div>
 </div>
 </div>
