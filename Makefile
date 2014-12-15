@@ -192,7 +192,12 @@ pdf-latex.tar: force
 	tar -cf $@ pdf-latex/W*pdf
 
 ##########
-tars: $(TARS)
+TGZS = $(subst .tar,.tgz,$(TARS))
+
+%.tgz: %.tar
+	gzip -c9 $*.tar > $@
+
+tars: $(TARS) $(TGZS)
 
 tars-clean:
 	rm -f $(TARS)
