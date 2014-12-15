@@ -130,7 +130,7 @@ $(call html_location,$(1)): $(1)
 $(call pdflatex_location,$(1)): $(1)
 	(cd pdf-latex; ln -f -s ../$(1) $(notdir $(1)) ;\
 	ipython nbconvert --to latex --post pdf $(notdir $(1));\
-	rm $(notdir $(1)))
+	rm $(notdir $(1) $(call sbn,$(1)).tex ))
 
 $(call gitprint_location,$(1)): $(call markdown_location,$(1))
 	curl -o $(call gitprint_location,$(1)) $(call gitprint_url,$(1))
@@ -163,7 +163,7 @@ html-clean:
 pdf-latex pdflatex: $(PDFLATEXS)
 
 pdf-latex-clean pdflatex-clean:
-	rm -f pdf-latex/*.{aux,out,log,ipynb,tex}
+	rm -f pdf-latex/*.{aux,out,log,ipynb,tex,pdf}
 
 .PHONY: pdf-latex pdflatex pdf-latex-clean pdflatex-clean
 
@@ -185,7 +185,21 @@ out-clean: html-clean markdown-clean pdflatex-clean gitprint-clean
 .PHONY: out out-clean
 
 ##############################
-ALL-NOTEBOOKS-HTML = $(HTMLS) html/custom.css 
+NOTEBOOKS-HTML = $(foreach notebook,$(NOTEBOOKS),notebooks/$(call sbn,$(notebook)).html)
 
-all-notebooks-html.tar: $(ALL-NOTEBOOKS-HTML)
-	tar -cf $@ $(ALL-NOTEBOOKS-HTML)
+notebooks-html.tar: html/custom.css $(NOTEBOOKS)
+	ln -f -s html notebooks
+	tar -chf $@ notebooks/custom.css $(NOTEBOOKS-HTML)
+
+NOTEBOOKS-IPYNB = $(foreach notebook,$(NOTEBOOKS),notebooks/$(call sbn,$(notebook)).ipynb)
+
+notebooks-ipynb.tar: $(NOTEBOOKS)
+	ln -f -s html notebooks
+	tar -chf $@ $(NOTEBOOKS-IPYNB)
+
+tars: notebooks-html.tar notebooks-ipynb.tar
+
+tars-clean:
+	rm -f notebooks-html.tar notebooks-ipynb.tar
+
+.PHONY: tars tars-clean
