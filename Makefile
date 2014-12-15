@@ -5,6 +5,7 @@
 #     recode ISO-8859-15..UTF-8 <filename>
 
 all: 
+.PHONY: all
 
 WEEKS=$(wildcard W?) 
 
@@ -24,6 +25,7 @@ index: force
 	    echo ""; \
 	    echo ""; \
 	done > index.long
+.PHONY: index
 
 all: index
 
@@ -31,6 +33,7 @@ all: index
 # builds a html index of the ipynb files expected to be reachable on connect.inria.fr
 # pthierry is built-in 
 connect: connect.html
+.PHONY: connect
 
 connect.html: force
 	tools/nbindex.py
@@ -40,6 +43,7 @@ all: connect
 #
 tags: force
 	git ls-files | xargs etags
+.PHONY: tags
 
 # run nbnorm on all notebooks
 norm normalize: normalize-notebook normalize-quiz
@@ -59,6 +63,8 @@ normalize-quiz: force
 
 all: norm
 
+.PHONY: norm normalize normalize-nb normalize-notebook normalize-quiz
+
 #
 CLEAN_FIND= -name '*~' -o -name '.\#*' -o -name '*pyc'
 
@@ -73,66 +79,65 @@ all: corr
 corr corriges:
 	$(MAKE) -C corriges
 
+.PHONY: corr corriges
+
 ######################################## the markdowns and PDFs
 # list of notebooks
-NOTEBOOKS = $(wildcard W*/S[0-9]*.ipynb)
+NOTEBOOKS = $(wildcard W*/W*S[0-9]*.ipynb)
 
 BRANCH=master
 GITPRINT_URL_ROOT = https://gitprint.com/parmentelat/flotpython/blob/$(BRANCH)/
 
-define week
-$(subst /,,$(dir $(1)))
-endef
-define mybasename
+# simple basename
+define sbn
 $(basename $(notdir $(1)))
-endef
-define myweekbasename
-$(call week,$(1))-$(call mybasename,$(1))
 endef
 
 define markdown_location
-markdown/$(1)-$(2).md
-endef
-define mymarkdown
-$(call markdown_location,$(call week,$(1)),$(call mybasename,$(1)))
+markdown/$(call sbn,$(1)).md
 endef
 
-define gitprint_location
-pdf-gitprint/$(1)-$(2).pdf
-endef
-define mygitprint
-$(call gitprint_location,$(call week,$(1)),$(call mybasename,$(1)))
-endef
-define gitprint_url
-$(GITPRINT_URL_ROOT)/markdown/$(1)-$(2).md?download
-endef
-define my_url
-$(call gitprint_url,$(call week,$(1)),$(call mybasename,$(1)))
+define html_location
+html/$(call sbn,$(1)).html
 endef
 
 define pdflatex_location
-pdf-latex/$(1)-$(2).pdf
-endef
-define mypdflatex
-$(call pdflatex_location,$(call week,$(1)),$(call mybasename,$(1)))
+pdf-latex/$(call sbn,$(1)).pdf
 endef
 
-MARKDOWNS = $(foreach notebook,$(NOTEBOOKS),$(call mymarkdown,$(notebook)))
-GITPRINTS = $(foreach notebook,$(NOTEBOOKS),$(call mygitprint,$(notebook)))
-PDFLATEXS = $(foreach notebook,$(NOTEBOOKS),$(call mypdflatex,$(notebook)))
+define gitprint_location
+pdf-gitprint/$(call sbn,$(1)).pdf
+endef
+define gitprint_url
+$(GITPRINT_URL_ROOT)/markdown/$(call sbn,$(1)).md?download
+endef
+
+MARKDOWNS = $(foreach notebook,$(NOTEBOOKS),$(call markdown_location,$(notebook)))
+HTMLS	  = $(foreach notebook,$(NOTEBOOKS),$(call html_location,$(notebook)))
+PDFLATEXS = $(foreach notebook,$(NOTEBOOKS),$(call pdflatex_location,$(notebook)))
+GITPRINTS = $(foreach notebook,$(NOTEBOOKS),$(call gitprint_location,$(notebook)))
 
 # apply this rule to all notebooks
 define notebook_rule
-$(call mymarkdown,$(1)): $(1)
-	ipython nbconvert --to markdown $(1) --stdout > $(call mymarkdown,$(1))
+$(call markdown_location,$(1)): $(1)
+	ipython nbconvert --to markdown $(1) --stdout > $(call markdown_location,$(1))
 
-$(call mygitprint,$(1)): $(call mymarkdown,$(1))
-	curl -o $(call mygitprint,$(1)) $(call my_url,$(1))
+$(call html_location,$(1)): $(1)
+	(cd html; ln -f -s ../$(1) $(notdir $(1)) ;\
+	ipython nbconvert --to html $(notdir $(1));\
+	)
 
-# xxx we might be better off creating a symlink in pdf-latex to the source ipynb
-$(call mypdflatex,$(1)): $(1)
-	(cd pdf-latex; ln -f -s ../$(1) $(call myweekbasename,$(1)).ipynb ;\
-	ipython nbconvert --to latex --post pdf $(call myweekbasename,$(1)))
+$(call pdflatex_location,$(1)): $(1)
+	(cd pdf-latex; ln -f -s ../$(1) $(notdir $(1)) ;\
+	ipython nbconvert --to latex --post pdf $(notdir $(1));\
+	rm $(notdir $(1)))
+
+$(call gitprint_location,$(1)): $(call markdown_location,$(1))
+	curl -o $(call gitprint_location,$(1)) $(call gitprint_url,$(1))
+
+$(call sbn,$(1)): $(call markdown_location,$(1)) $(call html_location,$(1)) $(call pdflatex_location,$(1)) $(call gitprint_location, $(1))
+
+.PHONY: $(call sbn,$(1))
 endef
 
 $(foreach notebook,$(NOTEBOOKS),$(eval $(call notebook_rule,$(notebook))))
@@ -140,16 +145,47 @@ $(foreach notebook,$(NOTEBOOKS),$(eval $(call notebook_rule,$(notebook))))
 all: md
 md markdown: $(MARKDOWNS)
 
-# these need to be done AFTER the markdown have been pushed up to github 
-gitprint: $(GITPRINTS)
+md-clean markdown-clean:
+	rm -f markdown/*.md
+
+.PHONY: md markdown md-clean markdown-clean
+
+
+html: $(HTMLS)
+
+html-clean:
+	rm -f html/*.{html,ipynb}
+
+.PHONY: html html-clean
+
 
 # the cool thing with this process is we do not need to commit to github first
-pdflatex: $(PDFLATEXS)
+pdf-latex pdflatex: $(PDFLATEXS)
 
-pdflatex-clean:
+pdf-latex-clean pdflatex-clean:
 	rm -f pdf-latex/*.{aux,out,log,ipynb,tex}
+
+.PHONY: pdf-latex pdflatex pdf-latex-clean pdflatex-clean
+
+# these need to be done AFTER the markdown have been pushed up to github 
+pdf-gitprint gitprint: $(GITPRINTS)
+
+pdf-gitprint-clean gitprint-clean:
+	rm -f pdf-gitprint/*.pdf
+
+.PHONY: pdf-gitprint gitprint
 
 # not sure this really is helpful but well
 pdf: pdflatex gitprint
+.PHONY: pdf
 
-.PHONY: all md markdown gitprint corr corriges pdflatex pdf
+out: html markdown pdflatex gitprint
+out-clean: html-clean markdown-clean pdflatex-clean gitprint-clean
+
+.PHONY: out out-clean
+
+##############################
+ALL-NOTEBOOKS-HTML = $(HTMLS) html/custom.css 
+
+all-notebooks-html.tar: $(ALL-NOTEBOOKS-HTML)
+	tar -cf $@ $(ALL-NOTEBOOKS-HTML)
