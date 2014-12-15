@@ -204,10 +204,14 @@ tars-clean:
 GITCOUNT = xargs git ls-files | wc -l
 COUNT    = wc -l
 
-check: check-nonw check-w check-html check-ipynb-in-html check-pdf-latex check-pdf-gitprint
+check: check-files check-nonw check-w check-html check-ipynb-in-html check-pdf-latex check-pdf-gitprint
+
+check-files: force
+	@echo NOTEBOOKS make variable has $(words $(NOTEBOOKS)) words
+	@echo GITPRINTS make variable has $(words $(GITPRINTS)) words
 
 check-nonw: force
-	echo "allow for one more (W2/exo-sample.ipynb)"
+	@echo "allow for one more (W2/exo-sample.ipynb)"
 	ls W*/*nb | grep -v '/W' | $(GITCOUNT)
 
 check-w: force
