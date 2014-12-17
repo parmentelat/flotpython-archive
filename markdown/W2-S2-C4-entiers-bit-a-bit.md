@@ -106,7 +106,7 @@ x49 >> 4 & \rightarrow & (0,0,0,0,0,1,1) \rightarrow 2+1 \rightarrow 3
 
 On peut utiliser la fonction *built-in* `bin`
 pour calculer la représentation binaire d'un entier; attention la valeur de
-retour est une chaîne de caractères de ytpe `str`
+retour est une chaîne de caractères de type `str`
 
 
     bin(x49)
