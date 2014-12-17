@@ -205,11 +205,11 @@ corriges.tar: force
 	tar -cf $@ corriges/*.{pdf,txt,py}
 
 
-TARS += pdf-gitprint.tar
+#TARS += pdf-gitprint.tar
 pdf-gitprint.tar: force
 	tar -cf $@ pdf-gitprint/W*pdf
 
-TARS += pdf-latex.tar
+#TARS += pdf-latex.tar
 pdf-latex.tar: force
 	tar -cf $@ pdf-latex/W*pdf
 
@@ -219,10 +219,13 @@ TGZS = $(subst .tar,.tgz,$(TARS))
 %.tgz: %.tar
 	gzip -c9 $*.tar > $@
 
-tars: $(TARS) $(TGZS)
+all-tars.tar: $(TGZS)
+	tar -cf $@ $(TGZS)
+
+tars: $(TARS) $(TGZS) all-tars.tar
 
 tars-clean:
-	rm -f $(TARS)
+	rm -f $(TARS) $(TGZS) all-tars.tar
 
 .PHONY: tars tars-clean
 
@@ -231,7 +234,8 @@ tars-clean:
 GITCOUNT = xargs git ls-files | wc -l
 COUNT    = wc -l
 
-check: check-files check-nonw check-w check-html check-ipynb-in-html check-pdf-latex check-pdf-gitprint
+check: check-files check-nonw check-w check-html check-ipynb-in-html check-markdown
+# check-pdf-latex check-pdf-gitprint
 
 check-files: force
 	@echo NOTEBOOKS make variable has $(words $(NOTEBOOKS)) words
@@ -249,6 +253,9 @@ check-html: force
 
 check-ipynb-in-html: force
 	ls html/W*.html | $(COUNT)
+
+check-markdown: force
+	ls markdown/W*.md | $(GITCOUNT)
 
 check-pdf-latex: force
 	ls pdf-latex/W*.pdf | $(GITCOUNT)
