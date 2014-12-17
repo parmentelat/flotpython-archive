@@ -43,7 +43,7 @@ IDLE.
             return 1
         # sinon on initialise f1 pour n-1 et f2 pour n-2
         f2, f1 = 1, 1
-        # et on iterere n-1 fois pour additionner
+        # et on itère n-1 fois pour additionner
         for i in range(2, n + 1):
             f2, f1 = f1, f1 + f2
     #        print i, f2, f1

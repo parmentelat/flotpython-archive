@@ -20,7 +20,7 @@ Nous allons voir en détails quelques-uns de ces exemples, nos décorateurs
 `caching` et `singleton` ont la même fonctionnalité que les `memoize` et
 `singleton` du recueil de décorateurs, mais implémentés différemment.
 
-### Un décorateur implémenté comme une fonction
+### Un décorateur implémenté comme une classe
 
 Dans la vidéo on a vu `NbAppels` pour compter le nombre de fois qu'on appelle
 une fonction. Pour mémoire on avait écrit&nbsp;:
