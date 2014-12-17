@@ -696,3 +696,22 @@ sites, mais en préparant le cours j'ai essayé rapidement
 fait; prenez garde toutefois à bien choisir le mode python dans la bannière de
 gauche car chaque langage de regexps a ses petites différences (ce ne serait pas
 drôle sinon:).
+
+### Pour en savoir plus
+
+Pour ceux qui ont quelques rudiments de la théorie des langages, vous savez
+qu'on distingue en général
+ * l'**analyse lexicale**, qui découpe le texte en morceaux (qu'on appelle des
+*tokens*),
+ * et l'**analyse syntaxique** qui décrit pour simplifier à l'extrême l'ordre
+dans lequel on peut trouver les tokens.
+
+Avec les expression régulières, on adresse le niveau de l'analyse lexicale. Pour
+l'analyse syntaxique, qui est franchement au delà des objectifs de ce cours, il
+existe de nombreuses alternatives, parmi lesquelles&nbsp;:
+ * [`pyparsing`](http://pyparsing.wikispaces.com/Download+and+Installation)
+ * [`PLY` (Python Lex-Yacc)](http://www.dabeaz.com/ply/)
+ * [`ANTLR`](http://www.antlr.org) qui est un outil écrit en Java mais qui peut
+générer des parsers en python,
+ * ...
+
