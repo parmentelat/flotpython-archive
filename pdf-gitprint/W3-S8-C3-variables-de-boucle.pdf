@@ -1,6 +1,0 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="/css/main.css"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-48971811-1', 'gitprint.com');
-ga('send', 'pageview');</script></head><body><div class="container"><div class="error hero"><h1>Something went wrong!</h1><h2>Oops, there was a problem connecting to Github to print this page. Check the URL and try again soon.</h2></div><footer class="footer"><p>&copy; 2014 <a href="http://burmister.com">Adam Burmister</a> | <a href="https://twitter.com/adamburmister">Twitter</a> | <a href="https://github.com/adamburmister/gitprint.com/issues?state=open">Report issue or suggest feature</a></p></footer></div></body></html>

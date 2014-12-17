@@ -59,7 +59,29 @@ corriges-clean:
 
 .PHONY: corriges corriges-pdf corriges-clean 
 
-######################################## the markdowns and PDFs
+########################################
+# historical note
+# students asked for an alternate format for notebooks
+# (*) at the beginning we went for a PDF approach, generating
+# markdown and then using gitprint
+# this resulted in a lot of approximate - if at all correct - output
+# (*) I then tried to use latex -> pdf, which is better now that
+# we don't use rawnbconvert anymore; result was more reliable,
+# but really not nice to look at - in other words
+# it would require a lot of styling, I'm thinking
+# a complete latex document class to have something decent
+# (*) so finally I came to consider html output as the most
+# reliable + pretty-to-look-at approach
+#
+# the other ones probably still work; note that the
+# gitprint thing has the additional drawback
+# that you need to commit the markdown files first up to github
+# before you can use gitprint, which makes things a little awkward
+
+# I'm removing the 2 pdf subdirs from git
+
+########################################
+
 # list of notebooks
 NOTEBOOKS = $(wildcard W*/W*S[0-9]*.ipynb)
 
