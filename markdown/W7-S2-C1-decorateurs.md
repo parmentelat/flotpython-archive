@@ -276,7 +276,12 @@ singleton.
     # mieux voir ce qui se passe
     
     class singleton(object):
-        '''make the class a singleton'''
+        '''
+        a decorator to transform a class into 
+        a class of one singleton
+        
+        the modified class must be a new-style class
+        '''
     
         def __init__(self, classe):
             """construit l'instance de la classe décorée"""
