@@ -45,7 +45,7 @@ La méthode `append` permet d'ajouter un élément à la fin d'une liste:
 
 ### `extend`
 
-La méthode `extend` réalise ma la même opération mais avec plusieurs éléments
+La méthode `extend` réalise la même opération mais avec plusieurs éléments
 
 
     liste.extend(['ex1', 'ex2'])
