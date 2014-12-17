@@ -2191,7 +2191,12 @@ In&nbsp;[]:
 <span class="c"># mieux voir ce qui se passe</span>
 
 <span class="k">class</span> <span class="nc">singleton</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;make the class a singleton&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    a decorator to transform a class into </span>
+<span class="sd">    a class of one singleton</span>
+<span class="sd">    </span>
+<span class="sd">    the modified class must be a new-style class</span>
+<span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classe</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;construit l&#39;instance de la classe décorée&quot;&quot;&quot;</span>
