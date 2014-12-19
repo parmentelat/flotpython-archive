@@ -54,7 +54,7 @@ tuple, il suffira d'enlever ou d'ajouter toute une ligne, sans avoir à s'occupe
 des virgules; si on avait choisi de ne pas faire figurer la virgule terminale,
 alors pour ajouter un item dans le tuple après le dernier, il ne faut pas
 oublier d'ajouter une virgule à la ligne précédente. Cette simplicité se
-répercute au niveau du getionnaire de code source, ou les différences dans le
+répercute au niveau du gestionnaire de code source, ou les différences dans le
 code sont plus faciles à visualiser.
 
 Signalons enfin que ceci n'est pas propre aux tuples. La virgule terminale est
