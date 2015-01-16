@@ -3,9 +3,10 @@
 
 ## Exercice - niveau basique
 
-Il vous est demandé d'écrire une fonction `aplatir` qui prend en argument
-`l_conteneurs` (ou plus généralement un itérable de conteneurs), et qui retourne
-la liste de tous les élément de tous les conteneurs.
+Il vous est demandé d'écrire une fonction `aplatir` qui prend *un unique*
+argument `l_conteneurs`, une liste (ou plus généralement un itérable) de
+conteneurs, et qui retourne la liste de tous les éléments de tous les
+conteneurs.
 
 
     # par exemple
