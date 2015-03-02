@@ -93,9 +93,27 @@ $([IPython.events]).on('app_initialized.NotebookApp', function(){
 
     // also support ctrl-m ctrl-s in addition to ctrl-m s
     IPython.keyboard_manager.command_shortcuts.add_shortcut('ctrl-s', {
-	help: 'Run all cells',
+	help: 'save notebook',
 	handler: function (event) {
 	    IPython.notebook.save_notebook();
+	    return false;
+	}
+    });
+    
+    // ctrl-m / ctrl-u = move cell up
+    IPython.keyboard_manager.command_shortcuts.add_shortcut('ctrl-u', {
+	help: 'Move cell up',
+	handler: function (event) {
+	    IPython.notebook.move_cell_up();
+	    return false;
+	}
+    });
+    
+    // ctrl-m / ctrl-d = move cell down
+    IPython.keyboard_manager.command_shortcuts.add_shortcut('ctrl-d', {
+	help: 'Move cell down',
+	handler: function (event) {
+	    IPython.notebook.move_cell_down();
 	    return false;
 	}
     });
