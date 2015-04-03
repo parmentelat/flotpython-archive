@@ -101,6 +101,10 @@ define html_location
 html/$(call sbn,$(1)).html
 endef
 
+define ipynb_location
+ipynb/$(call sbn,$(1)).ipynb
+endef
+
 define pdflatex_location
 pdf-latex/$(call sbn,$(1)).pdf
 endef
@@ -114,6 +118,7 @@ endef
 
 MARKDOWNS = $(foreach notebook,$(NOTEBOOKS),$(call markdown_location,$(notebook)))
 HTMLS	  = $(foreach notebook,$(NOTEBOOKS),$(call html_location,$(notebook)))
+IPYNBS	  = $(foreach notebook,$(NOTEBOOKS),$(call ipynb_location,$(notebook)))
 PDFLATEXS = $(foreach notebook,$(NOTEBOOKS),$(call pdflatex_location,$(notebook)))
 GITPRINTS = $(foreach notebook,$(NOTEBOOKS),$(call gitprint_location,$(notebook)))
 
@@ -126,6 +131,9 @@ $(call html_location,$(1)): $(1)
 	(cd html; ln -f -s ../$(1) $(notdir $(1)) ;\
 	ipython nbconvert --to html $(notdir $(1));\
 	)
+
+$(call ipynb_location,$(1)): $(1)
+	(mkdir -p ipynb; cd ipynb; ln -f -s ../$(1) $(notdir $(1)))
 
 $(call pdflatex_location,$(1)): $(1)
 	(cd pdf-latex; ln -f -s ../$(1) $(notdir $(1)) ;\
@@ -159,7 +167,6 @@ html-clean:
 .PHONY: html html-clean
 all: html
 
-
 # the cool thing with this process is we do not need to commit to github first
 pdf-latex pdflatex: $(PDFLATEXS)
 
@@ -189,16 +196,35 @@ out-clean: html-clean markdown-clean pdflatex-clean gitprint-clean
 TARS =
 
 TARS += notebooks-html.tar
-NOTEBOOKS-HTML = $(foreach notebook,$(NOTEBOOKS),notebooks/$(call sbn,$(notebook)).html)
-notebooks-html.tar: force
-	ln -f -s html notebooks
-	tar -chf $@ notebooks/custom.css $(NOTEBOOKS-HTML)
+NOTEBOOKS-HTML = $(foreach notebook,$(NOTEBOOKS),html/$(call sbn,$(notebook)).html)
+notebooks-html.tar: html
+	tar -chf $@ html/custom.css $(NOTEBOOKS-HTML)
+
+html-tar: notebooks-html.tar
+
+.PHONY: html-tar
 
 TARS += notebooks-ipynb.tar
 NOTEBOOKS-IPYNB = $(foreach notebook,$(NOTEBOOKS),notebooks/$(call sbn,$(notebook)).ipynb)
-notebooks-ipynb.tar: force
-	ln -f -s html notebooks
-	tar -chf $@ $(NOTEBOOKS-IPYNB)
+notebooks-ipynb.tar: ipynb 
+	tar -chf $@ ipynb
+
+ipynb-tar: notebooks-ipynb.tar
+
+ipynb: force
+	@mkdir -p ipynb; echo populating ipynb with notebooks from 'W*'
+	@rsync -aL $(NOTEBOOKS) ipynb
+	@mkdir -p ipynb/corrections; echo syncing modules/corrections onto ipynb/corrections
+	@rsync -a $$(git ls-files modules/corrections) ipynb/corrections
+	@mkdir -p ipynb/data; echo syncing data onto ipynb/data
+	@rsync -a $$(git ls-files data) ipynb/data
+	@mkdir -p ipynb/media; echo syncing media onto ipynb/media
+	@rsync -a $$(git ls-files media) ipynb/media
+
+ipynb-clean:
+	rm -rf ipynb
+
+.PHONY: ipynb-tar ipynb ipynb-clean
 
 TARS += corriges.tar
 corriges.tar: force
@@ -225,7 +251,7 @@ all-tars.tar: $(TGZS)
 tars: $(TARS) $(TGZS) all-tars.tar
 
 tars-clean:
-	rm -f $(TARS) $(TGZS) all-tars.tar
+	rm -f ipynb $(TARS) $(TGZS) all-tars.tar
 
 .PHONY: tars tars-clean
 
@@ -292,3 +318,13 @@ connect.html: force
 
 #all: connect
 
+
+#################### convenience, for debugging only
+# make +foo : prints the value of $(foo)
+# make ++foo : idem but verbose, i.e. foo=$(foo)
+++%: varname=$(subst +,,$@)
+++%:
+	@echo "$(varname)=$($(varname))"
++%: varname=$(subst +,,$@)
++%:
+	@echo "$($(varname))"
