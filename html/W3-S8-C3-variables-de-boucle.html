@@ -1902,8 +1902,8 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Ce résultat mérite une explication. Nous avons déjà vu dans un complément précédent en semaine 4 l&#39;exception <code>UnboundLocalError</code> qui se produit lorsque l&#39;on a dans une fonction une variable locale et une variable globale de même nom. Alors, pourquoi pour l&#39;appel <code>length([1, 2, 3])</code> il n&#39;y a pas d&#39;exception alors que pour l&#39;appel &#39;length([])&#39; il y a une exception. Cela est lié à la manière dont python détermine qu&#39;une variable est locale. </p>
-<p>Une variable est locale dans une fonction si elle est assignée dans la fonction explicitement (avec une opération d&#39;affectation) ou implicitement (par exemple avec une boucle for comme ici), nous reviendrons sur ce point dans la dernière vidéo de cette semaine. Mais pour les fonctions, pour une raison d&#39;efficacité, une variable est définie comme locale à la phase de pré-compilation, c&#39;est-à-dire avant l&#39;exécution du code. Par conséquent, le pré-compilateur ne peut pas savoir quel sera l&#39;argument passé à la fonction, il peut simplement savoir qu&#39;il y a une boucle <code>for</code> utilisant la variable <code>i</code>, donc, pour lui, <code>i</code> est locale pour toute la fonction. </p>
+<p>Ce résultat mérite une explication. Nous verrons plus tard, en semaine 4, l&#39;exception <code>UnboundLocalError</code>, mais pour le moment sachez qu&#39;elle se produit lorsque l&#39;on a dans une fonction une variable locale et une variable globale de même nom. Alors, pourquoi pour l&#39;appel <code>length([1, 2, 3])</code> il n&#39;y a pas d&#39;exception, alors que pour l&#39;appel <code>length([])</code> il y a une exception&nbsp;? Cela est lié à la manière dont python détermine qu&#39;une variable est locale. </p>
+<p>Une variable est locale dans une fonction si elle est assignée dans la fonction explicitement (avec une opération d&#39;affectation) ou implicitement (par exemple avec une boucle for comme ici), nous reviendrons sur ce point un peu plus tard. Mais pour les fonctions, pour une raison d&#39;efficacité, une variable est définie comme locale à la phase de pré-compilation, c&#39;est-à-dire avant l&#39;exécution du code. Par conséquent, le pré-compilateur ne peut pas savoir quel sera l&#39;argument passé à la fonction, il peut simplement savoir qu&#39;il y a une boucle <code>for</code> utilisant la variable <code>i</code>, donc, pour lui, <code>i</code> est locale pour toute la fonction. </p>
 <p>Lors du premier appel, on passe une liste à la fonction, liste qui est parcourue par la boucle <code>for</code>. En sortie de boucle, on a bien une variale locale <code>i</code> qui vaut 3. Lors du deuxième appel, on passe une liste vide à la fonction, la boucle <code>for</code> ne peut rien parcourir, donc elle retourne immédiatement. Lorsque l&#39;on arrive à la ligne <code>return i + 1</code> de la fonction, la variable <code>i</code> n&#39;a pas de valeur (on doit donc chercher <code>i</code> dans le module), mais <code>i</code> a été définie par le pré-compilateur comme étant locale, on a donc dans la même fonction une variable <code>i</code> locale et une référence à une variable <code>i</code> globale, on a donc l&#39;exception <code>UnboundLocalError</code>.</p>
 </div>
 </div>
@@ -2019,10 +2019,13 @@ In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+<div class="highlight"><pre><span class="c"># une version plus robuste de la fonction length de tout à l&#39;heure</span>
+<span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="c"># on initialise i explicitement pour le cas où l est vide</span>
     <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
         <span class="k">pass</span>
+    <span class="c"># comme cela i est toujours déclarée</span>
     <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
 
 <span class="n">length</span><span class="p">([])</span>

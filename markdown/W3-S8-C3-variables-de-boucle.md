@@ -74,22 +74,22 @@ peut l'être moins quand on lit du code réel, comme par exemple&nbsp;:
 
     length([])
 
-Ce résultat mérite une explication. Nous avons déjà vu dans un complément
-précédent en semaine 4 l'exception `UnboundLocalError` qui se produit lorsque
-l'on a dans une fonction une variable locale et une variable globale de même
-nom. Alors, pourquoi pour l'appel `length([1, 2, 3])` il n'y a pas d'exception
-alors que pour l'appel 'length([])' il y a une exception. Cela est lié à la
-manière dont python détermine qu'une variable est locale.
+Ce résultat mérite une explication. Nous verrons plus tard, en semaine 4,
+l'exception `UnboundLocalError`, mais pour le moment sachez qu'elle se produit
+lorsque l'on a dans une fonction une variable locale et une variable globale de
+même nom. Alors, pourquoi pour l'appel `length([1, 2, 3])` il n'y a pas
+d'exception, alors que pour l'appel `length([])` il y a une exception&nbsp;?
+Cela est lié à la manière dont python détermine qu'une variable est locale.
 
 Une variable est locale dans une fonction si elle est assignée dans la fonction
 explicitement (avec une opération d'affectation) ou implicitement (par exemple
-avec une boucle for comme ici), nous reviendrons sur ce point dans la dernière
-vidéo de cette semaine. Mais pour les fonctions, pour une raison d'efficacité,
-une variable est définie comme locale à la phase de pré-compilation,
-c'est-à-dire avant l'exécution du code. Par conséquent, le pré-compilateur ne
-peut pas savoir quel sera l'argument passé à la fonction, il peut simplement
-savoir qu'il y a une boucle `for` utilisant la variable `i`, donc, pour lui, `i`
-est locale pour toute la fonction.
+avec une boucle for comme ici), nous reviendrons sur ce point un peu plus tard.
+Mais pour les fonctions, pour une raison d'efficacité, une variable est définie
+comme locale à la phase de pré-compilation, c'est-à-dire avant l'exécution du
+code. Par conséquent, le pré-compilateur ne peut pas savoir quel sera l'argument
+passé à la fonction, il peut simplement savoir qu'il y a une boucle `for`
+utilisant la variable `i`, donc, pour lui, `i` est locale pour toute la
+fonction.
 
 Lors du premier appel, on passe une liste à la fonction, liste qui est parcourue
 par la boucle `for`. En sortie de boucle, on a bien une variale locale `i` qui
@@ -135,10 +135,13 @@ vivement conseillé de l'**initialiser** explicitement **avant** la boucle, pour
 vous prémunir contre les boucles vides, comme ceci&nbsp;:
 
 
+    # une version plus robuste de la fonction length de tout à l'heure
     def length(l):
+        # on initialise i explicitement pour le cas où l est vide
         i = -1
         for i, x in enumerate(l):
             pass
+        # comme cela i est toujours déclarée
         return i + 1
     
     length([])
