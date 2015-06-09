@@ -22,7 +22,7 @@ retourne la même liste mais avec toutes les sous-listes triées.
     def multi_tri(listes): 
         "<votre_code>"
 
-Vous pouvez le vérifier ici
+Vous pouvez le tester ici
 
 
     exo_multi_tri.correction(multi_tri)

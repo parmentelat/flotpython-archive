@@ -41,8 +41,8 @@ caractères accentués**.
 La méthode `debug` applique votre fonction au premier fichier d'entrée, et
 affiche le résultat comme dans l'exemple ci-dessus.
 
-**N'oubliez pas de vérifier** que vous ajoutez bien la **dernière fin de
-ligne**, car sa présence/absence n'apparaît pas clairement dans ce tableau.
+**N'oubliez pas de vérifier** que vous ajoutez bien la dernière fin de ligne,
+car sa présence/absence n'apparaît pas clairement dans ce tableau.
 
 
     # debugging
@@ -59,7 +59,4 @@ Ainsi que pour les courageux, des fichiers avec accents&nbsp;:
  * [Une charogne en Iso-latin-15](data/une_charogne_iso15.txt)
 
 À nouveau ces deux fichiers ne sont pas à prendre en compte dans la version
-basique de l'exercice. Vous pourrez même vous rendre compte qu'avec python-2, il
-est assez compliqué d'écrire une fonction `comptage` qui fonctionne correctement
-avec des entrées mixtes (c'est-à-dire indifféremment avec un fichier unicode ou
-isolatin) en ce qui concerne le nombre de caractères.
+basique de l'exercice.

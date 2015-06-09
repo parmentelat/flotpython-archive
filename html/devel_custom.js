@@ -119,5 +119,5 @@ $([IPython.events]).on('app_initialized.NotebookApp', function(){
     });
     
   // A small hint so we can see through firebug that our custom code executed
-  console.log("Custom iPython shortcut(s) loaded");
+  console.log("Custom shortcut(s) loaded");
 });
