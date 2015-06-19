@@ -73,20 +73,16 @@ corriges-clean:
 # (*) so finally I came to consider html output as the most
 # reliable + pretty-to-look-at approach
 #
-# the other ones probably still work; note that the
-# gitprint thing has the additional drawback
-# that you need to commit the markdown files first up to github
-# before you can use gitprint, which makes things a little awkward
-
-# I'm removing the 2 pdf subdirs from git
+# as of June 19 2015:
+# * I remove all by-products from git (be it pdf, html or markdown)
+# this was suboptimal as these files can be generated from the rest of the git contents
+# * I remove the make recipes for producing pdf, either based on pdflatex or gitprint
+# let's keep it simple (it's already a mess like this)
 
 ########################################
 
 # list of notebooks
 NOTEBOOKS = $(wildcard W*/W*S[0-9]*.ipynb)
-
-BRANCH=master
-GITPRINT_URL_ROOT = https://gitprint.com/parmentelat/flotpython/blob/$(BRANCH)/
 
 # simple basename
 define sbn
@@ -105,51 +101,32 @@ define ipynb_location
 ipynb/$(call sbn,$(1)).ipynb
 endef
 
-define pdflatex_location
-pdf-latex/$(call sbn,$(1)).pdf
-endef
-
-define gitprint_location
-pdf-gitprint/$(call sbn,$(1)).pdf
-endef
-define gitprint_url
-$(GITPRINT_URL_ROOT)/markdown/$(call sbn,$(1)).md?download
-endef
-
 MARKDOWNS = $(foreach notebook,$(NOTEBOOKS),$(call markdown_location,$(notebook)))
 HTMLS	  = $(foreach notebook,$(NOTEBOOKS),$(call html_location,$(notebook)))
 IPYNBS	  = $(foreach notebook,$(NOTEBOOKS),$(call ipynb_location,$(notebook)))
-PDFLATEXS = $(foreach notebook,$(NOTEBOOKS),$(call pdflatex_location,$(notebook)))
-GITPRINTS = $(foreach notebook,$(NOTEBOOKS),$(call gitprint_location,$(notebook)))
 
+########## how to redo individual stuff
 # apply this rule to all notebooks
 define notebook_rule
 $(call markdown_location,$(1)): $(1)
 	ipython nbconvert --to markdown $(1) --stdout > $(call markdown_location,$(1))
 
 $(call html_location,$(1)): $(1)
-	(cd html; ln -f -s ../$(1) $(notdir $(1)) ;\
-	ipython nbconvert --to html $(notdir $(1));\
-	)
+	ipython nbconvert --to html $(1) --stdout > $(call html_location,$(1))
 
 $(call ipynb_location,$(1)): $(1)
 	(mkdir -p ipynb; cd ipynb; ln -f -s ../$(1) $(notdir $(1)))
 
-$(call pdflatex_location,$(1)): $(1)
-	(cd pdf-latex; ln -f -s ../$(1) $(notdir $(1)) ;\
-	ipython nbconvert --to latex --post pdf $(notdir $(1));\
-	rm $(notdir $(1) $(call sbn,$(1)).tex ))
-
-$(call gitprint_location,$(1)): $(call markdown_location,$(1))
-	curl -o $(call gitprint_location,$(1)) $(call gitprint_url,$(1))
-
-$(call sbn,$(1)): $(call markdown_location,$(1)) $(call html_location,$(1)) $(call pdflatex_location,$(1)) $(call gitprint_location, $(1))
+# redo all targets about one notebook
+# e.g make -n W1-S2-C1-accents
+$(call sbn,$(1)): $(call markdown_location,$(1)) $(call html_location,$(1))
 
 .PHONY: $(call sbn,$(1))
 endef
 
 $(foreach notebook,$(NOTEBOOKS),$(eval $(call notebook_rule,$(notebook))))
 
+#################### markdown
 md markdown: $(MARKDOWNS)
 
 md-clean markdown-clean:
@@ -158,59 +135,16 @@ md-clean markdown-clean:
 .PHONY: md markdown md-clean markdown-clean
 all: md
 
-
+#################### html
 html: $(HTMLS)
 
 html-clean:
-	rm -f html/*.{html,ipynb}
+	rm -f html/*.html
 
 .PHONY: html html-clean
 all: html
 
-# the cool thing with this process is we do not need to commit to github first
-pdf-latex pdflatex: $(PDFLATEXS)
-
-pdf-latex-clean pdflatex-clean:
-	rm -f pdf-latex/*.{aux,out,log,ipynb,tex,pdf}
-
-.PHONY: pdf-latex pdflatex pdf-latex-clean pdflatex-clean
-
-# these need to be done AFTER the markdown have been pushed up to github 
-pdf-gitprint gitprint: $(GITPRINTS)
-
-pdf-gitprint-clean gitprint-clean:
-	rm -f pdf-gitprint/*.pdf
-
-.PHONY: pdf-gitprint gitprint
-
-# not sure this really is helpful but well
-pdf: pdflatex gitprint
-.PHONY: pdf
-
-out: html markdown pdflatex gitprint
-out-clean: html-clean markdown-clean pdflatex-clean gitprint-clean
-
-.PHONY: out out-clean
-
-##############################
-TARS =
-
-TARS += notebooks-html.tar
-NOTEBOOKS-HTML = $(foreach notebook,$(NOTEBOOKS),html/$(call sbn,$(notebook)).html)
-notebooks-html.tar: html
-	tar -chf $@ html/custom.css $(NOTEBOOKS-HTML)
-
-html-tar: notebooks-html.tar
-
-.PHONY: html-tar
-
-TARS += notebooks-ipynb.tar
-NOTEBOOKS-IPYNB = $(foreach notebook,$(NOTEBOOKS),notebooks/$(call sbn,$(notebook)).ipynb)
-notebooks-ipynb.tar: ipynb 
-	tar -chf $@ ipynb
-
-ipynb-tar: notebooks-ipynb.tar
-
+#################### ipynb
 ipynb: force
 	@mkdir -p ipynb; echo populating ipynb with notebooks from 'W*'
 	@rsync -aL $(NOTEBOOKS) ipynb
@@ -224,20 +158,79 @@ ipynb: force
 ipynb-clean:
 	rm -rf ipynb
 
-.PHONY: ipynb-tar ipynb ipynb-clean
+.PHONY: ipynb ipynb-clean
 
+####################
+# xxx misses ipynb ?
+out: html markdown ipynb
+out-clean: html-clean markdown-clean ipynb-clean
+
+.PHONY: out out-clean
+############################## outputs : tars and export (rsync)
+RSYNC_URL = tparment@srv-diana.inria.fr:/proj/planete/www/Thierry.Parmentelat/flotpython/
+RSYNC	   = rsync -av --delete
+
+TARS =
+
+########## html
+# tar
+TARS += notebooks-html.tar
+NOTEBOOKS-HTML = $(foreach notebook,$(NOTEBOOKS),$(call html_location,$(notebook)))
+notebooks-html.tar: html
+	tar -chf $@ html/custom.css $(NOTEBOOKS-HTML)
+
+html-tar: notebooks-html.tar
+
+# rsync
+html-rsync:
+	$(RSYNC) html/custom.css $(NOTEBOOKS-HTML) $(RSYNC_URL)/html/
+rsync: html-rsync
+
+.PHONY: html-tar html-rsync
+
+########## markdown
+# tar
+TARS += notebooks-markdown.tar
+NOTEBOOKS-MARKDOWN = $(foreach notebook,$(NOTEBOOKS),$(call markdown_location,$(notebook)))
+notebooks-markdown.tar: markdown
+	tar -chf $@ $(NOTEBOOKS-MARKDOWN)
+
+markdown-tar: notebooks-markdown.tar
+
+# rsync
+markdown-rsync:
+	$(RSYNC) $(NOTEBOOKS-MARKDOWN) $(RSYNC_URL)/markdown/
+
+########## ipynb
+# tar 
+TARS += notebooks-ipynb.tar
+NOTEBOOKS-IPYNB = $(foreach notebook,$(NOTEBOOKS),notebooks/$(call sbn,$(notebook)).ipynb)
+notebooks-ipynb.tar: ipynb
+	tar -chf $@ ipynb
+
+ipynb-tar: notebooks-ipynb.tar
+
+# rsync
+ipynb-rsync:
+	$(RSYNC) ipynb/ $(RSYNC_URL)/ipynb/
+rsync: ipynb-rsync
+
+.PHONY: ipynb-tar ipynb-rsync
+
+########## corriges
+# tar
 TARS += corriges.tar
 corriges.tar: force
 	tar -cf $@ corriges/*.{pdf,txt,py}
+corriges-tar: corriges.tar
 
+# rsync
+corriges-rsync:
+	$(RSYNC) corriges/*.{pdf,txt,py} $(RSYNC_URL)/corriges/
+rsync: corriges-rsync
 
-#TARS += pdf-gitprint.tar
-pdf-gitprint.tar: force
-	tar -cf $@ pdf-gitprint/W*pdf
+.PHONY: corriges-tar corriges-rsync
 
-#TARS += pdf-latex.tar
-pdf-latex.tar: force
-	tar -cf $@ pdf-latex/W*pdf
 
 ##########
 TGZS = $(subst .tar,.tgz,$(TARS))
@@ -255,41 +248,36 @@ tars-clean:
 
 .PHONY: tars tars-clean
 
+# rsync the tars themselves
+tars-rsync: $(TGZS)
+	$(RSYNC) $(TGZS) $(RSYNC_URL)/tars/
+rsync: tars-rsync
 
-##########
+########## count stuff - essentially detect sequels in html/ or markdown/
+########## that would need deletion after renamings or similar
 GITCOUNT = xargs git ls-files | wc -l
 COUNT    = wc -l
 
-check: check-files check-nonw check-w check-html check-ipynb-in-html check-markdown
+check: check-files check-w check-html check-markdown
 # check-pdf-latex check-pdf-gitprint
 
 check-files: force
 	@echo NOTEBOOKS make variable has $(words $(NOTEBOOKS)) words
-	@echo GITPRINTS make variable has $(words $(GITPRINTS)) words
 
-check-nonw: force
-	@echo "allow for one more (W2/exo-sample.ipynb)"
-	ls W*/*nb | grep -v '/W' | $(GITCOUNT)
+#check-nonw: force
+#	@echo "allow for one more (W2/exo-sample.ipynb)"
+#	ls W*/*nb | grep -v '/W' | $(GITCOUNT)
 
 check-w: force
 	ls W*/W*nb | $(GITCOUNT)
 
 check-html: force
-	ls html/W*.html | $(GITCOUNT)
-
-check-ipynb-in-html: force
 	ls html/W*.html | $(COUNT)
 
 check-markdown: force
-	ls markdown/W*.md | $(GITCOUNT)
+	ls markdown/W*.md | $(COUNT)
 
-check-pdf-latex: force
-	ls pdf-latex/W*.pdf | $(GITCOUNT)
-
-check-pdf-gitprint: force
-	ls pdf-gitprint/W*.pdf | $(GITCOUNT)
-
-############################## old stuff - not used anymore
+############################## textual index 
 #
 # rough index based on the *SUMMARY.txt
 # I need to set LC_ALL otherwise grep misreads line with accents and gives truncated results
@@ -306,18 +294,6 @@ index: force
 .PHONY: index
 
 # all: index
-
-#
-# builds a html index of the ipynb files expected to be reachable on connect.inria.fr
-# pthierry is built-in 
-connect: connect.html
-.PHONY: connect
-
-connect.html: force
-	tools/nbindex.py
-
-#all: connect
-
 
 #################### convenience, for debugging only
 # make +foo : prints the value of $(foo)
