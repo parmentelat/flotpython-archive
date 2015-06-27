@@ -204,9 +204,9 @@ markdown-rsync:
 ########## ipynb
 # tar 
 TARS += notebooks-ipynb.tar
-NOTEBOOKS-IPYNB = $(foreach notebook,$(NOTEBOOKS),notebooks/$(call sbn,$(notebook)).ipynb)
+NOTEBOOKS-IPYNB = $(foreach notebook,$(NOTEBOOKS),$(call ipynb_location,$(notebook)))
 notebooks-ipynb.tar: ipynb
-	tar -chf $@ ipynb
+	tar -chf $@  $(NOTEBOOKS-IPYNB) ipynb/corrections ipynb/data ipynb/media
 
 ipynb-tar: notebooks-ipynb.tar
 
@@ -238,13 +238,13 @@ TGZS = $(subst .tar,.tgz,$(TARS))
 %.tgz: %.tar
 	gzip -c9 $*.tar > $@
 
-all-tars.tar: $(TGZS)
+all-tgzs.tar: $(TGZS)
 	tar -cf $@ $(TGZS)
 
-tars: $(TARS) $(TGZS) all-tars.tar
+tars: $(TARS) $(TGZS) all-tgzs.tar
 
 tars-clean:
-	rm -f ipynb $(TARS) $(TGZS) all-tars.tar
+	rm -f ipynb $(TARS) $(TGZS) all-tgzs.tar
 
 .PHONY: tars tars-clean
 
