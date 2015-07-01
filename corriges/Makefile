@@ -88,3 +88,12 @@ $(foreach week, $(WEEKS), $(eval $(call week_target,$(week))))
 
 clean:
 	rm -f *.{aux,log,tex,toc,py}
+
+index:
+	for tex in *.tex; do pdflatex $$tex; done
+
+# convenience to generate a notebook fragment
+# that can validate all known exos at once
+validation:
+	$(TOOL) -N -o ../modules/corrections/validation $(SOURCES)
+
