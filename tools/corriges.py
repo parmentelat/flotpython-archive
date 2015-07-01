@@ -123,14 +123,18 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
             return self.notebook_cell_format.format(cell_lines=",\n".join(cell_lines))
         cell_lines = []
         add_cell_line("#################### new exo {}".format(self.name))
-        add_cell_line("from corrections.{} import exo_{}".format(self.filename, self.name))
+        add_cell_line("from corrections.{} import exo_{}"
+                      .format(self.filename, self.name))
         if self.name not in self.exceptions_exemple:
-            add_cell_line("exo_{}.exemple()".format(self.name))
+            add_cell_line("exo_{}.exemple()"
+                          .format(self.name))
         cell1 = cell()
         cell_lines = []
         add_cell_line("# cheating - should be OK")
-        add_cell_line("from corrections.{} import {}".format(self.filename, self.name))
-        add_cell_line("exo_{}.correction({})".format(self.name, self.name))
+        add_cell_line("from corrections.{} import {}"
+                      .format(self.filename, self.name))
+        add_cell_line("exo_{}.correction({})"
+                      .format(self.name, self.name))
         cell2 = cell()
         cell_lines = []
         add_cell_line("# dummy solution - should be KO")
