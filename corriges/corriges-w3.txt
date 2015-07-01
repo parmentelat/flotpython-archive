@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 ############################################################ 
 #
 # Corrigés de la semaine 3
@@ -21,7 +21,7 @@ def index(bateaux):
 
 
 ##################################################
-# index - Semaine 3 Séquence 2
+# index (v2) - Semaine 3 Séquence 2
 ##################################################
 def index2(bateaux):
     """
@@ -66,7 +66,7 @@ def merge(extended, abbreviated):
 
 
 ##################################################
-# merge - Semaine 3 Séquence 2
+# merge (v2) - Semaine 3 Séquence 2
 ##################################################
 def merge2(extended, abbreviated):
     """
@@ -93,7 +93,7 @@ def merge2(extended, abbreviated):
 
 
 ##################################################
-# merge - Semaine 3 Séquence 2
+# merge (v3) - Semaine 3 Séquence 2
 ##################################################
 def merge3(extended, abbreviated):
     """

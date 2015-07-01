@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 ############################################################ 
 #
 # Corrigés de la semaine 4
@@ -125,7 +125,7 @@ def alternat(l1, l2):
 
 
 ##################################################
-# alternat - Semaine 4 Séquence 4
+# alternat (v2) - Semaine 4 Séquence 4
 ##################################################
 def alternat2(l1, l2):
     "une deuxième version de alternat"

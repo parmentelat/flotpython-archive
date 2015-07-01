@@ -3,7 +3,7 @@
 
 from __future__ import print_function
 
-# helpers - used for the verbose mode only
+# helpers - used for verbose mode only
 # could have been implemented as static methods in Position
 # but we had not seen that at the time
 def d_m_s(f):

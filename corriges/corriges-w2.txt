@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-15 -*-
+# -*- coding: utf-8 -*-
 ############################################################ 
 #
 # Corrigés de la semaine 2
@@ -54,10 +54,34 @@ Prend en argument une liste, et retourne la liste modifiée:
 
 
 ##################################################
+# liste_P - Semaine 2 Séquence 7
+##################################################
+def P(x):
+    return 2*x**2 - 3*x - 2
+
+def liste_P(liste_x):
+    """
+    retourne la liste des valeurs de P 
+    sur les entrées figurant dans liste_x
+    """
+    return [ P(x) for x in liste_x ]
+
+# On peut bien entendu faire aussi de manière pédestre
+def liste_P_bis(liste_x):
+    liste_y = []
+    for x in liste_x:
+        liste_y.append(P(x))
+    return liste_y
+
+
+##################################################
 # multi_tri - Semaine 2 Séquence 7
 ##################################################
 def multi_tri(listes):
-    "trie toutes les sous-listes, et retourne listes"
+    """
+    trie toutes les sous-listes
+    et retourne listes
+    """
     for liste in listes:
         # sort fait un effet de bord 
         liste.sort()
@@ -69,8 +93,10 @@ def multi_tri(listes):
 # multi_tri_reverse - Semaine 2 Séquence 7
 ##################################################
 def multi_tri_reverse(listes, reverses):
-    """trie toutes les sous listes, dans une direction
-    précisée par le second argument"""
+    """
+    trie toutes les sous listes, dans une direction
+    précisée par le second argument
+    """
     # zip() permet de faire correspondre les éléments 
     # de listes avec ceux de reverses
     for liste, reverse in zip(listes, reverses):
@@ -81,35 +107,13 @@ def multi_tri_reverse(listes, reverses):
 
 
 ##################################################
-# liste_racines - Semaine 2 Séquence 7
-##################################################
-from math import e, pi
-
-def liste_racines(p):
-    "retourne la liste des racines p-ièmes de l'unité"
-    # une simple compréhension fait l'affaire
-    # souvenez vous que 1j c'est notre 'i' complexe
-    return [e**((2*pi*1j*n)/p) for n in range(p)]
-
-# Il est tout à fait possible aussi de construire les racines pas à pas
-# C'est un peu moins élégant mais ça fonctionne très bien aussi
-def liste_racines_bis(p):
-    "retourne la liste des racines p-ièmes de l'unité"
-    # on va construire le résultat petit à petit
-    # en partant d'une liste vide
-    resultat = []
-    # pour chaque n dans {0 .. p-1}
-    for n in range(p):
-        # on ajoute dans le résultat la racine d'ordre n
-        resultat.append(e**((2*pi*1j*n)/p))
-    # et on retourne le résultat
-    return resultat
-
-
-##################################################
 # produit_scalaire - Semaine 2 Séquence 7
 ##################################################
 def produit_scalaire(X,Y):
+    """
+    retourne le produit scalaire
+    de deux listes de même taille
+    """
     # initialisation du résultat
     scalaire = 0
     # ici encore avec zip() on peut faire correspondre 
@@ -125,8 +129,20 @@ def produit_scalaire(X,Y):
 # en voici toutefois un avant-goût: la fonction sum est très pratique
 # pour faire la somme de toute une liste de valeurs
 def produit_scalaire_bis(X,Y):
-    """retourne le produit scalaire de deux listes de même taille"""
     return sum([x*y for x, y in zip(X, Y)])
+
+# Et encore une; celle-ci par contre est
+# assez peu "pythonique"
+# on aime bien en général éviter
+# les boucles du genre
+# for i in range(l)
+#     ... l[i]
+def produit_scalaire_ter(X, Y):
+    scalaire = 0
+    n = len(X)
+    for i in range(n):
+        scalaire += X[i] * Y[i]
+    return scalaire
 
 
 ##################################################
