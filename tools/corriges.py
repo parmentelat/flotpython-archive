@@ -342,33 +342,6 @@ class Stats(object):
         if verbose:
             for function in self.functions:
                 print (function)
-    def rename_files(self):
-        hash = set()
-        gits = []
-        seds = []
-        for function in self.functions:
-            if not re.match("w[0-9]_", function.filename):
-                print("WARNING: deal with {} separately"
-                      .format(function.path))
-                continue
-            basename = function.filename[3:]
-            git = "git mv w{week}_{basename}.py w{week}s{sequence}_{basename}.py"\
-                .format(week=function.week, sequence=function.sequence, basename=basename)
-            sed = "s,w{week}_{basename},w{week}s{sequence}_{basename},g"\
-                .format(week=function.week, sequence=function.sequence, basename=basename)
-            if git not in hash:
-                gits.append(git)
-                seds.append(sed)
-            hash.add(git)
-        with open("rename.sh", 'w') as gitf:
-            for git in gits:
-                gitf.write(git+"\n")
-        print("rename.sh (over)written")
-        with open("rename.sed", 'w') as sedf:
-            for sed in seds:
-                sedf.write(sed+"\n")
-        print("rename.sed (over)written")
-            #check = "../modules/corrections
 
 ####################
 def main():
@@ -409,7 +382,6 @@ def main():
         Notebook(nboutput).write(functions)
         stats = Stats(solutions, functions)
         stats.print_count(verbose=False)
-        stats.rename_files()
         
 if __name__ == '__main__':
     main()
