@@ -36,13 +36,22 @@ class Solution:
     
     def __init__(self,
                  # mandatory
-                 filename, week, sequence, name):
+                 filename, week, sequence, name,
+                 more=None,
+             ):
+        self.path = filename
         self.filename = os.path.basename(filename).replace('.py', '')
         self.week = week
         self.sequence = sequence
         self.name = name
+        # something like 'v2' or 'suite' to label a new version or a continuation
+        self.more = more
         # internals : the Source parser will feed the code in there
         self.code = ""
+
+    def __repr__(self):
+        return "<Solution from {} function={} week={} seq={}>"\
+            .format(self.filename, self.name, self.week, self.sequence)
 
     def add_code_line(self, line):
         "convenience for the parser code"
@@ -61,14 +70,14 @@ class Solution:
     # être l'idée du siècle -> je prends pour une fois %()s et l'opérateur %
     latex_format = r"""
 \addcontentsline{toc}{section}{
-\texttt{%(name)s} -- {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s}
+\texttt{%(name)s}%(more)s -- {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s}
 %%%(name)s
 }
 \begin{Verbatim}[frame=single,fontsize=\%(size)s, samepage=true, numbers=left,
 framesep=3mm, framerule=3px,
 rulecolor=\color{Gray},
 %%fillcolor=\color{Plum},
-label=%(name)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s}]
+label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s}]
 %(code)s\end{Verbatim}
 \vspace{1cm}
 """
@@ -79,6 +88,7 @@ label=%(name)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence
         sequence = self.sequence
         size = Solution.exceptions_size.get(self.name, 'small')
         code = self.code
+        more = r" {{\small ({})}}".format(self.more) if self.more else ""
         return self.latex_format % locals()
 
     notebook_cell_format=r"""
@@ -132,12 +142,18 @@ label=%(name)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence
 ########################################
     text_format = r"""
 ##################################################
-# %(name)s - Semaine %(week)s Séquence %(sequence)s
+# {name}{more} - Semaine {week} Séquence {sequence}
 ##################################################
-%(code)s
+{code}
 """
     def text(self):
-        return self.text_format %self.__dict__
+        more = " ({})".format(self.more) if self.more else ""
+        return self.text_format.format(
+            name=self.name,
+            more=more,
+            week=self.week,
+            sequence=self.sequence,
+            code=self.code)
 
 ############################################################
 # as of dec. 11 2014 all files are UTF-8 and that's it
@@ -263,10 +279,10 @@ class Text(object):
     def __init__(self, filename):
         self.filename = filename
 
-    header = """# -*- coding: iso-8859-15 -*-
+    header_format = """# -*- coding: utf-8 -*-
 ############################################################ 
 #
-# %(title)s
+# {title}
 #
 ############################################################
 """
@@ -274,7 +290,7 @@ class Text(object):
 
     def write(self, solutions, title):
         with open(self.filename, 'w') as output:
-            output.write(self.header%dict(title=title))
+            output.write(self.header_format.format(title=title))
             for solution in solutions:
                 output.write(solution.text())
         print("{} (over)written".format(self.filename))
@@ -320,9 +336,27 @@ class Stats(object):
     def __init__(self, solutions, functions):
         self.solutions = solutions
         self.functions = functions
-    def print_count(self):
+    def print_count(self, verbose=False):
         print("We have a total of {} solutions for {} different exos"
               .format(len(self.solutions), len(self.functions)))
+        if verbose:
+            for function in self.functions:
+                print (function)
+    def rename_files(self):
+        hash = set()
+        for function in self.functions:
+            if not re.match("w[0-9]_", function.filename):
+                print("WARNING: deal with {} separately"
+                      .format(function.path))
+                continue
+            basename = function.filename[3:]
+            line = "git mv w{}_{}.py w{}s{}_{}.py"\
+                .format(function.week, basename,
+                        function.week, function.sequence, basename)
+            if line not in hash:
+                print(line)
+            hash.add(line)
+            #check = "../modules/corrections
 
 ####################
 def main():
@@ -361,8 +395,9 @@ def main():
         Text(txtoutput).write(solutions, title=args.title)
     if do_notebook:
         Notebook(nboutput).write(functions)
-
-    Stats(solutions, functions).print_count()
+        stats = Stats(solutions, functions)
+        stats.print_count(verbose=True)
+        stats.rename_files()
         
 if __name__ == '__main__':
     main()
