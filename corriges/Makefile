@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 TOOL = ../tools/corriges.py
 
-W2 = w2_slicing.py w2_if.py w2_for.py w2_strings.py
-W3 = w3_marine_dict.py w3_marine_set.py w3_decode_zen.py w3_if.py
-W4 = w4_files.py w4_pgcd.py w4_functional.py w4_comprehensions.py w4_fun_args.py 
+W2 = w2s3_slicing.py w2s7_if.py w2s7_for.py w2s8_strings.py
+W3 = w3s2_marine_dict.py w3s3_marine_set.py w3s5_decode_zen.py w3s7_if.py
+W4 = w4s1_files.py w4s2_pgcd.py w4s3_functional.py w4s4_comprehensions.py w4s8_fun_args.py 
 
 # pour la semaine 5 on met
 # dans le latex les deux fichiers (via $(TOOL))
 # dans le text un seul fichier (via $(TOOL))
 # plus le fichier shipdict.py tel quel
-W5_latex = w5_rpcproxy.py shipdict.py 
-W5_text = w5_rpcproxy.py
+W5_latex = w5s6_rpcproxy.py shipdict.py 
+W5_text = w5s6_rpcproxy.py
 W5_code  = ../data/shipdict.py
 
-W6_latex = w6_regexp.py
-W6_text = w6_regexp.py
+W6_latex = w6s6_regexp.py
+W6_text = w6s6_regexp.py
 W6_code = ../exo-meteo/meteodata.py ../exo-diskusage/diskusage.py ../exo-crawler/webcrawler.py
 
 WEEKS=2 3 4 5 6
