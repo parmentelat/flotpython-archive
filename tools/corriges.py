@@ -24,7 +24,8 @@ class Solution:
                  # mandatory
                  filename, week, sequence, name,
                  # additional tags supported on the @BEG@ line
-                 more=None, no_exemple=None, latex_size='small',
+                 more=None, latex_size='small',
+                 no_validation=None, no_exemple=None,
              ):
         self.path = filename
         self.filename = os.path.basename(filename).replace('.py', '')
@@ -33,10 +34,12 @@ class Solution:
         self.name = name
         # something like 'v2' or 'suite' to label a new version or a continuation
         self.more = more
-        # if set (to anything), no exemple show up in the validation nb
-        self.no_exemple = no_exemple
         # set to footnotesize if a solution is too wide
         self.latex_size = latex_size
+        # if set (to anything), no validation at all
+        self.no_validation = no_validation
+        # if set (to anything), no exemple show up in the validation nb
+        self.no_exemple = no_exemple
         # internals : the Source parser will feed the code in there
         self.code = ""
 
@@ -110,28 +113,44 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
         cell_lines = []
         def add_cell_line(line):
             cell_lines.append('"{}\\n"'.format(line))
-        def cell():
+        def make_cell():
             return self.notebook_cell_format.format(cell_lines=",\n".join(cell_lines))
+
+        # some exercices are so twisted that we can't do anything for them here
+        if self.no_validation:
+            cell_lines = []
+            add_cell_line("#################### exo {} has no_validation set"
+                          .format(self.name))
+            cell1 = make_cell()
+            return [ sep, sep, sep, cell1 ]
+
+        # the usual case
         cell_lines = []
-        add_cell_line("#################### new exo {}".format(self.name))
+        add_cell_line("########## exo {} ##########".format(self.name))
         add_cell_line("from corrections.{} import exo_{}"
                       .format(self.filename, self.name))
         if self.no_exemple is None:
             add_cell_line("exo_{}.exemple()"
                           .format(self.name))
-        cell1 = cell()
+        cell1 = make_cell()
         cell_lines = []
         add_cell_line("# cheating - should be OK")
-        add_cell_line("from corrections.{} import {}"
-                      .format(self.filename, self.name))
-        add_cell_line("exo_{}.correction({})"
-                      .format(self.name, self.name))
-        cell2 = cell()
+        add_cell_line("from corrections.{filename} import {name}"
+                      .format(**self.__dict__))
+        add_cell_line("exo_{name}.correction({name})"
+                      .format(**self.__dict__))
+        cell2 = make_cell()
         cell_lines = []
         add_cell_line("# dummy solution - should be KO")
-        add_cell_line("def foo(*args, **keywords): pass")
-        add_cell_line("exo_{}.correction(foo)".format(self.name))
-        cell3 = cell()
+        add_cell_line("try:")
+        add_cell_line("   from corrections.{filename} import ko_{name}"
+                      .format(**self.__dict__))
+        add_cell_line("except:")
+        add_cell_line("   def ko_{name}(*args, **keywords): 'your_code'"
+                      .format(**self.__dict__))
+        add_cell_line("exo_{name}.correction(ko_{name})"
+                      .format(**self.__dict__))
+        cell3 = make_cell()
         return [sep, sep, sep, cell1, cell2, cell3]
     
 ########################################
