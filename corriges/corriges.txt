@@ -6,7 +6,7 @@
 ############################################################
 
 ##################################################
-# composite - Semaine 2 Séquence 3
+# inconnue - Semaine 2 Séquence 3
 ##################################################
 # Pour calculer inconnue, on extrait une sous-chaine de composite
 # qui commence a l'index len(connue)
