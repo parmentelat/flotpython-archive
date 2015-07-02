@@ -20,24 +20,11 @@ class Solution:
     in general the first one is used for generating validation stuff
     """
 
-    # on peut tricher un peu si un problème ne rentre pas bien dans les clous
-    # \tiny, \scriptsize, \footnotesize, \small, \normalsize
-    exceptions_size = {
-        'diff': 'footnotesize',
-        #'decode_zen' : 'small',
-    }
-
-    # ditto - ne pas valider la methode exemple()
-    exceptions_exemple = [
-        'composite' ,
-        'index'
-    ]
-
-    
     def __init__(self,
                  # mandatory
                  filename, week, sequence, name,
-                 more=None,
+                 # additional tags supported on the @BEG@ line
+                 more=None, no_exemple=None, latex_size='small',
              ):
         self.path = filename
         self.filename = os.path.basename(filename).replace('.py', '')
@@ -46,6 +33,10 @@ class Solution:
         self.name = name
         # something like 'v2' or 'suite' to label a new version or a continuation
         self.more = more
+        # if set (to anything), no exemple show up in the validation nb
+        self.no_exemple = no_exemple
+        # set to footnotesize if a solution is too wide
+        self.latex_size = latex_size
         # internals : the Source parser will feed the code in there
         self.code = ""
 
@@ -73,7 +64,7 @@ class Solution:
 \texttt{%(name)s}%(more)s -- {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s}
 %%%(name)s
 }
-\begin{Verbatim}[frame=single,fontsize=\%(size)s, samepage=true, numbers=left,
+\begin{Verbatim}[frame=single,fontsize=\%(latex_size)s, samepage=true, numbers=left,
 framesep=3mm, framerule=3px,
 rulecolor=\color{Gray},
 %%fillcolor=\color{Plum},
@@ -86,7 +77,7 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
         name = Latex.escape(self.name)
         week = self.week
         sequence = self.sequence
-        size = Solution.exceptions_size.get(self.name, 'small')
+        latex_size = self.latex_size
         code = self.code
         more = r" {{\small ({})}}".format(self.more) if self.more else ""
         return self.latex_format % locals()
@@ -125,7 +116,7 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
         add_cell_line("#################### new exo {}".format(self.name))
         add_cell_line("from corrections.{} import exo_{}"
                       .format(self.filename, self.name))
-        if self.name not in self.exceptions_exemple:
+        if self.no_exemple is None:
             add_cell_line("exo_{}.exemple()"
                           .format(self.name))
         cell1 = cell()
@@ -241,8 +232,8 @@ class Latex(object):
 \usepackage[usenames,dvipsnames]{color}
 \setlength{\oddsidemargin}{0cm}
 \setlength{\textwidth}{16cm}
-\setlength{\topmargin}{0cm}
-\setlength{\textheight}{21cm}
+\setlength{\topmargin}{-1cm}
+\setlength{\textheight}{22cm}
 \setlength{\headsep}{1.5cm}
 \setlength{\parindent}{0.5cm}
 \begin{document}
