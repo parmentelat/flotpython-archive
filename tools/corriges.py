@@ -85,6 +85,7 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
         more = r" {{\small ({})}}".format(self.more) if self.more else ""
         return self.latex_format % locals()
 
+    # the validation notebook
     notebook_cell_format=r"""
     {{
      "cell_type": "code",
@@ -125,33 +126,35 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
             return [ sep, sep, sep, cell1 ]
 
         # the usual case
+        module = "corrections.{filename}".format(**self.__dict__)
+        exo = "corrections.{filename}.exo_{name}".format(**self.__dict__)
         cell_lines = []
         add_cell_line("########## exo {} ##########".format(self.name))
-        add_cell_line("from corrections.{} import exo_{}"
-                      .format(self.filename, self.name))
+        add_cell_line("# remove comment out to reload")
+        add_cell_line("# reload({module})".format(module=module))
+        add_cell_line("import {module}".format(module=module))
         if self.no_exemple is None:
-            add_cell_line("exo_{}.exemple()"
-                          .format(self.name))
+            add_cell_line("{exo}.exemple()".format(exo=exo))
         cell1 = make_cell()
         cell_lines = []
         add_cell_line("# cheating - should be OK")
-        add_cell_line("from corrections.{filename} import {name}"
-                      .format(**self.__dict__))
-        add_cell_line("exo_{name}.correction({name})"
-                      .format(**self.__dict__))
+        add_cell_line("from {module} import {name}"
+                      .format(module=module, **self.__dict__))
+        add_cell_line("{exo}.correction({name})"
+                      .format(exo=exo, **self.__dict__))
         cell2 = make_cell()
         cell_lines = []
         add_cell_line("# dummy solution - should be KO")
         add_cell_line("try:")
-        add_cell_line("   from corrections.{filename} import ko_{name}"
-                      .format(**self.__dict__))
+        add_cell_line("   from {module} import {name}_ko"
+                      .format(module=module, **self.__dict__))
         add_cell_line("except:")
-        add_cell_line("   def ko_{name}(*args, **keywords): 'your_code'"
+        add_cell_line("   def {name}_ko(*args, **keywords): return 'your_code'"
                       .format(**self.__dict__))
-        add_cell_line("exo_{name}.correction(ko_{name})"
-                      .format(**self.__dict__))
+        add_cell_line("{exo}.correction({name}_ko)"
+                      .format(exo=exo, **self.__dict__))
         cell3 = make_cell()
-        return [sep, sep, sep, cell1, cell2, cell3]
+        return [sep, sep, cell1, cell2, cell3]
     
 ########################################
     text_format = r"""
@@ -351,8 +354,12 @@ class Stats(object):
         self.solutions = solutions
         self.functions = functions
     def print_count(self, verbose=False):
-        print("We have a total of {} solutions for {} different exos"
-              .format(len(self.solutions), len(self.functions)))
+        skipped = [ f for f in self.functions if f.no_validation ] 
+        print("We have a total of {} solutions for {} different exos  - {} not validated:"
+              .format(len(self.solutions), len(self.functions), len(skipped)))
+        for f in skipped:
+            print("skipped {name} - w{week}s{sequence}"
+                  .format(**f.__dict__))
         if verbose:
             for function in self.functions:
                 print (function)
