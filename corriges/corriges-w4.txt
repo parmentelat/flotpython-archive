@@ -65,6 +65,28 @@ def pgcd(a, b):
 
 
 ##################################################
+# pgcd (v2) - Semaine 4 Séquence 2
+##################################################
+# il se trouve qu'en fait la première inversion n'est
+# pas nécessaire
+# en effet si a <= b, la première itération de la boucle
+# while va faire
+# r = a % b = a
+# et ensuite
+# a, b = b, r = b, a
+# ce qui provoque l'inversion
+def pgcd_bis(a, b):
+    while True:
+        # on calcule le reste 
+        r = a % b
+        # si le reste est nul, on a terminé
+        if r == 0:
+            return b
+        # sinon on passe à l'itération suivante
+        a, b = b, r
+
+
+##################################################
 # numbers - Semaine 4 Séquence 3
 ##################################################
 from operator import mul
@@ -86,7 +108,7 @@ def numbers(liste):
         reduce(mul, liste, 1),
         # les builtin 'min' et 'max' font ce qu'on veut aussi
         min(liste),
-        max(liste)
+        max(liste),
     )
 
 
@@ -127,7 +149,7 @@ def alternat(l1, l2):
 ##################################################
 # alternat (v2) - Semaine 4 Séquence 4
 ##################################################
-def alternat2(l1, l2):
+def alternat_bis(l1, l2):
     "une deuxième version de alternat"
     # la même idée mais directement, sans utiliser aplatir
     return [element for conteneur in zip(l1, l2) for element in conteneur]

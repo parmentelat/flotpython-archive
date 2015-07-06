@@ -146,36 +146,33 @@ def produit_scalaire_ter(X, Y):
 
 
 ##################################################
-# affichage - Semaine 2 Séquence 8
+# libelle - Semaine 2 Séquence 8
 ##################################################
-# un élève a remarqué très justement que ce code ne fait pas
-# exactement ce qui est demandé, en ce sens qu'avec
-# l'entrée correspondant à Ted Mosby on obtient A:><
-# je préfère toutefois publier le code qui est en
-# service pour la correction en ligne, et vous laisse
-# le soin de l'améliorer si vous le souhaitez
-def affichage(s):
-    # pour ignorer les espaces et les tabulations 
-    # le plus simple est de les enlever
-    s=s.replace(' ', '').replace('\t','')
-    # la liste des mots séparés par une virgule 
-    # nous est donnée par un simple appel à split
-    mots = s.split(',')
-    # si on n'a même pas deux mots, on retourne None
-    if len(mots) < 2:
-        return None
-    # maintenant qu'on sait qu'on a deux mots
-    # on peut extraire le prénom et le nom
-    prenom = mots.pop(0)
-    nom = mots.pop(0)
-    # on veut afficher "??" si l'âge est inconnu
-    age = "??"
-    # mais si l'âge est précisé dans la ligne
-    if len(mots) >= 2:
-        # alors on le prend
-        age = mots.pop(1)
-    # il ne reste plus qu'à formater
-    return "N:>{}< P:>{}< A:>{}<".format(nom, prenom, age)
+def libelle(ligne):
+    # on enlève les espaces et les tabulations
+    ligne = ligne.replace(' ', '').replace('\t','')
+    # on cherche les 3 champs
+    mots = ligne.split(',')
+    # on enleve les morceaux vides
+    mots = [mot for mot in mots if mot]
+    # si on n'a pas le bon nombre de champs
+    # rappelez-vous que 'return' tout court
+    # est équivalent à 'return None'
+    if len(mots) != 3:
+        return
+    # maintenant on a les trois valeurs
+    nom, prenom, rang = mots
+    # comment presenter le rang
+    msg_rang = "1er" if rang == "1" \
+               else "2nd" if rang == "2" \
+                    else "{}-eme".format(rang)
+    return "{prenom}.{nom} ({msg_rang})"\
+        .format(nom=nom, prenom=prenom, msg_rang=msg_rang)
+    # NOTE:
+    # on verra plus tard qu'on pourrait écrire beaucoup
+    # plus simplement ici
+    # return "{prenom}.{nom} ({msg_rang})"\
+    #    .format(**locals())
 
 
 ##################################################
@@ -190,7 +187,10 @@ def carre(s):
     #    résultat du split un 'token' vide, que l'on ignore 
     #    ici avec le clause 'if token'
     # enfin on convertit tous les tokens restants en entiers avec int()
-    entiers = [int(token) for token in s.split(";") if token]
+    entiers = [int(token) for token in s.split(";")
+               # en éliminant les entrées vides qui correspondent
+               # à des point-virgules en trop
+               if token]
     # il n'y a plus qu'à mettre au carré, retraduire en strings,
     # et à recoudre le tout avec join et ':'
     return ":".join([str(entier**2) for entier in entiers])
@@ -214,7 +214,7 @@ def index(bateaux):
 ##################################################
 # index (v2) - Semaine 3 Séquence 2
 ##################################################
-def index2(bateaux):
+def index_bis(bateaux):
     """
     La même chose mais de manière itérative
     """
@@ -259,7 +259,7 @@ def merge(extended, abbreviated):
 ##################################################
 # merge (v2) - Semaine 3 Séquence 2
 ##################################################
-def merge2(extended, abbreviated):
+def merge_bis(extended, abbreviated):
     """
     Une deuxième version, linéaire également
     """
@@ -286,7 +286,7 @@ def merge2(extended, abbreviated):
 ##################################################
 # merge (v3) - Semaine 3 Séquence 2
 ##################################################
-def merge3(extended, abbreviated):
+def merge_ter(extended, abbreviated):
     """
     Une troisième solution
     à cause du tri que l'on fait au départ, cette 
@@ -323,9 +323,9 @@ def merge3(extended, abbreviated):
 ##################################################
 def diff(extended, abbreviated):
     """Calcule comme demandé dans l'exercice, et sous formes d'ensembles
-(*) les noms des bateaux seulement dans extended
-(*) les noms des bateaux présents dans les deux listes
-(*) les ids des bateaux seulement dans abbreviated
+    (*) les noms des bateaux seulement dans extended
+    (*) les noms des bateaux présents dans les deux listes
+    (*) les ids des bateaux seulement dans abbreviated
     """
     ### on n'utilise que des ensembles dans tous l'exercice
     # les ids de tous les bateaux dans extended
@@ -352,6 +352,21 @@ def diff(extended, abbreviated):
           {ship[4] for ship in extended if ship[0] in extended_only_ids}
     # enfin on retourne les 3 ensembles sous forme d'un tuple
     return extended_only_names, both_names, abbreviated_only_ids
+
+
+##################################################
+# diff (v2) - Semaine 3 Séquence 3
+##################################################
+def diff_bis(extended, abbreviated):
+    extended_ids =     {ship[0] for ship in extended}
+    abbreviated_ids =  {ship[0] for ship in abbreviated}
+    abbreviated_only = {ship[0] for ship in abbreviated
+                        if ship[0] not in extended_ids}
+    extended_only =    {ship[4] for ship in extended
+                        if ship[0] not in abbreviated_ids}
+    both =             {ship[4] for ship in extended
+                        if ship[0] in abbreviated_ids}
+    return extended_only, both, abbreviated_only
 
 
 ##################################################
@@ -390,12 +405,12 @@ def decode_zen(this_module):
 
 
 ##################################################
-# decode_zen - Semaine 3 Séquence 5
+# decode_zen (v2) - Semaine 3 Séquence 5
 ##################################################
 # une autre version qui marche aussi, en utilisant 
 # dict.get(key, default)
-def decode_zen2(this):
-    return "".join([this.d.get(c, c) for c in this.s])
+def decode_zen_bis(this_module):
+    return "".join([this_module.d.get(c, c) for c in this_module.s])
 
 
 ##################################################
@@ -495,6 +510,28 @@ def pgcd(a, b):
 
 
 ##################################################
+# pgcd (v2) - Semaine 4 Séquence 2
+##################################################
+# il se trouve qu'en fait la première inversion n'est
+# pas nécessaire
+# en effet si a <= b, la première itération de la boucle
+# while va faire
+# r = a % b = a
+# et ensuite
+# a, b = b, r = b, a
+# ce qui provoque l'inversion
+def pgcd_bis(a, b):
+    while True:
+        # on calcule le reste 
+        r = a % b
+        # si le reste est nul, on a terminé
+        if r == 0:
+            return b
+        # sinon on passe à l'itération suivante
+        a, b = b, r
+
+
+##################################################
 # numbers - Semaine 4 Séquence 3
 ##################################################
 from operator import mul
@@ -516,7 +553,7 @@ def numbers(liste):
         reduce(mul, liste, 1),
         # les builtin 'min' et 'max' font ce qu'on veut aussi
         min(liste),
-        max(liste)
+        max(liste),
     )
 
 
@@ -557,7 +594,7 @@ def alternat(l1, l2):
 ##################################################
 # alternat (v2) - Semaine 4 Séquence 4
 ##################################################
-def alternat2(l1, l2):
+def alternat_bis(l1, l2):
     "une deuxième version de alternat"
     # la même idée mais directement, sans utiliser aplatir
     return [element for conteneur in zip(l1, l2) for element in conteneur]
@@ -929,24 +966,24 @@ class ShipDict(dict):
 
 
 ##################################################
-# regexp_pythonid - Semaine 6 Séquence 6
+# pythonid (regexp) - Semaine 6 Séquence 6
 ##################################################
 # un identificateur commence par une lettre ou un underscore
 # et peut être suivi par n'importe quel nombre de
 # lettre, chiffre ou underscore, ce qui se trouve être \w
 # si on ne se met pas en mode unicode
-regexp_pythonid = "[a-zA-Z_]\w*"
+pythonid = "[a-zA-Z_]\w*"
 
 
 ##################################################
-# regexp_pythonid (v2) - Semaine 6 Séquence 6
+# pythonid (v2) - Semaine 6 Séquence 6
 ##################################################
 # on peut aussi bien sûr l'écrire en clair
-regexp_pythonid2 = "[a-zA-Z_][a-zA-Z0-9_]*"
+pythonid_bis = "[a-zA-Z_][a-zA-Z0-9_]*"
 
 
 ##################################################
-# regexp_specials - Semaine 6 Séquence 6
+# specials (regexp) - Semaine 6 Séquence 6
 ##################################################
 # il faut commencer par exactement 2 underscores
 # donc le caractère suivant doit être une lettre
@@ -955,11 +992,11 @@ regexp_pythonid2 = "[a-zA-Z_][a-zA-Z0-9_]*"
 # un underscore
 # enfin pour traiter le cas où la partie centrale est réduite
 # à un seul caractère, on met une option - avec ()? 
-regexp_specials = "__[a-zA-Z](\w*[a-zA-Z0-9])?__"
+specials = "__[a-zA-Z](\w*[a-zA-Z0-9])?__"
 
 
 ##################################################
-# regexp_url - Semaine 6 Séquence 6
+# url (regexp) - Semaine 6 Séquence 6
 ##################################################
 # en ignorant la casse on pourra ne mentionner les noms de protocoles
 # qu'en minuscules
@@ -988,5 +1025,5 @@ port        = r"(:(?P<port>\d+))?"
 path        = r"(?P<path>.*)"
 
 # on assemble le tout
-regexp_url = i_flag + protos + "://" + user + hostname + port + '/' + path
+url = i_flag + protos + "://" + user + hostname + port + '/' + path
 

@@ -23,7 +23,7 @@ def index(bateaux):
 ##################################################
 # index (v2) - Semaine 3 Séquence 2
 ##################################################
-def index2(bateaux):
+def index_bis(bateaux):
     """
     La même chose mais de manière itérative
     """
@@ -68,7 +68,7 @@ def merge(extended, abbreviated):
 ##################################################
 # merge (v2) - Semaine 3 Séquence 2
 ##################################################
-def merge2(extended, abbreviated):
+def merge_bis(extended, abbreviated):
     """
     Une deuxième version, linéaire également
     """
@@ -95,7 +95,7 @@ def merge2(extended, abbreviated):
 ##################################################
 # merge (v3) - Semaine 3 Séquence 2
 ##################################################
-def merge3(extended, abbreviated):
+def merge_ter(extended, abbreviated):
     """
     Une troisième solution
     à cause du tri que l'on fait au départ, cette 
@@ -132,9 +132,9 @@ def merge3(extended, abbreviated):
 ##################################################
 def diff(extended, abbreviated):
     """Calcule comme demandé dans l'exercice, et sous formes d'ensembles
-(*) les noms des bateaux seulement dans extended
-(*) les noms des bateaux présents dans les deux listes
-(*) les ids des bateaux seulement dans abbreviated
+    (*) les noms des bateaux seulement dans extended
+    (*) les noms des bateaux présents dans les deux listes
+    (*) les ids des bateaux seulement dans abbreviated
     """
     ### on n'utilise que des ensembles dans tous l'exercice
     # les ids de tous les bateaux dans extended
@@ -161,6 +161,24 @@ def diff(extended, abbreviated):
           {ship[4] for ship in extended if ship[0] in extended_only_ids}
     # enfin on retourne les 3 ensembles sous forme d'un tuple
     return extended_only_names, both_names, abbreviated_only_ids
+
+
+##################################################
+# diff (v2) - Semaine 3 Séquence 3
+##################################################
+def diff_bis(extended, abbreviated):
+    """
+    Idem avec seulement des compréhensions
+    """
+    extended_ids =     {ship[0] for ship in extended}
+    abbreviated_ids =  {ship[0] for ship in abbreviated}
+    abbreviated_only = {ship[0] for ship in abbreviated
+                        if ship[0] not in extended_ids}
+    extended_only =    {ship[4] for ship in extended
+                        if ship[0] not in abbreviated_ids}
+    both =             {ship[4] for ship in extended
+                        if ship[0] in abbreviated_ids}
+    return extended_only, both, abbreviated_only
 
 
 ##################################################
@@ -199,12 +217,13 @@ def decode_zen(this_module):
 
 
 ##################################################
-# decode_zen - Semaine 3 Séquence 5
+# decode_zen (v2) - Semaine 3 Séquence 5
 ##################################################
 # une autre version qui marche aussi, en utilisant 
 # dict.get(key, default)
-def decode_zen2(this):
-    return "".join([this.d.get(c, c) for c in this.s])
+def decode_zen_bis(this_module):
+    "une autre version plus courte"
+    return "".join([this_module.d.get(c, c) for c in this_module.s])
 
 
 ##################################################
