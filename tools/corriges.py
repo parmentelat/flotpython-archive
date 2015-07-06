@@ -260,7 +260,7 @@ class Latex(object):
 \setlength{\parindent}{0.5cm}
 \begin{document}
 \centerline{\huge{%(title)s}}
-\vspace{2cm}
+\vspace{1cm}
 """
 
     contents=r"""
