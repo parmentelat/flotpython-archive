@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 ############################################################ 
 #
+# MOOC Python
+#
+############################################################
+# -*- coding: utf-8 -*-
+############################################################ 
+#
 # Tous les corrigés
 #
 ############################################################
@@ -358,6 +364,9 @@ def diff(extended, abbreviated):
 # diff (v2) - Semaine 3 Séquence 3
 ##################################################
 def diff_bis(extended, abbreviated):
+    """
+    Idem avec seulement des compréhensions
+    """
     extended_ids =     {ship[0] for ship in extended}
     abbreviated_ids =  {ship[0] for ship in abbreviated}
     abbreviated_only = {ship[0] for ship in abbreviated
@@ -410,6 +419,7 @@ def decode_zen(this_module):
 # une autre version qui marche aussi, en utilisant 
 # dict.get(key, default)
 def decode_zen_bis(this_module):
+    "une autre version plus courte"
     return "".join([this_module.d.get(c, c) for c in this_module.s])
 
 
@@ -481,8 +491,8 @@ def comptage(in_filename, out_filename):
                 total_chars += nb_chars
                 # on écrit la ligne de sortie; pas besoin
                 # de newline (\n) car line en a déjà un
-                output.write("{}:{}:{}:{}".\
-                             format(lineno, nb_words, nb_chars, line))
+                output.write("{}:{}:{}:{}"
+                             .format(lineno, nb_words, nb_chars, line))
             # on écrit la ligne de synthèse
             output.write("{}:{}:{}\n".\
                          format(lineno, total_words, total_chars))
@@ -558,9 +568,9 @@ def numbers(liste):
 
 
 ##################################################
-# validation - Semaine 4 Séquence 3
+# compare - Semaine 4 Séquence 3
 ##################################################
-def validation(f, g, entrees):
+def compare(f, g, entrees):
     """
     retourne une liste de booléens, un par entree dans entrees
     qui indique si f(entree) == g(entree)
@@ -662,9 +672,19 @@ def doubler_premier(f, first, *args):
 
 
 ##################################################
-# doubler_premier2 - Semaine 4 Séquence 8
+# doubler_premier (v2) - Semaine 4 Séquence 8
 ##################################################
-def doubler_premier2(f, first, *args, **keywords):
+def doubler_premier_bis(f, *args):
+    "marche aussi mais moins élégant"
+    first = args[0]
+    remains = args[1:]
+    return f(2*first, *remains)
+
+
+##################################################
+# doubler_premier_kwds - Semaine 4 Séquence 8
+##################################################
+def doubler_premier_kwds(f, first, *args, **keywords):
     """
     équivalent à doubler_premier 
     mais on peut aussi passer des arguments nommés
@@ -683,23 +703,23 @@ def doubler_premier2(f, first, *args, **keywords):
 #def muln(x=1, y=1): return x*y
 
 # alors ceci
-#doubler_premier2(muln, x=1, y=2)
+#doubler_premier_kwds(muln, x=1, y=2)
 # ne marche pas car on n'a pas les deux arguments requis
-# par doubler_premier2
+# par doubler_premier_kwds
 # 
 # et pour écrire, disons doubler_permier3, qui marcherait aussi comme cela
 # il faudrait faire une hypothèse sur le nom du premier argument...
 
 
 ##################################################
-# validation2 - Semaine 4 Séquence 8
+# compare_args - Semaine 4 Séquence 8
 ##################################################
-def validation2(f, g, argument_tuples):
+def compare_args(f, g, argument_tuples):
     """
     retourne une liste de booléens, un par entree dans entrees
     qui indique si f(*tuple) == g(*tuple)
     """
-    # c'est presque exactement comme validation, sauf qu'on s'attend 
+    # c'est presque exactement comme compare, sauf qu'on s'attend 
     # à recevoir une liste de tuples d'arguments, qu'on applique
     # aux deux fonctions avec la forme * au lieu de les passer directement
     return [f(*tuple) == g(*tuple) for tuple in argument_tuples]

@@ -63,7 +63,7 @@ class Solution:
     # utiliser les {} comme un marqueur dans du latex ne semble pas
     # être l'idée du siècle -> je prends pour une fois %()s et l'opérateur %
     latex_format = r"""
-\addcontentsline{toc}{section}{
+\addcontentsline{toc}{subsection}{
 \texttt{%(name)s}%(more)s -- {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s}
 %%%(name)s
 }
@@ -272,6 +272,8 @@ class Latex(object):
 %% for Verbatim
 \usepackage{fancyvrb}
 \usepackage[usenames,dvipsnames]{color}
+\usepackage{hyperref}
+
 \setlength{\oddsidemargin}{0cm}
 \setlength{\textwidth}{16cm}
 \setlength{\topmargin}{-1cm}
@@ -279,12 +281,16 @@ class Latex(object):
 \setlength{\headsep}{1.5cm}
 \setlength{\parindent}{0.5cm}
 \begin{document}
-\centerline{\huge{%(title)s}}
+\begin{center}
+{\huge %(title)s}
+\end{center}
 \vspace{1cm}
 """
 
     contents=r"""
+%\renewcommand{\baselinestretch}{0.75}\normalsize
 \tableofcontents
+%\renewcommand{\baselinestretch}{1.0}\normalsize
 \newpage
 """
 
@@ -293,15 +299,24 @@ class Latex(object):
 \end{document}
 """
 
+    week_format=r"""
+\addcontentsline{{toc}}{{section}}{{Semaine {}}}
+"""
+
     def __init__(self, filename):
         self.filename = filename
 
-    def write(self, solutions, title, contents):
+    def write(self, solutions, title_list, contents):
+        week = None
         with open(self.filename, 'w') as output:
-            output.write(Latex.header%(dict(title=title)))
+            title_tex = " \\\\ \\mbox{} \\\\ ".join(title_list)
+            output.write(Latex.header%(dict(title=title_tex)))
             if contents:
                 output.write(Latex.contents)
             for solution in solutions:
+                if solution.week != week:
+                    week = solution.week
+                    output.write(self.week_format.format(week))
                 output.write(solution.latex())
             output.write(Latex.footer)
         print("{} (over)written".format(self.filename))
@@ -325,9 +340,10 @@ class Text(object):
 """
     
 
-    def write(self, solutions, title):
+    def write(self, solutions, title_list):
         with open(self.filename, 'w') as output:
-            output.write(self.header_format.format(title=title))
+            for title in title_list:
+                output.write(self.header_format.format(title=title))
             for solution in solutions:
                 output.write(solution.text())
         print("{} (over)written".format(self.filename))
@@ -415,10 +431,11 @@ def main():
     texoutput = "{}.tex".format(output)
     txtoutput = "{}.txt".format(output)
     nboutput = "{}.ipynb".format(output)
+    title_list = args.title.split(";")
     if do_latex:
-        Latex(texoutput).write(solutions, title=args.title, contents=args.contents)
+        Latex(texoutput).write(solutions, title_list=title_list, contents=args.contents)
     if do_text:
-        Text(txtoutput).write(solutions, title=args.title)
+        Text(txtoutput).write(solutions, title_list=title_list)
     if do_notebook:
         Notebook(nboutput).write(functions)
         stats = Stats(solutions, functions)
