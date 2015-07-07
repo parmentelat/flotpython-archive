@@ -1,8 +1,14 @@
-all:
+std:
 	merger.py json/*
+verbose:
+	merger.py -v json/*
+all: std verbose
 
-REF-FILES =  ALL_SHIPS.kml.ref	ALL_SHIPS.txt.ref ALL_SHIPS-v.txt.ref v2.0
+REF-FILES =  ALL_SHIPS.kml.ref	ALL_SHIPS.txt.ref ALL_SHIPS-v.txt.ref
 
+diff:
+	for file in $(REF-FILES); do echo "---------- $$file"; \
+           base=$$(basename $$file .ref); diff $$file $$base; done
 
 ref-tar:
 	tar cf ../data/ships-ref.tar $(REF-FILES)
