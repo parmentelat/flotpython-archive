@@ -8,6 +8,7 @@ import tempfile
 import shutil
 from types import StringTypes, ListType
 
+default_version = "2.0"
 
 # compute signature
 from IPython.nbformat.sign import NotebookNotary as Notary
@@ -100,7 +101,7 @@ class Notebook:
         if verbose:
             print ("{} -> {}".format(self.filename,metadata[notebookname]))
 
-    def set_version (self, version="1.0", force=False):
+    def set_version (self, version=default_version, force=False):
         metadata = self.xpath (['metadata'])
         if 'version' not in metadata or force:
             metadata['version']=version
