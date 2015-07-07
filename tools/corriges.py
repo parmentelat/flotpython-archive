@@ -179,13 +179,19 @@ class Source(object):
     def __init__(self, filename):
         self.filename = filename
 
-    mandatory_fields = [ 'name', 'week', 'sequence' ]
+    # mandatory fields
+    # 'name' truly is required
+    # the other 2 can sometimes be inferred from the context (filename)
+    mandatory_fields = [ ('name', True), ('week', False), ('sequence', False) ]
         
     beg_matcher = re.compile(
         r"\A. @BEG@(?P<keywords>(\s+[a-z_]+=[a-z_A-Z0-9-]+)+)\s*\Z"
     )
     end_matcher = re.compile(
         r"\A. @END@"
+        )
+    filename_matcher = re.compile(
+        r"\Aw(?P<week>[0-9]+)s(?P<sequence>[0-9]+)_"
         )
     def parse(self):
         """
@@ -199,6 +205,12 @@ class Source(object):
         solutions = []
         functions = []
         names = []
+        basename = os.path.basename(self.filename)
+        match = self.filename_matcher.match(basename)
+        if match:
+            context_from_filename = match.groupdict()
+        else:
+            context_from_filename = {}
         with open(self.filename) as input:
             for lineno, line in enumerate(input):
                 lineno += 1
@@ -213,10 +225,18 @@ class Source(object):
                     for assignment in assignments:
                         k, v = assignment.split('=')
                         keywords[k] = v
-                    for field in self.mandatory_fields:
+                    for field, required in self.mandatory_fields:
                         if field not in keywords:
-                            print("{}:{} missing keyword {}"
-                                  .format(self.filename, lineno, field))
+                            if required:
+                                print("{}:{} missing keyword {}"
+                                      .format(self.filename, lineno, field))
+                            elif field in context_from_filename:
+                                keywords[field] = context_from_filename[field]
+                                #print("Using inferred field {} = {}"
+                                #      .format(field, keywords[field]))
+                            else:
+                                print("{}:{} could not infer field {}"
+                                      .format(field))
                     try:
                         solution = Solution(filename = self.filename, **keywords)
                     except:
