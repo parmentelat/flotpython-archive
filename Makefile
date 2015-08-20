@@ -130,7 +130,7 @@ markdown: $(MARKDOWNS)
 
 markdown-clean:
 	rm -f markdown/*.md
-CLEAN-TARGETS += markdown-clean
+SUPERCLEAN-TARGETS += markdown-clean
 
 .PHONY: markdown markdown-clean
 all: markdown
@@ -140,7 +140,7 @@ html: $(HTMLS)
 
 html-clean:
 	rm -f html/*.html
-CLEAN-TARGETS += html-clean
+SUPERCLEAN-TARGETS += html-clean
 
 .PHONY: html html-clean
 all: html
@@ -302,6 +302,7 @@ index: force
 standalone: ipynb
 	mkdir -p standalone
 	rsync -av W?/*.mov standalone/
+	rsync -av W?/*.quiz standalone/
 	rsync -av ipynb/ standalone/
 
 standalone-clean:
@@ -312,6 +313,8 @@ CLEAN-TARGETS += standalone-clean
 
 ############################## clean
 clean: $(CLEAN-TARGETS)
+# html and markdown are so slow to rebuild..
+superclean: $(CLEAN-TARGETS) $(SUPERCLEAN-TARGETS)
 
 .PHONY: clean
 #################### convenience, for debugging only
