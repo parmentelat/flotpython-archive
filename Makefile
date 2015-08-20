@@ -40,11 +40,9 @@ all: norm
 #
 CLEAN_FIND= -name '*~' -o -name '.\#*' -o -name '*pyc'
 
-toclean: force
-	find . $(CLEAN_FIND) -print0 | xargs -0 ls
-
-clean:: force
+junk-clean: force
 	find . $(CLEAN_FIND) -name '*~' -o -name '.#*' -print0 | xargs -0 rm -f
+CLEAN-TARGETS += junk-clean
 
 #################### corriges
 all: corriges
@@ -56,6 +54,7 @@ corriges-pdf:
 
 corriges-clean:
 	$(MAKE) -C corriges clean
+CLEAN-TARGETS += corriges-clean
 
 .PHONY: corriges corriges-pdf corriges-clean 
 
@@ -127,19 +126,21 @@ endef
 $(foreach notebook,$(NOTEBOOKS),$(eval $(call notebook_rule,$(notebook))))
 
 #################### markdown
-md markdown: $(MARKDOWNS)
+markdown: $(MARKDOWNS)
 
-md-clean markdown-clean:
+markdown-clean:
 	rm -f markdown/*.md
+CLEAN-TARGETS += markdown-clean
 
-.PHONY: md markdown md-clean markdown-clean
-all: md
+.PHONY: markdown markdown-clean
+all: markdown
 
 #################### html
 html: $(HTMLS)
 
 html-clean:
 	rm -f html/*.html
+CLEAN-TARGETS += html-clean
 
 .PHONY: html html-clean
 all: html
@@ -157,6 +158,7 @@ ipynb: force
 
 ipynb-clean:
 	rm -rf ipynb
+CLEAN-TARGETS += ipynb-clean
 
 .PHONY: ipynb ipynb-clean
 
@@ -245,6 +247,7 @@ tars: $(TARS) $(TGZS) all-tgzs.tar
 
 tars-clean:
 	rm -f ipynb $(TARS) $(TGZS) all-tgzs.tar
+CLEAN-TARGETS += tars-clean
 
 .PHONY: tars tars-clean
 
@@ -295,6 +298,21 @@ index: force
 
 # all: index
 
+############################## standalone
+standalone: force
+	mkdir -p standalone
+	rsync -av $(wildcard W?/C012AL-W?-S?.mov) standalone/
+
+standalone-clean:
+	rm -rf standalone
+CLEAN-TARGETS += standalone-clean
+
+.PHONY: standalone standalone-clean
+
+############################## clean
+clean: $(CLEAN-TARGETS)
+
+.PHONY: clean
 #################### convenience, for debugging only
 # make +foo : prints the value of $(foo)
 # make ++foo : idem but verbose, i.e. foo=$(foo)
