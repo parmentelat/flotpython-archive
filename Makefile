@@ -299,9 +299,10 @@ index: force
 # all: index
 
 ############################## standalone
-standalone: force
+standalone: ipynb
 	mkdir -p standalone
-	rsync -av $(wildcard W?/C012AL-W?-S?.mov) standalone/
+	rsync -av W?/*.mov standalone/
+	rsync -av ipynb/ standalone/
 
 standalone-clean:
 	rm -rf standalone
