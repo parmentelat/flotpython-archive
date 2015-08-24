@@ -157,7 +157,7 @@ ipynb: force
 	@rsync -a $$(git ls-files media) ipynb/media
 
 ipynb-clean:
-	rm -rf ipynb
+	rm -rf ipynb/
 CLEAN-TARGETS += ipynb-clean
 
 .PHONY: ipynb ipynb-clean
@@ -169,67 +169,81 @@ out-clean: html-clean markdown-clean ipynb-clean
 
 .PHONY: out out-clean
 ############################## outputs : tars and export (rsync)
+# Note on UTF-8 - need to instruct apache about our using utf-8
+# tparment@srv-diana $ cat /proj/planete/www/Thierry.Parmentelat/flotpython/.htaccess
+# AddDefaultCharset utf-8
 RSYNC_URL = tparment@srv-diana.inria.fr:/proj/planete/www/Thierry.Parmentelat/flotpython/
 RSYNC	   = rsync -av --delete
+
+tars-dir:
+	mkdir -p tars
+.PHONY: tars-dir
 
 TARS =
 
 ########## html
 # tar
-TARS += notebooks-html.tar
+TAR-HTML = tars/notebooks-html.tar
+TARS += $(TAR-HTML)
 NOTEBOOKS-HTML = $(foreach notebook,$(NOTEBOOKS),$(call html_location,$(notebook)))
-notebooks-html.tar: html
-	tar -chf $@ html/custom.css $(NOTEBOOKS-HTML)
+CONTENTS-HTML = html/custom.css $(NOTEBOOKS-HTML)
+$(TAR-HTML): tars-dir html $(CONTENTS-HTML)
+	tar -chf $@ $(CONTENTS-HTML)
 
-html-tar: notebooks-html.tar
+html-tar: $(TAR-HTML)
 
 # rsync
 html-rsync:
 	$(RSYNC) html/custom.css $(NOTEBOOKS-HTML) $(RSYNC_URL)/html/
-rsync: html-rsync
+RSYNC-TARGETS += html-rsync
 
 .PHONY: html-tar html-rsync
 
 ########## markdown
 # tar
-TARS += notebooks-markdown.tar
+TAR-MARKDOWN = tars/notebooks-markdown.tar
+TARS += $(TAR-MARKDOWN)
 NOTEBOOKS-MARKDOWN = $(foreach notebook,$(NOTEBOOKS),$(call markdown_location,$(notebook)))
-notebooks-markdown.tar: markdown
+$(TAR-MARKDOWN): markdown tars-dir $(NOTEBOOKS-MARKDOWN)
 	tar -chf $@ $(NOTEBOOKS-MARKDOWN)
 
-markdown-tar: notebooks-markdown.tar
+markdown-tar: $(TAR-MARKDOWN)
 
 # rsync
 markdown-rsync:
 	$(RSYNC) $(NOTEBOOKS-MARKDOWN) $(RSYNC_URL)/markdown/
+RSYNC-TARGETS += markdown-rsync
 
 ########## ipynb
 # tar 
-TARS += notebooks-ipynb.tar
+TAR-IPYNB = tars/notebooks-ipynb.tar
+TARS += $(TAR-IPYNB)
 NOTEBOOKS-IPYNB = $(foreach notebook,$(NOTEBOOKS),$(call ipynb_location,$(notebook)))
-notebooks-ipynb.tar: ipynb
+$(TAR-IPYNB): ipynb tars-dir $(NOTEBOOKS-IPYNB)
 	tar -chf $@  $(NOTEBOOKS-IPYNB) ipynb/corrections ipynb/data ipynb/media
 
-ipynb-tar: notebooks-ipynb.tar
+ipynb-tar: $(TAR-IPYNB)
 
 # rsync
 ipynb-rsync:
 	$(RSYNC) ipynb/ $(RSYNC_URL)/ipynb/
-rsync: ipynb-rsync
+RSYNC-TARGETS += ipynb-rsync
 
 .PHONY: ipynb-tar ipynb-rsync
 
 ########## corriges
 # tar
-TARS += corriges.tar
-corriges.tar: force
-	tar -cf $@ corriges/*.{pdf,txt,py}
-corriges-tar: corriges.tar
+TAR-CORRIGES = tars/corriges.tar
+TARS += $(TAR-CORRIGES)
+CORRIGES-CONTENTS = $(wildcard corriges/*.pdf) $(wildcard corriges/*.txt) $(wildcard corriges/*py)
+$(TAR-CORRIGES): force tars-dir $(CORRIGES-CONTENTS)
+	tar -cf $@ $(CORRIGES-CONTENTS)
+corriges-tar: $(TAR-CORRIGES)
 
 # rsync
 corriges-rsync:
 	$(RSYNC) corriges/*.{pdf,txt,py} $(RSYNC_URL)/corriges/
-rsync: corriges-rsync
+RSYNC-TARGETS += corriges-rsync
 
 .PHONY: corriges-tar corriges-rsync
 
@@ -240,13 +254,14 @@ TGZS = $(subst .tar,.tgz,$(TARS))
 %.tgz: %.tar
 	gzip -c9 $*.tar > $@
 
-all-tgzs.tar: $(TGZS)
+TAR-ALL = tars/all-tgzs.tar
+$(TAR-ALL): $(TGZS) tars-dir
 	tar -cf $@ $(TGZS)
 
-tars: $(TARS) $(TGZS) all-tgzs.tar
+tars: $(TARS) $(TGZS) $(TAR-ALL)
 
 tars-clean:
-	rm -f ipynb $(TARS) $(TGZS) all-tgzs.tar
+	rm -rf tars/
 CLEAN-TARGETS += tars-clean
 
 .PHONY: tars tars-clean
@@ -254,7 +269,7 @@ CLEAN-TARGETS += tars-clean
 # rsync the tars themselves
 tars-rsync: $(TGZS)
 	$(RSYNC) $(TGZS) $(RSYNC_URL)/tars/
-rsync: tars-rsync
+RSYNC-TARGETS += tars-rsync
 
 ########## count stuff - essentially detect sequels in html/ or markdown/
 ########## that would need deletion after renamings or similar
@@ -306,17 +321,19 @@ standalone: ipynb
 	rsync -av ipynb/ standalone/
 
 standalone-clean:
-	rm -rf standalone
+	rm -rf standalone/
 CLEAN-TARGETS += standalone-clean
 
 .PHONY: standalone standalone-clean
 
-############################## clean
+############################## 
 clean: $(CLEAN-TARGETS)
 # html and markdown are so slow to rebuild..
 superclean: $(CLEAN-TARGETS) $(SUPERCLEAN-TARGETS)
 
-.PHONY: clean
+rsync: $(RSYNC-TARGETS)
+
+.PHONY: clean superclean rsync
 #################### convenience, for debugging only
 # make +foo : prints the value of $(foo)
 # make ++foo : idem but verbose, i.e. foo=$(foo)
