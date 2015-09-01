@@ -4,6 +4,8 @@
 # for transcoding, use e.g. 
 #     recode ISO-8859-15..UTF-8 <filename>
 
+RSYNC = rsync --exclude .du --exclude .DS_Store
+
 all: 
 .PHONY: all
 
@@ -136,7 +138,8 @@ SUPERCLEAN-TARGETS += markdown-clean
 all: markdown
 
 #################### html
-html: $(HTMLS)
+html: $(HTMLS) media
+	$(RSYNC) -a media html/
 
 html-clean:
 	rm -f html/*.html
@@ -148,13 +151,13 @@ all: html
 #################### ipynb
 ipynb: force
 	@mkdir -p ipynb; echo populating ipynb with notebooks from 'W*'
-	@rsync -aL $(NOTEBOOKS) ipynb
+	@$(RSYNC) -aL $(NOTEBOOKS) ipynb
 	@mkdir -p ipynb/corrections; echo syncing modules/corrections onto ipynb/corrections
-	@rsync -a $$(git ls-files modules/corrections) ipynb/corrections
+	@$(RSYNC) -a $$(git ls-files modules/corrections) ipynb/corrections
 	@mkdir -p ipynb/data; echo syncing data onto ipynb/data
-	@rsync -a $$(git ls-files data) ipynb/data
+	@$(RSYNC) -a $$(git ls-files data) ipynb/data
 	@mkdir -p ipynb/media; echo syncing media onto ipynb/media
-	@rsync -a $$(git ls-files media) ipynb/media
+	@$(RSYNC) -a $$(git ls-files media) ipynb/media
 
 ipynb-clean:
 	rm -rf ipynb/
@@ -173,7 +176,7 @@ out-clean: html-clean markdown-clean ipynb-clean
 # tparment@srv-diana $ cat /proj/planete/www/Thierry.Parmentelat/flotpython/.htaccess
 # AddDefaultCharset utf-8
 RSYNC_URL = tparment@srv-diana.inria.fr:/proj/planete/www/Thierry.Parmentelat/flotpython/
-RSYNC	   = rsync -av --delete
+RSYNC_DEL = $(RSYNC) -av --delete --delete-excluded
 
 tars-dir:
 	mkdir -p tars
@@ -194,7 +197,7 @@ html-tar: $(TAR-HTML)
 
 # rsync
 html-rsync:
-	$(RSYNC) html/custom.css $(NOTEBOOKS-HTML) $(RSYNC_URL)/html/
+	$(RSYNC_DEL) html/custom.css html/media $(NOTEBOOKS-HTML) $(RSYNC_URL)/html/
 RSYNC-TARGETS += html-rsync
 
 .PHONY: html-tar html-rsync
@@ -211,7 +214,7 @@ markdown-tar: $(TAR-MARKDOWN)
 
 # rsync
 markdown-rsync:
-	$(RSYNC) $(NOTEBOOKS-MARKDOWN) $(RSYNC_URL)/markdown/
+	$(RSYNC_DEL) $(NOTEBOOKS-MARKDOWN) $(RSYNC_URL)/markdown/
 RSYNC-TARGETS += markdown-rsync
 
 ########## ipynb
@@ -226,7 +229,7 @@ ipynb-tar: $(TAR-IPYNB)
 
 # rsync
 ipynb-rsync:
-	$(RSYNC) ipynb/ $(RSYNC_URL)/ipynb/
+	$(RSYNC_DEL) ipynb/ $(RSYNC_URL)/ipynb/
 RSYNC-TARGETS += ipynb-rsync
 
 .PHONY: ipynb-tar ipynb-rsync
@@ -242,7 +245,7 @@ corriges-tar: $(TAR-CORRIGES)
 
 # rsync
 corriges-rsync:
-	$(RSYNC) corriges/*.{pdf,txt,py} $(RSYNC_URL)/corriges/
+	$(RSYNC_DEL) corriges/*.{pdf,txt,py} $(RSYNC_URL)/corriges/
 RSYNC-TARGETS += corriges-rsync
 
 .PHONY: corriges-tar corriges-rsync
@@ -268,7 +271,7 @@ CLEAN-TARGETS += tars-clean
 
 # rsync the tars themselves
 tars-rsync: $(TGZS)
-	$(RSYNC) $(TGZS) $(RSYNC_URL)/tars/
+	$(RSYNC_DEL) $(TGZS) $(RSYNC_URL)/tars/
 RSYNC-TARGETS += tars-rsync
 
 ########## count stuff - essentially detect sequels in html/ or markdown/
