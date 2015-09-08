@@ -8,6 +8,7 @@ import tempfile
 import shutil
 from types import StringTypes, ListType
 
+# MOOC session number
 default_version = "2.0"
 
 # compute signature
@@ -17,12 +18,12 @@ import IPython.nbformat.current as current_notebook
 
 def xpath (top, path):
     result = top
-    for i in path: result=result[i]
+    for i in path:
+        result = result[i]
     return result
 
 def truncate (s, n):
-    if len(s)<n: return s
-    return s[:n-2]+".."
+    return s if len(s) < n else s[:n-2] + ".."
 
 notebookname = "notebookname"
 
@@ -35,10 +36,10 @@ notebookname = "notebookname"
 # returns True if a change occurred, or the file is deleted
 def replace_file_with_string (target, new_contents, chmod=None, remove_if_empty=False):
     try:
-        current=file(target).read()
+        current = file(target).read()
     except:
-        current=""
-    if current==new_contents:
+        current = ""
+    if current == new_contents:
         # if turns out to be an empty string, and remove_if_empty is set,
         # then make sure to trash the file if it exists
         if remove_if_empty and not new_contents and os.path.isfile(target):
@@ -47,14 +48,15 @@ def replace_file_with_string (target, new_contents, chmod=None, remove_if_empty=
             finally: return True
         return False
     # overwrite target file: create a temp in the same directory
-    path=os.path.dirname(target) or '.'
+    path = os.path.dirname(target) or '.'
     fd, name = tempfile.mkstemp('','repl',path)
     os.write(fd,new_contents)
     os.close(fd)
     if os.path.exists(target):
         os.unlink(target)
     shutil.move(name,target)
-    if chmod: os.chmod(target,chmod)
+    if chmod:
+        os.chmod(target,chmod)
     return True
 
 
@@ -62,9 +64,9 @@ def replace_file_with_string (target, new_contents, chmod=None, remove_if_empty=
 class Notebook:
     def __init__ (self, name):
         if name.endswith(".ipynb"): 
-            name=name.replace(".ipynb","")
-        self.name=name
-        self.filename="{}.ipynb".format(self.name)
+            name = name.replace(".ipynb","")
+        self.name = name
+        self.filename = "{}.ipynb".format(self.name)
 
     def parse (self):
         try:
@@ -79,9 +81,9 @@ class Notebook:
         return xpath (self.notebook, path)
 
     def first_heading1 (self):
-        cells = self.xpath( ['worksheets',0, 'cells'] )
+        cells = self.xpath( ['worksheets', 0, 'cells'] )
         for cell in cells:
-            if cell['cell_type']=='heading' and cell['level'] == 1:
+            if cell['cell_type'] == 'heading' and cell['level'] == 1:
                 return xpath (cell, ['source'])
         return "NO HEADING 1 found"
 
@@ -94,7 +96,7 @@ class Notebook:
             pass
         else:
             new_name = force_name if force_name else self.first_heading1()
-            metadata[notebookname]=new_name
+            metadata[notebookname] = new_name
         # remove 'name' metadata that might come from previous versions of this script
         if 'name' in metadata:
             del metadata['name'] 
@@ -104,7 +106,7 @@ class Notebook:
     def set_version (self, version=default_version, force=False):
         metadata = self.xpath (['metadata'])
         if 'version' not in metadata or force:
-            metadata['version']=version
+            metadata['version'] = version
 
     def clear_all_outputs (self):
         """clear the 'outputs' field of python code cells, and remove 'prompt_number' as well when present"""
@@ -159,8 +161,8 @@ class Notebook:
 
     def sign (self):
         notary = Notary ()
-        signature=notary.compute_signature (self.notebook)
-        if not signature.startswith ("sha256:"):
+        signature = notary.compute_signature (self.notebook)
+        if not signature.startswith("sha256:"):
             signature = "sha256:" + signature
         self.notebook['metadata']['signature'] = signature
 
@@ -189,7 +191,7 @@ class Notebook:
         self.save()
 
 def full_monty (name, force_name, version, sign, verbose):
-    nb=Notebook(name)
+    nb = Notebook(name)
     nb.full_monty(force_name=force_name, version=version, sign=sign, verbose=verbose)
 
 from argparse import ArgumentParser
@@ -219,9 +221,11 @@ def main ():
         notebooks = glob.glob("*.ipynb")
 
     for notebook in args.notebooks:
-        if notebook.find ('.alt') >=0 :
+        if notebook.find ('.alt') >= 0 :
             print ('ignoring', notebook)
             continue
+        if args.verbose:
+            print("{} is opening notebook".format(sys.argv[0]), notebook)
         full_monty (notebook, force_name=args.force_name, version=args.version, sign=args.sign, verbose=args.verbose, )
 
 if __name__ == '__main__':
