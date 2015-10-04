@@ -28,28 +28,28 @@ def scan (dirname):
     total_attempts = Attempts()
     attempts_by_exo = {}
 
-    subdirs = glob (os.path.join(dirname,"*"))
+    subdirs = glob(os.path.join(dirname,"*"))
     for subdir in subdirs:
         nb_dirs += 1
         try:
             with open(os.path.join(subdir,".correction")) as log:
                 nb_students += 1
-                for lineno,line in enumerate(log):
+                for lineno, line in enumerate(log):
                     try:
                         date, id1, id2, function, result = line.split()
+                        total_attempts.record(result)
                         attempts_by_exo.setdefault(function, Attempts())
                         attempts_by_exo[function].record(result)
-                        total_attempts.record(result)
                     except:
-                        print ('skipping line=', line, '\tin subdir', subdir, file=sys.stderr)
+                        print('skipping line=', line, '\tin subdir', subdir, file=sys.stderr)
                         pass
         except:
             traceback.print_exc()
             pass
 
-    print ("{nb_students} students have tried at least once".format(**locals()))
+    print("{nb_students} students have tried at least once".format(**locals()))
     if nb_dirs != nb_students:
-        print ("{nb_dirs} dirs were found (should be {nb-students})".format(**locals()))
+        print("{nb_dirs} dirs were found (should be {nb-students})".format(**locals()))
 
     ok = total_attempts.ok
     ko = total_attempts.ko
@@ -57,17 +57,17 @@ def scan (dirname):
     exos = len(attempts_by_exo)
     trials_per_student = total / float(nb_students)
     ratio = float(ok)/total
-    print ("""  {ok} ok (successful) trials
+    print("""  {ok} ok (successful) trials
 + {ko} ko (unsuccessful) trials
 = {total} total trials ({ratio}% success)
 
 {exos} different exercices -> an average of {trials_per_student} attempts per student"""\
     .format(**locals()))
 
-    print ()
 
     for function in sorted(attempts_by_exo):
         print (function, attempts_by_exo[function])
+    print()
 
     return nb_dirs, nb_students, total_attempts, attempts_by_exo
         
@@ -80,3 +80,6 @@ args = parser.parse_args()
 
 scanned = scan (args.dirname)
 
+# NOTE for session 2
+# student b8766b1632296f06a22f501f21d8a352 needs to be discarded
+# as its .corrections contains weird data
