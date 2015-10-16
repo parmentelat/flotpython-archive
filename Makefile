@@ -113,7 +113,7 @@ $(call markdown_location,$(1)): $(1)
 	ipython nbconvert --to markdown $(1) --stdout > $(call markdown_location,$(1))
 
 $(call html_location,$(1)): $(1)
-	ipython nbconvert --to html $(1) --stdout > $(call html_location,$(1))
+	ipython nbconvert --to html $(1) --ExecutePreprocessor.enabled=True --stdout > $(call html_location,$(1))
 
 $(call ipynb_location,$(1)): $(1)
 	(mkdir -p ipynb; cd ipynb; ln -f -s ../$(1) $(notdir $(1)))
