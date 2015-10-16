@@ -34,10 +34,10 @@ NORM = tools/nbnorm.py
 
 # -type f : we need to skip symlinks
 normalize-nb normalize-notebook: force
-	find $(FOCUS) -name '*.ipynb' -type f | fgrep -v '/.ipynb_checkpoints/' | xargs $(NORM) $(NORM_OPTIONS)
+	find $(FOCUS) -name '*.ipynb' -type f | sort | fgrep -v '/.ipynb_checkpoints/' | xargs $(NORM) $(NORM_OPTIONS)
 
 normalize-quiz: force
-	find $(FOCUS) -name '*.quiz' | xargs tools/quiznorm.py
+	find $(FOCUS) -name '*.quiz' | sort | xargs tools/quiznorm.py
 
 all: norm
 
