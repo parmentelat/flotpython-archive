@@ -135,7 +135,8 @@ endef
 $(foreach notebook,$(NOTEBOOKS),$(eval $(call notebook_rule,$(notebook))))
 
 #################### markdown
-markdown: $(MARKDOWNS)
+markdown: $(MARKDOWNS) media
+	$(RSYNC) -a media markdown/
 
 markdown-clean:
 	rm -f markdown/*.md
