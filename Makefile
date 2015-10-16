@@ -9,7 +9,10 @@ RSYNC = rsync --exclude .du --exclude .DS_Store
 all: 
 .PHONY: all
 
-WEEKS=$(wildcard W?) 
+
+# work on one week at a time with FOCUS=W2
+FOCUS     = W?
+
 
 # for phony targets
 force:
@@ -31,10 +34,10 @@ NORM = tools/nbnorm.py
 
 # -type f : we need to skip symlinks
 normalize-nb normalize-notebook: force
-	find W[0-9]* -name '*.ipynb' -type f | fgrep -v '/.ipynb_checkpoints/' | xargs $(NORM) $(NORM_OPTIONS)
+	find $(FOCUS) -name '*.ipynb' -type f | fgrep -v '/.ipynb_checkpoints/' | xargs $(NORM) $(NORM_OPTIONS)
 
 normalize-quiz: force
-	find W[0-9]* -name '*.quiz' | xargs tools/quiznorm.py
+	find $(FOCUS) -name '*.quiz' | xargs tools/quiznorm.py
 
 all: norm
 
@@ -84,7 +87,6 @@ CLEAN-TARGETS += corriges-clean
 ########################################
 
 # list of notebooks
-FOCUS     = W*
 NOTEBOOKS = $(wildcard $(FOCUS)/W*S[0-9]*.ipynb)
 
 # simple basename
@@ -311,7 +313,7 @@ INDEX_POST= sed -e 's,\(\#\# Vid\),========== \1,'
 
 index: force
 	export LC_ALL=en_US.ISO8859-15;\
-	for s in $(WEEKS); do echo ==================== $$s; \
+	for s in $(FOCUS); do echo ==================== $$s; \
 	    ls $$s/*SUMMARY.txt | xargs egrep '(^C[0O]12AL.*txt|^NIVEAU|^\#\# Vid|^OK|^TODO|^ONGO|^NICE|^DROP)' | $(INDEX_POST) ; \
 	    echo ""; \
 	    echo ""; \

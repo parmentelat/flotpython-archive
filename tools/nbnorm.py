@@ -15,6 +15,7 @@ default_version = "2.0"
 from IPython.nbformat.sign import NotebookNotary as Notary
 # store to file
 import IPython.nbformat.current as current_notebook
+from IPython.nbformat.notebooknode import NotebookNode
 
 def xpath (top, path):
     result = top
@@ -112,10 +113,32 @@ class Notebook:
         metadata = self.xpath (['metadata'])
         if 'kernelspec' not in metadata:
             metadata['kernelspec'] = {
-        "display_name": "Python 2",
-        "language": "python",
-        "name": "python2",
-        }
+                "display_name": "Python 2",
+                "language": "python",
+                "name": "python2",
+            }
+
+    licence_line = '<span style="float:left;">Licence CC BY-NC-ND</span>'\
+                   '<span style="float:right;">Thierry Parmentelat &amp; Arnaud Legout,'\
+                   '<img src="media/inria-25.png" style="display:inline"></span>'
+            
+    def ensure_licence(self):
+        def is_licence_cell(cell):
+            return cell['cell_type'] == 'markdown' and cell['source'].find("Licence") >= 0
+        for worksheet in self.notebook.worksheets:
+            first_cell = worksheet.cells[0]
+            # cell.source is a list of strings
+            if is_licence_cell(first_cell):
+                # licence cell already here, just overwrite contents to latest version
+                first_cell['source'] = [ self.licence_line ]
+            else:
+                worksheet.cells.insert(
+                    0,
+                    NotebookNode({
+                        "cell_type": "markdown",
+                        "metadata": {},
+                        "source": [ self.licence_line ],
+                        }))
 
     # I keep the code for these 2 but don't need this any longer
     # as I have all kinds of shortcuts and interactive tools now
@@ -196,6 +219,7 @@ class Notebook:
         else:
             self.set_version(version, force=True)
         self.fill_kernelspec()
+        self.ensure_licence()
         self.clear_all_outputs ()
         self.remove_empty_cells ()
         self.translate_rawnbconvert(verbose)
