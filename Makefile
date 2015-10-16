@@ -84,7 +84,8 @@ CLEAN-TARGETS += corriges-clean
 ########################################
 
 # list of notebooks
-NOTEBOOKS = $(wildcard W*/W*S[0-9]*.ipynb)
+FOCUS     = W*
+NOTEBOOKS = $(wildcard $(FOCUS)/W*S[0-9]*.ipynb)
 
 # simple basename
 define sbn
