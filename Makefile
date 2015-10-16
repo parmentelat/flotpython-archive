@@ -197,7 +197,7 @@ TARS =
 TAR-HTML = tars/notebooks-html.tar
 TARS += $(TAR-HTML)
 NOTEBOOKS-HTML = $(foreach notebook,$(NOTEBOOKS),$(call html_location,$(notebook)))
-CONTENTS-HTML = html/custom.css $(NOTEBOOKS-HTML)
+CONTENTS-HTML = html/custom.css html/media $(NOTEBOOKS-HTML)
 $(TAR-HTML): tars-dir html $(CONTENTS-HTML)
 	tar -chf $@ $(CONTENTS-HTML)
 
@@ -215,7 +215,8 @@ RSYNC-TARGETS += html-rsync
 TAR-MARKDOWN = tars/notebooks-markdown.tar
 TARS += $(TAR-MARKDOWN)
 NOTEBOOKS-MARKDOWN = $(foreach notebook,$(NOTEBOOKS),$(call markdown_location,$(notebook)))
-$(TAR-MARKDOWN): markdown tars-dir $(NOTEBOOKS-MARKDOWN)
+CONTENTS-MARKDOWN = markdown/media $(NOTEBOOKS-MARKDOWN)
+$(TAR-MARKDOWN): tars-dir markdown $(CONTENTS-MARKDOWN)
 	tar -chf $@ $(NOTEBOOKS-MARKDOWN)
 
 markdown-tar: $(TAR-MARKDOWN)
