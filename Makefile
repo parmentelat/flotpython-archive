@@ -29,8 +29,9 @@ NORM = tools/nbnorm.py
 #NORM_OPTIONS = --sign
 #endif
 
+# -type f : we need to skip symlinks
 normalize-nb normalize-notebook: force
-	find W[0-9]* -name '*.ipynb' | fgrep -v '/.ipynb_checkpoints/' | xargs $(NORM) $(NORM_OPTIONS)
+	find W[0-9]* -name '*.ipynb' -type f | fgrep -v '/.ipynb_checkpoints/' | xargs $(NORM) $(NORM_OPTIONS)
 
 normalize-quiz: force
 	find W[0-9]* -name '*.quiz' | xargs tools/quiznorm.py
@@ -107,13 +108,16 @@ HTMLS	  = $(foreach notebook,$(NOTEBOOKS),$(call html_location,$(notebook)))
 IPYNBS	  = $(foreach notebook,$(NOTEBOOKS),$(call ipynb_location,$(notebook)))
 
 ########## how to redo individual stuff
-# apply this rule to all notebooks
+# when converting to html and markdown, we want to have the cells executed
+CONVERT = ipython nbconvert --ExecutePreprocessor.enabled=True
+
+# apply these rules to all notebooks
 define notebook_rule
 $(call markdown_location,$(1)): $(1)
-	ipython nbconvert --to markdown $(1) --stdout > $(call markdown_location,$(1))
+	$(CONVERT) --to markdown $(1) --stdout > $(call markdown_location,$(1)) || rm $(call markdown_location,$(1))
 
 $(call html_location,$(1)): $(1)
-	ipython nbconvert --to html $(1) --ExecutePreprocessor.enabled=True --stdout > $(call html_location,$(1))
+	$(CONVERT) --to html $(1) --stdout > $(call html_location,$(1)) || rm $(call html_location,$(1))
 
 $(call ipynb_location,$(1)): $(1)
 	(mkdir -p ipynb; cd ipynb; ln -f -s ../$(1) $(notdir $(1)))

@@ -108,6 +108,18 @@ class Notebook:
         if 'version' not in metadata or force:
             metadata['version'] = version
 
+    def fill_kernelspec(self):
+        metadata = self.xpath (['metadata'])
+        if 'kernelspec' not in metadata:
+            metadata['kernelspec'] = {
+        "display_name": "Python 2",
+        "language": "python",
+        "name": "python2",
+        }
+
+    # I keep the code for these 2 but don't need this any longer
+    # as I have all kinds of shortcuts and interactive tools now
+    # plus, nbconvert (at least in jupyter) has preprocessor options to deal with this as well
     def clear_all_outputs (self):
         """clear the 'outputs' field of python code cells, and remove 'prompt_number' as well when present"""
         for worksheet in self.notebook.worksheets:
@@ -131,9 +143,10 @@ class Notebook:
         if nb_empty:
             print ("found and removed {} empty cells".format(nb_empty))
 
+    # likewise, this was a one-shot thing, we don't create rawnbconvert any longer
     def translate_rawnbconvert (self, verbose):
         """
-        all cells lf type rawnbconvert are translated into a markdown cell
+        all cells of type rawnbconvert are translated into a markdown cell
         with 4 spaces indentation
         """
         nb_raw_cells = 0
@@ -158,7 +171,6 @@ class Notebook:
         if nb_raw_cells:
             print ("found and rewrote {} raw cells".format(nb_raw_cells))
         
-
     def sign (self):
         notary = Notary ()
         signature = notary.compute_signature (self.notebook)
@@ -183,6 +195,7 @@ class Notebook:
             self.set_version()
         else:
             self.set_version(version, force=True)
+        self.fill_kernelspec()
         self.clear_all_outputs ()
         self.remove_empty_cells ()
         self.translate_rawnbconvert(verbose)
