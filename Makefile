@@ -217,7 +217,7 @@ TARS += $(TAR-MARKDOWN)
 NOTEBOOKS-MARKDOWN = $(foreach notebook,$(NOTEBOOKS),$(call markdown_location,$(notebook)))
 CONTENTS-MARKDOWN = markdown/media $(NOTEBOOKS-MARKDOWN)
 $(TAR-MARKDOWN): tars-dir markdown $(CONTENTS-MARKDOWN)
-	tar -chf $@ $(NOTEBOOKS-MARKDOWN)
+	tar -chf $@ $(CONTENTS-MARKDOWN)
 
 markdown-tar: $(TAR-MARKDOWN)
 
