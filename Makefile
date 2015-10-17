@@ -122,8 +122,9 @@ $(call markdown_location,$(1)): $(1)
 $(call html_location,$(1)): $(1)
 	$(CONVERT) --to html $(1) --stdout > $(call html_location,$(1)) || rm $(call html_location,$(1))
 
-$(call ipynb_location,$(1)): $(1)
-	(mkdir -p ipynb; cd ipynb; ln -f -s ../$(1) $(notdir $(1)))
+# not used; the ipynb target uses rsync
+#$(call ipynb_location,$(1)): $(1)
+#	(mkdir -p ipynb; cd ipynb; ln -f -s ../$(1) $(notdir $(1)))
 
 # redo all targets about one notebook
 # e.g make -n W1-S2-C1-accents
@@ -210,6 +211,19 @@ RSYNC-TARGETS += html-rsync
 
 .PHONY: html-tar html-rsync
 
+# zip - on a weekly basis
+# e.g. make html-zip-focus FOCUS=W1 
+ZIP-HTML-FOCUS = tars/notebooks-html-$(FOCUS).zip
+$(ZIP-HTML-FOCUS): tars-dir html $(CONTENTS-HTML)
+	zip $@ $(CONTENTS-HTML)
+
+html-zip-focus: $(ZIP-HTML-FOCUS)
+
+# all 7 zips in one pass
+html-zip:
+	for focus in W?; do $(MAKE) html-zip-focus FOCUS=$$focus; done
+ZIPS += html-zip
+
 ########## markdown
 # tar
 TAR-MARKDOWN = tars/notebooks-markdown.tar
@@ -226,13 +240,27 @@ markdown-rsync:
 	$(RSYNC_DEL) $(NOTEBOOKS-MARKDOWN) $(RSYNC_URL)/markdown/
 RSYNC-TARGETS += markdown-rsync
 
+# zip - on a weekly basis
+# e.g. make markdown-zip-focus FOCUS=W1 
+ZIP-MARKDOWN-FOCUS = tars/notebooks-markdown-$(FOCUS).zip
+$(ZIP-MARKDOWN-FOCUS): tars-dir markdown $(CONTENTS-MARKDOWN)
+	zip $@ $(CONTENTS-MARKDOWN)
+
+markdown-zip-focus: $(ZIP-MARKDOWN-FOCUS)
+
+# all 7 zips in one pass
+markdown-zip:
+	for focus in W?; do $(MAKE) markdown-zip-focus FOCUS=$$focus; done
+ZIPS += markdown-zip
+
 ########## ipynb
 # tar 
 TAR-IPYNB = tars/notebooks-ipynb.tar
 TARS += $(TAR-IPYNB)
 NOTEBOOKS-IPYNB = $(foreach notebook,$(NOTEBOOKS),$(call ipynb_location,$(notebook)))
-$(TAR-IPYNB): ipynb tars-dir $(NOTEBOOKS-IPYNB)
-	tar -chf $@  $(NOTEBOOKS-IPYNB) ipynb/corrections ipynb/data ipynb/media
+CONTENTS-IPYNB = ipynb/corrections ipynb/data ipynb/media $(NOTEBOOKS-IPYNB)
+$(TAR-IPYNB): tars-dir ipynb $(CONTENTS-IPYNB)
+	tar -chf $@ $(CONTENTS-IPYNB)
 
 ipynb-tar: $(TAR-IPYNB)
 
@@ -242,6 +270,12 @@ ipynb-rsync:
 RSYNC-TARGETS += ipynb-rsync
 
 .PHONY: ipynb-tar ipynb-rsync
+
+ZIP-IPYNB = tars/notebooks-ipynb.zip
+ZIPS += $(ZIP-IPYNB)
+ipynb-zip: $(ZIP-IPYNB)
+$(ZIP-IPYNB): tars-dir ipynb $(CONTENTS-IPYNB)
+	zip $@ $(CONTENTS-IPYNB)
 
 ########## corriges
 # tar
@@ -283,6 +317,8 @@ tars-rsync: $(TGZS)
 	$(RSYNC_DEL) $(TGZS) $(RSYNC_URL)/tars/
 RSYNC-TARGETS += tars-rsync
 
+
+zip: $(ZIPS)
 ########## count stuff - essentially detect sequels in html/ or markdown/
 ########## that would need deletion after renamings or similar
 GITCOUNT = xargs git ls-files | wc -l
