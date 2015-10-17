@@ -120,7 +120,7 @@ class Notebook:
 
     licence_line = '<span style="float:left;">Licence CC BY-NC-ND</span>'\
                    '<span style="float:right;">Thierry Parmentelat &amp; Arnaud Legout,'\
-                   '<img src="media/inria-25.png" style="display:inline"></span>'
+                   '<img src="media/inria-25.png" style="display:inline"></span><br/>'
             
     def ensure_licence(self):
         def is_licence_cell(cell):
