@@ -5,6 +5,7 @@
 #     recode ISO-8859-15..UTF-8 <filename>
 
 RSYNC = rsync --exclude .du --exclude .DS_Store
+RSYNC_DEL = $(RSYNC) -av --delete --delete-excluded
 
 all: 
 .PHONY: all
@@ -13,42 +14,8 @@ all:
 # work on one week at a time with FOCUS=W2
 FOCUS     = W?
 
-
 # for phony targets
 force:
-
-#
-tags: force
-	git ls-files | xargs etags
-.PHONY: tags
-
-# run nbnorm on all notebooks
-norm normalize: normalize-notebook normalize-quiz
-
-# add the --sign option only on Thierry's macos to reduce noise-only changes
-NORM = tools/nbnorm.py
-#UNAME := $(shell uname)
-#ifeq ($(UNAME),Darwin)
-#NORM_OPTIONS = --sign
-#endif
-
-# -type f : we need to skip symlinks
-normalize-nb normalize-notebook: force
-	find $(FOCUS) -name '*.ipynb' -type f | sort | fgrep -v '/.ipynb_checkpoints/' | xargs $(NORM) $(NORM_OPTIONS)
-
-normalize-quiz: force
-	find $(FOCUS) -name '*.quiz' | sort | xargs tools/quiznorm.py
-
-all: norm
-
-.PHONY: norm normalize normalize-nb normalize-notebook normalize-quiz
-
-#
-CLEAN_FIND= -name '*~' -o -name '.\#*' -o -name '*pyc'
-
-junk-clean: force
-	find . $(CLEAN_FIND) -name '*~' -o -name '.#*' -print0 | xargs -0 rm -f
-CLEAN-TARGETS += junk-clean
 
 #################### corriges
 all: corriges
@@ -122,7 +89,7 @@ $(call markdown_location,$(1)): $(1)
 $(call html_location,$(1)): $(1)
 	$(CONVERT) --to html $(1) --stdout > $(call html_location,$(1)) || rm $(call html_location,$(1))
 
-# not used; the ipynb target uses rsync
+# not used; the ipynb target uses rsync to fill in ipynb/
 #$(call ipynb_location,$(1)): $(1)
 #	(mkdir -p ipynb; cd ipynb; ln -f -s ../$(1) $(notdir $(1)))
 
@@ -175,173 +142,188 @@ CLEAN-TARGETS += ipynb-clean
 .PHONY: ipynb ipynb-clean
 
 ####################
-# xxx misses ipynb ?
 out: html markdown ipynb
 out-clean: html-clean markdown-clean ipynb-clean
 
 .PHONY: out out-clean
-############################## outputs : tars and export (rsync)
+
+############################## outputs : tars and zips
+# Note on infrastructure - Oct 2015
+# because now we produce html and markdown with the code cells evaluated
+# we need to run this part of the make process on a dedicated box
+# this is jupyter.pl.sophia.inria.fr that runs an up-to-date deployment
+# of a dual-kernel jupyter
+# so the html and markdown targets, and thus tars and zips
+# need to be run on that box; so we now have these 2 targets
+# retrieve and publish
+# that go fetch the stuff on jupyter, and then
+# push the same stuff on srv-diana (a.k.a. http://planete.inria.fr)
+###
 # Note on UTF-8 - need to instruct apache about our using utf-8
 # tparment@srv-diana $ cat /proj/planete/www/Thierry.Parmentelat/flotpython/.htaccess
 # AddDefaultCharset utf-8
-RSYNC_URL = tparment@srv-diana.inria.fr:/proj/planete/www/Thierry.Parmentelat/flotpython/
-RSYNC_DEL = $(RSYNC) -av --delete --delete-excluded
+###
+RETRIEVE_ID  = thierry@jupyter.pl.sophia.inria.fr
+RETRIEVE_URL = $(RETRIEVE_ID):flotpython/
+PUBLISH_URL  = tparment@srv-diana.inria.fr:/proj/planete/www/Thierry.Parmentelat/flotpython/
 
-tars-dir:
-	mkdir -p tars
-.PHONY: tars-dir
+bundles-dir:
+	mkdir -p bundles
+bundles-clean:
+	rm -rf bundles/
+CLEAN-TARGETS += bundles-clean 
 
+.PHONY: bundles-dir bundles-clean
+
+### all this stuff is expected to run on jupyter.pl.sophia.inria.fr
+
+# how to redo file bundles/<bundle-name>.tar (and .zip)
+# bundle_target(bundle-name, contents, deps)
+# and to define shorthand phony target <phony>-tar in the mix
+# bundle_phony(phony,bundle_name)
 TARS =
+ZIPS =
+
+# e.g. bundle_target(notebooks-html,$(BUNDLE-HTML), html $(BUNDLE-HTML))
+# -> redo bundles/notebooks-html.tar
+# using files $(BUNDLE-HTML)
+# with deps 'html and $(BUNDLE-HTML)'
+# and of course same for zip
+define bundle_target
+bundles/$(1).tgz: bundles-dir $(3)
+ifneq "" "$(2)"
+	tar -czf bundles/$(1).tgz $(2)
+endif
+bundles/$(1).zip: bundles-dir $(3)
+ifneq "" "$(2)"
+	zip -r bundles/$(1) $(2)
+endif
+endef
+
+# e.g. bundle_target(notebooks-html,html)
+# defines various shortcuts like 'html-tar' 
+# + this will be done when doing make tars
+define bundle_shortcut
+TARS += bundles/$(1).tgz
+ZIPS += bundles/$(1).zip
+$(2)-tar: bundles/$(1).tgz
+$(2)-zip: bundles/$(1).zip
+$(2)-bundles: $(2)-tar $(2)-zip
+.PHONY: $(2)-bundles $(2)-tar $(2)-html
+endef
+
+# do all 7 weeks in one pass
+# e.g. bundle_all_weeks(html-focus,html-weeks)
+define bundle_all_weeks
+$(2)-tars:
+	for focus in $(FOCUS); do $(MAKE) $(1)-tar FOCUS=$$$$focus; done
+TARS += $(2)-tars
+$(2)-zips:
+	for focus in $(FOCUS); do $(MAKE) $(1)-zip FOCUS=$$$$focus; done
+ZIPS += $(2)-zips
+$(2): $(2)-tars $(2)-zips
+.PHONY: $(2)-tars $(2)-zips $(2)
+endef
 
 ########## html
-# tar
-TAR-HTML = tars/notebooks-html.tar
-TARS += $(TAR-HTML)
 NOTEBOOKS-HTML = $(foreach notebook,$(NOTEBOOKS),$(call html_location,$(notebook)))
-CONTENTS-HTML = html/custom.css html/media $(NOTEBOOKS-HTML)
-$(TAR-HTML): tars-dir html $(CONTENTS-HTML)
-	tar -chf $@ $(CONTENTS-HTML)
+BUNDLE-HTML = html/custom.css html/media $(NOTEBOOKS-HTML)
 
-html-tar: $(TAR-HTML)
+$(eval $(call bundle_target,notebooks-html,$(BUNDLE-HTML),html $(BUNDLE-HTML)))
+$(eval $(call bundle_shortcut,notebooks-html,html))
 
-# rsync
-html-rsync:
-	$(RSYNC_DEL) html/custom.css html/media $(NOTEBOOKS-HTML) $(RSYNC_URL)/html/
-RSYNC-TARGETS += html-rsync
+# this only makes sense in a context where FOCUS is defined to one week
+$(eval $(call bundle_target,$(FOCUS)-notebooks-html,$(BUNDLE-HTML),html $(BUNDLE-HTML)))
+ifneq "$(FOCUS)" "W?"
+$(eval $(call bundle_shortcut,$(FOCUS)-notebooks-html,html-focus))
+endif
 
-.PHONY: html-tar html-rsync
-
-# zip - on a weekly basis
-# e.g. make html-zip-focus FOCUS=W1 
-ZIP-HTML-FOCUS = tars/notebooks-html-$(FOCUS).zip
-$(ZIP-HTML-FOCUS): tars-dir html $(CONTENTS-HTML)
-	zip -r $@ $(CONTENTS-HTML)
-
-html-zip-focus: $(ZIP-HTML-FOCUS)
-
-# all 7 zips in one pass
-html-zip:
-	for focus in $(FOCUS); do $(MAKE) html-zip-focus FOCUS=$$focus; done
-ZIPS += html-zip
+$(eval $(call bundle_all_weeks,html-focus,html-weeks))
 
 ########## markdown
-# tar
-TAR-MARKDOWN = tars/notebooks-markdown.tar
-TARS += $(TAR-MARKDOWN)
 NOTEBOOKS-MARKDOWN = $(foreach notebook,$(NOTEBOOKS),$(call markdown_location,$(notebook)))
-CONTENTS-MARKDOWN = markdown/media $(NOTEBOOKS-MARKDOWN)
-$(TAR-MARKDOWN): tars-dir markdown $(CONTENTS-MARKDOWN)
-	tar -chf $@ $(CONTENTS-MARKDOWN)
+BUNDLE-MARKDOWN = markdown/media $(NOTEBOOKS-MARKDOWN)
 
-markdown-tar: $(TAR-MARKDOWN)
+$(eval $(call bundle_target,notebooks-markdown,$(BUNDLE-MARKDOWN),markdown $(BUNDLE-MARKDOWN)))
+$(eval $(call bundle_shortcut,notebooks-markdown,markdown))
 
-# rsync
-markdown-rsync:
-	$(RSYNC_DEL) $(NOTEBOOKS-MARKDOWN) $(RSYNC_URL)/markdown/
-RSYNC-TARGETS += markdown-rsync
+# this only makes sense in a context where FOCUS is defined to one week
+$(eval $(call bundle_target,$(FOCUS)-notebooks-markdown,$(BUNDLE-MARKDOWN),markdown $(BUNDLE-MARKDOWN)))
+ifneq "$(FOCUS)" "W?"
+$(eval $(call bundle_shortcut,$(FOCUS)-notebooks-markdown,markdown-focus))
+endif
 
-# zip - on a weekly basis
-# e.g. make markdown-zip-focus FOCUS=W1 
-ZIP-MARKDOWN-FOCUS = tars/notebooks-markdown-$(FOCUS).zip
-$(ZIP-MARKDOWN-FOCUS): tars-dir markdown $(CONTENTS-MARKDOWN)
-	zip -r $@ $(CONTENTS-MARKDOWN)
+$(eval $(call bundle_all_weeks,markdown-focus,markdown-weeks))
 
-markdown-zip-focus: $(ZIP-MARKDOWN-FOCUS)
-
-# all 7 zips in one pass
-markdown-zip:
-	for focus in W?; do $(MAKE) markdown-zip-focus FOCUS=$$focus; done
-ZIPS += markdown-zip
+########################################
+# these 2 (notebooks in ipynb format, and corriges) in principle could be run locally
+# but the rule of thumb would be to do it on jupyter as well
+# this way everything can be harvested using make retrieve
+# plus, chances are the working space is cleaner on jupyter
 
 ########## ipynb
-# tar 
-TAR-IPYNB = tars/notebooks-ipynb.tar
-TARS += $(TAR-IPYNB)
-NOTEBOOKS-IPYNB = $(foreach notebook,$(NOTEBOOKS),$(call ipynb_location,$(notebook)))
-CONTENTS-IPYNB = ipynb/corrections ipynb/data ipynb/media $(NOTEBOOKS-IPYNB)
-$(TAR-IPYNB): tars-dir ipynb $(CONTENTS-IPYNB)
-	tar -chf $@ $(CONTENTS-IPYNB)
+# there's no target ipynb/corrections and similar
+# so these must go in the contents, but not in deps
+BUNDLE-IPYNB = $(NOTEBOOKS-IPYNB) ipynb/corrections ipynb/data ipynb/media 
 
-ipynb-tar: $(TAR-IPYNB)
-
-# rsync
-ipynb-rsync:
-	$(RSYNC_DEL) ipynb/ $(RSYNC_URL)/ipynb/
-RSYNC-TARGETS += ipynb-rsync
-
-.PHONY: ipynb-tar ipynb-rsync
-
-ZIP-IPYNB = tars/notebooks-ipynb.zip
-ZIPS += $(ZIP-IPYNB)
-ipynb-zip: $(ZIP-IPYNB)
-$(ZIP-IPYNB): tars-dir ipynb $(CONTENTS-IPYNB)
-	zip -r $@ $(CONTENTS-IPYNB)
+$(eval $(call bundle_target,notebooks-ipynb,$(BUNDLE-IPYNB),ipynb $(NOTEBOOKS-IPYNB)))
+$(eval $(call bundle_shortcut,notebooks-ipynb,ipynb))
 
 ########## corriges
-# tar
-TAR-CORRIGES = tars/corriges.tar
-TARS += $(TAR-CORRIGES)
-CORRIGES-CONTENTS = $(wildcard corriges/*.pdf) $(wildcard corriges/*.txt) $(wildcard corriges/*py)
-$(TAR-CORRIGES): force tars-dir $(CORRIGES-CONTENTS)
-	tar -cf $@ $(CORRIGES-CONTENTS)
-corriges-tar: $(TAR-CORRIGES)
+FOCUS-LOWER = $(subst W,w,$(FOCUS))
+BUNDLE-CORRIGES-FOCUS = $(wildcard corriges/corriges-$(FOCUS-LOWER)*.txt corriges/corriges-$(FOCUS-LOWER)*.pdf corriges/corriges-$(FOCUS-LOWER)*.py)
+BUNDLE-CORRIGES = $(wildcard corriges/*.pdf) $(wildcard corriges/*.txt) $(wildcard corriges/*py)
 
-# rsync
-corriges-rsync:
-	$(RSYNC_DEL) corriges/*.{pdf,txt,py} $(RSYNC_URL)/corriges/
-RSYNC-TARGETS += corriges-rsync
+$(eval $(call bundle_target,corriges,$(BUNDLE-CORRIGES),corriges-pdf))
+$(eval $(call bundle_shortcut,corriges,corriges))
 
-.PHONY: corriges-tar corriges-rsync
-
+$(eval $(call bundle_target,$(FOCUS)-corriges,$(BUNDLE-CORRIGES-FOCUS),corriges-pdf))
+ifneq "$(FOCUS)" "W?"
+$(eval $(call bundle_shortcut,$(FOCUS)-corriges,corriges-focus))
+endif
+$(eval $(call bundle_all_weeks,corriges-focus,corriges-weeks))
 
 ##########
-TGZS = $(subst .tar,.tgz,$(TARS))
+tars: $(TARS)
+zips: $(ZIPS)
+bundles: $(TARS) $(ZIPS)
+.PHONY: tars zips bundles
 
-%.tgz: %.tar
-	gzip -c9 $*.tar > $@
+######################################## back on a local box
+remote:
+	ssh $(RETRIEVE_ID) 'cd flotpython; git reset --hard HEAD; git pull; make clean superclean; make bundles'
 
-TAR-ALL = tars/all-tgzs.tar
-$(TAR-ALL): $(TGZS) tars-dir
-	tar -cf $@ $(TGZS)
+retrieve:
+	mkdir -p bundles
+	$(RSYNC_DEL) $(RETRIEVE_URL)/bundles/ ./bundles/
 
-tars: $(TARS) $(TGZS) $(TAR-ALL)
+publish:
+	$(RSYNC_DEL) ./bundles/ $(PUBLISH_URL)/bundles/
 
-tars-clean:
-	rm -rf tars/
-CLEAN-TARGETS += tars-clean
+############################## standalone
+# this must be run lcoally, as the videos are not in git
+# it just wraps videos and notebooks in a single directory
+standalone: ipynb
+	mkdir -p standalone
+	rsync -av W?/*.mov standalone/
+	rsync -av W?/*.quiz standalone/
+	rsync -av ipynb/ standalone/
 
-.PHONY: tars tars-clean
+standalone-clean:
+	rm -rf standalone/
+CLEAN-TARGETS += standalone-clean
 
-# rsync the tars themselves
-tars-rsync: $(TGZS)
-	$(RSYNC_DEL) $(TGZS) $(RSYNC_URL)/tars/
-RSYNC-TARGETS += tars-rsync
+.PHONY: standalone standalone-clean
 
+############################## 
+clean: $(CLEAN-TARGETS)
+# html and markdown are so slow to rebuild..
+superclean: $(CLEAN-TARGETS) $(SUPERCLEAN-TARGETS)
 
-zip: $(ZIPS)
-########## count stuff - essentially detect sequels in html/ or markdown/
-########## that would need deletion after renamings or similar
-GITCOUNT = xargs git ls-files | wc -l
-COUNT    = wc -l
-
-check: check-files check-w check-html check-markdown
-# check-pdf-latex check-pdf-gitprint
-
-check-files: force
-	@echo NOTEBOOKS make variable has $(words $(NOTEBOOKS)) words
-
-#check-nonw: force
-#	@echo "allow for one more (W2/exo-sample.ipynb)"
-#	ls W*/*nb | grep -v '/W' | $(GITCOUNT)
-
-check-w: force
-	ls W*/W*nb | $(GITCOUNT)
-
-check-html: force
-	ls html/W*.html | $(COUNT)
-
-check-markdown: force
-	ls markdown/W*.md | $(COUNT)
+.PHONY: clean superclean 
+############################################################
+# various development targets
+############################################################
 
 ############################## textual index 
 #
@@ -361,27 +343,39 @@ index: force
 
 # all: index
 
-############################## standalone
-standalone: ipynb
-	mkdir -p standalone
-	rsync -av W?/*.mov standalone/
-	rsync -av W?/*.quiz standalone/
-	rsync -av ipynb/ standalone/
+#
+tags: force
+	git ls-files | xargs etags
+.PHONY: tags
 
-standalone-clean:
-	rm -rf standalone/
-CLEAN-TARGETS += standalone-clean
+# run nbnorm on all notebooks
+norm normalize: normalize-notebook normalize-quiz
 
-.PHONY: standalone standalone-clean
+# add the --sign option only on Thierry's macos to reduce noise-only changes
+NORM = tools/nbnorm.py
+#UNAME := $(shell uname)
+#ifeq ($(UNAME),Darwin)
+#NORM_OPTIONS = --sign
+#endif
 
-############################## 
-clean: $(CLEAN-TARGETS)
-# html and markdown are so slow to rebuild..
-superclean: $(CLEAN-TARGETS) $(SUPERCLEAN-TARGETS)
+# -type f : we need to skip symlinks
+normalize-nb normalize-notebook: force
+	find $(FOCUS) -name '*.ipynb' -type f | sort | fgrep -v '/.ipynb_checkpoints/' | xargs $(NORM) $(NORM_OPTIONS)
 
-rsync: $(RSYNC-TARGETS)
+normalize-quiz: force
+	find $(FOCUS) -name '*.quiz' | sort | xargs tools/quiznorm.py
 
-.PHONY: clean superclean rsync
+#all: norm
+
+.PHONY: norm normalize normalize-nb normalize-notebook normalize-quiz
+
+#
+CLEAN_FIND= -name '*~' -o -name '.\#*' -o -name '*pyc'
+
+junk-clean: force
+	find . $(CLEAN_FIND) -name '*~' -o -name '.#*' -print0 | xargs -0 rm -f
+CLEAN-TARGETS += junk-clean
+
 #################### convenience, for debugging only
 # make +foo : prints the value of $(foo)
 # make ++foo : idem but verbose, i.e. foo=$(foo)
