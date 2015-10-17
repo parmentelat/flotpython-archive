@@ -300,6 +300,9 @@ retrieve:
 publish:
 	$(RSYNC_DEL) ./bundles/ $(PUBLISH_URL)/bundles/
 
+full-monty: remote retrieve publish
+
+.PHONY: full-monty remote retrieve publish
 ############################## standalone
 # this must be run lcoally, as the videos are not in git
 # it just wraps videos and notebooks in a single directory
