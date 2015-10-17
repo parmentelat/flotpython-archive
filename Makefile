@@ -215,13 +215,13 @@ RSYNC-TARGETS += html-rsync
 # e.g. make html-zip-focus FOCUS=W1 
 ZIP-HTML-FOCUS = tars/notebooks-html-$(FOCUS).zip
 $(ZIP-HTML-FOCUS): tars-dir html $(CONTENTS-HTML)
-	zip $@ $(CONTENTS-HTML)
+	zip -r $@ $(CONTENTS-HTML)
 
 html-zip-focus: $(ZIP-HTML-FOCUS)
 
 # all 7 zips in one pass
 html-zip:
-	for focus in W?; do $(MAKE) html-zip-focus FOCUS=$$focus; done
+	for focus in $(FOCUS); do $(MAKE) html-zip-focus FOCUS=$$focus; done
 ZIPS += html-zip
 
 ########## markdown
@@ -244,7 +244,7 @@ RSYNC-TARGETS += markdown-rsync
 # e.g. make markdown-zip-focus FOCUS=W1 
 ZIP-MARKDOWN-FOCUS = tars/notebooks-markdown-$(FOCUS).zip
 $(ZIP-MARKDOWN-FOCUS): tars-dir markdown $(CONTENTS-MARKDOWN)
-	zip $@ $(CONTENTS-MARKDOWN)
+	zip -r $@ $(CONTENTS-MARKDOWN)
 
 markdown-zip-focus: $(ZIP-MARKDOWN-FOCUS)
 
@@ -275,7 +275,7 @@ ZIP-IPYNB = tars/notebooks-ipynb.zip
 ZIPS += $(ZIP-IPYNB)
 ipynb-zip: $(ZIP-IPYNB)
 $(ZIP-IPYNB): tars-dir ipynb $(CONTENTS-IPYNB)
-	zip $@ $(CONTENTS-IPYNB)
+	zip -r $@ $(CONTENTS-IPYNB)
 
 ########## corriges
 # tar
