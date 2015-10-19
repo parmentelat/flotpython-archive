@@ -356,10 +356,7 @@ norm normalize: normalize-notebook normalize-quiz
 
 # add the --sign option only on Thierry's macos to reduce noise-only changes
 NORM = tools/nbnorm.py
-#UNAME := $(shell uname)
-#ifeq ($(UNAME),Darwin)
-#NORM_OPTIONS = --sign
-#endif
+NORM_OPTIONS = --author "Thierry Parmentelat" --author "Arnaud Legout"
 
 # -type f : we need to skip symlinks
 normalize-nb normalize-notebook: force
