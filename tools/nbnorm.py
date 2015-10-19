@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from __future__ import print_function
 
@@ -6,7 +6,6 @@ import sys
 import os
 import tempfile
 import shutil
-from types import StringTypes, ListType
 
 # MOOC session number
 default_version = "1.0"
@@ -44,29 +43,18 @@ notebookname = "notebookname"
 # performs atomically:
 #    writes in a tmp file, which is then renamed(from sliverauth originally)
 # returns True if a change occurred, or the file is deleted
-def replace_file_with_string(target, new_contents, chmod=None, remove_if_empty=False):
+def replace_file_with_string(target, new_contents):
     try:
-        current = file(target).read()
-    except:
+        with open(target) as reader:
+            current = reader.read()
+    except Exception as e:
         current = ""
     if current == new_contents:
-        # if turns out to be an empty string, and remove_if_empty is set,
-        # then make sure to trash the file if it exists
-        if remove_if_empty and not new_contents and os.path.isfile(target):
-            logger.verbose("tools.replace_file_with_string: removing file %s"%target)
-            try: os.unlink(target)
-            finally: return True
         return False
-    # overwrite target file: create a temp in the same directory
-    path = os.path.dirname(target) or '.'
-    fd, name = tempfile.mkstemp('','repl',path)
-    os.write(fd,new_contents)
-    os.close(fd)
-    if os.path.exists(target):
-        os.unlink(target)
-    shutil.move(name,target)
-    if chmod:
-        os.chmod(target,chmod)
+    sys.exit(0)
+    # overwrite target file
+    with open(target, 'w') as writer:
+        writer.write(new_contents)
     return True
 
 
@@ -74,7 +62,7 @@ def replace_file_with_string(target, new_contents, chmod=None, remove_if_empty=F
 class Notebook:
     def __init__(self, name):
         if name.endswith(".ipynb"): 
-            name = name.replace(".ipynb","")
+            name = name.replace(".ipynb", "")
         self.name = name
         self.filename = "{}.ipynb".format(self.name)
 
@@ -82,7 +70,7 @@ class Notebook:
         try:
             with open(self.filename) as f:
                 if ipython_version == 2:
-                    self.notebook = current_notebook.read(f,'ipynb')
+                    self.notebook = current_notebook.read(f, 'ipynb')
                 else:
                     self.notebook = nbformat.reader.read(f)
                     
@@ -95,9 +83,9 @@ class Notebook:
         return xpath(self.notebook, path)
 
     def cells(self):
-        if ipython_version == 2:
+        try:
             return self.xpath( ['worksheets', 0, 'cells'] )
-        else:
+        except:
             return self.xpath( [ 'cells' ] )
 
     def cell_contents(self, cell):
@@ -124,7 +112,7 @@ class Notebook:
         if force_name is provided, set 'notebookname' accordingly
         if force_name is None or False, set 'notebookname' only if it is not set"""
         metadata = self.xpath( ['metadata'])
-        if metadata.get(notebookname,"") and not force_name:
+        if metadata.get(notebookname, "") and not force_name:
             pass
         else:
             new_name = force_name if force_name else self.first_heading1()
@@ -133,7 +121,7 @@ class Notebook:
         if 'name' in metadata:
             del metadata['name'] 
         if verbose:
-            print("{} -> {}".format(self.filename,metadata[notebookname]))
+            print("{} -> {}".format(self.filename, metadata[notebookname]))
 
     def set_version(self, version=default_version, force=False):
         metadata = self.xpath(['metadata'])
@@ -183,9 +171,9 @@ class Notebook:
                     del cell['prompt_number'] 
 
     def empty_cell(self, cell):
-        if ipython_version == 2:
+        try:
             return cell['cell_type'] == 'code' and not cell['input']
-        else:
+        except:
             return cell['cell_type'] == 'code' and not cell['source']
                 
     def remove_empty_cells(self):
@@ -212,11 +200,11 @@ class Notebook:
                     print("Got a raw cell with source of type {}".format(type(source)))
                     print(">>>{}<<<".format(source))
                     print("split:XXX{}XXX".format(source.split("\n")))
-                if isinstance(cell['source'], StringTypes):
+                if isinstance(cell['source'], str):
                     cell['cell_type'] = 'markdown'
                     cell['source'] = "    "+ "\n    ".join(source.split("\n"))
                     nb_raw_cells += 1
-                elif isinstance(cell['source'], ListType):
+                elif isinstance(cell['source'], list):
                     cell['cell_type'] = 'markdown'
                     cell['source'] =  [ '    ' + line for line in cell['source']]
                     nb_raw_cells += 1
