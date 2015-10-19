@@ -11,12 +11,21 @@ from types import StringTypes, ListType
 # MOOC session number
 default_version = "1.0"
 
-# compute signature
-from IPython.nbformat.sign import NotebookNotary as Notary
-# store to file
-import IPython.nbformat.current as current_notebook
-from IPython.nbformat.notebooknode import NotebookNode
+import IPython
+ipython_version = IPython.version_info[0]
 
+if ipython_version == 2:
+    import IPython.nbformat.current as current_notebook
+    from IPython.nbformat.notebooknode import NotebookNode
+    from IPython.nbformat.sign import NotebookNotary as Notary
+elif ipython_version == 4:
+    import nbformat
+    from nbformat.notebooknode import NotebookNode
+    from nbformat.sign import NotebookNotary as Notary
+else:
+    print("normalizer tool has no support for IPython version {}".format(ipython_version))
+    sys.exit(1)    
+    
 def xpath(top, path):
     result = top
     for i in path:
@@ -72,7 +81,11 @@ class Notebook:
     def parse(self):
         try:
             with open(self.filename) as f:
-                self.notebook = current_notebook.read(f,'ipynb')
+                if ipython_version == 2:
+                    self.notebook = current_notebook.read(f,'ipynb')
+                else:
+                    self.notebook = nbformat.reader.read(f)
+                    
         except:
             print("Could not parse {}".format(self.filename))
             import traceback
@@ -81,11 +94,29 @@ class Notebook:
     def xpath(self, path):
         return xpath(self.notebook, path)
 
+    def cells(self):
+        if ipython_version == 2:
+            return self.xpath( ['worksheets', 0, 'cells'] )
+        else:
+            return self.xpath( [ 'cells' ] )
+
+    def cell_contents(self, cell):
+        if ipython_version == 2:
+            return cell['input']
+        else:
+            return cell['source']
+        
     def first_heading1(self):
-        cells = self.xpath( ['worksheets', 0, 'cells'] )
-        for cell in cells:
+        for cell in self.cells():
+            print("Looking in cell ", cell)
             if cell['cell_type'] == 'heading' and cell['level'] == 1:
                 return xpath(cell, ['source'])
+            elif cell['cell_type'] == 'markdown':
+                lines = self.cell_contents(cell).split("\n")
+                if len(lines) == 1:
+                    line = lines[0]
+                    if line.startswith('# '):
+                        return line[2:]
         return "NO HEADING 1 found"
 
     def set_name_from_heading1(self, force_name, verbose):
@@ -126,44 +157,44 @@ class Notebook:
         def is_licence_cell(cell):
             return cell['cell_type'] == 'markdown' and cell['source'].find("Licence") >= 0
         licence_line = self.licence_format.format(html_authors=" &amp; ".join(authors))
-        for worksheet in self.notebook.worksheets:
-            first_cell = worksheet.cells[0]
-            # cell.source is a list of strings
-            if is_licence_cell(first_cell):
-                # licence cell already here, just overwrite contents to latest version
-                first_cell['source'] = [ licence_line ]
-            else:
-                worksheet.cells.insert(
-                    0,
-                    NotebookNode({
-                        "cell_type": "markdown",
-                        "metadata": {},
-                        "source": [ licence_line ],
-                        }))
+        first_cell = self.cells()[0]
+        # cell.source is a list of strings
+        if is_licence_cell(first_cell):
+            # licence cell already here, just overwrite contents to latest version
+            first_cell['source'] = [ licence_line ]
+        else:
+            self.cells().insert(
+                0,
+                NotebookNode({
+                "cell_type": "markdown",
+                "metadata": {},
+                "source": [ licence_line ],
+            }))
 
     # I keep the code for these 2 but don't need this any longer
     # as I have all kinds of shortcuts and interactive tools now
     # plus, nbconvert(at least in jupyter) has preprocessor options to deal with this as well
     def clear_all_outputs(self):
         """clear the 'outputs' field of python code cells, and remove 'prompt_number' as well when present"""
-        for worksheet in self.notebook.worksheets:
-            for cell in worksheet.cells:
-                if cell['cell_type'] == 'code' and cell['language'] == 'python':
-                    cell['outputs'] = []
-                    if 'prompt_number' in cell:
-                        del cell['prompt_number'] 
+        for cell in self.cells():
+            if cell['cell_type'] == 'code':
+                cell['outputs'] = []
+                if 'prompt_number' in cell:
+                    del cell['prompt_number'] 
 
+    def empty_cell(self, cell):
+        if ipython_version == 2:
+            return cell['cell_type'] == 'code' and not cell['input']
+        else:
+            return cell['cell_type'] == 'code' and not cell['source']
+                
     def remove_empty_cells(self):
         """remove any empty cell - code cells only for now"""
         nb_empty = 0
-        for worksheet in self.notebook.worksheets:
-            cells_to_remove = []
-            for cell in worksheet.cells:
-                if cell['cell_type'] == 'code' and cell['language'] == 'python' and not cell['input']:
-                    cells_to_remove.append(cell)
-            nb_empty += len(cells_to_remove)
-            for cell_to_remove in cells_to_remove:
-                worksheet.cells.remove(cell_to_remove)
+        cells_to_remove = [ cell for cell in self.cells() if self.empty_cell(cell) ]
+        nb_empty += len(cells_to_remove)
+        for cell_to_remove in cells_to_remove:
+             self.cells().remove(cell_to_remove)
         if nb_empty:
             print("found and removed {} empty cells".format(nb_empty))
 
@@ -174,24 +205,23 @@ class Notebook:
         with 4 spaces indentation
         """
         nb_raw_cells = 0
-        for worksheet in self.notebook.worksheets:
-            for cell in worksheet.cells:
-                if cell['cell_type'] == 'raw':
-                    source = cell['source']
-                    if verbose:
-                        print("Got a raw cell with source of type {}".format(type(source)))
-                        print(">>>{}<<<".format(source))
-                        print("split:XXX{}XXX".format(source.split("\n")))
-                    if isinstance(cell['source'], StringTypes):
-                        cell['cell_type'] = 'markdown'
-                        cell['source'] = "    "+ "\n    ".join(source.split("\n"))
-                        nb_raw_cells += 1
-                    elif isinstance(cell['source'], ListType):
-                        cell['cell_type'] = 'markdown'
-                        cell['source'] =  [ '    ' + line for line in cell['source']]
-                        nb_raw_cells += 1
-                    else:
-                        print("WARNING: dont know how to deal with a raw cell (type {})".format(type(cell['source'])))
+        for cell in self.cells():
+            if cell['cell_type'] == 'raw':
+                source = cell['source']
+                if verbose:
+                    print("Got a raw cell with source of type {}".format(type(source)))
+                    print(">>>{}<<<".format(source))
+                    print("split:XXX{}XXX".format(source.split("\n")))
+                if isinstance(cell['source'], StringTypes):
+                    cell['cell_type'] = 'markdown'
+                    cell['source'] = "    "+ "\n    ".join(source.split("\n"))
+                    nb_raw_cells += 1
+                elif isinstance(cell['source'], ListType):
+                    cell['cell_type'] = 'markdown'
+                    cell['source'] =  [ '    ' + line for line in cell['source']]
+                    nb_raw_cells += 1
+                else:
+                    print("WARNING: dont know how to deal with a raw cell (type {})".format(type(cell['source'])))
         if nb_raw_cells:
             print("found and rewrote {} raw cells".format(nb_raw_cells))
         
@@ -208,7 +238,11 @@ class Notebook:
             outfilename = "{}.alt.ipynb".format(self.name)
         else:
             outfilename = self.filename
-        new_contents = current_notebook.writes(self.notebook,'ipynb')
+        if ipython_version == 2:
+            new_contents = current_notebook.writes(self.notebook,'ipynb')
+        else:
+            # xxx don't specify output version for now
+            new_contents = nbformat.writes(self.notebook)
         if replace_file_with_string(outfilename, new_contents):
             print("{} saved into {}".format(self.name, outfilename))
             
@@ -235,8 +269,14 @@ def full_monty(name, force_name, version, sign, verbose, authors):
 from argparse import ArgumentParser
 
 usage="""normalize notebooks
- * clear all outputs
- * check for notebookname
+ * Metadata
+   * checks for notebookname (from first heading1 if missing, or from forced name on the command line)
+   * always checks for kernelspec metadata
+   * sets version if specified on the command-line
+ * Contents
+   * makes sure a correct licence line is inserted
+   * clears all outputs
+   * removes empty code cells
 """
 
 def main():
