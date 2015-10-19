@@ -9,7 +9,7 @@ import shutil
 from types import StringTypes, ListType
 
 # MOOC session number
-default_version = "2.0"
+default_version = "1.0"
 
 # compute signature
 from IPython.nbformat.sign import NotebookNotary as Notary
