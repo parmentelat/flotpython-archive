@@ -264,6 +264,7 @@ $(eval $(call bundle_all_weeks,markdown-focus,markdown-weeks))
 ########## ipynb
 # there's no target ipynb/corrections and similar
 # so these must go in the contents, but not in deps
+NOTEBOOKS-IPYNB = $(foreach notebook,$(NOTEBOOKS),$(call ipynb_location,$(notebook)))
 BUNDLE-IPYNB = $(NOTEBOOKS-IPYNB) ipynb/corrections ipynb/data ipynb/media 
 
 $(eval $(call bundle_target,notebooks-ipynb,$(BUNDLE-IPYNB),ipynb $(NOTEBOOKS-IPYNB)))
