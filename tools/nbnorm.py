@@ -7,9 +7,15 @@ import os
 import tempfile
 import shutil
 
+from util import replace_file_with_string, xpath, truncate
+
+####################
 # MOOC session number
 default_version = "1.0"
 
+notebookname = "notebookname"
+
+####################
 import IPython
 ipython_version = IPython.version_info[0]
 
@@ -25,39 +31,6 @@ else:
     print("normalizer tool has no support for IPython version {}".format(ipython_version))
     sys.exit(1)    
     
-def xpath(top, path):
-    result = top
-    for i in path:
-        result = result[i]
-    return result
-
-def truncate(s, n):
-    return s if len(s) < n else s[:n-2] + ".."
-
-notebookname = "notebookname"
-
-############################## stolen from nodemanager.tools
-# replace a target file with a new contents - checks for changes
-# can handle chmod if requested
-# can also remove resulting file if contents are void, if requested
-# performs atomically:
-#    writes in a tmp file, which is then renamed(from sliverauth originally)
-# returns True if a change occurred, or the file is deleted
-def replace_file_with_string(target, new_contents):
-    try:
-        with open(target) as reader:
-            current = reader.read()
-    except Exception as e:
-        current = ""
-    if current == new_contents:
-        return False
-    sys.exit(0)
-    # overwrite target file
-    with open(target, 'w') as writer:
-        writer.write(new_contents)
-    return True
-
-
 ####################
 class Notebook:
     def __init__(self, name):
