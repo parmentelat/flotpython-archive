@@ -1,21 +1,5 @@
 #!/usr/bin/env python3
 
-### TODO
-# add options to specify liverelease metadata with merge -o
-
-hard_coded_metadata = {
-  "livereveal": {
-    "width": 1200,
-#   available are default simple beige sky solarized
-#   need to stay away from darkish ones for now apparently
-    "theme": "simple",
-    "transition": "zoom",
-    "start_slideshow_at": "selected",
-    "height": 800
-  }
-}    
-
-
 """
 Simple tools to convert back and forth into a quick & dirty format
 named 'cf' for CompactFormat
@@ -92,19 +76,47 @@ def truncate(s, n):
 
 
 ####################
-class Notebook:
-    def __init__(self, name):
-        if name.endswith(".ipynb"): 
-            name = name.replace(".ipynb", "")
+class CellsFile:
+    """
+    a generic class for a pack of cells
+    either in ipynb or cf format
+    """
+    def __init__(self, name, ext):
+        dotext = "." + ext
+        if name.endswith(dotext): 
+            name = name.replace(dotext, "")
         self.name = name
-        self.filename = "{}.ipynb".format(self.name)
-
+        self.filename = "{}{}".format(self.name, dotext)
+        # subclass will need to have a .cells attribute
+        
     def exists(self):
         return os.path.exists(self.filename)
 
-    def create(self):
+    @staticmethod
+    def is_slide(cell, types = ('slide') ):
+        return 'metadata' in cell and \
+            'slideshow' in cell.metadata and \
+            'slide_type' in xpath(cell, ('metadata', 'slideshow')) and \
+            xpath(cell, ('metadata', 'slideshow', 'slide_type')) in types
+            
+
+    def __repr__(self):
+        result = "{}".format(self.filename)
+        if not self.exists():
+            result += " (non-existing yet)"
+        result += " has {} cells".format(len(self.cells))
+        slide_cells = list(c for c in self.cells if self.is_slide(c))
+        result += " and {} slides".format(len(slide_cells))
+        return result
+
+class Notebook(CellsFile):
+    def __init__(self, name):
+        CellsFile.__init__(self, name, 'ipynb')
+
+    def create(self, *metadata_dicts):
         self.notebook = current_format.new_notebook()
-        self.notebook.metadata.update(hard_coded_metadata)
+        for metadata in metadata_dicts:
+            self.notebook.metadata.update(metadata)
         self.cells = self.notebook.cells
 
     def parse(self):
@@ -141,22 +153,16 @@ class Notebook:
         return cell['source']
             
 ####################
-class CompactFormat:
+class CompactFormat(CellsFile):
 
     def __init__(self, name):
-        if name.endswith(".cf"): 
-            name = name.replace(".cf", "")
-        self.name = name
-        self.filename = "{}.cf".format(self.name)
-
-    def exists(self):
-        return os.path.exists(self.filename)
+        CellsFile.__init__(self, name, 'cf')
 
     def parse(self):
         """
         reads the .cf file looks for separator, and returns 
         a list of cells like e.g.
-        {'metadata': {}, 'cell_type': 'markdown', 'source': ['# my title\n', '## a subtitle' ]}
+        {'metadata': {}, 'cell_type': 'markdown', 'source': '# my title\n## a subtitle'}
         variants
         'cell_type' : 'code' 
         'metadata': {'slideshow': {'slide_type': 'slide'}}
@@ -187,19 +193,22 @@ class CompactFormat:
             cell = {'metadata' : {},
                     'cell_type' : 'markdown'}
             if source is not None:
+                if source and source[-1] == "\n":
+                    source = source[:-1]
                 cell['source'] = source
             for ident in idents:
                 if ident in cell_types:
                     cell['cell_type'] = ident
                     if ident == 'code':
                         cell['outputs'] = []
-                        cell['execution_count'] = 0
+                        cell['execution_count'] = None
                 elif ident in slide_types:
                     if 'slideshow' not in cell['metadata']:
                         cell['metadata']['slideshow'] = {}
                     cell['metadata']['slideshow']['slide_type'] = ident
                 else:
-                    print("{}:{} - ignored directive `{}' in separator".format(filename, lineno, ident))    
+                    print("{}:{} - ignored directive `{}' in separator"
+                          .format(filename, lineno, ident))    
             return NotebookNode(cell)
 
         # accumulate cells over file
@@ -217,13 +226,15 @@ class CompactFormat:
                     else:
                         # a pending cell has been started
                         if cell_idents is not None:
-                            self.cells.append(new_cell(cell_idents, self.filename, lineno+1, source=source))
+                            self.cells.append(new_cell(cell_idents, self.filename,
+                                                       lineno+1, source=source))
                             source = ""
                         # remember for next cell
                         cell_idents = line_idents
                 # don't forget last cell
             if cell_idents is not None:
-                self.cells.append(new_cell(cell_idents, self.filename, lineno+1, source=source))
+                self.cells.append(new_cell(cell_idents, self.filename,
+                                           lineno+1, source=source))
             return True
         except:
             import traceback
@@ -252,11 +263,48 @@ from argparse import ArgumentParser
 
 ##### merging one or more inputs (regardless of their type) into a notebook
 def merge():
+    meaningful = "relevant only with -o"
     parser = ArgumentParser()
     parser.add_argument("-o", "--output", help="name for the output ipynb", default=None)
-    parser.add_argument("inputs", nargs="*", help="notebooks (.ipynb) or compact format (.cf)")
+    parser.add_argument("-O", help="like -o based on the first input - typically for converting one cf into ipynb ",
+                        dest='output_first', action='store_true', default=False)
+    parser.add_argument("inputs", nargs="+",
+                        help="notebooks (.ipynb) or compact format (.cf)")
+    parser.add_argument("-W", "--width", type=int, default=1200, help=meaningful)
+    parser.add_argument("-H", "--height", type=int, default=800, help=meaningful)
+    parser.add_argument("-t", "--theme", default='simple', help=meaningful)
+    parser.add_argument("-r", "--transition", default='cube', help=meaningful)
+    parser.add_argument("-s", "--start-option", dest='start_slideshow_at', default='selected', help=meaningful)
     args = parser.parse_args()
 
+    def slideshow_metadata(args):
+        dict = {}
+        for attr in ['width', 'height', 'theme', 'transition', 'start_slideshow_at']:
+            dict[attr] = getattr(args, attr)
+        return {"livereveal": dict }
+
+    # python3 hard-wired for now
+    def kernelspec_metadata():
+        return {
+            "metadata": {
+                "kernelspec": {
+                    "display_name": "Python 3",
+                    "language": "python",
+                    "name": "python3"
+                },
+                "language_info": {
+                    "codemirror_mode": {
+                        "name": "ipython",
+                        "version": 3
+                    },
+                    "file_extension": ".py",
+                    "mimetype": "text/x-python",
+                    "name": "python",
+                    "nbconvert_exporter": "python",
+                    "pygments_lexer": "ipython3",
+                    "version": "3.4.4"
+                }}}
+    
     inputs = args.inputs
 
     # the receiver for the merge is
@@ -265,10 +313,14 @@ def merge():
     # (*) otherwise
     # the first argument is expected to be a notebook (as opposed to a .cf)
     # and in this case the rest of the inputs are merged into it
-    if args.output:
+    output = None
+    if args.output_first:
+        output = args.inputs[0].replace('.cf', '')
+    elif args.output:
         output = args.output
+    if output:
         receiver = Notebook(output)
-        receiver.create()
+        receiver.create(slideshow_metadata(args), kernelspec_metadata())
     else:
         output = inputs.pop(0)
         receiver = Notebook(output)
@@ -276,24 +328,23 @@ def merge():
             print("First arg is required to denote a notebook")
             exit(1)
 
-    print("Entering: {} has {} cells".format(output, len(receiver.cells)))
+    print("Entering: {}".format(receiver))
 
     for index, input in enumerate(args.inputs):
         file = Notebook(input)
         if file.parse():
-            print("{} is a notebook with {} cells".format(input, len(file.cells)))
+            print("Merging notebook {}".format(file))
         else:
             file = CompactFormat(input)
             if file.parse():
-                print("{} is a compact format with {} cells".format(input, len(file.cells)))
+                print("Merging compactfile {}".format(file))
             else:
                 print("could not read {} -- ignored".input)
                 continue
         receiver.cells += file.cells
 
-    print("Done: {} now has {} cells".format(output, len(receiver.cells)))
     receiver.save()
-    print("saved {}".format(receiver.filename))
+    print("Saved: {}".format(receiver))
             
 ##### converting back to cf
 def reverse():
