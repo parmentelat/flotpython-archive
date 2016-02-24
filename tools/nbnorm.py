@@ -111,7 +111,7 @@ class Notebook:
             }
 
     licence_format = '<span style="float:left;">Licence CC BY-NC-ND</span>'\
-                     '<span style="float:right;">{html_authors},'\
+                     '<span style="float:right;">{html_authors}&nbsp;'\
                      '<img src="media/inria-25.png" style="display:inline"></span><br/>'
             
     def ensure_licence(self, authors):
