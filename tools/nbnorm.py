@@ -140,6 +140,7 @@ class Notebook:
         for cell in self.cells():
             if cell['cell_type'] == 'code':
                 cell['outputs'] = []
+                cell['execution_count'] = None
                 if 'prompt_number' in cell:
                     del cell['prompt_number'] 
 
