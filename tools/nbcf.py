@@ -270,6 +270,7 @@ def merge():
                         dest='output_first', action='store_true', default=False)
     parser.add_argument("inputs", nargs="+",
                         help="notebooks (.ipynb) or compact format (.cf)")
+    parser.add_argument("-y", "--python", type=int, choices=(2,3), default=3)
     parser.add_argument("-W", "--width", type=int, default=1200, help=meaningful)
     parser.add_argument("-H", "--height", type=int, default=800, help=meaningful)
     parser.add_argument("-t", "--theme", default='simple', help=meaningful)
@@ -285,16 +286,23 @@ def merge():
 
     # python3 hard-wired for now
     def kernelspec_metadata():
+        if args.python == 3:
+            py_display_name, py_name, py_version = "Python 3", "python3", 3
+        elif args.python == 2:
+            py_display_name, py_name, py_version = "Python 2", "python2", 2
+        else:
+            print("unexexpected python version {}".format(args.python))
+            exit(1)
         return {
             "kernelspec": {
-                "display_name": "Python 3",
+                "display_name": py_display_name,
                 "language": "python",
-                "name": "python3"
+                "name": py_name,
             },
             "language_info": {
                 "codemirror_mode": {
                     "name": "ipython",
-                    "version": 3
+                    "version": py_version,
                 },
                 "file_extension": ".py",
                 "mimetype": "text/x-python",
