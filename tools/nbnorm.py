@@ -69,7 +69,7 @@ class Notebook:
         
     def first_heading1(self):
         for cell in self.cells():
-            print("Looking in cell ", cell)
+#            print("Looking in cell ", cell)
             if cell['cell_type'] == 'heading' and cell['level'] == 1:
                 return xpath(cell, ['source'])
             elif cell['cell_type'] == 'markdown':
@@ -140,9 +140,9 @@ class Notebook:
         for cell in self.cells():
             if cell['cell_type'] == 'code':
                 cell['outputs'] = []
-                cell['execution_count'] = None
-                if 'prompt_number' in cell:
-                    del cell['prompt_number'] 
+                for to_clean in ('execution_count', 'prompt_number'):
+                    if to_clean in cell:
+                        del cell[to_clean]
 
     def empty_cell(self, cell):
         try:
