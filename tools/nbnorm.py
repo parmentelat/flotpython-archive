@@ -140,9 +140,10 @@ class Notebook:
         for cell in self.cells():
             if cell['cell_type'] == 'code':
                 cell['outputs'] = []
-                for to_clean in ('execution_count', 'prompt_number'):
-                    if to_clean in cell:
-                        del cell[to_clean]
+                if 'prompt_number' in cell:
+                    del cell['prompt_number']
+                if 'execution_count' in cell:
+                    cell['execution_count'] = None
 
     def empty_cell(self, cell):
         try:
