@@ -142,6 +142,7 @@ class Notebook:
                 cell['outputs'] = []
                 if 'prompt_number' in cell:
                     del cell['prompt_number']
+                # this is now required in nbformat4
                 if 'execution_count' in cell:
                     cell['execution_count'] = None
 
