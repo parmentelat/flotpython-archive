@@ -24,6 +24,8 @@ class ExerciceRegexp(ExerciceFunction):
                 if not match:
                     return False
                 else:
+                    # xxx this is wrong ! matching section
+                    # won't have the metachars in incoming pattern
                     return match.group(0) == string
             # findall returns strings, while finditer returns match instances
             elif match_mode == 'findall':
@@ -36,7 +38,7 @@ class ExerciceRegexp(ExerciceFunction):
         """
         a regexp exercice is made with
         . a user-friendly name
-        . a regexp string for the solution
+        . a regexp pattern for the solution
         . a list of inputs on which to run the regexp
         . match_mode is either 'match', 'search' or 'findall' 
         . additional settings from ExerciceFunction
