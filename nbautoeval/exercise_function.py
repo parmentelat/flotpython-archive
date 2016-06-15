@@ -21,7 +21,7 @@ DEBUG=False
 ########## defaults for columns widths - for FUN 
 # this historically was called 'columns' as it was used to specify
 # the width of the 3 columns (in correction mode)
-# or of the 2 columns (in exemple mode) 
+# or of the 2 columns (in example mode) 
 # however when adding new layouts like 'text', the argument passed to the layout
 # function ceased to be a column width, so we call this layout_args instead
 # but in most cases this does represent column widths
@@ -40,7 +40,7 @@ class ExerciseFunction(object):
     student function, and compare the results using '==' to produce a
     table of green or red cells.
 
-    The class provides a few other utility methods, like 'exemple'
+    The class provides a few other utility methods, like 'example'
     that can be used in the students notebook to show the expected
     result for some or all of the inputs.
 
@@ -52,9 +52,9 @@ class ExerciseFunction(object):
     copy_mode='shallow' to the constructor here.
 
     Some more cosmetic settings are supported as well, for defining
-    the column widths in both the correction and exemple outputs. Also
-    exemple_how_many allows you to specify how many inputs should be
-    considered for generating the exemple table (starting of course at
+    the column widths in both the correction and example outputs. Also
+    example_how_many allows you to specify how many inputs should be
+    considered for generating the example table (starting of course at
     the top of the list).
     Finally render_name, if set to True, will cause the function name
     to appear in the first column together with arguments
@@ -64,7 +64,7 @@ class ExerciseFunction(object):
                  layout = 'pprint',
                  call_layout = None,
                  render_name = True,
-                 exemple_how_many = 1,
+                 example_how_many = 1,
                  layout_args = None,
                  column_headers = None):
         # the 'official' solution
@@ -79,8 +79,8 @@ class ExerciseFunction(object):
         self.call_layout = call_layout
         # states if the function name should appear in the call cells
         self.render_name = render_name
-        # how many exemples 
-        self.exemple_how_many = exemple_how_many
+        # how many examples 
+        self.example_how_many = example_how_many
         # column details - 3-tuples 
         # sizes - defaults should be fine in most cases
         self.layout_args = layout_args 
@@ -166,16 +166,16 @@ class ExerciseFunction(object):
         return HTML(html)
 
     # public interface
-    def exemple(self):
+    def example(self):
 
         self.set_call_layout()
         
-        how_many = self.exemple_how_many
+        how_many = self.example_how_many
         columns = self.layout_args if self.layout_args \
                   else default_layout_args
         exo_layout = self.layout
 
-        how_many_samples = self.exemple_how_many if self.exemple_how_many \
+        how_many_samples = self.example_how_many if self.example_how_many \
                            else len(self.datasets)
     
         # can provide 3 args (convenient when it's the same as correction) or just 2

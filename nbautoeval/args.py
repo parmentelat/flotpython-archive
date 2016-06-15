@@ -41,7 +41,7 @@ class ArgsKeywords(object):
         return result
 
     def set_layout(self, layout):
-        # used when rendering - in exemple or correction
+        # used when rendering - in example or correction
         # in general this is defined in the Exercise instance
         # but can also be overridden here
         self.layout = layout

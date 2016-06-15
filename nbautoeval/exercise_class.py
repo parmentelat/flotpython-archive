@@ -16,7 +16,7 @@ from .rendering import (
 ########## defaults for columns widths - for FUN 
 # this historically was called 'columns' as it was used to specify
 # the width of the 3 columns (in correction mode)
-# or of the 2 columns (in exemple mode) 
+# or of the 2 columns (in example mode) 
 # however when adding new layouts like 'text', the argument passed to the layout
 # function ceased to be a column width, so we call this layout_args instead
 # but in most cases this does represent column widths
@@ -64,14 +64,14 @@ class ExerciseClass(object):
     (*) a list of scenarios that will be executed on that class
 
     From that plus a few accessories for fine-grained customization
-    we can generate online exemple and correction.
+    we can generate online example and correction.
     """
     
     def __init__(self, solution, scenarios,
                  copy_mode = 'deep',
                  layout = None,
                  call_layout = None,
-                 exemple_how_many = 1,
+                 example_how_many = 1,
                  obj_name = 'o',
                  layout_args = None,
                  ):
@@ -80,7 +80,7 @@ class ExerciseClass(object):
         self.copy_mode = copy_mode
         self.layout = layout
         self.call_layout = call_layout
-        self.exemple_how_many = exemple_how_many
+        self.example_how_many = example_how_many
         self.obj_name = obj_name
         self.layout_args = layout_args 
         # computed
@@ -192,18 +192,18 @@ class ExerciseClass(object):
 
         return HTML(html)
 
-    def exemple(self):
+    def example(self):
         """
         display a table with example scenarios
         """
         self.set_call_layout()
-        how_many = self.exemple_how_many
+        how_many = self.example_how_many
         columns = self.layout_args if self.layout_args \
                   else default_layout_args
         exo_layout = self.layout
         ref_class = self.solution
 
-        how_many_samples = self.exemple_how_many if self.exemple_how_many \
+        how_many_samples = self.example_how_many if self.example_how_many \
                            else len(self.scenarios)
 
         # can provide 3 args (convenient when it's the same as correction) or just 2
