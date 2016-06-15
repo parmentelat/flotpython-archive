@@ -206,7 +206,7 @@ class TableCell(object):
         """
         # the value specified in the instance wins if set
         # as it is more specific
-        # second use the one provided at the exercice level
+        # second use the one provided at the exercise level
         # last resort is this default
         computed_layout = None
         if hasattr(self.content, 'layout'):

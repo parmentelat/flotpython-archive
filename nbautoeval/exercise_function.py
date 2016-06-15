@@ -3,7 +3,7 @@
 from __future__ import print_function
 
 ############################################################
-# the low level interface - used to be used directly in the first exercices
+# the low level interface - used to be used directly in the first exercises
 
 from IPython.display import HTML
 
@@ -28,8 +28,8 @@ DEBUG=False
 default_layout_args =  (24, 28, 28)
 
 ####################        
-class ExerciceFunction(object):
-    """The class for an exercice where students are asked to write a
+class ExerciseFunction(object):
+    """The class for an exercise where students are asked to write a
     function The teacher version of that function is provided as
     'solution' and is used against datasets to generate an online
     correction or example.

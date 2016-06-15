@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from nbautoeval.exercice_regexp import ExerciceRegexp, ExerciceRegexpGroups
+from nbautoeval.exercise_regexp import ExerciseRegexp, ExerciseRegexpGroups
 from nbautoeval.args import Args
 
 ########## step 1
@@ -28,7 +28,7 @@ inputs += [
 # so this amounts to 25 different runs
 
 ########## step 3
-exo_at_least_two = ExerciceRegexp(
+exo_at_least_two = ExerciseRegexp(
     # for building a regexp we need to provide a name explicitly
     # (as opposed to when we deal with functions, that have an internal name)
     'at_least_two',

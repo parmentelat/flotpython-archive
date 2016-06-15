@@ -56,10 +56,10 @@ class ScenarioClass(list):
         self.append( (methodname, args_obj,) )
 
 ##########
-class ExerciceClass(object):
+class ExerciseClass(object):
     """
-    Much like the ExerciceFunction class, this allows to define
-    an exercice as
+    Much like the ExerciseFunction class, this allows to define
+    an exercise as
     (*) a solution which is the correct implementation of a class
     (*) a list of scenarios that will be executed on that class
 
@@ -86,7 +86,7 @@ class ExerciceClass(object):
         # computed
         self.name = solution.__name__
 
-    # adding this feature on ExerciceClass as a mirror of ExerciceFunction
+    # adding this feature on ExerciseClass as a mirror of ExerciseFunction
     # but this it is unclear if it's really useful as class exos will be likely
     # to always use the same layout..
     def set_call_layout(self):

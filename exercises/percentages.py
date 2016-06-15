@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# importing the ExerciceFunction class
-from nbautoeval.exercice_function import ExerciceFunction
+# importing the ExerciseFunction class
+from nbautoeval.exercise_function import ExerciseFunction
 # the Args object is for defining inputs 
 from nbautoeval.args import Args
 
@@ -47,7 +47,7 @@ inputs_percentages = [
 # NOTE on names:
 # 
 # this is the only name that should be imported from this module
-exo_percentages = ExerciceFunction(
+exo_percentages = ExerciseFunction(
     # first argument is the 'correct' function
     # it is recommended to use the same name as in the notebook, as the
     # python function name is used in HTML rendering 
