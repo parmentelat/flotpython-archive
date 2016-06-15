@@ -11,12 +11,36 @@ all:
 .PHONY: all
 
 
-# work on one week at a time with FOCUS=W2
-FOCUS     = W?
+# work on one week at a time with FOCUS=w2
+FOCUS     = w?
+NOTEBOOKS = $(shell git ls-files $(FOCUS) | grep '\.ipynb$$')
+NOTEBASES = $(subst .ipynb,,$(NOTEBOOKS))
 
 # for phony targets
 force:
 
+####################
+# our notebooks now use format 4.0
+# to downgrade one can run this
+
+# notebase -> full path of v2 notebook
+define v2_path
+$(HOME)/nbformat2/$(1).ipynb
+endef
+
+NOTEBOOKS_V2 = $(foreach notebase,$(NOTEBASES),$(call v2_path,$(notebase)))
+
+v2: $(NOTEBOOKS_V2)
+
+define v2_target
+$(call v2_path,$(1)): $(1).ipynb
+	@mkdir -p $(dir $(call v2_path,$(1)))
+	jupyter nbconvert-2.7 --to notebook --nbformat=2 --output=$(call v2_path,$(1)) $(1).ipynb
+endef
+
+$(foreach notebase,$(NOTEBASES),$(eval $(call v2_target,$(notebase))))
+
+.PHONY: v2
 #################### corriges
 all: corriges
 corriges:
@@ -52,9 +76,6 @@ CLEAN-TARGETS += corriges-clean
 # let's keep it simple (it's already a mess like this)
 
 ########################################
-
-# list of notebooks
-NOTEBOOKS = $(wildcard $(FOCUS)/W*S[0-9]*.ipynb)
 
 # simple basename
 define sbn
@@ -94,7 +115,7 @@ $(call html_location,$(1)): $(1)
 #	(mkdir -p ipynb; cd ipynb; ln -f -s ../$(1) $(notdir $(1)))
 
 # redo all targets about one notebook
-# e.g make -n W1-S2-C1-accents
+# e.g make -n w1-s2-c1-accents
 $(call sbn,$(1)): $(call markdown_location,$(1)) $(call html_location,$(1))
 
 .PHONY: $(call sbn,$(1))
@@ -126,7 +147,7 @@ all: html
 
 #################### ipynb
 ipynb: force
-	@mkdir -p ipynb; echo populating ipynb with notebooks from 'W*'
+	@mkdir -p ipynb; echo populating ipynb with notebooks from 'w*'
 	@$(RSYNC) -aL $(NOTEBOOKS) ipynb
 	@mkdir -p ipynb/corrections; echo syncing modules/corrections onto ipynb/corrections
 	@$(RSYNC) -a $$(git ls-files modules/corrections) ipynb/corrections
@@ -234,7 +255,7 @@ $(eval $(call bundle_shortcut,notebooks-html,html))
 
 # this only makes sense in a context where FOCUS is defined to one week
 $(eval $(call bundle_target,$(FOCUS)-notebooks-html,$(BUNDLE-HTML),html $(BUNDLE-HTML)))
-ifneq "$(FOCUS)" "W?"
+ifneq "$(FOCUS)" "w?"
 $(eval $(call bundle_shortcut,$(FOCUS)-notebooks-html,html-focus))
 endif
 
@@ -249,7 +270,7 @@ $(eval $(call bundle_shortcut,notebooks-markdown,markdown))
 
 # this only makes sense in a context where FOCUS is defined to one week
 $(eval $(call bundle_target,$(FOCUS)-notebooks-markdown,$(BUNDLE-MARKDOWN),markdown $(BUNDLE-MARKDOWN)))
-ifneq "$(FOCUS)" "W?"
+ifneq "$(FOCUS)" "w?"
 $(eval $(call bundle_shortcut,$(FOCUS)-notebooks-markdown,markdown-focus))
 endif
 
@@ -271,15 +292,14 @@ $(eval $(call bundle_target,notebooks-ipynb,$(BUNDLE-IPYNB),ipynb $(NOTEBOOKS-IP
 $(eval $(call bundle_shortcut,notebooks-ipynb,ipynb))
 
 ########## corriges
-FOCUS-LOWER = $(subst W,w,$(FOCUS))
-BUNDLE-CORRIGES-FOCUS = $(wildcard corriges/corriges-$(FOCUS-LOWER)*.txt corriges/corriges-$(FOCUS-LOWER)*.pdf corriges/corriges-$(FOCUS-LOWER)*.py)
+BUNDLE-CORRIGES-FOCUS = $(wildcard corriges/corriges-$(FOCUS)*.txt corriges/corriges-$(FOCUS)*.pdf corriges/corriges-$(FOCUS)*.py)
 BUNDLE-CORRIGES = $(wildcard corriges/*.pdf) $(wildcard corriges/*.txt) $(wildcard corriges/*py)
 
 $(eval $(call bundle_target,corriges,$(BUNDLE-CORRIGES),corriges-pdf))
 $(eval $(call bundle_shortcut,corriges,corriges))
 
 $(eval $(call bundle_target,$(FOCUS)-corriges,$(BUNDLE-CORRIGES-FOCUS),corriges-pdf))
-ifneq "$(FOCUS)" "W?"
+ifneq "$(FOCUS)" "w?"
 $(eval $(call bundle_shortcut,$(FOCUS)-corriges,corriges-focus))
 endif
 $(eval $(call bundle_all_weeks,corriges-focus,corriges-weeks))
@@ -309,8 +329,8 @@ full-monty: remote retrieve publish
 # it just wraps videos and notebooks in a single directory
 standalone: ipynb
 	mkdir -p standalone
-	rsync -av W?/*.mov standalone/
-	rsync -av W?/*.quiz standalone/
+	rsync -av w?/*.mov standalone/
+	rsync -av w?/*.quiz standalone/
 	rsync -av ipynb/ standalone/
 
 standalone-clean:
