@@ -10,6 +10,7 @@ RSYNC_DEL = $(RSYNC) -av --delete --delete-excluded
 all: 
 .PHONY: all
 
+TOPLEVEL=$(shell pwd)
 
 # work on one week at a time with FOCUS=w2
 FOCUS     = w?
@@ -25,7 +26,7 @@ force:
 
 # notebase -> full path of v2 notebook
 define v2_path
-$(HOME)/nbformat2/$(1).ipynb
+$(TOPLEVEL)/nbformat2/$(1).ipynb
 endef
 
 NOTEBOOKS_V2 = $(foreach notebase,$(NOTEBASES),$(call v2_path,$(notebase)))
