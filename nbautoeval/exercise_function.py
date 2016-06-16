@@ -53,7 +53,7 @@ class ExerciseFunction(object):
 
     Some more cosmetic settings are supported as well, for defining
     the column widths in both the correction and example outputs. Also
-    example_how_many allows you to specify how many inputs should be
+    nb_examples allows you to specify how many inputs should be
     considered for generating the example table (starting of course at
     the top of the list).
     Finally render_name, if set to True, will cause the function name
@@ -64,7 +64,7 @@ class ExerciseFunction(object):
                  layout = 'pprint',
                  call_layout = None,
                  render_name = True,
-                 example_how_many = 1,
+                 nb_examples = 1,
                  layout_args = None,
                  column_headers = None):
         # the 'official' solution
@@ -80,7 +80,7 @@ class ExerciseFunction(object):
         # states if the function name should appear in the call cells
         self.render_name = render_name
         # how many examples 
-        self.example_how_many = example_how_many
+        self.nb_examples = nb_examples
         # column details - 3-tuples 
         # sizes - defaults should be fine in most cases
         self.layout_args = layout_args 
@@ -166,17 +166,20 @@ class ExerciseFunction(object):
         return HTML(html)
 
     # public interface
-    def example(self):
+    def example(self, how_many=None):
 
         self.set_call_layout()
         
-        how_many = self.example_how_many
+        if how_many is None:
+            how_many = self.nb_examples
         columns = self.layout_args if self.layout_args \
                   else default_layout_args
         exo_layout = self.layout
 
-        how_many_samples = self.example_how_many if self.example_how_many \
-                           else len(self.datasets)
+        if how_many is None:
+            how_many = self.nb_examples
+        if how_many == 0:
+            how_many = len(self.datasets)
     
         # can provide 3 args (convenient when it's the same as correction) or just 2
         columns = columns[:2]
@@ -191,7 +194,7 @@ class ExerciseFunction(object):
         html += TableRow(style=header_font_style,
                          cells = [ TableCell (CellLegend(x), tag='th', style=center_cell_style)
                                    for x in (title1, 'Resultat Attendu') ]).html()
-        for dataset in self.datasets[:how_many_samples]:
+        for dataset in self.datasets[:how_many]:
             sample_dataset = dataset.clone(self.copy_mode)
             if self.render_name:
                 dataset.render_function_name(self.name)

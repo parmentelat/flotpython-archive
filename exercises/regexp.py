@@ -38,7 +38,7 @@ exo_at_least_two = ExerciseRegexp(
     [Args(x) for x in inputs],
     # match_mode can be either 'match' or 'search', depending on
     match_mode = 'finditer',
-    example_how_many = 8)
+    nb_examples = 8)
 
 # XXX to be clarified again
 at_least_two_ko = "TATA"

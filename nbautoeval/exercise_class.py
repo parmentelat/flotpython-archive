@@ -71,7 +71,7 @@ class ExerciseClass(object):
                  copy_mode = 'deep',
                  layout = None,
                  call_layout = None,
-                 example_how_many = 1,
+                 nb_examples = 1,
                  obj_name = 'o',
                  layout_args = None,
                  ):
@@ -80,7 +80,7 @@ class ExerciseClass(object):
         self.copy_mode = copy_mode
         self.layout = layout
         self.call_layout = call_layout
-        self.example_how_many = example_how_many
+        self.nb_examples = nb_examples
         self.obj_name = obj_name
         self.layout_args = layout_args 
         # computed
@@ -197,13 +197,13 @@ class ExerciseClass(object):
         display a table with example scenarios
         """
         self.set_call_layout()
-        how_many = self.example_how_many
+        how_many = self.nb_examples
         columns = self.layout_args if self.layout_args \
                   else default_layout_args
         exo_layout = self.layout
         ref_class = self.solution
 
-        how_many_samples = self.example_how_many if self.example_how_many \
+        how_many_samples = self.nb_examples if self.nb_examples \
                            else len(self.scenarios)
 
         # can provide 3 args (convenient when it's the same as correction) or just 2

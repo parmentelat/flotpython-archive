@@ -8,32 +8,34 @@ import pprint
 from nbautoeval.rendering import commas, truncate_str, truncate_value
 
 ####################
-class ArgsKeywords(object):
+# From June 2016, this class should not need to be used directly
+# as Args would allow to build it with a nicer interface
+class ArgsTupleDict(object):
     """
     The most general form of a function argument list is made
     of a tuple and a dictionary
     
     Example:
-    my_input = ArgsKeywords( (1,2), {'a': []})
+    my_input = ArgsTupleDict( (1,2), {'a': []})
     my_input.call (foo)
     would then return the result of
     foo (1, 2, a=[])
     """
-    def __init__(self, args=None, keywords=None):
+    def __init__(self, _args=None, _keywords=None, **keywords):
         # expecting a tuple or a list
-        self.args = args if args is not None else tuple()
+        self.args = _args if _args is not None else tuple()
         # expecting a dictionary
-        self.keywords = keywords if keywords is not None else {}
+        self.keywords = _keywords if _keywords is not None else {}
         # can be overridden later on using 'render_function_name'
         self.function_name = None
         # can be overridden later on using 'render_prefix'
         self.prefix = ""
         # default - no way to set this on the constructor
-        # because layout=x is already captured in self.keywords
+        # because layout=x is already captured in _keywords
         self.layout = None
 
     def __repr__(self):
-        cn = "Args" if not self.keywords else "ArgsKeywords"
+        cn = "Args" if not self.keywords else "ArgsTupleDict"
         result = "<Args {}{}{} ".format(self.prefix, self.function_name, self.args)
         if self.keywords:
             result += "Keywords:" + ",".join(["{}={}".format(k, v) for (k, v) in self.keywords.items() ])
@@ -128,7 +130,7 @@ class ArgsKeywords(object):
             return sep + pformat_result.replace("\n","\n"+sep)
         args_tokens = [ pprint.pformat(arg, width=width-indent, indent=indent) for arg in self.args ]
         keyword_tokens =  [ "{}={}".format(k,pprint.pformat(v, width=width-indent, indent=indent))
-                            for k,v in self.keywords ]
+                            for k,v in self.keywords.items() ]
         tokens = [ indent_pformat(x) for x in args_tokens + keyword_tokens ]
         html += (",\n").join(tokens)
         if self.function_name:
@@ -137,7 +139,7 @@ class ArgsKeywords(object):
         return html
         
 # simplified for when no keywords are required
-class Args(ArgsKeywords):
+class Args(ArgsTupleDict):
     """
     In most cases though, we do not use keywords so it is more convenient to
     just pass a list of arguments
@@ -153,5 +155,5 @@ class Args(ArgsKeywords):
     """
     def __init__(self, *args, **kwds):
         # it is NOT *args here, this is intentional
-        ArgsKeywords.__init__(self, args, **kwds)
+        ArgsTupleDict.__init__(self, args, kwds)
 
