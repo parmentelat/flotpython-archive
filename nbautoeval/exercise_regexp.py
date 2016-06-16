@@ -6,6 +6,8 @@ import re
 
 from .exercise_function import ExerciseFunction
 
+default_match_mode = 'match' 
+
 class ExerciseRegexp(ExerciseFunction):
     """
     With these exercises the students are asked to write a regexp
@@ -34,7 +36,7 @@ class ExerciseRegexp(ExerciseFunction):
                 return [ match.span() for match in re.finditer(regexp, string)]
         return solution
 
-    def __init__(self, name, regexp, inputs, match_mode='match', *args, **keywords):
+    def __init__(self, name, regexp, inputs, match_mode=default_match_mode, *args, **keywords):
         """
         a regexp exercise is made with
         . a user-friendly name
@@ -59,7 +61,7 @@ class ExerciseRegexpGroups(ExerciseFunction):
     """
     With these exercises the students are asked to write a regexp
     with a set of specified named groups
-    a list of these groups needs to be passed to construct the object
+    a list of these groupnames needs to be passed to construct the object
 
     the regexp is then transformed into a function that again
     takes an input string and either a list of tuples 
@@ -95,8 +97,8 @@ class ExerciseRegexpGroups(ExerciseFunction):
                           for group in groups] for match in matches ]
         return solution
 
-    def __init__(self, name, regexp, groups, inputs, match_mode='match', *args, **keywords):
-        solution = ExerciseRegexpGroups.regexp_to_solution(regexp, groups, self.match_mode)
+    def __init__(self, name, regexp, groups, inputs, match_mode=default_match_mode, *args, **keywords):
+        solution = ExerciseRegexpGroups.regexp_to_solution(regexp, groups, match_mode)
         ExerciseFunction.__init__(self, solution, inputs, *args, **keywords)
         self.name = name
         self.regexp = regexp
