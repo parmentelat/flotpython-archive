@@ -21,6 +21,7 @@ NOTEBASES = $(subst .ipynb,,$(NOTEBOOKS))
 force:
 
 ####################
+all: v2
 # our notebooks now use format 4.0
 # to downgrade one can run this
 

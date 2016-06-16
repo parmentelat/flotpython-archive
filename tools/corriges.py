@@ -25,7 +25,7 @@ class Solution:
                  filename, week, sequence, name,
                  # additional tags supported on the @BEG@ line
                  more=None, latex_size='small',
-                 no_validation=None, no_exemple=None,
+                 no_validation=None, no_example=None,
              ):
         self.path = filename
         self.filename = os.path.basename(filename).replace('.py', '')
@@ -38,8 +38,8 @@ class Solution:
         self.latex_size = latex_size
         # if set (to anything), no validation at all
         self.no_validation = no_validation
-        # if set (to anything), no exemple show up in the validation nb
-        self.no_exemple = no_exemple
+        # if set (to anything), no example show up in the validation nb
+        self.no_example = no_example
         # internals : the Source parser will feed the code in there
         self.code = ""
 
@@ -133,8 +133,8 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
         add_cell_line("# remove comment out to reload")
         add_cell_line("# reload({module})".format(module=module))
         add_cell_line("import {module}".format(module=module))
-        if self.no_exemple is None:
-            add_cell_line("{exo}.exemple()".format(exo=exo))
+        if self.no_example is None:
+            add_cell_line("{exo}.example()".format(exo=exo))
         cell1 = make_cell()
         cell_lines = []
         add_cell_line("# cheating - should be OK")
