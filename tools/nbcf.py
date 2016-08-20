@@ -57,7 +57,7 @@ from util import replace_file_with_string, xpath, truncate
 import IPython
 ipython_version = IPython.version_info[0]
 
-if ipython_version == 4:
+if ipython_version >= 4:
     import nbformat
     from nbformat.notebooknode import NotebookNode
     current_format = nbformat.v4

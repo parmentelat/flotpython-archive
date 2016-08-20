@@ -37,7 +37,7 @@ v2: $(NOTEBOOKS_V2)
 define v2_target
 $(call v2_path,$(1)): $(1).ipynb
 	@mkdir -p $(dir $(call v2_path,$(1)))
-	jupyter nbconvert-2.7 --to notebook --nbformat=2 --output=$(call v2_path,$(1)) $(1).ipynb
+	jupyter-3.5 nbconvert-2.7 --to notebook --nbformat=2 --output=$(call v2_path,$(1)) $(1).ipynb
 endef
 
 $(foreach notebase,$(NOTEBASES),$(eval $(call v2_target,$(notebase))))
@@ -102,7 +102,7 @@ IPYNBS	  = $(foreach notebook,$(NOTEBOOKS),$(call ipynb_location,$(notebook)))
 
 ########## how to redo individual stuff
 # when converting to html and markdown, we want to have the cells executed
-CONVERT = ipython nbconvert --ExecutePreprocessor.enabled=True --ExecutePreprocessor.allow_errors=True
+CONVERT = jupyter nbconvert --ExecutePreprocessor.enabled=True --ExecutePreprocessor.allow_errors=True
 
 # apply these rules to all notebooks
 define notebook_rule

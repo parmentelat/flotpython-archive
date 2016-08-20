@@ -23,7 +23,7 @@ if ipython_version == 2:
     import IPython.nbformat.current as current_notebook
     from IPython.nbformat.notebooknode import NotebookNode
     from IPython.nbformat.sign import NotebookNotary as Notary
-elif ipython_version == 4:
+elif ipython_version >= 4:
     import nbformat
     from nbformat.notebooknode import NotebookNode
     from nbformat.sign import NotebookNotary as Notary
