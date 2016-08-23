@@ -26,6 +26,11 @@ def foo(n):
     "a code cell that is first in its slide"
     pass
 
+//==== ===slide
+//==== every line starting with
+//==== two slashes and at least 4 '=' 
+//==== is deemed a comment
+
 --------------------
 2 tools are available (based on sys.argv[0] for now)
 
@@ -171,6 +176,13 @@ class CompactFormat(CellsFile):
         returns a bool indicating success
         """
 
+        match_comment = re.compile("\A//={4,}")
+        def is_comment(line):
+            """
+            returns a bool indicating if the line is a comment line
+            """
+            return match_comment.match(line)            
+
         # v0 : keep it simple
         # start with at least 4 =, and a list of python-like idents
         match_sep = re.compile("\A={4,}\s*((\S+)?(\s+\S+)*)\Z")
@@ -219,6 +231,8 @@ class CompactFormat(CellsFile):
             with open(self.filename) as f:
                 source = ""
                 for lineno, line in enumerate(f):
+                    if is_comment(line):
+                        continue
                     line_idents = is_sep(line)
                     # not a separator
                     if line_idents is None:
