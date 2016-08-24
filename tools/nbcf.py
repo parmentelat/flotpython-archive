@@ -370,6 +370,8 @@ def merge():
 ##### converting back to cf
 def reverse():
     parser = ArgumentParser()
+    parser.add_argument("-f", "--force", action='store_true', default=False,
+                        help="write into .cf, not in .alt.cf, regardless of existence")
     parser.add_argument("notebook")
     args = parser.parse_args()
     input = args.notebook
@@ -379,7 +381,8 @@ def reverse():
         print("Could not parse input {}".format(input))
         exit(1)
     cf = CompactFormat(notebook.filename.replace(".ipynb", ""))
-    cf.save(notebook, keep_alt = True)
+    # if force is required, do not try to keep alt
+    cf.save(notebook, keep_alt = not args.force)
     
 
 ####################
