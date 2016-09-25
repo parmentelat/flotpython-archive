@@ -9,6 +9,6 @@ for i in $@; do
     [ -h $i ] && echo continue
     ###
     echo "Converting $i in place"
-    ipython nbconvert --to=notebook --nbformat=4 $i
+    jupyter nbconvert --to=notebook --nbformat=4 $i
     mv -f $base.nbconvert.ipynb $i
 done
