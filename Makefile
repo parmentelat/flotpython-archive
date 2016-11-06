@@ -102,6 +102,8 @@ IPYNBS	  = $(foreach notebook,$(NOTEBOOKS),$(call ipynb_location,$(notebook)))
 
 ########## how to redo individual stuff
 # when converting to html and markdown, we want to have the cells executed
+export PYTHONPATH=$(CURDIR)/modules
+
 CONVERT = jupyter nbconvert --ExecutePreprocessor.enabled=True --ExecutePreprocessor.allow_errors=True
 
 # apply these rules to all notebooks
