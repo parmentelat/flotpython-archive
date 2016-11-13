@@ -56,9 +56,9 @@ class HumanReadableSize(int):
             if self >= unit:
                 # small values usually show an int
                 if self%unit == 0:
-                    return "{:3d} {}".format(self/unit,label)
+                    return "{:3d} {}".format(self/unit, label)
                 else:
-                    return "{:3.02f} {}".format(float(self)/unit,label)
+                    return "{:3.02f} {}".format(float(self)/unit, label)
         return "xxx {} xxx".format(int.__repr__(self)) # remove me
         return "???"
 
@@ -85,7 +85,7 @@ class Cache(dict):
 
     special_name = ".du"
 
-    def __init__(self, verbose=False):
+    def __init__(self, verbose = False):
         dict.__init__(self)
         self.verbose = verbose
 
@@ -95,10 +95,10 @@ class Cache(dict):
         returns 0 if nothing works
         """        
         if path in self: 
-            return dict.__getitem__(self,path)
+            return dict.__getitem__(self, path)
         else: 
             try:     
-                with open(os.path.join(path,self.special_name)) as f:
+                with open(os.path.join(path, self.special_name)) as f:
                     return int(f.read())
             except IOError as e:
                 if self.verbose:
@@ -159,7 +159,7 @@ class ToplevelDir(object):
             print ("diskusage: running pass1 on {}".format(self.path))
         for root, dirs, files in os.walk (self.path, topdown=False):
             # first deal with files
-            filepaths = [os.path.join(root,file) for file in files]
+            filepaths = [os.path.join(root, file) for file in files]
             local_size = sum ([os.path.getsize(filepath) 
                                    for filepath in filepaths 
                                        if os.path.exists(filepath) ])
@@ -180,7 +180,7 @@ class ToplevelDir(object):
             self.cache [root] = cumulated_size
 
             # log this in verbose mode
-#            print("{:-8s} {}".format(HumanReadableSize(cumulated_size),root))
+#            print("{:-8s} {}".format(HumanReadableSize(cumulated_size), root))
 
     help_message = """number\tgo to listed directory
 +\tgo to last (and thus biggest) directory - this is the default 
@@ -219,7 +219,7 @@ h\tthis help"""
                           if os.path.isdir(os.path.join(subpath, d)) ]
         # show biggest last
         sized_subdirs.sort(key=lambda t: t[2])
-        for i,(name,_,size) in enumerate(sized_subdirs):
+        for i, (name, _, size) in enumerate(sized_subdirs):
             print("{} {}   {}".format(i+1, str(HumanReadableSize(size)).rjust(12), name))
         # the interactive mainloop for selecting the next dir
         while True:
@@ -243,7 +243,7 @@ h\tthis help"""
                 except:
                     print ("No such index {}".format(answer))
             ### otherwise
-            elif answer in ['..','0','u']:
+            elif answer in ['..', '0', 'u']:
                 return os.path.dirname(subpath)
             elif answer in [ 'l']:
                 self.list_files(subpath)
@@ -289,7 +289,7 @@ h\tthis help"""
         # show biggest last
         sized_files.sort(key=lambda t: t[1])
         print (4*'-', "Plain files in {}".format(subpath))
-        for i,(name,size) in enumerate(sized_files):
+        for i, (name, size) in enumerate(sized_files):
             print("F {}   {}".format(str(HumanReadableSize(size)).rjust(12), name))
 
 
