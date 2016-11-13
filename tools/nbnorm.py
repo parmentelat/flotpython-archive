@@ -110,14 +110,16 @@ class Notebook:
                 "name": "python2",
             }
 
-    licence_format = '<span style="float:left;">Licence CC BY-NC-ND</span>'\
-                     '<span style="float:right;">{html_authors}&nbsp;'\
-                     '<img src="media/inria-25.png" style="display:inline"></span><br/>'
+    licence_format_left =  '<span style="float:left;">Licence CC BY-NC-ND</span>'
+    licence_format_right = '<span style="float:right;">{html_authors}&nbsp;'\
+                           '<img src="media/inria-25.png" style="display:inline"></span><br/>'
             
     def ensure_licence(self, authors):
         def is_licence_cell(cell):
             return cell['cell_type'] == 'markdown' and cell['source'].find("Licence") >= 0
-        licence_line = self.licence_format.format(html_authors=" &amp; ".join(authors))
+        licence_line = self.licence_format_left
+        if authors:
+            licence_line += self.licence_format_right.format(html_authors=" &amp; ".join(authors))
         first_cell = self.cells()[0]
         # cell.source is a list of strings
         if is_licence_cell(first_cell):
