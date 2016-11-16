@@ -324,11 +324,11 @@ def main():
 
     args = parser.parse_args()
     if args.all_passes:
-        run_pass1 = True; run_pass2 = True
+        run_pass1, run_pass2 = True, True
     elif args.pass1:
-        run_pass1 = True; run_pass2 = False
+        run_pass1, run_pass2 = True, False
     else:
-        run_pass1 = False; run_pass2 = True
+        run_pass1, run_pass1 = False, True
 
     toplevel_dir = ToplevelDir (args.dir, verbose=args.verbose)
     try:
