@@ -110,16 +110,21 @@ class Notebook:
                 "name": "python2",
             }
 
+    # initial default logo_path was "media/inria-25.png"
     licence_format_left =  '<span style="float:left;">Licence CC BY-NC-ND</span>'
     licence_format_right = '<span style="float:right;">{html_authors}&nbsp;'\
-                           '<img src="media/inria-25.png" style="display:inline"></span><br/>'
+                           '{html_logo_img}</span><br/>'
             
-    def ensure_licence(self, authors):
+    def ensure_licence(self, authors, logo_path):
+        html_logo_img_format = '<img src="{logo_path}" style="display:inline">'
+        html_logo_img = "" if not logo_path else \
+                        html_logo_img_format.format(logo_path=logo_path)
         def is_licence_cell(cell):
             return cell['cell_type'] == 'markdown' and cell['source'].find("Licence") >= 0
         licence_line = self.licence_format_left
         if authors:
-            licence_line += self.licence_format_right.format(html_authors=" &amp; ".join(authors))
+            licence_line += self.licence_format_right.format(html_authors=" &amp; ".join(authors),
+                                                             html_logo_img = html_logo_img)
         first_cell = self.cells()[0]
         # cell.source is a list of strings
         if is_licence_cell(first_cell):
@@ -212,7 +217,7 @@ class Notebook:
         if replace_file_with_string(outfilename, new_contents):
             print("{} saved into {}".format(self.name, outfilename))
             
-    def full_monty(self, force_name, version, sign, verbose, authors):
+    def full_monty(self, force_name, version, authors, logo_path, sign, verbose):
         self.parse()
         self.set_name_from_heading1(force_name=force_name, verbose=verbose)
         if version is None:
@@ -220,7 +225,7 @@ class Notebook:
         else:
             self.set_version(version, force=True)
         self.fill_kernelspec()
-        self.ensure_licence(authors)
+        self.ensure_licence(authors, logo_path)
         self.clear_all_outputs()
         self.remove_empty_cells()
         self.translate_rawnbconvert(verbose)
@@ -228,9 +233,11 @@ class Notebook:
             self.sign()
         self.save()
 
-def full_monty(name, force_name, version, sign, verbose, authors):
+def full_monty(name, force_name, version, authors, logo_path, sign, verbose):
     nb = Notebook(name)
-    nb.full_monty(force_name=force_name, version=version, sign=sign, verbose=verbose, authors=authors)
+    nb.full_monty(force_name=force_name, version=version,
+                  authors=authors, logo_path=logo_path,
+                  sign=sign, verbose=verbose)
 
 from argparse import ArgumentParser
 
@@ -249,14 +256,16 @@ def main():
     parser = ArgumentParser(usage=usage)
     parser.add_argument("-f", "--force", action="store", dest="force_name", default=None,
                          help="force writing notebookname even if already present")
-    parser.add_argument("-s", "--sign", action="store_false", dest="sign", default=True,
-                         help="skip signing the notebooks")
+    parser.add_argument("-s", "--sign", action="store_true", dest="sign", default=False,
+                         help="sign the notebooks")
+    parser.add_argument("-a", "--author", dest='authors', action="append", default=[], type=str,
+                        help="define list of authors")
+    parser.add_argument("-l", "--logo-path", dest='logo_path', action="store", default="", type=str,
+                        help="path to use when inserting the logo img (should be about 25px high)")
     parser.add_argument("-v", "--verbose", dest="verbose", action="store_true", default=False,
                          help="show current notebookname")
     parser.add_argument("-V", "--version", dest="version", action="store", default=None,
                          help="set version in notebook metadata")
-    parser.add_argument("-a", "--author", dest='authors', action="append", default=[], type=str,
-                        help="define list of authors")
     parser.add_argument("notebooks", metavar="IPYNBS", nargs="*", 
                          help="the notebooks to normalize")
 
@@ -272,9 +281,9 @@ def main():
             continue
         if args.verbose:
             print("{} is opening notebook".format(sys.argv[0]), notebook)
-        full_monty(notebook, force_name=args.force_name, version=args.version, sign=args.sign,
-                   authors=args.authors, verbose=args.verbose,
-                   )
+        full_monty(notebook, force_name=args.force_name, version=args.version,
+                   authors=args.authors, logo_path = args.logo_path,
+                   sign=args.sign, verbose=args.verbose)
 
 if __name__ == '__main__':
     main()
