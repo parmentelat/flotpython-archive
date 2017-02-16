@@ -108,7 +108,7 @@ class Notebook:
     #   (but that still means creating the kernelspec metadata if missing)
     # 2 for python2
     # 3 for python3
-    def fill_kernelspec(self, kernel):
+    def handle_kernelspec(self, kernel):
         kernelspec2 = {
             "display_name": "Python 2",
             "language": "python",
@@ -125,8 +125,12 @@ class Notebook:
         if 'kernelspec' in metadata and kernel == 0:
             return
         newkernelspec = kernelspec2 if kernel <= 2 else kernelspec3
-        # show the change only when relevant
+        # is there really a change ?
         if 'kernelspec' not in metadata or metadata['kernelspec'] != newkernelspec:
+            # if we're here, we're about to mess with the kernelspec
+            # and so language_info' is irrelevant
+            if 'language_info' in metadata:
+                del metadata['language_info']
             if self.verbose:
                 print("setting kernel {}".format(newkernelspec['name']))
         metadata['kernelspec'] = newkernelspec
@@ -246,7 +250,7 @@ class Notebook:
             self.set_version()
         else:
             self.set_version(version, force=True)
-        self.fill_kernelspec(kernel)
+        self.handle_kernelspec(kernel)
         self.ensure_licence(authors, logo_path)
         self.clear_all_outputs()
         self.remove_empty_cells()
