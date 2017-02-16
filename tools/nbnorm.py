@@ -33,11 +33,12 @@ else:
     
 ####################
 class Notebook:
-    def __init__(self, name):
+    def __init__(self, name, verbose):
         if name.endswith(".ipynb"): 
             name = name.replace(".ipynb", "")
         self.name = name
         self.filename = "{}.ipynb".format(self.name)
+        self.verbose = verbose
 
     def parse(self):
         try:
@@ -80,7 +81,7 @@ class Notebook:
                         return line[2:]
         return "NO HEADING 1 found"
 
-    def set_name_from_heading1(self, force_name, verbose):
+    def set_name_from_heading1(self, force_name):
         """set 'name' in notebook metadata from the first heading 1 cell
         if force_name is provided, set 'notebookname' accordingly
         if force_name is None or False, set 'notebookname' only if it is not set"""
@@ -93,7 +94,7 @@ class Notebook:
         # remove 'name' metadata that might come from previous versions of this script
         if 'name' in metadata:
             del metadata['name'] 
-        if verbose:
+        if self.verbose:
             print("{} -> {}".format(self.filename, metadata[notebookname]))
 
     def set_version(self, version=default_version, force=False):
@@ -101,14 +102,34 @@ class Notebook:
         if 'version' not in metadata or force:
             metadata['version'] = version
 
-    def fill_kernelspec(self):
+    # the kernel parameter here is the one that comes
+    # from main, i.e. integers that can be
+    # 0 if we want to leave this untouched
+    #   (but that still means creating the kernelspec metadata if missing)
+    # 2 for python2
+    # 3 for python3
+    def fill_kernelspec(self, kernel):
+        kernelspec2 = {
+            "display_name": "Python 2",
+            "language": "python",
+            "name": "python2",
+        }
+        kernelspec3 = {
+            "display_name": "Python 3",
+            "language": "python",
+            "name": "python3",
+        }
         metadata = self.xpath(['metadata'])
-        if 'kernelspec' not in metadata:
-            metadata['kernelspec'] = {
-                "display_name": "Python 2",
-                "language": "python",
-                "name": "python2",
-            }
+        # don't touch anything if kernel is not specified
+        # and metadata already has a kernelspec
+        if 'kernelspec' in metadata and kernel == 0:
+            return
+        newkernelspec = kernelspec2 if kernel <= 2 else kernelspec3
+        # show the change only when relevant
+        if 'kernelspec' not in metadata or metadata['kernelspec'] != newkernelspec:
+            if self.verbose:
+                print("setting kernel {}".format(newkernelspec['name']))
+        metadata['kernelspec'] = newkernelspec
 
     # initial default logo_path was "media/inria-25.png"
     licence_format_left =  '<span style="float:left;">Licence CC BY-NC-ND</span>'
@@ -170,7 +191,7 @@ class Notebook:
             print("found and removed {} empty cells".format(nb_empty))
 
     # likewise, this was a one-shot thing, we don't create rawnbconvert any longer
-    def translate_rawnbconvert(self, verbose):
+    def translate_rawnbconvert(self):
         """
         all cells of type rawnbconvert are translated into a markdown cell
         with 4 spaces indentation
@@ -179,7 +200,7 @@ class Notebook:
         for cell in self.cells():
             if cell['cell_type'] == 'raw':
                 source = cell['source']
-                if verbose:
+                if self.verbose:
                     print("Got a raw cell with source of type {}".format(type(source)))
                     print(">>>{}<<<".format(source))
                     print("split:XXX{}XXX".format(source.split("\n")))
@@ -217,27 +238,29 @@ class Notebook:
         if replace_file_with_string(outfilename, new_contents):
             print("{} saved into {}".format(self.name, outfilename))
             
-    def full_monty(self, force_name, version, authors, logo_path, sign, verbose):
+    def full_monty(self, force_name, version, authors, logo_path,
+                   kernel, sign):
         self.parse()
-        self.set_name_from_heading1(force_name=force_name, verbose=verbose)
+        self.set_name_from_heading1(force_name=force_name)
         if version is None:
             self.set_version()
         else:
             self.set_version(version, force=True)
-        self.fill_kernelspec()
+        self.fill_kernelspec(kernel)
         self.ensure_licence(authors, logo_path)
         self.clear_all_outputs()
         self.remove_empty_cells()
-        self.translate_rawnbconvert(verbose)
+        self.translate_rawnbconvert()
         if sign:
             self.sign()
         self.save()
 
-def full_monty(name, force_name, version, authors, logo_path, sign, verbose):
-    nb = Notebook(name)
+def full_monty(name, force_name, version, authors, logo_path,
+               kernel, sign, verbose):
+    nb = Notebook(name, verbose)
     nb.full_monty(force_name=force_name, version=version,
                   authors=authors, logo_path=logo_path,
-                  sign=sign, verbose=verbose)
+                  kernel=kernel, sign=sign)
 
 from argparse import ArgumentParser
 
@@ -262,6 +285,8 @@ def main():
                         help="define list of authors")
     parser.add_argument("-l", "--logo-path", dest='logo_path', action="store", default="", type=str,
                         help="path to use when inserting the logo img (should be about 25px high)")
+    parser.add_argument("-k", "--kernel", dest='kernel', type=int, default=0, choices=(2, 3),
+                        help="Set to use python2 or 3; remains unchanged if not set")
     parser.add_argument("-v", "--verbose", dest="verbose", action="store_true", default=False,
                          help="show current notebookname")
     parser.add_argument("-V", "--version", dest="version", action="store", default=None,
@@ -275,6 +300,8 @@ def main():
         import glob
         notebooks = glob.glob("*.ipynb")
 
+    print("kernel=", args.kernel)
+
     for notebook in args.notebooks:
         if notebook.find('.alt') >= 0 :
             print('ignoring', notebook)
@@ -283,7 +310,7 @@ def main():
             print("{} is opening notebook".format(sys.argv[0]), notebook)
         full_monty(notebook, force_name=args.force_name, version=args.version,
                    authors=args.authors, logo_path = args.logo_path,
-                   sign=args.sign, verbose=args.verbose)
+                   kernel = args.kernel, sign=args.sign, verbose=args.verbose)
 
 if __name__ == '__main__':
     main()
