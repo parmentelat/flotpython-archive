@@ -9,6 +9,8 @@ import re
 from argparse import ArgumentParser
 
 ############################################################
+
+
 class Solution:
     """
     an object that describes one occurrence of a function solution
@@ -26,13 +28,14 @@ class Solution:
                  # additional tags supported on the @BEG@ line
                  more=None, latex_size='small',
                  no_validation=None, no_example=None,
-             ):
+                 ):
         self.path = filename
         self.filename = os.path.basename(filename).replace('.py', '')
         self.week = week
         self.sequence = sequence
         self.name = name
-        # something like 'v2' or 'suite' to label a new version or a continuation
+        # something like 'v2' or 'suite' to label a new version or a
+        # continuation
         self.more = more
         # set to footnotesize if a solution is too wide
         self.latex_size = latex_size
@@ -58,7 +61,7 @@ class Solution:
 #    def key(self):
 #        return 100*self.week+self.sequence
 
-    
+
 ########################################
     # utiliser les {} comme un marqueur dans du latex ne semble pas
     # être l'idée du siècle -> je prends pour une fois %()s et l'opérateur %
@@ -86,7 +89,7 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
         return self.latex_format % locals()
 
     # the validation notebook
-    notebook_cell_format=r"""
+    notebook_cell_format = r"""
     {{
      "cell_type": "code",
      "collapsed": false,
@@ -99,7 +102,7 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
     }}
 """
 
-    notebook_cell_separator=r"""
+    notebook_cell_separator = r"""
     {
      "cell_type": "markdown",
      "metadata": {},
@@ -108,12 +111,14 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
      ]
     }
 """
-    
+
     def notebook_cells(self):
         sep = self.notebook_cell_separator
         cell_lines = []
+
         def add_cell_line(line):
             cell_lines.append('"{}\\n"'.format(line))
+
         def make_cell():
             return self.notebook_cell_format.format(cell_lines=",\n".join(cell_lines))
 
@@ -123,7 +128,7 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
             add_cell_line("#################### exo {} has no_validation set"
                           .format(self.name))
             cell1 = make_cell()
-            return [ sep, sep, sep, cell1 ]
+            return [sep, sep, sep, cell1]
 
         # the usual case
         module = "corrections.{filename}".format(**self.__dict__)
@@ -155,7 +160,7 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
                       .format(exo=exo, **self.__dict__))
         cell3 = make_cell()
         return [sep, sep, cell1, cell2, cell3]
-    
+
 ########################################
     text_format = r"""
 ##################################################
@@ -163,6 +168,7 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
 ##################################################
 {code}
 """
+
     def text(self):
         more = " ({})".format(self.more) if self.more else ""
         return self.text_format.format(
@@ -174,6 +180,8 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
 
 ############################################################
 # as of dec. 11 2014 all files are UTF-8 and that's it
+
+
 class Source(object):
 
     def __init__(self, filename):
@@ -182,17 +190,18 @@ class Source(object):
     # mandatory fields
     # 'name' truly is required
     # the other 2 can sometimes be inferred from the context (filename)
-    mandatory_fields = [ ('name', True), ('week', False), ('sequence', False) ]
-        
+    mandatory_fields = [('name', True), ('week', False), ('sequence', False)]
+
     beg_matcher = re.compile(
         r"\A. @BEG@(?P<keywords>(\s+[a-z_]+=[a-z_A-Z0-9-]+)+)\s*\Z"
     )
     end_matcher = re.compile(
         r"\A. @END@"
-        )
+    )
     filename_matcher = re.compile(
         r"\Aw(?P<week>[0-9]+)s(?P<sequence>[0-9]+)_"
-        )
+    )
+
     def parse(self):
         """
         return a tuple of
@@ -218,7 +227,7 @@ class Source(object):
                 if line[-1] == "\n":
                     line = line[:-1]
                 begin = self.beg_matcher.match(line)
-                end   = self.end_matcher.match(line)
+                end = self.end_matcher.match(line)
                 if begin:
                     assignments = begin.group('keywords').split()
                     keywords = {}
@@ -232,17 +241,18 @@ class Source(object):
                                       .format(self.filename, lineno, field))
                             elif field in context_from_filename:
                                 keywords[field] = context_from_filename[field]
-                                #print("Using inferred field {} = {}"
+                                # print("Using inferred field {} = {}"
                                 #      .format(field, keywords[field]))
                             else:
                                 print("{}:{} could not infer field {}"
                                       .format(field))
                     try:
-                        solution = Solution(filename = self.filename, **keywords)
+                        solution = Solution(filename=self.filename, **keywords)
                     except:
                         import traceback
                         traceback.print_exc()
-                        print("{}:{}: ERROR (ignored): {}".format(self.filename, lineno, line))
+                        print("{}:{}: ERROR (ignored): {}".format(
+                            self.filename, lineno, line))
                 elif end:
                     if solution == None:
                         print("{}:{} - Unexpected @END@ - ignored\n{}"
@@ -253,7 +263,7 @@ class Source(object):
                         # avoid duplicates in functions
                         if solution.name not in names:
                             names.append(solution.name)
-                            functions.append(solution)                        
+                            functions.append(solution)
                         solution = None
                 elif '@BEG@' in line or '@END@' in line:
                     print("{}:{} Warning - misplaced @BEG|END@ - ignored\n{}"
@@ -264,9 +274,11 @@ class Source(object):
         return (solutions, functions)
 
 ############################################################
+
+
 class Latex(object):
 
-    header=r"""\documentclass [12pt]{article}
+    header = r"""\documentclass [12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[francais]{babel}
 %% for Verbatim
@@ -287,19 +299,18 @@ class Latex(object):
 \vspace{1cm}
 """
 
-    contents=r"""
+    contents = r"""
 %\renewcommand{\baselinestretch}{0.75}\normalsize
 \tableofcontents
 %\renewcommand{\baselinestretch}{1.0}\normalsize
 \newpage
 """
 
-
-    footer=r"""
+    footer = r"""
 \end{document}
 """
 
-    week_format=r"""
+    week_format = r"""
 \addcontentsline{{toc}}{{section}}{{Semaine {}}}
 """
 
@@ -310,7 +321,7 @@ class Latex(object):
         week = None
         with open(self.filename, 'w') as output:
             title_tex = " \\\\ \\mbox{} \\\\ ".join(title_list)
-            output.write(Latex.header%(dict(title=title_tex)))
+            output.write(Latex.header % (dict(title=title_tex)))
             if contents:
                 output.write(Latex.contents)
             for solution in solutions:
@@ -323,11 +334,13 @@ class Latex(object):
 
     @staticmethod
     def escape(str):
-        return str.replace("_",r"\_")
+        return str.replace("_", r"\_")
 
 ####################
+
+
 class Text(object):
-    
+
     def __init__(self, filename):
         self.filename = filename
 
@@ -338,7 +351,6 @@ class Text(object):
 #
 ############################################################
 """
-    
 
     def write(self, solutions, title_list):
         with open(self.filename, 'w') as output:
@@ -349,7 +361,10 @@ class Text(object):
         print("{} (over)written".format(self.filename))
 
 ####################
+
+
 class Notebook(object):
+
     def __init__(self, filename):
         self.filename = filename
 
@@ -374,23 +389,28 @@ class Notebook(object):
  ]
 }
 """
+
     def write(self, functions):
         # JSON won't like an extra comma
         with open(self.filename, 'w') as output:
             output.write(self.header)
-            all_cells = [ cell for function in functions
-                               for cell in function.notebook_cells() ]
+            all_cells = [cell for function in functions
+                         for cell in function.notebook_cells()]
             output.write(",".join(all_cells))
             output.write(self.footer)
         print("{} (over)written".format(self.filename))
 
 ##########
+
+
 class Stats(object):
+
     def __init__(self, solutions, functions):
         self.solutions = solutions
         self.functions = functions
+
     def print_count(self, verbose=False):
-        skipped = [ f for f in self.functions if f.no_validation ] 
+        skipped = [f for f in self.functions if f.no_validation]
         print("We have a total of {} solutions for {} different exos  - {} not validated:"
               .format(len(self.solutions), len(self.functions), len(skipped)))
         for f in skipped:
@@ -398,17 +418,20 @@ class Stats(object):
                   .format(**f.__dict__))
         if verbose:
             for function in self.functions:
-                print (function)
+                print(function)
 
 ####################
+
+
 def main():
     parser = ArgumentParser()
-    parser.add_argument("-o","--output", default=None)
-    parser.add_argument("-t","--title", default="Donnez un titre avec --title")
-    parser.add_argument("-c","--contents", action='store_true', default=False)
-    parser.add_argument("-L","--latex", action='store_true', default=False)
-    parser.add_argument("-N","--notebook", action='store_true', default=False)
-    parser.add_argument("-T","--text", action='store_true', default=False)
+    parser.add_argument("-o", "--output", default=None)
+    parser.add_argument(
+        "-t", "--title", default="Donnez un titre avec --title")
+    parser.add_argument("-c", "--contents", action='store_true', default=False)
+    parser.add_argument("-L", "--latex", action='store_true', default=False)
+    parser.add_argument("-N", "--notebook", action='store_true', default=False)
+    parser.add_argument("-T", "--text", action='store_true', default=False)
     parser.add_argument("files", nargs='+')
     args = parser.parse_args()
 
@@ -419,13 +442,21 @@ def main():
         functions += fs
 
     if args.latex:
-        do_latex = True; do_text = False; do_notebook = False
+        do_latex = True
+        do_text = False
+        do_notebook = False
     elif args.text:
-        do_latex = False; do_text = True; do_notebook = False
+        do_latex = False
+        do_text = True
+        do_notebook = False
     elif args.notebook:
-        do_latex = False; do_text = False; do_notebook = True
+        do_latex = False
+        do_text = False
+        do_notebook = True
     else:
-        do_latex = True; do_text = True; do_notebook = False
+        do_latex = True
+        do_text = True
+        do_notebook = False
 
     output = args.output if args.output else "corriges"
     texoutput = "{}.tex".format(output)
@@ -433,13 +464,14 @@ def main():
     nboutput = "{}.ipynb".format(output)
     title_list = args.title.split(";")
     if do_latex:
-        Latex(texoutput).write(solutions, title_list=title_list, contents=args.contents)
+        Latex(texoutput).write(
+            solutions, title_list=title_list, contents=args.contents)
     if do_text:
         Text(txtoutput).write(solutions, title_list=title_list)
     if do_notebook:
         Notebook(nboutput).write(functions)
         stats = Stats(solutions, functions)
         stats.print_count(verbose=False)
-        
+
 if __name__ == '__main__':
     main()

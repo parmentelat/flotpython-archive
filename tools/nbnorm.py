@@ -17,24 +17,65 @@ notebookname = "notebookname"
 
 ####################
 import IPython
-ipython_version = IPython.version_info[0]
 
-if ipython_version == 2:
-    import IPython.nbformat.current as current_notebook
-    from IPython.nbformat.notebooknode import NotebookNode
-    from IPython.nbformat.sign import NotebookNotary as Notary
-elif ipython_version >= 4:
-    import nbformat
-    from nbformat.notebooknode import NotebookNode
-    from nbformat.sign import NotebookNotary as Notary
-else:
-    print("normalizer tool has no support for IPython version {}".format(ipython_version))
-    sys.exit(1)    
-    
+# we drop older versions, requires IPython v4
+assert IPython.version_info[0] >= 4
+
+import nbformat
+from nbformat.notebooknode import NotebookNode
+from nbformat.sign import NotebookNotary as Notary
+
+# not customizable yet
+# at the notebook level
+
+livereveal_metadata_padding = {
+    'livereveal': {
+        "transition": "cube",
+        "theme": "simple",
+        "start_slideshow_at": "selected",
+        "width": 1280,
+        "height": 1024
+    },
+    'celltoolbar': 'Slideshow',
+}
+
+exts_metadata_padding = {
+    "deletable": True,
+    "editable": True,
+    "run_control": {
+        "frozen": False,
+        "read_only": False
+    }
+}
+
+# initial default logo_path was "media/inria-25.png"
+licence_format_left = '<span style="float:left;">Licence CC BY-NC-ND</span>'
+licence_format_right = '<span style="float:right;">{html_authors}&nbsp;'\
+                       '{html_logo_img}</span><br/>'
+
+####################
+# padding is a set of keys/subkeys
+# that we want to make sure are defined
+# this will never alter a key already present
+# just add key-pair values from the default
+# it means that we define these keys
+# if not yet present
+
+
+def pad_metadata(metadata, padding):
+    for k, v in padding.items():
+        if isinstance(v, dict):
+            sub_meta = metadata.setdefault(k, {})
+            pad_metadata(sub_meta, v)
+        if not isinstance(v, dict):
+            metadata.setdefault(k, v)
+
+
 ####################
 class Notebook:
+
     def __init__(self, name, verbose):
-        if name.endswith(".ipynb"): 
+        if name.endswith(".ipynb"):
             name = name.replace(".ipynb", "")
         self.name = name
         self.filename = "{}.ipynb".format(self.name)
@@ -43,11 +84,8 @@ class Notebook:
     def parse(self):
         try:
             with open(self.filename) as f:
-                if ipython_version == 2:
-                    self.notebook = current_notebook.read(f, 'ipynb')
-                else:
-                    self.notebook = nbformat.reader.read(f)
-                    
+                self.notebook = nbformat.reader.read(f)
+
         except:
             print("Could not parse {}".format(self.filename))
             import traceback
@@ -58,19 +96,16 @@ class Notebook:
 
     def cells(self):
         try:
-            return self.xpath( ['worksheets', 0, 'cells'] )
+            return self.xpath(['worksheets', 0, 'cells'])
         except:
-            return self.xpath( [ 'cells' ] )
+            return self.xpath(['cells'])
 
     def cell_contents(self, cell):
-        if ipython_version == 2:
-            return cell['input']
-        else:
-            return cell['source']
-        
+        return cell['source']
+
     def first_heading1(self):
         for cell in self.cells():
-#            print("Looking in cell ", cell)
+            #            print("Looking in cell ", cell)
             if cell['cell_type'] == 'heading' and cell['level'] == 1:
                 return xpath(cell, ['source'])
             elif cell['cell_type'] == 'markdown':
@@ -85,15 +120,16 @@ class Notebook:
         """set 'name' in notebook metadata from the first heading 1 cell
         if force_name is provided, set 'notebookname' accordingly
         if force_name is None or False, set 'notebookname' only if it is not set"""
-        metadata = self.xpath( ['metadata'])
+        metadata = self.xpath(['metadata'])
         if metadata.get(notebookname, "") and not force_name:
             pass
         else:
             new_name = force_name if force_name else self.first_heading1()
             metadata[notebookname] = new_name
-        # remove 'name' metadata that might come from previous versions of this script
+        # remove 'name' metadata that might come from previous versions of this
+        # script
         if 'name' in metadata:
-            del metadata['name'] 
+            del metadata['name']
         if self.verbose:
             print("{} -> {}".format(self.filename, metadata[notebookname]))
 
@@ -135,40 +171,68 @@ class Notebook:
                 print("setting kernel {}".format(newkernelspec['name']))
         metadata['kernelspec'] = newkernelspec
 
-    # initial default logo_path was "media/inria-25.png"
-    licence_format_left =  '<span style="float:left;">Licence CC BY-NC-ND</span>'
-    licence_format_right = '<span style="float:right;">{html_authors}&nbsp;'\
-                           '{html_logo_img}</span><br/>'
-            
+    def fill_rise_metadata(self, rise):
+        """
+        if rise is set:
+        if metadata is missing the 'livereveal' key,
+        fill it with a set of hard-wired settings
+        """
+        if not rise:
+            return
+        pad_metadata(self.notebookname['metadata'],
+                     livereveal_metadata_padding)
+
+    def fill_exts_metadata(self, exts):
+        """
+        if exts is set, fill each cell metadata's with a hard-wired
+        set of defaults for extensions; tis is to minimize git diffs
+        """
+        if not exts:
+            return
+        for cell in self.cells():
+            pad_metadata(cell['metadata'], exts_metadata_padding)
+
     def ensure_licence(self, authors, logo_path):
+        """
+        make sure the first cell is a author + licence cell
+        """
         html_logo_img_format = '<img src="{logo_path}" style="display:inline">'
         html_logo_img = "" if not logo_path else \
                         html_logo_img_format.format(logo_path=logo_path)
+        # a bit rustic but good enough
+
         def is_licence_cell(cell):
-            return cell['cell_type'] == 'markdown' and cell['source'].find("Licence") >= 0
-        licence_line = self.licence_format_left
+            return cell['cell_type'] == 'markdown' \
+                and cell['source'].find("Licence") >= 0
+        licence_line = licence_format_left
         if authors:
-            licence_line += self.licence_format_right.format(html_authors=" &amp; ".join(authors),
-                                                             html_logo_img = html_logo_img)
+            licence_line += licence_format_right.format(
+                html_authors=" &amp; ".join(authors),
+                html_logo_img=html_logo_img)
         first_cell = self.cells()[0]
         # cell.source is a list of strings
         if is_licence_cell(first_cell):
-            # licence cell already here, just overwrite contents to latest version
-            first_cell['source'] = [ licence_line ]
+            # licence cell already here, just overwrite contents to latest
+            # version
+            first_cell['source'] = [licence_line]
         else:
             self.cells().insert(
                 0,
                 NotebookNode({
-                "cell_type": "markdown",
-                "metadata": {},
-                "source": [ licence_line ],
-            }))
+                    "cell_type": "markdown",
+                    "metadata": {},
+                    "source": [licence_line],
+                }))
 
     # I keep the code for these 2 but don't need this any longer
     # as I have all kinds of shortcuts and interactive tools now
-    # plus, nbconvert(at least in jupyter) has preprocessor options to deal with this as well
+    # plus, nbconvert(at least in jupyter) has preprocessor options to deal
+    # with this as well
     def clear_all_outputs(self):
-        """clear the 'outputs' field of python code cells, and remove 'prompt_number' as well when present"""
+        """
+        clear the 'outputs' field of python code cells,
+        and remove 'prompt_number' as well when present
+        """
         for cell in self.cells():
             if cell['cell_type'] == 'code':
                 cell['outputs'] = []
@@ -183,18 +247,22 @@ class Notebook:
             return cell['cell_type'] == 'code' and not cell['input']
         except:
             return cell['cell_type'] == 'code' and not cell['source']
-                
+
     def remove_empty_cells(self):
-        """remove any empty cell - code cells only for now"""
+        """
+        remove any empty cell - code cells only for now
+        """
         nb_empty = 0
-        cells_to_remove = [ cell for cell in self.cells() if self.empty_cell(cell) ]
+        cells_to_remove = [
+            cell for cell in self.cells() if self.empty_cell(cell)]
         nb_empty += len(cells_to_remove)
         for cell_to_remove in cells_to_remove:
-             self.cells().remove(cell_to_remove)
+            self.cells().remove(cell_to_remove)
         if nb_empty:
             print("found and removed {} empty cells".format(nb_empty))
 
-    # likewise, this was a one-shot thing, we don't create rawnbconvert any longer
+    # likewise, this was a one-shot thing, we don't create rawnbconvert any
+    # longer
     def translate_rawnbconvert(self):
         """
         all cells of type rawnbconvert are translated into a markdown cell
@@ -205,22 +273,24 @@ class Notebook:
             if cell['cell_type'] == 'raw':
                 source = cell['source']
                 if self.verbose:
-                    print("Got a raw cell with source of type {}".format(type(source)))
+                    print("Got a raw cell with source of type {}".format(
+                        type(source)))
                     print(">>>{}<<<".format(source))
                     print("split:XXX{}XXX".format(source.split("\n")))
                 if isinstance(cell['source'], str):
                     cell['cell_type'] = 'markdown'
-                    cell['source'] = "    "+ "\n    ".join(source.split("\n"))
+                    cell['source'] = "    " + "\n    ".join(source.split("\n"))
                     nb_raw_cells += 1
                 elif isinstance(cell['source'], list):
                     cell['cell_type'] = 'markdown'
-                    cell['source'] =  [ '    ' + line for line in cell['source']]
+                    cell['source'] = ['    ' + line for line in cell['source']]
                     nb_raw_cells += 1
                 else:
-                    print("WARNING: dont know how to deal with a raw cell (type {})".format(type(cell['source'])))
+                    print("WARNING: dont know how to deal with a raw cell (type {})".format(
+                        type(cell['source'])))
         if nb_raw_cells:
             print("found and rewrote {} raw cells".format(nb_raw_cells))
-        
+
     def sign(self):
         notary = Notary()
         signature = notary.compute_signature(self.notebook)
@@ -234,16 +304,13 @@ class Notebook:
             outfilename = "{}.alt.ipynb".format(self.name)
         else:
             outfilename = self.filename
-        if ipython_version == 2:
-            new_contents = current_notebook.writes(self.notebook,'ipynb')
-        else:
-            # xxx don't specify output version for now
-            new_contents = nbformat.writes(self.notebook)
+        # xxx don't specify output version for now
+        new_contents = nbformat.writes(self.notebook)
         if replace_file_with_string(outfilename, new_contents):
             print("{} saved into {}".format(self.name, outfilename))
-            
+
     def full_monty(self, force_name, version, authors, logo_path,
-                   kernel, sign):
+                   kernel, rise, exts, sign):
         self.parse()
         self.set_name_from_heading1(force_name=force_name)
         if version is None:
@@ -251,6 +318,8 @@ class Notebook:
         else:
             self.set_version(version, force=True)
         self.handle_kernelspec(kernel)
+        self.fill_rise_metadata(rise)
+        self.fill_exts_metadata(exts)
         self.ensure_licence(authors, logo_path)
         self.clear_all_outputs()
         self.remove_empty_cells()
@@ -259,16 +328,16 @@ class Notebook:
             self.sign()
         self.save()
 
-def full_monty(name, force_name, version, authors, logo_path,
-               kernel, sign, verbose):
+
+def full_monty(name, **kwds):
+    verbose = kwds['verbose']
+    del kwds['verbose']
     nb = Notebook(name, verbose)
-    nb.full_monty(force_name=force_name, version=version,
-                  authors=authors, logo_path=logo_path,
-                  kernel=kernel, sign=sign)
+    nb.full_monty(**kwds)
 
 from argparse import ArgumentParser
 
-usage="""normalize notebooks
+usage = """normalize notebooks
  * Metadata
    * checks for notebookname (from first heading1 if missing, or from forced name on the command line)
    * always checks for kernelspec metadata
@@ -279,24 +348,29 @@ usage="""normalize notebooks
    * removes empty code cells
 """
 
+
 def main():
     parser = ArgumentParser(usage=usage)
     parser.add_argument("-f", "--force", action="store", dest="force_name", default=None,
-                         help="force writing notebookname even if already present")
+                        help="force writing notebookname even if already present")
     parser.add_argument("-s", "--sign", action="store_true", dest="sign", default=False,
-                         help="sign the notebooks")
+                        help="sign the notebooks")
     parser.add_argument("-a", "--author", dest='authors', action="append", default=[], type=str,
                         help="define list of authors")
     parser.add_argument("-l", "--logo-path", dest='logo_path', action="store", default="", type=str,
                         help="path to use when inserting the logo img (should be about 25px high)")
     parser.add_argument("-k", "--kernel", dest='kernel', type=int, default=0, choices=(2, 3),
                         help="Set to use python2 or 3; remains unchanged if not set")
+    parser.add_argument("-r", "--rise", dest='rise', default=False, action='store_true',
+                        help="fill in RISE/livereveal metadata with hard-wired settings")
+    parser.add_argument("-e", "--extensions", dest='exts', action='store_true',
+                        help="fill cell metadata for extensions, if missing")
     parser.add_argument("-v", "--verbose", dest="verbose", action="store_true", default=False,
-                         help="show current notebookname")
+                        help="show current notebookname")
     parser.add_argument("-V", "--version", dest="version", action="store", default=None,
-                         help="set version in notebook metadata")
-    parser.add_argument("notebooks", metavar="IPYNBS", nargs="*", 
-                         help="the notebooks to normalize")
+                        help="set version in notebook metadata")
+    parser.add_argument("notebooks", metavar="IPYNBS", nargs="*",
+                        help="the notebooks to normalize")
 
     args = parser.parse_args()
 
@@ -304,17 +378,16 @@ def main():
         import glob
         notebooks = glob.glob("*.ipynb")
 
-    print("kernel=", args.kernel)
-
     for notebook in args.notebooks:
-        if notebook.find('.alt') >= 0 :
+        if notebook.find('.alt') >= 0:
             print('ignoring', notebook)
             continue
         if args.verbose:
             print("{} is opening notebook".format(sys.argv[0]), notebook)
         full_monty(notebook, force_name=args.force_name, version=args.version,
-                   authors=args.authors, logo_path = args.logo_path,
-                   kernel = args.kernel, sign=args.sign, verbose=args.verbose)
+                   authors=args.authors, logo_path=args.logo_path,
+                   kernel=args.kernel, rise=args.rise, exts=args.exts,
+                   sign=args.sign, verbose=args.verbose)
 
 if __name__ == '__main__':
     main()
