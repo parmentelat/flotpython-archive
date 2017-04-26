@@ -179,7 +179,7 @@ class Notebook:
         """
         if not rise:
             return
-        pad_metadata(self.notebookname['metadata'],
+        pad_metadata(self.notebook['metadata'],
                      livereveal_metadata_padding)
 
     def fill_exts_metadata(self, exts):
@@ -363,7 +363,7 @@ def main():
                         help="Set to use python2 or 3; remains unchanged if not set")
     parser.add_argument("-r", "--rise", dest='rise', default=False, action='store_true',
                         help="fill in RISE/livereveal metadata with hard-wired settings")
-    parser.add_argument("-e", "--extensions", dest='exts', action='store_true',
+    parser.add_argument("-e", "--extensions", dest='exts', action='store_true', default=False,
                         help="fill cell metadata for extensions, if missing")
     parser.add_argument("-v", "--verbose", dest="verbose", action="store_true", default=False,
                         help="show current notebookname")
