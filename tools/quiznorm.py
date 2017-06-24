@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from nbnorm import replace_file_with_string
 
@@ -15,7 +15,7 @@ def normalize_quiz(filename):
                 line = line.replace('[', '&#91;').replace(']', '&#93;')
             normalized += line
     if replace_file_with_string(filename, normalized):
-        print "Normalized {}".format(filename)
+        print("Normalized {}".format(filename))
 
 from argparse import ArgumentParser
 
