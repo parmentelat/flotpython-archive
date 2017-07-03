@@ -8,16 +8,30 @@ import os.path
 import time
 
 ########## logging
-def log_correction(exo_name, success):
+def log_filename():
+    """
+    returns the filename where to log attempts
+    can be specified with env. variable NBAUTOEVAL_LOG
+    defaults to $HOME/.nbautoeval
+    """
+    # use the env variable if set, or fallback to default
+    return os.environ.get('NBAUTOEVAL_LOG') \
+        or os.path.join(os.getenv("HOME"), ".nbautoeval")
+
+def log_correction(exoname, success):
+    """
+    write a one-liner in the log file that contains
+    
+    timestamp unix-uid exo-name {ok|ko}
+    """
     try:
-        uid = os.getuid()
-        md5 = os.path.basename(os.path.normpath(os.getenv("HOME")))
         now = time.strftime("%D-%H:%M", time.localtime())
-        logname = os.path.join(os.getenv("HOME"), ".correction")
+        uid = os.getuid()
         message = "OK" if success else "KO"
-        with open(logname, 'a') as log:
-            line = "{now} {uid} {md5} {exo_name} {message}\n".format(**locals())
+        with open(log_filename(), 'a') as log:
+            line = "{now} {uid} {exoname} {message}\n".format(**locals())
             log.write(line)
     except:
+        # really not sure what to do then...
         pass
 
