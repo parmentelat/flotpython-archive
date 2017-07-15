@@ -20,29 +20,6 @@ NOTEBASES = $(subst .ipynb,,$(NOTEBOOKS))
 # for phony targets
 force:
 
-####################
-all: v2
-# our notebooks now use format 4.0
-# to downgrade one can run this
-
-# notebase -> full path of v2 notebook
-define v2_path
-$(TOPLEVEL)/nbformat2/$(1).ipynb
-endef
-
-NOTEBOOKS_V2 = $(foreach notebase,$(NOTEBASES),$(call v2_path,$(notebase)))
-
-v2: $(NOTEBOOKS_V2)
-
-define v2_target
-$(call v2_path,$(1)): $(1).ipynb
-	@mkdir -p $(dir $(call v2_path,$(1)))
-	jupyter-3.5 nbconvert-2.7 --to notebook --nbformat=2 --output=$(call v2_path,$(1)) $(1).ipynb
-endef
-
-$(foreach notebase,$(NOTEBASES),$(eval $(call v2_target,$(notebase))))
-
-.PHONY: v2
 #################### corriges
 all: corriges
 corriges:
