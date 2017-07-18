@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
-
 import pprint
 
 from types import FunctionType, BuiltinFunctionType, BuiltinMethodType
@@ -44,7 +42,7 @@ def custom_repr(x):
 
 def commas(iterable):
     if isinstance(iterable, dict):
-        return ", ".join(["{}={}".format(k,custom_repr(v)) for k,v in iterable.items()])
+        return ", ".join(["{}={}".format(k,custom_repr(v)) for k, v in iterable.items()])
     elif isinstance(iterable, str): 
         return str
     else:
@@ -59,7 +57,7 @@ def truncate_value(value, width):
         return truncate_str(repr(value), width)
 
 ########## rendering usual objects (not Args or ArgsKeywords)
-class CellObj(object):
+class CellObj:
     def __init__(self, torender):
         self.torender = torender
     def layout_truncate(self, width):
@@ -93,7 +91,7 @@ class CellObj(object):
         """
         return self.layout_text(width, show_backslash_n=True)
     
-class CellLegend(object):
+class CellLegend:
     def __init__(self, legend):
         self.legend = legend
     def __repr__(self):
@@ -112,7 +110,7 @@ class CellLegend(object):
 # <table class='error'>
 def tag_keywords(tag, **html_tags):
     html = "<{}".format(tag)
-    for k,v in html_tags.items():
+    for k, v in html_tags.items():
         # ignore stuff that is defined by default as None
         if v is None:
             continue
@@ -125,7 +123,7 @@ def end_tag(tag):
     return "</{}>".format(tag)
 
 ##############################
-class Table(object):
+class Table:
     def __init__(self, **html_tags):
         self.html_tags = html_tags
     def header(self):
@@ -133,7 +131,7 @@ class Table(object):
     def footer(self):
         return end_tag("table")
 
-class TableRow(object):
+class TableRow:
     def __init__(self, cells, **html_tags):
         self.cells = cells
         self.html_tags = html_tags
@@ -145,7 +143,7 @@ class TableRow(object):
         html += end_tag("tr")
         return html
 
-class TableCell(object):
+class TableCell:
     """
     Something that will produce a table cell, based on 
     (*) a content, that is expected to have the right 

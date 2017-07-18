@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
+
 
 ############################################################
 # the low level interface - used to be used directly in the first exercises
@@ -172,15 +172,12 @@ class ExerciseFunction(object):
         
         if how_many is None:
             how_many = self.nb_examples
-        columns = self.layout_args if self.layout_args \
-                  else default_layout_args
-        exo_layout = self.layout
-
-        if how_many is None:
-            how_many = self.nb_examples
         if how_many == 0:
             how_many = len(self.datasets)
     
+        columns = self.layout_args if self.layout_args \
+                  else default_layout_args
+
         # can provide 3 args (convenient when it's the same as correction) or just 2
         columns = columns[:2]
         c1, c2 = columns
@@ -190,10 +187,11 @@ class ExerciseFunction(object):
         html = table.header()
 
         title1 = "Arguments" if not self.render_name else "Appel"
-        # souci avec l'accent de 'Résultat Attendu'
-        html += TableRow(style=header_font_style,
-                         cells = [ TableCell (CellLegend(x), tag='th', style=center_cell_style)
-                                   for x in (title1, 'Resultat Attendu') ]).html()
+        html += TableRow(
+            style=header_font_style,
+            cells=[ TableCell (CellLegend(x), tag='th', style=center_cell_style)
+                    for x in (title1, 'Résultat Attendu') ]
+        ).html()
         for dataset in self.datasets[:how_many]:
             sample_dataset = dataset.clone(self.copy_mode)
             if self.render_name:
@@ -202,9 +200,10 @@ class ExerciseFunction(object):
                 expected = sample_dataset.call(self.solution)
             except Exception as e:
                 expected = e
-            html += TableRow(cells = [ TableCell(dataset, layout=self.layout, width=c1),
-                                       TableCell(expected, layout=self.layout, width=c2)
-                                   ]).html()
+            html += TableRow(
+                cells = [ TableCell(dataset, layout=self.layout, width=c1),
+                          TableCell(expected, layout=self.layout, width=c2)
+                ]).html()
     
         html += table.footer()
         return HTML(html)
