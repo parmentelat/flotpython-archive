@@ -5,7 +5,7 @@
     <description>Positions for ship(s) ALL_SHIPS</description>
   <Style id="style_13 BEAUFORT">
       <LineStyle>
-        <color>80d1bc6d</color>
+        <color>80e26ccc</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -13,7 +13,7 @@
       </PolyStyle>
     </Style><Style id="style_ABEILLE BOURBON">
       <LineStyle>
-        <color>80478269</color>
+        <color>80ed7514</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -21,7 +21,7 @@
       </PolyStyle>
     </Style><Style id="style_ABRADEN">
       <LineStyle>
-        <color>80c2517a</color>
+        <color>804c8c86</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -29,7 +29,7 @@
       </PolyStyle>
     </Style><Style id="style_ADELIA 2">
       <LineStyle>
-        <color>8093e081</color>
+        <color>8071f5d2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -37,7 +37,7 @@
       </PolyStyle>
     </Style><Style id="style_ADELINE STEPHEN">
       <LineStyle>
-        <color>804cbc9b</color>
+        <color>80de5784</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -45,7 +45,7 @@
       </PolyStyle>
     </Style><Style id="style_AEGIR">
       <LineStyle>
-        <color>8045e0f1</color>
+        <color>80659fee</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -53,7 +53,7 @@
       </PolyStyle>
     </Style><Style id="style_AFRICAN HALCYON">
       <LineStyle>
-        <color>80c9de53</color>
+        <color>80f2418b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -61,7 +61,7 @@
       </PolyStyle>
     </Style><Style id="style_AFRIKA">
       <LineStyle>
-        <color>80b6deab</color>
+        <color>802d522d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -69,7 +69,7 @@
       </PolyStyle>
     </Style><Style id="style_AIGLE DES MERS">
       <LineStyle>
-        <color>80792170</color>
+        <color>80cb22a8</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -77,7 +77,7 @@
       </PolyStyle>
     </Style><Style id="style_AIGRAN D">
       <LineStyle>
-        <color>809ae1ee</color>
+        <color>80d64af2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -85,7 +85,7 @@
       </PolyStyle>
     </Style><Style id="style_ALCOR">
       <LineStyle>
-        <color>807ad647</color>
+        <color>8092bed9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -93,7 +93,7 @@
       </PolyStyle>
     </Style><Style id="style_ALCYON">
       <LineStyle>
-        <color>80c78b0d</color>
+        <color>80a4f02f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -101,7 +101,7 @@
       </PolyStyle>
     </Style><Style id="style_ALIDA">
       <LineStyle>
-        <color>80b368cc</color>
+        <color>805923c4</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -109,7 +109,7 @@
       </PolyStyle>
     </Style><Style id="style_ALVA RICKMERS">
       <LineStyle>
-        <color>80a70a7e</color>
+        <color>801cf0e3</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -117,7 +117,7 @@
       </PolyStyle>
     </Style><Style id="style_AM EXPRESS">
       <LineStyle>
-        <color>80d64356</color>
+        <color>80b95e82</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -125,7 +125,7 @@
       </PolyStyle>
     </Style><Style id="style_AMALTHEA">
       <LineStyle>
-        <color>80d7378f</color>
+        <color>80992364</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -133,7 +133,7 @@
       </PolyStyle>
     </Style><Style id="style_AMORINA">
       <LineStyle>
-        <color>8042eec7</color>
+        <color>80795aa6</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -141,7 +141,7 @@
       </PolyStyle>
     </Style><Style id="style_AN TUAZ COZ">
       <LineStyle>
-        <color>80731c55</color>
+        <color>80adf33e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -149,7 +149,7 @@
       </PolyStyle>
     </Style><Style id="style_ANDRE COLIN">
       <LineStyle>
-        <color>8081e623</color>
+        <color>8097847b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -157,7 +157,7 @@
       </PolyStyle>
     </Style><Style id="style_ANDURIL">
       <LineStyle>
-        <color>808cb08b</color>
+        <color>80e78f4c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -165,7 +165,7 @@
       </PolyStyle>
     </Style><Style id="style_ANITA CONTI">
       <LineStyle>
-        <color>80ca89ed</color>
+        <color>8019d8f5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -173,7 +173,7 @@
       </PolyStyle>
     </Style><Style id="style_ANNA">
       <LineStyle>
-        <color>80989473</color>
+        <color>8096f40d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -181,7 +181,7 @@
       </PolyStyle>
     </Style><Style id="style_ANTAEUS">
       <LineStyle>
-        <color>80966491</color>
+        <color>8021c2e1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -189,7 +189,7 @@
       </PolyStyle>
     </Style><Style id="style_ANTARCTICGAS">
       <LineStyle>
-        <color>804e3636</color>
+        <color>8070bfdd</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -197,7 +197,7 @@
       </PolyStyle>
     </Style><Style id="style_APL INDONESIA">
       <LineStyle>
-        <color>809aa47a</color>
+        <color>80d2b5aa</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -205,7 +205,7 @@
       </PolyStyle>
     </Style><Style id="style_AQUARIUS">
       <LineStyle>
-        <color>801fbcd8</color>
+        <color>800aa688</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -213,7 +213,7 @@
       </PolyStyle>
     </Style><Style id="style_AR GAVOTTEN">
       <LineStyle>
-        <color>80e3d0dd</color>
+        <color>80dde85f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -221,7 +221,7 @@
       </PolyStyle>
     </Style><Style id="style_AR MORVRINI">
       <LineStyle>
-        <color>80e38966</color>
+        <color>8048c45d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -229,7 +229,7 @@
       </PolyStyle>
     </Style><Style id="style_AR ZANTEZ">
       <LineStyle>
-        <color>80b04bc9</color>
+        <color>80bee81a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -237,7 +237,7 @@
       </PolyStyle>
     </Style><Style id="style_ARGONAUTE">
       <LineStyle>
-        <color>80d2dd95</color>
+        <color>803af49b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -245,7 +245,7 @@
       </PolyStyle>
     </Style><Style id="style_ARKLOW RACER">
       <LineStyle>
-        <color>80ea9274</color>
+        <color>804247d7</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -253,7 +253,7 @@
       </PolyStyle>
     </Style><Style id="style_ARKLOW RANGER">
       <LineStyle>
-        <color>80a5f5e2</color>
+        <color>802ed795</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -261,7 +261,7 @@
       </PolyStyle>
     </Style><Style id="style_ARKLOW WILLOW">
       <LineStyle>
-        <color>80c51d9a</color>
+        <color>807c211e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -269,7 +269,7 @@
       </PolyStyle>
     </Style><Style id="style_ARMORIQUE">
       <LineStyle>
-        <color>807c9ed1</color>
+        <color>805bea8c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -277,7 +277,7 @@
       </PolyStyle>
     </Style><Style id="style_ARRAOK2">
       <LineStyle>
-        <color>8043b625</color>
+        <color>80872557</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -285,7 +285,7 @@
       </PolyStyle>
     </Style><Style id="style_ARUN">
       <LineStyle>
-        <color>803ec558</color>
+        <color>809754be</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -293,7 +293,7 @@
       </PolyStyle>
     </Style><Style id="style_AS CYPRIA">
       <LineStyle>
-        <color>80ca212c</color>
+        <color>8029965f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -301,7 +301,7 @@
       </PolyStyle>
     </Style><Style id="style_ASIABORG">
       <LineStyle>
-        <color>80ae1491</color>
+        <color>80da943e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -309,7 +309,7 @@
       </PolyStyle>
     </Style><Style id="style_ATALANTE">
       <LineStyle>
-        <color>80e088aa</color>
+        <color>80d6a496</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -317,7 +317,7 @@
       </PolyStyle>
     </Style><Style id="style_ATLANTIC SURVEYOR">
       <LineStyle>
-        <color>80109f99</color>
+        <color>80a0537b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -325,7 +325,7 @@
       </PolyStyle>
     </Style><Style id="style_ATOUT CHANCE">
       <LineStyle>
-        <color>80916661</color>
+        <color>8021a2d6</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -333,7 +333,7 @@
       </PolyStyle>
     </Style><Style id="style_AVEL AN HEOL">
       <LineStyle>
-        <color>80f1120f</color>
+        <color>806c5b9d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -341,7 +341,7 @@
       </PolyStyle>
     </Style><Style id="style_AZURA">
       <LineStyle>
-        <color>80ec3527</color>
+        <color>80475439</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -349,7 +349,7 @@
       </PolyStyle>
     </Style><Style id="style_B GAS LANRICK">
       <LineStyle>
-        <color>803bc6e7</color>
+        <color>803adc39</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -357,7 +357,7 @@
       </PolyStyle>
     </Style><Style id="style_BALBUZARD">
       <LineStyle>
-        <color>800f6e21</color>
+        <color>8012a6b2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -365,7 +365,7 @@
       </PolyStyle>
     </Style><Style id="style_BALISE TEST">
       <LineStyle>
-        <color>80473ea2</color>
+        <color>804c831b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -373,7 +373,7 @@
       </PolyStyle>
     </Style><Style id="style_BALTHASAR SCHULTE">
       <LineStyle>
-        <color>805c3480</color>
+        <color>8020b7cb</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -381,7 +381,7 @@
       </PolyStyle>
     </Style><Style id="style_BALTIC MERCHANT">
       <LineStyle>
-        <color>801321f3</color>
+        <color>802bea30</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -389,7 +389,7 @@
       </PolyStyle>
     </Style><Style id="style_BANGOR">
       <LineStyle>
-        <color>80395eb6</color>
+        <color>8013e11e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -397,7 +397,7 @@
       </PolyStyle>
     </Style><Style id="style_BARA AN TY">
       <LineStyle>
-        <color>80cfe231</color>
+        <color>80efbdde</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -405,7 +405,7 @@
       </PolyStyle>
     </Style><Style id="style_BARA DOUS">
       <LineStyle>
-        <color>80a8ee17</color>
+        <color>8094b86e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -413,7 +413,7 @@
       </PolyStyle>
     </Style><Style id="style_BARA HEIZ">
       <LineStyle>
-        <color>80a9d15a</color>
+        <color>80e0be90</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -421,7 +421,7 @@
       </PolyStyle>
     </Style><Style id="style_BARA PEMDEZ II">
       <LineStyle>
-        <color>80459672</color>
+        <color>80508fd9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -429,7 +429,7 @@
       </PolyStyle>
     </Style><Style id="style_BARR AVEL">
       <LineStyle>
-        <color>8033796a</color>
+        <color>8046e341</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -437,7 +437,7 @@
       </PolyStyle>
     </Style><Style id="style_BASSE GOUACH">
       <LineStyle>
-        <color>80908253</color>
+        <color>80efb7a0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -445,7 +445,7 @@
       </PolyStyle>
     </Style><Style id="style_BBC OLYMPUS">
       <LineStyle>
-        <color>805ecf45</color>
+        <color>80dd759e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -453,7 +453,7 @@
       </PolyStyle>
     </Style><Style id="style_BBC PEARL">
       <LineStyle>
-        <color>808e0cb9</color>
+        <color>80507d88</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -461,7 +461,7 @@
       </PolyStyle>
     </Style><Style id="style_BELASITZA">
       <LineStyle>
-        <color>8059144c</color>
+        <color>80b3aebd</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -469,7 +469,7 @@
       </PolyStyle>
     </Style><Style id="style_BELENOS">
       <LineStyle>
-        <color>8042ea5d</color>
+        <color>80f4d565</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -477,7 +477,7 @@
       </PolyStyle>
     </Style><Style id="style_BENTE">
       <LineStyle>
-        <color>804d5ee9</color>
+        <color>801f5da6</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -485,7 +485,7 @@
       </PolyStyle>
     </Style><Style id="style_BERCEAU DE LOCE">
       <LineStyle>
-        <color>809f9cb2</color>
+        <color>802786a0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -493,7 +493,7 @@
       </PolyStyle>
     </Style><Style id="style_BERENICE">
       <LineStyle>
-        <color>80656ba3</color>
+        <color>80ab5fe2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -501,7 +501,7 @@
       </PolyStyle>
     </Style><Style id="style_BERRIZ PATXIKU">
       <LineStyle>
-        <color>800a3758</color>
+        <color>803a480e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -509,7 +509,7 @@
       </PolyStyle>
     </Style><Style id="style_BF CONFIANZA">
       <LineStyle>
-        <color>8042a063</color>
+        <color>80c54f27</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -517,7 +517,7 @@
       </PolyStyle>
     </Style><Style id="style_BF EUPHORIA">
       <LineStyle>
-        <color>80d8906b</color>
+        <color>80be4269</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -525,7 +525,7 @@
       </PolyStyle>
     </Style><Style id="style_BIANCO OLIVIA BULKER">
       <LineStyle>
-        <color>8068af6c</color>
+        <color>80d5355f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -533,7 +533,7 @@
       </PolyStyle>
     </Style><Style id="style_BILLABONG">
       <LineStyle>
-        <color>80a61573</color>
+        <color>8077da19</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -541,7 +541,7 @@
       </PolyStyle>
     </Style><Style id="style_BINDY">
       <LineStyle>
-        <color>80472f86</color>
+        <color>8023d22f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -549,7 +549,7 @@
       </PolyStyle>
     </Style><Style id="style_BIT REDO">
       <LineStyle>
-        <color>807c8ebc</color>
+        <color>80e4bc42</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -557,7 +557,7 @@
       </PolyStyle>
     </Style><Style id="style_BLUE ORCA">
       <LineStyle>
-        <color>80da7e53</color>
+        <color>8015db9c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -565,7 +565,7 @@
       </PolyStyle>
     </Style><Style id="style_BLUMENAU">
       <LineStyle>
-        <color>8078c8d8</color>
+        <color>80acf292</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -573,7 +573,7 @@
       </PolyStyle>
     </Style><Style id="style_BM110-MFV OURLADYLOU">
       <LineStyle>
-        <color>80c936f5</color>
+        <color>80a4b81c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -581,7 +581,7 @@
       </PolyStyle>
     </Style><Style id="style_BOCHEM CHENNAI">
       <LineStyle>
-        <color>809f1db5</color>
+        <color>801029ac</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -589,7 +589,7 @@
       </PolyStyle>
     </Style><Style id="style_BONTEKONING">
       <LineStyle>
-        <color>80f268aa</color>
+        <color>803aa5de</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -597,7 +597,7 @@
       </PolyStyle>
     </Style><Style id="style_BORKUM">
       <LineStyle>
-        <color>80543cb3</color>
+        <color>809d286e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -605,7 +605,7 @@
       </PolyStyle>
     </Style><Style id="style_BOSTON EXPRESS">
       <LineStyle>
-        <color>800acc86</color>
+        <color>802168df</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -613,7 +613,7 @@
       </PolyStyle>
     </Style><Style id="style_BOUEE PHARE NE">
       <LineStyle>
-        <color>802126a3</color>
+        <color>802713a5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -621,7 +621,7 @@
       </PolyStyle>
     </Style><Style id="style_BOUEE PHARE SW">
       <LineStyle>
-        <color>80d84cf0</color>
+        <color>800f3b39</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -629,7 +629,7 @@
       </PolyStyle>
     </Style><Style id="style_BOUNDER">
       <LineStyle>
-        <color>8021d367</color>
+        <color>80c12984</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -637,7 +637,7 @@
       </PolyStyle>
     </Style><Style id="style_BPI">
       <LineStyle>
-        <color>801d4a74</color>
+        <color>803fc4d6</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -645,7 +645,7 @@
       </PolyStyle>
     </Style><Style id="style_BRECQHOU LASS">
       <LineStyle>
-        <color>80c4d529</color>
+        <color>8019b70f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -653,7 +653,7 @@
       </PolyStyle>
     </Style><Style id="style_BREIZH ARVOR 2">
       <LineStyle>
-        <color>8084a35b</color>
+        <color>809576a8</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -661,7 +661,7 @@
       </PolyStyle>
     </Style><Style id="style_BRO DISTRIBUTOR">
       <LineStyle>
-        <color>80d74b0e</color>
+        <color>8023df4c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -669,7 +669,7 @@
       </PolyStyle>
     </Style><Style id="style_BUCCIN">
       <LineStyle>
-        <color>8013aa8d</color>
+        <color>801b421c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -677,7 +677,7 @@
       </PolyStyle>
     </Style><Style id="style_BULK SPAIN">
       <LineStyle>
-        <color>80e9e7e0</color>
+        <color>80af5763</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -685,7 +685,7 @@
       </PolyStyle>
     </Style><Style id="style_CALEBARIAN">
       <LineStyle>
-        <color>8013baaf</color>
+        <color>80793819</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -693,7 +693,7 @@
       </PolyStyle>
     </Style><Style id="style_CALYPSO">
       <LineStyle>
-        <color>80a4b2df</color>
+        <color>808a8114</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -701,7 +701,7 @@
       </PolyStyle>
     </Style><Style id="style_CAP FREHEL">
       <LineStyle>
-        <color>80a16188</color>
+        <color>80a223bd</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -709,7 +709,7 @@
       </PolyStyle>
     </Style><Style id="style_CAP LIZARD">
       <LineStyle>
-        <color>803b940c</color>
+        <color>806e3d4c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -717,7 +717,7 @@
       </PolyStyle>
     </Style><Style id="style_CAPE BOWEN">
       <LineStyle>
-        <color>802d58c4</color>
+        <color>8065f1c5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -725,7 +725,7 @@
       </PolyStyle>
     </Style><Style id="style_CAPE ENDLESS">
       <LineStyle>
-        <color>80b3599c</color>
+        <color>8082e0f0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -733,7 +733,7 @@
       </PolyStyle>
     </Style><Style id="style_CAPE OLIVE">
       <LineStyle>
-        <color>801330f1</color>
+        <color>80f59b35</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -741,7 +741,7 @@
       </PolyStyle>
     </Style><Style id="style_CARLA EGLANTINE">
       <LineStyle>
-        <color>804e678b</color>
+        <color>80bcb63e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -749,7 +749,7 @@
       </PolyStyle>
     </Style><Style id="style_CARLOS FISCHER">
       <LineStyle>
-        <color>804f7a42</color>
+        <color>80ce18d3</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -757,7 +757,7 @@
       </PolyStyle>
     </Style><Style id="style_CASABLANCA">
       <LineStyle>
-        <color>80153485</color>
+        <color>80b732e2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -765,7 +765,7 @@
       </PolyStyle>
     </Style><Style id="style_CAYMAN">
       <LineStyle>
-        <color>801a6957</color>
+        <color>80336191</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -773,7 +773,7 @@
       </PolyStyle>
     </Style><Style id="style_CELACANTE">
       <LineStyle>
-        <color>806b21e0</color>
+        <color>804a28a2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -781,7 +781,7 @@
       </PolyStyle>
     </Style><Style id="style_CELTIC VENTURE">
       <LineStyle>
-        <color>8079d0f0</color>
+        <color>80f57bb4</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -789,7 +789,7 @@
       </PolyStyle>
     </Style><Style id="style_CEMBAY">
       <LineStyle>
-        <color>805b7baf</color>
+        <color>80360d82</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -797,7 +797,7 @@
       </PolyStyle>
     </Style><Style id="style_CESKA">
       <LineStyle>
-        <color>806e51b7</color>
+        <color>80b872f0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -805,7 +805,7 @@
       </PolyStyle>
     </Style><Style id="style_CEZEMBRE">
       <LineStyle>
-        <color>80dde39d</color>
+        <color>809be98c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -813,7 +813,7 @@
       </PolyStyle>
     </Style><Style id="style_CFL PENHAR">
       <LineStyle>
-        <color>8062efa0</color>
+        <color>80f459b0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -821,7 +821,7 @@
       </PolyStyle>
     </Style><Style id="style_CHALLENGER">
       <LineStyle>
-        <color>80191dba</color>
+        <color>80656de0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -829,7 +829,7 @@
       </PolyStyle>
     </Style><Style id="style_CHANNEL LIGHTVESSEL">
       <LineStyle>
-        <color>80180b66</color>
+        <color>80b24a31</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -837,7 +837,7 @@
       </PolyStyle>
     </Style><Style id="style_CHARIKLIA JUNIOR">
       <LineStyle>
-        <color>8084737d</color>
+        <color>8099ba0d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -845,7 +845,7 @@
       </PolyStyle>
     </Style><Style id="style_CHARLEVY">
       <LineStyle>
-        <color>8094aa6d</color>
+        <color>807fc71e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -853,7 +853,7 @@
       </PolyStyle>
     </Style><Style id="style_CHEMICAL MARINER">
       <LineStyle>
-        <color>8060f347</color>
+        <color>805fc715</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -861,7 +861,7 @@
       </PolyStyle>
     </Style><Style id="style_CHEMROUTE BRILLIANT">
       <LineStyle>
-        <color>80c16f5e</color>
+        <color>8095512c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -869,7 +869,7 @@
       </PolyStyle>
     </Style><Style id="style_CHEPHREN">
       <LineStyle>
-        <color>8019d5af</color>
+        <color>8047cd85</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -877,7 +877,7 @@
       </PolyStyle>
     </Style><Style id="style_CHINA BLUE">
       <LineStyle>
-        <color>80df74a9</color>
+        <color>8064a653</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -885,7 +885,7 @@
       </PolyStyle>
     </Style><Style id="style_CHLOE-MEL">
       <LineStyle>
-        <color>8026673a</color>
+        <color>80b665a1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -893,7 +893,7 @@
       </PolyStyle>
     </Style><Style id="style_CHYRA">
       <LineStyle>
-        <color>8013e93c</color>
+        <color>80eeace4</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -901,7 +901,7 @@
       </PolyStyle>
     </Style><Style id="style_CINTHARTH">
       <LineStyle>
-        <color>802c3863</color>
+        <color>80a82bc1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -909,7 +909,7 @@
       </PolyStyle>
     </Style><Style id="style_CITY OF SUNDERLAND">
       <LineStyle>
-        <color>808a2df3</color>
+        <color>80596dc9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -917,7 +917,7 @@
       </PolyStyle>
     </Style><Style id="style_CMA CGM MATISSE">
       <LineStyle>
-        <color>80f12d69</color>
+        <color>8074deb0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -925,7 +925,7 @@
       </PolyStyle>
     </Style><Style id="style_CMA CGM WAGNER">
       <LineStyle>
-        <color>80aad97e</color>
+        <color>801e0aa2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -933,7 +933,7 @@
       </PolyStyle>
     </Style><Style id="style_COCOCHEMINUTE SOLO">
       <LineStyle>
-        <color>80e2567f</color>
+        <color>803bbc5f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -941,7 +941,7 @@
       </PolyStyle>
     </Style><Style id="style_COLOMBINE">
       <LineStyle>
-        <color>807fa839</color>
+        <color>80324743</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -949,7 +949,7 @@
       </PolyStyle>
     </Style><Style id="style_COMMODORE GOODWILL">
       <LineStyle>
-        <color>80993d5a</color>
+        <color>80ad7c6a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -957,7 +957,7 @@
       </PolyStyle>
     </Style><Style id="style_CONDOR RAPIDE">
       <LineStyle>
-        <color>80eddecb</color>
+        <color>80bfeab6</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -965,7 +965,7 @@
       </PolyStyle>
     </Style><Style id="style_CONNEMARA">
       <LineStyle>
-        <color>80122d46</color>
+        <color>809be974</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -973,7 +973,7 @@
       </PolyStyle>
     </Style><Style id="style_CORAIL">
       <LineStyle>
-        <color>80c3d093</color>
+        <color>801270e9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -981,7 +981,7 @@
       </PolyStyle>
     </Style><Style id="style_COSCO HOPE">
       <LineStyle>
-        <color>80b3c819</color>
+        <color>80bd9b75</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -989,7 +989,7 @@
       </PolyStyle>
     </Style><Style id="style_COTES DE BRETAGNE">
       <LineStyle>
-        <color>801dd713</color>
+        <color>80cfb3bf</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -997,7 +997,7 @@
       </PolyStyle>
     </Style><Style id="style_COVADONGA">
       <LineStyle>
-        <color>803f130d</color>
+        <color>8015347c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1005,7 +1005,7 @@
       </PolyStyle>
     </Style><Style id="style_COZ IM FREE SOLOSAIL">
       <LineStyle>
-        <color>80d1582f</color>
+        <color>801a4cbd</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1013,7 +1013,7 @@
       </PolyStyle>
     </Style><Style id="style_CREOLA">
       <LineStyle>
-        <color>802da4ee</color>
+        <color>80327c91</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1021,7 +1021,7 @@
       </PolyStyle>
     </Style><Style id="style_CROWN PRINCESS">
       <LineStyle>
-        <color>8081de80</color>
+        <color>80ec86f2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1029,7 +1029,7 @@
       </PolyStyle>
     </Style><Style id="style_CSCC SHANGHAI">
       <LineStyle>
-        <color>8091aac8</color>
+        <color>8099a4cb</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1037,7 +1037,7 @@
       </PolyStyle>
     </Style><Style id="style_DACANI">
       <LineStyle>
-        <color>80bcf3ba</color>
+        <color>800aec13</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1045,7 +1045,7 @@
       </PolyStyle>
     </Style><Style id="style_DAME ARGO">
       <LineStyle>
-        <color>80df3a88</color>
+        <color>80885d59</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1053,7 +1053,7 @@
       </PolyStyle>
     </Style><Style id="style_DANIO">
       <LineStyle>
-        <color>8097cc7b</color>
+        <color>80e08116</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1061,7 +1061,7 @@
       </PolyStyle>
     </Style><Style id="style_DAYTONA">
       <LineStyle>
-        <color>80c46594</color>
+        <color>80d9dcea</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1069,7 +1069,7 @@
       </PolyStyle>
     </Style><Style id="style_DEEP ORIENT">
       <LineStyle>
-        <color>80d2c6a5</color>
+        <color>80d9743a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1077,7 +1077,7 @@
       </PolyStyle>
     </Style><Style id="style_DEOM DEI">
       <LineStyle>
-        <color>800a3481</color>
+        <color>8096ac1f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1085,7 +1085,7 @@
       </PolyStyle>
     </Style><Style id="style_DESERT HOPE">
       <LineStyle>
-        <color>804619d4</color>
+        <color>80e0c32b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1093,7 +1093,7 @@
       </PolyStyle>
     </Style><Style id="style_DESPERADO">
       <LineStyle>
-        <color>80e8516a</color>
+        <color>800d70b7</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1101,7 +1101,7 @@
       </PolyStyle>
     </Style><Style id="style_DIAOULIC SOLO SAILOR">
       <LineStyle>
-        <color>80c918a1</color>
+        <color>80745a0a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1109,7 +1109,7 @@
       </PolyStyle>
     </Style><Style id="style_DIEZEBORG">
       <LineStyle>
-        <color>80284dcd</color>
+        <color>80400dc1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1117,7 +1117,7 @@
       </PolyStyle>
     </Style><Style id="style_DIKKE DRUYFF">
       <LineStyle>
-        <color>8017126c</color>
+        <color>80cb0adc</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1125,7 +1125,7 @@
       </PolyStyle>
     </Style><Style id="style_DOUWE S">
       <LineStyle>
-        <color>807ed5b3</color>
+        <color>80b691a6</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1133,7 +1133,7 @@
       </PolyStyle>
     </Style><Style id="style_DRECHTBORG">
       <LineStyle>
-        <color>80a82df2</color>
+        <color>80233a28</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1141,7 +1141,7 @@
       </PolyStyle>
     </Style><Style id="style_ECUADOR STAR">
       <LineStyle>
-        <color>806b9a65</color>
+        <color>80a5b03c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1149,7 +1149,7 @@
       </PolyStyle>
     </Style><Style id="style_ECUME DES JOURS">
       <LineStyle>
-        <color>8015792d</color>
+        <color>80e95751</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1157,7 +1157,7 @@
       </PolyStyle>
     </Style><Style id="style_EDDYSTONE">
       <LineStyle>
-        <color>80119b9e</color>
+        <color>80ba3823</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1165,7 +1165,7 @@
       </PolyStyle>
     </Style><Style id="style_EL AMANECER">
       <LineStyle>
-        <color>80228b5b</color>
+        <color>8083e46f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1173,7 +1173,7 @@
       </PolyStyle>
     </Style><Style id="style_EL ARRANQUE">
       <LineStyle>
-        <color>8064c17d</color>
+        <color>80aa1e0f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1181,7 +1181,7 @@
       </PolyStyle>
     </Style><Style id="style_ELLIE LADY">
       <LineStyle>
-        <color>80d99978</color>
+        <color>8050f37d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1189,7 +1189,7 @@
       </PolyStyle>
     </Style><Style id="style_EMBDENS WELVAART">
       <LineStyle>
-        <color>809f5927</color>
+        <color>80d6d427</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1197,7 +1197,7 @@
       </PolyStyle>
     </Style><Style id="style_EMERALD EXPRESS">
       <LineStyle>
-        <color>80ab9cc4</color>
+        <color>80e64b2c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1205,7 +1205,7 @@
       </PolyStyle>
     </Style><Style id="style_EMILIA JAYNE BM10">
       <LineStyle>
-        <color>8027e1c6</color>
+        <color>80b18fdb</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1213,7 +1213,7 @@
       </PolyStyle>
     </Style><Style id="style_EMMA LOUISE CRABBER">
       <LineStyle>
-        <color>80e2d7aa</color>
+        <color>80b0af62</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1221,7 +1221,7 @@
       </PolyStyle>
     </Style><Style id="style_EMPEDOCLE">
       <LineStyle>
-        <color>80c984c3</color>
+        <color>8027e931</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1229,7 +1229,7 @@
       </PolyStyle>
     </Style><Style id="style_EN AVANT">
       <LineStyle>
-        <color>8036c272</color>
+        <color>8051e30e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1237,7 +1237,7 @@
       </PolyStyle>
     </Style><Style id="style_ENEZ EUSSA 3">
       <LineStyle>
-        <color>80bc75c4</color>
+        <color>8014143e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1245,7 +1245,7 @@
       </PolyStyle>
     </Style><Style id="style_ENEZ VIAN">
       <LineStyle>
-        <color>801b14e6</color>
+        <color>80b84c98</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1253,7 +1253,7 @@
       </PolyStyle>
     </Style><Style id="style_ENFANT DU VOYAGE">
       <LineStyle>
-        <color>807cdee8</color>
+        <color>805a679b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1261,7 +1261,7 @@
       </PolyStyle>
     </Style><Style id="style_ENFORCER">
       <LineStyle>
-        <color>80a7903c</color>
+        <color>80f2e314</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1269,7 +1269,7 @@
       </PolyStyle>
     </Style><Style id="style_ENTRE TERREMER">
       <LineStyle>
-        <color>8020cbdb</color>
+        <color>80e2c9bd</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1277,7 +1277,7 @@
       </PolyStyle>
     </Style><Style id="style_ESBJERG">
       <LineStyle>
-        <color>80c1ae6d</color>
+        <color>80a5b188</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1285,7 +1285,7 @@
       </PolyStyle>
     </Style><Style id="style_ESCAPADE">
       <LineStyle>
-        <color>8052246e</color>
+        <color>80c0aef1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1293,7 +1293,7 @@
       </PolyStyle>
     </Style><Style id="style_ESHIPS BARRACUDA">
       <LineStyle>
-        <color>808fe3e6</color>
+        <color>807fad79</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1301,7 +1301,7 @@
       </PolyStyle>
     </Style><Style id="style_ESPERANZA 2">
       <LineStyle>
-        <color>806c21c0</color>
+        <color>8069e993</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1309,7 +1309,7 @@
       </PolyStyle>
     </Style><Style id="style_ESTRELLAPOLARPRIMERO">
       <LineStyle>
-        <color>80b71173</color>
+        <color>80373f6a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1317,7 +1317,7 @@
       </PolyStyle>
     </Style><Style id="style_ETENDARD">
       <LineStyle>
-        <color>80ab11e2</color>
+        <color>80a0540c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1325,7 +1325,7 @@
       </PolyStyle>
     </Style><Style id="style_ETER-VAG">
       <LineStyle>
-        <color>80edb41c</color>
+        <color>802d304f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1333,7 +1333,7 @@
       </PolyStyle>
     </Style><Style id="style_ETOILE DARVOR 2">
       <LineStyle>
-        <color>801a5e10</color>
+        <color>805f60d4</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1341,7 +1341,7 @@
       </PolyStyle>
     </Style><Style id="style_ETOILE POLAIRE 3">
       <LineStyle>
-        <color>805c0cef</color>
+        <color>8068c121</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1349,7 +1349,7 @@
       </PolyStyle>
     </Style><Style id="style_EVER LASTING">
       <LineStyle>
-        <color>80cb1adc</color>
+        <color>8060d1a8</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1357,7 +1357,7 @@
       </PolyStyle>
     </Style><Style id="style_EVER SUMMIT">
       <LineStyle>
-        <color>803b3aa9</color>
+        <color>8013144f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1365,7 +1365,7 @@
       </PolyStyle>
     </Style><Style id="style_EVERHARD SCHULTE">
       <LineStyle>
-        <color>80e7270b</color>
+        <color>8033309f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1373,7 +1373,7 @@
       </PolyStyle>
     </Style><Style id="style_FATU HIVA 2">
       <LineStyle>
-        <color>80610f98</color>
+        <color>8054666f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1381,7 +1381,7 @@
       </PolyStyle>
     </Style><Style id="style_FELIR">
       <LineStyle>
-        <color>80d43624</color>
+        <color>80962b55</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1389,7 +1389,7 @@
       </PolyStyle>
     </Style><Style id="style_FILLE DU SUET">
       <LineStyle>
-        <color>805bec28</color>
+        <color>802784c5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1397,7 +1397,7 @@
       </PolyStyle>
     </Style><Style id="style_FINNKRAFT">
       <LineStyle>
-        <color>80ee5f79</color>
+        <color>80471658</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1405,7 +1405,7 @@
       </PolyStyle>
     </Style><Style id="style_FIREFLY">
       <LineStyle>
-        <color>804fe7ec</color>
+        <color>8037e58f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1413,7 +1413,7 @@
       </PolyStyle>
     </Style><Style id="style_FLAGSHIP IRIS">
       <LineStyle>
-        <color>80a035f4</color>
+        <color>80c41c57</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1421,7 +1421,7 @@
       </PolyStyle>
     </Style><Style id="style_FLEUR DE GWARES">
       <LineStyle>
-        <color>8022932e</color>
+        <color>8071df5e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1429,7 +1429,7 @@
       </PolyStyle>
     </Style><Style id="style_FLINTERBOTHNIA">
       <LineStyle>
-        <color>80dde9c7</color>
+        <color>80567425</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1437,7 +1437,7 @@
       </PolyStyle>
     </Style><Style id="style_FLINTERMAAS">
       <LineStyle>
-        <color>805443bc</color>
+        <color>802399f2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1445,7 +1445,7 @@
       </PolyStyle>
     </Style><Style id="style_FLINTERZEE">
       <LineStyle>
-        <color>804e6d14</color>
+        <color>80858360</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1453,7 +1453,7 @@
       </PolyStyle>
     </Style><Style id="style_FRANTSUZIA">
       <LineStyle>
-        <color>80290e1c</color>
+        <color>80e1d6d9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1461,7 +1461,7 @@
       </PolyStyle>
     </Style><Style id="style_FRISIA BONN">
       <LineStyle>
-        <color>801b6d8b</color>
+        <color>80612984</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1469,7 +1469,7 @@
       </PolyStyle>
     </Style><Style id="style_FRISIANA">
       <LineStyle>
-        <color>80b82b6d</color>
+        <color>8027bd89</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1477,7 +1477,7 @@
       </PolyStyle>
     </Style><Style id="style_FROMVEUR II">
       <LineStyle>
-        <color>80a01d72</color>
+        <color>80771357</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1485,7 +1485,7 @@
       </PolyStyle>
     </Style><Style id="style_FS MUTIN">
       <LineStyle>
-        <color>8061e917</color>
+        <color>805fc6b9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1493,7 +1493,7 @@
       </PolyStyle>
     </Style><Style id="style_FUCHUA">
       <LineStyle>
-        <color>806a6cb5</color>
+        <color>80ee31f5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1501,7 +1501,7 @@
       </PolyStyle>
     </Style><Style id="style_GAELIK">
       <LineStyle>
-        <color>80553a4f</color>
+        <color>8034aa9a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1509,7 +1509,7 @@
       </PolyStyle>
     </Style><Style id="style_GALIBIER">
       <LineStyle>
-        <color>8079eac5</color>
+        <color>806ad8ad</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1517,7 +1517,7 @@
       </PolyStyle>
     </Style><Style id="style_GALICIA">
       <LineStyle>
-        <color>804b8dac</color>
+        <color>80201ad8</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1525,7 +1525,7 @@
       </PolyStyle>
     </Style><Style id="style_GASCHEM RHONE">
       <LineStyle>
-        <color>80c57368</color>
+        <color>801f3cc9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1533,7 +1533,7 @@
       </PolyStyle>
     </Style><Style id="style_GENMAR HOPE">
       <LineStyle>
-        <color>80bf6f44</color>
+        <color>8042196c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1541,7 +1541,7 @@
       </PolyStyle>
     </Style><Style id="style_GEORGIA">
       <LineStyle>
-        <color>8075e72b</color>
+        <color>800c236e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1549,7 +1549,7 @@
       </PolyStyle>
     </Style><Style id="style_GERDA">
       <LineStyle>
-        <color>8077a07c</color>
+        <color>80988e54</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1557,7 +1557,7 @@
       </PolyStyle>
     </Style><Style id="style_GERTRUD">
       <LineStyle>
-        <color>803a0aae</color>
+        <color>807cf587</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1565,7 +1565,7 @@
       </PolyStyle>
     </Style><Style id="style_GIMACO">
       <LineStyle>
-        <color>809c0b50</color>
+        <color>80d39fc0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1573,7 +1573,7 @@
       </PolyStyle>
     </Style><Style id="style_GIRL RACHAEL">
       <LineStyle>
-        <color>80bf9e8a</color>
+        <color>80b74176</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1581,7 +1581,7 @@
       </PolyStyle>
     </Style><Style id="style_GO4IT SOLOSAILOR">
       <LineStyle>
-        <color>802eb079</color>
+        <color>801f6842</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1589,7 +1589,7 @@
       </PolyStyle>
     </Style><Style id="style_GRANDE AFRICA">
       <LineStyle>
-        <color>80aabd40</color>
+        <color>804c9fd0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1597,7 +1597,7 @@
       </PolyStyle>
     </Style><Style id="style_GRANDE AMERICA">
       <LineStyle>
-        <color>80bd4cf2</color>
+        <color>8034783b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1605,7 +1605,7 @@
       </PolyStyle>
     </Style><Style id="style_GRANDE SCANDINAVIA">
       <LineStyle>
-        <color>8026da13</color>
+        <color>8065271a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1613,7 +1613,7 @@
       </PolyStyle>
     </Style><Style id="style_GREAT BEAR V">
       <LineStyle>
-        <color>80468693</color>
+        <color>80dce7e4</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1621,7 +1621,7 @@
       </PolyStyle>
     </Style><Style id="style_GREEN DALE">
       <LineStyle>
-        <color>80672245</color>
+        <color>80bd11f1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1629,7 +1629,7 @@
       </PolyStyle>
     </Style><Style id="style_GREEN LAKE">
       <LineStyle>
-        <color>804cbce0</color>
+        <color>80907dca</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1637,7 +1637,7 @@
       </PolyStyle>
     </Style><Style id="style_GREEN MALOY">
       <LineStyle>
-        <color>809612c4</color>
+        <color>80b73d28</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1645,7 +1645,7 @@
       </PolyStyle>
     </Style><Style id="style_GRIMM">
       <LineStyle>
-        <color>80525a87</color>
+        <color>80896f4b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1653,7 +1653,7 @@
       </PolyStyle>
     </Style><Style id="style_GRISGRIS">
       <LineStyle>
-        <color>8044e330</color>
+        <color>803fae14</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1661,7 +1661,7 @@
       </PolyStyle>
     </Style><Style id="style_GRY MARITHA">
       <LineStyle>
-        <color>806b4e84</color>
+        <color>80d641a9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1669,7 +1669,7 @@
       </PolyStyle>
     </Style><Style id="style_GURE AITA JOXE">
       <LineStyle>
-        <color>80919e87</color>
+        <color>802f243c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1677,7 +1677,7 @@
       </PolyStyle>
     </Style><Style id="style_H G BUELOW">
       <LineStyle>
-        <color>806a9f69</color>
+        <color>807f6a66</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1685,7 +1685,7 @@
       </PolyStyle>
     </Style><Style id="style_HANNES">
       <LineStyle>
-        <color>80c1c44e</color>
+        <color>8095dd30</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1693,7 +1693,7 @@
       </PolyStyle>
     </Style><Style id="style_HANOI">
       <LineStyle>
-        <color>80619e2f</color>
+        <color>8024a286</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1701,7 +1701,7 @@
       </PolyStyle>
     </Style><Style id="style_HANS LEHMANN">
       <LineStyle>
-        <color>80ae6495</color>
+        <color>802f9a71</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1709,7 +1709,7 @@
       </PolyStyle>
     </Style><Style id="style_HANSE COURAGE">
       <LineStyle>
-        <color>802aa75d</color>
+        <color>80adb876</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1717,7 +1717,7 @@
       </PolyStyle>
     </Style><Style id="style_HAPPY RIVER">
       <LineStyle>
-        <color>80796b7a</color>
+        <color>80ea8f88</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1725,7 +1725,7 @@
       </PolyStyle>
     </Style><Style id="style_HARVESTER 2">
       <LineStyle>
-        <color>80ad55a3</color>
+        <color>80b7f4ed</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1733,7 +1733,7 @@
       </PolyStyle>
     </Style><Style id="style_HAYLEY B">
       <LineStyle>
-        <color>801850b9</color>
+        <color>805cdf89</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1741,7 +1741,7 @@
       </PolyStyle>
     </Style><Style id="style_HEATHER">
       <LineStyle>
-        <color>80169c10</color>
+        <color>8089acb5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1749,7 +1749,7 @@
       </PolyStyle>
     </Style><Style id="style_HELAS">
       <LineStyle>
-        <color>8079db0c</color>
+        <color>80e93d94</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1757,7 +1757,7 @@
       </PolyStyle>
     </Style><Style id="style_HERMINE">
       <LineStyle>
-        <color>808619d6</color>
+        <color>80a6420c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1765,7 +1765,7 @@
       </PolyStyle>
     </Style><Style id="style_HIGH POWER III">
       <LineStyle>
-        <color>80abb9a7</color>
+        <color>8061bec9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1773,7 +1773,7 @@
       </PolyStyle>
     </Style><Style id="style_HONG KONG EXPRESS">
       <LineStyle>
-        <color>800b139c</color>
+        <color>80f05bdb</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1781,7 +1781,7 @@
       </PolyStyle>
     </Style><Style id="style_HORIZON">
       <LineStyle>
-        <color>80f5d8af</color>
+        <color>805c1390</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1789,7 +1789,7 @@
       </PolyStyle>
     </Style><Style id="style_ICE BASE">
       <LineStyle>
-        <color>80b53fbb</color>
+        <color>802fe94b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1797,7 +1797,7 @@
       </PolyStyle>
     </Style><Style id="style_IDA">
       <LineStyle>
-        <color>804d2276</color>
+        <color>80a4d231</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1805,7 +1805,7 @@
       </PolyStyle>
     </Style><Style id="style_IDATSA">
       <LineStyle>
-        <color>8057316d</color>
+        <color>80e16b9f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1813,7 +1813,7 @@
       </PolyStyle>
     </Style><Style id="style_IIRIS">
       <LineStyle>
-        <color>80dd7073</color>
+        <color>8055c1be</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1821,7 +1821,7 @@
       </PolyStyle>
     </Style><Style id="style_ILE DE GROIX">
       <LineStyle>
-        <color>80b18528</color>
+        <color>80d8821a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1829,7 +1829,7 @@
       </PolyStyle>
     </Style><Style id="style_ILE DE SIECK">
       <LineStyle>
-        <color>80e072c4</color>
+        <color>80d61f8e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1837,7 +1837,7 @@
       </PolyStyle>
     </Style><Style id="style_INTERLINK VERITY">
       <LineStyle>
-        <color>8065c865</color>
+        <color>80e8f414</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1845,7 +1845,7 @@
       </PolyStyle>
     </Style><Style id="style_INTUITION CRABER">
       <LineStyle>
-        <color>803d38e7</color>
+        <color>801a432b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1853,7 +1853,7 @@
       </PolyStyle>
     </Style><Style id="style_IRIGOIEN BERRIA">
       <LineStyle>
-        <color>80941565</color>
+        <color>8014560d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1861,7 +1861,7 @@
       </PolyStyle>
     </Style><Style id="style_IROISE 1">
       <LineStyle>
-        <color>80411d36</color>
+        <color>80cce27c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1869,7 +1869,7 @@
       </PolyStyle>
     </Style><Style id="style_ISOLA CORALLO">
       <LineStyle>
-        <color>8017a032</color>
+        <color>805ee633</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1877,7 +1877,7 @@
       </PolyStyle>
     </Style><Style id="style_JAC DA755 SOLOSAILOR">
       <LineStyle>
-        <color>809a9ab0</color>
+        <color>80d630e8</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1885,7 +1885,7 @@
       </PolyStyle>
     </Style><Style id="style_JAMES R H PZ78">
       <LineStyle>
-        <color>80824dd9</color>
+        <color>80b17f69</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1893,7 +1893,7 @@
       </PolyStyle>
     </Style><Style id="style_JEREMI SIMON">
       <LineStyle>
-        <color>805d769f</color>
+        <color>808b6bf0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1901,7 +1901,7 @@
       </PolyStyle>
     </Style><Style id="style_JI XIAN FENG">
       <LineStyle>
-        <color>8083ebeb</color>
+        <color>80918a12</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1909,7 +1909,7 @@
       </PolyStyle>
     </Style><Style id="style_JIA QIANG">
       <LineStyle>
-        <color>80e5e693</color>
+        <color>809c21b7</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1917,7 +1917,7 @@
       </PolyStyle>
     </Style><Style id="style_JIMORHAN">
       <LineStyle>
-        <color>807db03c</color>
+        <color>80d5d88e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1925,7 +1925,7 @@
       </PolyStyle>
     </Style><Style id="style_JOHANNA MARIA">
       <LineStyle>
-        <color>80481430</color>
+        <color>80cca31d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1933,7 +1933,7 @@
       </PolyStyle>
     </Style><Style id="style_JOHN PAUL K.">
       <LineStyle>
-        <color>800aa42b</color>
+        <color>80c977f1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1941,7 +1941,7 @@
       </PolyStyle>
     </Style><Style id="style_JOKER">
       <LineStyle>
-        <color>80c3aaef</color>
+        <color>80cb3e54</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1949,7 +1949,7 @@
       </PolyStyle>
     </Style><Style id="style_JORK RULER">
       <LineStyle>
-        <color>8067e375</color>
+        <color>8093f0a3</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1957,7 +1957,7 @@
       </PolyStyle>
     </Style><Style id="style_JUDINE">
       <LineStyle>
-        <color>805a22da</color>
+        <color>8074dd85</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1965,7 +1965,7 @@
       </PolyStyle>
     </Style><Style id="style_JULIA">
       <LineStyle>
-        <color>80c55675</color>
+        <color>80e2d46d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1973,7 +1973,7 @@
       </PolyStyle>
     </Style><Style id="style_JULIAN BIHAN">
       <LineStyle>
-        <color>80561014</color>
+        <color>80a5a045</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1981,7 +1981,7 @@
       </PolyStyle>
     </Style><Style id="style_JULIE GIRL">
       <LineStyle>
-        <color>80613b85</color>
+        <color>80e3e7d6</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1989,7 +1989,7 @@
       </PolyStyle>
     </Style><Style id="style_KADEGE">
       <LineStyle>
-        <color>803639a8</color>
+        <color>800fb2ec</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -1997,7 +1997,7 @@
       </PolyStyle>
     </Style><Style id="style_KALICOBA">
       <LineStyle>
-        <color>80b753d4</color>
+        <color>800ac738</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2005,7 +2005,7 @@
       </PolyStyle>
     </Style><Style id="style_KALONIG SOLO SAILOR">
       <LineStyle>
-        <color>80465bb2</color>
+        <color>80578b9b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2013,7 +2013,7 @@
       </PolyStyle>
     </Style><Style id="style_KAN AN AEL">
       <LineStyle>
-        <color>8014e61b</color>
+        <color>804b5f1a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2021,7 +2021,7 @@
       </PolyStyle>
     </Style><Style id="style_KAN AR MOOR">
       <LineStyle>
-        <color>8076b515</color>
+        <color>8088e64d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2029,7 +2029,7 @@
       </PolyStyle>
     </Style><Style id="style_KAREN LIQUIDE">
       <LineStyle>
-        <color>80c8f176</color>
+        <color>80dd57cf</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2037,7 +2037,7 @@
       </PolyStyle>
     </Style><Style id="style_KARIENA MARJANNE FV">
       <LineStyle>
-        <color>80251d21</color>
+        <color>80726cd9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2045,7 +2045,7 @@
       </PolyStyle>
     </Style><Style id="style_KARINA THERESA">
       <LineStyle>
-        <color>80be6be2</color>
+        <color>806c1933</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2053,7 +2053,7 @@
       </PolyStyle>
     </Style><Style id="style_KEFELEG AR MOR">
       <LineStyle>
-        <color>80711c6e</color>
+        <color>80ae2a47</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2061,7 +2061,7 @@
       </PolyStyle>
     </Style><Style id="style_KELIG FLORIAN">
       <LineStyle>
-        <color>80bccd13</color>
+        <color>8053c4de</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2069,7 +2069,7 @@
       </PolyStyle>
     </Style><Style id="style_KELOU MAD">
       <LineStyle>
-        <color>80347d28</color>
+        <color>805f1813</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2077,7 +2077,7 @@
       </PolyStyle>
     </Style><Style id="style_KENDALCH II">
       <LineStyle>
-        <color>80d7e655</color>
+        <color>8085742e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2085,7 +2085,7 @@
       </PolyStyle>
     </Style><Style id="style_KERFLOUS">
       <LineStyle>
-        <color>80708d4d</color>
+        <color>8087ede7</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2093,7 +2093,7 @@
       </PolyStyle>
     </Style><Style id="style_KEROULAN">
       <LineStyle>
-        <color>80893950</color>
+        <color>80a4c11e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2101,7 +2101,7 @@
       </PolyStyle>
     </Style><Style id="style_KINGFISHER II">
       <LineStyle>
-        <color>80729888</color>
+        <color>80b6bc30</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2109,7 +2109,7 @@
       </PolyStyle>
     </Style><Style id="style_KONINGSBORG">
       <LineStyle>
-        <color>80474026</color>
+        <color>80d96473</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2117,7 +2117,7 @@
       </PolyStyle>
     </Style><Style id="style_KRITI SEA">
       <LineStyle>
-        <color>80c221b6</color>
+        <color>8013a681</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2125,7 +2125,7 @@
       </PolyStyle>
     </Style><Style id="style_KWINTEBANK">
       <LineStyle>
-        <color>80444db7</color>
+        <color>806c7f16</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2133,7 +2133,7 @@
       </PolyStyle>
     </Style><Style id="style_L.ARLEQUIN 2">
       <LineStyle>
-        <color>80a5b983</color>
+        <color>802382d1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2141,7 +2141,7 @@
       </PolyStyle>
     </Style><Style id="style_LA FANETTE">
       <LineStyle>
-        <color>80d426a2</color>
+        <color>80300f12</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2149,7 +2149,7 @@
       </PolyStyle>
     </Style><Style id="style_LA MORDOREE">
       <LineStyle>
-        <color>8025b75e</color>
+        <color>80a3a82b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2157,7 +2157,7 @@
       </PolyStyle>
     </Style><Style id="style_LA ROUMASSE">
       <LineStyle>
-        <color>80a9b0a5</color>
+        <color>80ab5c24</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2165,7 +2165,7 @@
       </PolyStyle>
     </Style><Style id="style_LA SERVANE">
       <LineStyle>
-        <color>803ece42</color>
+        <color>80bd96b0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2173,7 +2173,7 @@
       </PolyStyle>
     </Style><Style id="style_LADY AKKA">
       <LineStyle>
-        <color>8084a941</color>
+        <color>80623b6c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2181,7 +2181,7 @@
       </PolyStyle>
     </Style><Style id="style_LADY KIRSTEN">
       <LineStyle>
-        <color>809e4d32</color>
+        <color>80d2d0d1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2189,7 +2189,7 @@
       </PolyStyle>
     </Style><Style id="style_LADY SHANA">
       <LineStyle>
-        <color>80c98c57</color>
+        <color>808726eb</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2197,7 +2197,7 @@
       </PolyStyle>
     </Style><Style id="style_LAISSE LES DIRE II">
       <LineStyle>
-        <color>80940f28</color>
+        <color>8019a6bd</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2205,7 +2205,7 @@
       </PolyStyle>
     </Style><Style id="style_LALBATROS">
       <LineStyle>
-        <color>8067f082</color>
+        <color>8081a7ab</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2213,7 +2213,7 @@
       </PolyStyle>
     </Style><Style id="style_LANGEVIN">
       <LineStyle>
-        <color>801cbec2</color>
+        <color>8060b029</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2221,7 +2221,7 @@
       </PolyStyle>
     </Style><Style id="style_LARCHE">
       <LineStyle>
-        <color>80c090ae</color>
+        <color>80b8c0a9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2229,7 +2229,7 @@
       </PolyStyle>
     </Style><Style id="style_LARCHE DALLIAN">
       <LineStyle>
-        <color>803cb6ca</color>
+        <color>8055d3e3</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2237,7 +2237,7 @@
       </PolyStyle>
     </Style><Style id="style_LASTEROIDE">
       <LineStyle>
-        <color>80bd5d95</color>
+        <color>802af36d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2245,7 +2245,7 @@
       </PolyStyle>
     </Style><Style id="style_LATLANTIQUE">
       <LineStyle>
-        <color>809ede23</color>
+        <color>80d655f4</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2253,7 +2253,7 @@
       </PolyStyle>
     </Style><Style id="style_LAURA">
       <LineStyle>
-        <color>80ce865e</color>
+        <color>80c8e9b8</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2261,7 +2261,7 @@
       </PolyStyle>
     </Style><Style id="style_LAVENTURIERE">
       <LineStyle>
-        <color>80750c3d</color>
+        <color>80d9298e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2269,7 +2269,7 @@
       </PolyStyle>
     </Style><Style id="style_LAZALAI">
       <LineStyle>
-        <color>80a4a57e</color>
+        <color>80e6d33a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2277,7 +2277,7 @@
       </PolyStyle>
     </Style><Style id="style_LE BOUCANIER">
       <LineStyle>
-        <color>80ea7b54</color>
+        <color>8013d26e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2285,7 +2285,7 @@
       </PolyStyle>
     </Style><Style id="style_LE BREIZH">
       <LineStyle>
-        <color>80d24798</color>
+        <color>807b69cb</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2293,7 +2293,7 @@
       </PolyStyle>
     </Style><Style id="style_LE COMMODORE">
       <LineStyle>
-        <color>80b0cbc3</color>
+        <color>803a7e65</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2301,7 +2301,7 @@
       </PolyStyle>
     </Style><Style id="style_LE GUILLEMOT III">
       <LineStyle>
-        <color>80641713</color>
+        <color>80d4ab1d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2309,7 +2309,7 @@
       </PolyStyle>
     </Style><Style id="style_LE JUSANT">
       <LineStyle>
-        <color>80b5ec5a</color>
+        <color>8015f014</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2317,7 +2317,7 @@
       </PolyStyle>
     </Style><Style id="style_LE LAGON">
       <LineStyle>
-        <color>8072b5a5</color>
+        <color>80864bf0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2325,7 +2325,7 @@
       </PolyStyle>
     </Style><Style id="style_LE MONT THABOR">
       <LineStyle>
-        <color>8047a851</color>
+        <color>80108fb4</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2333,7 +2333,7 @@
       </PolyStyle>
     </Style><Style id="style_LE NATIF 2">
       <LineStyle>
-        <color>805e89b6</color>
+        <color>809b9cea</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2341,7 +2341,7 @@
       </PolyStyle>
     </Style><Style id="style_LE SILLON">
       <LineStyle>
-        <color>802d0f9e</color>
+        <color>80414421</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2349,7 +2349,7 @@
       </PolyStyle>
     </Style><Style id="style_LES ANTILLES">
       <LineStyle>
-        <color>800f143f</color>
+        <color>80d0dbec</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2357,7 +2357,7 @@
       </PolyStyle>
     </Style><Style id="style_LES HANOIS">
       <LineStyle>
-        <color>80a41918</color>
+        <color>80edaad1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2365,7 +2365,7 @@
       </PolyStyle>
     </Style><Style id="style_LES TROIS MOUSSES">
       <LineStyle>
-        <color>80ef6ddc</color>
+        <color>808abc90</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2373,7 +2373,7 @@
       </PolyStyle>
     </Style><Style id="style_LES VIKINGS 2">
       <LineStyle>
-        <color>803d705e</color>
+        <color>80758b58</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2381,7 +2381,7 @@
       </PolyStyle>
     </Style><Style id="style_LESK NE DA LAR">
       <LineStyle>
-        <color>803357f2</color>
+        <color>80272f77</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2389,7 +2389,7 @@
       </PolyStyle>
     </Style><Style id="style_LEZ BREIZH">
       <LineStyle>
-        <color>80ba646a</color>
+        <color>80ee9a76</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2397,7 +2397,7 @@
       </PolyStyle>
     </Style><Style id="style_LIBERTE KERROCH">
       <LineStyle>
-        <color>804887b7</color>
+        <color>801f2474</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2405,7 +2405,7 @@
       </PolyStyle>
     </Style><Style id="style_LISA JACQUELINE">
       <LineStyle>
-        <color>80ac7713</color>
+        <color>801a2374</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2413,7 +2413,7 @@
       </PolyStyle>
     </Style><Style id="style_LISANAIS">
       <LineStyle>
-        <color>80e36a66</color>
+        <color>80d031c5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2421,7 +2421,7 @@
       </PolyStyle>
     </Style><Style id="style_LOCLEADE">
       <LineStyle>
-        <color>800a2ad7</color>
+        <color>8011d47c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2429,7 +2429,7 @@
       </PolyStyle>
     </Style><Style id="style_LOKEANOS">
       <LineStyle>
-        <color>8083b62c</color>
+        <color>8078b974</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2437,7 +2437,7 @@
       </PolyStyle>
     </Style><Style id="style_LOMIG SOLO SAILOR">
       <LineStyle>
-        <color>8057d0cb</color>
+        <color>801189f5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2445,7 +2445,7 @@
       </PolyStyle>
     </Style><Style id="style_LOUARN">
       <LineStyle>
-        <color>80440fc8</color>
+        <color>80e75dc2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2453,7 +2453,7 @@
       </PolyStyle>
     </Style><Style id="style_LOUISA N">
       <LineStyle>
-        <color>8031c3ab</color>
+        <color>804a1e64</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2461,7 +2461,7 @@
       </PolyStyle>
     </Style><Style id="style_LOWLANDS BEILUN">
       <LineStyle>
-        <color>80311ce4</color>
+        <color>801c2965</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2469,7 +2469,7 @@
       </PolyStyle>
     </Style><Style id="style_LOYAT">
       <LineStyle>
-        <color>80979c75</color>
+        <color>80bb1162</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2477,7 +2477,7 @@
       </PolyStyle>
     </Style><Style id="style_LU XUN">
       <LineStyle>
-        <color>802d9845</color>
+        <color>8063370c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2485,7 +2485,7 @@
       </PolyStyle>
     </Style><Style id="style_LUANTSA">
       <LineStyle>
-        <color>80c8b610</color>
+        <color>80de45db</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2493,7 +2493,7 @@
       </PolyStyle>
     </Style><Style id="style_LUDIVINE F/V">
       <LineStyle>
-        <color>80e6121f</color>
+        <color>80671ca2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2501,7 +2501,7 @@
       </PolyStyle>
     </Style><Style id="style_MA GONDOLE">
       <LineStyle>
-        <color>804f2d41</color>
+        <color>80ee2e3f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2509,7 +2509,7 @@
       </PolyStyle>
     </Style><Style id="style_MAB FANCH">
       <LineStyle>
-        <color>805db769</color>
+        <color>800a3eb2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2517,7 +2517,7 @@
       </PolyStyle>
     </Style><Style id="style_MAE">
       <LineStyle>
-        <color>80497e66</color>
+        <color>80b6c5f0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2525,7 +2525,7 @@
       </PolyStyle>
     </Style><Style id="style_MAERSK NEEDHAM">
       <LineStyle>
-        <color>8053de8b</color>
+        <color>8029c90b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2533,7 +2533,7 @@
       </PolyStyle>
     </Style><Style id="style_MAERSK WINDHOEK">
       <LineStyle>
-        <color>80f0c090</color>
+        <color>805568ba</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2541,7 +2541,7 @@
       </PolyStyle>
     </Style><Style id="style_MAGAYANT">
       <LineStyle>
-        <color>8047ac75</color>
+        <color>8010a445</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2549,7 +2549,7 @@
       </PolyStyle>
     </Style><Style id="style_MALIWAN">
       <LineStyle>
-        <color>80b4697f</color>
+        <color>80e52e39</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2557,7 +2557,7 @@
       </PolyStyle>
     </Style><Style id="style_MANATHIA">
       <LineStyle>
-        <color>800eb812</color>
+        <color>807e2684</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2565,7 +2565,7 @@
       </PolyStyle>
     </Style><Style id="style_MANFRED">
       <LineStyle>
-        <color>80aa93c1</color>
+        <color>8062bf4c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2573,7 +2573,7 @@
       </PolyStyle>
     </Style><Style id="style_MANGA-REVA">
       <LineStyle>
-        <color>804eab3a</color>
+        <color>802b113f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2581,7 +2581,7 @@
       </PolyStyle>
     </Style><Style id="style_MARANELLO">
       <LineStyle>
-        <color>80865af0</color>
+        <color>80665f83</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2589,7 +2589,7 @@
       </PolyStyle>
     </Style><Style id="style_MARC ANDRE">
       <LineStyle>
-        <color>80ef3b8f</color>
+        <color>805455ea</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2597,7 +2597,7 @@
       </PolyStyle>
     </Style><Style id="style_MARIAL">
       <LineStyle>
-        <color>8057eee4</color>
+        <color>8097ac5d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2605,7 +2605,7 @@
       </PolyStyle>
     </Style><Style id="style_MARIE ALEXANDRA">
       <LineStyle>
-        <color>8094b3aa</color>
+        <color>8039a11e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2613,7 +2613,7 @@
       </PolyStyle>
     </Style><Style id="style_MARIE-LOU III">
       <LineStyle>
-        <color>805de2de</color>
+        <color>8024929e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2621,7 +2621,7 @@
       </PolyStyle>
     </Style><Style id="style_MARILUDE2">
       <LineStyle>
-        <color>8058ba0c</color>
+        <color>8058326a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2629,7 +2629,7 @@
       </PolyStyle>
     </Style><Style id="style_MARINA">
       <LineStyle>
-        <color>80ca8fea</color>
+        <color>80ef2f2a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2637,7 +2637,7 @@
       </PolyStyle>
     </Style><Style id="style_MARTE">
       <LineStyle>
-        <color>805f9d56</color>
+        <color>80d7435a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2645,7 +2645,7 @@
       </PolyStyle>
     </Style><Style id="style_MARY CHRISTO 2">
       <LineStyle>
-        <color>80c297f3</color>
+        <color>808c4846</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2653,7 +2653,7 @@
       </PolyStyle>
     </Style><Style id="style_MATMACO">
       <LineStyle>
-        <color>800a2b14</color>
+        <color>80cb3954</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2661,7 +2661,7 @@
       </PolyStyle>
     </Style><Style id="style_MAZOWSZE">
       <LineStyle>
-        <color>8027e5e9</color>
+        <color>806975b3</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2669,7 +2669,7 @@
       </PolyStyle>
     </Style><Style id="style_MEKHANIK PYATLIN">
       <LineStyle>
-        <color>807be9cb</color>
+        <color>8015e62b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2677,7 +2677,7 @@
       </PolyStyle>
     </Style><Style id="style_MELVAN">
       <LineStyle>
-        <color>80c1ba36</color>
+        <color>80a30f6e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2685,7 +2685,7 @@
       </PolyStyle>
     </Style><Style id="style_MEN AR GROAS">
       <LineStyle>
-        <color>808b6eea</color>
+        <color>801dbd1c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2693,7 +2693,7 @@
       </PolyStyle>
     </Style><Style id="style_MEN BRIAL">
       <LineStyle>
-        <color>803332a5</color>
+        <color>802b7556</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2701,7 +2701,7 @@
       </PolyStyle>
     </Style><Style id="style_MEN GLAS2">
       <LineStyle>
-        <color>802f2380</color>
+        <color>809674c7</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2709,7 +2709,7 @@
       </PolyStyle>
     </Style><Style id="style_MEN GWEN">
       <LineStyle>
-        <color>80c698bc</color>
+        <color>802ea176</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2717,7 +2717,7 @@
       </PolyStyle>
     </Style><Style id="style_MERMAID EXPRESS">
       <LineStyle>
-        <color>80484d6f</color>
+        <color>8056ad64</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2725,7 +2725,7 @@
       </PolyStyle>
     </Style><Style id="style_MFV ALGRIE">
       <LineStyle>
-        <color>80f3b3e9</color>
+        <color>801f497b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2733,7 +2733,7 @@
       </PolyStyle>
     </Style><Style id="style_MFV ANGEL EMIEL">
       <LineStyle>
-        <color>80888cf3</color>
+        <color>80ab68ad</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2741,7 +2741,7 @@
       </PolyStyle>
     </Style><Style id="style_MFV BON ACCORD">
       <LineStyle>
-        <color>8036c2c4</color>
+        <color>8091186a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2749,7 +2749,7 @@
       </PolyStyle>
     </Style><Style id="style_MFV CARHELMAR">
       <LineStyle>
-        <color>80d1bb2e</color>
+        <color>80720c74</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2757,7 +2757,7 @@
       </PolyStyle>
     </Style><Style id="style_MFV CHRISTINA">
       <LineStyle>
-        <color>80a6e38e</color>
+        <color>80c4f05c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2765,7 +2765,7 @@
       </PolyStyle>
     </Style><Style id="style_MFV EMILY ROSE">
       <LineStyle>
-        <color>805fea8e</color>
+        <color>807a3e69</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2773,7 +2773,7 @@
       </PolyStyle>
     </Style><Style id="style_MFV HOPE - SU514">
       <LineStyle>
-        <color>806b9ac7</color>
+        <color>80558221</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2781,7 +2781,7 @@
       </PolyStyle>
     </Style><Style id="style_MFV JACOBA">
       <LineStyle>
-        <color>803f0d86</color>
+        <color>8039d525</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2789,7 +2789,7 @@
       </PolyStyle>
     </Style><Style id="style_MFV JORDAN A">
       <LineStyle>
-        <color>80e8aa9e</color>
+        <color>80502698</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2797,7 +2797,7 @@
       </PolyStyle>
     </Style><Style id="style_MFV KERRIE MARIE">
       <LineStyle>
-        <color>809e7fb6</color>
+        <color>80a5ba31</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2805,7 +2805,7 @@
       </PolyStyle>
     </Style><Style id="style_MINI599">
       <LineStyle>
-        <color>8044dc4a</color>
+        <color>80d5bd7c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2813,7 +2813,7 @@
       </PolyStyle>
     </Style><Style id="style_MINISKIRT SOLOSAILOR">
       <LineStyle>
-        <color>80e9e41c</color>
+        <color>807039ce</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2821,7 +2821,7 @@
       </PolyStyle>
     </Style><Style id="style_MIREN">
       <LineStyle>
-        <color>8073b974</color>
+        <color>80757836</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2829,7 +2829,7 @@
       </PolyStyle>
     </Style><Style id="style_MIRENTXU 1">
       <LineStyle>
-        <color>8082c8b0</color>
+        <color>80497e61</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2837,7 +2837,7 @@
       </PolyStyle>
     </Style><Style id="style_MIRO D">
       <LineStyle>
-        <color>80ec30e3</color>
+        <color>808f2e64</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2845,7 +2845,7 @@
       </PolyStyle>
     </Style><Style id="style_MN TOUCAN">
       <LineStyle>
-        <color>80e59fe7</color>
+        <color>8080abad</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2853,7 +2853,7 @@
       </PolyStyle>
     </Style><Style id="style_MOL COMMITMENT">
       <LineStyle>
-        <color>8045dac0</color>
+        <color>802085cb</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2861,7 +2861,7 @@
       </PolyStyle>
     </Style><Style id="style_MORSTON">
       <LineStyle>
-        <color>80991f11</color>
+        <color>803e550a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2869,7 +2869,7 @@
       </PolyStyle>
     </Style><Style id="style_MR KENTAURUS">
       <LineStyle>
-        <color>800c45bd</color>
+        <color>80debc7c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2877,7 +2877,7 @@
       </PolyStyle>
     </Style><Style id="style_MSC BARCELONA">
       <LineStyle>
-        <color>8065c19d</color>
+        <color>80a8800b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2885,7 +2885,7 @@
       </PolyStyle>
     </Style><Style id="style_MSC LAURA">
       <LineStyle>
-        <color>8065d913</color>
+        <color>80415627</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2893,7 +2893,7 @@
       </PolyStyle>
     </Style><Style id="style_MSC LAUREN">
       <LineStyle>
-        <color>8077cd27</color>
+        <color>80ceab57</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2901,7 +2901,7 @@
       </PolyStyle>
     </Style><Style id="style_MSC MARIA SAVERIA">
       <LineStyle>
-        <color>80b1570f</color>
+        <color>8095a531</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2909,7 +2909,7 @@
       </PolyStyle>
     </Style><Style id="style_MSC MELISSA">
       <LineStyle>
-        <color>80798513</color>
+        <color>8076beca</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2917,7 +2917,7 @@
       </PolyStyle>
     </Style><Style id="style_MSC ROSSELLA">
       <LineStyle>
-        <color>808f5b0b</color>
+        <color>808221b7</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2925,7 +2925,7 @@
       </PolyStyle>
     </Style><Style id="style_MSC SOPHIE">
       <LineStyle>
-        <color>80372489</color>
+        <color>8089cc45</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2933,7 +2933,7 @@
       </PolyStyle>
     </Style><Style id="style_MSC TAMARA">
       <LineStyle>
-        <color>8014e5d1</color>
+        <color>8095cd71</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2941,7 +2941,7 @@
       </PolyStyle>
     </Style><Style id="style_MSC VERONIQUE">
       <LineStyle>
-        <color>80e954df</color>
+        <color>8051ab0f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2949,7 +2949,7 @@
       </PolyStyle>
     </Style><Style id="style_MTS VALOUR">
       <LineStyle>
-        <color>80f2be4a</color>
+        <color>80284fec</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2957,7 +2957,7 @@
       </PolyStyle>
     </Style><Style id="style_MYGHAL">
       <LineStyle>
-        <color>80a89669</color>
+        <color>80b5140a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2965,7 +2965,7 @@
       </PolyStyle>
     </Style><Style id="style_NAJLAND">
       <LineStyle>
-        <color>80521827</color>
+        <color>804b6f90</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2973,7 +2973,7 @@
       </PolyStyle>
     </Style><Style id="style_NARVAL 3">
       <LineStyle>
-        <color>80297ba1</color>
+        <color>80ed9ebf</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2981,7 +2981,7 @@
       </PolyStyle>
     </Style><Style id="style_NAUSICAA">
       <LineStyle>
-        <color>80be15cc</color>
+        <color>806f7b24</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2989,7 +2989,7 @@
       </PolyStyle>
     </Style><Style id="style_NED602">
       <LineStyle>
-        <color>80148cb9</color>
+        <color>80c94a64</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -2997,7 +2997,7 @@
       </PolyStyle>
     </Style><Style id="style_NEMO-TX">
       <LineStyle>
-        <color>809eea5b</color>
+        <color>8052e9cb</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3005,7 +3005,7 @@
       </PolyStyle>
     </Style><Style id="style_NEPTUNE">
       <LineStyle>
-        <color>80941d8e</color>
+        <color>80b6f23c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3013,7 +3013,7 @@
       </PolyStyle>
     </Style><Style id="style_NEPTUNE III">
       <LineStyle>
-        <color>80c93947</color>
+        <color>80a21f13</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3021,7 +3021,7 @@
       </PolyStyle>
     </Style><Style id="style_NETWERK-SOLO SAILOR">
       <LineStyle>
-        <color>80af4547</color>
+        <color>801cd44d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3029,7 +3029,7 @@
       </PolyStyle>
     </Style><Style id="style_NEW DAWN">
       <LineStyle>
-        <color>80e6f52e</color>
+        <color>80589261</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3037,7 +3037,7 @@
       </PolyStyle>
     </Style><Style id="style_NEW HARMONY FH60">
       <LineStyle>
-        <color>80de8c13</color>
+        <color>802891e6</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3045,7 +3045,7 @@
       </PolyStyle>
     </Style><Style id="style_NIAGARA">
       <LineStyle>
-        <color>8094a111</color>
+        <color>8049eef5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3053,7 +3053,7 @@
       </PolyStyle>
     </Style><Style id="style_NINA MARIE">
       <LineStyle>
-        <color>80bccb1a</color>
+        <color>80cd331b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3061,7 +3061,7 @@
       </PolyStyle>
     </Style><Style id="style_NO WAR">
       <LineStyle>
-        <color>80a37542</color>
+        <color>8074e654</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3069,7 +3069,7 @@
       </PolyStyle>
     </Style><Style id="style_NOEST">
       <LineStyle>
-        <color>80762f58</color>
+        <color>80528f2c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3077,7 +3077,7 @@
       </PolyStyle>
     </Style><Style id="style_NORDIC MALMOE">
       <LineStyle>
-        <color>80a47a8d</color>
+        <color>809c8faa</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3085,7 +3085,7 @@
       </PolyStyle>
     </Style><Style id="style_NORDIC NELLY">
       <LineStyle>
-        <color>808acb5b</color>
+        <color>803f9224</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3093,7 +3093,7 @@
       </PolyStyle>
     </Style><Style id="style_NORMAND INSTALLER">
       <LineStyle>
-        <color>80c91c6e</color>
+        <color>8073ac95</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3101,7 +3101,7 @@
       </PolyStyle>
     </Style><Style id="style_NOTREDAMEDELAJOIE">
       <LineStyle>
-        <color>805d74ce</color>
+        <color>8071c7d1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3109,7 +3109,7 @@
       </PolyStyle>
     </Style><Style id="style_NOVA CURA">
       <LineStyle>
-        <color>8082f2d5</color>
+        <color>80f1d351</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3117,7 +3117,7 @@
       </PolyStyle>
     </Style><Style id="style_NS CREATION">
       <LineStyle>
-        <color>8026540f</color>
+        <color>80547b69</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3125,7 +3125,7 @@
       </PolyStyle>
     </Style><Style id="style_NUEVO LIBE">
       <LineStyle>
-        <color>80b70edb</color>
+        <color>809baa2d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3133,7 +3133,7 @@
       </PolyStyle>
     </Style><Style id="style_NVO VIRGEN PODEROSA">
       <LineStyle>
-        <color>80376b18</color>
+        <color>803229bc</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3141,7 +3141,7 @@
       </PolyStyle>
     </Style><Style id="style_OCEAN PRIDE FH24">
       <LineStyle>
-        <color>80536516</color>
+        <color>80286b70</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3149,7 +3149,7 @@
       </PolyStyle>
     </Style><Style id="style_OCEANE">
       <LineStyle>
-        <color>80bfb15e</color>
+        <color>80a1812d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3157,7 +3157,7 @@
       </PolyStyle>
     </Style><Style id="style_ON LPREND">
       <LineStyle>
-        <color>80cf1c16</color>
+        <color>8099b556</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3165,7 +3165,7 @@
       </PolyStyle>
     </Style><Style id="style_ONE GIRLS OCEAN">
       <LineStyle>
-        <color>805ddebc</color>
+        <color>8064ab83</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3173,7 +3173,7 @@
       </PolyStyle>
     </Style><Style id="style_ONEGO NAVIGATOR">
       <LineStyle>
-        <color>80a88ec7</color>
+        <color>80c87441</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3181,7 +3181,7 @@
       </PolyStyle>
     </Style><Style id="style_OPDR LAS PALMAS">
       <LineStyle>
-        <color>806b11c7</color>
+        <color>808487bb</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3189,7 +3189,7 @@
       </PolyStyle>
     </Style><Style id="style_ORIENT TIGER">
       <LineStyle>
-        <color>8036655e</color>
+        <color>808a5b88</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3197,7 +3197,7 @@
       </PolyStyle>
     </Style><Style id="style_ORINOCO FLO">
       <LineStyle>
-        <color>80275c33</color>
+        <color>80b0197b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3205,7 +3205,7 @@
       </PolyStyle>
     </Style><Style id="style_OTTAWA EXPRESS">
       <LineStyle>
-        <color>809ba40d</color>
+        <color>80562ec8</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3213,7 +3213,7 @@
       </PolyStyle>
     </Style><Style id="style_OURANOS">
       <LineStyle>
-        <color>80758cd7</color>
+        <color>808817ed</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3221,7 +3221,7 @@
       </PolyStyle>
     </Style><Style id="style_OUTSIDER">
       <LineStyle>
-        <color>807f1c16</color>
+        <color>80a94110</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3229,7 +3229,7 @@
       </PolyStyle>
     </Style><Style id="style_OVERSEAS LUXMAR">
       <LineStyle>
-        <color>80d5c4d4</color>
+        <color>8064826e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3237,7 +3237,7 @@
       </PolyStyle>
     </Style><Style id="style_PALATINE">
       <LineStyle>
-        <color>8047a220</color>
+        <color>80ed0ce2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3245,7 +3245,7 @@
       </PolyStyle>
     </Style><Style id="style_PANAMERA">
       <LineStyle>
-        <color>80cd58eb</color>
+        <color>80901bb9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3253,7 +3253,7 @@
       </PolyStyle>
     </Style><Style id="style_PARIS TEXAS">
       <LineStyle>
-        <color>807911e0</color>
+        <color>80e71eb9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3261,7 +3261,7 @@
       </PolyStyle>
     </Style><Style id="style_PASADENA">
       <LineStyle>
-        <color>809d4d12</color>
+        <color>80c7b56f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3269,7 +3269,7 @@
       </PolyStyle>
     </Style><Style id="style_PASCAL">
       <LineStyle>
-        <color>80622f8b</color>
+        <color>800b6614</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3277,7 +3277,7 @@
       </PolyStyle>
     </Style><Style id="style_PEACE">
       <LineStyle>
-        <color>802c33e3</color>
+        <color>8027a80a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3285,7 +3285,7 @@
       </PolyStyle>
     </Style><Style id="style_PEADAR MARIE">
       <LineStyle>
-        <color>80a143d9</color>
+        <color>804fe9ad</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3293,7 +3293,7 @@
       </PolyStyle>
     </Style><Style id="style_PECOS">
       <LineStyle>
-        <color>809de97b</color>
+        <color>80bd54c4</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3301,7 +3301,7 @@
       </PolyStyle>
     </Style><Style id="style_PEIKKO">
       <LineStyle>
-        <color>80dbaa14</color>
+        <color>80f0442e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3309,7 +3309,7 @@
       </PolyStyle>
     </Style><Style id="style_PENMEN">
       <LineStyle>
-        <color>80424c32</color>
+        <color>80ca9c53</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3317,7 +3317,7 @@
       </PolyStyle>
     </Style><Style id="style_PETERSBURG">
       <LineStyle>
-        <color>80423fd9</color>
+        <color>803a2479</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3325,7 +3325,7 @@
       </PolyStyle>
     </Style><Style id="style_PETIT AUGUSTE  CIE">
       <LineStyle>
-        <color>8077d82a</color>
+        <color>807fc15e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3333,7 +3333,7 @@
       </PolyStyle>
     </Style><Style id="style_PETIT GAEL 2">
       <LineStyle>
-        <color>808f0de5</color>
+        <color>806c355e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3341,7 +3341,7 @@
       </PolyStyle>
     </Style><Style id="style_PHARE DE LA TEIGNOUS">
       <LineStyle>
-        <color>800b66c7</color>
+        <color>8075afef</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3349,7 +3349,7 @@
       </PolyStyle>
     </Style><Style id="style_PHARE DE TREZIEN">
       <LineStyle>
-        <color>80f50ecc</color>
+        <color>80b9792f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3357,7 +3357,7 @@
       </PolyStyle>
     </Style><Style id="style_PHARE DU PETIT MINOU">
       <LineStyle>
-        <color>808213c1</color>
+        <color>807cbf2f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3365,7 +3365,7 @@
       </PolyStyle>
     </Style><Style id="style_PHOENIX">
       <LineStyle>
-        <color>80249ac1</color>
+        <color>80905a2b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3373,7 +3373,7 @@
       </PolyStyle>
     </Style><Style id="style_PILOT GOLDEN SPUR">
       <LineStyle>
-        <color>80a86310</color>
+        <color>803ff339</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3381,7 +3381,7 @@
       </PolyStyle>
     </Style><Style id="style_PLAY DEAU">
       <LineStyle>
-        <color>8070e158</color>
+        <color>807b63d4</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3389,7 +3389,7 @@
       </PolyStyle>
     </Style><Style id="style_PONT AVEN">
       <LineStyle>
-        <color>80442a82</color>
+        <color>806d77d8</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3397,7 +3397,7 @@
       </PolyStyle>
     </Style><Style id="style_PORZ STREILHEN">
       <LineStyle>
-        <color>80871b6a</color>
+        <color>80876dc4</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3405,7 +3405,7 @@
       </PolyStyle>
     </Style><Style id="style_PRASIDENT">
       <LineStyle>
-        <color>80a5ed6f</color>
+        <color>8042d53c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3413,7 +3413,7 @@
       </PolyStyle>
     </Style><Style id="style_PRETTY LADY">
       <LineStyle>
-        <color>8070793f</color>
+        <color>807a3ea0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3421,7 +3421,7 @@
       </PolyStyle>
     </Style><Style id="style_PROGRES">
       <LineStyle>
-        <color>8067a267</color>
+        <color>80bf16f1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3429,7 +3429,7 @@
       </PolyStyle>
     </Style><Style id="style_PROMETHEE">
       <LineStyle>
-        <color>8093cff5</color>
+        <color>806d1245</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3437,7 +3437,7 @@
       </PolyStyle>
     </Style><Style id="style_PTIT JUL II">
       <LineStyle>
-        <color>80da610f</color>
+        <color>80ac1fe8</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3445,7 +3445,7 @@
       </PolyStyle>
     </Style><Style id="style_PTITE FLEUR BLE">
       <LineStyle>
-        <color>809a7941</color>
+        <color>80396718</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3453,7 +3453,7 @@
       </PolyStyle>
     </Style><Style id="style_QUEEN VICTORIA">
       <LineStyle>
-        <color>801355c6</color>
+        <color>80c8adb7</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3461,7 +3461,7 @@
       </PolyStyle>
     </Style><Style id="style_QUENTIN GREGOIRE">
       <LineStyle>
-        <color>80ed23d9</color>
+        <color>803645a6</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3469,7 +3469,7 @@
       </PolyStyle>
     </Style><Style id="style_REM FORZA">
       <LineStyle>
-        <color>8015b210</color>
+        <color>8056a620</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3477,7 +3477,7 @@
       </PolyStyle>
     </Style><Style id="style_RENE A">
       <LineStyle>
-        <color>806dd766</color>
+        <color>80bee88d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3485,7 +3485,7 @@
       </PolyStyle>
     </Style><Style id="style_RESCUE 8-32">
       <LineStyle>
-        <color>80e4b298</color>
+        <color>80ca52cf</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3493,7 +3493,7 @@
       </PolyStyle>
     </Style><Style id="style_RIEN DIMPOSSIBL">
       <LineStyle>
-        <color>80305a6b</color>
+        <color>80eaec64</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3501,7 +3501,7 @@
       </PolyStyle>
     </Style><Style id="style_RIGEL LEADER">
       <LineStyle>
-        <color>8095f54c</color>
+        <color>80737f17</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3509,7 +3509,7 @@
       </PolyStyle>
     </Style><Style id="style_RIO DE LA PLATA">
       <LineStyle>
-        <color>8080e65b</color>
+        <color>80abbc8e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3517,7 +3517,7 @@
       </PolyStyle>
     </Style><Style id="style_RISTEN">
       <LineStyle>
-        <color>809ebe9e</color>
+        <color>80b4b096</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3525,7 +3525,7 @@
       </PolyStyle>
     </Style><Style id="style_RIZE">
       <LineStyle>
-        <color>80bb38eb</color>
+        <color>80c6789e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3533,7 +3533,7 @@
       </PolyStyle>
     </Style><Style id="style_RN WARSHIP">
       <LineStyle>
-        <color>8033934f</color>
+        <color>807e874b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3541,7 +3541,7 @@
       </PolyStyle>
     </Style><Style id="style_ROSCO PALM">
       <LineStyle>
-        <color>809f4e6f</color>
+        <color>80be8341</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3549,7 +3549,7 @@
       </PolyStyle>
     </Style><Style id="style_ROSE DES VENTS">
       <LineStyle>
-        <color>80ab49b5</color>
+        <color>80604e14</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3557,7 +3557,7 @@
       </PolyStyle>
     </Style><Style id="style_ROXY">
       <LineStyle>
-        <color>805b299a</color>
+        <color>80151733</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3565,7 +3565,7 @@
       </PolyStyle>
     </Style><Style id="style_SAARGAS">
       <LineStyle>
-        <color>80316f68</color>
+        <color>80630a54</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3573,7 +3573,7 @@
       </PolyStyle>
     </Style><Style id="style_SAFMARINE LONGA">
       <LineStyle>
-        <color>801bb1aa</color>
+        <color>80b10b2d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3581,7 +3581,7 @@
       </PolyStyle>
     </Style><Style id="style_SAGA FRIGG">
       <LineStyle>
-        <color>80c18a8c</color>
+        <color>801ad377</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3589,7 +3589,7 @@
       </PolyStyle>
     </Style><Style id="style_SAGA JOURNEY">
       <LineStyle>
-        <color>80313a3f</color>
+        <color>80b842a5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3597,7 +3597,7 @@
       </PolyStyle>
     </Style><Style id="style_SAGITTARIUS LEADER">
       <LineStyle>
-        <color>8085cb5e</color>
+        <color>806f98f5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3605,7 +3605,7 @@
       </PolyStyle>
     </Style><Style id="style_SAILFORT">
       <LineStyle>
-        <color>80dab7b3</color>
+        <color>80427e3b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3613,7 +3613,7 @@
       </PolyStyle>
     </Style><Style id="style_SAINT DENIS">
       <LineStyle>
-        <color>805925ed</color>
+        <color>8060a524</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3621,7 +3621,7 @@
       </PolyStyle>
     </Style><Style id="style_SAINT TUDY">
       <LineStyle>
-        <color>80d36ad5</color>
+        <color>80a5ec1f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3629,7 +3629,7 @@
       </PolyStyle>
     </Style><Style id="style_SAINT-DAMIEN">
       <LineStyle>
-        <color>80de5a80</color>
+        <color>80d55b5c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3637,7 +3637,7 @@
       </PolyStyle>
     </Style><Style id="style_SAKHALIN">
       <LineStyle>
-        <color>8058aee1</color>
+        <color>80937eee</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3645,7 +3645,7 @@
       </PolyStyle>
     </Style><Style id="style_SAM HAWK">
       <LineStyle>
-        <color>80f2b952</color>
+        <color>805d4b11</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3653,7 +3653,7 @@
       </PolyStyle>
     </Style><Style id="style_SAMANA">
       <LineStyle>
-        <color>80d9f45b</color>
+        <color>808f153a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3661,7 +3661,7 @@
       </PolyStyle>
     </Style><Style id="style_SAN ANTONIO">
       <LineStyle>
-        <color>80e982ed</color>
+        <color>80681e3f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3669,7 +3669,7 @@
       </PolyStyle>
     </Style><Style id="style_SANAGA 2">
       <LineStyle>
-        <color>80f5c9ab</color>
+        <color>80e89062</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3677,7 +3677,7 @@
       </PolyStyle>
     </Style><Style id="style_SANTA ANNA">
       <LineStyle>
-        <color>802e0b96</color>
+        <color>803ae03d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3685,7 +3685,7 @@
       </PolyStyle>
     </Style><Style id="style_SANTA CRUZ">
       <LineStyle>
-        <color>80b0e684</color>
+        <color>804ab6c4</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3693,7 +3693,7 @@
       </PolyStyle>
     </Style><Style id="style_SAPPHIRE ACE">
       <LineStyle>
-        <color>80aea23a</color>
+        <color>80c65759</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3701,7 +3701,7 @@
       </PolyStyle>
     </Style><Style id="style_SARAH P">
       <LineStyle>
-        <color>80a2f124</color>
+        <color>808ee66c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3709,7 +3709,7 @@
       </PolyStyle>
     </Style><Style id="style_SARK BELLE">
       <LineStyle>
-        <color>80ac9a62</color>
+        <color>804b8562</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3717,7 +3717,7 @@
       </PolyStyle>
     </Style><Style id="style_SARK VENTURE">
       <LineStyle>
-        <color>80c50cdc</color>
+        <color>80e9c047</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3725,7 +3725,7 @@
       </PolyStyle>
     </Style><Style id="style_SARK VIKING">
       <LineStyle>
-        <color>80ca7b23</color>
+        <color>80155897</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3733,7 +3733,7 @@
       </PolyStyle>
     </Style><Style id="style_SCF URAL">
       <LineStyle>
-        <color>80749345</color>
+        <color>801c0c7f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3741,7 +3741,7 @@
       </PolyStyle>
     </Style><Style id="style_SCHILLIG">
       <LineStyle>
-        <color>807cc1e3</color>
+        <color>8088c37a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3749,7 +3749,7 @@
       </PolyStyle>
     </Style><Style id="style_SCHOKLAND">
       <LineStyle>
-        <color>808ecd1c</color>
+        <color>8016f4d9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3757,7 +3757,7 @@
       </PolyStyle>
     </Style><Style id="style_SCI NHAVA SHEVA">
       <LineStyle>
-        <color>80d4e331</color>
+        <color>8073887f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3765,7 +3765,7 @@
       </PolyStyle>
     </Style><Style id="style_SCILLONIAN III">
       <LineStyle>
-        <color>80cdd2d9</color>
+        <color>807a281f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3773,7 +3773,7 @@
       </PolyStyle>
     </Style><Style id="style_SCORPIO   PZ707">
       <LineStyle>
-        <color>8084993b</color>
+        <color>801e4723</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3781,7 +3781,7 @@
       </PolyStyle>
     </Style><Style id="style_SEA ENDURANCE">
       <LineStyle>
-        <color>80b1690e</color>
+        <color>80ddcd31</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3789,7 +3789,7 @@
       </PolyStyle>
     </Style><Style id="style_SEA SPRAY LT61">
       <LineStyle>
-        <color>802965da</color>
+        <color>8073ecf5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3797,7 +3797,7 @@
       </PolyStyle>
     </Style><Style id="style_SEABED WORKER">
       <LineStyle>
-        <color>808fe2e5</color>
+        <color>80407aa6</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3805,7 +3805,7 @@
       </PolyStyle>
     </Style><Style id="style_SEADREAM OF SARK">
       <LineStyle>
-        <color>801e9458</color>
+        <color>801ddb77</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3813,7 +3813,7 @@
       </PolyStyle>
     </Style><Style id="style_SEAGO ISTANBUL">
       <LineStyle>
-        <color>8081757b</color>
+        <color>8099cbec</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3821,7 +3821,7 @@
       </PolyStyle>
     </Style><Style id="style_SEAMULLET">
       <LineStyle>
-        <color>8022ce7d</color>
+        <color>80de6e14</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3829,7 +3829,7 @@
       </PolyStyle>
     </Style><Style id="style_SICHEM MISSISSIPPI">
       <LineStyle>
-        <color>80a27934</color>
+        <color>80384987</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3837,7 +3837,7 @@
       </PolyStyle>
     </Style><Style id="style_SIEGEDIJK">
       <LineStyle>
-        <color>80892fd3</color>
+        <color>80422ae1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3845,7 +3845,7 @@
       </PolyStyle>
     </Style><Style id="style_SILVER HAVEN">
       <LineStyle>
-        <color>80ce2b1a</color>
+        <color>80e85164</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3853,7 +3853,7 @@
       </PolyStyle>
     </Style><Style id="style_SINGELGRACHT">
       <LineStyle>
-        <color>801a66ea</color>
+        <color>805b7925</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3861,7 +3861,7 @@
       </PolyStyle>
     </Style><Style id="style_SKANDI SAIGON">
       <LineStyle>
-        <color>808d4840</color>
+        <color>8098f053</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3869,7 +3869,7 @@
       </PolyStyle>
     </Style><Style id="style_SLIDUR">
       <LineStyle>
-        <color>80242bc9</color>
+        <color>80a694d3</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3877,7 +3877,7 @@
       </PolyStyle>
     </Style><Style id="style_SNS083">
       <LineStyle>
-        <color>802ad5cc</color>
+        <color>803dc055</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3885,7 +3885,7 @@
       </PolyStyle>
     </Style><Style id="style_SOUTH RIVER">
       <LineStyle>
-        <color>802a8d0b</color>
+        <color>80d17b8d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3893,7 +3893,7 @@
       </PolyStyle>
     </Style><Style id="style_SOUVIENS-TOI">
       <LineStyle>
-        <color>80d58dbc</color>
+        <color>80a48093</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3901,7 +3901,7 @@
       </PolyStyle>
     </Style><Style id="style_SPARKLING LINE">
       <LineStyle>
-        <color>807dace5</color>
+        <color>80ac4c4f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3909,7 +3909,7 @@
       </PolyStyle>
     </Style><Style id="style_SPERED BREIZH">
       <LineStyle>
-        <color>808ed85a</color>
+        <color>80450e28</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3917,7 +3917,7 @@
       </PolyStyle>
     </Style><Style id="style_SPICA LEADER">
       <LineStyle>
-        <color>80210b3f</color>
+        <color>80a7d2c0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3925,7 +3925,7 @@
       </PolyStyle>
     </Style><Style id="style_STADT HAMELN">
       <LineStyle>
-        <color>80cf533f</color>
+        <color>802336c5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3933,7 +3933,7 @@
       </PolyStyle>
     </Style><Style id="style_STANLEY PARK">
       <LineStyle>
-        <color>807ee982</color>
+        <color>80744941</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3941,7 +3941,7 @@
       </PolyStyle>
     </Style><Style id="style_STARLIGHT FH 414">
       <LineStyle>
-        <color>805a1c91</color>
+        <color>8052ebc6</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3949,7 +3949,7 @@
       </PolyStyle>
     </Style><Style id="style_STELISSA">
       <LineStyle>
-        <color>803f6063</color>
+        <color>80b20bc7</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3957,7 +3957,7 @@
       </PolyStyle>
     </Style><Style id="style_STELLA">
       <LineStyle>
-        <color>80bc40e6</color>
+        <color>80938d77</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3965,7 +3965,7 @@
       </PolyStyle>
     </Style><Style id="style_STELLA MARIS">
       <LineStyle>
-        <color>80b97bd9</color>
+        <color>80e51629</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3973,7 +3973,7 @@
       </PolyStyle>
     </Style><Style id="style_STEN HIDRA">
       <LineStyle>
-        <color>805e6428</color>
+        <color>806caf4f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3981,7 +3981,7 @@
       </PolyStyle>
     </Style><Style id="style_STENA ANTARCTICA">
       <LineStyle>
-        <color>80c16880</color>
+        <color>8028c69a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3989,7 +3989,7 @@
       </PolyStyle>
     </Style><Style id="style_STERED LOSTEK SOLO">
       <LineStyle>
-        <color>8079a462</color>
+        <color>806544b6</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -3997,7 +3997,7 @@
       </PolyStyle>
     </Style><Style id="style_STEREDEN AR MOOR">
       <LineStyle>
-        <color>80e26f5e</color>
+        <color>80c1be95</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4005,7 +4005,7 @@
       </PolyStyle>
     </Style><Style id="style_STOLT PETREL">
       <LineStyle>
-        <color>8068bef4</color>
+        <color>80b35242</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4013,7 +4013,7 @@
       </PolyStyle>
     </Style><Style id="style_STOLT PUFFIN">
       <LineStyle>
-        <color>80d67b4e</color>
+        <color>80c7def0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4021,7 +4021,7 @@
       </PolyStyle>
     </Style><Style id="style_STRAITVIEW">
       <LineStyle>
-        <color>80735b43</color>
+        <color>80471a8e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4029,7 +4029,7 @@
       </PolyStyle>
     </Style><Style id="style_SUNNY LINA">
       <LineStyle>
-        <color>8036eb7f</color>
+        <color>8058b65d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4037,7 +4037,7 @@
       </PolyStyle>
     </Style><Style id="style_SUNSHINE">
       <LineStyle>
-        <color>80236465</color>
+        <color>804569aa</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4045,7 +4045,7 @@
       </PolyStyle>
     </Style><Style id="style_SWAN SEA VALE">
       <LineStyle>
-        <color>8083f1f0</color>
+        <color>8084539f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4053,7 +4053,7 @@
       </PolyStyle>
     </Style><Style id="style_TAD AN DIOUL">
       <LineStyle>
-        <color>808f9ba9</color>
+        <color>80352dd9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4061,7 +4061,7 @@
       </PolyStyle>
     </Style><Style id="style_TAILLEFER 3">
       <LineStyle>
-        <color>80807c54</color>
+        <color>800d978b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4069,7 +4069,7 @@
       </PolyStyle>
     </Style><Style id="style_TALANTA">
       <LineStyle>
-        <color>80ab1f54</color>
+        <color>805d679f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4077,7 +4077,7 @@
       </PolyStyle>
     </Style><Style id="style_TALARIANTE">
       <LineStyle>
-        <color>80dc3fee</color>
+        <color>80ac10d9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4085,7 +4085,7 @@
       </PolyStyle>
     </Style><Style id="style_TALISMAN">
       <LineStyle>
-        <color>80f29113</color>
+        <color>802bea6f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4093,7 +4093,7 @@
       </PolyStyle>
     </Style><Style id="style_TANGAROA">
       <LineStyle>
-        <color>80203957</color>
+        <color>8031378c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4101,7 +4101,7 @@
       </PolyStyle>
     </Style><Style id="style_TARANIS">
       <LineStyle>
-        <color>8024c65f</color>
+        <color>801d2ccd</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4109,7 +4109,7 @@
       </PolyStyle>
     </Style><Style id="style_TEAMWORK SOLO SAILOR">
       <LineStyle>
-        <color>80411464</color>
+        <color>803ed2f4</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4117,7 +4117,7 @@
       </PolyStyle>
     </Style><Style id="style_TERENEZ">
       <LineStyle>
-        <color>800b2598</color>
+        <color>80d0899b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4125,7 +4125,7 @@
       </PolyStyle>
     </Style><Style id="style_TESTAROSSA">
       <LineStyle>
-        <color>80e639b8</color>
+        <color>80cebc40</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4133,7 +4133,7 @@
       </PolyStyle>
     </Style><Style id="style_TH0MAS NICOLAS 2">
       <LineStyle>
-        <color>80380add</color>
+        <color>8046c52b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4141,7 +4141,7 @@
       </PolyStyle>
     </Style><Style id="style_THIRA">
       <LineStyle>
-        <color>80d11933</color>
+        <color>80da45cc</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4149,7 +4149,7 @@
       </PolyStyle>
     </Style><Style id="style_TIANSHENGHAI">
       <LineStyle>
-        <color>8041e564</color>
+        <color>806c64a5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4157,7 +4157,7 @@
       </PolyStyle>
     </Style><Style id="style_TIBIDY">
       <LineStyle>
-        <color>80c87063</color>
+        <color>80a12bab</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4165,7 +4165,7 @@
       </PolyStyle>
     </Style><Style id="style_TORM ROSETTA">
       <LineStyle>
-        <color>80be9b49</color>
+        <color>8089f0f4</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4173,7 +4173,7 @@
       </PolyStyle>
     </Style><Style id="style_TORPO">
       <LineStyle>
-        <color>8093b0cd</color>
+        <color>8025a7df</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4181,7 +4181,7 @@
       </PolyStyle>
     </Style><Style id="style_TORRENS">
       <LineStyle>
-        <color>80a9a196</color>
+        <color>801090a2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4189,7 +4189,7 @@
       </PolyStyle>
     </Style><Style id="style_TOUR DAUVERGNE">
       <LineStyle>
-        <color>801fe9b2</color>
+        <color>8065877e</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4197,7 +4197,7 @@
       </PolyStyle>
     </Style><Style id="style_TOURELLE DES SOEURS">
       <LineStyle>
-        <color>804aad9c</color>
+        <color>80590d42</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4205,7 +4205,7 @@
       </PolyStyle>
     </Style><Style id="style_TOURELLE DU STOLE">
       <LineStyle>
-        <color>80a56391</color>
+        <color>8098b133</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4213,7 +4213,7 @@
       </PolyStyle>
     </Style><Style id="style_TOURMALET">
       <LineStyle>
-        <color>80a53981</color>
+        <color>80b3eb88</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4221,7 +4221,7 @@
       </PolyStyle>
     </Style><Style id="style_TREBERON">
       <LineStyle>
-        <color>802622e1</color>
+        <color>80d9c685</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4229,7 +4229,7 @@
       </PolyStyle>
     </Style><Style id="style_TRITON LEADER">
       <LineStyle>
-        <color>8027dc78</color>
+        <color>80955abe</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4237,7 +4237,7 @@
       </PolyStyle>
     </Style><Style id="style_TUKU TUKU">
       <LineStyle>
-        <color>80755a6c</color>
+        <color>80e31e4c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4245,7 +4245,7 @@
       </PolyStyle>
     </Style><Style id="style_TUNA">
       <LineStyle>
-        <color>80638f59</color>
+        <color>802da470</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4253,7 +4253,7 @@
       </PolyStyle>
     </Style><Style id="style_TXIMISTARRI 2">
       <LineStyle>
-        <color>80cb4144</color>
+        <color>80be3adc</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4261,7 +4261,7 @@
       </PolyStyle>
     </Style><Style id="style_UACC FALCON">
       <LineStyle>
-        <color>807be60f</color>
+        <color>805bd354</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4269,7 +4269,7 @@
       </PolyStyle>
     </Style><Style id="style_UAL COBURG">
       <LineStyle>
-        <color>80b40b69</color>
+        <color>806c193f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4277,7 +4277,7 @@
       </PolyStyle>
     </Style><Style id="style_UBC SALAVERRY">
       <LineStyle>
-        <color>80be736f</color>
+        <color>80135ac3</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4285,7 +4285,7 @@
       </PolyStyle>
     </Style><Style id="style_UHELLVENNAD">
       <LineStyle>
-        <color>80457a3f</color>
+        <color>80c94961</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4293,7 +4293,7 @@
       </PolyStyle>
     </Style><Style id="style_V/F PORS MOGUER">
       <LineStyle>
-        <color>804ca497</color>
+        <color>80e67ab5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4301,7 +4301,7 @@
       </PolyStyle>
     </Style><Style id="style_VAG A LAMM">
       <LineStyle>
-        <color>80e5ee85</color>
+        <color>80c3b2b2</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4309,7 +4309,7 @@
       </PolyStyle>
     </Style><Style id="style_VECTIS HARRIER">
       <LineStyle>
-        <color>801e5084</color>
+        <color>80434c62</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4317,7 +4317,7 @@
       </PolyStyle>
     </Style><Style id="style_VECTIS OSPREY">
       <LineStyle>
-        <color>80a8e92e</color>
+        <color>80b53358</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4325,7 +4325,7 @@
       </PolyStyle>
     </Style><Style id="style_VENNENDIEP">
       <LineStyle>
-        <color>8012d7c8</color>
+        <color>800e659c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4333,7 +4333,7 @@
       </PolyStyle>
     </Style><Style id="style_VICTOR EMMANUEL">
       <LineStyle>
-        <color>80be78a9</color>
+        <color>809418c5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4341,7 +4341,7 @@
       </PolyStyle>
     </Style><Style id="style_VIERGE DELOCEAN">
       <LineStyle>
-        <color>806b3766</color>
+        <color>80ab3064</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4349,7 +4349,7 @@
       </PolyStyle>
     </Style><Style id="style_VILLE CROISIC 5">
       <LineStyle>
-        <color>80c3c7ec</color>
+        <color>800f87aa</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4357,7 +4357,7 @@
       </PolyStyle>
     </Style><Style id="style_VINDILIS">
       <LineStyle>
-        <color>80dbaa84</color>
+        <color>80191047</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4365,7 +4365,7 @@
       </PolyStyle>
     </Style><Style id="style_VINLANDIA">
       <LineStyle>
-        <color>80b435e3</color>
+        <color>80150d43</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4373,7 +4373,7 @@
       </PolyStyle>
     </Style><Style id="style_VLIEDIEP">
       <LineStyle>
-        <color>80b29670</color>
+        <color>80b15d1b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4381,7 +4381,7 @@
       </PolyStyle>
     </Style><Style id="style_VN PARTISAN">
       <LineStyle>
-        <color>809f9bde</color>
+        <color>80dc1962</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4389,7 +4389,7 @@
       </PolyStyle>
     </Style><Style id="style_VTS ILEDEBREHAT">
       <LineStyle>
-        <color>80903c72</color>
+        <color>80b3762c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4397,7 +4397,7 @@
       </PolyStyle>
     </Style><Style id="style_VTS ROSCOFF">
       <LineStyle>
-        <color>8043dfd1</color>
+        <color>80ee417c</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4405,7 +4405,7 @@
       </PolyStyle>
     </Style><Style id="style_VTS THE LIZARD">
       <LineStyle>
-        <color>808d3814</color>
+        <color>80792e65</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4413,7 +4413,7 @@
       </PolyStyle>
     </Style><Style id="style_WALROSS 4">
       <LineStyle>
-        <color>802972a9</color>
+        <color>805937b0</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4421,7 +4421,7 @@
       </PolyStyle>
     </Style><Style id="style_WAR RAOG 3">
       <LineStyle>
-        <color>803eabd5</color>
+        <color>805ec4d3</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4429,7 +4429,7 @@
       </PolyStyle>
     </Style><Style id="style_WASHINGTON EXPRESS">
       <LineStyle>
-        <color>80bc6ea2</color>
+        <color>80c9726b</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4437,7 +4437,7 @@
       </PolyStyle>
     </Style><Style id="style_WILHELMINE ESSBERGER">
       <LineStyle>
-        <color>80f3da59</color>
+        <color>800c72ee</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4445,7 +4445,7 @@
       </PolyStyle>
     </Style><Style id="style_WILLCHALLENGE">
       <LineStyle>
-        <color>80ab308d</color>
+        <color>804d9292</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4453,7 +4453,7 @@
       </PolyStyle>
     </Style><Style id="style_WILSON RIGA">
       <LineStyle>
-        <color>805e7171</color>
+        <color>80d7c6b9</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4461,7 +4461,7 @@
       </PolyStyle>
     </Style><Style id="style_WINTER">
       <LineStyle>
-        <color>80a6d178</color>
+        <color>80be80cc</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4469,7 +4469,7 @@
       </PolyStyle>
     </Style><Style id="style_WOLF ROCK LH">
       <LineStyle>
-        <color>802cbbbb</color>
+        <color>80149af5</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4477,7 +4477,7 @@
       </PolyStyle>
     </Style><Style id="style_X WING SOLOSAILOR">
       <LineStyle>
-        <color>80eb6677</color>
+        <color>8029726d</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4485,7 +4485,7 @@
       </PolyStyle>
     </Style><Style id="style_XIN HONG KONG">
       <LineStyle>
-        <color>8089dcb0</color>
+        <color>80350a8a</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4493,7 +4493,7 @@
       </PolyStyle>
     </Style><Style id="style_YANG LI HU">
       <LineStyle>
-        <color>800f3ad3</color>
+        <color>802da9e8</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4501,7 +4501,7 @@
       </PolyStyle>
     </Style><Style id="style_YANNICK">
       <LineStyle>
-        <color>8094d86b</color>
+        <color>80b38de1</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4509,7 +4509,7 @@
       </PolyStyle>
     </Style><Style id="style_YORKTOWN EXPRESS">
       <LineStyle>
-        <color>803b0af5</color>
+        <color>80c5bd2f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4517,7 +4517,7 @@
       </PolyStyle>
     </Style><Style id="style_YOUL VAT">
       <LineStyle>
-        <color>802aa17d</color>
+        <color>801e5e46</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4525,7 +4525,7 @@
       </PolyStyle>
     </Style><Style id="style_ZEBULON">
       <LineStyle>
-        <color>8063881c</color>
+        <color>80e1dedc</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4533,7 +4533,7 @@
       </PolyStyle>
     </Style><Style id="style_ZEELAND">
       <LineStyle>
-        <color>80ee7e0d</color>
+        <color>8037490f</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
@@ -4541,7 +4541,7 @@
       </PolyStyle>
     </Style><Style id="style_ZEPHYR">
       <LineStyle>
-        <color>806cbc53</color>
+        <color>80d8ef35</color>
         <width>4</width>
       </LineStyle>
       <PolyStyle>
