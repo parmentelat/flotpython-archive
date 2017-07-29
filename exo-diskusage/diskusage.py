@@ -1,22 +1,8 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
-# for python3
-from __future__ import print_function
-
-try:    raw_input
-except: raw_input = input
-
-import os, os.path
-from argparse import ArgumentParser
-
-### xxx TODOS
-# (*) add a cleanup method on ToplevelDir
-# that can remove the .du files
-# and link it with a global option
-# (*) propagate the --verbose option 
+# we assume 3.6 as we use f-strings
 
 
-########################################
 """
 diskusage: a utility to estimate the size of a whole filesystem tree
 
@@ -28,11 +14,12 @@ pass2: an interactive tool for navigating the tree
        and spotting the files to be cleaned up
 """
 
-########## helper class
-# int goes to 2**64 i.e. 16 10*18
-# which should abe ample enough
-# using long would ruin the python3 version
+import os
+import os.path
+from argparse import ArgumentParser
 
+
+########## helper class
 class HumanReadableSize(int):
     """
     helper class for displaying size in bytes 
@@ -42,9 +29,9 @@ class HumanReadableSize(int):
     # http://en.wikipedia.org/wiki/Petabyte
     ### the unit to use for a size in 2**n
     # 2**10 = 1024 = 1 kilo
-    LABELS = [ (6, 'EiB'), (5, 'PiB'), ( 4, 'TiB'),
-               ( 3, 'GiB'), ( 2, 'MiB'), ( 1, 'KiB'),
-               (0, 'B') ]
+    LABELS = [ (6, 'EiB'), (5, 'PiB'), (4, 'TiB'),
+               (3, 'GiB'), (2, 'MiB'), (1, 'KiB'),
+               (0, 'Byt') ]
     # compute 2**(10.n)
     UNIT_LABELS = [ (2**(10*n), s) for (n, s) in LABELS ]
 
@@ -55,12 +42,10 @@ class HumanReadableSize(int):
         for ( unit, label ) in self.UNIT_LABELS:
             if self >= unit:
                 # small values usually show an int
-                if self%unit == 0:
-                    return "{:3d} {}".format(self/unit, label)
+                if self % unit == 0:
+                    return f"{self//unit:3d} {label}"
                 else:
-                    return "{:3.02f} {}".format(float(self)/unit, label)
-        return "xxx {} xxx".format(int.__repr__(self)) # remove me
-        return "???"
+                    return f"{self/unit:3.02f} {label}"
 
     # we have seen that __repr__ is used when __str__ is not defined
     # but in our case since we inherit int, __str__ does get found
@@ -74,13 +59,12 @@ class Cache(dict):
     a dictionary {path: size_in_bytes}
 
     this is also linked to the file system and the .du files
-    meaning that 
+    in the sense that 
     (*) cache[path] looks in path/.du if not yet in memory
         if nothing else works (not in memory and not in .du)
         we return 0
     (*) cache[path] = size also writes path/.du
         if permission is granted
-
     """
 
     special_name = ".du"
@@ -102,31 +86,29 @@ class Cache(dict):
                     return int(f.read())
             except IOError as e:
                 if self.verbose:
-                    print ("Warning - unable to find size for {}".format(path))
+                    print(f"Warning - unable to find size for {path}")
                 return 0
 
     def __setitem__(self, path, size):
         """
         remembers path cache in dictionary
-        and stores in special file as  far as possible
+        and stores in special file as far as possible
 
         ignores if not possible for any reason 
         like Permission Denied or the like
         """
         dict.__setitem__(self, path, size)
         # store result in <dir>/.du for second/interactive pass
-        special_filename = os.path.join(path, self.special_name)
+        special = os.path.join(path, self.special_name)
         try:
-            with open(special_filename, 'w') as store:
-                store.write("{}\n".format(size))
+            with open(special, 'w') as store:
+                store.write(f"{size}\n")
             if self.verbose:
-                print("Saved size {} in {}".format(size, special_filename))
+                print(f"Saved size {size} in {special}")
         except IOError as e:
             if self.verbose:
-                print ("Warning, could not save special file {}".\
-                       format(special_filename))
+                print (f"Warning, could not save special file {special}")
             # write error - permission denied - don't cache it then
-            # xxx log this in verbose mode
             pass
 
 ####################
@@ -156,7 +138,7 @@ class ToplevelDir(object):
         pass2 will not even need to read .du files
         """        
         if self.verbose:
-            print ("diskusage: running pass1 on {}".format(self.path))
+            print(f"diskusage: running pass1 on {self.path}")
         for root, dirs, files in os.walk (self.path, topdown=False):
             # first deal with files
             filepaths = [os.path.join(root, file) for file in files]
@@ -179,9 +161,6 @@ class ToplevelDir(object):
             # store in dictionary for dealing with the upper directory
             self.cache [root] = cumulated_size
 
-            # log this in verbose mode
-#            print("{:-8s} {}".format(HumanReadableSize(cumulated_size), root))
-
     help_message = """number\tgo to listed directory
 +\tgo to last (and thus biggest) directory - this is the default 
 u\tgo one step up - can be also '0' or '..'
@@ -203,15 +182,14 @@ h\tthis help"""
         subtree to visit (can also be one step up)
 
         we show the immediate subdirs sorted 
-        (biggest comes last)
-        and can thus be selected using '+'
+        biggest comes last, and can thus be selected using '+'
 
         subdirs are listed with a number that 
         can be selected for moving down the tree
         
         """
-        print(8*'-', "Path {} has a total size of {}".\
-              format(subpath, HumanReadableSize(self.cache[subpath])))
+        print(f"{8*'-'} Path {subpath} "
+              f"has a total size of {HumanReadableSize(self.cache[subpath])}")
         # we build a list of tuples
         # (lastname, full-path-from-toppath, size)
         sized_subdirs=[ (d, os.path.join(subpath, d), self.cache[os.path.join(subpath, d)])
@@ -219,18 +197,19 @@ h\tthis help"""
                           if os.path.isdir(os.path.join(subpath, d)) ]
         # show biggest last
         sized_subdirs.sort(key=lambda t: t[2])
-        for i, (name, _, size) in enumerate(sized_subdirs):
-            print("{} {}   {}".format(i+1, str(HumanReadableSize(size)).rjust(12), name))
+        for i, (name, _, size) in enumerate(sized_subdirs, 1):
+            print(f"{i} {str(HumanReadableSize(size)):>12}   {name}")
         # the interactive mainloop for selecting the next dir
         while True:
-            # '+' is the default
-            answer = raw_input("Enter number (h for help) ") or '+'
+            answer = input("Enter number (h for help) ")
             # case does not matter, let's do lowercase
             answer = answer.strip().lower()
+            # '+' is the default
+            answer = answer or '+'
     
             ### does this look like a number
             index = None
-            if answer in ['+']:
+            if answer in '+':
                 index = -1
             else:
                 try:    index = int(answer)-1
@@ -243,22 +222,22 @@ h\tthis help"""
                 except:
                     print ("No such index {}".format(answer))
             ### otherwise
-            elif answer in ['..', '0', 'u']:
+            elif answer in ('..', '0', 'u'):
                 return os.path.dirname(subpath)
-            elif answer in [ 'l']:
+            elif answer in 'l':
                 self.list_files(subpath)
-            elif answer in [ '.']:
+            elif answer in '.':
                 return subpath
-            elif answer in [ '!']:
+            elif answer in '!':
                 print ("running pass1")
                 self.pass1()
-            elif answer in [ 'v']:
+            elif answer in 'v':
                 self.verbose = not self.verbose
                 self.cache.verbose = self.verbose
                 if self.verbose: print ("verbose")
-            elif answer in ['q']:
+            elif answer in 'q':
                 exit(0)
-            elif answer in ['h']:
+            elif answer in 'h?':
                 print(self.help_message)
             else:
                 print("command not understood")
@@ -328,7 +307,7 @@ def main():
     elif args.pass1:
         run_pass1, run_pass2 = True, False
     else:
-        run_pass1, run_pass1 = False, True
+        run_pass1, run_pass2 = False, True
 
     toplevel_dir = ToplevelDir (args.dir, verbose=args.verbose)
     try:
