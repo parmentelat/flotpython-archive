@@ -1,20 +1,23 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 import logging
 import time
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from operator import itemgetter
 
-logging.basicConfig(filename='diagnose.log', filemode='w',
-                    level=logging.ERROR)
+logging.basicConfig(
+    filename='diagnose.log',
+    filemode='w',
+    level=logging.ERROR)
 
-# A propos du module de la librairie standard logging.
-# J'utilise ici le module logging qui permet de definir differents 
+# À propos du module de la librairie standard logging.
+# J'utilise ici le module logging qui permet de définir différents 
 # niveaux de log pour debugger un programme et pour faire des fichiers
-# de trace d'execution. J'ai laisse dans ce fichier tous les logs que 
-# j'ai utilise pour debugger ce programme. Pour voir tous les logs
-# il faut mettre ci-dessus le parametre level a logging.DEBUG (mais
-# attention ca va faire beaucoup de donnees).
+# de trace d'exécution. J'ai laissé dans ce fichier tous les logs que 
+# j'ai utilisés pour debugger ce programme. Pour voir tous les logs
+# il faut mettre ci-dessus le paramètre level a logging.DEBUG (mais
+# attention ça va faire beaucoup de donnees).
 
 
 # helper function
@@ -44,21 +47,21 @@ def extract_domains_from_url(url):
 # helper function
 def is_html_page(url):
     """
-    simple heuristique pour tester si une page est ecrite en
-    HTML. Il y a des cas mal identifies par cette heuristique,
+    simple heuristique pour tester si une page est écrite en
+    HTML. Il y a des cas mal identifiés par cette heuristique,
     mais elle est suffisante pour nos besoins. Par exemple:
-    http://inria.fr sera identifie comme non html de meme que
+    http://inria.fr sera identifié comme non html, de même que
     toutes les pages qui utilisent des points dans le nom d'un
-    repertoire.
+    répertoire.
     """
-    #if there is no extension, it is a directory, so it
-    #defaults to an index.html page
+    # if there is no extension, it is a directory, so it
+    # defaults to an index.html page
     if url.endswith('/'):
         return True
     else:
         url_tokens = url.split('/')
-        #if there is no extension, it is a directory, so it
-        #defaults to an index.html page
+        # if there is no extension, it is a directory, so it
+        # defaults to an index.html page
         if '.' not in url_tokens[-1]:
             return True
         elif ('html' in url_tokens[-1].lower() or   
@@ -69,25 +72,24 @@ def is_html_page(url):
 
 class HTMLPage(object):
     """
-    represente une page HTML. 
+    représente une page HTML. 
 
     L'objet a 4 attributs:
-        -url: l'URL qui correspond a la page Web
-        -_html_it: un iterateur qui parcourt le code HTML, une ligne 
-                   a la fois
-        -urls: la liste de toutes les URLs contenues dans la page
-        -http_code: le code retourne par le protocol HTTP lors de 
-                    l'acces a la page
-                    *http_code=0 signifie une erreur dans l'URL, 
-                    *http_code=-1 signifie que le site de repond pas
-                    *http_code=-2 signifie une exception en accedant 
-                    a l'URL
+        * url: l'URL qui correspond a la page Web
+        * _html_it: un itérateur qui parcourt le code HTML, une ligne 
+                   à la fois
+        * urls: la liste de toutes les URLs contenues dans la page
+        * http_code: le code retourné par le protocol HTTP lors de 
+                    l'accès à la page
+          * http_code=0 signifie une erreur dans l'URL, 
+          * http_code=-1 signifie que le site de répond pas
+          * http_code=-2 signifie une exception en accédant à l'URL
     """
 
     def __init__(self, url):
         """
         Constructeur de la classe. Le constructeur prend comme
-        argument une URL et construit un objet HTMLPage en definissant
+        argument une URL et construit un objet HTMLPage en définissant
         les 4 attributs url, _html_it, urls, http_code
         """
         self.http_code = 0
@@ -100,7 +102,7 @@ class HTMLPage(object):
     def page_fetcher(self, url):
         """
         accede a l'URL et retourne un objet qui permet de parcourir le
-        code HTML (voir la documentation de urllib2.urlopen) ou une
+        code HTML (voir la documentation de urllib.request.urlopen) ou une
         liste vide en cas d'erreur.
         """
         
@@ -109,25 +111,25 @@ class HTMLPage(object):
         # lorsque la page ne contient pas de code HTML et donc pas
         # d'URL.  On peut ainsi obtenir un code HTTP sans avoir besoin
         # de telecharger toute la page.
-        class HeadRequest(urllib2.Request):
+        class HeadRequest(urllib.request.Request):
             def get_method(self):
                 return "HEAD"
         
         try:
             if is_html_page(url):
-                page = urllib2.urlopen(url)
+                page = urllib.request.urlopen(url)
             else:
                 logging.debug('HEAD request for {}'.format(url))
-                page = urllib2.urlopen(HeadRequest(url))
+                page = urllib.request.urlopen(HeadRequest(url))
             self.http_code = page.getcode()
             return page
-        except urllib2.HTTPError as e:
+        except urllib.error.HTTPError as e:
             logging.warning('HTTPError: cannot open {}. Reason {}, code {}'
                             .format(url, e.reason, e.code))
             self.http_code = e.code
             return []
 
-        except urllib2.URLError as e:
+        except urllib.error.URLError as e:
             logging.warning('URLError: cannot open {}. Reason {}'
                             .format(url, e.reason))
             self.http_code = -1
@@ -140,37 +142,37 @@ class HTMLPage(object):
     def extract_urls_from_page(self):
         """
         Construit la liste de toutes les URLs contenues dans le corps de
-        la page HTML en parcourant l'iterateur retourne par
+        la page HTML en parcourant l'itérateur retourné par
         page_fetcher()
 
-        On identifie une URL parce qu'elle est precedee de href= et
-        dans le corps (body) de la page. Le parsing que l'on implement
+        On identifie une URL parce qu'elle est précédée de href= et
+        dans le corps (body) de la page. Le parsing que l'on implemente
         est imparfait, mais un vrai parsing intelligent demanderait
         une analyse syntaxique trop complexe pour nos besoins.
         
-        Plus en details, notre parsing consiste a chercher dans le
+        Plus en détails, notre parsing consiste à chercher dans le
         corps de la page (body): 
 
-        -les urls contenues dans le champ href (essentiellement on
-         cherche le tag 'href=' et on extrait ce qui est entre
-         guillemets ou apostrophes)
+        - les urls contenues dans le champ href (essentiellement on
+          cherche le tag 'href=' et on extrait ce qui est entre
+          guillemets ou apostrophes)
          
-        -on ne garde ensuite que les urls qui commencent par http ou
-         https et
+        - on ne garde ensuite que les urls qui commencent par http ou
+          https et
              
              * les urls qui commencent par ./ auxquelles on ajoute
-          devant (a la place du point) l'Url de la page d'origine
-          (self.url) exemple : pour './ma_page.html' et self.url =
-          http://mon_site.fr/rep1/ on obtient l'url
-          http://mon_site.fr/rep1/ma_page.html
+               devant (a la place du point) l'Url de la page d'origine
+               (self.url) exemple : pour './ma_page.html' et self.url =
+               http://mon_site.fr/rep1/ on obtient l'url
+               http://mon_site.fr/rep1/ma_page.html
           
             * les urls qui commencent par /ma_page.html auxquelles on
-           ajoute devant uniquement le hostname de la page d'origine
-           (self.url) exemple : pour '/ma_page.html' et self.url =
-           http://mon_site.fr/rep1/ on obtient l'url
-           http://mon_site.fr/ma_page.html
+              ajoute devant uniquement le hostname de la page d'origine
+              (self.url) exemple : pour '/ma_page.html' et self.url =
+              http://mon_site.fr/rep1/ on obtient l'url
+              http://mon_site.fr/ma_page.html
 
-        Cette methode retourne la liste des URLs contenues dans la
+        Cette méthode retourne la liste des URLs contenues dans la
         page.
 
         """
@@ -179,7 +181,8 @@ class HTMLPage(object):
         # body of the document
         list_urls = []
         is_body = False
-        for line in self._html_it:
+        for byte_line in self._html_it:
+            line = str(byte_line)
             # line = line.lower()
             if is_body:
                 if "href=" in line.lower():
@@ -267,16 +270,16 @@ class Crawler(object):
 
         # Each key is a URL, and the value for the key url is the list
         # of pages that referenced this url. This dict is used to find
-        # pages that references given URLs in order to diagnose
+        # pages that reference given URLs in order to diagnose
         # buggy Web pages.
         self.pages_to_be_crawled_dict = {}
 
         # set of the pages still to be crawled
-        self.pages_to_be_crawled = set([])
+        self.pages_to_be_crawled = set()
 
         # set of the pages/domains already crawled
-        self.pages_crawled = set([])
-        self.domains_crawled = set([])
+        self.pages_crawled = set()
+        self.domains_crawled = set()
         
         # duration of the last crawl
         self.last_crawl_duration = 0
@@ -378,11 +381,11 @@ def get_dead_pages(url, page_filter):
     dead_urls = []
     for page in crawl:
         # just to see progress on the terminal
-        print crawl
-        print page.http_code, page.url
+        print(crawl)
+        print(page.http_code, page.url)
         
         # 2xx HTTP codes are for successful requests
-        if page.http_code not in range(200,300):
+        if not (200 <= page.http_code < 300):
             dead_urls.append((page.http_code, page.url))        
             
         source_pages = {}    
@@ -401,8 +404,7 @@ def get_dead_pages(url, page_filter):
             dump_file.write('Page contenant des liens defecteux : \n{}\n'
                         .format(source_page))
             dump_file.write('-'*70 + '\n')
-            http_code = source_pages[source_page].keys()
-            http_code.sort()
+            http_code = sorted(source_pages[source_page].keys())
             for code in http_code:
                 dump_file.write('CODE HTTP {}\n'.format(code))
                 for url in source_pages[source_page][code]:
@@ -415,8 +417,8 @@ def get_slow_pages(url, page_filter):
     pages_responsivness = []
     for page in crawl:
         # just to see progress on the terminal
-        print crawl
-        print page.http_code, page.url
+        print(crawl)
+        print(page.http_code, page.url)
         pages_responsivness.append((crawl.last_crawl_duration, page.url))
 
     pages_responsivness.sort(key=itemgetter(0), reverse=True)
