@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 # -*- eval: (auto-fill-mode 0) -*-
 # XXX TODO : numéroter tous les exos
 
