@@ -185,7 +185,7 @@ class Notebook:
     def fill_exts_metadata(self, exts):
         """
         if exts is set, fill each cell metadata's with a hard-wired
-        set of defaults for extensions; tis is to minimize git diffs
+        set of defaults for extensions; this is to minimize git diffs
         """
         if not exts:
             return
