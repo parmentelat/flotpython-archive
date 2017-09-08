@@ -33,10 +33,15 @@ livereveal_metadata_padding = {
         "transition": "cube",
         "theme": "simple",
         "start_slideshow_at": "selected",
-        "width": 1280,
-        "height": 1024
     },
     'celltoolbar': 'Slideshow',
+}
+
+livereveal_metadata_force = {
+    'livereveal': {
+        "width": "100%",
+        "height": "100%",
+    }
 }
 
 exts_metadata_padding = {
@@ -61,15 +66,20 @@ licence_format_right = '<span style="float:right;">{html_authors}&nbsp;'\
 # it means that we define these keys
 # if not yet present
 
-
-def pad_metadata(metadata, padding):
+def pad_metadata(metadata, padding, force=False):
+    """
+    makes sure the keys in padding are defined in metadata
+    if force is set, overwrite any previous value
+    """
     for k, v in padding.items():
         if isinstance(v, dict):
             sub_meta = metadata.setdefault(k, {})
-            pad_metadata(sub_meta, v)
+            pad_metadata(sub_meta, v, force)
         if not isinstance(v, dict):
-            metadata.setdefault(k, v)
-
+            if force:
+                metadata[k] = v
+            else:
+                metadata.setdefault(k, v)
 
 ####################
 class Notebook:
@@ -181,6 +191,8 @@ class Notebook:
             return
         pad_metadata(self.notebook['metadata'],
                      livereveal_metadata_padding)
+        pad_metadata(self.notebook['metadata'],
+                     livereveal_metadata_force, force=True)
 
     def fill_exts_metadata(self, exts):
         """
