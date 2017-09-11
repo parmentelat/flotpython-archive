@@ -33,6 +33,7 @@ livereveal_metadata_padding = {
         "transition": "cube",
         "theme": "simple",
         "start_slideshow_at": "selected",
+        "auto_select" : "code",
     },
     'celltoolbar': 'Slideshow',
 }
