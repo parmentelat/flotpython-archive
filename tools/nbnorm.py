@@ -34,6 +34,7 @@ livereveal_metadata_padding = {
         "theme": "simple",
         "start_slideshow_at": "selected",
         "auto_select" : "code",
+        "auto_select_fragment" : True,
     },
     'celltoolbar': 'Slideshow',
 }
@@ -42,6 +43,7 @@ livereveal_metadata_force = {
     'livereveal': {
         "width": "100%",
         "height": "100%",
+        "slideNumber" : "c/t",
     }
 }
 
