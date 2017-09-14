@@ -35,6 +35,7 @@ livereveal_metadata_padding = {
         "start_slideshow_at": "selected",
         "auto_select" : "code",
         "auto_select_fragment" : True,
+        "autolaunch" : True,
     },
     'celltoolbar': 'Slideshow',
 }
