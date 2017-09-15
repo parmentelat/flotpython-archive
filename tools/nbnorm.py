@@ -44,7 +44,7 @@ livereveal_metadata_force = {
     'livereveal': {
         "width": "100%",
         "height": "100%",
-        "slideNumber" : "c/t",
+        "slideNumber" : "c",
     }
 }
 
