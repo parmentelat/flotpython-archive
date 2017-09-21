@@ -30,7 +30,6 @@ from nbformat.sign import NotebookNotary as Notary
 
 livereveal_metadata_padding = {
     'livereveal': {
-        "transition": "cube",
         "theme": "simple",
         "start_slideshow_at": "selected",
         "auto_select" : "code",
@@ -42,13 +41,15 @@ livereveal_metadata_padding = {
 
 livereveal_metadata_force = {
     'livereveal': {
+        "backimage" : "media/both-logos-1920-alpha.png",
+        "transition": "fade",
         "width": "100%",
         "height": "100%",
         "slideNumber" : "c",
     }
 }
 
-exts_metadata_padding = {
+extensions_metadata_cell_padding = {
     "deletable": True,
     "editable": True,
     "run_control": {
@@ -198,7 +199,7 @@ class Notebook:
         pad_metadata(self.notebook['metadata'],
                      livereveal_metadata_force, force=True)
 
-    def fill_exts_metadata(self, exts):
+    def fill_extensions_metadata(self, exts):
         """
         if exts is set, fill each cell metadata's with a hard-wired
         set of defaults for extensions; this is to minimize git diffs
@@ -206,7 +207,7 @@ class Notebook:
         if not exts:
             return
         for cell in self.cells():
-            pad_metadata(cell['metadata'], exts_metadata_padding)
+            pad_metadata(cell['metadata'], extensions_metadata_cell_padding)
 
     def ensure_licence(self, authors, logo_path):
         """
@@ -335,7 +336,7 @@ class Notebook:
             self.set_version(version, force=True)
         self.handle_kernelspec(kernel)
         self.fill_rise_metadata(rise)
-        self.fill_exts_metadata(exts)
+        self.fill_extensions_metadata(exts)
         self.ensure_licence(authors, logo_path)
         self.clear_all_outputs()
         self.remove_empty_cells()

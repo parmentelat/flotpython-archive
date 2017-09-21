@@ -358,7 +358,7 @@ norm normalize: normalize-notebook normalize-quiz
 
 # add the --sign option only on Thierry's macos to reduce noise-only changes
 NORM = tools/nbnorm.py
-NORM_OPTIONS = --author "Thierry Parmentelat" --author "Arnaud Legout" --version 3.0 --logo-path media/inria-25-alpha.png --kernel 3 --rise
+NORM_OPTIONS = --author "Thierry Parmentelat" --author "Arnaud Legout" --version 3.0 --logo-path media/both-logos-small-alpha.png --kernel 3 --rise
 
 # -type f : we need to skip symlinks
 normalize-nb normalize-notebook: force
