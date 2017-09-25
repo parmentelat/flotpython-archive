@@ -38,7 +38,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "help(str)"
@@ -75,7 +77,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "'abc=:=def=:=ghi=:=jkl'.split('=:=')"
@@ -91,7 +95,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\"=:=\".join(['abc', 'def', 'ghi', 'jkl'])"
@@ -107,7 +113,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "'abc;def;ghi;jkl;'.split(';')"
@@ -123,7 +131,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\";\".join(['abc', 'def', 'ghi', 'jkl', ''])"
@@ -146,7 +156,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\"abcdefabcdefabcdef\".replace(\"abc\", \"zoo\")"
@@ -155,7 +167,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\"abcdefabcdefabcdef\".replace(\"abc\", \"zoo\", 2)"
@@ -171,7 +185,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\"les [x] qui disent [y]\".replace(\"[x]\", \"chevaliers\").replace(\"[y]\", \"Ni\")"
@@ -194,7 +210,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\" abc:def:ghi \".replace(\" \", \"\")"
@@ -210,7 +228,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\" \\tune chaine avec des trucs qui dépassent \\n\".strip()"
@@ -233,7 +253,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "# l'indice du début de la première occurrence\n",
@@ -243,7 +265,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "# ou -1 si la chaine n'est pas présente:\n",
@@ -260,7 +284,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "# en partant de la fin\n",
@@ -270,7 +296,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "# notez que le résultat correspond\n",
@@ -288,7 +316,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\"abcdefcdefghefghijk\".index(\"def\")"
@@ -297,7 +327,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "try:\n",
@@ -316,7 +348,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\"abcdefcdefghefghijk\".count(\"ef\")"
@@ -332,7 +366,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\"abcdefcdefghefghijk\".startswith(\"abcd\")"
@@ -341,7 +377,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\"abcdefcdefghefghijk\".endswith(\"ghijk\")"
@@ -380,7 +418,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\"monty PYTHON\".upper()"
@@ -389,7 +429,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\"monty PYTHON\".lower()"
@@ -398,7 +440,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\"monty PYTHON\".swapcase()"
@@ -407,7 +451,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\"monty PYTHON\".capitalize()"
@@ -416,7 +462,9 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "collapsed": true
+   },
    "outputs": [],
    "source": [
     "\"monty PYTHON\".title()"
@@ -449,7 +497,9 @@
    "source": [
     "Signalons enfin que python propose également un module d'expressions régulières, un outil qui permet de faire des calculs beaucoup plus élaborés. Cette technique bien connue a été rendue populaire historiquement au travers notamment du langage Perl.\n",
     "\n",
-    "Ce concept est très puissant, et permet d'aborder des cas qui vont bien au-delà de ce qui est présenté ici, pour reconnaître les chaînes qui obéissent à des règles lexicales précises. Étant d'une utilisation très spécifique, nous avons choisi d'aborder ce sujet en dernière semaine lors de la session consacrée aux sujets avancés."
+    "Ce concept est très puissant, et permet d'aborder des cas qui vont bien au-delà de ce qui est présenté ici, pour reconnaître les chaînes qui obéissent à des règles lexicales précises. Étant d'une utilisation très spécifique, nous avons choisi d'aborder ce sujet en dernière semaine lors de la session consacrée aux sujets avancés.\n",
+    "\n",
+    "xxx il faudrait le mettre un peu moisn tard que ça.."
    ]
   }
  ],
@@ -469,7 +519,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.5.1"
+   "version": "3.6.2"
   },
   "notebookname": "Les outils sur les chaînes",
   "version": "3.0"
