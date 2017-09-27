@@ -41,7 +41,7 @@ livereveal_metadata_padding = {
 
 livereveal_metadata_force = {
     'livereveal': {
-        "backimage" : "media/both-logos-1920-alpha.png",
+        "backimage" : "media/nologo.png",
         "transition": "fade",
         "width": "100%",
         "height": "100%",
