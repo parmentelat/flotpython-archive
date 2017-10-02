@@ -35,6 +35,8 @@ livereveal_metadata_padding = {
         "auto_select" : "code",
         "auto_select_fragment" : True,
         "autolaunch" : False,
+#        "slideNumber" : False,
+#        "controls" : False,
     },
     'celltoolbar': 'Slideshow',
 }
@@ -45,7 +47,6 @@ livereveal_metadata_force = {
         "transition": "fade",
         "width": "100%",
         "height": "100%",
-        "slideNumber" : "c",
     }
 }
 
