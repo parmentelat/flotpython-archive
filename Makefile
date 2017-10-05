@@ -310,8 +310,9 @@ full-monty: remote retrieve publish
 # it just wraps videos and notebooks in a single directory
 standalone: ipynb
 	mkdir -p standalone
-	rsync -av w?/*.mov standalone/
-	rsync -av w?/*.quiz standalone/
+# to reinstate later
+#	rsync -av w?/*.mov standalone/
+#	rsync -av w?/*.quiz standalone/
 	rsync -av ipynb/ standalone/
 
 standalone-clean:
