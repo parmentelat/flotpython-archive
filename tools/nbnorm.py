@@ -38,6 +38,10 @@ livereveal_metadata_padding = {
 #        "slideNumber" : False,
 #        "controls" : False,
     },
+}
+
+# this was for the video slides, it's bad on regular notebooks
+livereveal_metadata_clear = {
     'celltoolbar': 'Slideshow',
 }
 
@@ -87,6 +91,21 @@ def pad_metadata(metadata, padding, force=False):
             else:
                 metadata.setdefault(k, v)
 
+def clear_metadata(metadata, padding):
+    """
+    makes sure the keys in padding are removed in metadata
+    """
+    for k, v in padding.items():
+        # supertree missing in metadata : we're good
+        if k not in metadata:
+            continue
+        if isinstance(v, dict):
+            sub_meta = metadata[k]
+            clear_metadata(sub_meta, v)
+        if not isinstance(v, dict):
+            del metadata[k]
+
+                
 ####################
 class Notebook:
 
@@ -195,10 +214,10 @@ class Notebook:
         """
         if not rise:
             return
-        pad_metadata(self.notebook['metadata'],
-                     livereveal_metadata_padding)
-        pad_metadata(self.notebook['metadata'],
-                     livereveal_metadata_force, force=True)
+        metadata = self.notebook['metadata']
+        pad_metadata(metadata, livereveal_metadata_padding)
+        pad_metadata(metadata, livereveal_metadata_force, force=True)
+        clear_metadata(metadata, livereveal_metadata_clear)
 
     def fill_extensions_metadata(self, exts):
         """

@@ -14,7 +14,8 @@ TOPLEVEL=$(shell pwd)
 
 # work on one week at a time with FOCUS=w2
 FOCUS     = w?
-NOTEBOOKS = $(shell git ls-files $(FOCUS) | grep '\.ipynb$$')
+PATTERN   = w[0-9]-s[0-9]-[ce].*ipynb$$
+NOTEBOOKS = $(shell git ls-files $(FOCUS) | grep '$(PATTERN)')
 NOTEBASES = $(subst .ipynb,,$(NOTEBOOKS))
 
 # for phony targets
@@ -310,9 +311,10 @@ full-monty: remote retrieve publish
 # it just wraps videos and notebooks in a single directory
 standalone: ipynb
 	mkdir -p standalone
-# to reinstate later
+# xxx to reinstate later
 #	rsync -av w?/*.mov standalone/
 #	rsync -av w?/*.quiz standalone/
+# xxx also was missing modules
 	rsync -av ipynb/ standalone/
 
 standalone-clean:
@@ -363,7 +365,10 @@ NORM_OPTIONS = --author "Thierry Parmentelat" --author "Arnaud Legout" --version
 
 # -type f : we need to skip symlinks
 normalize-nb normalize-notebook: force
-	find $(FOCUS) -name '*.ipynb' -type f | sort | fgrep -v '/.ipynb_checkpoints/' | xargs $(NORM) $(NORM_OPTIONS)
+# this is to work on all present notebook files
+#	find $(FOCUS) -type f | grep '$(PATTERN)'| sort | fgrep -v '/.ipynb_checkpoints/' | xargs $(NORM) $(NORM_OPTIONS)
+# this is to work on all notebooks in git
+	ls $(NOTEBOOKS) | xargs $(NORM) $(NORM_OPTIONS)
 
 normalize-quiz: force
 	find $(FOCUS) -name '*.quiz' | sort | xargs tools/quiznorm.py
