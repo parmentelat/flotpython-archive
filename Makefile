@@ -14,7 +14,7 @@ TOPLEVEL=$(shell pwd)
 
 # work on one week at a time with FOCUS=w2
 FOCUS     = w?
-PATTERN   = w[0-9]-s[0-9]-[ce].*ipynb$$
+PATTERN   = w[0-9]-s[0-9]-[cx].*ipynb$$
 NOTEBOOKS = $(shell git ls-files $(FOCUS) | grep '$(PATTERN)')
 NOTEBASES = $(subst .ipynb,,$(NOTEBOOKS))
 
