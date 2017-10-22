@@ -63,10 +63,7 @@ extensions_metadata_cell_padding = {
     }
 }
 
-# initial default logo_path was "media/inria-25.png"
-licence_format_left = '<span style="float:left;">Licence CC BY-NC-ND</span>'
-licence_format_right = '<span style="float:right;">{html_authors}&nbsp;'\
-                       '{html_logo_img}</span><br/>'
+default_licence = 'Licence CC BY-NC-ND'
 
 ####################
 # padding is a set of keys/subkeys
@@ -229,26 +226,54 @@ class Notebook:
         for cell in self.cells():
             pad_metadata(cell['metadata'], extensions_metadata_cell_padding)
 
-    def ensure_licence(self, authors, logo_path):
+    def ensure_title(self, licence, authors, logo_path):
         """
         make sure the first cell is a author + licence cell
         """
-        html_logo_img_format = '<img src="{logo_path}" style="display:inline">'
-        html_logo_img = "" if not logo_path else \
-                        html_logo_img_format.format(logo_path=logo_path)
+
+        # the title cell has 3 parts that are equidistant
+        title_style = '''<style>
+div.title-slide {
+    width: 100%;
+    display: flex;
+    flex-direction: row;            /* default value; can be omitted */
+    flex-wrap: nowrap;              /* default value; can be omitted */
+    justify-content: space-between;
+}
+</style>
+'''
+
+        title_format = '''<div class="title-slide">
+<span style="float:left;">{licence}</span>
+<span>{html_authors}</span>
+<span>{html_image}</span>
+</div>'''
+
+        
+        title_image_format = '<img src="{logo_path}" style="display:inline" />'
+        html_image = "" if not logo_path else \
+                      title_image_format.format(logo_path=logo_path)
         # a bit rustic but good enough
 
-        def is_licence_cell(cell):
+        def is_title_cell(cell):
+            # for legacy - notebooks tweaked with older versions
+            # of this tool, we want to consider first cells that have
+            # Licence as being our title cell as well
             return cell['cell_type'] == 'markdown' \
-                and cell['source'].find("Licence") >= 0
-        licence_line = licence_format_left
-        if authors:
-            licence_line += licence_format_right.format(
-                html_authors=" &amp; ".join(authors),
-                html_logo_img=html_logo_img)
+                and (cell['source'].find("title-slide") >= 0
+                     or cell['source'].find("Licence") >= 0)
+        html_authors = "" if not authors \
+                       else " &amp; ".join(authors)
+
+        licence_line = title_style.replace("\n", "") \
+                       + title_format.format(
+                           licence=licence,
+                           html_authors=html_authors,
+                           html_image=html_image)
+
         first_cell = self.cells()[0]
         # cell.source is a list of strings
-        if is_licence_cell(first_cell):
+        if is_title_cell(first_cell):
             # licence cell already here, just overwrite contents to latest
             # version
             first_cell['source'] = [licence_line]
@@ -346,7 +371,7 @@ class Notebook:
         if replace_file_with_string(outfilename, new_contents):
             print("{} saved into {}".format(self.name, outfilename))
 
-    def full_monty(self, force_name, version, authors, logo_path,
+    def full_monty(self, force_name, version, licence, authors, logo_path,
                    kernel, rise, exts, sign):
         self.parse()
         self.set_name_from_heading1(force_name=force_name)
@@ -357,7 +382,7 @@ class Notebook:
         self.handle_kernelspec(kernel)
         self.fill_rise_metadata(rise)
         self.fill_extensions_metadata(exts)
-        self.ensure_licence(authors, logo_path)
+        self.ensure_title(licence, authors, logo_path)
         self.clear_all_outputs()
         self.remove_empty_cells()
         self.translate_rawnbconvert()
@@ -392,6 +417,8 @@ def main():
                         help="force writing notebookname even if already present")
     parser.add_argument("-s", "--sign", action="store_true", dest="sign", default=False,
                         help="sign the notebooks")
+    parser.add_argument("-t", "--licence-text", dest='licence', default=default_licence,
+                        help="the text for the licence string in titles")
     parser.add_argument("-a", "--author", dest='authors', action="append", default=[], type=str,
                         help="define list of authors")
     parser.add_argument("-l", "--logo-path", dest='logo_path', action="store", default="", type=str,
@@ -422,7 +449,7 @@ def main():
         if args.verbose:
             print("{} is opening notebook".format(sys.argv[0]), notebook)
         full_monty(notebook, force_name=args.force_name, version=args.version,
-                   authors=args.authors, logo_path=args.logo_path,
+                   licence=args.licence, authors=args.authors, logo_path=args.logo_path,
                    kernel=args.kernel, rise=args.rise, exts=args.exts,
                    sign=args.sign, verbose=args.verbose)
 
