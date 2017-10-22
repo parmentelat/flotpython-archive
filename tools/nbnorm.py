@@ -232,6 +232,9 @@ class Notebook:
         """
 
         # the title cell has 3 parts that are equidistant
+        # xxx it looks like this <style> tag somehow gets
+        # trimmed away when rendered inside of edx
+        # so I had to add it in nbhosting's custom.css as well
         title_style = '''<style>
 div.title-slide {
     width: 100%;
