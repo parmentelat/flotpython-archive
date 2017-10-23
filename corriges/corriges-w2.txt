@@ -6,7 +6,82 @@
 ############################################################
 
 ##################################################
-# inconnue - Semaine 2 Séquence 3
+# pythonid (regexp) - Semaine 2 Séquence 2
+##################################################
+# un identificateur commence par une lettre ou un underscore
+# et peut être suivi par n'importe quel nombre de
+# lettre, chiffre ou underscore, ce qui se trouve être \w
+# si on ne se met pas en mode unicode
+pythonid_regexp = "[a-zA-Z_]\w*"
+
+
+##################################################
+# pythonid (v2) - Semaine 2 Séquence 2
+##################################################
+# on peut aussi bien sûr l'écrire en clair
+pythonid_bis = "[a-zA-Z_][a-zA-Z0-9_]*"
+
+
+##################################################
+# agenda - Semaine 2 Séquence 2
+##################################################
+# * l'exercice est basé sur re.match, ce qui signifie que
+#   le match est cherché au début de la chaine
+#   MAIS il nous faut bien mettre \Z à la fin de notre regexp,
+#   sinon par exemple avec la cinquième entrée le nom 'Du Pré'
+#   sera reconnu partiellement comme simplement 'Du' au lieu d'être rejeté
+# 
+# * remarquez sinon l'utilisation à la fin de :? pour signifier qu'on peut
+#   mettre ou non un deuxième séparateur ':' 
+#   
+agenda_regexp = r"\A(?P<prenom>[-\w]*):(?P<nom>[-\w]+):?\Z"
+
+
+##################################################
+# phone - Semaine 2 Séquence 2
+##################################################
+# * idem concernant le \Z final
+# * il faut bien backslasher le + dans le numéro de téléphone
+#   car sinon cela veut dire 'un ou plusieurs'
+# * du coup il faut bien définir la regexp comme un raw-string
+phone_regexp = r"(\+33|0)(?P<number>[0-9]{9})\Z"
+
+
+##################################################
+# url (regexp) - Semaine 2 Séquence 2
+##################################################
+# en ignorant la casse on pourra ne mentionner les noms de protocoles
+# qu'en minuscules
+i_flag = "(?i)"
+
+# pour élaborer la chaine (proto1|proto2|...)
+protos_list = ['http', 'https', 'ftp', 'ssh', ] 
+protos      = "(?P<proto>" + "|".join(protos_list) + ")"
+
+# à l'intérieur de la zone 'user/password', la partie
+# password est optionnelle - mais on ne veut pas le ':' dans
+# le groupe 'password' - il nous faut deux groupes
+password    = r"(:(?P<password>[^:]+))?"
+
+# la partie user-password elle-même est optionnelle
+user        = r"((?P<user>\w+){password}@)?".format(**locals())
+
+# pour le hostname on accepte des lettres, chiffres, underscore et '.'
+# attention à backslaher . car sinon ceci va matcher tout y compris /
+hostname    = r"(?P<hostname>[\w\.]+)"
+
+# le port est optionnel
+port        = r"(:(?P<port>\d+))?"
+
+# après le premier slash
+path        = r"(?P<path>.*)"
+
+# on assemble le tout
+url = i_flag + protos + "://" + user + hostname + port + '/' + path
+
+
+##################################################
+# inconnue - Semaine 2 Séquence 6
 ##################################################
 # Pour calculer inconnue, on extrait une sous-chaine de composite
 # qui commence a l'index len(connue)
@@ -19,11 +94,212 @@ inconnue = composite [ len(connue) : -len(connue) ]
 
 
 ##################################################
+# libelle - Semaine 2 Séquence 6
+##################################################
+def libelle(ligne):
+    # on enlève les espaces et les tabulations
+    ligne = ligne.replace(' ', '').replace('\t','')
+    # on cherche les 3 champs
+    mots = ligne.split(',')
+    # on enleve les morceaux vides
+    mots = [mot for mot in mots if mot]
+    # si on n'a pas le bon nombre de champs
+    # rappelez-vous que 'return' tout court
+    # est équivalent à 'return None'
+    if len(mots) != 3:
+        return
+    # maintenant on a les trois valeurs
+    nom, prenom, rang = mots
+    # comment presenter le rang
+    msg_rang = "1er" if rang == "1" \
+               else "2nd" if rang == "2" \
+                    else "{}-ème".format(rang)
+    return "{prenom}.{nom} ({msg_rang})"\
+        .format(nom=nom, prenom=prenom, msg_rang=msg_rang)
+    # NOTE:
+    # on verra plus tard qu'on pourrait écrire beaucoup
+    # plus simplement ici
+    # return "{prenom}.{nom} ({msg_rang})"\
+    #    .format(**locals())
+
+
+##################################################
+# carre - Semaine 2 Séquence 6
+##################################################
+def carre(s):
+    # on enlève les espaces et les tabulations
+    s = s.replace(' ', '').replace('\t','')
+    # la ligne suivante fait le plus gros du travail
+    # d'abord on appelle split() pour découper selon les ';'
+    # dans le cas où on a des ';' en trop, on obtient dans le 
+    #    résultat du split un 'token' vide, que l'on ignore 
+    #    ici avec le clause 'if token'
+    # enfin on convertit tous les tokens restants en entiers avec int()
+    entiers = [int(token) for token in s.split(";")
+               # en éliminant les entrées vides qui correspondent
+               # à des point-virgules en trop
+               if token]
+    # il n'y a plus qu'à mettre au carré, retraduire en strings,
+    # et à recoudre le tout avec join et ':'
+    return ":".join([str(entier**2) for entier in entiers])
+
+
+##################################################
+# aplatir - Semaine 2 Séquence 7
+##################################################
+def aplatir(conteneurs):
+    "retourne une liste des éléments des éléments de conteneurs"
+    # on peut concaténer les éléments de deuxième niveau 
+    # par une simple imbrication de deux compréhensions de liste
+    return [element for conteneur in conteneurs for element in conteneur]
+
+
+##################################################
+# alternat - Semaine 2 Séquence 7
+##################################################
+def alternat(l1, l2):
+    "renvoie une liste des éléments pris un sur deux dans l1 et dans l2"
+    # pour réaliser l'alternance on peut combiner zip avec aplatir
+    # telle qu'on vient de la réaliser
+    return aplatir(zip(l1, l2))
+
+
+##################################################
+# alternat (v2) - Semaine 2 Séquence 7
+##################################################
+def alternat_bis(l1, l2):
+    "une deuxième version de alternat"
+    # la même idée mais directement, sans utiliser aplatir
+    return [element for conteneur in zip(l1, l2) for element in conteneur]
+
+
+##################################################
+# intersect - Semaine 2 Séquence 7
+##################################################
+def intersect(A, B):
+    """
+    prend en entrée deux listes de tuples de la forme
+    (entier, valeur)
+    renvoie la liste des valeurs associées dans A ou B
+    aux entiers présents dans A et B
+    """
+    # pour montrer un exemple de fonction locale:
+    # une fonction qui renvoie l'ensemble des entiers
+    # présents dans une des deux listes d'entrée
+    def keys(S):
+        return {k for k, val in S}
+    # on l'applique à A et B
+    keys_A = keys(A)
+    keys_B = keys(B)
+    # 
+    # les entiers présents dans A et B 
+    # avec une intersection d'ensembles
+    common_keys = keys_A & keys_B
+    # et pour conclure on fait une union sur deux
+    # compréhensions d'ensembles
+    return {vala for k, vala in A if k in common_keys} \
+         | {valb for k, valb in B if k in common_keys} 
+
+
+##################################################
+# liste_P - Semaine 2 Séquence 7
+##################################################
+def P(x):
+    return 2 * x**2 - 3 * x - 2
+
+
+def liste_P(liste_x):
+    """
+    retourne la liste des valeurs de P 
+    sur les entrées figurant dans liste_x
+    """
+    return [P(x) for x in liste_x]
+
+# On peut bien entendu faire aussi de manière pédestre
+def liste_P_bis(liste_x):
+    liste_y = []
+    for x in liste_x:
+        liste_y.append(P(x))
+    return liste_y
+
+
+##################################################
+# multi_tri - Semaine 2 Séquence 7
+##################################################
+def multi_tri(listes):
+    """
+    trie toutes les sous-listes
+    et retourne listes
+    """
+    for liste in listes:
+        # sort fait un effet de bord
+        liste.sort()
+    # et on retourne la liste de départ
+    return listes
+
+
+##################################################
+# multi_tri_reverse - Semaine 2 Séquence 7
+##################################################
+def multi_tri_reverse(listes, reverses):
+    """
+    trie toutes les sous listes, dans une direction
+    précisée par le second argument
+    """
+    # zip() permet de faire correspondre les éléments
+    # de listes avec ceux de reverses
+    for liste, reverse in zip(listes, reverses):
+        # on appelle sort en précisant reverse=
+        liste.sort(reverse=reverse)
+    # on retourne la liste de départ
+    return listes
+
+
+##################################################
+# produit_scalaire - Semaine 2 Séquence 7
+##################################################
+def produit_scalaire(X, Y):
+    """
+    retourne le produit scalaire
+    de deux listes de même taille
+    """
+    # initialisation du résultat
+    scalaire = 0
+    # ici encore avec zip() on peut faire correspondre
+    # les X avec les Y
+    for x, y in zip(X, Y):
+        scalaire += x * y
+    # on retourne le résultat
+    return scalaire
+
+# Il y a plein d'autres solutions qui marchent aussi
+# en voici notamment une qui utilise la fonction builtin sum
+# (que nous n'avons pas encore vue, nous la verrons en semaine 4)
+# en voici toutefois un avant-goût: la fonction sum est très pratique
+# pour faire la somme de toute une liste de valeurs
+def produit_scalaire_bis(X, Y):
+    return sum([x * y for x, y in zip(X, Y)])
+
+# Et encore une; celle-ci par contre est
+# assez peu "pythonique"
+# on aime bien en général éviter
+# les boucles du genre
+# for i in range(l)
+#     ... l[i]
+def produit_scalaire_ter(X, Y):
+    scalaire = 0
+    n = len(X)
+    for i in range(n):
+        scalaire += X[i] * Y[i]
+    return scalaire
+
+
+##################################################
 # divisible - Semaine 2 Séquence 7
 ##################################################
-def divisible(a, b): 
+def divisible(a, b):
     "renvoie True si un des deux arguments divise l'autre"
-    # b divise a si et seulement si le reste 
+    # b divise a si et seulement si le reste
     # de la division de a par b est nul
     # et il faut regarder aussi si a divise b
     return a % b == 0 or b % a == 0
@@ -51,147 +327,4 @@ Prend en argument une liste, et retourne la liste modifiée:
         liste.pop()
     # et on n'oublie pas de retourner la liste dans tous les cas
     return liste
-
-
-##################################################
-# liste_P - Semaine 2 Séquence 7
-##################################################
-def P(x):
-    return 2*x**2 - 3*x - 2
-
-def liste_P(liste_x):
-    """
-    retourne la liste des valeurs de P 
-    sur les entrées figurant dans liste_x
-    """
-    return [ P(x) for x in liste_x ]
-
-# On peut bien entendu faire aussi de manière pédestre
-def liste_P_bis(liste_x):
-    liste_y = []
-    for x in liste_x:
-        liste_y.append(P(x))
-    return liste_y
-
-
-##################################################
-# multi_tri - Semaine 2 Séquence 7
-##################################################
-def multi_tri(listes):
-    """
-    trie toutes les sous-listes
-    et retourne listes
-    """
-    for liste in listes:
-        # sort fait un effet de bord 
-        liste.sort()
-    # et on retourne la liste de départ
-    return listes
-
-
-##################################################
-# multi_tri_reverse - Semaine 2 Séquence 7
-##################################################
-def multi_tri_reverse(listes, reverses):
-    """
-    trie toutes les sous listes, dans une direction
-    précisée par le second argument
-    """
-    # zip() permet de faire correspondre les éléments 
-    # de listes avec ceux de reverses
-    for liste, reverse in zip(listes, reverses):
-        # on appelle sort en précisant reverse=
-        liste.sort(reverse=reverse)
-    # on retourne la liste de départ
-    return listes
-
-
-##################################################
-# produit_scalaire - Semaine 2 Séquence 7
-##################################################
-def produit_scalaire(X,Y):
-    """
-    retourne le produit scalaire
-    de deux listes de même taille
-    """
-    # initialisation du résultat
-    scalaire = 0
-    # ici encore avec zip() on peut faire correspondre 
-    # les X avec les Y
-    for x,y in zip(X,Y):
-        scalaire += x*y
-    # on retourne le résultat
-    return scalaire
-
-# Il y a plein d'autres solutions qui marchent aussi
-# en voici notamment une qui utilise la fonction builtin sum
-# (que nous n'avons pas encore vue, nous la verrons en semaine 4)
-# en voici toutefois un avant-goût: la fonction sum est très pratique
-# pour faire la somme de toute une liste de valeurs
-def produit_scalaire_bis(X,Y):
-    return sum([x*y for x, y in zip(X, Y)])
-
-# Et encore une; celle-ci par contre est
-# assez peu "pythonique"
-# on aime bien en général éviter
-# les boucles du genre
-# for i in range(l)
-#     ... l[i]
-def produit_scalaire_ter(X, Y):
-    scalaire = 0
-    n = len(X)
-    for i in range(n):
-        scalaire += X[i] * Y[i]
-    return scalaire
-
-
-##################################################
-# libelle - Semaine 2 Séquence 8
-##################################################
-def libelle(ligne):
-    # on enlève les espaces et les tabulations
-    ligne = ligne.replace(' ', '').replace('\t','')
-    # on cherche les 3 champs
-    mots = ligne.split(',')
-    # on enleve les morceaux vides
-    mots = [mot for mot in mots if mot]
-    # si on n'a pas le bon nombre de champs
-    # rappelez-vous que 'return' tout court
-    # est équivalent à 'return None'
-    if len(mots) != 3:
-        return
-    # maintenant on a les trois valeurs
-    nom, prenom, rang = mots
-    # comment presenter le rang
-    msg_rang = "1er" if rang == "1" \
-               else "2nd" if rang == "2" \
-                    else "{}-eme".format(rang)
-    return "{prenom}.{nom} ({msg_rang})"\
-        .format(nom=nom, prenom=prenom, msg_rang=msg_rang)
-    # NOTE:
-    # on verra plus tard qu'on pourrait écrire beaucoup
-    # plus simplement ici
-    # return "{prenom}.{nom} ({msg_rang})"\
-    #    .format(**locals())
-
-
-##################################################
-# carre - Semaine 2 Séquence 8
-##################################################
-def carre(s):
-    # on enlève les espaces et les tabulations
-    s = s.replace(' ', '').replace('\t','')
-    # la ligne suivante fait le plus gros du travail
-    # d'abord on appelle split() pour découper selon les ';'
-    # dans le cas où on a des ';' en trop, on obtient dans le 
-    #    résultat du split un 'token' vide, que l'on ignore 
-    #    ici avec le clause 'if token'
-    # enfin on convertit tous les tokens restants en entiers avec int()
-    entiers = [int(token) for token in s.split(";")
-               # en éliminant les entrées vides qui correspondent
-               # à des point-virgules en trop
-               if token]
-    # il n'y a plus qu'à mettre au carré, retraduire en strings,
-    # et à recoudre le tout avec join et ':'
-    return ":".join([str(entier**2) for entier in entiers])
 

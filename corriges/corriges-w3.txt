@@ -6,7 +6,46 @@
 ############################################################
 
 ##################################################
-# index - Semaine 3 Séquence 2
+# comptage - Semaine 3 Séquence 1
+##################################################
+def comptage(in_filename, out_filename):
+    """
+    retranscrit le fichier in_filename dans le fichier out_filename
+    en ajoutant des annotations sur les nombres de lignes, de mots
+    et de caractères
+    """
+    # on ouvre le fichier d'entrée en lecture
+    # on aurait pu mettre open(in_filename, 'r')
+    with open(in_filename, encoding='utf-8') as input:
+        # on ouvre la sortie en écriture
+        with open(out_filename, "w", encoding='utf-8') as output:
+            # initialisations
+            total_words = 0
+            total_chars = 0
+            # pour toutes les lignes du fichier d'entrée
+            # le numéro de ligne commence à 1
+            for lineno, line in enumerate(input, 1):
+                # autant de mots que d'éléments dans split()
+                nb_words = len(line.split())
+                total_words += nb_words
+                # autant de caractères que d'éléments dans la ligne
+                nb_chars = len(line)
+                total_chars += nb_chars
+                # on écrit la ligne de sortie; pas besoin
+                # de newline (\n) car line en a déjà un
+                output.write("{}:{}:{}:{}"
+                             .format(lineno, nb_words, nb_chars, line))
+            # on écrit la ligne de synthèse
+            # lineno est une variable de boucle, elle "fuite"
+            # on peut donc utiliser sa dernière valeur
+            # mais remarquez que ce code ne fonctionnerait
+            # pas sur un fichier vide, ou on aurait lineno non définie
+            output.write("{}:{}:{}\n"
+                         .format(lineno, total_words, total_chars))
+
+
+##################################################
+# index - Semaine 3 Séquence 4
 ##################################################
 def index(bateaux):
     """
@@ -17,11 +56,11 @@ def index(bateaux):
     avec les deux types de données
     """
     # c'est une simple compréhension de dictionnaire
-    return {bateau[0]:bateau for bateau in bateaux}
+    return {bateau[0] : bateau for bateau in bateaux}
 
 
 ##################################################
-# index (v2) - Semaine 3 Séquence 2
+# index (v2) - Semaine 3 Séquence 4
 ##################################################
 def index_bis(bateaux):
     """
@@ -35,22 +74,21 @@ def index_bis(bateaux):
 
 
 ##################################################
-# merge - Semaine 3 Séquence 2
+# merge - Semaine 3 Séquence 4
 ##################################################
 def merge(extended, abbreviated):
     """
     Consolide des données étendues et des données abrégées
     comme décrit dans l'énoncé
     Le coût de cette fonction est linéaire dans la taille 
-    des données (longueur des listes)
+    des données (longueur commune des deux listes)
     """
     # on initialise le résultat avec un dictionnaire vide
     result = {}
     # pour les données étendues
-    for ship in extended:
-        # on affecte les 6 premiers champs
-        # et on ignore les champs de rang 6 et au delà
-        id, latitude, longitude, timestamp, name, country = ship[:6]
+    # on affecte les 6 premiers champs
+    # et on ignore les champs de rang 6 et au delà
+    for id, latitude, longitude, timestamp, name, country, *ignore in extended:
         # on crée une entrée dans le résultat, 
         # avec la mesure correspondant aux données étendues
         result[id] = [name, country, (latitude, longitude, timestamp)]
@@ -66,7 +104,7 @@ def merge(extended, abbreviated):
 
 
 ##################################################
-# merge (v2) - Semaine 3 Séquence 2
+# merge (v2) - Semaine 3 Séquence 4
 ##################################################
 def merge_bis(extended, abbreviated):
     """
@@ -93,7 +131,7 @@ def merge_bis(extended, abbreviated):
 
 
 ##################################################
-# merge (v3) - Semaine 3 Séquence 2
+# merge (v3) - Semaine 3 Séquence 4
 ##################################################
 def merge_ter(extended, abbreviated):
     """
@@ -128,7 +166,22 @@ def merge_ter(extended, abbreviated):
 
 
 ##################################################
-# diff - Semaine 3 Séquence 3
+# index - Semaine 3 Séquence 4
+##################################################
+
+from collections import defaultdict
+
+def parse_graph(filename):
+    g = defaultdict(list)
+    with open(filename) as f:
+        for line in f:
+            begin, value, end = line.split()
+            g[begin].append( (end, int(value)))
+    return g
+
+
+##################################################
+# diff - Semaine 3 Séquence 5
 ##################################################
 def diff(extended, abbreviated):
     """Calcule comme demandé dans l'exercice, et sous formes d'ensembles
@@ -164,7 +217,7 @@ def diff(extended, abbreviated):
 
 
 ##################################################
-# diff (v2) - Semaine 3 Séquence 3
+# diff (v2) - Semaine 3 Séquence 5
 ##################################################
 def diff_bis(extended, abbreviated):
     """
@@ -179,113 +232,4 @@ def diff_bis(extended, abbreviated):
     both =             {ship[4] for ship in extended
                         if ship[0] in abbreviated_ids}
     return extended_only, both, abbreviated_only
-
-
-##################################################
-# decode_zen - Semaine 3 Séquence 5
-##################################################
-# le module this est implémenté comme une petite énigme 
-# comme le laissent entrevoir les indices, on y trouve
-# (*) dans l'attribut 's' une version encodée du manifeste
-# (*) dans l'attribut 'd' le code à utiliser pour décoder
-# 
-# ce qui veut dire qu'en première approximation on pourrait 
-# obtenir une liste des caractères du manifeste en faisant
-# 
-# [ this.d[c] for c in this.s ]
-# 
-# mais ce serait le cas seulement si le code agissait sur 
-# tous les caractères; comme ce n'est pas le cas il faut
-# laisser intacts les caractères de this.s qui ne sont pas
-# dans this.d (dans le sens "c in this.d")
-#
-# je fais exprès de ne pas appeler l'argument this pour
-# illustrer le fait qu'un module est un objet comme un autre
-
-def decode_zen(this_module):
-    "décode le zen de python à partir du module this"
-    # la version encodée du manifeste
-    encoded = this_module.s
-    # le 'code' 
-    code = this_module.d
-    # si un caractère est dans le code, on applique le code
-    # sinon on garde le caractère tel quel
-    # aussi, on appelle 'join' pour refaire une chaîne à partir
-    # de la liste des caractères décodés
-    return ''.join([code[c] if c in code else c for c in encoded])
-
-
-##################################################
-# decode_zen (v2) - Semaine 3 Séquence 5
-##################################################
-# une autre version un peu plus courte
-#
-# on utilise la méthode get d'un dictionnaire, qui permet de spécifier
-# (en second argument) quelle valeur on veut utiliser dans les cas où la
-# clé n'est pas présente dans le dictionnaire
-# 
-# dict.get(key, default)
-# retourne dict[key] si elle eset présente, et default sinon
- 
-def decode_zen_bis(this_module):
-    "une autre version plus courte"
-    return "".join([this_module.d.get(c, c) for c in this_module.s])
-
-
-##################################################
-# decode_zen (v3) - Semaine 3 Séquence 5
-##################################################
-# presque la même chose, mais en utilisant une expression génératrice
-# à la place de la compréhension; la seule différence avec la v2 est
-# l'absence des crochets carrés []
-# ici je triche, nous n'avons pas encore vu ces expressions-là,
-# nous les verrons en semaine 6, mais ça me permet de les introduire
-# pour les curieux donc:
-# avec ce code, **on ne crée pas la liste** qui est passée au join(),
-# c'est comme si cette liste était cette fois
-# parcourue à travers **un itérateur**
-#
-# on est donc un peu plus efficace - même si ça n'est évidemment
-# pas très sensible dans ce cas précis 
-
-def decode_zen_ter(this_module):
-    "une version avec une expression génératrice plutôt qu'une compréhension"
-    return "".join(this_module.d.get(c, c) for c in this_module.s)
-
-
-##################################################
-# dispatch1 - Semaine 3 Séquence 7
-##################################################
-def dispatch1(a, b):
-    """dispatch1 comme spécifié"""
-    # si les deux arguments sont pairs
-    if a%2 == 0 and b%2 == 0:
-        return a*a + b*b
-    # si a est pair et b est impair
-    elif a%2 == 0 and b%2 != 0:
-        return a*(b-1)
-    # si a est impair et b est pair
-    elif a%2 != 0 and b%2 == 0:
-        return (a-1)*b
-    # sinon - c'est que a et b sont impairs
-    else:
-        return a*a - b*b
-
-
-##################################################
-# dispatch2 - Semaine 3 Séquence 7
-##################################################
-def dispatch2(a, b, A, B):
-    """dispatch2 comme spécifié"""
-    # les deux cas de la diagonale \ 
-    if (a in A and b in B) or (a not in A and b not in B):
-        return a*a + b*b
-    # sinon si b n'est pas dans B
-    # ce qui alors implique que a est dans A
-    elif b not in B: 
-        return a*(b-1)
-    # le dernier cas, on sait forcément que
-    # b est dans B et a n'est pas dans A
-    else:
-        return (a-1)*b
 
