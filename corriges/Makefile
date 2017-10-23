@@ -1,34 +1,35 @@
 # -*- coding: utf-8 -*-
 TOOL = ../tools/corriges.py
 
-W2 = w2s3_slicing.py w2s7_if.py w2s7_for.py w2s8_strings.py
-W3 = w3s2_marine_dict.py w3s3_marine_set.py w3s5_decode_zen.py w3s7_if.py
-W4 = w4s1_files.py w4s2_pgcd.py w4s3_functional.py w4s4_comprehensions.py w4s8_fun_args.py 
+w2 = w2s2_regexp.py w2s6_slicing.py w2s6_strings.py w2s7_comprehensions.py w2s7_for.py w2s7_if.py
+w3 = w3s1_files.py w3s4_marine_dict.py w3s4_parse_graph.py w3s5_marine_set.py
+w4 = w4s3_pgcd.py w4s6_fun_args.py
+w5 = w5s2_functional.py w5s5_decode_zen.py w5s6_rpcproxy.py
 
 # pour la semaine 5 on met
 # dans le latex les deux fichiers (via $(TOOL))
 # dans le text un seul fichier (via $(TOOL))
 # plus le fichier shipdict.py tel quel
-W5_latex = w5s6_rpcproxy.py shipdict.py 
-W5_text = w5s6_rpcproxy.py
-W5_code  = ../data/shipdict.py
+w5_latex = w5s6_rpcproxy.py shipdict.py 
+w5_text = w5s6_rpcproxy.py
+w5_code  = ../data/shipdict.py
 
-W6_latex = w6s6_regexp.py
-W6_text = w6s6_regexp.py
-W6_code = ../exo-meteo/meteodata.py ../exo-diskusage/diskusage.py ../exo-crawler/webcrawler.py
+w6_latex = w6s6_regexp.py
+w6_text = w6s6_regexp.py
+w6_code = ../exo-meteo/meteodata.py ../exo-diskusage/diskusage.py ../exo-crawler/webcrawler.py
 
-WEEKS=2 3 4 5 6
+WEEKS = 2 3 4 5
 
 define find_source
 $(wildcard ../modules/corrections/$(1) ../data/$(1))
 endef
 
 define week_latex_sources
-$(foreach python,$(W$(1)_latex), $(call find_source,$(python)))
+$(foreach python,$(w$(1)_latex), $(call find_source,$(python)))
 endef
 
 define week_text_sources
-$(foreach python,$(W$(1)_text), $(call find_source,$(python)))
+$(foreach python,$(w$(1)_text), $(call find_source,$(python)))
 endef
 
 SOURCES = $(foreach week,$(WEEKS),$(call week_latex_sources,$(week)))
@@ -45,8 +46,8 @@ pdf:: corriges.pdf
 
 
 define week_values
-W$(1)_text = $(or $(W$(1)_text),$(W$(1)))
-W$(1)_latex = $(or $(W$(1)_latex),$(W$(1)))
+w$(1)_text = $(or $(w$(1)_text),$(w$(1)))
+w$(1)_latex = $(or $(w$(1)_latex),$(w$(1)))
 endef
 
 $(foreach week, $(WEEKS), $(eval $(call week_values,$(week))))
@@ -79,7 +80,7 @@ superclean::
 
 pdf:: corriges-w$(1).pdf
 
-$(foreach code,$(W$(1)_code),$(eval $(call code_target,$(code),$(notdir $(code)),$(1))))
+$(foreach code,$(w$(1)_code),$(eval $(call code_target,$(code),$(notdir $(code)),$(1))))
 endef
 
 $(foreach week, $(WEEKS), $(eval $(call week_target,$(week))))
