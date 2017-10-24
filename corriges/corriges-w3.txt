@@ -60,7 +60,7 @@ def index(bateaux):
 
 
 ##################################################
-# index (v2) - Semaine 3 Séquence 4
+# index (bis) - Semaine 3 Séquence 4
 ##################################################
 def index_bis(bateaux):
     """
@@ -104,7 +104,7 @@ def merge(extended, abbreviated):
 
 
 ##################################################
-# merge (v2) - Semaine 3 Séquence 4
+# merge (bis) - Semaine 3 Séquence 4
 ##################################################
 def merge_bis(extended, abbreviated):
     """
@@ -131,7 +131,7 @@ def merge_bis(extended, abbreviated):
 
 
 ##################################################
-# merge (v3) - Semaine 3 Séquence 4
+# merge (ter) - Semaine 3 Séquence 4
 ##################################################
 def merge_ter(extended, abbreviated):
     """
@@ -217,7 +217,7 @@ def diff(extended, abbreviated):
 
 
 ##################################################
-# diff (v2) - Semaine 3 Séquence 5
+# diff (bis) - Semaine 3 Séquence 5
 ##################################################
 def diff_bis(extended, abbreviated):
     """

@@ -22,34 +22,39 @@ pythonid_regexp = "[a-zA-Z_]\w*"
 
 
 ##################################################
-# pythonid (v2) - Semaine 2 Séquence 2
+# pythonid (bis) - Semaine 2 Séquence 2
 ##################################################
 # on peut aussi bien sûr l'écrire en clair
 pythonid_bis = "[a-zA-Z_][a-zA-Z0-9_]*"
 
 
 ##################################################
-# agenda - Semaine 2 Séquence 2
+# agenda (regexp) - Semaine 2 Séquence 2
 ##################################################
-# * l'exercice est basé sur re.match, ce qui signifie que
-#   le match est cherché au début de la chaine
-#   MAIS il nous faut bien mettre \Z à la fin de notre regexp,
-#   sinon par exemple avec la cinquième entrée le nom 'Du Pré'
-#   sera reconnu partiellement comme simplement 'Du' au lieu d'être rejeté
+# l'exercice est basé sur re.match, ce qui signifie que
+# le match est cherché au début de la chaine
+# MAIS il nous faut bien mettre \Z à la fin de notre regexp,
+# sinon par exemple avec la cinquième entrée le nom 'Du Pré'
+# sera reconnu partiellement comme simplement 'Du'
+# au lieu d'être rejeté à cause de l'espace
 # 
-# * remarquez sinon l'utilisation à la fin de :? pour signifier qu'on peut
-#   mettre ou non un deuxième séparateur ':' 
+# du coup pensez à bien toujours définir
+# vos regexps avec des raw-strings
+#
+# remarquez sinon l'utilisation à la fin de :? pour signifier qu'on peut
+# mettre ou non un deuxième séparateur ':' 
 #   
 agenda_regexp = r"\A(?P<prenom>[-\w]*):(?P<nom>[-\w]+):?\Z"
 
 
 ##################################################
-# phone - Semaine 2 Séquence 2
+# phone (regexp) - Semaine 2 Séquence 2
 ##################################################
-# * idem concernant le \Z final
-# * il faut bien backslasher le + dans le numéro de téléphone
-#   car sinon cela veut dire 'un ou plusieurs'
-# * du coup il faut bien définir la regexp comme un raw-string
+# idem concernant le \Z final
+#
+# il faut bien backslasher le + dans le +33
+# car sinon cela veut dire 'un ou plusieurs'
+#
 phone_regexp = r"(\+33|0)(?P<number>[0-9]{9})\Z"
 
 
@@ -87,19 +92,6 @@ url = i_flag + protos + "://" + user + hostname + port + '/' + path
 
 
 ##################################################
-# inconnue - Semaine 2 Séquence 6
-##################################################
-# Pour calculer inconnue, on extrait une sous-chaine de composite
-# qui commence a l'index len(connue)
-# qui se termine a l'index len(composite)-len(connue)
-# ce qui donne en utilisant une slice
-inconnue = composite [ len(connue) : len(composite)-len(connue) ]
-#
-# on peut aussi faire encore plus simplement
-inconnue = composite [ len(connue) : -len(connue) ]
-
-
-##################################################
 # libelle - Semaine 2 Séquence 6
 ##################################################
 def libelle(ligne):
@@ -107,8 +99,6 @@ def libelle(ligne):
     ligne = ligne.replace(' ', '').replace('\t','')
     # on cherche les 3 champs
     mots = ligne.split(',')
-    # on enleve les morceaux vides
-    mots = [mot for mot in mots if mot]
     # si on n'a pas le bon nombre de champs
     # rappelez-vous que 'return' tout court
     # est équivalent à 'return None'
@@ -120,13 +110,7 @@ def libelle(ligne):
     msg_rang = "1er" if rang == "1" \
                else "2nd" if rang == "2" \
                     else "{}-ème".format(rang)
-    return "{prenom}.{nom} ({msg_rang})"\
-        .format(nom=nom, prenom=prenom, msg_rang=msg_rang)
-    # NOTE:
-    # on verra plus tard qu'on pourrait écrire beaucoup
-    # plus simplement ici
-    # return "{prenom}.{nom} ({msg_rang})"\
-    #    .format(**locals())
+    return f"{prenom}.{nom} ({msg_rang})"
 
 
 ##################################################
@@ -151,6 +135,83 @@ def carre(s):
 
 
 ##################################################
+# inconnue - Semaine 2 Séquence 6
+##################################################
+# pour enlever à gauche et à droite une chaine de longueur x
+# on peut faire composite[ x : -x ]
+# or ici x vaut len(connue)
+def inconnue(composite, connue):
+    return composite[ len(connue) : -len(connue) ]
+
+
+##################################################
+# inconnue (bis) - Semaine 2 Séquence 6
+##################################################
+# ce qui peut aussi s'écrire comme ceci si on préfère
+def inconnue_bis(composite, connue):
+    return composite[ len(connue) : len(composite)-len(connue) ]
+
+
+##################################################
+# divisible - Semaine 2 Séquence 6
+##################################################
+def divisible(a, b):
+    "renvoie True si un des deux arguments divise l'autre"
+    # b divise a si et seulement si le reste
+    # de la division de a par b est nul
+    # et il faut regarder aussi si a divise b
+    return a % b == 0 or b % a == 0
+
+
+##################################################
+# divisible (bis) - Semaine 2 Séquence 6
+##################################################
+def divisible_bis(a, b):
+    if a % b == 0:
+        return True
+    if b % a == 0:
+        return True
+    return False
+
+
+##################################################
+# morceaux - Semaine 2 Séquence 6
+##################################################
+def morceaux(x):
+    if x <= -5:
+        return -x - 5
+    elif x <= 5:
+        return 0
+    else:
+        return x / 5 - 1
+
+
+##################################################
+# morceaux (bis) - Semaine 2 Séquence 6
+##################################################
+def morceaux_bis(x):
+    if x <= -5:
+        return -x - 5
+    if x <= 5:
+        return 0
+    return x / 5 - 1
+
+
+##################################################
+# morceaux (ter) - Semaine 2 Séquence 6
+##################################################
+# on peut aussi faire des tests d'intervalle
+# comme ceci  0 <= x <= 10
+def morceaux_ter(x):
+    if x <= -5:
+        return -x - 5
+    elif -5 <= x <= 5:
+        return 0
+    else:
+        return x / 5 - 1
+
+
+##################################################
 # aplatir - Semaine 2 Séquence 7
 ##################################################
 def aplatir(conteneurs):
@@ -171,7 +232,7 @@ def alternat(l1, l2):
 
 
 ##################################################
-# alternat (v2) - Semaine 2 Séquence 7
+# alternat (bis) - Semaine 2 Séquence 7
 ##################################################
 def alternat_bis(l1, l2):
     "une deuxième version de alternat"
@@ -208,19 +269,8 @@ def intersect(A, B):
 
 
 ##################################################
-# liste_P - Semaine 2 Séquence 7
+# liste_P (bis) - Semaine 2 Séquence 7
 ##################################################
-def P(x):
-    return 2 * x**2 - 3 * x - 2
-
-
-def liste_P(liste_x):
-    """
-    retourne la liste des valeurs de P 
-    sur les entrées figurant dans liste_x
-    """
-    return [P(x) for x in liste_x]
-
 # On peut bien entendu faire aussi de manière pédestre
 def liste_P_bis(liste_x):
     liste_y = []
@@ -278,6 +328,10 @@ def produit_scalaire(X, Y):
     # on retourne le résultat
     return scalaire
 
+
+##################################################
+# produit_scalaire (bis) - Semaine 2 Séquence 7
+##################################################
 # Il y a plein d'autres solutions qui marchent aussi
 # en voici notamment une qui utilise la fonction builtin sum
 # (que nous n'avons pas encore vue, nous la verrons en semaine 4)
@@ -286,10 +340,13 @@ def produit_scalaire(X, Y):
 def produit_scalaire_bis(X, Y):
     return sum([x * y for x, y in zip(X, Y)])
 
-# Et encore une; celle-ci par contre est
-# assez peu "pythonique"
-# on aime bien en général éviter
-# les boucles du genre
+
+
+##################################################
+# produit_scalaire (ter) - Semaine 2 Séquence 7
+##################################################
+# Et encore une: celle-ci par contre est assez peu "pythonique"
+# on aime bien en général éviter les boucles du genre
 # for i in range(l)
 #     ... l[i]
 def produit_scalaire_ter(X, Y):
@@ -298,41 +355,6 @@ def produit_scalaire_ter(X, Y):
     for i in range(n):
         scalaire += X[i] * Y[i]
     return scalaire
-
-
-##################################################
-# divisible - Semaine 2 Séquence 7
-##################################################
-def divisible(a, b):
-    "renvoie True si un des deux arguments divise l'autre"
-    # b divise a si et seulement si le reste
-    # de la division de a par b est nul
-    # et il faut regarder aussi si a divise b
-    return a % b == 0 or b % a == 0
-
-
-##################################################
-# spam - Semaine 2 Séquence 7
-##################################################
-def spam(liste):
-    """
-Prend en argument une liste, et retourne la liste modifiée:
- * taille paire: on intervertit les deux premiers éléments
- * taille impaire, on retire le dernier élément
-"""
-    # si la liste est vide il n'y a rien à faire
-    if not liste:
-        pass
-    # si la liste est de taille paire
-    elif len(liste) % 2 == 0:
-        # on intervertit les deux premiers éléments
-        liste[0], liste[1] = liste[1], liste[0]
-    # si elle est de taille impaire
-    else:
-        # on retire le dernier élément
-        liste.pop()
-    # et on n'oublie pas de retourner la liste dans tous les cas
-    return liste
 
 
 ##################################################
@@ -390,7 +412,7 @@ def index(bateaux):
 
 
 ##################################################
-# index (v2) - Semaine 3 Séquence 4
+# index (bis) - Semaine 3 Séquence 4
 ##################################################
 def index_bis(bateaux):
     """
@@ -434,7 +456,7 @@ def merge(extended, abbreviated):
 
 
 ##################################################
-# merge (v2) - Semaine 3 Séquence 4
+# merge (bis) - Semaine 3 Séquence 4
 ##################################################
 def merge_bis(extended, abbreviated):
     """
@@ -461,7 +483,7 @@ def merge_bis(extended, abbreviated):
 
 
 ##################################################
-# merge (v3) - Semaine 3 Séquence 4
+# merge (ter) - Semaine 3 Séquence 4
 ##################################################
 def merge_ter(extended, abbreviated):
     """
@@ -547,7 +569,7 @@ def diff(extended, abbreviated):
 
 
 ##################################################
-# diff (v2) - Semaine 3 Séquence 5
+# diff (bis) - Semaine 3 Séquence 5
 ##################################################
 def diff_bis(extended, abbreviated):
     """
@@ -586,7 +608,7 @@ def pgcd(a, b):
 
 
 ##################################################
-# pgcd (v2) - Semaine 4 Séquence 3
+# pgcd (bis) - Semaine 4 Séquence 3
 ##################################################
 # il se trouve qu'en fait la première inversion n'est
 # pas nécessaire
@@ -637,7 +659,7 @@ def doubler_premier(f, first, *args):
 
 
 ##################################################
-# doubler_premier (v2) - Semaine 4 Séquence 6
+# doubler_premier (bis) - Semaine 4 Séquence 6
 ##################################################
 def doubler_premier_bis(f, *args):
     "marche aussi mais moins élégant"

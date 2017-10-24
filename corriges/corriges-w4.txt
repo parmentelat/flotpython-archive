@@ -27,7 +27,7 @@ def pgcd(a, b):
 
 
 ##################################################
-# pgcd (v2) - Semaine 4 Séquence 3
+# pgcd (bis) - Semaine 4 Séquence 3
 ##################################################
 # il se trouve qu'en fait la première inversion n'est
 # pas nécessaire
@@ -78,7 +78,7 @@ def doubler_premier(f, first, *args):
 
 
 ##################################################
-# doubler_premier (v2) - Semaine 4 Séquence 6
+# doubler_premier (bis) - Semaine 4 Séquence 6
 ##################################################
 def doubler_premier_bis(f, *args):
     "marche aussi mais moins élégant"

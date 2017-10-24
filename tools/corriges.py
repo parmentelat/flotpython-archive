@@ -1,7 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-from __future__ import print_function
 
 import os.path
 import re
@@ -47,8 +45,8 @@ class Solution:
         self.code = ""
 
     def __repr__(self):
-        return "<Solution from {} function={} week={} seq={}>"\
-            .format(self.filename, self.name, self.week, self.sequence)
+        return f"<Solution from {self.filename} function={self.name} " \
+               f"week={self.week} seq={self.sequence}>"
 
     def add_code_line(self, line):
         "convenience for the parser code"
@@ -117,7 +115,11 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
         cell_lines = []
 
         def add_cell_line(line):
-            cell_lines.append('"{}\\n"'.format(line))
+            cell_lines.append(f'"{line}\\n"')
+
+        def add_cell_lines(lines):
+            for line in lines.split("\n"):
+                add_cell_line(line)
 
         def make_cell():
             return self.notebook_cell_format.format(cell_lines=",\n".join(cell_lines))
@@ -131,33 +133,31 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
             return [sep, sep, sep, cell1]
 
         # the usual case
-        module = "corrections.{filename}".format(**self.__dict__)
-        exo = "corrections.{filename}.exo_{name}".format(**self.__dict__)
+        module = f"corrections.{self.filename}"
+        exo = f"corrections.{self.filename}.exo_{self.name}"
         cell_lines = []
-        add_cell_line("########## exo {} ##########".format(self.name))
-        add_cell_line("# remove comment out to reload")
-        add_cell_line("# reload({module})".format(module=module))
-        add_cell_line("import {module}".format(module=module))
+        add_cell_line(f"########## exo {self.name} ##########")
+        add_cell_line(f"# remove comment out to reload")
+        add_cell_line(f"# reload({module})")
+        add_cell_line(f"import {module}")
         if self.no_example is None:
-            add_cell_line("{exo}.example()".format(exo=exo))
+            add_cell_line(f"{exo}.example()")
         cell1 = make_cell()
         cell_lines = []
         add_cell_line("# cheating - should be OK")
-        add_cell_line("from {module} import {name}"
-                      .format(module=module, **self.__dict__))
-        add_cell_line("{exo}.correction({name})"
-                      .format(exo=exo, **self.__dict__))
+        add_cell_line(f"from {module} import {self.name}")
+        add_cell_line(f"{exo}.correction({self.name})")
         cell2 = make_cell()
         cell_lines = []
-        add_cell_line("# dummy solution - should be KO")
-        add_cell_line("try:")
-        add_cell_line("   from {module} import {name}_ko"
-                      .format(module=module, **self.__dict__))
-        add_cell_line("except:")
-        add_cell_line("   def {name}_ko(*args, **keywords): return 'your_code'"
-                      .format(**self.__dict__))
-        add_cell_line("{exo}.correction({name}_ko)"
-                      .format(exo=exo, **self.__dict__))
+        add_cell_line(f"# dummy solution - should be KO")
+        add_cell_lines(f"""try:
+   from {module} import {self.name}_ko
+except:
+   def {self.name}_ko(*args, **keywords):
+       return 'your_code'
+""")
+
+        add_cell_line(f"{exo}.correction({self.name}_ko)")
         cell3 = make_cell()
         return [sep, sep, cell1, cell2, cell3]
 
@@ -237,26 +237,21 @@ class Source(object):
                     for field, required in self.mandatory_fields:
                         if field not in keywords:
                             if required:
-                                print("{}:{} missing keyword {}"
-                                      .format(self.filename, lineno, field))
+                                print(f"{self.filename}:{lineno} missing keyword {field}")
                             elif field in context_from_filename:
                                 keywords[field] = context_from_filename[field]
-                                # print("Using inferred field {} = {}"
-                                #      .format(field, keywords[field]))
+                                # print(f"Using inferred field {field} = {keywords[field]}")
                             else:
-                                print("{}:{} could not infer field {}"
-                                      .format(field))
+                                print(f"{self.filename}:{lineno} could not infer field {field}")
                     try:
                         solution = Solution(filename=self.filename, **keywords)
                     except:
                         import traceback
                         traceback.print_exc()
-                        print("{}:{}: ERROR (ignored): {}".format(
-                            self.filename, lineno, line))
+                        print(f"{self.filename}:{lineno}: ERROR (ignored): {line}")
                 elif end:
                     if solution == None:
-                        print("{}:{} - Unexpected @END@ - ignored\n{}"
-                              .format(self.filename, lineno, line))
+                        print(f"{self.filename}:{lineno} - Unexpected @END@ - ignored\n{line}")
                     else:
                         # memorize current solution
                         solutions.append(solution)
@@ -266,8 +261,7 @@ class Source(object):
                             functions.append(solution)
                         solution = None
                 elif '@BEG@' in line or '@END@' in line:
-                    print("{}:{} Warning - misplaced @BEG|END@ - ignored\n{}"
-                          .format(self.filename, lineno, line))
+                    print(f"{self.filename}:{lineno} Warning - misplaced @BEG|END@ - ignored\n{line}")
                     continue
                 elif solution:
                     solution.add_code_line(line)
@@ -330,7 +324,7 @@ class Latex(object):
                     output.write(self.week_format.format(week))
                 output.write(solution.latex())
             output.write(Latex.footer)
-        print("{} (over)written".format(self.filename))
+        print(f"{self.filename} (over)written")
 
     @staticmethod
     def escape(str):
@@ -358,7 +352,7 @@ class Text(object):
                 output.write(self.header_format.format(title=title))
             for solution in solutions:
                 output.write(solution.text())
-        print("{} (over)written".format(self.filename))
+        print(f"{self.filename} (over)written")
 
 ####################
 
@@ -398,7 +392,7 @@ class Notebook(object):
                          for cell in function.notebook_cells()]
             output.write(",".join(all_cells))
             output.write(self.footer)
-        print("{} (over)written".format(self.filename))
+        print(f"{self.filename} (over)written")
 
 ##########
 
@@ -411,11 +405,12 @@ class Stats(object):
 
     def print_count(self, verbose=False):
         skipped = [f for f in self.functions if f.no_validation]
-        print("We have a total of {} solutions for {} different exos  - {} not validated:"
-              .format(len(self.solutions), len(self.functions), len(skipped)))
+        ns = len(self.solutions)
+        nf = len(self.functions)
+        nnv = len(skipped)
+        print(f"We have a total of {ns} solutions for {nf} different exos  - {nnv} not validated:")
         for f in skipped:
-            print("skipped {name} - w{week}s{sequence}"
-                  .format(**f.__dict__))
+            print(f"skipped {self.name} - w{self.week}s{self.sequence}")
         if verbose:
             for function in self.functions:
                 print(function)
@@ -459,9 +454,9 @@ def main():
         do_notebook = False
 
     output = args.output if args.output else "corriges"
-    texoutput = "{}.tex".format(output)
-    txtoutput = "{}.txt".format(output)
-    nboutput = "{}.ipynb".format(output)
+    texoutput = f"{output}.tex"
+    txtoutput = f"{output}.txt"
+    nboutput = f"{output}.ipynb"
     title_list = args.title.split(";")
     if do_latex:
         Latex(texoutput).write(
