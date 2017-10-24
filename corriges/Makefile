@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 TOOL = ../tools/corriges.py
 
-w2 = w2s2_regexp.py w2s6_slicing.py w2s6_strings.py w2s7_comprehensions.py w2s7_for.py w2s7_if.py
+w2 = w2s2_regexp.py w2s6_strings.py w2s6_slicing.py w2s6_if.py w2s7_comprehensions.py w2s7_for.py 
 w3 = w3s1_files.py w3s4_marine_dict.py w3s4_parse_graph.py w3s5_marine_set.py
 w4 = w4s3_pgcd.py w4s6_fun_args.py
 w5 = w5s2_functional.py w5s5_decode_zen.py w5s6_rpcproxy.py
