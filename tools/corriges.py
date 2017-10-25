@@ -132,7 +132,7 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
         cell.add_line(f"""try:
    from {module} import {self.name}_ko
 except:
-   print("WARNING - no _ko variant found")
+   print("WARNING - variant {self.name}_ko not found")
    def {self.name}_ko(*args, **keywords):
        return 'your_code'
 """)
@@ -161,7 +161,7 @@ except:
 # as of dec. 11 2014 all files are UTF-8 and that's it
 
 
-class Source(object):
+class Source:
 
     def __init__(self, filename):
         self.filename = filename
@@ -250,7 +250,7 @@ class Source(object):
 ############################################################
 
 
-class Latex(object):
+class Latex:
 
     header = r"""\documentclass [12pt]{article}
 \usepackage[utf8]{inputenc}
@@ -313,7 +313,7 @@ class Latex(object):
 ####################
 
 
-class Text(object):
+class Text:
 
     def __init__(self, filename):
         self.filename = filename
@@ -337,7 +337,7 @@ class Text(object):
 ####################
 
 
-class Notebook(object):
+class Notebook:
 
     def __init__(self, filename):
         self.filename = filename
@@ -375,7 +375,7 @@ class Notebook(object):
 ##########
 
 
-class Stats(object):
+class Stats:
 
     def __init__(self, solutions, functions):
         self.solutions = solutions
@@ -388,7 +388,7 @@ class Stats(object):
         nnv = len(skipped)
         print(f"We have a total of {ns} solutions for {nf} different exos  - {nnv} not validated:")
         for f in skipped:
-            print(f"skipped {self.name} - w{self.week}s{self.sequence}")
+            print(f"skipped {f.name} - w{f.week}s{f.sequence}")
         if verbose:
             for function in self.functions:
                 print(function)

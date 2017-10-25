@@ -1,10 +1,23 @@
 # -*- coding: utf-8 -*-
 TOOL = ../tools/corriges.py
 
-w2 = w2s2_regexp.py w2s6_strings.py w2s6_slicing.py w2s6_if.py w2s7_comprehensions.py w2s7_for.py 
-w3 = w3s1_files.py w3s4_marine_dict.py w3s4_parse_graph.py w3s5_marine_set.py
-w4 = w4s3_pgcd.py w4s6_fun_args.py
-w5 = w5s2_functional.py w5s5_decode_zen.py w5s6_rpcproxy.py
+n2 = regexp_pythonid regexp_agenda regexp_phone regexp_url \
+     exo_libelle exo_carre exo_inconnue exo_divisible exo_morceaux exo_spam \
+     exo_liste_p exo_multi_tri exo_multi_tri_reverse exo_produit_scalaire \
+     exo_aplatir exo_alternat exo_intersect
+# xxx this needs to be refreshed
+n3 = exo_comptage exo_marine_dict exo_parse_graph exo_marine_set
+n4 = exo_pgcd exo_distance exo_doubler_premier exo_doubler_premier_kwds exo_compare_args
+n5 = exo_numbers exo_compare_all exo_decode_zen.py exo_rpcproxy.py
+
+define pys
+$(foreach name, $(1), $(name).py)
+endef
+
+w2 = $(call pys, $(n2))
+w3 = $(call pys, $(n3))
+w4 = $(call pys, $(n4))
+w5 = $(call pys, $(n5))
 
 # pour la semaine 5 on met
 # dans le latex les deux fichiers (via $(TOOL))
