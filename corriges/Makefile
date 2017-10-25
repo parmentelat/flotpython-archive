@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
 TOOL = ../tools/corriges.py
 
+all: everything
+
+exomap: .FORCE
+	../tools/exomap.sh
+
+.FORCE:
+
 n2 = regexp_pythonid regexp_agenda regexp_phone regexp_url \
      exo_libelle exo_carre exo_inconnue exo_divisible exo_morceaux exo_spam \
      exo_liste_p exo_multi_tri exo_multi_tri_reverse exo_produit_scalaire \
      exo_aplatir exo_alternat exo_intersect
-# xxx this needs to be refreshed
 n3 = exo_comptage exo_marine_dict exo_parse_graph exo_marine_set
 n4 = exo_pgcd exo_distance exo_doubler_premier exo_doubler_premier_kwds exo_compare_args
 n5 = exo_numbers exo_compare_all exo_decode_zen.py exo_rpcproxy.py
@@ -47,7 +53,7 @@ endef
 
 SOURCES = $(foreach week,$(WEEKS),$(call week_latex_sources,$(week)))
 
-all: $(foreach week, $(WEEKS), corriges-w$(week).tex corriges-w$(week).txt) corriges.tex corriges.txt code
+everything: $(foreach week, $(WEEKS), corriges-w$(week).tex corriges-w$(week).txt) corriges.tex corriges.txt code
 
 corriges.tex corriges.txt: $(SOURCES) $(TOOL)
 	$(TOOL) --output corriges --title "MOOC Python;Tous les corrigés" --contents $(SOURCES)

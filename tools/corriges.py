@@ -9,7 +9,28 @@ from argparse import ArgumentParser
 import nbformat
 from nbformat.notebooknode import NotebookNode
 
-############################################################
+
+import re
+
+class Map(dict):
+    """
+    An object that keeps track of the association
+    name -> week x sequence
+
+    see exomap.sh 
+    """
+
+    pattern = re.compile("w.*/w(.)-s(.)-x.* import exo_(\w+)")
+    
+    def __init__(self, filename="exomap"):
+        with open(filename) as f:
+            for lineno, line in enumerate(f, 1):
+                m = Map.pattern.match(line)
+                if not m:
+                    print(f"WARNING: could not understand line {line}")
+                    continue
+                week, sequence, name = m.groups()
+                self[name] = week, sequence
 
 
 class Solution:
@@ -163,13 +184,9 @@ except:
 
 class Source:
 
-    def __init__(self, filename):
+    def __init__(self, filename, map):
         self.filename = filename
-
-    # mandatory fields
-    # 'name' truly is required
-    # the other 2 can sometimes be inferred from the context (filename)
-    fields_defaults = [('name', None), ('week', 0), ('sequence', 0)]
+        self.map = map
 
     beg_matcher = re.compile(
         r"\A. @BEG@(?P<keywords>(\s+[a-z_]+=[a-z_A-Z0-9-]+)+)\s*\Z"
@@ -213,16 +230,20 @@ class Source:
                     for assignment in assignments:
                         k, v = assignment.split('=')
                         keywords[k] = v
-                    for field, default in self.fields_defaults:
-                        if field not in keywords:
-                            if default is None:
-                                print(f"{self.filename}:{lineno} missing keyword {field}")
-                            elif field in context_from_filename:
-                                keywords[field] = context_from_filename[field]
-                                # print(f"Using inferred field {field} = {keywords[field]}")
-                            else:
-                                print(f"{self.filename}:{lineno} using default {field}={default}")
-                                keywords[field] = default
+                    if 'name' not in keywords:
+                        print(f"{self.filename}:{lineno} 'name' missing keyword")
+                        continue
+                    name = keywords['name']
+                    if 'week' in keywords and 'sequence' in keywords:
+                        print(f"{self.filename}:{lineno} using explicit week or sequence")
+                        self.map[name] = keywords['week'], keywords['sequence']
+                    else:
+                        week, sequence = self.map.get(name)
+                        if not week or not sequence:
+                            print(f"{self.filename}:{lineno} cannot spot week or sequence")
+                            continue
+                        keywords['week'] = week
+                        keywords['sequence'] = sequence
                     try:
                         solution = Solution(filename=self.filename, **keywords)
                     except:
@@ -408,9 +429,10 @@ def main():
     parser.add_argument("files", nargs='+')
     args = parser.parse_args()
 
+    map = Map()
     solutions, functions = [], []
     for filename in args.files:
-        ss, fs = Source(filename).parse()
+        ss, fs = Source(filename, map).parse()
         solutions += ss
         functions += fs
 
