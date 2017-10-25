@@ -6,6 +6,9 @@ import re
 
 from argparse import ArgumentParser
 
+import nbformat
+from nbformat.notebooknode import NotebookNode
+
 ############################################################
 
 
@@ -87,79 +90,55 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
         return self.latex_format % locals()
 
     # the validation notebook
-    notebook_cell_format = r"""
-    {{
-     "cell_type": "code",
-     "collapsed": false,
-     "input": [
-    {cell_lines}
-     ],
-     "language": "python",
-     "metadata": {{}},
-     "outputs": []
-    }}
-"""
+    def add_validation(self, notebook):
 
-    notebook_cell_separator = r"""
-    {
-     "cell_type": "markdown",
-     "metadata": {},
-     "source": [
-      "*********"
-     ]
-    }
-"""
-
-    def notebook_cells(self):
-        sep = self.notebook_cell_separator
-        cell_lines = []
-
-        def add_cell_line(line):
-            cell_lines.append(f'"{line}\\n"')
-
-        def add_cell_lines(lines):
-            for line in lines.split("\n"):
-                add_cell_line(line)
-
-        def make_cell():
-            return self.notebook_cell_format.format(cell_lines=",\n".join(cell_lines))
+        class Cell:
+            def __init__(self):
+                self.lines = []
+            def add_line(self, line):
+                self.lines.append(line)
+            def add_lines(self, lines):
+                self.lines += lines
+            def record(self):
+                notebook.add_code_cell(self.lines)
 
         # some exercices are so twisted that we can't do anything for them here
         if self.no_validation:
-            cell_lines = []
-            add_cell_line("#################### exo {} has no_validation set"
-                          .format(self.name))
-            cell1 = make_cell()
-            return [sep, sep, sep, cell1]
+            for i in range(2):
+                notebook.add_text_cell("*****")
+            cell = Cell()
+            cell.add_line(
+                f"#################### exo {self.name} has no_validation set")
+            cell.record()
+            return
 
+        notebook.add_text_cell("*****")
         # the usual case
         module = f"corrections.{self.filename}"
         exo = f"corrections.{self.filename}.exo_{self.name}"
-        cell_lines = []
-        add_cell_line(f"########## exo {self.name} ##########")
-        add_cell_line(f"# remove comment out to reload")
-        add_cell_line(f"# reload({module})")
-        add_cell_line(f"import {module}")
+        cell = Cell()
+        cell.add_line(f"########## exo {self.name} ##########")
+        cell.add_line(f"import {module}")
         if self.no_example is None:
-            add_cell_line(f"{exo}.example()")
-        cell1 = make_cell()
-        cell_lines = []
-        add_cell_line("# cheating - should be OK")
-        add_cell_line(f"from {module} import {self.name}")
-        add_cell_line(f"{exo}.correction({self.name})")
-        cell2 = make_cell()
-        cell_lines = []
-        add_cell_line(f"# dummy solution - should be KO")
-        add_cell_lines(f"""try:
+            cell.add_line(f"{exo}.example()")
+        cell.record()
+        cell = Cell()
+        cell.add_line("# cheating - should be OK")
+        cell.add_line(f"from {module} import {self.name}")
+        cell.add_line(f"{exo}.correction({self.name})")
+        cell.record()
+        cell = Cell()
+        cell.add_line(f"# dummy solution - should be KO")
+        cell.add_line(f"""try:
    from {module} import {self.name}_ko
 except:
+   print("WARNING - no _ko variant found")
    def {self.name}_ko(*args, **keywords):
        return 'your_code'
 """)
 
-        add_cell_line(f"{exo}.correction({self.name}_ko)")
-        cell3 = make_cell()
-        return [sep, sep, cell1, cell2, cell3]
+        cell.add_line(f"{exo}.correction({self.name}_ko)")
+        cell.record()
 
 ########################################
     text_format = r"""
@@ -190,7 +169,7 @@ class Source(object):
     # mandatory fields
     # 'name' truly is required
     # the other 2 can sometimes be inferred from the context (filename)
-    mandatory_fields = [('name', True), ('week', False), ('sequence', False)]
+    fields_defaults = [('name', None), ('week', 0), ('sequence', 0)]
 
     beg_matcher = re.compile(
         r"\A. @BEG@(?P<keywords>(\s+[a-z_]+=[a-z_A-Z0-9-]+)+)\s*\Z"
@@ -234,15 +213,16 @@ class Source(object):
                     for assignment in assignments:
                         k, v = assignment.split('=')
                         keywords[k] = v
-                    for field, required in self.mandatory_fields:
+                    for field, default in self.fields_defaults:
                         if field not in keywords:
-                            if required:
+                            if default is None:
                                 print(f"{self.filename}:{lineno} missing keyword {field}")
                             elif field in context_from_filename:
                                 keywords[field] = context_from_filename[field]
                                 # print(f"Using inferred field {field} = {keywords[field]}")
                             else:
-                                print(f"{self.filename}:{lineno} could not infer field {field}")
+                                print(f"{self.filename}:{lineno} using default {field}={default}")
+                                keywords[field] = default
                     try:
                         solution = Solution(filename=self.filename, **keywords)
                     except:
@@ -361,37 +341,35 @@ class Notebook(object):
 
     def __init__(self, filename):
         self.filename = filename
+        self.notebook = nbformat.v4.new_notebook()
+        self.add_code_cell("%load_ext autoreload\n%autoreload 2")
 
-    header = r"""
-{
- "metadata": {
-  "notebookname": "VALIDATION",
-  "signature": "sha256:843fabf07c2d056925e263e004388ed1a2e08532c706063406f32466db14ba23",
-  "version": "1.0"
- },
- "nbformat": 3,
- "nbformat_minor": 0,
- "worksheets": [
-  {
-   "cells": [
-"""
+    def _normalize(self, contents):
+        if isinstance(contents, str):
+            return contents
+        elif isinstance(contents, list):
+            return "\n".join(contents)
 
-    footer = r"""
-   ],
-   "metadata": {}
-  }
- ]
-}
-"""
-
+    def add_text_cell(self, contents):
+        self.notebook['cells'].append(
+            nbformat.v4.new_markdown_cell(
+                self._normalize(contents)
+            ))
+        
+    def add_code_cell(self, contents):
+        self.notebook['cells'].append(
+            nbformat.v4.new_code_cell(
+                self._normalize(contents)
+            ))
+        
     def write(self, functions):
+        
+        for function in functions:
+            function.add_validation(self)
+
         # JSON won't like an extra comma
         with open(self.filename, 'w') as output:
-            output.write(self.header)
-            all_cells = [cell for function in functions
-                         for cell in function.notebook_cells()]
-            output.write(",".join(all_cells))
-            output.write(self.footer)
+            nbformat.write(self.notebook, output)
         print(f"{self.filename} (over)written")
 
 ##########
