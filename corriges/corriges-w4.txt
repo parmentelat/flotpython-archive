@@ -9,6 +9,9 @@
 # pgcd - Semaine 4 Séquence 3
 ##################################################
 def pgcd(a, b):
+    # le cas pathologique
+    if a * b == 0:
+        return 0
     "le pgcd de a et b par l'algorithme d'Euclide"
     # l'algorithme suppose que a >= b
     # donc si ce n'est pas le cas 
@@ -38,6 +41,9 @@ def pgcd(a, b):
 # a, b = b, r = b, a
 # ce qui provoque l'inversion
 def pgcd_bis(a, b):
+    # le cas pathologique
+    if a == 0 or b == 0:
+        return 0
     while True:
         # on calcule le reste 
         r = a % b
@@ -46,6 +52,23 @@ def pgcd_bis(a, b):
             return b
         # sinon on passe à l'itération suivante
         a, b = b, r
+
+
+##################################################
+# pgcd (ter) - Semaine 4 Séquence 3
+##################################################
+# une autre alternative, qui fonctionne aussi
+# plus court, mais on passe du temps à se convaincre
+# que ça fonctionne bien comme demandé
+def pgcd_ter(a, b):
+    # le cas pathologique
+    if a * b == 0:
+        return 0
+    # si on n'aime pas les boucles sans fin
+    # on peut faire aussi comme ceci
+    while b:
+        a, b = b, a % b
+    return a
 
 
 ##################################################

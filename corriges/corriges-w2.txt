@@ -12,7 +12,7 @@
 # et peut être suivi par n'importe quel nombre de
 # lettre, chiffre ou underscore, ce qui se trouve être \w
 # si on ne se met pas en mode unicode
-pythonid_regexp = "[a-zA-Z_]\w*"
+pythonid = "[a-zA-Z_]\w*"
 
 
 ##################################################
@@ -38,7 +38,7 @@ pythonid_bis = "[a-zA-Z_][a-zA-Z0-9_]*"
 # remarquez sinon l'utilisation à la fin de :? pour signifier qu'on peut
 # mettre ou non un deuxième séparateur ':' 
 #   
-agenda_regexp = r"\A(?P<prenom>[-\w]*):(?P<nom>[-\w]+):?\Z"
+agenda = r"\A(?P<prenom>[-\w]*):(?P<nom>[-\w]+):?\Z"
 
 
 ##################################################
@@ -49,7 +49,7 @@ agenda_regexp = r"\A(?P<prenom>[-\w]*):(?P<nom>[-\w]+):?\Z"
 # il faut bien backslasher le + dans le +33
 # car sinon cela veut dire 'un ou plusieurs'
 #
-phone_regexp = r"(\+33|0)(?P<number>[0-9]{9})\Z"
+phone = r"(\+33|0)(?P<number>[0-9]{9})\Z"
 
 
 ##################################################
@@ -101,10 +101,10 @@ def libelle(ligne):
     # maintenant on a les trois valeurs
     nom, prenom, rang = mots
     # comment presenter le rang
-    msg_rang = "1er" if rang == "1" \
-               else "2nd" if rang == "2" \
-                    else "{}-ème".format(rang)
-    return f"{prenom}.{nom} ({msg_rang})"
+    rang_ieme = "1er" if rang == "1" \
+                else "2nd" if rang == "2" \
+                else f"{rang}-ème"
+    return f"{prenom}.{nom} ({rang_ieme})"
 
 
 ##################################################
@@ -206,63 +206,6 @@ def morceaux_ter(x):
 
 
 ##################################################
-# aplatir - Semaine 2 Séquence 7
-##################################################
-def aplatir(conteneurs):
-    "retourne une liste des éléments des éléments de conteneurs"
-    # on peut concaténer les éléments de deuxième niveau 
-    # par une simple imbrication de deux compréhensions de liste
-    return [element for conteneur in conteneurs for element in conteneur]
-
-
-##################################################
-# alternat - Semaine 2 Séquence 7
-##################################################
-def alternat(l1, l2):
-    "renvoie une liste des éléments pris un sur deux dans l1 et dans l2"
-    # pour réaliser l'alternance on peut combiner zip avec aplatir
-    # telle qu'on vient de la réaliser
-    return aplatir(zip(l1, l2))
-
-
-##################################################
-# alternat (bis) - Semaine 2 Séquence 7
-##################################################
-def alternat_bis(l1, l2):
-    "une deuxième version de alternat"
-    # la même idée mais directement, sans utiliser aplatir
-    return [element for conteneur in zip(l1, l2) for element in conteneur]
-
-
-##################################################
-# intersect - Semaine 2 Séquence 7
-##################################################
-def intersect(A, B):
-    """
-    prend en entrée deux listes de tuples de la forme
-    (entier, valeur)
-    renvoie la liste des valeurs associées dans A ou B
-    aux entiers présents dans A et B
-    """
-    # pour montrer un exemple de fonction locale:
-    # une fonction qui renvoie l'ensemble des entiers
-    # présents dans une des deux listes d'entrée
-    def keys(S):
-        return {k for k, val in S}
-    # on l'applique à A et B
-    keys_A = keys(A)
-    keys_B = keys(B)
-    # 
-    # les entiers présents dans A et B 
-    # avec une intersection d'ensembles
-    common_keys = keys_A & keys_B
-    # et pour conclure on fait une union sur deux
-    # compréhensions d'ensembles
-    return {vala for k, vala in A if k in common_keys} \
-         | {valb for k, valb in B if k in common_keys} 
-
-
-##################################################
 # liste_P (bis) - Semaine 2 Séquence 7
 ##################################################
 # On peut bien entendu faire aussi de manière pédestre
@@ -349,4 +292,61 @@ def produit_scalaire_ter(X, Y):
     for i in range(n):
         scalaire += X[i] * Y[i]
     return scalaire
+
+
+##################################################
+# aplatir - Semaine 2 Séquence 7
+##################################################
+def aplatir(conteneurs):
+    "retourne une liste des éléments des éléments de conteneurs"
+    # on peut concaténer les éléments de deuxième niveau 
+    # par une simple imbrication de deux compréhensions de liste
+    return [element for conteneur in conteneurs for element in conteneur]
+
+
+##################################################
+# alternat - Semaine 2 Séquence 7
+##################################################
+def alternat(l1, l2):
+    "renvoie une liste des éléments pris un sur deux dans l1 et dans l2"
+    # pour réaliser l'alternance on peut combiner zip avec aplatir
+    # telle qu'on vient de la réaliser
+    return aplatir(zip(l1, l2))
+
+
+##################################################
+# alternat (bis) - Semaine 2 Séquence 7
+##################################################
+def alternat_bis(l1, l2):
+    "une deuxième version de alternat"
+    # la même idée mais directement, sans utiliser aplatir
+    return [element for conteneur in zip(l1, l2) for element in conteneur]
+
+
+##################################################
+# intersect - Semaine 2 Séquence 7
+##################################################
+def intersect(A, B):
+    """
+    prend en entrée deux listes de tuples de la forme
+    (entier, valeur)
+    renvoie la liste des valeurs associées dans A ou B
+    aux entiers présents dans A et B
+    """
+    # pour montrer un exemple de fonction locale:
+    # une fonction qui renvoie l'ensemble des entiers
+    # présents dans une des deux listes d'entrée
+    def keys(S):
+        return {k for k, val in S}
+    # on l'applique à A et B
+    keys_A = keys(A)
+    keys_B = keys(B)
+    # 
+    # les entiers présents dans A et B 
+    # avec une intersection d'ensembles
+    common_keys = keys_A & keys_B
+    # et pour conclure on fait une union sur deux
+    # compréhensions d'ensembles
+    return {vala for k, vala in A if k in common_keys} \
+         | {valb for k, valb in B if k in common_keys} 
 

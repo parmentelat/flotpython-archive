@@ -18,7 +18,7 @@
 # et peut être suivi par n'importe quel nombre de
 # lettre, chiffre ou underscore, ce qui se trouve être \w
 # si on ne se met pas en mode unicode
-pythonid_regexp = "[a-zA-Z_]\w*"
+pythonid = "[a-zA-Z_]\w*"
 
 
 ##################################################
@@ -44,7 +44,7 @@ pythonid_bis = "[a-zA-Z_][a-zA-Z0-9_]*"
 # remarquez sinon l'utilisation à la fin de :? pour signifier qu'on peut
 # mettre ou non un deuxième séparateur ':' 
 #   
-agenda_regexp = r"\A(?P<prenom>[-\w]*):(?P<nom>[-\w]+):?\Z"
+agenda = r"\A(?P<prenom>[-\w]*):(?P<nom>[-\w]+):?\Z"
 
 
 ##################################################
@@ -55,7 +55,7 @@ agenda_regexp = r"\A(?P<prenom>[-\w]*):(?P<nom>[-\w]+):?\Z"
 # il faut bien backslasher le + dans le +33
 # car sinon cela veut dire 'un ou plusieurs'
 #
-phone_regexp = r"(\+33|0)(?P<number>[0-9]{9})\Z"
+phone = r"(\+33|0)(?P<number>[0-9]{9})\Z"
 
 
 ##################################################
@@ -212,63 +212,6 @@ def morceaux_ter(x):
 
 
 ##################################################
-# aplatir - Semaine 2 Séquence 7
-##################################################
-def aplatir(conteneurs):
-    "retourne une liste des éléments des éléments de conteneurs"
-    # on peut concaténer les éléments de deuxième niveau 
-    # par une simple imbrication de deux compréhensions de liste
-    return [element for conteneur in conteneurs for element in conteneur]
-
-
-##################################################
-# alternat - Semaine 2 Séquence 7
-##################################################
-def alternat(l1, l2):
-    "renvoie une liste des éléments pris un sur deux dans l1 et dans l2"
-    # pour réaliser l'alternance on peut combiner zip avec aplatir
-    # telle qu'on vient de la réaliser
-    return aplatir(zip(l1, l2))
-
-
-##################################################
-# alternat (bis) - Semaine 2 Séquence 7
-##################################################
-def alternat_bis(l1, l2):
-    "une deuxième version de alternat"
-    # la même idée mais directement, sans utiliser aplatir
-    return [element for conteneur in zip(l1, l2) for element in conteneur]
-
-
-##################################################
-# intersect - Semaine 2 Séquence 7
-##################################################
-def intersect(A, B):
-    """
-    prend en entrée deux listes de tuples de la forme
-    (entier, valeur)
-    renvoie la liste des valeurs associées dans A ou B
-    aux entiers présents dans A et B
-    """
-    # pour montrer un exemple de fonction locale:
-    # une fonction qui renvoie l'ensemble des entiers
-    # présents dans une des deux listes d'entrée
-    def keys(S):
-        return {k for k, val in S}
-    # on l'applique à A et B
-    keys_A = keys(A)
-    keys_B = keys(B)
-    # 
-    # les entiers présents dans A et B 
-    # avec une intersection d'ensembles
-    common_keys = keys_A & keys_B
-    # et pour conclure on fait une union sur deux
-    # compréhensions d'ensembles
-    return {vala for k, vala in A if k in common_keys} \
-         | {valb for k, valb in B if k in common_keys} 
-
-
-##################################################
 # liste_P (bis) - Semaine 2 Séquence 7
 ##################################################
 # On peut bien entendu faire aussi de manière pédestre
@@ -355,6 +298,63 @@ def produit_scalaire_ter(X, Y):
     for i in range(n):
         scalaire += X[i] * Y[i]
     return scalaire
+
+
+##################################################
+# aplatir - Semaine 2 Séquence 7
+##################################################
+def aplatir(conteneurs):
+    "retourne une liste des éléments des éléments de conteneurs"
+    # on peut concaténer les éléments de deuxième niveau 
+    # par une simple imbrication de deux compréhensions de liste
+    return [element for conteneur in conteneurs for element in conteneur]
+
+
+##################################################
+# alternat - Semaine 2 Séquence 7
+##################################################
+def alternat(l1, l2):
+    "renvoie une liste des éléments pris un sur deux dans l1 et dans l2"
+    # pour réaliser l'alternance on peut combiner zip avec aplatir
+    # telle qu'on vient de la réaliser
+    return aplatir(zip(l1, l2))
+
+
+##################################################
+# alternat (bis) - Semaine 2 Séquence 7
+##################################################
+def alternat_bis(l1, l2):
+    "une deuxième version de alternat"
+    # la même idée mais directement, sans utiliser aplatir
+    return [element for conteneur in zip(l1, l2) for element in conteneur]
+
+
+##################################################
+# intersect - Semaine 2 Séquence 7
+##################################################
+def intersect(A, B):
+    """
+    prend en entrée deux listes de tuples de la forme
+    (entier, valeur)
+    renvoie la liste des valeurs associées dans A ou B
+    aux entiers présents dans A et B
+    """
+    # pour montrer un exemple de fonction locale:
+    # une fonction qui renvoie l'ensemble des entiers
+    # présents dans une des deux listes d'entrée
+    def keys(S):
+        return {k for k, val in S}
+    # on l'applique à A et B
+    keys_A = keys(A)
+    keys_B = keys(B)
+    # 
+    # les entiers présents dans A et B 
+    # avec une intersection d'ensembles
+    common_keys = keys_A & keys_B
+    # et pour conclure on fait une union sur deux
+    # compréhensions d'ensembles
+    return {vala for k, vala in A if k in common_keys} \
+         | {valb for k, valb in B if k in common_keys} 
 
 
 ##################################################
@@ -518,9 +518,8 @@ def merge_ter(extended, abbreviated):
 
 
 ##################################################
-# index - Semaine 3 Séquence 4
+# parse_graph - Semaine 3 Séquence 4
 ##################################################
-
 from collections import defaultdict
 
 def parse_graph(filename):
@@ -590,6 +589,9 @@ def diff_bis(extended, abbreviated):
 # pgcd - Semaine 4 Séquence 3
 ##################################################
 def pgcd(a, b):
+    # le cas pathologique
+    if a * b == 0:
+        return 0
     "le pgcd de a et b par l'algorithme d'Euclide"
     # l'algorithme suppose que a >= b
     # donc si ce n'est pas le cas 
@@ -619,6 +621,9 @@ def pgcd(a, b):
 # a, b = b, r = b, a
 # ce qui provoque l'inversion
 def pgcd_bis(a, b):
+    # le cas pathologique
+    if a == 0 or b == 0:
+        return 0
     while True:
         # on calcule le reste 
         r = a % b
@@ -627,6 +632,23 @@ def pgcd_bis(a, b):
             return b
         # sinon on passe à l'itération suivante
         a, b = b, r
+
+
+##################################################
+# pgcd (ter) - Semaine 4 Séquence 3
+##################################################
+# une autre alternative, qui fonctionne aussi
+# plus court, mais on passe du temps à se convaincre
+# que ça fonctionne bien comme demandé
+def pgcd_ter(a, b):
+    # le cas pathologique
+    if a * b == 0:
+        return 0
+    # si on n'aime pas les boucles sans fin
+    # on peut faire aussi comme ceci
+    while b:
+        a, b = b, a % b
+    return a
 
 
 ##################################################
@@ -713,54 +735,7 @@ def compare_args(f, g, argument_tuples):
 
 
 ##################################################
-# RPCProxy - Semaine 5 Séquence 6
-##################################################
-# une troisième implémentation de RPCProxy
-
-class Forwarder:
-    """
-    Une instance de la classe Forwarder est un callable
-    qui peut être utilisée comme une méthode sur l
-    class RPCProxy
-    """
-    def __init__(self, rpc_proxy, methodname):
-        """
-        le constructeur  mémorise l'instance de RPCProxy
-        et le nom de la méthode qui a été appelée
-        """
-        self.methodname = methodname
-        self.rpc_proxy = rpc_proxy
-
-    def __call__(self, *args):
-        """
-        en rendant cet objet callable, on peut l'utiliser
-        comme une méthode de RPCProxy
-        """
-        print "Envoi à {}\nde la fonction {} -- args= {}".\
-            format(self.rpc_proxy.url, self.methodname, args)
-        return "retour de la fonction " + self.methodname
-
-class RPCProxy:
-    """
-    Une troisième implémentation de RPCProxy qui sous-traite
-    à une classe annexe `Forwarder` qui se comporte comme
-    une *factory* de méthodes
-    """
-    def __init__(self, url, login, password):
-        self.url = url
-        self.login = login
-        self.password = password
-        
-    def __getattr__ (self, methodname):
-        """
-        Crée à la volée une instance de Forwarder
-        correspondant à 'methodname'
-        """
-        return Forwarder(self, methodname)
-
-
-##################################################
-# shipdict - Semaine 5 Séquence 6
+# shipdict - Semaine 6 Séquence 4
 ##################################################
 
 # helpers - used for verbose mode only
@@ -797,7 +772,7 @@ def lon_d_m_s(f):
 
 
 ##################################################
-# shipdict (suite) - Semaine 5 Séquence 6
+# shipdict (suite) - Semaine 6 Séquence 4
 ##################################################
 class Position(object):
     "a position atom with timestamp attached"
@@ -823,7 +798,7 @@ class Position(object):
 
 
 ##################################################
-# shipdict (suite) - Semaine 5 Séquence 6
+# shipdict (suite) - Semaine 6 Séquence 4
 ##################################################
 class Ship(object):
     """
@@ -857,7 +832,7 @@ class Ship(object):
 
 
 ##################################################
-# shipdict (suite) - Semaine 5 Séquence 6
+# shipdict (suite) - Semaine 6 Séquence 4
 ##################################################
 class ShipDict(dict):
     """
@@ -905,7 +880,7 @@ class ShipDict(dict):
 
 
 ##################################################
-# shipdict (suite) - Semaine 5 Séquence 6
+# shipdict (suite) - Semaine 6 Séquence 4
 ##################################################
     def add_chunk(self, chunk):
         """
@@ -946,7 +921,7 @@ class ShipDict(dict):
 
 
 ##################################################
-# shipdict (suite) - Semaine 5 Séquence 6
+# shipdict (suite) - Semaine 6 Séquence 4
 ##################################################
     def ships_by_name(self, name):
         """
