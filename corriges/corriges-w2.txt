@@ -86,46 +86,15 @@ url = i_flag + protos + "://" + user + hostname + port + '/' + path
 
 
 ##################################################
-# libelle - Semaine 2 Séquence 6
+# label - Semaine 2 Séquence 6
 ##################################################
-def libelle(ligne):
-    # on enlève les espaces et les tabulations
-    ligne = ligne.replace(' ', '').replace('\t','')
-    # on cherche les 3 champs
-    mots = ligne.split(',')
-    # si on n'a pas le bon nombre de champs
-    # rappelez-vous que 'return' tout court
-    # est équivalent à 'return None'
-    if len(mots) != 3:
-        return
-    # maintenant on a les trois valeurs
-    nom, prenom, rang = mots
-    # comment presenter le rang
-    rang_ieme = "1er" if rang == "1" \
-                else "2nd" if rang == "2" \
-                else f"{rang}-ème"
-    return f"{prenom}.{nom} ({rang_ieme})"
-
-
-##################################################
-# carre - Semaine 2 Séquence 6
-##################################################
-def carre(s):
-    # on enlève les espaces et les tabulations
-    s = s.replace(' ', '').replace('\t','')
-    # la ligne suivante fait le plus gros du travail
-    # d'abord on appelle split() pour découper selon les ';'
-    # dans le cas où on a des ';' en trop, on obtient dans le 
-    #    résultat du split un 'token' vide, que l'on ignore 
-    #    ici avec le clause 'if token'
-    # enfin on convertit tous les tokens restants en entiers avec int()
-    entiers = [int(token) for token in s.split(";")
-               # en éliminant les entrées vides qui correspondent
-               # à des point-virgules en trop
-               if token]
-    # il n'y a plus qu'à mettre au carré, retraduire en strings,
-    # et à recoudre le tout avec join et ':'
-    return ":".join([str(entier**2) for entier in entiers])
+def label(prenom, note):
+    if note < 10:
+        return f"{prenom} est recalé"
+    elif note < 16:
+        return f"{prenom} est reçu"
+    else:
+        return f"félicitations à {prenom}"
 
 
 ##################################################
@@ -147,25 +116,60 @@ def inconnue_bis(composite, connue):
 
 
 ##################################################
+# laccess - Semaine 2 Séquence 6
+##################################################
+def laccess(liste):
+    """
+    retourne un élément de la liste selon la taille
+    """
+    # si la liste est vide il n'y a rien à faire
+    if not liste:
+        return
+    # si la liste est de taille paire
+    if len(liste) % 2 == 0:
+        return liste[-1]
+    else:
+        return liste[len(liste)//2]
+
+
+##################################################
+# laccess (bis) - Semaine 2 Séquence 6
+##################################################
+# une autre version qui utilise
+# un trait qu'on n'a pas encore vu
+def laccess(liste):
+    # si la liste est vide il n'y a rien à faire
+    if not liste:
+        return
+    # l'index à utiliser selon la taille
+    index = -1 if len(liste) % 2 == 0 else len(liste) // 2
+    return liste[index]
+
+
+##################################################
 # divisible - Semaine 2 Séquence 6
 ##################################################
 def divisible(a, b):
     "renvoie True si un des deux arguments divise l'autre"
     # b divise a si et seulement si le reste
     # de la division de a par b est nul
+    if a % b == 0:
+        return True
     # et il faut regarder aussi si a divise b
-    return a % b == 0 or b % a == 0
+    if b % a == 0:
+        return True
+    return False
 
 
 ##################################################
 # divisible (bis) - Semaine 2 Séquence 6
 ##################################################
 def divisible_bis(a, b):
-    if a % b == 0:
-        return True
-    if b % a == 0:
-        return True
-    return False
+    "renvoie True si un des deux arguments divise l'autre"
+    # on n'a pas encore vu les opérateurs logiques, mais
+    # on peut aussi faire tout simplement comme ça
+    # sans faire de if du tout
+    return a % b == 0 or b % a == 0
 
 
 ##################################################
@@ -206,6 +210,20 @@ def morceaux_ter(x):
 
 
 ##################################################
+# liste_P - Semaine 2 Séquence 7
+##################################################
+def P(x):
+    return 2 * x**2 - 3 * x - 2
+
+def liste_P(liste_x):
+    """
+    retourne la liste des valeurs de P 
+    sur les entrées figurant dans liste_x
+    """
+    return [P(x) for x in liste_x]
+
+
+##################################################
 # liste_P (bis) - Semaine 2 Séquence 7
 ##################################################
 # On peut bien entendu faire aussi de manière pédestre
@@ -217,136 +235,22 @@ def liste_P_bis(liste_x):
 
 
 ##################################################
-# multi_tri - Semaine 2 Séquence 7
+# carre - Semaine 2 Séquence 7
 ##################################################
-def multi_tri(listes):
-    """
-    trie toutes les sous-listes
-    et retourne listes
-    """
-    for liste in listes:
-        # sort fait un effet de bord
-        liste.sort()
-    # et on retourne la liste de départ
-    return listes
-
-
-##################################################
-# multi_tri_reverse - Semaine 2 Séquence 7
-##################################################
-def multi_tri_reverse(listes, reverses):
-    """
-    trie toutes les sous listes, dans une direction
-    précisée par le second argument
-    """
-    # zip() permet de faire correspondre les éléments
-    # de listes avec ceux de reverses
-    for liste, reverse in zip(listes, reverses):
-        # on appelle sort en précisant reverse=
-        liste.sort(reverse=reverse)
-    # on retourne la liste de départ
-    return listes
-
-
-##################################################
-# produit_scalaire - Semaine 2 Séquence 7
-##################################################
-def produit_scalaire(X, Y):
-    """
-    retourne le produit scalaire
-    de deux listes de même taille
-    """
-    # initialisation du résultat
-    scalaire = 0
-    # ici encore avec zip() on peut faire correspondre
-    # les X avec les Y
-    for x, y in zip(X, Y):
-        scalaire += x * y
-    # on retourne le résultat
-    return scalaire
-
-
-##################################################
-# produit_scalaire (bis) - Semaine 2 Séquence 7
-##################################################
-# Il y a plein d'autres solutions qui marchent aussi
-# en voici notamment une qui utilise la fonction builtin sum
-# (que nous n'avons pas encore vue, nous la verrons en semaine 4)
-# en voici toutefois un avant-goût: la fonction sum est très pratique
-# pour faire la somme de toute une liste de valeurs
-def produit_scalaire_bis(X, Y):
-    return sum([x * y for x, y in zip(X, Y)])
-
-
-
-##################################################
-# produit_scalaire (ter) - Semaine 2 Séquence 7
-##################################################
-# Et encore une: celle-ci par contre est assez peu "pythonique"
-# on aime bien en général éviter les boucles du genre
-# for i in range(l)
-#     ... l[i]
-def produit_scalaire_ter(X, Y):
-    scalaire = 0
-    n = len(X)
-    for i in range(n):
-        scalaire += X[i] * Y[i]
-    return scalaire
-
-
-##################################################
-# aplatir - Semaine 2 Séquence 7
-##################################################
-def aplatir(conteneurs):
-    "retourne une liste des éléments des éléments de conteneurs"
-    # on peut concaténer les éléments de deuxième niveau 
-    # par une simple imbrication de deux compréhensions de liste
-    return [element for conteneur in conteneurs for element in conteneur]
-
-
-##################################################
-# alternat - Semaine 2 Séquence 7
-##################################################
-def alternat(l1, l2):
-    "renvoie une liste des éléments pris un sur deux dans l1 et dans l2"
-    # pour réaliser l'alternance on peut combiner zip avec aplatir
-    # telle qu'on vient de la réaliser
-    return aplatir(zip(l1, l2))
-
-
-##################################################
-# alternat (bis) - Semaine 2 Séquence 7
-##################################################
-def alternat_bis(l1, l2):
-    "une deuxième version de alternat"
-    # la même idée mais directement, sans utiliser aplatir
-    return [element for conteneur in zip(l1, l2) for element in conteneur]
-
-
-##################################################
-# intersect - Semaine 2 Séquence 7
-##################################################
-def intersect(A, B):
-    """
-    prend en entrée deux listes de tuples de la forme
-    (entier, valeur)
-    renvoie la liste des valeurs associées dans A ou B
-    aux entiers présents dans A et B
-    """
-    # pour montrer un exemple de fonction locale:
-    # une fonction qui renvoie l'ensemble des entiers
-    # présents dans une des deux listes d'entrée
-    def keys(S):
-        return {k for k, val in S}
-    # on l'applique à A et B
-    keys_A = keys(A)
-    keys_B = keys(B)
-    # 
-    # les entiers présents dans A et B 
-    # avec une intersection d'ensembles
-    common_keys = keys_A & keys_B
-    # et pour conclure on fait une union sur deux
-    # compréhensions d'ensembles
-    return {vala for k, vala in A if k in common_keys} \
-         | {valb for k, valb in B if k in common_keys} 
+def carre(s):
+    # on enlève les espaces et les tabulations
+    s = s.replace(' ', '').replace('\t','')
+    # la ligne suivante fait le plus gros du travail
+    # d'abord on appelle split() pour découper selon les ';'
+    # dans le cas où on a des ';' en trop, on obtient dans le 
+    #    résultat du split un 'token' vide, que l'on ignore 
+    #    ici avec le clause 'if token'
+    # enfin on convertit tous les tokens restants en entiers avec int()
+    entiers = [int(token) for token in s.split(";")
+               # en éliminant les entrées vides qui correspondent
+               # à des point-virgules en trop
+               if token]
+    # il n'y a plus qu'à mettre au carré, retraduire en strings,
+    # et à recoudre le tout avec join et ':'
+    return ":".join([str(entier**2) for entier in entiers])
 

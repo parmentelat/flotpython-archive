@@ -239,7 +239,7 @@ class Source:
                         print(f"{self.filename}:{lineno} using explicit week or sequence")
                         self.map[name] = keywords['week'], keywords['sequence']
                     else:
-                        week, sequence = self.map.get(name)
+                        week, sequence = self.map.get(name, (None, None))
                         if not week or not sequence:
                             print(f"{self.filename}:{lineno} cannot spot week or sequence")
                             continue
