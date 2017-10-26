@@ -88,6 +88,7 @@ class Solution:
     # utiliser les {} comme un marqueur dans du latex ne semble pas
     # être l'idée du siècle -> je prends pour une fois %()s et l'opérateur %
     latex_format = r"""
+\phantomsection
 \addcontentsline{toc}{subsection}{
 \texttt{%(name)s}%(more)s -- {\small \footnotesize{Semaine} %(week)s \footnotesize{Séquence} %(sequence)s}
 %%%(name)s
@@ -306,6 +307,7 @@ class Latex:
 """
 
     week_format = r"""
+\phantomsection
 \addcontentsline{{toc}}{{section}}{{Semaine {}}}
 """
 
