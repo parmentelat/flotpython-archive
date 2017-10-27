@@ -23,6 +23,11 @@ from .rendering import (
 default_layout_args =  (24, 28, 28)
 
 ##########
+def pairwise(it):
+    it = iter(it)
+    while True:
+        yield next(it), next(it)
+
 class ScenarioClass(list):
     """
     Describes a scenario that can be applied to a class
@@ -36,8 +41,12 @@ class ScenarioClass(list):
     the latter being an instance of ArgsKeywords or Args
     """
 
-    def __init__(self):
+    def __init__(self, init_args_obj=None, *steps_args_obj):
         list.__init__(self)
+        if init_args_obj:
+            self.set_init_args(init_args_obj)
+        for methodname, args_obj in pairwise(steps_args_obj):
+            self.add_step(methodname, args_obj)
 
     def set_init_args(self, args_obj):
         """
