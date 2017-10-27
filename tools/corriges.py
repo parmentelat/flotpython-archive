@@ -53,6 +53,7 @@ class Solution:
                  ):
         self.path = filename
         self.filename = os.path.basename(filename).replace('.py', '')
+        self.is_class = self.filename.find('cls') == 0
         self.week = week
         self.sequence = sequence
         self.name = name
@@ -138,6 +139,7 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
         # the usual case
         module = f"corrections.{self.filename}"
         exo = f"corrections.{self.filename}.exo_{self.name}"
+        solution = self.name if not self.is_class else self.name.capitalize()
         cell = Cell()
         cell.add_line(f"########## exo {self.name} ##########")
         cell.add_line(f"import {module}")
@@ -146,20 +148,17 @@ label=%(name)s%(more)s - {\small \footnotesize{Semaine} %(week)s \footnotesize{S
         cell.record()
         cell = Cell()
         cell.add_line("# cheating - should be OK")
-        cell.add_line(f"from {module} import {self.name}")
-        cell.add_line(f"{exo}.correction({self.name})")
+        cell.add_line(f"from {module} import {solution}")
+        cell.add_line(f"{exo}.correction({solution})")
         cell.record()
         cell = Cell()
         cell.add_line(f"# dummy solution - should be KO")
-        cell.add_line(f"""try:
-   from {module} import {self.name}_ko
-except:
-   print("WARNING - variant {self.name}_ko not found")
-   def {self.name}_ko(*args, **keywords):
-       return 'your_code'
-""")
+        ko = f"{solution}_ko"
+        cell.add_line(f"""if not hasattr({module}, '{ko}'):
+    print("{ko} not found")
+else:
+    IPython.display.display({exo}.correction({module}.{ko}))""")
 
-        cell.add_line(f"{exo}.correction({self.name}_ko)")
         cell.record()
 
 ########################################
@@ -365,6 +364,7 @@ class Notebook:
     def __init__(self, filename):
         self.filename = filename
         self.notebook = nbformat.v4.new_notebook()
+        self.add_code_cell("import IPython")
         self.add_code_cell("%load_ext autoreload\n%autoreload 2")
 
     def _normalize(self, contents):
