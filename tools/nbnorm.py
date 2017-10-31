@@ -268,25 +268,29 @@ div.title-slide {
         html_authors = "" if not authors \
                        else " &amp; ".join(authors)
 
-        licence_line = title_style.replace("\n", "") \
+        title_line = title_style.replace("\n", "") \
                        + title_format.format(
                            licence=licence,
                            html_authors=html_authors,
                            html_image=html_image)
 
+        # when opened interactively and then saved again, this is how the result looks like
+        title_lines = [ line + "\n" for line in title_line.split("\n") ]
+        # remove last \n
+        title_lines[-1] = title_lines[-1][:-1]
+        
         first_cell = self.cells()[0]
         # cell.source is a list of strings
         if is_title_cell(first_cell):
-            # licence cell already here, just overwrite contents to latest
-            # version
-            first_cell['source'] = [licence_line]
+            # licence cell already here, just overwrite contents to latest version
+            first_cell['source'] = title_lines
         else:
             self.cells().insert(
                 0,
                 NotebookNode({
                     "cell_type": "markdown",
                     "metadata": {},
-                    "source": [licence_line],
+                    "source": title_lines,
                 }))
 
     # I keep the code for these 2 but don't need this any longer
