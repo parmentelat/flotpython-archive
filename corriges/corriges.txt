@@ -645,6 +645,65 @@ class FifoBis(Fifo):
 
 
 ##################################################
+# dispatch1 - Semaine 4 Séquence 2
+##################################################
+def dispatch1(a, b):
+    """dispatch1 comme spécifié"""
+    # si les deux arguments sont pairs
+    if a%2 == 0 and b%2 == 0:
+        return a*a + b*b
+    # si a est pair et b est impair
+    elif a%2 == 0 and b%2 != 0:
+        return a*(b-1)
+    # si a est impair et b est pair
+    elif a%2 != 0 and b%2 == 0:
+        return (a-1)*b
+    # sinon - c'est que a et b sont impairs
+    else:
+        return a*a - b*b
+
+
+##################################################
+# dispatch2 - Semaine 4 Séquence 2
+##################################################
+def dispatch2(a, b, A, B):
+    """dispatch2 comme spécifié"""
+    # les deux cas de la diagonale \ 
+    if (a in A and b in B) or (a not in A and b not in B):
+        return a*a + b*b
+    # sinon si b n'est pas dans B
+    # ce qui alors implique que a est dans A
+    elif b not in B: 
+        return a*(b-1)
+    # le dernier cas, on sait forcément que
+    # b est dans B et a n'est pas dans A
+    else:
+        return (a-1)*b
+
+
+##################################################
+# libelle - Semaine 4 Séquence 2
+##################################################
+def libelle(ligne):
+    # on enlève les espaces et les tabulations
+    ligne = ligne.replace(' ', '').replace('\t','')
+    # on cherche les 3 champs
+    mots = ligne.split(',')
+    # si on n'a pas le bon nombre de champs
+    # rappelez-vous que 'return' tout court
+    # est équivalent à 'return None'
+    if len(mots) != 3:
+        return
+    # maintenant on a les trois valeurs
+    nom, prenom, rang = mots
+    # comment présenter le rang
+    rang_ieme = "1er" if rang == "1" \
+                else "2nd" if rang == "2" \
+                else f"{rang}-ème"
+    return f"{prenom}.{nom} ({rang_ieme})"
+
+
+##################################################
 # pgcd - Semaine 4 Séquence 3
 ##################################################
 def pgcd(a, b):
@@ -725,7 +784,90 @@ def distance(*args):
 
 
 ##################################################
-# doubler_premier - Semaine 4 Séquence 6
+# numbers - Semaine 4 Séquence 6
+##################################################
+from operator import mul
+
+def numbers(*liste):
+    """
+    retourne un tuple contenant
+    (*) la somme
+    (*) le minimum
+    (*) le maximum
+    des éléments de la liste
+    """
+    
+    if not liste:
+        return 0, 0, 0
+
+    return ( 
+        # la builtin 'sum' renvoie la somme
+        sum(liste),
+        # les builtin 'min' et 'max' font ce qu'on veut aussi
+        min(liste),
+        max(liste),
+    )
+
+
+##################################################
+# numbers (bis) - Semaine 4 Séquence 6
+##################################################
+# en regardant bien la documentation de sum, max et min,
+# on voit qu'on peut aussi traiter le cas singulier
+# (pas d'argument) en passant
+#   start à sum
+#   et default à min ou max
+# comme ceci
+def numbers_bis(*liste):
+    return (
+        # attention:
+        # la signature de sum est: sum(iterable[, start])
+        # du coup on ne peut pas passer à sum start=0
+        # parce que start n'a pas de valeur par défaut
+        sum(liste, 0),
+        # par contre avec min c'est min(iterable, *[, key, default])
+        # du coup on doit appeler min avec default=0 qui est plus clair
+        # l'étoile qui apparaît dans la signature
+        # rend le paramètre default keyword-only
+        min(liste, default=0),
+        max(liste, default=0),
+    )
+
+
+##################################################
+# multi_tri - Semaine 5 Séquence 2
+##################################################
+def multi_tri(listes):
+    """
+    trie toutes les sous-listes
+    et retourne listes
+    """
+    for liste in listes:
+        # sort fait un effet de bord
+        liste.sort()
+    # et on retourne la liste de départ
+    return listes
+
+
+##################################################
+# multi_tri_reverse - Semaine 5 Séquence 2
+##################################################
+def multi_tri_reverse(listes, reverses):
+    """
+    trie toutes les sous listes, dans une direction
+    précisée par le second argument
+    """
+    # zip() permet de faire correspondre les éléments
+    # de listes avec ceux de reverses
+    for liste, reverse in zip(listes, reverses):
+        # on appelle sort en précisant reverse=
+        liste.sort(reverse=reverse)
+    # on retourne la liste de départ
+    return listes
+
+
+##################################################
+# doubler_premier - Semaine 5 Séquence 2
 ##################################################
 def doubler_premier(f, first, *args):
     """
@@ -740,7 +882,7 @@ def doubler_premier(f, first, *args):
 
 
 ##################################################
-# doubler_premier (bis) - Semaine 4 Séquence 6
+# doubler_premier (bis) - Semaine 5 Séquence 2
 ##################################################
 def doubler_premier_bis(f, *args):
     "marche aussi mais moins élégant"
@@ -750,7 +892,7 @@ def doubler_premier_bis(f, *args):
 
 
 ##################################################
-# doubler_premier_kwds - Semaine 4 Séquence 6
+# doubler_premier_kwds - Semaine 5 Séquence 2
 ##################################################
 def doubler_premier_kwds(f, first, *args, **keywords):
     """
@@ -780,48 +922,6 @@ def doubler_premier_kwds(f, first, *args, **keywords):
 
 
 ##################################################
-# compare_args - Semaine 4 Séquence 6
-##################################################
-def compare_args(f, g, argument_tuples):
-    """
-    retourne une liste de booléens, un par entree dans entrees
-    qui indique si f(*tuple) == g(*tuple)
-    """
-    # c'est presque exactement comme compare, sauf qu'on s'attend 
-    # à recevoir une liste de tuples d'arguments, qu'on applique
-    # aux deux fonctions avec la forme * au lieu de les passer directement
-    return [f(*tuple) == g(*tuple) for tuple in argument_tuples]
-
-
-##################################################
-# numbers - Semaine 5 Séquence 2
-##################################################
-from functools import reduce
-
-from operator import mul
-
-def numbers(liste):
-    """
-    retourne un tuple contenant
-    (*) la somme
-    (*) le produit
-    (*) le minimum
-    (*) le maximum
-    des éléments de la liste
-    """
-    
-    return ( 
-        # la builtin 'sum' renvoie la somme
-        sum(liste),
-        # pour la multiplication, reduce est nécessaire
-        reduce(mul, liste, 1),
-        # les builtin 'min' et 'max' font ce qu'on veut aussi
-        min(liste),
-        max(liste),
-    )
-
-
-##################################################
 # compare_all - Semaine 5 Séquence 2
 ##################################################
 def compare_all(f, g, entrees):
@@ -836,207 +936,237 @@ def compare_all(f, g, entrees):
 
 
 ##################################################
-# shipdict - Semaine 6 Séquence 4
+# compare_args - Semaine 5 Séquence 2
 ##################################################
+def compare_args(f, g, argument_tuples):
+    """
+    retourne une liste de booléens, un par entree dans entrees
+    qui indique si f(*tuple) == g(*tuple)
+    """
+    # c'est presque exactement comme compare, sauf qu'on s'attend 
+    # à recevoir une liste de tuples d'arguments, qu'on applique
+    # aux deux fonctions avec la forme * au lieu de les passer directement
+    return [f(*tuple) == g(*tuple) for tuple in argument_tuples]
 
-# helpers - used for verbose mode only
-# could have been implemented as static methods in Position
-# but we had not seen that at the time
-def d_m_s(f):
-    """
-    make a float readable; e.g. transform 2.5 into 2.30'00'' 
-    we avoid using the degree sign to keep things simple
-    input is assumed positive
-    """
-    d = int (f)
-    m = int((f-d)*60)
-    s = int( (f-d)*3600 - 60*m)
-    return "{:02d}.{:02d}'{:02d}''".format(d,m,s)
 
-def lat_d_m_s(f):
+##################################################
+# aplatir - Semaine 5 Séquence 3
+##################################################
+def aplatir(conteneurs):
+    "retourne une liste des éléments des éléments de conteneurs"
+    # on peut concaténer les éléments de deuxième niveau 
+    # par une simple imbrication de deux compréhensions de liste
+    return [element for conteneur in conteneurs for element in conteneur]
+
+
+##################################################
+# alternat - Semaine 5 Séquence 3
+##################################################
+def alternat(l1, l2):
+    "renvoie une liste des éléments pris un sur deux dans l1 et dans l2"
+    # pour réaliser l'alternance on peut combiner zip avec aplatir
+    # telle qu'on vient de la réaliser
+    return aplatir(zip(l1, l2))
+
+
+##################################################
+# alternat (bis) - Semaine 5 Séquence 3
+##################################################
+def alternat_bis(l1, l2):
+    "une deuxième version de alternat"
+    # la même idée mais directement, sans utiliser aplatir
+    return [element for conteneur in zip(l1, l2) for element in conteneur]
+
+
+##################################################
+# intersect - Semaine 5 Séquence 3
+##################################################
+def intersect(A, B):
     """
-    degree-minute-second conversion on a latitude float
+    prend en entrée deux listes de tuples de la forme
+    (entier, valeur)
+    renvoie la liste des valeurs associées dans A ou B
+    aux entiers présents dans A et B
     """
-    if f >= 0:
-        return "{} N".format(d_m_s(f))
-    else:
-        return "{} S".format(d_m_s(-f))
+    # pour montrer un exemple de fonction locale:
+    # une fonction qui renvoie l'ensemble des entiers
+    # présents dans une des deux listes d'entrée
+    def keys(S):
+        return {k for k, val in S}
+    # on l'applique à A et B
+    keys_A = keys(A)
+    keys_B = keys(B)
+    # 
+    # les entiers présents dans A et B 
+    # avec une intersection d'ensembles
+    common_keys = keys_A & keys_B
+    # et pour conclure on fait une union sur deux
+    # compréhensions d'ensembles
+    return {vala for k, vala in A if k in common_keys} \
+         | {valb for k, valb in B if k in common_keys} 
+
+
+##################################################
+# produit_scalaire - Semaine 5 Séquence 4
+##################################################
+def produit_scalaire(X, Y):
+    """
+    retourne le produit scalaire
+    de deux listes de même taille
+    """
+    # on utilise la fonction builtin sum sur une itération
+    # des produits x*y 
+    # avec zip() on peut faire correspondre les X avec les Y
+    # remarquez bien qu'on utilise ici une expression génératrice
+    # et PAS une compréhension car on n'a pas du tout besoin de
+    # créer la liste des produits x*y 
+    return sum(x * y for x, y in zip(X, Y))
+
+
+##################################################
+# produit_scalaire (bis) - Semaine 5 Séquence 4
+##################################################
+# Il y a plein d'autres solutions qui marchent aussi
+def produit_scalaire_bis(X, Y):
+    # initialisation du résultat
+    scalaire = 0
+    for x, y in zip(X, Y):
+        scalaire += x * y
+    # on retourne le résultat
+    return scalaire
+
+
+##################################################
+# produit_scalaire (ter) - Semaine 5 Séquence 4
+##################################################
+# et encore une: celle-ci par contre est assez peu "pythonique"
+# je la donne plutôt comme un exemple de ce qu'il faut éviter
+# on aime bien en général éviter les boucles du genre
+# for i in range(len(iterable)):
+#     ... iterable[i]
+def produit_scalaire_ter(X, Y):
+    scalaire = 0
+    n = len(X)
+    for i in range(n):
+        scalaire += X[i] * Y[i]
+    return scalaire
+
+
+##################################################
+# decode_zen - Semaine 5 Séquence 7
+##################################################
+# le module this est implémenté comme une petite énigme 
+# comme le laissent entrevoir les indices, on y trouve
+# (*) dans l'attribut 's' une version encodée du manifeste
+# (*) dans l'attribut 'd' le code à utiliser pour décoder
+# 
+# ce qui veut dire qu'en première approximation on pourrait 
+# obtenir une liste des caractères du manifeste en faisant
+# 
+# [ this.d[c] for c in this.s ]
+# 
+# mais ce serait le cas seulement si le code agissait sur 
+# tous les caractères; comme ce n'est pas le cas il faut
+# laisser intacts les caractères de this.s qui ne sont pas
+# dans this.d (dans le sens "c in this.d")
+#
+# je fais exprès de ne pas appeler l'argument this pour
+# illustrer le fait qu'un module est un objet comme un autre
+
+def decode_zen(this_module):
+    "décode le zen de python à partir du module this"
+    # la version encodée du manifeste
+    encoded = this_module.s
+    # le 'code' 
+    code = this_module.d
+    # si un caractère est dans le code, on applique le code
+    # sinon on garde le caractère tel quel
+    # aussi, on appelle 'join' pour refaire une chaîne à partir
+    # de la liste des caractères décodés
+    return ''.join([code[c] if c in code else c for c in encoded])
+
+
+##################################################
+# decode_zen (bis) - Semaine 5 Séquence 7
+##################################################
+# une autre version un peu plus courte
+#
+# on utilise la méthode get d'un dictionnaire, qui permet de spécifier
+# (en second argument) quelle valeur on veut utiliser dans les cas où la
+# clé n'est pas présente dans le dictionnaire
+# 
+# dict.get(key, default)
+# retourne dict[key] si elle eset présente, et default sinon
+ 
+def decode_zen_bis(this_module):
+    "une autre version plus courte"
+    return "".join([this_module.d.get(c, c) for c in this_module.s])
+
+
+##################################################
+# decode_zen (ter) - Semaine 5 Séquence 7
+##################################################
+# presque la même chose, mais en utilisant une expression génératrice
+# à la place de la compréhension; la seule différence avec la version bis
+# est l'absence des crochets carrés []
+# ici je triche, nous n'avons pas encore vu ces expressions-là,
+# nous les verrons en semaine 6, mais ça me permet de les introduire
+# pour les curieux donc:
+# avec ce code, **on ne crée pas la liste** qui est passée au join(),
+# c'est comme si cette liste était cette fois
+# parcourue à travers **un itérateur**
+#
+# on est donc un peu plus efficace - même si ça n'est évidemment
+# pas très sensible dans ce cas précis 
+
+def decode_zen_ter(this_module):
+    "une version avec une expression génératrice plutôt qu'une compréhension"
+    return "".join(this_module.d.get(c, c) for c in this_module.s)
+
+
+##################################################
+# RPCProxy - Semaine 6 Séquence 2
+##################################################
+# une troisième implémentation de RPCProxy
+
+class Forwarder:
+    """
+    Une instance de la classe Forwarder est un callable
+    qui peut être utilisée comme une méthode sur l
+    class RPCProxy
+    """
+    def __init__(self, rpc_proxy, methodname):
+        """
+        le constructeur  mémorise l'instance de RPCProxy
+        et le nom de la méthode qui a été appelée
+        """
+        self.methodname = methodname
+        self.rpc_proxy = rpc_proxy
+
+    def __call__(self, *args):
+        """
+        en rendant cet objet callable, on peut l'utiliser
+        comme une méthode de RPCProxy
+        """
+        print "Envoi à {}\nde la fonction {} -- args= {}".\
+            format(self.rpc_proxy.url, self.methodname, args)
+        return "retour de la fonction " + self.methodname
+
+class RPCProxy:
+    """
+    Une troisième implémentation de RPCProxy qui sous-traite
+    à une classe annexe `Forwarder` qui se comporte comme
+    une *factory* de méthodes
+    """
+    def __init__(self, url, login, password):
+        self.url = url
+        self.login = login
+        self.password = password
         
-def lon_d_m_s(f):
-    """
-    degree-minute-second conversion on a longitude float
-    """
-    if f >= 0:
-        return "{} E".format(d_m_s(f))
-    else:
-        return "{} W".format(d_m_s(-f))
-
-
-##################################################
-# shipdict (suite) - Semaine 6 Séquence 4
-##################################################
-class Position(object):
-    "a position atom with timestamp attached"
-    
-    def __init__(self, latitude, longitude, timestamp):
-        "constructor"
-        self.latitude = latitude
-        self.longitude = longitude
-        self.timestamp = timestamp
-
-# all these methods are only used when merger.py runs in verbose mode
-    def lat_str(self):
-        return lat_d_m_s(self.latitude)
-    def lon_str(self):
-        return lon_d_m_s(self.longitude)
-
-    def __repr__(self):
+    def __getattr__ (self, methodname):
         """
-        only used when merger.py is run in verbose mode
+        Crée à la volée une instance de Forwarder
+        correspondant à 'methodname'
         """
-        return "<{} {} @ {}>".format(self.lat_str(),
-                                     self.lon_str(), self.timestamp)
-
-
-##################################################
-# shipdict (suite) - Semaine 6 Séquence 4
-##################################################
-class Ship(object):
-    """
-    a ship object, that requires a ship id, 
-    and optionnally a ship name and country
-    which can also be set later on
-    
-    this object also manages a list of known positions
-    """
-    def __init__(self, id, name=None, country=None):
-        "constructor"
-        self.id = id
-        self.name = name
-        self.country = country
-        # this is where we remember the various positions over time
-        self.positions = []
-
-    def add_position(self, position):
-        """
-        insert a position relating to this ship
-        positions are not kept in order so you need 
-        to call `sort_positions` once you're done
-        """
-        self.positions.append(position)
-
-    def sort_positions(self):
-        """
-        sort list of positions by chronological order
-        """
-        self.positions.sort(key=lambda position: position.timestamp)
-
-
-##################################################
-# shipdict (suite) - Semaine 6 Séquence 4
-##################################################
-class ShipDict(dict):
-    """
-    a repository for storing all ships that we know about
-    indexed by their id
-    """
-    def __init__(self):
-        "constructor"
-        dict.__init__(self)
-
-    def __repr__(self):
-        return "<ShipDict instance with {} ships>".format(len(self))
-
-    def is_abbreviated(self, chunk):
-        """
-        depending on the size of the incoming data chunk, 
-        guess if it is an abbreviated or extended data
-        """
-        return len(chunk) <= 7
-
-    def add_abbreviated(self, chunk):
-        """
-        adds an abbreviated data chunk to the repository
-        """
-        id, latitude, longitude, *_, timestamp = chunk
-        if id not in self:
-            self[id] = Ship(id)
-        ship = self[id]
-        ship.add_position (Position (latitude, longitude, timestamp))
-        
-    def add_extended(self, chunk):
-        """
-        adds an extended data chunk to the repository
-        """
-        id, latitude, longitude = chunk[:3]
-        timestamp, name = chunk[5:7]
-        country = chunk[10]
-        if id not in self:
-            self[id] = Ship(id)
-        ship = self[id]
-        if not ship.name:
-            ship.name = name
-            ship.country = country
-        self[id].add_position (Position (latitude, longitude, timestamp))
-
-
-##################################################
-# shipdict (suite) - Semaine 6 Séquence 4
-##################################################
-    def add_chunk(self, chunk):
-        """
-        chunk is a plain list coming from the JSON data
-        and be either extended or abbreviated
-
-        based on the result of is_abbreviated(), 
-        gets sent to add_extended or add_abbreviated
-        """
-        if self.is_abbreviated(chunk):
-            self.add_abbreviated(chunk)
-        else:
-            self.add_extended(chunk)
-
-    def sort(self):
-        """
-        makes sure all the ships have their positions
-        sorted in chronological order
-        """
-        for id, ship in self.items():
-            ship.sort_positions()
-
-    def clean_unnamed(self):
-        """
-        Because we enter abbreviated and extended data
-        in no particular order, and for any time period,
-        we might have ship instances with no name attached
-        This method removes such entries from the dict
-        """
-        # we cannot do all in a single loop as this would amount to
-        # changing the loop subject
-        # so let us collect the ids to remove first
-        unnamed_ids = { id for id, ship in self.items()
-                        if ship.name is None }
-        # and remove them next
-        for id in unnamed_ids:
-            del self[id]
-
-
-##################################################
-# shipdict (suite) - Semaine 6 Séquence 4
-##################################################
-    def ships_by_name(self, name):
-        """
-        returns a list of all known ships with name <name>
-        """
-        return [ ship for ship in self.values() if ship.name == name ]
-
-    def all_ships(self):
-        """
-        returns a list of all ships known to us
-        """
-        # we need to create an actual list because it
-        # may need to be sorted later on, and so
-        # a raw dict_values object won't be good enough
-        return self.values()
-
+        return Forwarder(self, methodname)
 

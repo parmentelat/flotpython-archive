@@ -23,8 +23,9 @@ n5 = exo_multi_tri exo_multi_tri_reverse \
      exo_aplatir exo_alternat exo_intersect \
      exo_produit_scalaire exo_decode_zen 
 
-# dans w6-s2
-others = exo_rpcproxy.py 
+
+# dans w6-s2 et w6-s4 resp.
+others = exo_rpcproxy shipdict
 
 define pys
 $(foreach name, $(1), $(name).py)
@@ -35,17 +36,13 @@ w3 = $(call pys, $(n3))
 w4 = $(call pys, $(n4))
 w5 = $(call pys, $(n5))
 
-# pour la semaine 5 on met
+# pour la semaine 6 on met
 # dans le latex les deux fichiers (via $(TOOL))
 # dans le text un seul fichier (via $(TOOL))
 # plus le fichier shipdict.py tel quel
-w6_latex = w5s6_rpcproxy.py shipdict.py 
-w6_text = w5s6_rpcproxy.py
+w6_latex = exo_rpcproxy.py 
+w6_text = exo_rpcproxy.py
 w6_code  = ../data/shipdict.py
-
-#w6_latex = w6s6_regexp.py
-#w6_text = w6s6_regexp.py
-#w6_code = ../exo-meteo/meteodata.py ../exo-diskusage/diskusage.py ../exo-crawler/webcrawler.py
 
 WEEKS = 2 3 4 5 6
 
