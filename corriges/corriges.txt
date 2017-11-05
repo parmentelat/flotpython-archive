@@ -92,46 +92,15 @@ url = i_flag + protos + "://" + user + hostname + port + '/' + path
 
 
 ##################################################
-# libelle - Semaine 2 Séquence 6
+# label - Semaine 2 Séquence 6
 ##################################################
-def libelle(ligne):
-    # on enlève les espaces et les tabulations
-    ligne = ligne.replace(' ', '').replace('\t','')
-    # on cherche les 3 champs
-    mots = ligne.split(',')
-    # si on n'a pas le bon nombre de champs
-    # rappelez-vous que 'return' tout court
-    # est équivalent à 'return None'
-    if len(mots) != 3:
-        return
-    # maintenant on a les trois valeurs
-    nom, prenom, rang = mots
-    # comment presenter le rang
-    msg_rang = "1er" if rang == "1" \
-               else "2nd" if rang == "2" \
-                    else "{}-ème".format(rang)
-    return f"{prenom}.{nom} ({msg_rang})"
-
-
-##################################################
-# carre - Semaine 2 Séquence 6
-##################################################
-def carre(s):
-    # on enlève les espaces et les tabulations
-    s = s.replace(' ', '').replace('\t','')
-    # la ligne suivante fait le plus gros du travail
-    # d'abord on appelle split() pour découper selon les ';'
-    # dans le cas où on a des ';' en trop, on obtient dans le 
-    #    résultat du split un 'token' vide, que l'on ignore 
-    #    ici avec le clause 'if token'
-    # enfin on convertit tous les tokens restants en entiers avec int()
-    entiers = [int(token) for token in s.split(";")
-               # en éliminant les entrées vides qui correspondent
-               # à des point-virgules en trop
-               if token]
-    # il n'y a plus qu'à mettre au carré, retraduire en strings,
-    # et à recoudre le tout avec join et ':'
-    return ":".join([str(entier**2) for entier in entiers])
+def label(prenom, note):
+    if note < 10:
+        return f"{prenom} est recalé"
+    elif note < 16:
+        return f"{prenom} est reçu"
+    else:
+        return f"félicitations à {prenom}"
 
 
 ##################################################
@@ -153,25 +122,60 @@ def inconnue_bis(composite, connue):
 
 
 ##################################################
+# laccess - Semaine 2 Séquence 6
+##################################################
+def laccess(liste):
+    """
+    retourne un élément de la liste selon la taille
+    """
+    # si la liste est vide il n'y a rien à faire
+    if not liste:
+        return
+    # si la liste est de taille paire
+    if len(liste) % 2 == 0:
+        return liste[-1]
+    else:
+        return liste[len(liste)//2]
+
+
+##################################################
+# laccess (bis) - Semaine 2 Séquence 6
+##################################################
+# une autre version qui utilise
+# un trait qu'on n'a pas encore vu
+def laccess(liste):
+    # si la liste est vide il n'y a rien à faire
+    if not liste:
+        return
+    # l'index à utiliser selon la taille
+    index = -1 if len(liste) % 2 == 0 else len(liste) // 2
+    return liste[index]
+
+
+##################################################
 # divisible - Semaine 2 Séquence 6
 ##################################################
 def divisible(a, b):
     "renvoie True si un des deux arguments divise l'autre"
     # b divise a si et seulement si le reste
     # de la division de a par b est nul
+    if a % b == 0:
+        return True
     # et il faut regarder aussi si a divise b
-    return a % b == 0 or b % a == 0
+    if b % a == 0:
+        return True
+    return False
 
 
 ##################################################
 # divisible (bis) - Semaine 2 Séquence 6
 ##################################################
 def divisible_bis(a, b):
-    if a % b == 0:
-        return True
-    if b % a == 0:
-        return True
-    return False
+    "renvoie True si un des deux arguments divise l'autre"
+    # on n'a pas encore vu les opérateurs logiques, mais
+    # on peut aussi faire tout simplement comme ça
+    # sans faire de if du tout
+    return a % b == 0 or b % a == 0
 
 
 ##################################################
@@ -212,6 +216,20 @@ def morceaux_ter(x):
 
 
 ##################################################
+# liste_P - Semaine 2 Séquence 7
+##################################################
+def P(x):
+    return 2 * x**2 - 3 * x - 2
+
+def liste_P(liste_x):
+    """
+    retourne la liste des valeurs de P 
+    sur les entrées figurant dans liste_x
+    """
+    return [P(x) for x in liste_x]
+
+
+##################################################
 # liste_P (bis) - Semaine 2 Séquence 7
 ##################################################
 # On peut bien entendu faire aussi de manière pédestre
@@ -223,142 +241,28 @@ def liste_P_bis(liste_x):
 
 
 ##################################################
-# multi_tri - Semaine 2 Séquence 7
+# carre - Semaine 2 Séquence 7
 ##################################################
-def multi_tri(listes):
-    """
-    trie toutes les sous-listes
-    et retourne listes
-    """
-    for liste in listes:
-        # sort fait un effet de bord
-        liste.sort()
-    # et on retourne la liste de départ
-    return listes
-
-
-##################################################
-# multi_tri_reverse - Semaine 2 Séquence 7
-##################################################
-def multi_tri_reverse(listes, reverses):
-    """
-    trie toutes les sous listes, dans une direction
-    précisée par le second argument
-    """
-    # zip() permet de faire correspondre les éléments
-    # de listes avec ceux de reverses
-    for liste, reverse in zip(listes, reverses):
-        # on appelle sort en précisant reverse=
-        liste.sort(reverse=reverse)
-    # on retourne la liste de départ
-    return listes
+def carre(s):
+    # on enlève les espaces et les tabulations
+    s = s.replace(' ', '').replace('\t','')
+    # la ligne suivante fait le plus gros du travail
+    # d'abord on appelle split() pour découper selon les ';'
+    # dans le cas où on a des ';' en trop, on obtient dans le 
+    #    résultat du split un 'token' vide, que l'on ignore 
+    #    ici avec le clause 'if token'
+    # enfin on convertit tous les tokens restants en entiers avec int()
+    entiers = [int(token) for token in s.split(";")
+               # en éliminant les entrées vides qui correspondent
+               # à des point-virgules en trop
+               if token]
+    # il n'y a plus qu'à mettre au carré, retraduire en strings,
+    # et à recoudre le tout avec join et ':'
+    return ":".join([str(entier**2) for entier in entiers])
 
 
 ##################################################
-# produit_scalaire - Semaine 2 Séquence 7
-##################################################
-def produit_scalaire(X, Y):
-    """
-    retourne le produit scalaire
-    de deux listes de même taille
-    """
-    # initialisation du résultat
-    scalaire = 0
-    # ici encore avec zip() on peut faire correspondre
-    # les X avec les Y
-    for x, y in zip(X, Y):
-        scalaire += x * y
-    # on retourne le résultat
-    return scalaire
-
-
-##################################################
-# produit_scalaire (bis) - Semaine 2 Séquence 7
-##################################################
-# Il y a plein d'autres solutions qui marchent aussi
-# en voici notamment une qui utilise la fonction builtin sum
-# (que nous n'avons pas encore vue, nous la verrons en semaine 4)
-# en voici toutefois un avant-goût: la fonction sum est très pratique
-# pour faire la somme de toute une liste de valeurs
-def produit_scalaire_bis(X, Y):
-    return sum([x * y for x, y in zip(X, Y)])
-
-
-
-##################################################
-# produit_scalaire (ter) - Semaine 2 Séquence 7
-##################################################
-# Et encore une: celle-ci par contre est assez peu "pythonique"
-# on aime bien en général éviter les boucles du genre
-# for i in range(l)
-#     ... l[i]
-def produit_scalaire_ter(X, Y):
-    scalaire = 0
-    n = len(X)
-    for i in range(n):
-        scalaire += X[i] * Y[i]
-    return scalaire
-
-
-##################################################
-# aplatir - Semaine 2 Séquence 7
-##################################################
-def aplatir(conteneurs):
-    "retourne une liste des éléments des éléments de conteneurs"
-    # on peut concaténer les éléments de deuxième niveau 
-    # par une simple imbrication de deux compréhensions de liste
-    return [element for conteneur in conteneurs for element in conteneur]
-
-
-##################################################
-# alternat - Semaine 2 Séquence 7
-##################################################
-def alternat(l1, l2):
-    "renvoie une liste des éléments pris un sur deux dans l1 et dans l2"
-    # pour réaliser l'alternance on peut combiner zip avec aplatir
-    # telle qu'on vient de la réaliser
-    return aplatir(zip(l1, l2))
-
-
-##################################################
-# alternat (bis) - Semaine 2 Séquence 7
-##################################################
-def alternat_bis(l1, l2):
-    "une deuxième version de alternat"
-    # la même idée mais directement, sans utiliser aplatir
-    return [element for conteneur in zip(l1, l2) for element in conteneur]
-
-
-##################################################
-# intersect - Semaine 2 Séquence 7
-##################################################
-def intersect(A, B):
-    """
-    prend en entrée deux listes de tuples de la forme
-    (entier, valeur)
-    renvoie la liste des valeurs associées dans A ou B
-    aux entiers présents dans A et B
-    """
-    # pour montrer un exemple de fonction locale:
-    # une fonction qui renvoie l'ensemble des entiers
-    # présents dans une des deux listes d'entrée
-    def keys(S):
-        return {k for k, val in S}
-    # on l'applique à A et B
-    keys_A = keys(A)
-    keys_B = keys(B)
-    # 
-    # les entiers présents dans A et B 
-    # avec une intersection d'ensembles
-    common_keys = keys_A & keys_B
-    # et pour conclure on fait une union sur deux
-    # compréhensions d'ensembles
-    return {vala for k, vala in A if k in common_keys} \
-         | {valb for k, valb in B if k in common_keys} 
-
-
-##################################################
-# comptage - Semaine 3 Séquence 1
+# comptage - Semaine 3 Séquence 2
 ##################################################
 def comptage(in_filename, out_filename):
     """
@@ -371,29 +275,94 @@ def comptage(in_filename, out_filename):
     with open(in_filename, encoding='utf-8') as input:
         # on ouvre la sortie en écriture
         with open(out_filename, "w", encoding='utf-8') as output:
-            # initialisations
-            total_words = 0
-            total_chars = 0
+            lineno = 1
             # pour toutes les lignes du fichier d'entrée
             # le numéro de ligne commence à 1
-            for lineno, line in enumerate(input, 1):
+            for line in input:
                 # autant de mots que d'éléments dans split()
                 nb_words = len(line.split())
-                total_words += nb_words
                 # autant de caractères que d'éléments dans la ligne
                 nb_chars = len(line)
-                total_chars += nb_chars
                 # on écrit la ligne de sortie; pas besoin
                 # de newline (\n) car line en a déjà un
-                output.write("{}:{}:{}:{}"
-                             .format(lineno, nb_words, nb_chars, line))
-            # on écrit la ligne de synthèse
-            # lineno est une variable de boucle, elle "fuite"
-            # on peut donc utiliser sa dernière valeur
-            # mais remarquez que ce code ne fonctionnerait
-            # pas sur un fichier vide, ou on aurait lineno non définie
-            output.write("{}:{}:{}\n"
-                         .format(lineno, total_words, total_chars))
+                output.write(f"{lineno}:{nb_words}:{nb_chars}:{line}")
+                lineno += 1
+
+
+##################################################
+# comptage (bis) - Semaine 3 Séquence 2
+##################################################
+# un peu plus pythonique avec enumerate
+def comptage_bis(in_filename, out_filename):
+    with open(in_filename, encoding='utf-8') as input:
+        with open(out_filename, "w", encoding='utf-8') as output:
+            # enumerate(.., 1) pour commencer avec une ligne
+            # numérotée 1 et pas 0
+            for lineno, line in enumerate(input, 1):
+                output.write(f"{lineno}:{len(line.split())}:"
+                             f"{len(line)}:{line}")
+
+
+##################################################
+# surgery - Semaine 3 Séquence 2
+##################################################
+def surgery(liste):
+    """
+    Prend en argument une liste, et retourne la liste modifiée:
+    * taille paire: on intervertit les deux premiers éléments
+    * taille impaire >= 3: on fait tourner les 3 premiers éléments
+    """
+    # si la liste est de taille 0 ou 1, il n'y a rien à faire
+    if len(liste) < 2:
+        pass
+    # si la liste est de taille paire
+    elif len(liste) % 2 == 0:
+        # on intervertit les deux premiers éléments
+        liste[0], liste[1] = liste[1], liste[0]
+    # si elle est de taille impaire
+    else:
+        liste[-2], liste[-1] = liste[-1], liste[-2]
+    # et on n'oublie pas de retourner la liste dans tous les cas
+    return liste
+
+
+##################################################
+# graph_dict - Semaine 3 Séquence 4
+##################################################
+# on va utiliser un defaultdict
+
+from collections import defaultdict
+
+def graph_dict(filename):
+    # on le déclare de type list
+    g = defaultdict(list)
+    with open(filename) as f:
+        for line in f:
+            # on coupe la ligne en trois parties
+            begin, value, end = line.split()
+            # comme c'est un defaultdict on n'a
+            # pas besoin de l'initialiser
+            g[begin].append( (end, int(value)))
+    return g
+
+
+##################################################
+# graph_dict (bis) - Semaine 3 Séquence 4
+##################################################
+# la même chose mais sans defaultdict
+
+def graph_dict_bis(filename):
+    # un dictionnaire vide
+    g = {}
+    with open(filename) as f:
+        for line in f:
+            begin, value, end = line.split()
+            # c'est ça qu'on économise avec un defaultdict
+            if begin not in g:
+                g[begin] = []
+            # sinon c'est tout pareil
+            g[begin].append( (end, int(value)))
+    return g
 
 
 ##################################################
@@ -422,6 +391,24 @@ def index_bis(bateaux):
     resultat = {}
     for bateau in bateaux:
         resultat [bateau[0]] = bateau
+    return resultat
+
+
+##################################################
+# index (ter) - Semaine 3 Séquence 4
+##################################################
+def index_ter(bateaux):
+    """
+    Encore une autre, avec un extended unpacking
+    """
+    # si on veut décortiquer
+    resultat = {}
+    for bateau in bateaux:
+        # avec un extended unpacking on peut extraire
+        # le premier champ; en appelant le reste _
+        # on indique qu'on n'en fera en fait rien
+        id, *_ = bateau
+        resultat [id] = bateau
     return resultat
 
 
@@ -518,17 +505,45 @@ def merge_ter(extended, abbreviated):
 
 
 ##################################################
-# parse_graph - Semaine 3 Séquence 4
+# read_set - Semaine 3 Séquence 5
 ##################################################
-from collections import defaultdict
-
-def parse_graph(filename):
-    g = defaultdict(list)
+# on suppose que le fichier existe
+def read_set(filename):
+    # on crée un ensemble vide
+    result = set()
+    # on parcourt le fichier
     with open(filename) as f:
         for line in f:
-            begin, value, end = line.split()
-            g[begin].append( (end, int(value)))
-    return g
+            # avec strip() on enlève la fin de ligne,
+            # et les espaces au début et à la fin
+            result.add(line.strip())
+    return result
+
+
+##################################################
+# read_set (bis) - Semaine 3 Séquence 5
+##################################################
+# on peut aussi utiliser une compréhension d'ensemble
+# (voir semaine 5)
+# comme une compréhension de liste mais on remplace
+# les [] par des {}
+def read_set_bis(filename):
+    with open(filename) as f:
+        return {line.strip() for line in f}
+
+
+##################################################
+# search_in_set (bis) - Semaine 3 Séquence 5
+##################################################
+def search_in_set_bis(filename_reference, filename):
+
+    # on tire profit de la fonction précédente
+    reference_set = read_set(filename_reference)
+
+    # c'est plus clair avec une compréhension
+    with open(filename) as f:
+        return [ (line.strip(), line.strip() in reference_set)
+                 for line in f ]
 
 
 ##################################################
@@ -583,6 +598,50 @@ def diff_bis(extended, abbreviated):
     both =             {ship[4] for ship in extended
                         if ship[0] in abbreviated_ids}
     return extended_only, both, abbreviated_only
+
+
+##################################################
+# fifo - Semaine 3 Séquence 8
+##################################################
+class Fifo:
+    """
+    Une classe FIFO implémentée avec une simple liste
+    """
+    
+    def __init__(self):
+        # l'attribut queue est un objet liste
+        self.queue = []
+
+    def incoming(self, x):
+        # on insère au début de la liste
+        self.queue.insert(0, x)
+
+    def outgoing(self):
+        # une première façon de faire consiste à
+        # utiliser un try/except
+        try:
+            return self.queue.pop()
+        except IndexError:
+            return None
+
+
+##################################################
+# fifo (bis) - Semaine 3 Séquence 8
+##################################################
+# une autre implémentation pourrait faire comme ceci
+class FifoBis(Fifo):
+    def __init__(self):
+        self.queue = []
+
+    def incoming(self, x):
+        self.queue.insert(0, x)
+
+    def outgoing(self):
+        # plus concis mais peut-être moins lisible
+        if len(self.queue):
+            return self.queue.pop()
+        # en fait on n'a même pas besoin du else..
+
 
 
 ##################################################
@@ -732,6 +791,48 @@ def compare_args(f, g, argument_tuples):
     # à recevoir une liste de tuples d'arguments, qu'on applique
     # aux deux fonctions avec la forme * au lieu de les passer directement
     return [f(*tuple) == g(*tuple) for tuple in argument_tuples]
+
+
+##################################################
+# numbers - Semaine 5 Séquence 2
+##################################################
+from functools import reduce
+
+from operator import mul
+
+def numbers(liste):
+    """
+    retourne un tuple contenant
+    (*) la somme
+    (*) le produit
+    (*) le minimum
+    (*) le maximum
+    des éléments de la liste
+    """
+    
+    return ( 
+        # la builtin 'sum' renvoie la somme
+        sum(liste),
+        # pour la multiplication, reduce est nécessaire
+        reduce(mul, liste, 1),
+        # les builtin 'min' et 'max' font ce qu'on veut aussi
+        min(liste),
+        max(liste),
+    )
+
+
+##################################################
+# compare_all - Semaine 5 Séquence 2
+##################################################
+def compare_all(f, g, entrees):
+    """
+    retourne une liste de booléens, un par entree dans entrees
+    qui indique si f(entree) == g(entree)
+    """
+    # on vérifie pour chaque entrée si f et g retournent
+    # des résultats égaux avec ==
+    # et on assemble le tout avec une comprehension de liste 
+    return [f(entree) == g(entree) for entree in entrees]
 
 
 ##################################################
