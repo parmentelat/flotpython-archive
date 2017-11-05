@@ -16,10 +16,15 @@ n2 = regexp_pythonid regexp_agenda regexp_phone regexp_url \
      exo_liste_p exo_carre
 n3 = exo_comptage exo_surgery  exo_graph_dict exo_marine_dict \
      exo_read_set exo_marine_set cls_fifo
-n4 = exo_pgcd exo_distance exo_doubler_premier exo_doubler_premier_kwds exo_compare_args
-n5 = exo_numbers exo_compare_all exo_decode_zen.py exo_rpcproxy.py
-others = exo_multi_tri exo_multi_tri_reverse exo_produit_scalaire \
-     exo_aplatir exo_alternat exo_intersect
+n4 = exo_dispatch exo_libelle exo_pgcd exo_distance exo_numbers
+n5 = exo_multi_tri exo_multi_tri_reverse \
+     exo_doubler_premier exo_doubler_premier_kwds \
+     exo_compare_all exo_compare_args \
+     exo_aplatir exo_alternat exo_intersect \
+     exo_produit_scalaire exo_decode_zen 
+
+# dans w6-s2
+others = exo_rpcproxy.py 
 
 define pys
 $(foreach name, $(1), $(name).py)
