@@ -40,8 +40,9 @@ w5 = $(call pys, $(n5))
 # dans le latex les deux fichiers (via $(TOOL))
 # dans le text un seul fichier (via $(TOOL))
 # plus le fichier shipdict.py tel quel
-w6_latex = exo_rpcproxy.py 
-w6_text = exo_rpcproxy.py
+# rpcproxy n'est plus proposé comme exercice
+#w6_latex = exo_rpcproxy.py
+#w6_text = exo_rpcproxy.py
 w6_code  = ../data/shipdict.py
 
 WEEKS = 2 3 4 5 6
