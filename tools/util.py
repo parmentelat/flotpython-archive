@@ -20,13 +20,23 @@ def truncate(s, n):
 # returns True if a change occurred, or the file is deleted
 
 
+def compare_without_trailing_newline(a ,b):
+    """
+    returns True if both strings are almost equal
+    if any of the input strings ends with a "\n", 
+    it is ignored is the comparison
+    """
+    a_ref = a if (not a or a[-1] != "\n") else a[:-1]
+    b_ref = b if (not b or b[-1] != "\n") else b[:-1]
+    return a_ref == b_ref
+
 def replace_file_with_string(target, new_contents):
     try:
         with open(target) as reader:
             current = reader.read()
     except Exception as e:
         current = ""
-    if current == new_contents:
+    if compare_without_trailing_newline(current, new_contents):
         return False
     # overwrite target file
     with open(target, 'w') as writer:

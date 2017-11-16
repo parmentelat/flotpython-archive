@@ -373,7 +373,7 @@ div.title-slide {
             outfilename = "{}.alt.ipynb".format(self.name)
         else:
             outfilename = self.filename
-        # xxx don't specify output version for now
+        # don't specify output version for now
         new_contents = nbformat.writes(self.notebook)
         if replace_file_with_string(outfilename, new_contents):
             print("{} saved into {}".format(self.name, outfilename))
