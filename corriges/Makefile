@@ -16,7 +16,7 @@ n2 = regexp_pythonid regexp_agenda regexp_phone regexp_url \
      exo_liste_p exo_carre
 n3 = exo_comptage exo_surgery  exo_graph_dict exo_marine_dict \
      exo_read_set exo_marine_set cls_fifo
-n4 = exo_dispatch exo_libelle exo_pgcd exo_distance exo_numbers
+n4 = exo_dispatch exo_libelle exo_pgcd exo_taxes exo_distance exo_numbers
 n5 = exo_multi_tri exo_multi_tri_reverse \
      exo_doubler_premier exo_doubler_premier_kwds \
      exo_compare_all exo_compare_args \
