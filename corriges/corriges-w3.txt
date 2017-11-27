@@ -419,8 +419,11 @@ class Fifo:
 ##################################################
 # fifo (bis) - Semaine 3 Séquence 8
 ##################################################
-# une autre implémentation pourrait faire comme ceci
 class FifoBis(Fifo):
+    """
+    une alternative en testant directement
+    plutôt que d'attraper l'exception
+    """
     def __init__(self):
         self.queue = []
 
