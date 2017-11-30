@@ -15,10 +15,9 @@ def comptage(in_filename, out_filename):
     et de caractères
     """
     # on ouvre le fichier d'entrée en lecture
-    # on aurait pu mettre open(in_filename, 'r')
     with open(in_filename, encoding='utf-8') as input:
         # on ouvre la sortie en écriture
-        with open(out_filename, "w", encoding='utf-8') as output:
+        with open(out_filename, 'w', encoding='utf-8') as output:
             lineno = 1
             # pour toutes les lignes du fichier d'entrée
             # le numéro de ligne commence à 1
@@ -36,15 +35,35 @@ def comptage(in_filename, out_filename):
 ##################################################
 # comptage (bis) - Semaine 3 Séquence 2
 ##################################################
-# un peu plus pythonique avec enumerate
 def comptage_bis(in_filename, out_filename):
+    """
+    un peu plus pythonique avec enumerate
+    """
     with open(in_filename, encoding='utf-8') as input:
-        with open(out_filename, "w", encoding='utf-8') as output:
+        with open(out_filename, 'w', encoding='utf-8') as output:
             # enumerate(.., 1) pour commencer avec une ligne
             # numérotée 1 et pas 0
             for lineno, line in enumerate(input, 1):
+                # une astuce : si on met deux chaines 
+                # collées comme ceci elle sont concaténées
+                # et on n'a pas besoin de mettre de backslash
+                # puisqu'on est dans des parenthèses
                 output.write(f"{lineno}:{len(line.split())}:"
                              f"{len(line)}:{line}")
+
+
+##################################################
+# comptage (ter) - Semaine 3 Séquence 2
+##################################################
+def comptage_ter(in_filename, out_filename):
+    """
+    pareil mais avec un seul with
+    """
+    with open(in_filename, encoding='utf-8') as input, \
+         open(out_filename, 'w', encoding='utf-8') as output:
+        for lineno, line in enumerate(input, 1):
+            output.write(f"{lineno}:{len(line.split())}:"
+                         f"{len(line)}:{line}")
 
 
 ##################################################
@@ -73,39 +92,49 @@ def surgery(liste):
 ##################################################
 # graph_dict - Semaine 3 Séquence 4
 ##################################################
-# on va utiliser un defaultdict
+# une première solution avec un defaultdict
 
 from collections import defaultdict
 
 def graph_dict(filename):
-    # on le déclare de type list
+    """
+    construit une stucture de données de graphe
+    à partir du nom du fichier d'entrée
+    """
+    # on déclare le defaultdict de type list
+    # de cette façon si une clé manque elle
+    # sera initialisée avec un appel à list()
     g = defaultdict(list)
+    
     with open(filename) as f:
         for line in f:
             # on coupe la ligne en trois parties
             begin, value, end = line.split()
             # comme c'est un defaultdict on n'a
             # pas besoin de l'initialiser
-            g[begin].append( (end, int(value)))
+            g[begin].append((end, int(value)))
     return g
 
 
 ##################################################
 # graph_dict (bis) - Semaine 3 Séquence 4
 ##################################################
-# la même chose mais sans defaultdict
-
 def graph_dict_bis(filename):
-    # un dictionnaire vide
+    """
+    pareil mais sans defaultdict
+    """
+    # un dictionnaire vide normal
     g = {}
+
     with open(filename) as f:
         for line in f:
             begin, value, end = line.split()
-            # c'est ça qu'on économise avec un defaultdict
+            # c'est cette partie
+            # qu'on économise avec un defaultdict
             if begin not in g:
                 g[begin] = []
             # sinon c'est tout pareil
-            g[begin].append( (end, int(value)))
+            g[begin].append((end, int(value)))
     return g
 
 
@@ -134,7 +163,7 @@ def index_bis(bateaux):
     # si on veut décortiquer
     resultat = {}
     for bateau in bateaux:
-        resultat [bateau[0]] = bateau
+        resultat[bateau[0]] = bateau
     return resultat
 
 
@@ -152,7 +181,7 @@ def index_ter(bateaux):
         # le premier champ; en appelant le reste _
         # on indique qu'on n'en fera en fait rien
         id, *_ = bateau
-        resultat [id] = bateau
+        resultat[id] = bateau
     return resultat
 
 
@@ -171,7 +200,7 @@ def merge(extended, abbreviated):
     # pour les données étendues
     # on affecte les 6 premiers champs
     # et on ignore les champs de rang 6 et au delà
-    for id, latitude, longitude, timestamp, name, country, *ignore in extended:
+    for id, latitude, longitude, timestamp, name, country, *_ in extended:
         # on crée une entrée dans le résultat, 
         # avec la mesure correspondant aux données étendues
         result[id] = [name, country, (latitude, longitude, timestamp)]
@@ -179,8 +208,8 @@ def merge(extended, abbreviated):
     for id, latitude, longitude, timestamp in abbreviated:
         # et avec les hypothèses on sait que le bateau a déjà été 
         # inscrit dans le résultat, donc result[id] doit déjà exister
-        # et on peut se contenter d'ajouter ls mesure abrégée
-        # dans l'entrée correspondant dans result
+        # et on peut se contenter d'ajouter la mesure abrégée
+        # dans l'entrée correspondante dans result
         result[id].append((latitude, longitude, timestamp))
     # et retourner le résultat
     return result
@@ -192,6 +221,7 @@ def merge(extended, abbreviated):
 def merge_bis(extended, abbreviated):
     """
     Une deuxième version, linéaire également
+    mais qui utilise les indices plutôt que l'unpacking
     """
     # on initialise le résultat avec un dictionnaire vide
     result = {}
@@ -253,8 +283,12 @@ def merge_ter(extended, abbreviated):
 ##################################################
 # on suppose que le fichier existe
 def read_set(filename):
+    """
+    crée un ensemble des mots-lignes trouvés dans le fichier
+    """
     # on crée un ensemble vide
     result = set()
+    
     # on parcourt le fichier
     with open(filename) as f:
         for line in f:
@@ -268,12 +302,35 @@ def read_set(filename):
 # read_set (bis) - Semaine 3 Séquence 5
 ##################################################
 # on peut aussi utiliser une compréhension d'ensemble
-# (voir semaine 5)
-# comme une compréhension de liste mais on remplace
+# (voir semaine 5); ça se présente comme
+# une compréhension de liste mais on remplace
 # les [] par des {}
 def read_set_bis(filename):
     with open(filename) as f:
         return {line.strip() for line in f}
+
+
+##################################################
+# search_in_set - Semaine 3 Séquence 5
+##################################################
+# ici aussi on suppose que les fichiers existent
+def search_in_set(filename_reference, filename):
+    """
+    cherche les mots-lignes de filename parmi ceux
+    qui sont presents dans filename_reference
+    """
+
+    # on tire profit de la fonction précédente
+    reference_set = read_set(filename_reference)
+
+    # on crée une liste vide
+    result = []
+    with open(filename) as f:
+        for line in f:
+            token = line.strip()
+            result.append((token, token in reference_set))
+
+    return result
 
 
 ##################################################
@@ -284,10 +341,11 @@ def search_in_set_bis(filename_reference, filename):
     # on tire profit de la fonction précédente
     reference_set = read_set(filename_reference)
 
-    # c'est plus clair avec une compréhension
+    # c'est un plus clair avec une compréhension
+    # mais moins efficace car on calcule strip() deux fois
     with open(filename) as f:
-        return [ (line.strip(), line.strip() in reference_set)
-                 for line in f ]
+        return [(line.strip(), line.strip() in reference_set)
+                for line in f]
 
 
 ##################################################
@@ -299,26 +357,33 @@ def diff(extended, abbreviated):
     (*) les noms des bateaux présents dans les deux listes
     (*) les ids des bateaux seulement dans abbreviated
     """
+
     ### on n'utilise que des ensembles dans tous l'exercice
+
     # les ids de tous les bateaux dans extended
     # avec ce qu'on a vu jusqu'ici le moyen le plus naturel
     # consiste à calculer une compréhension de liste
     # et à la traduire en ensemble comme ceci
     extended_ids = set([ship[0] for ship in extended])
+
     # les ids de tous les bateaux dans abbreviated
     # je fais exprès de ne pas mettre les []
     # de la compréhension de liste, c'est pour vous introduire
     # les expressions génératrices - voir semaine 5
     abbreviated_ids = set(ship[0] for ship in abbreviated)
+
     # les ids des bateaux seulement dans abbreviated
     # une difference d'ensembles
     abbreviated_only_ids = abbreviated_ids - extended_ids
+
     # les ids des bateaux dans les deux listes
     # une intersection d'ensembles
     both_ids = abbreviated_ids & extended_ids
+
     # les ids des bateaux seulement dans extended 
     # ditto
     extended_only_ids = extended_ids - abbreviated_ids
+
     # pour les deux catégories où c'est possible
     # on recalcule les noms des bateaux
     # par une compréhension d'ensemble
@@ -434,6 +499,6 @@ class FifoBis(Fifo):
         # plus concis mais peut-être moins lisible
         if len(self.queue):
             return self.queue.pop()
-        # en fait on n'a même pas besoin du else..
+        # en fait on n'a même plus besoin du else..
 
 
