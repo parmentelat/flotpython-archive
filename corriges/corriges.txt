@@ -75,7 +75,9 @@ protos      = "(?P<proto>" + "|".join(protos_list) + ")"
 password    = r"(:(?P<password>[^:]+))?"
 
 # la partie user-password elle-même est optionnelle
-user        = r"((?P<user>\w+){password}@)?".format(**locals())
+# on utilise ici un raw f-string avec le préfixe rf
+# pour insérer la regexp <password> dans la regexp <user>
+user        = rf"((?P<user>\w+){password}@)?"
 
 # pour le hostname on accepte des lettres, chiffres, underscore et '.'
 # attention à backslaher . car sinon ceci va matcher tout y compris /
@@ -101,6 +103,33 @@ def label(prenom, note):
         return f"{prenom} est reçu"
     else:
         return f"félicitations à {prenom}"
+
+
+##################################################
+# label (bis) - Semaine 2 Séquence 6
+##################################################
+def label_bis(prenom, note):
+    if note < 10:
+        return f"{prenom} est recalé"
+    # on n'en a pas vraiment besoin ici, mais
+    # juste pour illustrer cette construction
+    elif 10 <= note < 16:
+        return f"{prenom} est reçu"
+    else:
+        return f"félicitations à {prenom}"
+
+
+##################################################
+# label (ter) - Semaine 2 Séquence 6
+##################################################
+# on n'a pas encore vu l'expression conditionnelle
+# et dans ce cas précis ce n'est pas forcément une
+# idée géniale, mais pour votre curiosité on peut aussi
+# faire comme ceci
+def label_ter(prenom, note):
+    return f"{prenom} est recalé" if note < 10 \
+    else f"{prenom} est reçu" if 10 <= note < 16 \
+    else f"félicitations à {prenom}"
 
 
 ##################################################
@@ -243,22 +272,37 @@ def liste_P_bis(liste_x):
 ##################################################
 # carre - Semaine 2 Séquence 7
 ##################################################
-def carre(s):
+def carre(line):
     # on enlève les espaces et les tabulations
-    s = s.replace(' ', '').replace('\t','')
+    line = line.replace(' ', '').replace('\t','')
     # la ligne suivante fait le plus gros du travail
     # d'abord on appelle split() pour découper selon les ';'
     # dans le cas où on a des ';' en trop, on obtient dans le 
     #    résultat du split un 'token' vide, que l'on ignore 
     #    ici avec le clause 'if token'
     # enfin on convertit tous les tokens restants en entiers avec int()
-    entiers = [int(token) for token in s.split(";")
+    entiers = [int(token) for token in line.split(";")
                # en éliminant les entrées vides qui correspondent
                # à des point-virgules en trop
                if token]
     # il n'y a plus qu'à mettre au carré, retraduire en strings,
     # et à recoudre le tout avec join et ':'
     return ":".join([str(entier**2) for entier in entiers])
+
+
+##################################################
+# carre (bis) - Semaine 2 Séquence 7
+##################################################
+def carre_bis(line):
+    # pareil mais avec, à la place des compréhensions
+    # des expressions génératrices que - rassurez-vous -
+    # l'on n'a pas vues encore, on en parlera en semaine 5
+    # le point que je veux illustrer ici c'est que c'est
+    # exactement le même code mais avec () au lieu de []
+    line = line.replace(' ', '').replace('\t','')
+    entiers = (int(token) for token in line.split(";")
+               if token)
+    return ":".join(str(entier**2) for entier in entiers)
 
 
 ##################################################
@@ -271,10 +315,9 @@ def comptage(in_filename, out_filename):
     et de caractères
     """
     # on ouvre le fichier d'entrée en lecture
-    # on aurait pu mettre open(in_filename, 'r')
     with open(in_filename, encoding='utf-8') as input:
         # on ouvre la sortie en écriture
-        with open(out_filename, "w", encoding='utf-8') as output:
+        with open(out_filename, 'w', encoding='utf-8') as output:
             lineno = 1
             # pour toutes les lignes du fichier d'entrée
             # le numéro de ligne commence à 1
@@ -292,15 +335,35 @@ def comptage(in_filename, out_filename):
 ##################################################
 # comptage (bis) - Semaine 3 Séquence 2
 ##################################################
-# un peu plus pythonique avec enumerate
 def comptage_bis(in_filename, out_filename):
+    """
+    un peu plus pythonique avec enumerate
+    """
     with open(in_filename, encoding='utf-8') as input:
-        with open(out_filename, "w", encoding='utf-8') as output:
+        with open(out_filename, 'w', encoding='utf-8') as output:
             # enumerate(.., 1) pour commencer avec une ligne
             # numérotée 1 et pas 0
             for lineno, line in enumerate(input, 1):
+                # une astuce : si on met deux chaines 
+                # collées comme ceci elle sont concaténées
+                # et on n'a pas besoin de mettre de backslash
+                # puisqu'on est dans des parenthèses
                 output.write(f"{lineno}:{len(line.split())}:"
                              f"{len(line)}:{line}")
+
+
+##################################################
+# comptage (ter) - Semaine 3 Séquence 2
+##################################################
+def comptage_ter(in_filename, out_filename):
+    """
+    pareil mais avec un seul with
+    """
+    with open(in_filename, encoding='utf-8') as input, \
+         open(out_filename, 'w', encoding='utf-8') as output:
+        for lineno, line in enumerate(input, 1):
+            output.write(f"{lineno}:{len(line.split())}:"
+                         f"{len(line)}:{line}")
 
 
 ##################################################
@@ -329,39 +392,49 @@ def surgery(liste):
 ##################################################
 # graph_dict - Semaine 3 Séquence 4
 ##################################################
-# on va utiliser un defaultdict
+# une première solution avec un defaultdict
 
 from collections import defaultdict
 
 def graph_dict(filename):
-    # on le déclare de type list
+    """
+    construit une stucture de données de graphe
+    à partir du nom du fichier d'entrée
+    """
+    # on déclare le defaultdict de type list
+    # de cette façon si une clé manque elle
+    # sera initialisée avec un appel à list()
     g = defaultdict(list)
+    
     with open(filename) as f:
         for line in f:
             # on coupe la ligne en trois parties
             begin, value, end = line.split()
             # comme c'est un defaultdict on n'a
             # pas besoin de l'initialiser
-            g[begin].append( (end, int(value)))
+            g[begin].append((end, int(value)))
     return g
 
 
 ##################################################
 # graph_dict (bis) - Semaine 3 Séquence 4
 ##################################################
-# la même chose mais sans defaultdict
-
 def graph_dict_bis(filename):
-    # un dictionnaire vide
+    """
+    pareil mais sans defaultdict
+    """
+    # un dictionnaire vide normal
     g = {}
+
     with open(filename) as f:
         for line in f:
             begin, value, end = line.split()
-            # c'est ça qu'on économise avec un defaultdict
+            # c'est cette partie
+            # qu'on économise avec un defaultdict
             if begin not in g:
                 g[begin] = []
             # sinon c'est tout pareil
-            g[begin].append( (end, int(value)))
+            g[begin].append((end, int(value)))
     return g
 
 
@@ -390,7 +463,7 @@ def index_bis(bateaux):
     # si on veut décortiquer
     resultat = {}
     for bateau in bateaux:
-        resultat [bateau[0]] = bateau
+        resultat[bateau[0]] = bateau
     return resultat
 
 
@@ -408,7 +481,7 @@ def index_ter(bateaux):
         # le premier champ; en appelant le reste _
         # on indique qu'on n'en fera en fait rien
         id, *_ = bateau
-        resultat [id] = bateau
+        resultat[id] = bateau
     return resultat
 
 
@@ -427,7 +500,7 @@ def merge(extended, abbreviated):
     # pour les données étendues
     # on affecte les 6 premiers champs
     # et on ignore les champs de rang 6 et au delà
-    for id, latitude, longitude, timestamp, name, country, *ignore in extended:
+    for id, latitude, longitude, timestamp, name, country, *_ in extended:
         # on crée une entrée dans le résultat, 
         # avec la mesure correspondant aux données étendues
         result[id] = [name, country, (latitude, longitude, timestamp)]
@@ -435,8 +508,8 @@ def merge(extended, abbreviated):
     for id, latitude, longitude, timestamp in abbreviated:
         # et avec les hypothèses on sait que le bateau a déjà été 
         # inscrit dans le résultat, donc result[id] doit déjà exister
-        # et on peut se contenter d'ajouter ls mesure abrégée
-        # dans l'entrée correspondant dans result
+        # et on peut se contenter d'ajouter la mesure abrégée
+        # dans l'entrée correspondante dans result
         result[id].append((latitude, longitude, timestamp))
     # et retourner le résultat
     return result
@@ -448,6 +521,7 @@ def merge(extended, abbreviated):
 def merge_bis(extended, abbreviated):
     """
     Une deuxième version, linéaire également
+    mais qui utilise les indices plutôt que l'unpacking
     """
     # on initialise le résultat avec un dictionnaire vide
     result = {}
@@ -509,8 +583,12 @@ def merge_ter(extended, abbreviated):
 ##################################################
 # on suppose que le fichier existe
 def read_set(filename):
+    """
+    crée un ensemble des mots-lignes trouvés dans le fichier
+    """
     # on crée un ensemble vide
     result = set()
+    
     # on parcourt le fichier
     with open(filename) as f:
         for line in f:
@@ -524,12 +602,35 @@ def read_set(filename):
 # read_set (bis) - Semaine 3 Séquence 5
 ##################################################
 # on peut aussi utiliser une compréhension d'ensemble
-# (voir semaine 5)
-# comme une compréhension de liste mais on remplace
+# (voir semaine 5); ça se présente comme
+# une compréhension de liste mais on remplace
 # les [] par des {}
 def read_set_bis(filename):
     with open(filename) as f:
         return {line.strip() for line in f}
+
+
+##################################################
+# search_in_set - Semaine 3 Séquence 5
+##################################################
+# ici aussi on suppose que les fichiers existent
+def search_in_set(filename_reference, filename):
+    """
+    cherche les mots-lignes de filename parmi ceux
+    qui sont presents dans filename_reference
+    """
+
+    # on tire profit de la fonction précédente
+    reference_set = read_set(filename_reference)
+
+    # on crée une liste vide
+    result = []
+    with open(filename) as f:
+        for line in f:
+            token = line.strip()
+            result.append((token, token in reference_set))
+
+    return result
 
 
 ##################################################
@@ -540,10 +641,11 @@ def search_in_set_bis(filename_reference, filename):
     # on tire profit de la fonction précédente
     reference_set = read_set(filename_reference)
 
-    # c'est plus clair avec une compréhension
+    # c'est un plus clair avec une compréhension
+    # mais moins efficace car on calcule strip() deux fois
     with open(filename) as f:
-        return [ (line.strip(), line.strip() in reference_set)
-                 for line in f ]
+        return [(line.strip(), line.strip() in reference_set)
+                for line in f]
 
 
 ##################################################
@@ -555,29 +657,40 @@ def diff(extended, abbreviated):
     (*) les noms des bateaux présents dans les deux listes
     (*) les ids des bateaux seulement dans abbreviated
     """
+
     ### on n'utilise que des ensembles dans tous l'exercice
+
     # les ids de tous les bateaux dans extended
-    # une compréhension d'ensemble
-    extended_ids = {ship[0] for ship in extended}
+    # avec ce qu'on a vu jusqu'ici le moyen le plus naturel
+    # consiste à calculer une compréhension de liste
+    # et à la traduire en ensemble comme ceci
+    extended_ids = set([ship[0] for ship in extended])
+
     # les ids de tous les bateaux dans abbreviated
-    # idem
-    abbreviated_ids = {ship[0] for ship in abbreviated}
+    # je fais exprès de ne pas mettre les []
+    # de la compréhension de liste, c'est pour vous introduire
+    # les expressions génératrices - voir semaine 5
+    abbreviated_ids = set(ship[0] for ship in abbreviated)
+
     # les ids des bateaux seulement dans abbreviated
     # une difference d'ensembles
     abbreviated_only_ids = abbreviated_ids - extended_ids
+
     # les ids des bateaux dans les deux listes
     # une intersection d'ensembles
     both_ids = abbreviated_ids & extended_ids
+
     # les ids des bateaux seulement dans extended 
     # ditto
     extended_only_ids = extended_ids - abbreviated_ids
+
     # pour les deux catégories où c'est possible
     # on recalcule les noms des bateaux
     # par une compréhension d'ensemble
     both_names = \
-          {ship[4] for ship in extended if ship[0] in both_ids}
+        set([ship[4] for ship in extended if ship[0] in both_ids])
     extended_only_names = \
-          {ship[4] for ship in extended if ship[0] in extended_only_ids}
+        set([ship[4] for ship in extended if ship[0] in extended_only_ids])
     # enfin on retourne les 3 ensembles sous forme d'un tuple
     return extended_only_names, both_names, abbreviated_only_ids
 
@@ -587,7 +700,32 @@ def diff(extended, abbreviated):
 ##################################################
 def diff_bis(extended, abbreviated):
     """
-    Idem avec seulement des compréhensions
+    Même code mais qui utilise les compréhensions d'ensemble
+    que l'on n'a pas encore vues - à nouveau, voir semaine 5
+    mais vous allez voir que c'est assez intuitif 
+    """
+    extended_ids = {ship[0] for ship in extended}
+    abbreviated_ids = {ship[0] for ship in abbreviated}
+
+    abbreviated_only_ids = abbreviated_ids - extended_ids
+    both_ids = abbreviated_ids & extended_ids
+    extended_only_ids = extended_ids - abbreviated_ids
+
+    both_names = \
+          {ship[4] for ship in extended if ship[0] in both_ids}
+    extended_only_names = \
+          {ship[4] for ship in extended if ship[0] in extended_only_ids}
+
+    return extended_only_names, both_names, abbreviated_only_ids
+
+
+##################################################
+# diff (ter) - Semaine 3 Séquence 5
+##################################################
+def diff_ter(extended, abbreviated):
+    """
+    Idem sans les calculs d'ensembles intermédiaires
+    en utilisant les conditions dans les compréhensions
     """
     extended_ids =     {ship[0] for ship in extended}
     abbreviated_ids =  {ship[0] for ship in abbreviated}
@@ -597,6 +735,24 @@ def diff_bis(extended, abbreviated):
                         if ship[0] not in abbreviated_ids}
     both =             {ship[4] for ship in extended
                         if ship[0] in abbreviated_ids}
+    return extended_only, both, abbreviated_only
+
+
+##################################################
+# diff (quater) - Semaine 3 Séquence 5
+##################################################
+def diff_quater(extended, abbreviated):
+    """
+    Idem sans indices
+    """
+    extended_ids =     {id for id, *_ in extended}
+    abbreviated_ids =  {id for id, *_ in abbreviated}
+    abbreviated_only = {id for id, *_ in abbreviated
+                        if id not in extended_ids}
+    extended_only =    {name for id, _, _, _, name, *_ in extended
+                        if id not in abbreviated_ids}
+    both =             {name for id, _, _, _, name, *_ in extended
+                        if id in abbreviated_ids}
     return extended_only, both, abbreviated_only
 
 
@@ -628,8 +784,11 @@ class Fifo:
 ##################################################
 # fifo (bis) - Semaine 3 Séquence 8
 ##################################################
-# une autre implémentation pourrait faire comme ceci
 class FifoBis(Fifo):
+    """
+    une alternative en testant directement
+    plutôt que d'attraper l'exception
+    """
     def __init__(self):
         self.queue = []
 
@@ -640,7 +799,7 @@ class FifoBis(Fifo):
         # plus concis mais peut-être moins lisible
         if len(self.queue):
             return self.queue.pop()
-        # en fait on n'a même pas besoin du else..
+        # en fait on n'a même plus besoin du else..
 
 
 
@@ -707,15 +866,14 @@ def libelle(ligne):
 # pgcd - Semaine 4 Séquence 3
 ##################################################
 def pgcd(a, b):
-    # le cas pathologique
-    if a * b == 0:
-        return 0
     "le pgcd de a et b par l'algorithme d'Euclide"
     # l'algorithme suppose que a >= b
     # donc si ce n'est pas le cas 
     # il faut inverser les deux entrées
     if b > a : 
         a, b = b, a
+    if b == 0:
+        return a
     # boucle sans fin
     while True:
         # on calcule le reste 
@@ -739,9 +897,10 @@ def pgcd(a, b):
 # a, b = b, r = b, a
 # ce qui provoque l'inversion
 def pgcd_bis(a, b):
-    # le cas pathologique
-    if a == 0 or b == 0:
-        return 0
+    # si l'on des deux est nul on retourne l'autre
+    if a * b == 0:
+        return a or b
+    # sinon on fait une boucle sans fin
     while True:
         # on calcule le reste 
         r = a % b
@@ -759,14 +918,83 @@ def pgcd_bis(a, b):
 # plus court, mais on passe du temps à se convaincre
 # que ça fonctionne bien comme demandé
 def pgcd_ter(a, b):
-    # le cas pathologique
-    if a * b == 0:
-        return 0
     # si on n'aime pas les boucles sans fin
     # on peut faire aussi comme ceci
     while b:
         a, b = b, a % b
     return a
+
+
+##################################################
+# taxes - Semaine 4 Séquence 3
+##################################################
+# une solution très élégante proposée par adrienollier
+
+# les tranches en ordre décroissant
+TaxRate = (
+    (150_000, 45),
+    (45_000, 40),
+    (11_500, 20),
+    (0, 0),
+)
+
+def taxes(income):
+    """
+    U.K. income taxes calculator
+    https://www.gov.uk/income-tax-rates
+    """
+    due = 0
+    for floor, rate in TaxRate:
+        if income > floor:
+            due += (income - floor) * rate / 100
+            income = floor
+    return int(due)
+
+
+##################################################
+# taxes (bis) - Semaine 4 Séquence 3
+##################################################
+
+# cette solution est plus lourde
+# je la retiens parce qu'elle montre un cas de for .. else ..
+# qui ne soit pas trop tiré par les cheveux
+# quoique
+
+bands = [
+    # à partir de 0. le taux est nul
+    (0, 0.),
+    # jusqu'à 11 500 où il devient de 20%
+    (11_500, 20/100),
+    # etc.
+    (45_000, 40/100),
+    (150_000, 45/100),
+]
+
+def taxes_bis(income):
+    """
+    utilise un for avec un else
+    """
+    amount = 0
+    
+    # en faisant ce zip un peu étrange, on va
+    # considérer les couples de tuples consécutifs dans
+    # la liste bands
+    for (band1, rate1), (band2, _) in zip(bands, bands[1:]):
+        # le salaire est au-delà de cette tranche
+        if income >= band2:
+            amount += (band2-band1) * rate1
+        # le salaire est dans cette tranche
+        else:
+            amount += (income-band1) * rate1
+            # du coup on peut sortir du for par un break
+            # et on ne passera pas par le else du for
+            break
+    # on ne passe ici qu'avec les salaires dans la dernière tranche
+    # en effet pour les autres on est sorti du for par un break
+    else:
+        band_top, rate_top = bands[-1]
+        amount += (income - band_top) * rate_top
+    return(int(amount))
 
 
 ##################################################
@@ -784,10 +1012,24 @@ def distance(*args):
 
 
 ##################################################
+# distance (bis) - Semaine 4 Séquence 6
+##################################################
+def distance_bis(*args):
+    "idem mais avec une expression génératrice"
+    # on n'a pas encore vu cette forme - cf Semaine 6
+    # mais pour vous donner un avant-goût d'une expression
+    # génératrice on peut faire aussi ceci
+    # observez l'absence de crochets []
+    # la différence c'est juste qu'on ne
+    # construit pas la liste des carrés,
+    # car on n'en a pas besoin
+    # et donc un itérateur nous suffit
+    return math.sqrt(sum(x**2 for x in args))
+
+
+##################################################
 # numbers - Semaine 4 Séquence 6
 ##################################################
-from operator import mul
-
 def numbers(*liste):
     """
     retourne un tuple contenant
@@ -822,11 +1064,11 @@ def numbers_bis(*liste):
     return (
         # attention:
         # la signature de sum est: sum(iterable[, start])
-        # du coup on ne peut pas passer à sum start=0
+        # du coup on ne PEUT PAS passer à sum start=0
         # parce que start n'a pas de valeur par défaut
         sum(liste, 0),
         # par contre avec min c'est min(iterable, *[, key, default])
-        # du coup on doit appeler min avec default=0 qui est plus clair
+        # du coup on DOIT appeler min avec default=0 qui est plus clair
         # l'étoile qui apparaît dans la signature
         # rend le paramètre default keyword-only
         min(liste, default=0),
@@ -1122,51 +1364,4 @@ def decode_zen_bis(this_module):
 def decode_zen_ter(this_module):
     "une version avec une expression génératrice plutôt qu'une compréhension"
     return "".join(this_module.d.get(c, c) for c in this_module.s)
-
-
-##################################################
-# RPCProxy - Semaine 6 Séquence 2
-##################################################
-# une troisième implémentation de RPCProxy
-
-class Forwarder:
-    """
-    Une instance de la classe Forwarder est un callable
-    qui peut être utilisée comme une méthode sur l
-    class RPCProxy
-    """
-    def __init__(self, rpc_proxy, methodname):
-        """
-        le constructeur  mémorise l'instance de RPCProxy
-        et le nom de la méthode qui a été appelée
-        """
-        self.methodname = methodname
-        self.rpc_proxy = rpc_proxy
-
-    def __call__(self, *args):
-        """
-        en rendant cet objet callable, on peut l'utiliser
-        comme une méthode de RPCProxy
-        """
-        print "Envoi à {}\nde la fonction {} -- args= {}".\
-            format(self.rpc_proxy.url, self.methodname, args)
-        return "retour de la fonction " + self.methodname
-
-class RPCProxy:
-    """
-    Une troisième implémentation de RPCProxy qui sous-traite
-    à une classe annexe `Forwarder` qui se comporte comme
-    une *factory* de méthodes
-    """
-    def __init__(self, url, login, password):
-        self.url = url
-        self.login = login
-        self.password = password
-        
-    def __getattr__ (self, methodname):
-        """
-        Crée à la volée une instance de Forwarder
-        correspondant à 'methodname'
-        """
-        return Forwarder(self, methodname)
 
