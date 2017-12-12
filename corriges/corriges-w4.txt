@@ -130,7 +130,6 @@ def pgcd_ter(a, b):
 ##################################################
 # taxes - Semaine 4 Séquence 3
 ##################################################
-
 # une solution très élégante proposée par adrienollier
 
 # les tranches en ordre décroissant
@@ -152,7 +151,6 @@ def taxes(income):
             due += (income - floor) * rate / 100
             income = floor
     return int(due)
-
 
 
 ##################################################
@@ -216,10 +214,24 @@ def distance(*args):
 
 
 ##################################################
+# distance (bis) - Semaine 4 Séquence 6
+##################################################
+def distance_bis(*args):
+    "idem mais avec une expression génératrice"
+    # on n'a pas encore vu cette forme - cf Semaine 6
+    # mais pour vous donner un avant-goût d'une expression
+    # génératrice on peut faire aussi ceci
+    # observez l'absence de crochets []
+    # la différence c'est juste qu'on ne
+    # construit pas la liste des carrés,
+    # car on n'en a pas besoin
+    # et donc un itérateur nous suffit
+    return math.sqrt(sum(x**2 for x in args))
+
+
+##################################################
 # numbers - Semaine 4 Séquence 6
 ##################################################
-from operator import mul
-
 def numbers(*liste):
     """
     retourne un tuple contenant
@@ -254,11 +266,11 @@ def numbers_bis(*liste):
     return (
         # attention:
         # la signature de sum est: sum(iterable[, start])
-        # du coup on ne peut pas passer à sum start=0
+        # du coup on ne PEUT PAS passer à sum start=0
         # parce que start n'a pas de valeur par défaut
         sum(liste, 0),
         # par contre avec min c'est min(iterable, *[, key, default])
-        # du coup on doit appeler min avec default=0 qui est plus clair
+        # du coup on DOIT appeler min avec default=0 qui est plus clair
         # l'étoile qui apparaît dans la signature
         # rend le paramètre default keyword-only
         min(liste, default=0),
