@@ -56,7 +56,9 @@ def doubler_premier(f, first, *args):
 # doubler_premier (bis) - Semaine 5 Séquence 2
 ##################################################
 def doubler_premier_bis(f, *args):
-    "marche aussi mais moins élégant"
+    """
+    marche aussi mais moins élégant
+    """
     first = args[0]
     remains = args[1:]
     return f(2*first, *remains)
