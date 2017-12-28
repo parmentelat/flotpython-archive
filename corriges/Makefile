@@ -22,7 +22,8 @@ n5 = exo_multi_tri exo_multi_tri_reverse \
      exo_compare_all exo_compare_args \
      exo_aplatir exo_alternat exo_intersect \
      exo_produit_scalaire exo_decode_zen 
-
+# w6 n'a que l'exercice shipdict; faire 'make code' pour produire le corrigé
+n7 = exo_stairs
 
 # dans w6-s2 et w6-s4 resp.
 others = exo_rpcproxy shipdict
@@ -35,17 +36,10 @@ w2 = $(call pys, $(n2))
 w3 = $(call pys, $(n3))
 w4 = $(call pys, $(n4))
 w5 = $(call pys, $(n5))
-
-# pour la semaine 6 on met
-# dans le latex les deux fichiers (via $(TOOL))
-# dans le text un seul fichier (via $(TOOL))
-# plus le fichier shipdict.py tel quel
-# rpcproxy n'est plus proposé comme exercice
-#w6_latex = exo_rpcproxy.py
-#w6_text = exo_rpcproxy.py
 w6_code  = ../data/shipdict.py
+w7 = $(call pys, $(n7))
 
-WEEKS = 2 3 4 5 6
+WEEKS = 2 3 4 5 7
 
 define find_source
 $(wildcard ../modules/corrections/$(1) ../data/$(1))
@@ -115,7 +109,7 @@ $(foreach week, $(WEEKS), $(eval $(call week_target,$(week))))
 .PHONY: all code clean superclean code-clean pdf
 
 clean:
-	rm -f *.{aux,log,tex,toc,py}
+	rm -f *.{aux,log,tex,toc,py,out}
 
 index:
 	for tex in *.tex; do pdflatex $$tex; done

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
+from __future__ import print_function
 
 ############################################################
 # the low level interface - used to be used directly in the first exercises
@@ -28,7 +28,7 @@ DEBUG=False
 default_layout_args =  (24, 28, 28)
 
 ####################        
-class ExerciseFunction(object):
+class ExerciseFunction:
     """The class for an exercise where students are asked to write a
     function The teacher version of that function is provided as
     'solution' and is used against datasets to generate an online
@@ -146,7 +146,7 @@ class ExerciseFunction(object):
                 student_result = e
     
             # compare results
-            ok = expected == student_result
+            ok = self.validate(expected, student_result)
             if not ok:
                 overall = False
             # render that run
@@ -172,12 +172,15 @@ class ExerciseFunction(object):
         
         if how_many is None:
             how_many = self.nb_examples
+        columns = self.layout_args if self.layout_args \
+                  else default_layout_args
+        exo_layout = self.layout
+
+        if how_many is None:
+            how_many = self.nb_examples
         if how_many == 0:
             how_many = len(self.datasets)
     
-        columns = self.layout_args if self.layout_args \
-                  else default_layout_args
-
         # can provide 3 args (convenient when it's the same as correction) or just 2
         columns = columns[:2]
         c1, c2 = columns
@@ -187,11 +190,10 @@ class ExerciseFunction(object):
         html = table.header()
 
         title1 = "Arguments" if not self.render_name else "Appel"
-        html += TableRow(
-            style=header_font_style,
-            cells=[ TableCell (CellLegend(x), tag='th', style=center_cell_style)
-                    for x in (title1, 'Résultat Attendu') ]
-        ).html()
+        # souci avec l'accent de 'Résultat Attendu'
+        html += TableRow(style=header_font_style,
+                         cells = [ TableCell (CellLegend(x), tag='th', style=center_cell_style)
+                                   for x in (title1, 'Resultat Attendu') ]).html()
         for dataset in self.datasets[:how_many]:
             sample_dataset = dataset.clone(self.copy_mode)
             if self.render_name:
@@ -200,11 +202,66 @@ class ExerciseFunction(object):
                 expected = sample_dataset.call(self.solution)
             except Exception as e:
                 expected = e
-            html += TableRow(
-                cells = [ TableCell(dataset, layout=self.layout, width=c1),
-                          TableCell(expected, layout=self.layout, width=c2)
-                ]).html()
+            html += TableRow(cells = [ TableCell(dataset, layout=self.layout, width=c1),
+                                       TableCell(expected, layout=self.layout, width=c2)
+                                   ]).html()
     
         html += table.footer()
         return HTML(html)
 
+
+    def validate(self, expected, result):
+        """
+        how to compare the results as obtained from
+        * the solution function
+        * and the student function
+        
+        the default here is to use ==
+        """
+        return expected == result
+
+# see this question on SO
+# https://stackoverflow.com/questions/40659212/futurewarning-elementwise-comparison-failed-returning-scalar-but-in-the-futur
+
+try:
+    import numpy as np
+    import warnings
+
+    class ExerciseFunctionNumpy(ExerciseFunction):
+        """
+        This is suitable for functions that are expected to return a numpy (nd)array
+        """
+
+        def __init__(self, solution, datasets,
+                     *args,
+                     layout='text',
+                     call_layout='pprint',
+                     precision=None,
+                     **kwds):
+            return ExerciseFunction.__init__(
+                self, solution, datasets,
+                layout = layout,
+                call_layout=call_layout,
+                *args, **kwds)
+
+        # redefine validation function on numpy arrays
+        def validate(self, expected, result):
+            try:
+                return np.all(
+                    np.isclose(
+                        expected, result))
+            except Exception as e:
+                # print("OOPS", type(e), e)
+                try:
+                    with warnings.catch_warnings():
+                        warnings.simplefilter(action='ignore', category=FutureWarning)
+                        return expected == result
+                except Exception as e:
+                    print("OOPS2", type(e), e)
+                    return False
+
+except:
+    #print("ExerciseFunctionNumpy not defined ; numpy not installed ? ")
+    pass
+
+    
