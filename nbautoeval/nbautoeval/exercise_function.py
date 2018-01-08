@@ -255,7 +255,12 @@ try:
                 try:
                     with warnings.catch_warnings():
                         warnings.simplefilter(action='ignore', category=FutureWarning)
-                        return expected == result
+                        # we need to return a genuine bool here
+                        result = expected == result
+                        if isinstance(result, np.ndarray):
+                            return np.all(result)
+                        else:
+                            return result
                 except Exception as e:
                     print("OOPS2", type(e), e)
                     return False
