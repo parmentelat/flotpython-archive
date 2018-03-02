@@ -128,13 +128,17 @@ SUPERCLEAN-TARGETS += html-clean
 all: html
 
 #################### ipynb
+# the cities data is huge, and was used only with the miniprojects,
+# so it has become a big impediment
+DATA-FILES = $(shell git ls-files data | egrep -v '^data/(cities|all-cities)')
+
 ipynb: force
 	@mkdir -p ipynb; echo populating ipynb with notebooks from 'w*'
 	@$(RSYNC) -aL $(NOTEBOOKS) ipynb
 	@mkdir -p ipynb/corrections; echo syncing modules/corrections onto ipynb/corrections
 	@$(RSYNC) -a $$(git ls-files modules/corrections) ipynb/corrections
 	@mkdir -p ipynb/data; echo syncing data onto ipynb/data
-	@$(RSYNC) -a $$(git ls-files data) ipynb/data
+	@$(RSYNC) -a $(DATA-FILES) ipynb/data
 	@mkdir -p ipynb/media; echo syncing media onto ipynb/media
 	@$(RSYNC) -a $$(git ls-files media) ipynb/media
 
