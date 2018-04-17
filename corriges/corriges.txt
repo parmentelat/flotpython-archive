@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-############################################################ 
+############################################################
 #
 # MOOC Python
 #
 ############################################################
 # -*- coding: utf-8 -*-
-############################################################ 
+############################################################
 #
 # Tous les corrigés
 #
@@ -279,7 +279,7 @@ def carre(line):
     # d'abord on appelle split() pour découper selon les ';'
     # dans le cas où on a des ';' en trop, on obtient dans le 
     #    résultat du split un 'token' vide, que l'on ignore 
-    #    ici avec le clause 'if token'
+    #    ici avec la clause 'if token'
     # enfin on convertit tous les tokens restants en entiers avec int()
     entiers = [int(token) for token in line.split(";")
                # en éliminant les entrées vides qui correspondent
@@ -1127,7 +1127,9 @@ def doubler_premier(f, first, *args):
 # doubler_premier (bis) - Semaine 5 Séquence 2
 ##################################################
 def doubler_premier_bis(f, *args):
-    "marche aussi mais moins élégant"
+    """
+    marche aussi mais moins élégant
+    """
     first = args[0]
     remains = args[1:]
     return f(2*first, *remains)
@@ -1205,7 +1207,10 @@ def aplatir(conteneurs):
 # alternat - Semaine 5 Séquence 3
 ##################################################
 def alternat(l1, l2):
-    "renvoie une liste des éléments pris un sur deux dans l1 et dans l2"
+    """
+    renvoie une liste des éléments
+    pris alternativement dans l1 et dans l2
+    """
     # pour réaliser l'alternance on peut combiner zip avec aplatir
     # telle qu'on vient de la réaliser
     return aplatir(zip(l1, l2))
@@ -1215,7 +1220,9 @@ def alternat(l1, l2):
 # alternat (bis) - Semaine 5 Séquence 3
 ##################################################
 def alternat_bis(l1, l2):
-    "une deuxième version de alternat"
+    """
+    une deuxième version de alternat
+    """
     # la même idée mais directement, sans utiliser aplatir
     return [element for conteneur in zip(l1, l2) for element in conteneur]
 
@@ -1269,8 +1276,11 @@ def produit_scalaire(X, Y):
 # produit_scalaire (bis) - Semaine 5 Séquence 4
 ##################################################
 # Il y a plein d'autres solutions qui marchent aussi
+#
 def produit_scalaire_bis(X, Y):
-    # initialisation du résultat
+    """
+    Une autre version
+    """
     scalaire = 0
     for x, y in zip(X, Y):
         scalaire += x * y
@@ -1281,14 +1291,23 @@ def produit_scalaire_bis(X, Y):
 ##################################################
 # produit_scalaire (ter) - Semaine 5 Séquence 4
 ##################################################
-# et encore une: celle-ci par contre est assez peu "pythonique"
-# je la donne plutôt comme un exemple de ce qu'il faut éviter
-# on aime bien en général éviter les boucles du genre
-# for i in range(len(iterable)):
-#     ... iterable[i]
+# Et encore une:
+# celle-ci par contre est assez peu "pythonique"
+# considérez-la comme un exemple de ce qu'il faut éviter
+#
 def produit_scalaire_ter(X, Y):
+    """
+    Un exemple de ce qu'il faut éviter de faire:
+    for i in range(len(iterable):
+        x = iterable[i]
+    peut le plus souvent se remplacer par un
+    for x in iterable:
+        ...
+    """
     scalaire = 0
+    # on calcule la taille
     n = len(X)
+    # uniquement pour faire ce vilain idiome
     for i in range(n):
         scalaire += X[i] * Y[i]
     return scalaire
@@ -1303,29 +1322,27 @@ def produit_scalaire_ter(X, Y):
 # (*) dans l'attribut 'd' le code à utiliser pour décoder
 # 
 # ce qui veut dire qu'en première approximation on pourrait 
-# obtenir une liste des caractères du manifeste en faisant
-# 
-# [ this.d[c] for c in this.s ]
+# énumérer les caractères du manifeste en faisant
+# (this.d[c] for c in this.s)
 # 
 # mais ce serait le cas seulement si le code agissait sur 
 # tous les caractères; comme ce n'est pas le cas il faut
 # laisser intacts les caractères de this.s qui ne sont pas
-# dans this.d (dans le sens "c in this.d")
-#
-# je fais exprès de ne pas appeler l'argument this pour
-# illustrer le fait qu'un module est un objet comme un autre
+# dans this.d
 
 def decode_zen(this_module):
-    "décode le zen de python à partir du module this"
+    """
+    décode le zen de python à partir du module this
+    """
     # la version encodée du manifeste
     encoded = this_module.s
-    # le 'code' 
+    # le dictionnaire qui implémente le code
     code = this_module.d
     # si un caractère est dans le code, on applique le code
     # sinon on garde le caractère tel quel
     # aussi, on appelle 'join' pour refaire une chaîne à partir
     # de la liste des caractères décodés
-    return ''.join([code[c] if c in code else c for c in encoded])
+    return ''.join(code[c] if c in code else c for c in encoded)
 
 
 ##################################################
@@ -1338,30 +1355,40 @@ def decode_zen(this_module):
 # clé n'est pas présente dans le dictionnaire
 # 
 # dict.get(key, default)
-# retourne dict[key] si elle eset présente, et default sinon
+# retourne dict[key] si elle est présente, et default sinon
  
 def decode_zen_bis(this_module):
-    "une autre version plus courte"
-    return "".join([this_module.d.get(c, c) for c in this_module.s])
-
-
-##################################################
-# decode_zen (ter) - Semaine 5 Séquence 7
-##################################################
-# presque la même chose, mais en utilisant une expression génératrice
-# à la place de la compréhension; la seule différence avec la version bis
-# est l'absence des crochets carrés []
-# ici je triche, nous n'avons pas encore vu ces expressions-là,
-# nous les verrons en semaine 6, mais ça me permet de les introduire
-# pour les curieux donc:
-# avec ce code, **on ne crée pas la liste** qui est passée au join(),
-# c'est comme si cette liste était cette fois
-# parcourue à travers **un itérateur**
-#
-# on est donc un peu plus efficace - même si ça n'est évidemment
-# pas très sensible dans ce cas précis 
-
-def decode_zen_ter(this_module):
-    "une version avec une expression génératrice plutôt qu'une compréhension"
+    """
+    une autre version un peu plus courte
+    """
     return "".join(this_module.d.get(c, c) for c in this_module.s)
+
+
+##################################################
+# stairs - Semaine 7 Séquence 2
+##################################################
+def stairs(k):
+    """
+    la pyramide en escaliers telle que décrite dans l'énoncé
+    """
+    # on calcule n
+    n = 2 * k + 1
+    # on calcule les deux tableaux d'indices
+    # tous les deux de dimension n 
+    ix, iy = np.indices((n, n))
+    # il n'y a plus qu'à appliquer la formule qui va bien
+    return 2 * k - (np.abs(ix - k) + np.abs(iy - k))
+
+
+##################################################
+# stairs - Semaine 7 Séquence 2
+##################################################
+def stairs_bis(k):
+    """
+    Bien sûr on peut préciser le type mais ce n'est pas 
+    réellement nécessaire ici
+    """
+    n = 2 * k + 1
+    ix, iy = np.indices((n, n), dtype=np.int8)
+    return 2 * k - (np.abs(ix - k) + np.abs(iy - k))
 
