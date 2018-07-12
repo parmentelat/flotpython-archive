@@ -13,20 +13,25 @@ script au plus grand projet.
 
 L'écosystème Python est un des plus riches et des plus
 dynamiques. Quelque soit votre besoin, il est très probable qu'il
-existe déjà un projet de référence y répondant.  
+existe déjà un projet de référence y répondant.
+[[projet de référence ça fait un peu ampoulé pour un teaser.
+  pourquoi pas juste bout de code, ou librairie, ...
+]]
 
 Cependant, pour exploiter pleinement les possibilités de Python vous
-devez acquérir une profonde compréhension du langage.  Dans ce MOOC,
-vous apprendrez à bien programmer en Python.  En effet, on ne
+devez acquérir une très bonne compréhension du langage.  Dans ce MOOC,
+vous apprendrez à bien programmer en Python. On ne
 programme pas en Python comme on programme en C++ ou en Java.
 
-Le langage Python encourage une programmation intuitive qui repose sur
-une syntaxe naturelle et des concepts fondamentaux puissants qui
-facilitent la programmation.
+Le langage Python a été conçu depuis le tout début avec l'objectif de pouvoir
+écrire des programmes lisibles. C'est pourquoi il encourage une programmation
+intuitive qui repose sur une syntaxe naturelle et des concepts fondamentaux
+puissants qui facilitent la programmation.
 
 Dans ce MOOC, nous verrons tous les aspects du langage, dans de
 nombreuses vidéos courtes, et nous les approfondirons dans des
-compléments et exercices auto-corrigés sous le format de notebook qui
+compléments et exercices auto-corrigés sous le format de notebook
+[[on dit le mot jupyter ou pas ?]] qui
 pemettent de mélanger dans un navigateur du texte et du code
 exécutable sans rien avoir à installer.
 
@@ -36,12 +41,16 @@ vous saurez les utiliser pour en exploiter toute la puissance.
 Ce MOOC est parfaitement adapté à des programmeurs confirmés qui
 veulent découvrir Python ou approfondir leurs connaissances.  Mais il
 est également adapté à des débutants en programmation. En effet, le
-contenu de ce MOOC est découpé en trois niveaux, basic, intermédiaire
-et avancé, pour que chacun puisse adapté son cursus en fonction de ses
-objectifs.
+contenu de ce MOOC est découpé en trois niveaux, basique, intermédiaire
+et avancé, pour que chacun puisse adapter son cursus en fonction de ses
+objectifs et de ses acquis.
+
+[[ est-ce qu'on dit un mot rapide sur le format tronc commun 6 semaines +
+options 3 semaines ? ce serait histoire de ne pas décourager les gens qui
+seraient intimidés par un cours de 9 semaines - je ne pense pas qu'on aura le
+courage d'en changer dans le futur prévisible... ]]
 
 Alors, n'hésitez pas à nous rejoindre sur ce MOOC pour découvrir,
 approfondir, et maîtriser Python.
 
 À bientôt !
-
