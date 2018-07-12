@@ -50,7 +50,6 @@ options 3 semaines ? ce serait histoire de ne pas décourager les gens qui
 seraient intimidés par un cours de 9 semaines - je ne pense pas qu'on aura le
 courage d'en changer dans le futur prévisible... ]]
 
-Alors, n'hésitez pas à nous rejoindre sur ce MOOC pour découvrir,
-approfondir, et maîtriser Python.
+Alors, n'hésitez pas à rejoindre des dizaines de milliers d'étudiants, et inscrivez vous à ce MOOC pour découvrir, approfondir, et maîtriser Python.
 
 À bientôt !
