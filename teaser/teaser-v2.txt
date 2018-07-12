@@ -1,0 +1,47 @@
+﻿Bonjour,
+
+Vous voulez débuter en programmation, découvrir Python, ou renforcer
+vos connaissances et vous vous demandez si ce MOOC sur Python va
+répondre à vos attentes, alors laissez moi vous expliquer pourquoi ce
+MOOC est fait pour vous.
+
+Python est un langage de programmation facile à apprendre et
+parfaitement adapté pour débuter.  Mais, il est également
+incroyablement puissant et permet d'écrire, en moins de temps que
+n'importe quel autre langage, des programmes allant du plus petit
+script au plus grand projet.
+
+L'écosystème Python est un des plus riches et des plus
+dynamiques. Quelque soit votre besoin, il est très probable qu'il
+existe déjà un projet de référence y répondant.  
+
+Cependant, pour exploiter pleinement les possibilités de Python vous
+devez acquérir une profonde compréhension du langage.  Dans ce MOOC,
+vous apprendrez à bien programmer en Python.  En effet, on ne
+programme pas en Python comme on programme en C++ ou en Java.
+
+Le langage Python encourage une programmation intuitive qui repose sur
+une syntaxe naturelle et des concepts fondamentaux puissants qui
+facilitent la programmation.
+
+Dans ce MOOC, nous verrons tous les aspects du langage, dans de
+nombreuses vidéos courtes, et nous les approfondirons dans des
+compléments et exercices auto-corrigés sous le format de notebook qui
+pemettent de mélanger dans un navigateur du texte et du code
+exécutable sans rien avoir à installer.
+
+A la fin de ce MOOC, vous maîtriserez les fondamentaux du langage et
+vous saurez les utiliser pour en exploiter toute la puissance.
+
+Ce MOOC est parfaitement adapté à des programmeurs confirmés qui
+veulent découvrir Python ou approfondir leurs connaissances.  Mais il
+est également adapté à des débutants en programmation. En effet, le
+contenu de ce MOOC est découpé en trois niveaux, basic, intermédiaire
+et avancé, pour que chacun puisse adapté son cursus en fonction de ses
+objectifs.
+
+Alors, n'hésitez pas à nous rejoindre sur ce MOOC pour découvrir,
+approfondir, et maîtriser Python.
+
+À bientôt !
+
