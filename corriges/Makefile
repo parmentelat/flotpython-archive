@@ -11,7 +11,7 @@ nbmap:
 
 .FORCE:
 
-n2 = regexp_pythonid regexp_agenda regexp_phone regexp_url \
+n2 = exo_wc regexp_pythonid regexp_agenda regexp_phone regexp_url \
      exo_label exo_inconnue exo_laccess exo_divisible exo_morceaux \
      exo_liste_p exo_carre
 n3 = exo_comptage exo_surgery  exo_graph_dict exo_marine_dict \

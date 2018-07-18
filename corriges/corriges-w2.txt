@@ -6,6 +6,19 @@
 ############################################################
 
 ##################################################
+# wc - Semaine 2 Séquence 2
+##################################################
+def wc(string):
+    """
+    Basic implementation of the wc(1) UNIX command.
+    """
+    nb_line = string.count('\n')
+    nb_word = len(string.split())
+    nb_byte = len(string)
+    return nb_line, nb_word, nb_byte
+
+
+##################################################
 # pythonid (regexp) - Semaine 2 Séquence 2
 ##################################################
 # un identificateur commence par une lettre ou un underscore
