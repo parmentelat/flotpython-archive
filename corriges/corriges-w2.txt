@@ -6,19 +6,6 @@
 ############################################################
 
 ##################################################
-# wc - Semaine 2 Séquence 2
-##################################################
-def wc(string):
-    """
-    Basic implementation of the wc(1) UNIX command.
-    """
-    nb_line = string.count('\n')
-    nb_word = len(string.split())
-    nb_byte = len(string)
-    return nb_line, nb_word, nb_byte
-
-
-##################################################
 # pythonid (regexp) - Semaine 2 Séquence 2
 ##################################################
 # un identificateur commence par une lettre ou un underscore
@@ -98,6 +85,23 @@ path        = r"(?P<path>.*)"
 
 # on assemble le tout
 url = i_flag + protos + "://" + user + hostname + port + '/' + path
+
+
+##################################################
+# wc - Semaine 2 Séquence 6
+##################################################
+def wc(string):
+    """
+    Compte les nombres de lignes, de mots et de caractères
+
+    Retourne une liste de ces 3 nombres (notez qu'usuellement
+    on renverrait plutôt un tuple, qu'on étudiera la semaine prochaine)
+    """
+    # on peut tout faire avec la bibliothèque standard
+    nb_lines = string.count('\n')
+    nb_words = len(string.split())
+    nb_bytes = len(string)
+    return [nb_lines, nb_words, nb_bytes]
 
 
 ##################################################
