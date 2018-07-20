@@ -88,23 +88,6 @@ url = i_flag + protos + "://" + user + hostname + port + '/' + path
 
 
 ##################################################
-# wc - Semaine 2 Séquence 6
-##################################################
-def wc(string):
-    """
-    Compte les nombres de lignes, de mots et de caractères
-
-    Retourne une liste de ces 3 nombres (notez qu'usuellement
-    on renverrait plutôt un tuple, qu'on étudiera la semaine prochaine)
-    """
-    # on peut tout faire avec la bibliothèque standard
-    nb_lines = string.count('\n')
-    nb_words = len(string.split())
-    nb_bytes = len(string)
-    return [nb_lines, nb_words, nb_bytes]
-
-
-##################################################
 # label - Semaine 2 Séquence 6
 ##################################################
 def label(prenom, note):
@@ -216,6 +199,23 @@ def divisible_bis(a, b):
     # on peut aussi faire tout simplement comme ça
     # sans faire de if du tout
     return a % b == 0 or b % a == 0
+
+
+##################################################
+# wc - Semaine 2 Séquence 6
+##################################################
+def wc(string):
+    """
+    Compte les nombres de lignes, de mots et de caractères
+
+    Retourne une liste de ces 3 nombres (notez qu'usuellement
+    on renverrait plutôt un tuple, qu'on étudiera la semaine prochaine)
+    """
+    # on peut tout faire avec la bibliothèque standard
+    nb_lines = string.count('\n')
+    nb_words = len(string.split())
+    nb_bytes = len(string)
+    return [nb_lines, nb_words, nb_bytes]
 
 
 ##################################################
