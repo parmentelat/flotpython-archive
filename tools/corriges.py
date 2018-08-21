@@ -17,11 +17,11 @@ class Map(dict):
     An object that keeps track of the association
     name -> week x sequence
 
-    see exomap.sh 
+    see exomap.sh
     """
 
-    pattern = re.compile("w.*/w(.)-s(.)-x.* import exo_(\w+)")
-    
+    pattern = re.compile("w.*/w(.)-s(.)-.* import exo_(\w+)")
+
     def __init__(self, filename="exomap"):
         with open(filename) as f:
             for lineno, line in enumerate(f, 1):
@@ -37,7 +37,7 @@ class Solution:
     """
     an object that describes one occurrence of a function solution
     provided in the corrections/ package
-    it comes with a week number, a sequence number, 
+    it comes with a week number, a sequence number,
     a function name, plus the code as a string
 
     there may be several solutions for a single function
@@ -341,7 +341,7 @@ class Text:
         self.filename = filename
 
     header_format = """# -*- coding: utf-8 -*-
-############################################################ 
+############################################################
 #
 # {title}
 #
@@ -378,15 +378,15 @@ class Notebook:
             nbformat.v4.new_markdown_cell(
                 self._normalize(contents)
             ))
-        
+
     def add_code_cell(self, contents):
         self.notebook['cells'].append(
             nbformat.v4.new_code_cell(
                 self._normalize(contents)
             ))
-        
+
     def write(self, functions):
-        
+
         for function in functions:
             function.add_validation(self)
 

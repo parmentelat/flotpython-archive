@@ -1,0 +1,1 @@
+Dans ce cours, vous apprendrez à bien programmer en Python. On vous mènera des premiers pas dans le langage à l'étude des concepts les plus évolués, au travers de nombreuses vidéos courtes, de notebooks, et d'exercices auto-évalués.

@@ -3,17 +3,17 @@ TOOL = ../tools/corriges.py
 
 all: everything
 
-exomap: .FORCE
+exomap:
 	../tools/exomap.sh
 
-nbmap: .FORCE
+nbmap:
 	(cd ..; git ls-files w?/w?-s?-[cx]*nb) > nbmap
 
 .FORCE:
 
 n2 = regexp_pythonid regexp_agenda regexp_phone regexp_url \
-     exo_label exo_inconnue exo_laccess exo_divisible exo_morceaux \
-     exo_liste_p exo_carre
+     exo_label exo_inconnue exo_laccess exo_divisible exo_wc exo_morceaux \
+	 exo_liste_p exo_carre
 n3 = exo_comptage exo_surgery  exo_graph_dict exo_marine_dict \
      exo_read_set exo_marine_set cls_fifo
 n4 = exo_dispatch exo_libelle exo_pgcd exo_taxes exo_distance exo_numbers
@@ -21,7 +21,7 @@ n5 = exo_multi_tri exo_multi_tri_reverse \
      exo_doubler_premier exo_doubler_premier_kwds \
      exo_compare_all exo_compare_args \
      exo_aplatir exo_alternat exo_intersect \
-     exo_produit_scalaire exo_decode_zen 
+     exo_produit_scalaire exo_decode_zen
 # w6 n'a que l'exercice shipdict; faire 'make code' pour produire le corrigé
 n7 = exo_stairs
 
@@ -62,7 +62,7 @@ corriges.tex corriges.txt: $(SOURCES) $(TOOL) exomap
 corriges.pdf: corriges.tex
 	pdflatex corriges.tex
 superclean::
-	rm -f corriges.*
+	rm -f corriges.* exomap nbmap
 pdf:: corriges.pdf
 
 
@@ -109,7 +109,7 @@ $(foreach week, $(WEEKS), $(eval $(call week_target,$(week))))
 .PHONY: all code clean superclean code-clean pdf
 
 clean:
-	rm -f *.{aux,log,tex,toc,py,out}
+	rm -f *.{aux,log,tex,toc,py,out} exomap nbmap
 
 index:
 	for tex in *.tex; do pdflatex $$tex; done
@@ -118,4 +118,3 @@ index:
 # that can validate all known exos at once
 validation:
 	$(TOOL) -N -o ../modules/corrections/validation $(SOURCES)
-
