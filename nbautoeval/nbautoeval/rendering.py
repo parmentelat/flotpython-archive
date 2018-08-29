@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+# pylint: disable=c0111, c0103, r1705
+
 import pprint
 
 from types import FunctionType, BuiltinFunctionType, BuiltinMethodType
@@ -14,9 +16,14 @@ header_font_style = 'font-family:monospace;font-size:medium;'
 ok_style = 'background-color:#d6e9ce;'
 ko_style = 'background-color:#efd6d6;'
 
-center_cell_style = 'text-align: center;'
-left_cell_style = 'text-align: left;'
-right_cell_style = 'text-align: right;'
+center_text_style = 'text-align: center;'
+left_text_style = 'text-align: left;'
+right_text_style = 'text-align: right;'
+
+bottom_border_style = "border-bottom:2px solid gray;"
+left_border_thick_style = "border-left:3px solid gray;"
+left_border_thin_style = "border-left:1px solid gray;"
+
 ########## helpers for rendering / truncating
 def html_escape(s):
     return s
@@ -42,8 +49,8 @@ def custom_repr(x):
 
 def commas(iterable):
     if isinstance(iterable, dict):
-        return ", ".join(["{}={}".format(k,custom_repr(v)) for k, v in iterable.items()])
-    elif isinstance(iterable, str): 
+        return ", ".join(["{}={}".format(k, custom_repr(v)) for k, v in iterable.items()])
+    elif isinstance(iterable, str):
         return str
     else:
         return ", ".join([custom_repr(x) for x in iterable])
@@ -65,7 +72,7 @@ class CellObj:
     def layout_pprint(self, width):
         indent = 2
         html = "<pre>\n"
-        width = width if width >0 else 80
+        width = width if width > 0 else 80
         html += pprint.pformat(self.torender, indent=indent, width=width)
         html += "</pre>"
         return html
@@ -90,7 +97,7 @@ class CellObj:
         Same as layout_text but with \n at the end of line that have it
         """
         return self.layout_text(width, show_backslash_n=True)
-    
+
 class CellLegend:
     def __init__(self, legend):
         self.legend = legend
@@ -128,10 +135,10 @@ class Table:
         self.html_tags = html_tags
     def header(self):
         return tag_keywords("table", **self.html_tags)
-    def footer(self):
+    def footer(self):                                   # pylint: disable=r0201
         return end_tag("table")
 
-class TableRow:
+class TableRow:                                         # pylint: disable=r0903
     def __init__(self, cells, **html_tags):
         self.cells = cells
         self.html_tags = html_tags
@@ -145,9 +152,9 @@ class TableRow:
 
 class TableCell:
     """
-    Something that will produce a table cell, based on 
-    (*) a content, that is expected to have the right 
-        layout method, like e.g. layout_truncate 
+    Something that will produce a table cell, based on
+    (*) a content, that is expected to have the right
+        layout method, like e.g. layout_truncate
         since truncate is our default layout
         this typically applies to Args-like objects
         otherwise, a CellObj object is created instead
@@ -179,7 +186,7 @@ class TableCell:
                 proxy = CellObj(self.content)
                 method = getattr(proxy, symbol)
                 html += method(self.width)
-        except:
+        except:                                         # pylint: disable=w0702
             import traceback
             traceback.print_exc()
             html += "TableCell.html({})".format(self.content)
@@ -192,9 +199,9 @@ class TableCell:
     # or means something we cannot do
     default_layout = 'truncate'
     supported_layouts = [
-        'truncate', 'pprint', 
+        'truncate', 'pprint',
         'void', 'text', 'text_backslash_n',
-    ] 
+    ]
 
     def computed_layout(self):
         """
@@ -219,12 +226,23 @@ class TableCell:
         return computed_layout
 
 
+def test_rendering():
+    from collections import defaultdict
+    test_inputs = [
+        ("abc\ndef", 6),
+        (defaultdict(a=1, b=2, marseille='lyon'), 5),
+        (defaultdict(a=1, b=2, marseille='lyon'), 10),
+        (defaultdict(a=1, b=2, marseille='lyon'), 20),
+    ]
+
+    for token, width in test_inputs:
+        print(20*'*')
+        cell = CellObj(token)
+        print(f"------width={width} input [[{input}]]")
+        print(f"---text          [[{cell.layout_text(width)}]]")
+        print(f"---pprint        [[{cell.layout_pprint(width)}]]")
+        print(f"---truncate      [[{cell.layout_truncate(width)}]]")
+        print(f"text_backslash_n [[{cell.layout_text_backslash_n(width)}]]")
+
 if __name__ == '__main__':
-    size = 'small'
-    inputs = [ "abc\ndef" ]
-    for input in inputs:
-        cell = CellObj(input)
-        print("----------input [[{}]]".format(input))
-        print("----------text [[{}]]".format(cell.layout_text(size)))
-        print("text_backslash_n [[{}]]".format(cell.layout_text_backslash_n(size)))
-            
+    test_rendering()

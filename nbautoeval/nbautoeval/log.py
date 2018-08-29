@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+# pylint: disable=c0111, w0703
 
 
 # for logging
@@ -21,7 +22,7 @@ def log_filename():
 def log_correction(exoname, success):
     """
     write a one-liner in the log file that contains
-    
+
     timestamp unix-uid exo-name {ok|ko}
     """
     try:
@@ -29,9 +30,12 @@ def log_correction(exoname, success):
         uid = os.getuid()
         message = "OK" if success else "KO"
         with open(log_filename(), 'a') as log:
-            line = "{now} {uid} {exoname} {message}\n".format(**locals())
+            line = "{now} {uid} {exoname} {message}\n".format(
+                now=now,
+                uid=uid,
+                exoname=exoname,
+                message=message)
             log.write(line)
-    except:
+    except Exception:
         # really not sure what to do then...
         pass
-

@@ -1,27 +1,28 @@
 # -*- coding: utf-8 -*-
 
+# pylint: disable=c0111, r1705
 
 
 import copy
 import pprint
 
-from nbautoeval.rendering import commas, truncate_str, truncate_value
+from nbautoeval.rendering import commas, truncate_str
 
 ####################
 # From June 2016, this class should not need to be used directly
 # as Args would allow to build it with a nicer interface
-class ArgsTupleDict(object):
+class ArgsTupleDict:
     """
     The most general form of a function argument list is made
     of a tuple and a dictionary
-    
+
     Example:
     my_input = ArgsTupleDict( (1,2), {'a': []})
     my_input.call (foo)
     would then return the result of
     foo (1, 2, a=[])
     """
-    def __init__(self, _args=None, _keywords=None, **keywords):
+    def __init__(self, _args=None, _keywords=None):
         # expecting a tuple or a list
         self.args = _args if _args is not None else tuple()
         # expecting a dictionary
@@ -35,10 +36,11 @@ class ArgsTupleDict(object):
         self.layout = None
 
     def __repr__(self):
-        cn = "Args" if not self.keywords else "ArgsTupleDict"
-        result = "<Args {}{}{} ".format(self.prefix, self.function_name, self.args)
+        result = "<Args {}{}{} ".format(
+            self.prefix, self.function_name, self.args)
         if self.keywords:
-            result += "Keywords:" + ",".join(["{}={}".format(k, v) for (k, v) in self.keywords.items() ])
+            result += "Keywords:" + ",".join(["{}={}".format(k, v)
+                                              for (k, v) in self.keywords.items()])
         result += ">"
         return result
 
@@ -47,7 +49,7 @@ class ArgsTupleDict(object):
         # in general this is defined in the Exercise instance
         # but can also be overridden here
         self.layout = layout
-        
+
     def call(self, function, debug=False):
         if debug:
             print("calling {} *{} **{}".format(function.__name__, self.args, self.keywords))
@@ -58,14 +60,14 @@ class ArgsTupleDict(object):
             print("creating object in class {}, *{} **{}"
                   .format(klass.__name__, self.args, self.keywords))
         return klass(*self.args, **self.keywords)
-                  
-    def call_obj(self, object, methodname, debug=False):
+
+    def call_obj(self, obj, methodname, debug=False):
         if debug:
             print("calling method {} on object {} *{} **{}"
-                  .format(methodname, object, self.args, self.keywords))
-        method = getattr(object, methodname)
+                  .format(methodname, obj, self.args, self.keywords))
+        method = getattr(obj, methodname)
         return method(*self.args, **self.keywords)
-                  
+
     def clone(self, copy_mode):
         "clone this input for safety"
         if copy_mode == 'shallow':
@@ -83,7 +85,7 @@ class ArgsTupleDict(object):
         arg1, .. argn
         """
         self.function_name = function_name
-        
+
     def render_prefix(self, prefix):
         """
         if called, arguments will be rendered like this
@@ -91,7 +93,7 @@ class ArgsTupleDict(object):
         """
         self.prefix = prefix
 
-    def layout_void(self, width):
+    def layout_void(self, width):                # pylint: disable=r0201, w0613
         return ""
 
     def layout_truncate(self, width):
@@ -106,7 +108,7 @@ class ArgsTupleDict(object):
             text = "{}({})".format(self.function_name, text)
         text = self.prefix + text
         return truncate_str(text, width)
-    
+
     def layout_pprint(self, width):
         """
         render a list of arguments in pprint mode
@@ -127,17 +129,21 @@ class ArgsTupleDict(object):
         if self.function_name:
             html += self.function_name + "(\n"
         def indent_pformat(pformat_result):
-            return sep + pformat_result.replace("\n","\n"+sep)
-        args_tokens = [ pprint.pformat(arg, width=width-indent, indent=indent) for arg in self.args ]
-        keyword_tokens =  [ "{}={}".format(k,pprint.pformat(v, width=width-indent, indent=indent))
-                            for k,v in self.keywords.items() ]
-        tokens = [ indent_pformat(x) for x in args_tokens + keyword_tokens ]
+            return sep + pformat_result.replace("\n", "\n"+sep)
+        args_tokens = [
+            pprint.pformat(arg, width=width-indent, indent=indent)
+            for arg in self.args]
+        keyword_tokens = [
+            "{}={}".format(k, pprint.pformat(v, width=width-indent,
+                                             indent=indent))
+            for (k, v) in self.keywords.items()]
+        tokens = [indent_pformat(x) for x in args_tokens + keyword_tokens]
         html += (",\n").join(tokens)
         if self.function_name:
             html += ")\n"
         html += "</pre>"
         return html
-        
+
 # simplified for when no keywords are required
 class Args(ArgsTupleDict):
     """
@@ -150,10 +156,9 @@ class Args(ArgsTupleDict):
     would then return the result of
     foo(1, 2, 3)
 
-    Like for ArgKeywords it is preferable to set the layout 
+    Like for ArgKeywords it is preferable to set the layout
     using the separate set_leyout method
     """
     def __init__(self, *args, **kwds):
         # it is NOT *args here, this is intentional
         ArgsTupleDict.__init__(self, args, kwds)
-
