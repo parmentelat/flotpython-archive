@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+# pylint: disable=c0111, w0703, r1705
+
 from __future__ import print_function
 
 ############################################################
@@ -12,23 +14,24 @@ from .rendering import (
     Table, TableRow, TableCell, CellLegend,
     font_style, header_font_style,
     ok_style, ko_style,
-    center_cell_style,
-    truncate_value)
+    center_text_style, left_text_style,
+    bottom_border_style, left_border_thick_style, left_border_thin_style,
+)
 
-DEBUG=False
-#DEBUG=True
+DEBUG = False
+#DEBUG = True
 
-########## defaults for columns widths - for FUN 
+########## defaults for columns widths - for FUN
 # this historically was called 'columns' as it was used to specify
 # the width of the 3 columns (in correction mode)
-# or of the 2 columns (in example mode) 
+# or of the 2 columns (in example mode)
 # however when adding new layouts like 'text', the argument passed to the layout
 # function ceased to be a column width, so we call this layout_args instead
 # but in most cases this does represent column widths
-default_layout_args =  (24, 28, 28)
+DEFAULT_LAYOUT_ARGS = (24, 28, 28)
 
-####################        
-class ExerciseFunction:
+####################
+class ExerciseFunction:                                 # pylint: disable=r0902
     """The class for an exercise where students are asked to write a
     function The teacher version of that function is provided as
     'solution' and is used against datasets to generate an online
@@ -59,14 +62,14 @@ class ExerciseFunction:
     Finally render_name, if set to True, will cause the function name
     to appear in the first column together with arguments
     """
-    def __init__(self, solution, datasets, 
-                 copy_mode = 'deep',
-                 layout = 'pprint',
-                 call_layout = None,
-                 render_name = True,
-                 nb_examples = 1,
-                 layout_args = None,
-                 column_headers = None):
+    def __init__(self, solution, datasets,              # pylint: disable=r0913
+                 copy_mode='deep',
+                 layout='pprint',
+                 call_layout=None,
+                 render_name=True,
+                 nb_examples=1,
+                 layout_args=None,
+                 column_headers=None):
         # the 'official' solution
         self.solution = solution
         # the inputs - actually Args instances
@@ -79,11 +82,11 @@ class ExerciseFunction:
         self.call_layout = call_layout
         # states if the function name should appear in the call cells
         self.render_name = render_name
-        # how many examples 
+        # how many examples
         self.nb_examples = nb_examples
-        # column details - 3-tuples 
+        # column details - 3-tuples
         # sizes - defaults should be fine in most cases
-        self.layout_args = layout_args 
+        self.layout_args = layout_args
         # header names - for some odd cases
         self.column_headers = column_headers
         ###
@@ -96,7 +99,7 @@ class ExerciseFunction:
             for dataset in self.datasets:
                 dataset.set_layout(self.call_layout)
 
-    def correction(self, student_function):
+    def correction(self, student_function):             # pylint: disable=r0914
         """
         colums should be a 3-tuple for the 3 columns widths
         copy_mode can be either None, 'shallow', or 'deep' (default)
@@ -105,25 +108,26 @@ class ExerciseFunction:
         datasets = self.datasets
         copy_mode = self.copy_mode
         columns = self.layout_args if self.layout_args \
-                  else default_layout_args
+                  else DEFAULT_LAYOUT_ARGS
 
-        c1, c2, c3 = columns
+        col1, col2, col3 = columns
         #print("Using columns={}".format(columns))
 
         table = Table(style=font_style)
         html = table.header()
-        
+
         if self.column_headers:
-            t1, t2, t3 = self.column_headers
+            tit1, tit2, tit3 = self.column_headers
         else:
-            t1, t2, t3 = ("Arguments" if not self.render_name else "Appel",
-                         "Attendu",
-                         "Obtenu")
-        html += TableRow (
-            cells = [ TableCell (CellLegend(x), tag='th', style=center_cell_style)
-                      for x in ( t1, t2, t3, '') ],
+            tit1, tit2, tit3 = (
+                "Arguments" if not self.render_name else "Appel",
+                "Attendu",
+                "Obtenu")
+        html += TableRow(
+            cells=[TableCell(CellLegend(x), tag='th', style=center_text_style)
+                   for x in (tit1, tit2, tit3, '')],
             style=header_font_style).html()
-    
+
         overall = True
         for dataset in datasets:
             # will use original dataset for rendering to avoid any side-effects
@@ -133,32 +137,36 @@ class ExerciseFunction:
             # always clone all inputs
             student_dataset = dataset.clone(copy_mode)
             ref_dataset = dataset.clone(copy_mode)
-            
+
             # run both codes
             try:
                 expected = ref_dataset.call(self.solution, debug=DEBUG)
-            except Exception as e:
-                expected = e
+            except Exception as exc:
+                expected = exc
 
             try:
                 student_result = student_dataset.call(student_function, debug=DEBUG)
-            except Exception as e:
-                student_result = e
-    
+            except Exception as exc:
+                student_result = exc
+
             # compare results
-            ok = self.validate(expected, student_result)
-            if not ok:
+            is_ok = self.validate(expected, student_result)
+            if not is_ok:
                 overall = False
             # render that run
-            result_cell = '<td style="background-color:green;">'
-            message = 'OK' if ok else 'KO'
-            style = ok_style if ok else ko_style
+            message = 'OK' if is_ok else 'KO'
+            style = ok_style if is_ok else ko_style
             html += TableRow(
-                style = style,
-                cells = [ TableCell(dataset, layout=self.layout, width=c1),
-                          TableCell(expected, layout=self.layout, width=c2),
-                          TableCell(student_result, layout=self.layout, width=c3),
-                          TableCell(CellLegend(message))]
+                style=style + bottom_border_style,
+                cells=[TableCell(dataset, layout=self.layout, width=col1),
+                       TableCell(expected, layout=self.layout, width=col2,
+                                 style=left_text_style
+                                 +left_border_thick_style),
+                       TableCell(student_result, layout=self.layout, width=col3,
+                                 style=left_text_style
+                                 +left_border_thin_style),
+                       TableCell(CellLegend(message),
+                                 style=left_border_thick_style)]
             ).html()
 
         log_correction(self.name, overall)
@@ -169,21 +177,20 @@ class ExerciseFunction:
     def example(self, how_many=None):
 
         self.set_call_layout()
-        
+
         if how_many is None:
             how_many = self.nb_examples
         columns = self.layout_args if self.layout_args \
-                  else default_layout_args
-        exo_layout = self.layout
+                  else DEFAULT_LAYOUT_ARGS
 
         if how_many is None:
             how_many = self.nb_examples
         if how_many == 0:
             how_many = len(self.datasets)
-    
+
         # can provide 3 args (convenient when it's the same as correction) or just 2
         columns = columns[:2]
-        c1, c2 = columns
+        col1, col2 = columns
         #print("Using columns={}".format(columns))
 
         table = Table(style=font_style)
@@ -192,30 +199,35 @@ class ExerciseFunction:
         title1 = "Arguments" if not self.render_name else "Appel"
         # souci avec l'accent de 'Résultat Attendu'
         html += TableRow(style=header_font_style,
-                         cells = [ TableCell (CellLegend(x), tag='th', style=center_cell_style)
-                                   for x in (title1, 'Resultat Attendu') ]).html()
+                         cells=[TableCell(CellLegend(x),
+                                          tag='th',
+                                          style=center_text_style)
+                                for x in (title1, 'Resultat Attendu')]).html()
         for dataset in self.datasets[:how_many]:
             sample_dataset = dataset.clone(self.copy_mode)
             if self.render_name:
                 dataset.render_function_name(self.name)
             try:
                 expected = sample_dataset.call(self.solution)
-            except Exception as e:
-                expected = e
-            html += TableRow(cells = [ TableCell(dataset, layout=self.layout, width=c1),
-                                       TableCell(expected, layout=self.layout, width=c2)
-                                   ]).html()
-    
+            except Exception as exc:                     # pylint:disable=w0703
+                expected = exc
+            html += TableRow(
+                cells=[TableCell(dataset,
+                                 layout=self.layout, width=col1),
+                       TableCell(expected, layout=self.layout, width=col2,
+                                 style=left_text_style+left_border_thick_style)
+                       ]).html()
+
         html += table.footer()
         return HTML(html)
 
 
-    def validate(self, expected, result):
+    def validate(self, expected, result):               # pylint: disable=r0201
         """
         how to compare the results as obtained from
         * the solution function
         * and the student function
-        
+
         the default here is to use ==
         """
         return expected == result
@@ -236,11 +248,10 @@ try:
                      *args,
                      layout='text',
                      call_layout='pprint',
-                     precision=None,
                      **kwds):
-            return ExerciseFunction.__init__(
+            ExerciseFunction.__init__(
                 self, solution, datasets,
-                layout = layout,
+                layout=layout,
                 call_layout=call_layout,
                 *args, **kwds)
 
@@ -250,7 +261,7 @@ try:
                 return np.all(
                     np.isclose(
                         expected, result))
-            except Exception as e:
+            except Exception:
                 # print("OOPS", type(e), e)
                 try:
                     with warnings.catch_warnings():
@@ -261,12 +272,10 @@ try:
                             return np.all(result)
                         else:
                             return result
-                except Exception as e:
-                    print("OOPS2", type(e), e)
+                except Exception as exc:
+                    print("OOPS2", type(exc), exc)
                     return False
 
-except:
+except Exception:
     #print("ExerciseFunctionNumpy not defined ; numpy not installed ? ")
     pass
-
-    
