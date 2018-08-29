@@ -7,8 +7,12 @@ import pprint
 from types import FunctionType, BuiltinFunctionType, BuiltinMethodType
 
 ########## styles in html output
-font_style = 'font-family:monospace;font-size:small;'
-header_font_style = 'font-family:monospace;font-size:medium;'
+default_font_size='small'
+default_header_font_size='medium'
+
+def font_style(font_size):
+    return 'font-family:monospace;font-size:{};'\
+    .format(font_size)
 
 # iteration 1 was using this
 #ok_style = 'background-color:#66CC66;'

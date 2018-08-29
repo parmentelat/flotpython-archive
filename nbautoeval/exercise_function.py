@@ -12,7 +12,7 @@ from IPython.display import HTML
 from .log import log_correction
 from .rendering import (
     Table, TableRow, TableCell, CellLegend,
-    font_style, header_font_style,
+    font_style, default_font_size, default_header_font_size,
     ok_style, ko_style,
     center_text_style, left_text_style,
     bottom_border_style, left_border_thick_style, left_border_thin_style,
@@ -69,7 +69,9 @@ class ExerciseFunction:                                 # pylint: disable=r0902
                  render_name=True,
                  nb_examples=1,
                  layout_args=None,
-                 column_headers=None):
+                 column_headers=None,
+                 font_size=default_font_size,
+                 header_font_size=default_header_font_size):
         # the 'official' solution
         self.solution = solution
         # the inputs - actually Args instances
@@ -89,6 +91,9 @@ class ExerciseFunction:                                 # pylint: disable=r0902
         self.layout_args = layout_args
         # header names - for some odd cases
         self.column_headers = column_headers
+        # sizes for the table
+        self.font_size = font_size
+        self.header_font_size = header_font_size
         ###
         # in some weird cases this won't exist
         self.name = getattr(solution, '__name__', "no_name")
@@ -113,7 +118,7 @@ class ExerciseFunction:                                 # pylint: disable=r0902
         col1, col2, col3 = columns
         #print("Using columns={}".format(columns))
 
-        table = Table(style=font_style)
+        table = Table(style=font_style(self.font_size))
         html = table.header()
 
         if self.column_headers:
@@ -126,7 +131,7 @@ class ExerciseFunction:                                 # pylint: disable=r0902
         html += TableRow(
             cells=[TableCell(CellLegend(x), tag='th', style=center_text_style)
                    for x in (tit1, tit2, tit3, '')],
-            style=header_font_style).html()
+            style=font_style(self.header_font_size)).html()
 
         overall = True
         for dataset in datasets:
@@ -193,12 +198,12 @@ class ExerciseFunction:                                 # pylint: disable=r0902
         col1, col2 = columns
         #print("Using columns={}".format(columns))
 
-        table = Table(style=font_style)
+        table = Table(style=font_style(self.font_size))
         html = table.header()
 
         title1 = "Arguments" if not self.render_name else "Appel"
         # souci avec l'accent de 'Résultat Attendu'
-        html += TableRow(style=header_font_style,
+        html += TableRow(style=font_style(self.header_font_size),
                          cells=[TableCell(CellLegend(x),
                                           tag='th',
                                           style=center_text_style)

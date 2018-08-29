@@ -9,7 +9,7 @@ from IPython.display import HTML
 from .log import log_correction
 from .rendering import (
     Table, TableRow, TableCell, CellLegend,
-    font_style, header_font_style,
+    font_style, default_font_size, default_header_font_size,
     ok_style, ko_style,
     center_text_style, left_text_style,
     bottom_border_style, left_border_thick_style, left_border_thin_style,
@@ -86,7 +86,8 @@ class ExerciseClass:                                    # pylint: disable=r0902
                  nb_examples=1,
                  obj_name='o',
                  layout_args=None,
-                 ):
+                 font_size=default_font_size,
+                 header_font_size=default_header_font_size):
         self.solution = solution
         self.scenarios = scenarios
         self.copy_mode = copy_mode
@@ -95,6 +96,9 @@ class ExerciseClass:                                    # pylint: disable=r0902
         self.nb_examples = nb_examples
         self.obj_name = obj_name
         self.layout_args = layout_args
+        # sizes for the table
+        self.font_size = font_size
+        self.header_font_size = header_font_size
         # computed
         self.name = solution.__name__
 
@@ -121,7 +125,7 @@ class ExerciseClass:                                    # pylint: disable=r0902
         c1, c2, c3 = columns
         ref_class = self.solution
 
-        table = Table(style=font_style)
+        table = Table(style=font_style(self.font_size))
         html = table.header()
 
         for i, scenario in enumerate(self.scenarios):
@@ -135,7 +139,7 @@ class ExerciseClass:                                    # pylint: disable=r0902
             html += TableRow(
                 cells=[TableCell(legend, colspan=4, tag='th',
                                  style='text-align:center')],
-                style=header_font_style).html()
+                style=font_style(self.header_font_size)).html()
             cells = [TableCell(CellLegend(x), tag='th')
                      for x in ('Appel', 'Attendu', 'Obtenu', '')]
             html += TableRow(cells=cells).html()
@@ -234,7 +238,7 @@ class ExerciseClass:                                    # pylint: disable=r0902
         columns = columns[:2]
         c1, c2 = columns
         #print("Using columns={}".format(columns))
-        table = Table(style=font_style)
+        table = Table(style=font_style(self.font_size))
         html = table.header()
 
         sample_scenarios = self.scenarios[:how_many_samples]
@@ -251,7 +255,7 @@ class ExerciseClass:                                    # pylint: disable=r0902
             html += TableRow(
                 cells=[TableCell(legend, colspan=4, tag='th',
                                  style=center_text_style)],
-                style=header_font_style).html()
+                style=font_style(self.header_font_size)).html()
             cells = [TableCell(CellLegend(x), tag='th')
                      for x in ('Appel', 'Attendu')]
             html += TableRow(cells=cells).html()
