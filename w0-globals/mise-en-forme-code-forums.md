@@ -1,77 +1,60 @@
-Titre : Comment bien présenter votre code dans le forum
+Titre: Comment bien présenter votre code dans le forum
 
+Images: il faut uploader les 3 images mise-en-forme*png et mettre leur URL ici:
+
+[1]: /media/15362242658974735.png
+[2]: /media/15362236062861809.png
+[3]: /media/1536224348435858.png
+
+==============================
 
 Bonjour à tous
 
 Avant que le forum ne commence à s'animer, je voudrais attirer votre attention sur **la présentation, notamment des extraits de code**, dans le forum.
 
-***
+*****
 
-### Ce qu'il ne faut pas faire
-Voici à quoi ressemble un morceau de code dans le forum **si je fais un simple copier-coller**.
+## Si vous ne faites rien de particulier
 
-**Si j'écris ceci**&nbsp;:
+Votre première inclination sera sans doute d'écrire votre message comme ceci :
 
-    def factoriel(n):
-        if n <= 1:
-            return 1
-        else:
-            return n*factoriel(n-1)
+![enter image description here][1]
 
-**Alors j'obtiens ceci**&nbsp;:
+*****
 
-def factoriel(n):
-    if n <= 1:
-        return 1
-    else:
-        return n*factoriel(n-1)
+## Utilisez le bouton 'Code'
 
-***
+Comme vous le voyez, le code a perdu sa mise en forme, il est illisible.
+Pour que vos lecteurs puissent le comprendre, il vous suffit de le sélectioner et d'utiliser le bouton 'Code' (ou d'appuyer sur `Control-K` ou `⌘-K` au clavier) comme ceci :
 
-### Ce qu'il faut faire
+![enter image description here][2]
 
-Comme vous allez vite le voir, en python **les sauts de ligne sont très importants**; c'est pourquoi il est crucial de présenter le code **comme vous le voyez vous-même**. 
+Après quoi vous obtenez ceci :
 
-**Si j'écris ceci**&nbsp;:
+![enter image description here][3]
 
-        def factoriel(n):
-            if n <= 1:
-                return 1
-            else:
-                return n*factoriel(n-1)
+*****
 
-**Alors j'obtiens ceci**&nbsp;:
+## Autres cas
 
+Vous pouvez aussi mettre du code *à l'intérieur d'une ligne* pour écrire `while True:` ou autre référence à un fragment de code. Ici encore, j'ai simplement sélectionné le code, et utilisé le bouton 'Code'.
 
-    def factoriel(n):
-        if n <= 1:
-            return 1
-        else:
-            return n*factoriel(n-1)
+Selon que vous êtes sur Windows ou Mac, vous pouvez utiliser le raccourci clavier `Control-K` ou `⌘-K` pour obtenir le même effet.
 
-
-Ah, c'est déjà mieux. Et **pour obtenir ce résultat, c'est très simple**, je peux faire de plusieurs façons différentes:
-
- * Je sélectionne les 5 lignes de code; juste au dessus de la zone où j'ai tapé le texte, il y a un petit menu, pour mettre en gras, en italique, etc.. Un des boutons a deux rangées de `0` et de `1`, c'est le symbole pour du code. Si je clique sur ce bouton avec mon code sélectionné, il se décale de 4 caractères vers la droite dans mon éditeur, et dans la fenêtre d'aperçu je vois que mon code est rendu correctement.
-
- * Pareil, mais au lieu d'appuyer sur le bouton `101` je fais Control-k (je suis sur mac, sur Windows j'imagine que ça sera sûrement Control-K ou Alt-K). C'est juste plus rapide. 
-
- * Je peux aussi insérer à la main les 4 espaces supplémentaires à gauche;  c'est fastidieux mais ça marche aussi
-
-Tout ceci est valable aussi, naturellement, pour les messages d'erreur au terminal et autres contenus similaires.
+Comme vous le remarquez, dans le cas où vous déclenchez le bouton `Code` sur un bloc de plusieurs lignes, cela a pour effet de décaler le code de 4 espaces vers la gauche. Sur un fragment, l'effet est d'encadrer le code avec deux antiquotes. Enfin, vous pouvez aussi faire ces manipulations manuellement sans l'assistance du bouton 'Code'.
 
 ***
 
-### Pour aller plus loin 
-Si vous voulez approfondir, le forum parle [un *markup* langage qui s'appelle `markdown`](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) (on est geek ou on ne l'est pas;). 
+## Pour aller plus loin
+Si vous voulez approfondir, le forum parle [un *markup* langage qui s'appelle `markdown`](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) (on est geek ou on ne l'est pas;).
 
-Notamment vous pouvez aussi pour peaufiner mettre les choses en gras, en italique, faire des listes à boulettes, etc...  Tout ceci est très bien, mais **en priorité** je vous incite à faire attention à ce que **votre code** soit lisible. Si vous ne présentez pas votre code correctement, surtout quand ça devient un peu long, on ne pourra pas vous comprendre.
+Notamment vous pouvez aussi pour peaufiner mettre les choses en gras, en italique, faire des listes à boulettes, etc...  Tout ceci est très bien, mais **en priorité** je vous incite à faire attention à ce que **votre code** soit lisible. Si vous ne présentez pas votre code correctement, surtout quand ça devient un peu long, on ne pourra **pas vous comprendre**.
 
 ***
 
-### Vous pouvez aussi partager vos notebooks
+## Vous pouvez aussi partager vos notebooks
 
-Je signale enfin que, si vous souhaitez partager du code **que vous avez déjà écrit dans un notebook**, il existe une fonction créée spécialement pour cela, cherchez dans les menus la fonction "*Share static version*", qui vous donnera une URL pour **partager votre notebook en lecture-seule** avec qui vous voulez. 
+Je signale enfin que, si vous souhaitez partager du code **que vous avez déjà écrit dans un notebook**, il existe une fonction créée spécialement pour cela, cherchez dans les menus la fonction "*Share static version*", qui vous donnera une URL pour **partager votre notebook en lecture-seule** avec qui vous voulez.
 
 <br/>
 Merci d'avance pour les autres élèves, et en attendant, donc, de lire votre code, bon MOOC à vous tous.
