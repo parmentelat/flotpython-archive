@@ -1,0 +1,6 @@
+Bonjour à tous
+
+Nous vous rappelons que le MOOC sur Python3 commence demain sur la plateforme FUN
+
+Rendez-vous donc demain à partir de 10:00 sur https://fun-mooc.fr/
+-- Thierry Parmentelat et Arnaud Legout
