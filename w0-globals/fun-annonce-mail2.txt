@@ -9,6 +9,6 @@ https://www.fun-mooc.fr/courses/course-v1:UCA+107001+session02/info
 pour entamer cette deuxième semaine d'un bon pied;
 et notamment si vous cherchiez un support de cours à lire 'offline'.
 
-Et, n'oubliez pas de vous inscrire sur @mooc_python_3 sur Twitter.
+Pour finir, n'oubliez pas de parler du MOOC autour de vous et de vous inscrire sur @mooc_python_3 sur Twitter.
 
 -- Thierry Parmentelat et Arnaud Legout
