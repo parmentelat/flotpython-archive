@@ -60,7 +60,7 @@ phone = r"(\+33|0)(?P<number>[0-9]{9})\Z"
 i_flag = "(?i)"
 
 # pour élaborer la chaine (proto1|proto2|...)
-protos_list = ['http', 'https', 'ftp', 'ssh', ] 
+protos_list = ['http', 'https', 'ftp', 'ssh', ]
 protos      = "(?P<proto>" + "|".join(protos_list) + ")"
 
 # à l'intérieur de la zone 'user/password', la partie
@@ -85,6 +85,26 @@ path        = r"(?P<path>.*)"
 
 # on assemble le tout
 url = i_flag + protos + "://" + user + hostname + port + '/' + path
+
+
+##################################################
+# url (bis) - Semaine 2 Séquence 2
+##################################################
+# merci à sizeof qui a pointé l'utilisation de re.X
+# https://docs.python.org/fr/3/library/re.html#re.X
+# ce qui donne une présentation beaucoup plus compacte
+
+protos_list = ['http', 'https', 'ftp', 'ssh', ]
+
+url_bis = rf"""(?x)                    # verbose mode
+    (?i)                               # ignore case
+    (?P<proto>{"|".join(protos_list)}) # http|https|...
+    ://                                # separator
+    ((?P<user>\w+){password}@)?        # optional user/password
+    (?P<hostname>[\w\.]+)              # mandatory hostname
+    (:(?P<port>\d+))?                  # optional port
+    /(?P<path>.*)                      # mandatory path
+"""
 
 
 ##################################################
