@@ -1,0 +1,268 @@
+1
+00:00:04,791 --> 00:00:05,334
+Bonjour,
+
+2
+00:00:05,350 --> 00:00:06,841
+vous voulez débuter en programmation,
+
+3
+00:00:06,941 --> 00:00:08,032
+découvrir Python
+
+4
+00:00:08,132 --> 00:00:09,374
+ou renforcer vos connaissances,
+
+5
+00:00:09,474 --> 00:00:10,316
+et vous vous demandez
+
+6
+00:00:10,380 --> 00:00:11,968
+si ce MOOC va répondre à vos attentes.
+
+7
+00:00:12,010 --> 00:00:13,306
+Alors laissez-moi vous expliquer
+
+8
+00:00:13,406 --> 00:00:14,406
+pourquoi ce MOOC est fait pour vous.
+
+9
+00:00:14,945 --> 00:00:16,707
+Python est un langage de programmation
+
+10
+00:00:16,807 --> 00:00:17,777
+facile à apprendre
+
+11
+00:00:17,877 --> 00:00:19,679
+qui est parfaitement adapté pour débuter.
+
+12
+00:00:19,779 --> 00:00:21,925
+Mais il est également incroyablement puissant
+
+13
+00:00:22,025 --> 00:00:22,976
+et permet d'écrire
+
+14
+00:00:23,076 --> 00:00:24,666
+en moins de temps que n'importe quel autre langage
+
+15
+00:00:24,766 --> 00:00:26,458
+des programmes allant du plus petit script
+
+16
+00:00:26,558 --> 00:00:27,429
+aux plus grands projets.
+
+17
+00:00:27,915 --> 00:00:29,454
+L'écosystème Python est très riche
+
+18
+00:00:29,554 --> 00:00:31,610
+et il est probable que quel que soit votre besoin
+
+19
+00:00:31,710 --> 00:00:33,305
+il y ait déjà une librairie populaire
+
+20
+00:00:33,405 --> 00:00:34,109
+pour y répondre.
+
+21
+00:00:34,528 --> 00:00:36,397
+Cependant, pour exploiter pleinement
+
+22
+00:00:36,497 --> 00:00:37,606
+les possibilités de Python,
+
+23
+00:00:37,706 --> 00:00:38,427
+vous devez acquérir
+
+24
+00:00:38,527 --> 00:00:40,133
+une profonde compréhension du langage.
+
+25
+00:00:40,560 --> 00:00:41,969
+En effet on ne programme pas en Python
+
+26
+00:00:42,069 --> 00:00:43,963
+comme on programme en Java ou en C++.
+
+27
+00:00:44,605 --> 00:00:46,187
+Python est un langage qui a été conçu
+
+28
+00:00:46,189 --> 00:00:47,597
+dès l'origine avec comme objectif
+
+29
+00:00:47,697 --> 00:00:49,969
+la simplicité et la lisibilité du code.
+
+30
+00:00:50,164 --> 00:00:52,533
+Python encourage une programmation intuitive
+
+31
+00:00:52,633 --> 00:00:54,458
+qui repose sur une syntaxe naturelle
+
+32
+00:00:54,558 --> 00:00:56,402
+et des concepts fondamentaux puissants
+
+33
+00:00:56,502 --> 00:00:57,984
+qui facilitent la programmation.
+
+34
+00:00:58,391 --> 00:00:59,198
+Dans ce MOOC,
+
+35
+00:00:59,298 --> 00:01:00,868
+nous couvrirons tous les aspects du langage
+
+36
+00:01:00,968 --> 00:01:02,477
+dans de nombreuses vidéos courtes
+
+37
+00:01:02,577 --> 00:01:03,837
+et nous les approfondirons
+
+38
+00:01:03,937 --> 00:01:04,630
+dans des compléments
+
+39
+00:01:04,730 --> 00:01:06,283
+et des exercices auto-corrigés
+
+40
+00:01:06,383 --> 00:01:08,052
+sous la forme de notebooks Jupiter,
+
+41
+00:01:08,152 --> 00:01:09,990
+c'est-à-dire sous la forme de documents web
+
+42
+00:01:10,090 --> 00:01:11,182
+qui mélangent du texte
+
+43
+00:01:11,495 --> 00:01:12,658
+et du code exécutable
+
+44
+00:01:12,758 --> 00:01:13,878
+sans rien avoir à installer.
+
+45
+00:01:14,308 --> 00:01:15,595
+À la fin de ce MOOC,
+
+46
+00:01:15,695 --> 00:01:17,842
+vous aurez acquis les fondamentaux du langage
+
+47
+00:01:17,942 --> 00:01:18,916
+et vous saurez les appliquer
+
+48
+00:01:19,016 --> 00:01:20,316
+pour en tirer la pleine puissance.
+
+49
+00:01:20,826 --> 00:01:22,616
+Ce MOOC est parfaitement adapté
+
+50
+00:01:22,716 --> 00:01:23,909
+à des développeurs confirmés
+
+51
+00:01:24,009 --> 00:01:25,295
+qui souhaitent découvrir Python
+
+52
+00:01:25,395 --> 00:01:26,688
+ou approfondir leurs connaissances
+
+53
+00:01:26,993 --> 00:01:28,114
+mais il est également adapté
+
+54
+00:01:28,214 --> 00:01:29,731
+à des débutants en programmation.
+
+55
+00:01:30,068 --> 00:01:31,654
+En effet, nous avons découpé
+
+56
+00:01:31,754 --> 00:01:33,424
+le contenu de ce MOOC en trois niveaux,
+
+57
+00:01:33,524 --> 00:01:35,253
+basique, intermédiaire, avancé,
+
+58
+00:01:35,353 --> 00:01:36,544
+de manière à ce que chacun
+
+59
+00:01:36,644 --> 00:01:37,796
+puisse adapter son cursus
+
+60
+00:01:37,896 --> 00:01:39,355
+en fonction de ses objectifs
+
+61
+00:01:39,455 --> 00:01:40,394
+et de ses acquis.
+
+62
+00:01:40,715 --> 00:01:42,355
+Alors n'hésitez pas à venir rejoindre
+
+63
+00:01:42,455 --> 00:01:43,593
+les dizaines de milliers d'étudiants
+
+64
+00:01:43,693 --> 00:01:44,836
+qui ont déjà suivi notre MOOC,
+
+65
+00:01:44,936 --> 00:01:46,885
+inscrivez-vous pour découvrir,
+
+66
+00:01:46,985 --> 00:01:48,417
+approfondir et maîtriser Python.
+
+67
+00:01:48,517 --> 00:01:49,497
+À bientôt !
+
