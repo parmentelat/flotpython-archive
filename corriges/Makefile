@@ -58,7 +58,7 @@ SOURCES = $(foreach week,$(WEEKS),$(call week_latex_sources,$(week)))
 everything: $(foreach week, $(WEEKS), corriges-w$(week).tex corriges-w$(week).txt) corriges.tex corriges.txt code
 
 corriges.tex corriges.txt: $(SOURCES) $(TOOL) exomap
-	$(TOOL) --output corriges --title "MOOC Python;Tous les corrigés" --contents $(SOURCES)
+	$(TOOL) --output corriges --title "MOOC Python 3;Session 2018;Tous les corrigés" --contents $(SOURCES)
 corriges.pdf: corriges.tex
 	pdflatex corriges.tex
 superclean::
@@ -88,7 +88,7 @@ superclean:: code-clean
 
 define week_target
 corriges-w$(1).tex: $(call week_latex_sources,$(1)) $(TOOL) exomap
-	$(TOOL) --latex --output corriges-w$(1) --title "MOOC Python;Corrigés de la semaine $(1)" $(call week_latex_sources,$(1))
+	$(TOOL) --latex --output corriges-w$(1) --title "MOOC Python 3;Session 2018;Corrigés de la semaine $(1)" $(call week_latex_sources,$(1))
 
 corriges-w$(1).pdf: corriges-w$(1).tex
 	pdflatex corriges-w$(1).tex
