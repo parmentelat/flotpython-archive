@@ -1,0 +1,10 @@
+<p>Bonjour à tous</p>
+<p></p>
+<p>Le MOOC sur Python3 se met en pause pour une semaine.</p>
+
+<p>Profitez-en pour rattraper votre retard le cas échéant ! </p>
+
+<p>Que ce soit votre cas ou non, souvenez-vous aussi que le forum reste ouvert
+et actif pendant ce temps-là,  n'hésitez pas à y échanger.</p>
+
+<p>-- Thierry Parmentelat et Arnaud Legout</p>
