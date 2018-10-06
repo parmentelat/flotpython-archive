@@ -25,7 +25,7 @@ Votre première inclination sera sans doute d'écrire votre message comme ceci 
 ## Utilisez le bouton 'Code'
 
 Comme vous le voyez, le code a perdu sa mise en forme, il est illisible.
-Pour que vos lecteurs puissent le comprendre, il vous suffit de le sélectioner et d'utiliser le bouton 'Code' (ou d'appuyer sur `Control-K` ou `⌘-K` au clavier) comme ceci :
+Pour que vos lecteurs puissent le comprendre, il vous suffit de le sélectioner et d'utiliser le bouton 'Code' (ou d'appuyer sur `Control-K` ou `⌘-K` au clavier) comme ceci :
 
 ![enter image description here][2]
 
@@ -54,7 +54,7 @@ Notamment vous pouvez aussi pour peaufiner mettre les choses en gras, en italiqu
 
 ## Vous pouvez aussi partager vos notebooks
 
-Je signale enfin que, si vous souhaitez partager du code **que vous avez déjà écrit dans un notebook**, il existe une fonction créée spécialement pour cela, cherchez dans les menus la fonction "*Share static version*", qui vous donnera une URL pour **partager votre notebook en lecture-seule** avec qui vous voulez.
+Je signale enfin que, si vous souhaitez partager du code **que vous avez déjà écrit dans un notebook**, il existe une fonction créée spécialement pour cela, cherchez dans les menus la fonction "*Share static version*", qui vous donnera une URL pour **partager votre notebook en lecture seule** avec qui vous voulez.
 
 <br/>
 Merci d'avance pour les autres élèves, et en attendant, donc, de lire votre code, bon MOOC à vous tous.
