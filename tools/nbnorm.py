@@ -102,7 +102,7 @@ def clear_metadata(metadata, padding):
         if not isinstance(v, dict):
             del metadata[k]
 
-                
+
 ####################
 class Notebook:
 
@@ -165,9 +165,9 @@ class Notebook:
         if self.verbose:
             print("{} -> {}".format(self.filename, metadata[notebookname]))
 
-    def set_version(self, version=default_version, force=False):
+    def set_version(self, version=default_version, force_version=False):
         metadata = self.xpath(['metadata'])
-        if 'version' not in metadata or force:
+        if 'version' not in metadata or force_version:
             metadata['version'] = version
 
     # the kernel parameter here is the one that comes
@@ -252,7 +252,7 @@ div.title-slide {
 <span>{html_image}</span>
 </div>'''
 
-        
+
         title_image_format = '<img src="{logo_path}" style="display:inline" />'
         html_image = "" if not logo_path else \
                       title_image_format.format(logo_path=logo_path)
@@ -278,7 +278,7 @@ div.title-slide {
         title_lines = [ line + "\n" for line in title_line.split("\n") ]
         # remove last \n
         title_lines[-1] = title_lines[-1][:-1]
-        
+
         first_cell = self.cells()[0]
         # cell.source is a list of strings
         if is_title_cell(first_cell):
@@ -378,14 +378,14 @@ div.title-slide {
         if replace_file_with_string(outfilename, new_contents):
             print("{} saved into {}".format(self.name, outfilename))
 
-    def full_monty(self, force_name, version, licence, authors, logo_path,
+    def full_monty(self, force_name_version, version, licence, authors, logo_path,
                    kernel, rise, exts, sign):
         self.parse()
-        self.set_name_from_heading1(force_name=force_name)
+        self.set_name_from_heading1(force_name=force_name_version)
         if version is None:
             self.set_version()
         else:
-            self.set_version(version, force=True)
+            self.set_version(version, force_version=force_name_version)
         self.handle_kernelspec(kernel)
         self.fill_rise_metadata(rise)
         self.fill_extensions_metadata(exts)
@@ -420,8 +420,8 @@ usage = """normalize notebooks
 
 def main():
     parser = ArgumentParser(usage=usage)
-    parser.add_argument("-f", "--force", action="store", dest="force_name", default=None,
-                        help="force writing notebookname even if already present")
+    parser.add_argument("-f", "--force", action="store", dest="force_name_version", default=None,
+                        help="force writing notebookname, or version, when provided, even if already present")
     parser.add_argument("-s", "--sign", action="store_true", dest="sign", default=False,
                         help="sign the notebooks")
     parser.add_argument("-t", "--licence-text", dest='licence', default=default_licence,
@@ -455,7 +455,7 @@ def main():
             continue
         if args.verbose:
             print("{} is opening notebook".format(sys.argv[0]), notebook)
-        full_monty(notebook, force_name=args.force_name, version=args.version,
+        full_monty(notebook, force_name_version=args.force_name_version, version=args.version,
                    licence=args.licence, authors=args.authors, logo_path=args.logo_path,
                    kernel=args.kernel, rise=args.rise, exts=args.exts,
                    sign=args.sign, verbose=args.verbose)
