@@ -343,8 +343,8 @@ div.title-slide {
             return self.Line.BULLET
         return self.Line.REGULAR
 
-    # this is an attempt at spotting a bad practice
-    def spot_ill_formed_markdown_bullets(self):
+    # this is an attempt at fixting a bad practice
+    def fix_ill_formed_markdown_bullets(self):
         """
         Regular markdown has it that if a bullet list is inserted right after
         a paragraph, there must be a blank line before the bullets.
@@ -385,6 +385,23 @@ div.title-slide {
             print(f"In {self.name}:"
                   f"fixed {nb_patches} occurrences of ill-formed bullet")
 
+    MAX_CODELEN = 80
+
+    def spot_long_code_cells(self):
+        """
+        Prints out a warning when a code cell has a line longer than
+        a hard-wired limit
+        """
+        for cell in self.cells():
+            if cell['cell_type'] != 'code':
+                continue
+            source = cell['source']
+            for line in source.split("\n"):
+                if len(line) >= self.MAX_CODELEN:
+                    print(f"{self.name} - WARNING "
+                          f"code line {len(line)} longer than {self.MAX_CODELEN}")
+                    print(f"{line}")
+
     def save(self, keep_alt=False):
         if keep_alt:
             # xxx store in alt filename
@@ -410,7 +427,8 @@ div.title-slide {
         self.fill_rise_metadata(rise)
         self.fill_extensions_metadata(exts)
         self.ensure_title(licence, authors, logo_path)
-        self.spot_ill_formed_markdown_bullets()
+        self.fix_ill_formed_markdown_bullets()
+        self.spot_long_code_cells()
         self.save()
 
 
