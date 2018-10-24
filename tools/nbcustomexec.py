@@ -10,10 +10,27 @@ We have several kinds of ad hoc treatments to be done in this context
 
 * some cells must not be evaluated at all (e.g. the one with ipythontutor
 magic)
-* some cells call input() and cannot be run in the background
+* some cells call input() and cannot be run unattended
 * etc .. list to be completed
 
 """
+
+# status right now:
+#
+# (*) a code cell that contains any of the IGNORE_IF_PRESENT strings
+#     in its source gets ignored altogether (not evaluated at all)
+# (*) a code cell that contains any of the IGNORE_IF_PRESENT_IN_METADATA
+#     tag with value among the ones defined in IGNORE_IF_PRESENT_IN_METADATA
+#     gets ignored as well
+
+
+IGNORE_IF_PRESENT_IN_SOURCE = [
+    '%ipythontutor',
+]
+
+IGNORE_IF_PRESENT_IN_METADATA = {
+    'latex:ignore' : [True],
+}
 
 
 DEBUG=False
@@ -40,16 +57,25 @@ class CustomExecPreprocessor(ExecutePreprocessor):
 
     def preprocess_cell(self, cell, resources, cell_index):
 
-        run_it = True
+        ignore_it = False
 
         source = cell.source
-        if '%ipythontutor' in source:
-            run_it = False
+        for ignore in IGNORE_IF_PRESENT_IN_SOURCE:
+            if ignore in source:
+                ignore_it = True
+                break
+
+        metadata = cell.metadata
+        for key, value in metadata.items():
+            if (key in IGNORE_IF_PRESENT_IN_METADATA
+                    and value in IGNORE_IF_PRESENT_IN_METADATA[key]):
+                ignore_it = True
+                break
 
         if DEBUG:
-            print(f"evaluating cell #{cell_index} -> {run_it} "
-              f"type={type(cell.source)}")
-        if run_it:
+            print(f"evaluating cell #{cell_index} -> {ignore_it} "
+                  f"type={type(cell.source)}")
+        if not ignore_it:
             return ExecutePreprocessor.preprocess_cell(
                 self, cell, resources, cell_index)
         # otherwise even if we skip that cell we need
