@@ -9,7 +9,9 @@
 # dispatch1 - Semaine 4 Séquence 2
 ##################################################
 def dispatch1(a, b):
-    """dispatch1 comme spécifié"""
+    """
+    dispatch1 comme spécifié
+    """
     # si les deux arguments sont pairs
     if a%2 == 0 and b%2 == 0:
         return a*a + b*b
@@ -28,13 +30,15 @@ def dispatch1(a, b):
 # dispatch2 - Semaine 4 Séquence 2
 ##################################################
 def dispatch2(a, b, A, B):
-    """dispatch2 comme spécifié"""
-    # les deux cas de la diagonale \ 
+    """
+    dispatch2 comme spécifié
+    """
+    # les deux cas de la diagonale \
     if (a in A and b in B) or (a not in A and b not in B):
         return a*a + b*b
     # sinon si b n'est pas dans B
     # ce qui alors implique que a est dans A
-    elif b not in B: 
+    elif b not in B:
         return a*(b-1)
     # le dernier cas, on sait forcément que
     # b est dans B et a n'est pas dans A
@@ -46,6 +50,9 @@ def dispatch2(a, b, A, B):
 # libelle - Semaine 4 Séquence 2
 ##################################################
 def libelle(ligne):
+    """
+    n'oubliez pas votre docstring
+    """
     # on enlève les espaces et les tabulations
     ligne = ligne.replace(' ', '').replace('\t','')
     # on cherche les 3 champs
@@ -68,58 +75,65 @@ def libelle(ligne):
 # pgcd - Semaine 4 Séquence 3
 ##################################################
 def pgcd(a, b):
-    "le pgcd de a et b par l'algorithme d'Euclide"
+    """
+    le pgcd de a et b par l'algorithme d'Euclide
+    """
     # l'algorithme suppose que a >= b
-    # donc si ce n'est pas le cas 
+    # donc si ce n'est pas le cas
     # il faut inverser les deux entrées
-    if b > a : 
+    if b > a:
         a, b = b, a
     if b == 0:
         return a
     # boucle sans fin
     while True:
-        # on calcule le reste 
-        r = a % b
+        # on calcule le reste
+        reste = a % b
         # si le reste est nul, on a terminé
-        if r == 0:
+        if reste == 0:
             return b
         # sinon on passe à l'itération suivante
-        a, b = b, r
+        a, b = b, reste
 
 
 ##################################################
 # pgcd (bis) - Semaine 4 Séquence 3
 ##################################################
-# il se trouve qu'en fait la première inversion n'est
-# pas nécessaire
-# en effet si a <= b, la première itération de la boucle
-# while va faire
-# r = a % b = a
-# et ensuite
-# a, b = b, r = b, a
-# ce qui provoque l'inversion
 def pgcd_bis(a, b):
+    """
+    Il se trouve qu'en fait la première
+    inversion n'est pas nécessaire.
+
+    En effet si a <= b, la première itération
+    de la boucle while va faire:
+    reste = a % b  c'est-à-dire a
+    et ensuite
+    a, b = b, reste = b, a
+    provoque l'inversion
+    """
     # si l'on des deux est nul on retourne l'autre
     if a * b == 0:
         return a or b
     # sinon on fait une boucle sans fin
     while True:
-        # on calcule le reste 
-        r = a % b
+        # on calcule le reste
+        reste = a % b
         # si le reste est nul, on a terminé
-        if r == 0:
+        if reste == 0:
             return b
         # sinon on passe à l'itération suivante
-        a, b = b, r
+        a, b = b, reste
 
 
 ##################################################
 # pgcd (ter) - Semaine 4 Séquence 3
 ##################################################
-# une autre alternative, qui fonctionne aussi
-# plus court, mais on passe du temps à se convaincre
-# que ça fonctionne bien comme demandé
 def pgcd_ter(a, b):
+    """
+    Une autre alternative, qui fonctionne aussi
+    C'est plus court, mais on passe du temps à se
+    convaincre que ça fonctionne bien comme demandé
+    """
     # si on n'aime pas les boucles sans fin
     # on peut faire aussi comme ceci
     while b:
@@ -157,8 +171,8 @@ def taxes(income):
 # taxes (bis) - Semaine 4 Séquence 3
 ##################################################
 
-# cette solution est plus lourde
-# je la retiens parce qu'elle montre un cas de for .. else ..
+# cette solution est plus pataude; je la retiens
+# parce qu'elle montre un cas de for .. else ..
 # qui ne soit pas trop tiré par les cheveux
 # quoique
 
@@ -174,10 +188,10 @@ bands = [
 
 def taxes_bis(income):
     """
-    utilise un for avec un else
+    Utilise un for avec un else
     """
     amount = 0
-    
+
     # en faisant ce zip un peu étrange, on va
     # considérer les couples de tuples consécutifs dans
     # la liste bands
@@ -196,7 +210,7 @@ def taxes_bis(income):
     else:
         band_top, rate_top = bands[-1]
         amount += (income - band_top) * rate_top
-    return(int(amount))
+    return int(amount)
 
 
 ##################################################
@@ -205,8 +219,11 @@ def taxes_bis(income):
 import math
 
 def distance(*args):
-    "la racine de la somme des carrés des arguments"
-    # avec une compréhension on calcule la liste des carrés des arguments
+    """
+    La racine de la somme des carrés des arguments
+    """
+    # avec une compréhension on calcule
+    # la liste des carrés des arguments
     # on applique ensuite sum pour en faire la somme
     # vous pourrez d'ailleurs vérifier que sum ([]) = 0
     # enfin on extrait la racine avec math.sqrt
@@ -217,10 +234,13 @@ def distance(*args):
 # distance (bis) - Semaine 4 Séquence 6
 ##################################################
 def distance_bis(*args):
-    "idem mais avec une expression génératrice"
-    # on n'a pas encore vu cette forme - cf Semaine 6
+    """
+    Idem mais avec une expression génératrice
+    """
+    # on n'a pas encore vu cette forme - cf Semaine 5
     # mais pour vous donner un avant-goût d'une expression
-    # génératrice on peut faire aussi ceci
+    # génératrice:
+    # on peut faire aussi comme ceci
     # observez l'absence de crochets []
     # la différence c'est juste qu'on ne
     # construit pas la liste des carrés,
@@ -240,11 +260,11 @@ def numbers(*liste):
     (*) le maximum
     des éléments de la liste
     """
-    
+
     if not liste:
         return 0, 0, 0
 
-    return ( 
+    return (
         # la builtin 'sum' renvoie la somme
         sum(liste),
         # les builtin 'min' et 'max' font ce qu'on veut aussi
@@ -258,18 +278,22 @@ def numbers(*liste):
 ##################################################
 # en regardant bien la documentation de sum, max et min,
 # on voit qu'on peut aussi traiter le cas singulier
-# (pas d'argument) en passant
+# (où il n'y pas d'argument) en passant
 #   start à sum
 #   et default à min ou max
 # comme ceci
 def numbers_bis(*liste):
     return (
-        # attention:
-        # la signature de sum est: sum(iterable[, start])
+        # attention, la signature de sum est:
+        #   sum(iterable[, start])
         # du coup on ne PEUT PAS passer à sum start=0
         # parce que start n'a pas de valeur par défaut
+        # on pourrait par contre faire juste sum(liste)
+        # car le défaut pour start c'est 0
+        # dit autrement, sum([]) retourne bien 0
         sum(liste, 0),
-        # par contre avec min c'est min(iterable, *[, key, default])
+        # par contre avec min c'est
+        #  min(iterable, *[, key, default])
         # du coup on DOIT appeler min avec default=0 qui est plus clair
         # l'étoile qui apparaît dans la signature
         # rend le paramètre default keyword-only
