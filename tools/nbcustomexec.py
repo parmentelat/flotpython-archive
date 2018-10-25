@@ -52,13 +52,18 @@ CODE_TO_EXEC_AFTER = "latex:hidden-code-after"
 
 # replace on the fly
 CODE_REPLACEMENT = "latex:replace"
+REPLACE_ALL = '*all*'
+
 # attach to this key either
-# * one list with 2 strings
+#  * one list with 2 strings
 # [ "ab", "cd"]
-# * or a list of 2-string lists of that kind
+#  * or a list of 2-string lists of that kind
 # [ ["ab", "cd"], ["ef", "gh"]]
 # this will replace all occurrences of "ab" into "cd"
 # and same with the second couple
+#
+#  note that '*ALL*' as the left-hand-side
+# in a replacement means the whole cell gets rewritten
 
 
 # all annotations will mention this string
@@ -130,8 +135,12 @@ class CustomExecPreprocessor(ExecutePreprocessor):
                         print(f"Could not use replacement {replacement}")
                         continue
                     before, after = replacement
-                    print(f"replacing {before} with {after}")
-                    cell.source = cell.source.replace(before, after)
+                    if before == REPLACE_ALL:
+                        print(f"replacing all cell with {after}")
+                        cell.source = after
+                    else:
+                        print(f"replacing {before} with {after}")
+                        cell.source = cell.source.replace(before, after)
 
         execution_result = ExecutePreprocessor.preprocess_cell(
             self, cell, resources, cell_index)
