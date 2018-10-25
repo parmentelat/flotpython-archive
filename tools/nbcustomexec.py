@@ -50,8 +50,19 @@ CODE_TO_EXEC_INSTEAD = "latex:hidden-code-instead"
 CODE_TO_EXEC_BEFORE = "latex:hidden-code-before"
 CODE_TO_EXEC_AFTER = "latex:hidden-code-after"
 
+# replace on the fly
+CODE_REPLACEMENT = "latex:replace"
+# attach to this key either
+# * one list with 2 strings
+# [ "ab", "cd"]
+# * or a list of 2-string lists of that kind
+# [ ["ab", "cd"], ["ef", "gh"]]
+# this will replace all occurrences of "ab" into "cd"
+# and same with the second couple
+
+
 # all annotations will mention this string
-MARKER = "automatic execution"
+MARKER = "auto-exec-for-latex"
 
 ##########
 
@@ -106,6 +117,21 @@ class CustomExecPreprocessor(ExecutePreprocessor):
                 substituted_code = cell.source
                 cell.source = cell.source + "\n" + metadata[key]
 
+            if key == CODE_REPLACEMENT:
+                replacements = metadata[key]
+                # should be either a 2-string list
+                # or a list of 2-string lists
+                def is_replacement(x):
+                    return isinstance(x, list) and len(x) == 2
+                if is_replacement(replacements):
+                    replacements = [replacements]
+                for replacement in replacements:
+                    if not is_replacement(replacement):
+                        print(f"Could not use replacement {replacement}")
+                        continue
+                    before, after = replacement
+                    print(f"replacing {before} with {after}")
+                    cell.source = cell.source.replace(before, after)
 
         execution_result = ExecutePreprocessor.preprocess_cell(
             self, cell, resources, cell_index)
