@@ -136,16 +136,14 @@ class CustomExecPreprocessor(ExecutePreprocessor):
                         continue
                     before, after = replacement
                     if before == REPLACE_ALL:
-                        print(f"replacing all cell with {after}")
                         cell.source = after
                     else:
-                        print(f"replacing {before} with {after}")
                         cell.source = cell.source.replace(before, after)
 
         execution_result = ExecutePreprocessor.preprocess_cell(
             self, cell, resources, cell_index)
 
-        if substituted_code is not None:
+        if substituted_code is not None and cell.type == 'code':
             cell.source = (substituted_code
                            + f"\n\n# NOTE:\n# {MARKER} has used instead:"
                            + f"\n##########"
