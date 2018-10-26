@@ -84,6 +84,38 @@ def save_notebook(notebook, path: Path):
 
 class CustomExecPreprocessor(ExecutePreprocessor):
 
+    def do_replacement(self, incoming, replacements):
+        """
+        performs replacements as specified in replacements
+
+        Parameters:
+          incoming: the string where replacements are to be done
+          replacements: typically metadata['latex:replace']
+            should be either a 2-string list
+            or a list of 2-string lists
+
+        Returns:
+          a new string
+        """
+        def is_replacement(x):
+            return isinstance(x, list) and len(x) == 2 \
+                and isinstance(x[0], str)
+
+        result = incoming
+        if is_replacement(replacements):
+            replacements = [replacements]
+        for replacement in replacements:
+            if not is_replacement(replacement):
+                print(f"Could not use replacement {replacement}")
+                continue
+            before, after = replacement
+            if before == REPLACE_ALL:
+                result = after
+            else:
+                print(f"replacing {before} with {after}")
+                result = result.replace(before, after)
+        return result
+
     def preprocess_cell(self, cell, resources, cell_index):
 
         # even if we skip a cell, we need to comply with the protocol
@@ -125,21 +157,7 @@ class CustomExecPreprocessor(ExecutePreprocessor):
 
             if key == CODE_REPLACEMENT:
                 replacements = metadata[key]
-                # should be either a 2-string list
-                # or a list of 2-string lists
-                def is_replacement(x):
-                    return isinstance(x, list) and len(x) == 2
-                if is_replacement(replacements):
-                    replacements = [replacements]
-                for replacement in replacements:
-                    if not is_replacement(replacement):
-                        print(f"Could not use replacement {replacement}")
-                        continue
-                    before, after = replacement
-                    if before == REPLACE_ALL:
-                        cell.source = after
-                    else:
-                        cell.source = cell.source.replace(before, after)
+                cell.source = self.do_replacement(cell.source, replacements)
 
         execution_result = ExecutePreprocessor.preprocess_cell(
             self, cell, resources, cell_index)
@@ -151,6 +169,12 @@ class CustomExecPreprocessor(ExecutePreprocessor):
                            + f"\n{cell.source}"
                            + f"\n##########"
                            )
+
+        # perform replacements in output as well
+        # nope, that's more complicated than that
+        # if CODE_REPLACEMENT in metadata and cell.cell_type == 'code':
+        #     cell.output = self.do_replacement(
+        #        cell.output, metadata[CODE_REPLACEMENT])
 
         return execution_result
 
