@@ -90,9 +90,10 @@ class CustomExecPreprocessor(ExecutePreprocessor):
         # implemented in the superclass, which expects
         ignored_result = cell, resources
         def mark_ignored(cell):
-            cell.source = (f"# NOTE\n"
-                           f"# {MARKER} has skipped execution of this cell\n\n"
-                           + cell.source)
+            if cell.cell_type == 'code':
+                cell.source = (f"# NOTE\n"
+                               f"# {MARKER} has skipped execution of this cell\n\n"
+                               + cell.source)
 
         substituted_code = None
 
@@ -143,7 +144,7 @@ class CustomExecPreprocessor(ExecutePreprocessor):
         execution_result = ExecutePreprocessor.preprocess_cell(
             self, cell, resources, cell_index)
 
-        if substituted_code is not None and cell.type == 'code':
+        if substituted_code is not None and cell.cell_type == 'code':
             cell.source = (substituted_code
                            + f"\n\n# NOTE:\n# {MARKER} has used instead:"
                            + f"\n##########"
