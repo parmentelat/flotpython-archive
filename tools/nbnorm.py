@@ -152,9 +152,11 @@ class Notebook:
         return "NO HEADING 1 found"
 
     def set_name_from_heading1(self, force_name):
-        """set 'name' in notebook metadata from the first heading 1 cell
+        """
+        set 'name' in notebook metadata from the first heading 1 cell
         if force_name is provided, set 'notebookname' accordingly
-        if force_name is None or False, set 'notebookname' only if it is not set"""
+        if force_name is None or False, set 'notebookname' only if it is not set
+        """
         metadata = self.xpath(['metadata'])
         if metadata.get(notebookname, "") and not force_name:
             pass
