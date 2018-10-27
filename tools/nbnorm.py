@@ -67,6 +67,7 @@ extensions_metadata_cell_padding = {
 
 default_licence = 'Licence CC BY-NC-ND'
 
+
 ####################
 # padding is a set of keys/subkeys
 # that we want to make sure are defined
@@ -115,6 +116,7 @@ class Notebook:
         self.filename = "{}.ipynb".format(self.name)
         self.verbose = verbose
 
+
     def parse(self):
         try:
             with open(self.filename) as f:
@@ -125,6 +127,7 @@ class Notebook:
             import traceback
             traceback.print_exc()
 
+
     def xpath(self, path):
         return xpath(self.notebook, path)
 
@@ -133,6 +136,7 @@ class Notebook:
 
     def cell_contents(self, cell):
         return cell['source']
+
 
     def first_heading1(self):
         for cell in self.cells():
@@ -164,10 +168,12 @@ class Notebook:
         if self.verbose:
             print("{} -> {}".format(self.filename, metadata[notebookname]))
 
+
     def set_version(self, version=default_version, force_version=False):
         metadata = self.xpath(['metadata'])
         if 'version' not in metadata or force_version:
             metadata['version'] = version
+
 
     # the kernel parameter here is the one that comes
     # from main, i.e. integers that can be
@@ -202,6 +208,7 @@ class Notebook:
                 print("setting kernel {}".format(newkernelspec['name']))
         metadata['kernelspec'] = newkernelspec
 
+
     def fill_rise_metadata(self, rise):
         """
         if rise is set:
@@ -224,6 +231,7 @@ class Notebook:
             return
         for cell in self.cells():
             pad_metadata(cell['metadata'], extensions_metadata_cell_padding)
+
 
     def ensure_title(self, licence, authors, logo_path):
         """
@@ -256,6 +264,7 @@ div.title-slide {
         html_image = "" if not logo_path else \
                       title_image_format.format(logo_path=logo_path)
         # a bit rustic but good enough
+
 
         def is_title_cell(cell):
             # for legacy - notebooks tweaked with older versions
@@ -292,6 +301,7 @@ div.title-slide {
                     "source": title_lines,
                 }))
 
+
     # I keep the code for these 2 but don't need this any longer
     # as I have all kinds of shortcuts and interactive tools now
     # plus, nbconvert(at least in jupyter) has preprocessor options to deal
@@ -309,6 +319,7 @@ div.title-slide {
                 # this is now required in nbformat4
                 if 'execution_count' in cell:
                     cell['execution_count'] = None
+
 
     def empty_cell(self, cell):
         try:
@@ -342,6 +353,7 @@ div.title-slide {
         if self.re_bullet.match(line):
             return self.Line.BULLET
         return self.Line.REGULAR
+
 
     # this is an attempt at fixting a bad practice
     def fix_ill_formed_markdown_bullets(self):
@@ -385,6 +397,7 @@ div.title-slide {
             print(f"In {self.name}:"
                   f"fixed {nb_patches} occurrences of ill-formed bullet")
 
+
     MAX_CODELEN = 80
 
     def spot_long_code_cells(self):
@@ -402,6 +415,21 @@ div.title-slide {
                           f"code line {len(line)} longer than {self.MAX_CODELEN}")
                     print(f"{line}")
 
+
+    def spot_md_escapes_4_spaces(self):
+        for index, cell in enumerate(self.cells(), 1):
+            if cell.cell_type != 'markdown':
+                continue
+            lines = cell.source if type(cell.source) is list \
+                else cell.source.split("\n")
+            in_backquotes = False
+            for line in lines:
+                if line.startswith("```"):
+                    in_backquotes = not in_backquotes
+                if not in_backquotes and line.startswith("    "):
+                    print(f"MD4SP: {self.name}:{index} -> {line}")
+
+
     def save(self, keep_alt=False):
         if keep_alt:
             # xxx store in alt filename
@@ -413,8 +441,10 @@ div.title-slide {
         if replace_file_with_string(outfilename, new_contents):
             print("{} saved into {}".format(self.name, outfilename))
 
-    def full_monty(self, force_name_version, version, licence, authors, logo_path,
-                   kernel, rise, exts):
+
+    def full_monty(self, force_name_version, version,
+                   licence, authors, logo_path,
+                   kernel, rise, exts, backquotes):
         self.parse()
         self.clear_all_outputs()
         self.remove_empty_cells()
@@ -429,6 +459,8 @@ div.title-slide {
         self.ensure_title(licence, authors, logo_path)
         self.fix_ill_formed_markdown_bullets()
         self.spot_long_code_cells()
+        if backquotes:
+            self.spot_md_escapes_4_spaces()
         self.save()
 
 
@@ -437,6 +469,7 @@ def full_monty(name, **kwds):
     del kwds['verbose']
     nb = Notebook(name, verbose)
     nb.full_monty(**kwds)
+
 
 from argparse import ArgumentParser
 
@@ -450,7 +483,6 @@ usage = """normalize notebooks
    * clears all outputs
    * removes empty code cells
 """
-
 
 def main():
     parser = ArgumentParser(usage=usage)
@@ -468,6 +500,8 @@ def main():
                         help="fill in RISE/livereveal metadata with hard-wired settings")
     parser.add_argument("-e", "--extensions", dest='exts', action='store_true', default=False,
                         help="fill cell metadata for extensions, if missing")
+    parser.add_argument("-b", "--backquotes", default=False, action='store_true',
+                        help="check for use of ``` rather than 4 preceding spaces")
     parser.add_argument("-v", "--verbose", dest="verbose", action="store_true", default=False,
                         help="show current notebookname")
     parser.add_argument("-V", "--version", dest="version", action="store", default=None,
@@ -490,6 +524,7 @@ def main():
         full_monty(notebook, force_name_version=args.force_name_version, version=args.version,
                    licence=args.licence, authors=args.authors, logo_path=args.logo_path,
                    kernel=args.kernel, rise=args.rise, exts=args.exts,
+                   backquotes=args.backquotes,
                    verbose=args.verbose)
 
 if __name__ == '__main__':
