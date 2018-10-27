@@ -19,7 +19,7 @@ from pathlib import Path
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
 import nbformat
-from nbconvert.preprocessors import ExecutePreprocessor
+from nbconvert.preprocessors import Preprocessor, ExecutePreprocessor
 
 
 ##########
@@ -34,15 +34,17 @@ from nbconvert.preprocessors import ExecutePreprocessor
 #     CODE_TO_EXEC_INSTEAD: we execute the metadata value instead of the
 #     cell source; this typically for cells that use input()
 
+# strip means the cell is removed from the output
+STRIP_IF_PRESENT_IN_METADATA = 'latex:skip-cell'
+
+# ignore means the cell is not executed
 IGNORE_IF_PRESENT_IN_SOURCE = [
     '%ipythontutor',
     # cells about auto-evaluated exercises
     '.correction(',
 ]
 
-IGNORE_IF_PRESENT_IN_METADATA = {
-    'latex:skip-eval' : [True],
-}
+IGNORE_IF_PRESENT_IN_METADATA = 'latex:skip-eval'
 
 # if this key is set in metadata, we evaluate that code
 # instead of the cell's code
@@ -80,6 +82,15 @@ def save_notebook(notebook, path: Path):
     with path.open('w') as output:
         nbformat.write(notebook, output)
 
+
+class StripPreprocessor(Preprocessor):
+
+    def preprocess(self, nb, resources):
+        new_cells = [
+            cell for cell in nb.cells
+            if STRIP_IF_PRESENT_IN_METADATA not in cell.metadata]
+        nb.cells = new_cells
+        return nb, resources
 
 
 class CustomExecPreprocessor(ExecutePreprocessor):
@@ -138,8 +149,7 @@ class CustomExecPreprocessor(ExecutePreprocessor):
         metadata = cell.metadata
         for key, value in metadata.items():
 
-            if (key in IGNORE_IF_PRESENT_IN_METADATA
-                    and value in IGNORE_IF_PRESENT_IN_METADATA[key]):
+            if key == IGNORE_IF_PRESENT_IN_METADATA:
                 mark_ignored(cell)
                 return ignored_result
 
@@ -216,9 +226,11 @@ def main():
         output = output_path / f"{stem}.ipynb"
         if args.verbose:
             print(f"{path} -> {output}")
-        preprocessor = CustomExecPreprocessor(timeout=600, kernel_name='python3')
-        executed, resources = preprocessor.preprocess(notebook, resources)
-        save_notebook(executed, output)
+        stripproc = StripPreprocessor()
+        notebook, resources = stripproc.preprocess(notebook, resources)
+        execproc = CustomExecPreprocessor(timeout=600, kernel_name='python3')
+        notebook, resources = execproc.preprocess(notebook, resources)
+        save_notebook(notebook, output)
 
 if __name__ == '__main__':
     main()
