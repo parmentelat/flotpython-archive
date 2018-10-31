@@ -1,13 +1,29 @@
 flotpython
 ==========
 
+# WARNING
+
+This git repo is outdated; as of Nov. 2 2018, its contents is being reorganized into smaller pieces:
+
+* https://github.com/flotpython/course:
+  the primary contents, be it notebooks, quiz and other material relating to videos
+
+* https://github.com/flotpython/tools:
+  all utilities, including pdf generation
+
+* https://github.com/flotpython/edx:
+  contents like html annoucements, mails, written while running the course in edx.
+
+* https://github.com/flotpython/recreation:
+  a free area for students to write and share code
+
 # Purpose
 
-This git repo contains the material for the MOOC 'Python : des fondamentaux à l'utilisation du langage' running on www.fun-mooc.fr
+~~This git repo contains the material for the MOOC 'Python : des fondamentaux à l'utilisation du langage' running on www.fun-mooc.fr~~
 
-Both the python2 and python3 versions of that course are contained in this repo, although going back to python2 will require to travel back in time.
+~~Both the python2 and python3 versions of that course are contained in this repo, although going back to python2 will require to travel back in time.~~
 
-The actual videos that make the MOOC are not managed in this repository, only the preparation notes.
+~~The actual videos that make the MOOC are not managed in this repository, only the preparation notes.~~
 
 # Notebooks
 
@@ -15,7 +31,7 @@ Instead, and probably the most valuable contents, you will find here the noteboo
 
 ## Infrastructure
 
-As of 2017, we use the following app to host the notebook infrastructure when running the MOOC on FUN 
+As of 2017, we use the following app to host the notebook infrastructure when running the MOOC on FUN
 
 https://github.com/parmentelat/nbhosting
 
@@ -28,4 +44,4 @@ Here is a link to a binder instance, that in principle should be ready for playi
 
 Of course, you can also run them locally if you install jupyter locally.
 
-We might also be able to give you access to the `nbhosting` instance, if you get in touch with us directly. 
+We might also be able to give you access to the `nbhosting` instance, if you get in touch with us directly.
