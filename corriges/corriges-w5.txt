@@ -40,56 +40,68 @@ def multi_tri_reverse(listes, reverses):
 ##################################################
 # doubler_premier - Semaine 5 Séquence 2
 ##################################################
-def doubler_premier(f, first, *args):
+def doubler_premier(func, first, *args):
     """
     renvoie le résultat de la fonction f appliquée sur
-    f(2 * first, *args)
+    func(2 * first, *args)
     """
     # une fois qu'on a écrit la signature on a presque fini le travail
     # en effet on a isolé la fonction, son premier argument, et le reste
     # des arguments
-    # il ne reste qu'à appeler f, après avoir doublé first
-    return f(2*first, *args)
+    # il ne reste qu'à appeler func, en doublant first
+    return func(2*first, *args)
 
 
 ##################################################
 # doubler_premier (bis) - Semaine 5 Séquence 2
 ##################################################
-def doubler_premier_bis(f, *args):
+def doubler_premier_bis(func, *args):
     """
     marche aussi mais moins élégant
     """
+    first, *remains = args
+    return func(2*first, *remains)
+
+
+##################################################
+# doubler_premier (ter) - Semaine 5 Séquence 2
+##################################################
+def doubler_premier_ter(func, *args):
+    """
+    ou encore comme ça, mais
+    c'est carrément moche
+    """
     first = args[0]
     remains = args[1:]
-    return f(2*first, *remains)
+    return func(2*first, *remains)
 
 
 ##################################################
 # doubler_premier_kwds - Semaine 5 Séquence 2
 ##################################################
-def doubler_premier_kwds(f, first, *args, **keywords):
+def doubler_premier_kwds(func, first, *args, **keywords):
     """
-    équivalent à doubler_premier 
+    équivalent à doubler_premier
     mais on peut aussi passer des arguments nommés
     """
     # c'est exactement la même chose
-    return f(2*first, *args, **keywords)
+    return func(2*first, *args, **keywords)
 
 # Complément - niveau avancé
 # ----
-# Il y a un cas qui ne fonctionne pas avec cette implémentation, 
-# quand le premier argument de f a une valeur par défaut 
+# Il y a un cas qui ne fonctionne pas avec cette implémentation,
+# quand le premier argument de func a une valeur par défaut
 # *et* on veut pouvoir appeler doubler_premier
-# en nommant ce premier argument 
+# en nommant ce premier argument
 #
-# par exemple - avec f=muln telle que définie dans l'énoncé 
+# par exemple - avec func=muln telle que définie dans l'énoncé
 #def muln(x=1, y=1): return x*y
 
-# alors ceci
-#doubler_premier_kwds(muln, x=1, y=2)
+# alors ceci:
+# doubler_premier_kwds(muln, x=1, y=2)
 # ne marche pas car on n'a pas les deux arguments requis
 # par doubler_premier_kwds
-# 
+#
 # et pour écrire, disons doubler_permier3, qui marcherait aussi comme cela
 # il faudrait faire une hypothèse sur le nom du premier argument...
 
@@ -97,29 +109,29 @@ def doubler_premier_kwds(f, first, *args, **keywords):
 ##################################################
 # compare_all - Semaine 5 Séquence 2
 ##################################################
-def compare_all(f, g, entrees):
+def compare_all(fun1, fun2, entrees):
     """
     retourne une liste de booléens, un par entree dans entrees
-    qui indique si f(entree) == g(entree)
+    qui indique si fun1(entree) == fun2(entree)
     """
     # on vérifie pour chaque entrée si f et g retournent
     # des résultats égaux avec ==
-    # et on assemble le tout avec une comprehension de liste 
-    return [f(entree) == g(entree) for entree in entrees]
+    # et on assemble le tout avec une comprehension de liste
+    return [fun1(entree) == fun2(entree) for entree in entrees]
 
 
 ##################################################
 # compare_args - Semaine 5 Séquence 2
 ##################################################
-def compare_args(f, g, argument_tuples):
+def compare_args(fun1, fun2, arg_tuples):
     """
     retourne une liste de booléens, un par entree dans entrees
-    qui indique si f(*tuple) == g(*tuple)
+    qui indique si fun1(*tuple) == fun2(*tuple)
     """
-    # c'est presque exactement comme compare, sauf qu'on s'attend 
+    # c'est presque exactement comme compare_all, sauf qu'on s'attend
     # à recevoir une liste de tuples d'arguments, qu'on applique
     # aux deux fonctions avec la forme * au lieu de les passer directement
-    return [f(*tuple) == g(*tuple) for tuple in argument_tuples]
+    return [fun1(*arg) == fun2(*arg) for arg in arg_tuples]
 
 
 ##################################################
@@ -135,70 +147,82 @@ def aplatir(conteneurs):
 ##################################################
 # alternat - Semaine 5 Séquence 3
 ##################################################
-def alternat(l1, l2):
+def alternat(iter1, iter2):
     """
     renvoie une liste des éléments
-    pris alternativement dans l1 et dans l2
+    pris alternativement dans iter1 et dans iter2
     """
     # pour réaliser l'alternance on peut combiner zip avec aplatir
     # telle qu'on vient de la réaliser
-    return aplatir(zip(l1, l2))
+    return aplatir(zip(iter1, iter2))
 
 
 ##################################################
 # alternat (bis) - Semaine 5 Séquence 3
 ##################################################
-def alternat_bis(l1, l2):
+def alternat_bis(iter1, iter2):
     """
     une deuxième version de alternat
     """
     # la même idée mais directement, sans utiliser aplatir
-    return [element for conteneur in zip(l1, l2) for element in conteneur]
+    return [element for conteneur in zip(iter1, iter2)
+            for element in conteneur]
 
 
 ##################################################
 # intersect - Semaine 5 Séquence 3
 ##################################################
-def intersect(A, B):
+def intersect(tuples_a, tuples_b):
     """
     prend en entrée deux listes de tuples de la forme
     (entier, valeur)
-    renvoie la liste des valeurs associées dans A ou B
+
+    renvoie l'ensemble des valeurs associées, dans A ou B,
     aux entiers présents dans A et B
+
+    il y a **plein** d'autres façons de faire, mais il faut
+    juste se méfier de ne pas tout recalculer plusieurs fois
+    si on veut faire trop court
+
     """
+
     # pour montrer un exemple de fonction locale:
     # une fonction qui renvoie l'ensemble des entiers
-    # présents dans une des deux listes d'entrée
-    def keys(S):
-        return {k for k, val in S}
+    # présents comme clé dans une liste d'entrée
+    def keys(tuples):
+        return {entier for entier, valeur in tuples}
     # on l'applique à A et B
-    keys_A = keys(A)
-    keys_B = keys(B)
-    # 
-    # les entiers présents dans A et B 
+    keys_a = keys(tuples_a)
+    keys_b = keys(tuples_b)
+    #
+    # les entiers présents dans A et B
     # avec une intersection d'ensembles
-    common_keys = keys_A & keys_B
+    common_keys = keys_a & keys_b
     # et pour conclure on fait une union sur deux
     # compréhensions d'ensembles
-    return {vala for k, vala in A if k in common_keys} \
-         | {valb for k, valb in B if k in common_keys} 
+    return {val_a for key, val_a in tuples_a if key in common_keys} \
+         | {val_b for key, val_b in tuples_b if key in common_keys}
 
 
 ##################################################
 # produit_scalaire - Semaine 5 Séquence 4
 ##################################################
-def produit_scalaire(X, Y):
+def produit_scalaire(vec1, vec2):
     """
     retourne le produit scalaire
     de deux listes de même taille
     """
-    # on utilise la fonction builtin sum sur une itération
-    # des produits x*y 
-    # avec zip() on peut faire correspondre les X avec les Y
+    # avec zip() on peut faire correspondre les
+    # valeurs de vec1 avec celles de vec2 de même rang
+    #
+    # et on utilise la fonction builtin sum sur une itération
+    # des produits x1*x2
+    #
     # remarquez bien qu'on utilise ici une expression génératrice
     # et PAS une compréhension car on n'a pas du tout besoin de
-    # créer la liste des produits x*y 
-    return sum(x * y for x, y in zip(X, Y))
+    # créer la liste des produits x1*x2
+    #
+    return sum(x1 * x2 for x1, x2 in zip(vec1, vec2))
 
 
 ##################################################
@@ -206,13 +230,13 @@ def produit_scalaire(X, Y):
 ##################################################
 # Il y a plein d'autres solutions qui marchent aussi
 #
-def produit_scalaire_bis(X, Y):
+def produit_scalaire_bis(vec1, vec2):
     """
-    Une autre version
+    Une autre version, où on fait la somme à la main
     """
     scalaire = 0
-    for x, y in zip(X, Y):
-        scalaire += x * y
+    for x1, x2 in zip(vec1, vec2):
+        scalaire += x1 * x2
     # on retourne le résultat
     return scalaire
 
@@ -222,40 +246,48 @@ def produit_scalaire_bis(X, Y):
 ##################################################
 # Et encore une:
 # celle-ci par contre est assez peu "pythonique"
-# considérez-la comme un exemple de ce qu'il faut éviter
 #
-def produit_scalaire_ter(X, Y):
+# considérez-la comme un exemple de
+# ce qu'il faut ÉVITER DE FAIRE:
+#
+def produit_scalaire_ter(vec1, vec2):
     """
-    Un exemple de ce qu'il faut éviter de faire:
-    for i in range(len(iterable):
-        x = iterable[i]
-    peut le plus souvent se remplacer par un
-    for x in iterable:
-        ...
+    Lorsque vous vous trouvez en train d'écrire:
+
+        for i in range(len(sequence)):
+            x = iterable[sequence]
+            # etc...
+
+    vous pouvez toujours écrire à la place:
+
+        for x in sequence:
+            ...
+
+    qui en plus d'être plus facile à lire,
+    marchera sur tout itérable, et sera plus rapide
     """
     scalaire = 0
-    # on calcule la taille
-    n = len(X)
-    # uniquement pour faire ce vilain idiome
-    for i in range(n):
-        scalaire += X[i] * Y[i]
+    # sachez reconnaitre ce vilain idiome:
+    for i in range(len(vec1)):
+        scalaire += vec1[i] * vec2[i]
     return scalaire
 
 
 ##################################################
 # decode_zen - Semaine 5 Séquence 7
 ##################################################
-# le module this est implémenté comme une petite énigme 
+# le module this est implémenté comme une petite énigme
+#
 # comme le laissent entrevoir les indices, on y trouve
 # (*) dans l'attribut 's' une version encodée du manifeste
 # (*) dans l'attribut 'd' le code à utiliser pour décoder
-# 
-# ce qui veut dire qu'en première approximation on pourrait 
+#
+# ce qui veut dire qu'en première approximation, on pourrait
 # énumérer les caractères du manifeste en faisant
 # (this.d[c] for c in this.s)
-# 
-# mais ce serait le cas seulement si le code agissait sur 
-# tous les caractères; comme ce n'est pas le cas il faut
+#
+# mais ce serait le cas seulement si le code agissait sur
+# tous les caractères; mais ce n'est pas le cas, il faut
 # laisser intacts les caractères de this.s qui ne sont pas
 # dans this.d
 
@@ -279,16 +311,17 @@ def decode_zen(this_module):
 ##################################################
 # une autre version un peu plus courte
 #
-# on utilise la méthode get d'un dictionnaire, qui permet de spécifier
-# (en second argument) quelle valeur on veut utiliser dans les cas où la
+# on utilise la méthode get d'un dictionnaire,
+# qui permet de spécifier (en second argument)
+# quelle valeur on veut utiliser dans les cas où la
 # clé n'est pas présente dans le dictionnaire
-# 
+#
 # dict.get(key, default)
 # retourne dict[key] si elle est présente, et default sinon
- 
+
 def decode_zen_bis(this_module):
     """
-    une autre version un peu plus courte
+    une autre version, un peu plus courte
     """
     return "".join(this_module.d.get(c, c) for c in this_module.s)
 
